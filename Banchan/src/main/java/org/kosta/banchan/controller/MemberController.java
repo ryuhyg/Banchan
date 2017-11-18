@@ -38,6 +38,11 @@ public class MemberController {
 		return "member/registerView.tiles";		
 	}	
 	
+	@RequestMapping("seller_detail.do")
+	public String sellerDetail() {
+		return "member/seller_detail.tiles";
+	}
+	
 
 	@RequestMapping("findMemberById.do")
 	public ModelAndView findMemberById(String id) {

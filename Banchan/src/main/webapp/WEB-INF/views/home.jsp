@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
     
  <!-- 슬라이드 부분 *************************** -->
-<section id="home-slide" class="header-margin-base">
+<section id="home-slide" class="header-margin-base" >
 			<div class="home-slider" data-navigation=".home-slider-nav">
 				<div class="crsl-wrap">
-					<figure class="crsl-item" style="background-image: url('resources/images/img/main_img_00.jpg') ; background-repeat: repeat-x;">
+					<figure class="crsl-item"  style="background-image: url('resources/images/img/main_img_00.jpg') ; background-repeat: repeat-x;">
 						<div class="container slider-box" >
 							<div class="content"><h2>반찬</h2></div>
 							<div class="content"><h1>세련된 느낌</h1></div>
@@ -13,12 +13,6 @@
 						</div>
 					</figure>
 				</div>
-				<p class="home-slider-nav previus">
-					<a href="#" class="previous">previous</a>
-				</p>
-				<p class="home-slider-nav next">
-					<a href="#" class="next">next</a>
-				</p>
 			</div>
 	</section>
 <!-- 슬라이드 부분끝 *************************** -->
@@ -26,7 +20,7 @@
 		<section id="recent-list">
 			<div class="section-detail">
 				<h1>
-				  <span>오늘의 반찬은 </span>
+				  <span>오늘은 </span>
 				  <span id="spinner-show"  style="color: red; font-weight: bold;">
 					  <em class="current" style="color: red; font-weight: bold;">순대국</em>
 					  <span class="next"><span></span></span>
@@ -52,7 +46,7 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="box-ads box-home">
-							<a class="hover-effect image image-fill" href="property-detail.html">
+							<a class="hover-effect image image-fill" href="seller_detail.do">
 								<span class="cover"></span>
 								<img alt="Sample images" src="">
 								<h3 class="title">주부님이름</h3>
