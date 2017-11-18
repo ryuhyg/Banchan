@@ -1,13 +1,13 @@
-package org.kosta.Banchan.security;
+package org.kosta.banchan.security;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.kosta.Banchan.model.Authority;
-import org.kosta.Banchan.model.MemberService;
-import org.kosta.Banchan.model.MemberVO;
+import org.kosta.banchan.model.Authority;
+import org.kosta.banchan.model.MemberService;
+import org.kosta.banchan.model.MemberVO;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

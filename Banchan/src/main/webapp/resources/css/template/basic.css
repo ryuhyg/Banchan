@@ -87,11 +87,11 @@ body {
   border-radius: 1px;
 }
 .form-control:focus {
-  border: 1px solid #1fb7a6;
+  border: 1px solid #333333;
   background-color: #FEFEFE;
-  -webkit-box-shadow: 0 0 0 4px rgba(89, 227, 211, 0.1);
-  -moz-box-shadow: 0 0 0 4px rgba(89, 227, 211, 0.1);
-  box-shadow: 0 0 0 4px rgba(89, 227, 211, 0.1);
+  -webkit-box-shadow: 0 0 0 4px rgba(102, 102, 102, 0.1);
+  -moz-box-shadow: 0 0 0 4px rgba(102, 102, 102, 0.1);
+  box-shadow: 0 0 0 4px rgba(102, 102, 102, 0.1);
 }
 .form-control:hover {
   border-color: #d8d8d8;
@@ -105,7 +105,7 @@ body {
   background-color: #FAFAFA;
   border: 1px solid #E5E5E5;
   padding: 16px;
-  margin-bottom: 36px;
+  	: 36px;
 }
 .right-box .search-button {
   width: 100%;
@@ -138,7 +138,7 @@ body {
   background-color: #1a1a1a;
 }
 .dropdown.open {
-  border-color: #1fb7a6;
+  border-color: #1a1a1a;
   -webkit-box-shadow: 0 0 0 4px rgba(89, 227, 211, 0.1);
   -moz-box-shadow: 0 0 0 4px rgba(89, 227, 211, 0.1);
   box-shadow: 0 0 0 4px rgba(89, 227, 211, 0.1);

@@ -1,13 +1,14 @@
-package org.kosta.Banchan.model;
+package org.kosta.banchan.model;
 
 import java.util.List;
 
-public interface MemberService {
+public interface MemberDAO {
+
 	MemberVO findMemberById(String id);
 
 	List<String> getAddressList();
 
-	List<MemberVO> findMemberListByAddress(String address);
+	List<MemberVO> findMemberListByAddress(String address);	
 
 	int getMemberCount();
 
@@ -15,7 +16,10 @@ public interface MemberService {
 
 	void registerMember(MemberVO vo);
 
-	String idcheck(String id);
-	
+	int idcheck(String id);
+
 	List<Authority> selectAuthorityByUsername(String username);
+
+	void registerRole(Authority authority);
+
 }

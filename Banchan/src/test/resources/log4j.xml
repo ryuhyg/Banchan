@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="org.kosta.Banchan">
+	<logger name="org.kosta.banchan">
 		<level value="warn" />
 	</logger>
 	

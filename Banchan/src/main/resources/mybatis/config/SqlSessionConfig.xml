@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>	
 
 	<typeAliases>		
-	<package name="org.kosta.Banchan.model"/>
+	<package name="org.kosta.banchan.model"/>
 	</typeAliases>	
 	<!-- mapper.xml 을 명시한다  -->
 	<mappers>	

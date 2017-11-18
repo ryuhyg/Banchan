@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<!-- Spring Security 인증처리로직를 정의한 클래스 -->
 	<bean name="customizedAuthenticationProvider"
-		class="org.kosta.Banchan.security.MemberAuthenticationProvider" />
+		class="org.kosta.banchan.security.MemberAuthenticationProvider" />
 	<sec:authentication-manager>
 		<sec:authentication-provider ref="customizedAuthenticationProvider" />
 	</sec:authentication-manager>

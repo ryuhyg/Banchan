@@ -1,4 +1,4 @@
-package org.kosta.Banchan.model;
+package org.kosta.banchan.model;
 
 public class MemberVO {
 	private String id;   

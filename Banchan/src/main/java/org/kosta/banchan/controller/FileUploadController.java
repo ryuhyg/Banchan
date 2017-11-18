@@ -1,4 +1,4 @@
-package org.kosta.Banchan.controller;
+package org.kosta.banchan.controller;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.kosta.Banchan.model.UploadTestVO;
+import org.kosta.banchan.model.UploadTestVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;

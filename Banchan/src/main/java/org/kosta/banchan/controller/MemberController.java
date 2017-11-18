@@ -1,12 +1,12 @@
-package org.kosta.Banchan.controller;
+package org.kosta.banchan.controller;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.kosta.Banchan.model.MemberService;
-import org.kosta.Banchan.model.MemberVO;
+import org.kosta.banchan.model.MemberService;
+import org.kosta.banchan.model.MemberVO;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

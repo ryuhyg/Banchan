@@ -32,8 +32,8 @@
 							<li class="has_submenu">
 								<a href="">Home</a>
 								<ul>
-									<li><a href="">홈페이지 소개</a></li>
-									<li><a href="">기타예비</a></li>
+									<li><a href="">홈으로</a></li>
+									<li><a href="">소개</a></li>
 								</ul>
 							</li>
 							<li class="has_submenu">

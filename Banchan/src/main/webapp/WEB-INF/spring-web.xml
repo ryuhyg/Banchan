@@ -11,7 +11,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 		
-<context:component-scan base-package="org.kosta.Banchan.controller" />
+<context:component-scan base-package="org.kosta.banchan.controller" />
 	<!-- Annotation 기반 spring security를 사용하기 위한 설정
 		 Controller 영역에서 아래와 같은 @Secure 어노테이션을 사용해야 하므로 
 		 컨트롤러 영역 객체를 생성하는 spring-web.xml에서  정의한다 
@@ -40,7 +40,7 @@ class="org.springframework.web.servlet.view.InternalResourceViewResolver">
    <property name="defaultEncoding" value="utf-8"/>
 </bean>
 <!-- 파일 다운로드를 위한 설정 -->
-<bean name="downloadView" class="org.kosta.Banchan.controller.DownloadView"/>
+<bean name="downloadView" class="org.kosta.banchan.controller.DownloadView"/>
 <!-- 파일 다운로드 서비스를 위해 ViewResolver를 추가한다 -->
 <bean id="beanNameViewResolver" 
 class="org.springframework.web.servlet.view.BeanNameViewResolver">

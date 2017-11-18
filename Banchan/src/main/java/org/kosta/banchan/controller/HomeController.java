@@ -1,4 +1,4 @@
-package org.kosta.Banchan.controller;
+package org.kosta.banchan.controller;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
