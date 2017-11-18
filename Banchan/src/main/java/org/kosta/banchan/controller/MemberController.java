@@ -43,7 +43,7 @@ public class MemberController {
 		return "member/seller_detail.tiles";
 	}
 	public String hyang() {
-		return "";
+		return "정지원수정한다........아아아아아ㅏ";
 	}
 	
 	
