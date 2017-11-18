@@ -42,6 +42,10 @@ public class MemberController {
 	public String sellerDetail() {
 		return "member/seller_detail.tiles";
 	}
+	public String hyang() {
+		return "";
+	}
+	
 	
 
 	@RequestMapping("findMemberById.do")
