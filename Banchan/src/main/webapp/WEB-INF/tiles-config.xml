@@ -11,7 +11,7 @@
 		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
 		<put-attribute name="right" value="/WEB-INF/views/layout/right.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
-		<put-attribute name="main" value="/WEB-INF/views/home2.jsp" />
+		<put-attribute name="main" value="/WEB-INF/views/home.jsp" />
 	</definition>	
 	<!-- {디렉토리명}/{view이름} -->
 	<definition name="*/*.tiles" extends="home.tiles">

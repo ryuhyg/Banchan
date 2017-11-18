@@ -54,7 +54,7 @@
 						<div class="box-ads box-home">
 							<a class="hover-effect image image-fill" href="property-detail.html">
 								<span class="cover"></span>
-								<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
+								<img alt="Sample images" src="">
 								<h3 class="title">주부님이름</h3>
 							</a><!-- /.hover-effect -->
 							
@@ -70,36 +70,32 @@
 						<div class="box-ads box-home">
 							<a class="hover-effect image image-fill" href="property-detail.html">
 								<span class="cover"></span>
-								<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
-								<h3 class="title">560 Marshall Dr</h3>
+								<img alt="Sample images" src="">
+								<h3 class="title">주부님이름</h3>
 							</a><!-- /.hover-effect -->
-							<span class="price">$ 709.000,00</span>
-							<span class="address"><i class="fa fa-map-marker"></i> Hoboken, NJ 07056</span>
-							<span class="description">Lorem Ipsum available, but the majority have suffered There are many variations of passages by injected humour.</span>
+							
+							<span class="address"><i class="fa fa-map-marker"></i> 위치정보 </span>
+							<span class="description">주부님 소개</span>
 							<dl class="detail">
-								
+								<dt class="">별점</dt>
 							</dl><!-- /.detail -->
-							<div class="footer">
-								<a class="btn btn-reverse" href="property-detail.html">Read now</a>
-							</div>
+							
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
 					<div class="col-md-4">
 						<div class="box-ads box-home">
 							<a class="hover-effect image image-fill" href="property-detail.html">
 								<span class="cover"></span>
-								<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
-								<h3 class="title">477 Jersey Ave</h3>
+								<img alt="Sample images" src="">
+								<h3 class="title">주부님이름</h3>
 							</a><!-- /.hover-effect -->
-							<span class="price">$ 663.500,00</span>
-							<span class="address"><i class="fa fa-map-marker"></i> Jersey City, NJ 07302</span>
-							<span class="description">Nulla condimentum neque nulla. Sed at ornare lacus, id euismod felis. Aliquam et vulputate tortor. Nunc gravida nunc sed mi bibendum accumsan.</span>
+							
+							<span class="address"><i class="fa fa-map-marker"></i> 위치정보 </span>
+							<span class="description">주부님 소개</span>
 							<dl class="detail">
-								
+								<dt class="">별점</dt>
 							</dl><!-- /.detail -->
-							<div class="footer">
-								<a class="btn btn-reverse" href="property-detail.html">Read now</a>
-							</div>
+							
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
 				</div>
@@ -113,63 +109,48 @@
 						<div class="box-ads box-home">
 							<a class="hover-effect image image-fill" href="property-detail.html">
 								<span class="cover"></span>
-								<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
-								<h3 class="title">403 Bloomfield St</h3>
+								<img alt="Sample images" src="">
+								<h3 class="title">주부님이름</h3>
 							</a><!-- /.hover-effect -->
-							<span class="price">$ 772.000,00</span>
-							<span class="address"><i class="fa fa-map-marker"></i> Hoboken, NJ 07030</span>
-							<span class="description">Nunc gravida nunc sed mi bibendum accumsan, condimentum neque nulla. Sed at ornare lacus. Aliquam et vulputate tortor id euismod felis.</span>
+							
+							<span class="address"><i class="fa fa-map-marker"></i> 위치정보 </span>
+							<span class="description">주부님 소개</span>
 							<dl class="detail">
-								<dt class="status">Status:</dt><dd><span>Sale</span></dd>
-								<dt class="area">Area:</dt><dd><span>165m2</span></dd>
-								<dt class="bed">Beds:</dt><dd><span>2</span></dd>
-								<dt class="bath">Baths:</dt><dd><span>1</span></dd>
+								<dt class="">별점</dt>
 							</dl><!-- /.detail -->
-							<div class="footer">
-								<a class="btn btn-reverse" href="property-detail.html">Read now</a>
-							</div>
+							
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
 					<div class="col-md-4">
 						<div class="box-ads box-home">
 							<a class="hover-effect image image-fill" href="property-detail.html">
 								<span class="cover"></span>
-								<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
-								<h3 class="title">339 Broadway</h3>
+								<img alt="Sample images" src="">
+								<h3 class="title">주부님이름</h3>
 							</a><!-- /.hover-effect -->
-							<span class="price">$ 988.000,00</span>
-							<span class="address"><i class="fa fa-map-marker"></i> New York, NY 10013</span>
-							<span class="description">Proin egestas vitae mi eget commodo. Proin purus dignissim porttitous vel accumsan odio. Pulvinarut id . Proin dapibus mollis purus ac luctus.</span>
+							
+							<span class="address"><i class="fa fa-map-marker"></i> 위치정보 </span>
+							<span class="description">주부님 소개</span>
 							<dl class="detail">
-								<dt class="status">Status:</dt><dd><span>Sale</span></dd>
-								<dt class="area">Area:</dt><dd><span>369m2</span></dd>
-								<dt class="bed">Beds:</dt><dd><span>4</span></dd>
-								<dt class="bath">Baths:</dt><dd><span>2</span></dd>
+								<dt class="">별점</dt>
 							</dl><!-- /.detail -->
-							<div class="footer">
-								<a class="btn btn-reverse" href="property-detail.html">Read now</a>
-							</div>
+							
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
 					<div class="col-md-4">
 						<div class="box-ads box-home">
 							<a class="hover-effect image image-fill" href="property-detail.html">
 								<span class="cover"></span>
-								<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
-								<h3 class="title">435 Newark Ave</h3>
+								<img alt="Sample images" src="">
+								<h3 class="title">주부님이름</h3>
 							</a><!-- /.hover-effect -->
-							<span class="price">$ 631.000,00</span>
-							<span class="address"><i class="fa fa-map-marker"></i> Jersey City, NJ 07302</span>
-							<span class="description">Mut the majority have suffered alteration in. There are many variations of passages of Lorem Ipsum available, some form, by injected humour.</span>
+							
+							<span class="address"><i class="fa fa-map-marker"></i> 위치정보 </span>
+							<span class="description">주부님 소개</span>
 							<dl class="detail">
-								<dt class="status">Status:</dt><dd><span>Sale</span></dd>
-								<dt class="area">Area:</dt><dd><span>658m2</span></dd>
-								<dt class="bed">Beds:</dt><dd><span>4</span></dd>
-								<dt class="bath">Baths:</dt><dd><span>5</span></dd>
+								<dt class="">별점</dt>
 							</dl><!-- /.detail -->
-							<div class="footer">
-								<a class="btn btn-reverse" href="property-detail.html">Read now</a>
-							</div>
+							
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
 				</div>

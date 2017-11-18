@@ -26,6 +26,18 @@ public class MemberController {
 	 */
 	@Resource
 	private BCryptPasswordEncoder passwordEncoder;
+	
+	
+	@RequestMapping("loginView.do")
+	public String loginView(){
+		return "member/loginView.tiles";
+	}
+	
+	@RequestMapping("registerView.do")
+	public String registerView() {
+		return "member/registerView.tiles";		
+	}	
+	
 
 	@RequestMapping("findMemberById.do")
 	public ModelAndView findMemberById(String id) {
@@ -82,11 +94,7 @@ public class MemberController {
 		return "member/updateForm.tiles";
 	}
 	
-	@RequestMapping("loginView.do")
-	public String loginView(){
-		//System.out.println("일로 들어오니??");
-		return "member/loginView.tiles";
-	}
+	
 
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("updateMemberAction.do")
