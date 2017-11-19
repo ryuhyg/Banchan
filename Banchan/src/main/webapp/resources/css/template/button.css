@@ -54,7 +54,7 @@
   background-color: #1a1a1a;
 }
 .btn-reverse {
-  border: 1px solid #fff;
+  border: 1px solid #1a1a1a;
   background-color: #1a1a1a;
   color: #fff;
 }
@@ -64,7 +64,7 @@
 .btn-reverse:focus,
 .btn-reverse:hover {
   border: 1px solid #1a1a1a;
-  background-color: #c0c0c0;
+  background-color: #fff;
   color: #1a1a1a;
 }
 .btn-group-lg > .btn,

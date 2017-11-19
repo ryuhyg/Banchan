@@ -38,9 +38,9 @@ public class MemberController {
 		return "member/registerView.tiles";		
 	}	
 	
-	@RequestMapping("seller_detail.do")
+	@RequestMapping("seller_myPage.do")
 	public String sellerDetail() {
-		return "member/seller_detail.tiles";
+		return "member/seller_myPage.tiles";
 	}
 	
 	

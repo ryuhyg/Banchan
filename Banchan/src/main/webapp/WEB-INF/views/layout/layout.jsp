@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="tiles"  uri="http://tiles.apache.org/tags-tiles" %>    
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,11 +14,13 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/vendor/mmenu/jquery.mmenu.all.css" />          <!-- Menu Responsive -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/vendor/animate-wow/animate.css">               <!-- Animation WOW -->	
 	
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/vendor/labelauty/labelauty.css">               <!-- Checkbox form Style -->
+	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/vendor/nouislider/nouislider.min.css">         <!-- Slider Price -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/vendor/easydropdown/easydropdown.css">         <!-- Select form Style -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/vendor/skill-bars/skill-bars.css">             <!-- Skill Bars -->
+    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ui-spinner.css">                               <!-- Spinner -->
-	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/vendor/labelauty/labelauty.css">               <!-- Checkbox form Style -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu.css">                                     <!-- Include Menu stylesheet -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/custom.css">                                   <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/media-query.css">                              <!-- Media Query -->
@@ -62,7 +64,7 @@
 </div>
 
 
-<script	src="${pageContext.request.contextPath}/resources/script/jquery.min.js"></script>		<!-- jQuery	(necessary for Bootstrap's JavaScript plugins) -->
+	<script	src="${pageContext.request.contextPath}/resources/script/jquery.min.js"></script>		<!-- jQuery	(necessary for Bootstrap's JavaScript plugins) -->
 	<script	src="${pageContext.request.contextPath}/resources/script/jquery-ui.min.js"></script>		<!-- jQuery	UI is a	curated	set	of user	interface interactions,	effects, widgets, and themes -->
 	<script	src="${pageContext.request.contextPath}/resources/script/bootstrap.min.js"></script>		<!-- Include all compiled plugins (below), or include individual files as needed -->
 
@@ -73,7 +75,33 @@
 	<script	src="${pageContext.request.contextPath}/resources/script/vendor/images-fill/imagesloaded.min.js"></script>			<!-- Loaded	image with ImageFill -->
 	<script src="${pageContext.request.contextPath}/resources/script/vendor/images-fill/imagefill.min.js"></script>					<!-- ImageFill Script -->
 	<script	src="${pageContext.request.contextPath}/resources/script/vendor/easydropdown/jquery.easydropdown.min.js"></script>	<!-- Select	list Script	-->
+	
+	<script	src="${pageContext.request.contextPath}/resources/script/vendor/carousel/responsiveCarousel.min.js"></script>		<!-- Carousel Script -->
+	<script	src="${pageContext.request.contextPath}/resources/script/vendor/noui-slider/nouislider.all.min.js"></script>				<!-- Range Slider -->
+	<script	src="${pageContext.request.contextPath}/resources/script/vendor/skill-bars/custom.js"></script>						<!-- Skill Bars	Script -->
 
 	<script	src="${pageContext.request.contextPath}/resources/script/custom.js"></script>		<!-- Custom	Script -->
-	</body>
+
+<!-- ************************************************************ -->
+	<script>
+
+		"use strict";
+
+		$(function() {
+			$("#accordion").accordion({
+				heightStyle: "content"
+			});
+			$("#toggle h3").click(function() {
+				$(this).hasClass('toggle-attive') ? 
+				$(this).next().removeClass('toggle-attive') : 
+				$(this).next().slideToggle({
+					duration: 400,
+					easing: 'linear'
+				});
+			});
+		});
+
+	</script>
+
+  </body>
 </html>

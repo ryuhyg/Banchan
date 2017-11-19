@@ -14,7 +14,7 @@
 						<div id="login-pan" class="col-md-6">
 							<a href="${pageContext.request.contextPath}/member/registerView.do" ><i class="icon fa fa-pencil-square-o"></i> 회원가입</a>
 							<a href="${pageContext.request.contextPath}/member/loginView.do"  ><i class="icon fa fa-user user"></i> 로그인</a>
-							<a href="${pageContext.request.contextPath}/member/loginView.do"  ><i class="icon fa fa-user user"></i> 기타</a>
+							<a href="${pageContext.request.contextPath}/member/seller_myPage.do"  ><i class="icon fa fa-user user"></i> 판매자마이페이지</a>
 						</div>
 						</sec:authorize>
 			<%-- 			<sec:authentication property="principal.name" />님 <br>
