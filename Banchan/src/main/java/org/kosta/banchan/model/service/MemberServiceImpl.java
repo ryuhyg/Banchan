@@ -21,8 +21,7 @@ public class MemberServiceImpl implements MemberService {
    @Resource
     private MemberDAO memberDAO;
    @Resource
-
-    private SellerDAO sellerDAO; 
+   private SellerDAO sellerDAO; 
    	//광태 비번 암호화 객체 주입
  	@Resource
  	private BCryptPasswordEncoder passwordEncoder;

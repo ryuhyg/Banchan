@@ -3,6 +3,7 @@ package org.kosta.banchan.model.service;
 import java.util.List;
 
 import org.kosta.banchan.model.vo.Authority;
+import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
@@ -26,6 +27,11 @@ public interface MemberService {
 /////////////////////// end  광태 메서드   ///////////////////////////////
 
 	List<SellerVO> selectSellerTop3();
+
+/////////////////////// start  우정 메서드   ///////////////////////////////	
+	SellerVO selectSellerInfo(String id);
+	List<FoodVO> selectFoodInfo(String id);
+/////////////////////// end  우정 메서드   ///////////////////////////////
 
 
 }

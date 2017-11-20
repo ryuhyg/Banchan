@@ -6,13 +6,13 @@
 					<div class="col-md-9">
 						<div class="row">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
-								<h1 class="name">주부님 이름</h1>
+								<h1 class="name">${svo.memName } </h1>
 								<span class="text">
 								주부님 소개
 								</span>
 								<div class="bs-callout callout-success">
 								  <h4 class="title">믿고먹는 주부님</h4>
-								  <p class="text">이 주부님은 많은 소비자들에게 높은 평가를 받으셨습니다.</p>
+								  <p class="text">${svo.sellerInfo }</p>
 								</div>
 							</div><!-- /.col-md-8 -->
 							<div class="col-sm-4 col-md-4 col-sm-pull-8">
@@ -20,12 +20,13 @@
 								<div class="agent-box-card grey">
 									<div class="image-content">
 										<div class="image image-fill">
-											<img alt="Image Sample" src="http://placehold.it/512/bbbbbb/ffffff">
+											<!-- <img alt="Image Sample" src="resources/images/${svo.sellerImg }"> -->
+											<img alt="Image Sample" src="resources/images/${svo.sellerImg }">
 										</div>						
 									</div>
 									<div class="info-agent">
-										<div class="text">
-											<i class="fa fa-quote-left"></i> 주부님 소개 <i class="fa fa-quote-right"></i>
+										<div class="text" style="text-align:center">
+											<b>별점:${svo.sellerScore}</b>
 										</div>
 										<ul class="contact">
 											<li><a class="icon" href="#"><i class="fa fa-facebook"></i></a></li>

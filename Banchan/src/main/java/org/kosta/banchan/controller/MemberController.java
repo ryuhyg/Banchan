@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MemberController {
 	@Resource
 	private MemberService memberService;
+	
 	/*
 	 *  회원정보수정시 비밀번호 암호화처리를 위한 객체를 주입받는다
 	 *  spring-security.xml 에서 bean 설정이 되어 있음 
@@ -37,10 +38,6 @@ public class MemberController {
 		return "member/registerView.tiles";		
 	}	
 	
-	@RequestMapping("seller_myPage.do")
-	public String sellerDetail() {
-		return "member/seller_myPage.tiles";
-	}
 
 	@RequestMapping("login_fail.do")
 	public String loginFail() {
@@ -87,5 +84,13 @@ public class MemberController {
 	    	return "home.tiles";
 	    }
 /////////////////////// end  정훈 메서드   ///////////////////////////////
-
+////////////////////start 우정 메서드 ////////////////////////////
+	    @RequestMapping("sellerPageInfo.do")
+	    public String seller_myPage(Model model,String memId) {
+	    	SellerVO svo=memberService.selectSellerInfo(memId);
+	    	System.out.println(svo);
+	    	model.addAttribute("svo",svo);
+	    	return "member/seller_myPage.tiles";
+	    }
+////////////////////end 우정 메서드 ////////////////////////////
 }

@@ -31,7 +31,7 @@
 								</form>
 						<%-- </sec:authorize>
 						<sec:authorize access="hasRole('ROLE_BUYER)"><!-- 판매자 권한 설정 --> --%>
-							<a href="${pageContext.request.contextPath}/member/seller_myPage.do"  ><i class="icon fa fa-user user"></i> 판매자 마이페이지</a>
+							<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=java2"  ><i class="icon fa fa-user user"></i> 판매자 마이페이지</a>
 						<%-- </sec:authorize> --%>
 						</div>
 					</div>
