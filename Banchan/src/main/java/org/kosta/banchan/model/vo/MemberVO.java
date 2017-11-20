@@ -13,14 +13,13 @@ public class MemberVO {
     private String pwAnswer;
     private String enableNo;
     private String pwQnaNo;
-
+ 
     private AddressVO addressVO;
 
 	public MemberVO() {
 		super();
 	}
 
-	
 	@Override
 	public String toString() {
 		return "MemberVO [memId=" + memId + ", pw=" + pw + ", memName=" + memName + ", birth=" + birth + ", tel=" + tel
