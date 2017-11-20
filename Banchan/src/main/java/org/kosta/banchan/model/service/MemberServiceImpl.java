@@ -18,10 +18,20 @@ public class MemberServiceImpl implements MemberService {
 
    @Override
 	public MemberVO findMemberById(String id) {
-		return null;
+		return memberDAO.findMemberById(id);
 	}
+   /*
+    * 권한 확인
+    */
    @Override
-	public List<Authority> selectAuthorityByMemId(String memId) {
-		return null;
+	public List<Authority> selectAuthorityByMemId(String id) {
+		return memberDAO.selectAuthorityByMemId(id);
 	}
+   /*
+    * 아이디 체크
+    */
+   @Override
+   public int idcheck(String id) {
+	   return memberDAO.idcheck(id);
+   }
 }

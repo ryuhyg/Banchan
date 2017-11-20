@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<section id="recent-list" style="margin-top: 300px;">
+<section id="recent-list" style="margin-top: 350px;">
 	<div class="container">
 				<div class="row">
 				<div class="col-sm-2"><!-- left -->

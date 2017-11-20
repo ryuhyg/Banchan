@@ -10,6 +10,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="selectMember" resultType="memberVO">
  		select mem_id,pw from ban_mem
  	</select>
+ 	<select id="findMemberById" resultType="memberVO">
+ 	 <include refid="selectMember" />
+ 	 where id=#{value}
+ 	</select>
+ 	<!-- Spring Security에서 권한 체크를 위해 사용 -->
+	<select id="selectAuthorityByMemId"  resultType="authority">
+		SELECT a.auth_name
+		FROM mem_auth ma, auth a
+		WHERE ma.auth_no=a.auth_no and ma.mem_id=#{value}
+	</select>
+ 	<select id="idcheck" resultType="int">
+		select count(*) from  ban_mem where mem_id=#{value}
+	</select>
 </mapper>
 
 

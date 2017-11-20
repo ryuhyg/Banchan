@@ -5,7 +5,7 @@
 	<section id="home-slide" class="header-margin-base">
 			<div class="home-slider" data-navigation=".home-slider-nav">
 				<div class="crsl-wrap">
-					<figure class="crsl-item" style="background-image: url('resources/images/img/main_img_00.jpg');"	>
+					<figure class="crsl-item" style="background-image: url('resources/images/img/main_img_00.jpg');">
 						<div class="container slider-box">
 							<div class="content"><h2>There are many variations</h2></div>
 							<div class="content"><h1>Real Estate</h1></div>

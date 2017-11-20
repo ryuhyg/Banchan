@@ -9,5 +9,13 @@ public interface MemberDAO {
 
 	List<MemberVO> selectMember();
 
+	MemberVO findMemberById(String id);
+
+	int idcheck(String id);
+
+	void registerRole(Authority authority);
+
+	List<Authority> selectAuthorityByMemId(String memId);
+
 
 }

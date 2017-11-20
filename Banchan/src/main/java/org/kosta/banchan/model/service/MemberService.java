@@ -9,7 +9,9 @@ public interface MemberService {
 
 	MemberVO findMemberById(String id);
 
-	List<Authority> selectAuthorityByMemId(String memId);
+	List<Authority> selectAuthorityByMemId(String id);
+
+	int idcheck(String id);
 
 
 
