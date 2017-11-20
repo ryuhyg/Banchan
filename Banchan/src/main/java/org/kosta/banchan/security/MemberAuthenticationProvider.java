@@ -48,18 +48,21 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 			return null;
 		}
 		//2.사용자 정보 디비로 부터 조회
-		String id = authentication.getName();//사용자가 로그인시 입력한 ID 반환 		
+		String id = authentication.getName();//사용자가 로그인시 입력한 ID 반환 	
+		System.out.println("id ="+id);
 		MemberVO member = memberService.findMemberById(id);
 		if(member == null){
 			throw new UsernameNotFoundException("회원 아이디가 존재하지 않습니다");
 		}
 		String password=(String)authentication.getCredentials();//사용자가 입력한 패스워드 반환 
+		System.out.println("password ="+password);
 		//3.패스워드 비교
 		/*if(!password.equals(member.getPassword())){//패스워드가 틀리면
 			throw new BadCredentialsException("패스워드가 틀립니다.");
 		}*/
 		/* 비밀번호 암호화를 이용할 경우 
 		 이용자가 로그인 폼에서 입력한 비밀번호와 DB로부터 가져온 암호화된 비밀번호를 비교한다 */
+		System.out.println("member 정보="+member);
         if (!passwordEncoder.matches(password, member.getPw())) 
                 throw new BadCredentialsException("비밀번호 불일치~~~");
 		//4.사용자 권한 조회
@@ -69,6 +72,8 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 		}
 		
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+		System.out.println("list = "+list);
+		System.out.println("authorities ="+authorities);
 		for(Authority au : list){
 			authorities.add(new SimpleGrantedAuthority(au.getAuthNo()));
 		}
