@@ -26,6 +26,7 @@ public interface MemberService {
 /////////////////////// end  광태 메서드   ///////////////////////////////
 
 	List<SellerVO> selectSellerTop3();
+	List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo);
 
 
 }

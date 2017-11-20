@@ -10,6 +10,7 @@ import org.kosta.banchan.model.vo.AddressVO;
 import org.kosta.banchan.model.vo.Authority;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
+import org.kosta.banchan.model.vo.SellerVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -92,6 +93,10 @@ public class MemberDAOImpl implements MemberDAO {
 		//회원 아이디로 addressNo 정보 받기 
 		public String findMemberAddressnoById(MemberVO memberVO) {
 			return template.selectOne("member.findMemberAddressnoById", memberVO);
+		}
+		@Override
+		public List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo){
+			return template.selectList("member.getAllSameAddressSellerListByAddress", addressNo);
 		}
 	/////////// end 위치기반 추천 메서드 ////////////////////   
 /////////////////////// end  광태 메서드   ///////////////////////////////

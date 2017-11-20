@@ -98,6 +98,10 @@ public class MemberServiceImpl implements MemberService {
 		   // 멤버 테이블에서 addressNO 같은 회원들 List 로 get 후 return
 		   
 	   }
+	   @Override
+	   public List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo){
+		   return memberDAO.getAllSameAddressSellerListByAddress(addressNo);
+	   }
 	   /////////// end 위치기반 추천 메서드 ////////////////////   
    /////////////////////// end  광태 메서드   ///////////////////////////////
 	   

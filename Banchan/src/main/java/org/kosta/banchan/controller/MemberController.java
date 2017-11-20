@@ -75,6 +75,19 @@ public class MemberController {
 	    	
 	    	return "redirect:member/loginView.do";
 	    }
+	    
+	   ///////////////start 위치기반//////////
+	    @RequestMapping("locationServicePage.do")
+	    public String locationServicePage(Model model) {
+	    	
+	    	System.out.println("locationServicePage");
+	    	
+	    	List<SellerVO> list =
+	    			memberService.getAllSameAddressSellerListByAddress("1003");
+	    	model.addAttribute("list",list);
+	    	return "member/locationServicePage.tiles";
+	    }
+	    ////////////// end 위치기반 ///////////
 	/////////////////////// end  광태 메서드   ///////////////////////////////
 	
 /////////////////////// start  정훈 메서드   ///////////////////////////////
