@@ -5,12 +5,14 @@ import java.util.List;
 import org.kosta.banchan.model.vo.Authority;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
+import org.kosta.banchan.model.vo.SellerVO;
 
 public interface MemberService {
 
 	MemberVO findMemberById(String id);
-
+/////////////////////// start  정훈 메서드   ///////////////////////////////
 	List<Authority> selectAuthorityByMemId(String id);
+/////////////////////// end  정훈 메서드   ///////////////////////////////
 
 	int idcheck(String id);
 	
@@ -22,6 +24,8 @@ public interface MemberService {
 	// 광태 회원가입 메소드
 	void registerMember(MemberVO memberVO);
 /////////////////////// end  광태 메서드   ///////////////////////////////
+
+	List<SellerVO> selectSellerTop3();
 
 
 }

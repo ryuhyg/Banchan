@@ -19,8 +19,7 @@ public class TestUnit {
 	@Test
 	public void unitTest() {
 		System.out.println(sellerDAO.selectSellerInfo("java2"));
-		
-		
+
 		/*MemberVO mvo = new MemberVO();
 		mvo.setAddressVO(new AddressVO());
 		mvo.getAddressVO().setAddressAPI("경기도 성남시 분당구 삼평동 대왕판교로 67777602");
@@ -28,5 +27,8 @@ public class TestUnit {
 		mvo.getAddressVO().setLongitude(1442.11);
 		System.out.println(mvo);
 		dao.registerNewAddressInfo(mvo)*/
+
+		System.out.println(sellerDAO.selectSellerTop3().get(0).getMemName());
+
 	}
 }

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
+import org.kosta.banchan.model.vo.SellerVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,4 +77,15 @@ public class MemberController {
 	    }
 	/////////////////////// end  광태 메서드   ///////////////////////////////
 	
+/////////////////////// start  정훈 메서드   ///////////////////////////////
+	    @RequestMapping("selectSellerTop3.do")
+	    public String selectSellerTop3(Model model) {
+	    	
+	    	List<SellerVO> list=memberService.selectSellerTop3();
+	    	
+	    	model.addAttribute("list", list);
+	    	return "home.tiles";
+	    }
+/////////////////////// end  정훈 메서드   ///////////////////////////////
+
 }

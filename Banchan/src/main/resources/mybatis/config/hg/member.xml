@@ -12,11 +12,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	<select id="findMemberById" resultType="memberVO">
  	 <include refid="selectMember" />
- 	 where id=#{value}
+ 	 where mem_id=#{value} and enable_no=11
  	</select>
  	<!-- Spring Security에서 권한 체크를 위해 사용 -->
 	<select id="selectAuthorityByMemId"  resultType="authority">
-		SELECT a.auth_name
+		SELECT ma.mem_id, a.auth_name
 		FROM mem_auth ma, auth a
 		WHERE ma.auth_no=a.auth_no and ma.mem_id=#{value}
 	</select>

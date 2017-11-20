@@ -14,7 +14,7 @@
 	</script>
 	
 		<header class="menu-base" id="header-container-box">
-			<div class="info"><!-- info -->
+			<div class="info" style="height: 50px; float: left"><!-- info -->
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6">
@@ -23,7 +23,6 @@
 						<div id="login-pan" class="col-md-6">
 							<a href="${pageContext.request.contextPath}/member/registerView.do" ><i class="icon fa fa-pencil-square-o"></i> 회원가입</a>
 							<a href="${pageContext.request.contextPath}/member/loginView.do"  ><i class="icon fa fa-user user"></i> 로그인</a>
-						</div>
 						<%-- </sec:authorize>
 						<sec:authorize access="hasRole('ROLE_SELLER)"><!-- 구매자 권한 설정 --> --%>
 								<a href="#" id="logoutAction"><i class="icon fa fa-user user"></i>로그아웃</a>
@@ -34,6 +33,7 @@
 						<sec:authorize access="hasRole('ROLE_BUYER)"><!-- 판매자 권한 설정 --> --%>
 							<a href="${pageContext.request.contextPath}/member/seller_myPage.do"  ><i class="icon fa fa-user user"></i> 판매자 마이페이지</a>
 						<%-- </sec:authorize> --%>
+						</div>
 					</div>
 				</div>			
 			</div><!-- /.info -->

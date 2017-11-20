@@ -1,5 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ 
+ <!-- 별점 style부분 ************************* -->
+ <style type="text/css"> /* 별점 css */
+.star_rating {font-size:0; letter-spacing:-4px;}
+.star_rating a {
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+}
+.star_rating a:first-child {margin-left:0;}
+.star_rating a.on {color:#ffcc00;}
+</style>   
+    
+    
+    
+    
     
  <!-- 슬라이드 부분 *************************** -->
 	<section id="home-slide" class="header-margin-base">
@@ -72,55 +92,84 @@
 				</div>
 				<div class="row">
 					<div class="col-md-4">
-						<div class="box-ads box-home">
-							<a class="hover-effect image image-fill" href="seller_detail.do">
+						<div class="box-ads box-home" style="height: 425px">
+							<a class="hover-effect image image-fill" href="selectSellerTop3Detail.do?memId=${list.get(0).getMemId()}">
 								<span class="cover"></span>
-								<img alt="Sample images" src="">
-								<h3 class="title">주부님이름</h3>
+								<img alt="Sample images" src="/banchan/resources/images/김래원.jpg">
+								<h3 class="title">${list.get(0).getMemName()} &nbsp;주부님</h3>
 							</a><!-- /.hover-effect -->
+							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.get(0).getAddressVO().getAddressAPI()}</span>
+							<span class="description">${list.get(0).getSellerInfo()}</span>
 							
-							<span class="address"><i class="fa fa-map-marker"></i> 위치정보 </span>
-							<span class="description">주부님 소개</span>
 							<dl class="detail">
-								<dt class="">별점</dt>
-							</dl><!-- /.detail -->
-							
+							<div>
+								<dt class="">판매자평점</dt><br><br>
+								<span class="star_rating">  <!-- 별점 표현 -->
+      							<c:forEach begin="1" end="${list.get(0).getSellerScore()}">
+    							<a class="on">★</a>
+								</c:forEach>
+								<c:forEach begin="1" end="${5-list.get(0).getSellerScore()}">
+    							<a>★</a>
+   								</c:forEach>
+       							</span>
+       							 &nbsp;${list.get(0).getSellerScore()}
+       						</div>
+       						</dl><!-- /.detail -->
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
 					<div class="col-md-4">
-						<div class="box-ads box-home">
-							<a class="hover-effect image image-fill" href="property-detail.html">
+						<div class="box-ads box-home" style="height: 425px">
+							<a class="hover-effect image image-fill" href="selectSellerTop3Detail.do?memId=${list.get(1).getMemId()}">
 								<span class="cover"></span>
-								<img alt="Sample images" src="">
-								<h3 class="title">주부님이름</h3>
+								<img alt="Sample images" src="/banchan/resources/images/김래원.jpg">
+								<h3 class="title">${list.get(1).getMemName()} &nbsp;주부님</h3>
 							</a><!-- /.hover-effect -->
+							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.get(1).getAddressVO().getAddressAPI()}</span>
+							<span class="description">${list.get(1).getSellerInfo()}</span>
 							
-							<span class="address"><i class="fa fa-map-marker"></i> 위치정보 </span>
-							<span class="description">주부님 소개</span>
 							<dl class="detail">
-								<dt class="">별점</dt>
-							</dl><!-- /.detail -->
-							
+							<div>
+								<dt class="">판매자평점</dt><br><br>
+								<span class="star_rating">  <!-- 별점 표현 -->
+      							<c:forEach begin="1" end="${list.get(1).getSellerScore()}">
+    							<a class="on">★</a>
+								</c:forEach>
+								<c:forEach begin="1" end="${5-list.get(1).getSellerScore()}">
+    							<a>★</a>
+   								</c:forEach>
+       							</span>
+       							 &nbsp;${list.get(1).getSellerScore()}
+       						</div>
+       						</dl><!-- /.detail -->
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
 					<div class="col-md-4">
-						<div class="box-ads box-home">
-							<a class="hover-effect image image-fill" href="property-detail.html">
+						<div class="box-ads box-home" style="height: 425px">
+							<a class="hover-effect image image-fill" href="selectSellerTop3Detail.do?memId=${list.get(2).getMemId()}">
 								<span class="cover"></span>
-								<img alt="Sample images" src="">
-								<h3 class="title">주부님이름</h3>
+								<img alt="Sample images" src="/banchan/resources/images/김래원.jpg">
+								<h3 class="title">${list.get(2).getMemName()} &nbsp;주부님</h3>
 							</a><!-- /.hover-effect -->
+							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.get(2).getAddressVO().getAddressAPI()}</span>
+							<span class="description">${list.get(2).getSellerInfo()}</span>
 							
-							<span class="address"><i class="fa fa-map-marker"></i> 위치정보 </span>
-							<span class="description">주부님 소개</span>
 							<dl class="detail">
-								<dt class="">별점</dt>
-							</dl><!-- /.detail -->
-							
+							<div>
+								<dt class="">판매자평점</dt><br><br>
+								<span class="star_rating">  <!-- 별점 표현 -->
+      							<c:forEach begin="1" end="${list.get(2).getSellerScore()}">
+    							<a class="on">★</a>
+								</c:forEach>
+								<c:forEach begin="1" end="${5-list.get(2).getSellerScore()}">
+    							<a>★</a>
+   								</c:forEach>
+       							</span>
+       							 &nbsp;${list.get(2).getSellerScore()}
+       						</div>
+       						</dl><!-- /.detail -->
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
 				</div>
-				
 	<!-- 인기 음식 -->			
 				<div class="list-box-title">
 					<span><i class=""></i>인기 음식</span>
