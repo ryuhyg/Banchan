@@ -70,17 +70,19 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 		if(list.size() == 0){
 			throw new UsernameNotFoundException("아무 권한이 없습니다.");
 		}
+		System.out.println("list = "+list);
 		
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-		System.out.println("list = "+list);
-		System.out.println("authorities ="+authorities);
+		
 		for(Authority au : list){
 			authorities.add(new SimpleGrantedAuthority(au.getAuthNo()));
 		}
 		/****************************************
 		 * 여기까지 왔으면 인증 완료 - Authentication객체 생성해서 리턴
 		 ***************************************/
-		
+		System.out.println("member = "+member);
+		System.out.println("password = "+password);
+		System.out.println("authorities ="+authorities);
 		Authentication auth = new UsernamePasswordAuthenticationToken(member, password, authorities);
 		System.out.println("로그인 OK~"+auth);
 		return auth;		
