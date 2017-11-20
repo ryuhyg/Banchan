@@ -1,11 +1,18 @@
 package org.kosta.banchan.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.service.MemberService;
+import org.kosta.banchan.model.vo.MemberVO;
+import org.kosta.banchan.model.vo.PwQnaVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MemberController {
@@ -38,5 +45,35 @@ public class MemberController {
 	public String loginFail() {
 		return "member/login_fail";
 	}
+	
+	/////////////////////// start  광태 메서드   ///////////////////////////////
+		// 광태 Ajax id check
+	    @RequestMapping("checkIdOnAjax.do")
+		@ResponseBody
+		public String checkIdOnAjax(String id) {
+			return memberService.checkIdOnAjax(id);
+		}
+	    
+	    @RequestMapping("member/registerView.do")
+	    public String getAllPwQnAList(Model model) {
+	    	
+	    	List<PwQnaVO> pwQnaList =
+	    						memberService.getAllPwQnAList();
+	    	
+	    	//request에 set해서 비밀번호 찾기 질문 리스트를 보냄.
+	    	model.addAttribute("pwQnaList", pwQnaList);   	
+	    	
+	    	return "member/registerView.tiles";
+	    }
+	    
+	    @RequestMapping(value = "registerMember.do", method = RequestMethod.POST)
+	    public String registerMember(MemberVO memberVO) {
+	    	
+	    	//System.out.println("memberVO :"+memberVO);
+	    	memberService.registerMember(memberVO);
+	    	
+	    	return "redirect:member/loginView.do";
+	    }
+	/////////////////////// end  광태 메서드   ///////////////////////////////
 	
 }
