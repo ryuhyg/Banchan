@@ -4,6 +4,10 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
+ <!-- seller정보(판매자 정보,회원정보,주소 정보)를 가져온다 
+ 	    상속받고있는 memberVO의 멤버변수는 별도의 resultMap 없이 값 setting 가능
+ 	  has a 관계의 address 정보는 resultMap이용
+  -->
 	<resultMap type="sellerVO" id="addressRM">
 		<result column="address_no" property="addressVO.addressNo"/>
 		<result column="address_api" property="addressVO.addressAPI"/>
@@ -15,9 +19,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		b.address_de,b.pw_qna_no,b.enable_no,b.mem_name,b.pw_answer,
 		s.seller_img,s.seller_info,s.seller_score
 		from seller s, ban_mem b,address a
-		where b.mem_id=#{value} and s.mem_id=b.mem_id and a.address_no=b.address_no
-			
+		where b.mem_id=#{value} and s.mem_id=b.mem_id and a.address_no=b.address_no	
  	</select>
+ <!-- sellerInfo end -->
+ 	
+ <!-- 판매자의 등록 음식과 등록음식에 대한 현재 판매 list를 가져오는 쿼리 -->
+ 
+ 	<resultMap type="deptVO" id="deptRM2">
+ 	 	<result column="deptno"  property="deptno" />
+ 	 	<result column="dname"  property="dname"/>
+ 	 	<result column="loc" property="location"/>
+ 	 	<collection property="empList" javaType="java.util.ArrayList"
+ 	 	 ofType="empVO" column="deptno" select="getEmpListByDeptno"
+ 	 	></collection>
+ 	 </resultMap>
+ 	 <select id="getEmpListByDeptno" parameterType="int" resultType="empVO">
+ 	 	<include refid="selectEmp" ></include>
+ 	 	where deptno=#{value}
+ 	 </select>
+ 	 <select id="getDeptAndEmpList" resultMap="deptRM2">
+ 	 	select deptno,dname,loc from dept
+ 	 	order by deptno desc
+ 	 </select>
+ 	 
+ 	<resultMap type="foodVO" id="foodRM">
+ 	 	<result column="deptno"  property="deptno" />
+ 	 	<result column="dname"  property="dname"/>
+ 	 	<result column="loc" property="location"/>
+ 	 	<collection property="empList" javaType="java.util.ArrayList"
+ 	 	 ofType="empVO" column="deptno" select="getEmpListByDeptno"
+ 	 	></collection>
+ 	 </resultMap>
+ 	 <select id="getEmpListByDeptno" parameterType="int" resultType="empVO">
+ 	 	<include refid="selectEmp" ></include>
+ 	 	where deptno=#{value}
+ 	 </select> 
+ 	<select id="getFoodandSellList" parameterType="string">
+ 	select food_no,food_name,mem_id,food_de,food_score,
+ 	category_no,food_main_img,food_postdate
+	from food
+	where mem_id=#{value}
+	order by food_no descd
+ 	</select>
+ <!-- select food,food_sell end -->
 </mapper>
 
 
