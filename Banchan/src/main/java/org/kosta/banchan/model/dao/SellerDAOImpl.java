@@ -20,6 +20,13 @@ public class SellerDAOImpl implements SellerDAO {
     public SellerVO selectSellerInfo(String id) {
         return template.selectOne("member.selectSellerInfo",id);
     }
+	@Override
+    public List<SellerVO> selectSellerTop3() {
+        
+		List<SellerVO> list=template.selectList("member.selectSellerTop3");
+
+        return list;
+    }
 
 	@Override
 	public List<FoodVO> selectFoodInfo(String id) {

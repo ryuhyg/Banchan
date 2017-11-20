@@ -21,8 +21,8 @@ public class MemberServiceImpl implements MemberService {
    @Resource
     private MemberDAO memberDAO;
    @Resource
+
     private SellerDAO sellerDAO; 
-   
    	//광태 비번 암호화 객체 주입
  	@Resource
  	private BCryptPasswordEncoder passwordEncoder;
@@ -103,4 +103,20 @@ public class MemberServiceImpl implements MemberService {
 ////////////////////start 우정 메서드 ////////////////////////////
 	   
 	   
+	   
+/////////////////////// start  정훈 메서드   ///////////////////////////////
+	   //정훈 main화면 top3 판매자 리스트 메서드
+	   @Override
+		public List<SellerVO> selectSellerTop3() {
+			List<SellerVO> list = sellerDAO.selectSellerTop3();
+			for (int i = 0; i < list.size(); i++) {
+				if (!(list.get(i).getSellerInfo().length() < 18)) {
+					String str = list.get(i).getSellerInfo().substring(0, 18);
+					list.get(i).setSellerInfo(str + "...");
+				}
+			}
+			return list;
+		}
+/////////////////////// end  정훈 메서드   ///////////////////////////////
+
 }
