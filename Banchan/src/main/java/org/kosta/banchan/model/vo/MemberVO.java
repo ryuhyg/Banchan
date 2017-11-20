@@ -7,7 +7,7 @@ public class MemberVO {
     private String memId;
     private String pw;
     private String memName;
-    private String brith;
+    private String birth;
     private String tel;
     private String addressDe;
     private String pwAnswer;
@@ -20,12 +20,14 @@ public class MemberVO {
 		super();
 	}
 
+	
 	@Override
 	public String toString() {
-		return "MemberVO [memId=" + memId + ", pw=" + pw + ", memName=" + memName + ", brith=" + brith + ", tel=" + tel
-				+ ", addressDe=" + addressDe + ", pwAnswer=" + pwAnswer + ", enableNo=" + enableNo
-				 + ", pwQnaNo=" + pwQnaNo + ", addressVO=" + addressVO + "]";
+		return "MemberVO [memId=" + memId + ", pw=" + pw + ", memName=" + memName + ", birth=" + birth + ", tel=" + tel
+				+ ", addressDe=" + addressDe + ", pwAnswer=" + pwAnswer + ", enableNo=" + enableNo + ", pwQnaNo="
+				+ pwQnaNo + ", addressVO=" + addressVO + "]";
 	}
+
 
 	public String getMemId() {
 		return memId;
@@ -51,13 +53,17 @@ public class MemberVO {
 		this.memName = memName;
 	}
 
-	public String getBrith() {
-		return brith;
+	
+
+	public String getBirth() {
+		return birth;
 	}
 
-	public void setBrith(String brith) {
-		this.brith = brith;
+
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
+
 
 	public String getTel() {
 		return tel;
