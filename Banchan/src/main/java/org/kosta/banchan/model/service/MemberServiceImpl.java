@@ -5,9 +5,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.dao.MemberDAO;
+import org.kosta.banchan.model.dao.SellerDAO;
 import org.kosta.banchan.model.vo.Authority;
+import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
+import org.kosta.banchan.model.vo.SellerVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +20,8 @@ public class MemberServiceImpl implements MemberService {
 
    @Resource
     private MemberDAO memberDAO;
+   @Resource
+    private SellerDAO sellerDAO; 
    
    	//광태 비번 암호화 객체 주입
  	@Resource
@@ -86,5 +91,16 @@ public class MemberServiceImpl implements MemberService {
 	
 	   }
    /////////////////////// end  광태 메서드   ///////////////////////////////
-
+	   
+////////////////////start 우정 메서드 ////////////////////////////
+	  public SellerVO selectSellerInfo(String id) {
+		  return sellerDAO.selectSellerInfo(id);
+	  }
+	  public List<FoodVO> selectFoodInfo(String id) {
+		  return sellerDAO.selectFoodInfo(id);
+	  }
+	  
+////////////////////start 우정 메서드 ////////////////////////////
+	   
+	   
 }
