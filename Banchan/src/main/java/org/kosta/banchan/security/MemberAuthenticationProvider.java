@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.kosta.banchan.model.Authority;
-import org.kosta.banchan.model.MemberService;
-import org.kosta.banchan.model.MemberVO;
+import org.kosta.banchan.model.service.MemberService;
+import org.kosta.banchan.model.vo.Authority;
+import org.kosta.banchan.model.vo.MemberVO;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -60,17 +60,17 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 		}*/
 		/* 비밀번호 암호화를 이용할 경우 
 		 이용자가 로그인 폼에서 입력한 비밀번호와 DB로부터 가져온 암호화된 비밀번호를 비교한다 */
-        if (!passwordEncoder.matches(password, member.getPassword())) 
+        if (!passwordEncoder.matches(password, member.getPw())) 
                 throw new BadCredentialsException("비밀번호 불일치~~~");
 		//4.사용자 권한 조회
-		List<Authority> list = memberService.selectAuthorityByUsername(id);
+		List<Authority> list = memberService.selectAuthorityByMemId(id);
 		if(list.size() == 0){
 			throw new UsernameNotFoundException("아무 권한이 없습니다.");
 		}
 		
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
 		for(Authority au : list){
-			authorities.add(new SimpleGrantedAuthority(au.getAuthority()));
+			authorities.add(new SimpleGrantedAuthority(au.getAuthNo()));
 		}
 		/****************************************
 		 * 여기까지 왔으면 인증 완료 - Authentication객체 생성해서 리턴

@@ -1,4 +1,4 @@
-package org.kosta.banchan.model;
+package org.kosta.banchan.model.vo;
 
 import java.util.List;
 

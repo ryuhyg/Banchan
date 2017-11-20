@@ -6,15 +6,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.kosta.banchan.model.UploadTestVO;
+import org.kosta.banchan.model.vo.UploadTestVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller   
+@Controller
 public class FileUploadController {	
 	private String uploadPath;
+	
 	@RequestMapping("multi_fileupload.do")
 	public ModelAndView fileUpload(UploadTestVO vo,HttpServletRequest request){			
 		uploadPath=request.getSession().getServletContext().getRealPath("/resources/upload/");
