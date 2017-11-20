@@ -19,7 +19,7 @@ public class HomeController {
 	public String home(){
 		//Spring Security 권한 출력 
 		System.out.println("home "+SecurityContextHolder.getContext().getAuthentication().getPrincipal());		
-		return "home.tiles";
+		return "redirect:selectSellerTop3.do";
 	}
 	
 	@RequestMapping("{viewName}.do")

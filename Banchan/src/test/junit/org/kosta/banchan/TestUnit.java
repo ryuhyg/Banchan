@@ -16,6 +16,7 @@ public class TestUnit {
 	private SellerDAO sellerDAO;
 	@Test
 	public void unitTest() {
-		System.out.println(sellerDAO.selectSellerInfo("java2"));	
+		System.out.println(sellerDAO.selectSellerInfo("java2"));
+		System.out.println(sellerDAO.selectSellerTop3().get(0).getMemName());
 	}
 }
