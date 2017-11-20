@@ -48,6 +48,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 	INSERT INTO	 mem_auth(mem_auth_no, mem_id, auth_no) 
 				VALUES(mem_auth_seq.nextval,#{memId},'10')
  	</insert>
+ 	
+<!-- Start 위치 기반  쿼리쿼리쿼리 Query -->
+	
+	<!-- 회원 아이디로 addressNo 정보 받기 -->
+	<select id="findMemberAddressnoById" parameterType="memberVO" resultType="string">
+			SELECT		 address_no
+			FROM 		 BAN_MEM
+			WHERE 		 mem_id=#{memId} 
+	</select>
+<!-- End 위치 기반  쿼리쿼리쿼리 Query -->
 </mapper>
 
 

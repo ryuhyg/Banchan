@@ -85,6 +85,15 @@ public class MemberServiceImpl implements MemberService {
 					memberDAO.registerMemberBasicAuth(memberVO);
 	
 	   }
+	   /////////// start 위치기반 추천 메서드 ////////////////////
+	   
+	   public void getAllNearSellerListByAddress() {
+		   // 현재 로그인된 회원 아이디로 addressNO get
+		   
+		   // 멤버 테이블에서 addressNO 같은 회원들 List 로 get 후 return
+		   
+	   }
+	   /////////// end 위치기반 추천 메서드 ////////////////////   
    /////////////////////// end  광태 메서드   ///////////////////////////////
 
 }
