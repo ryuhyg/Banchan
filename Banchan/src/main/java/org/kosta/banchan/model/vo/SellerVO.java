@@ -9,11 +9,11 @@ public class SellerVO extends MemberVO {
     private float sellerScore;
 	public SellerVO() {
 		super();
-	
+		//this.setAddressVO(new AddressVO());
 	}
 
 	
-	@Override
+/*	@Override
 	public String toString() {
 		return "SellerVO [MemberVO [memId=" + memId+", pw=" + super.getPw()+ ", memName=" + super.getMemName() 
 		+ ", birth=" + super.getBirth() + ", tel=" + super.getTel()+ ", addressDe=" +super.getAddressDe()
@@ -23,11 +23,18 @@ public class SellerVO extends MemberVO {
 		+ ", sellerImg=" + sellerImg + ", sellerInfo=" + sellerInfo + ", sellerScore="
 				+ sellerScore + "]";
 	}
-
+*/
 
 	public String getMemId() {
 		return memId;
 	}
+	@Override
+	public String toString() {
+		return "SellerVO [memId=" + memId + ", sellerImg=" + sellerImg + ", sellerInfo=" + sellerInfo + ", sellerScore="
+				+ sellerScore + "]";
+	}
+
+
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
