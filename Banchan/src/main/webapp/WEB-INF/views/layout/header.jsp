@@ -22,7 +22,7 @@
 						<div class="col-md-4">
 						</div>
 						<div id="login-pan" class="col-md-4">
-						<sec:authorize access="isAuthenticated()"><!-- 비회원 권한 설정 -->
+						<sec:authorize access="!isAuthenticated()"><!-- 비회원 권한 설정 -->
 							<a href="${pageContext.request.contextPath}/member/registerView.do" ><i class="icon fa fa-pencil-square-o"></i> 회원가입</a>
 							<a href="${pageContext.request.contextPath}/member/loginView.do"  ><i class="icon fa fa-user user"></i> 로그인</a>
 						</sec:authorize>
