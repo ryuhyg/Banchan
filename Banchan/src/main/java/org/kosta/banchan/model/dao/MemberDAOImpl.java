@@ -100,6 +100,26 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 	/////////// end 위치기반 추천 메서드 ////////////////////   
 /////////////////////// end  광태 메서드   ///////////////////////////////
+		
+/////////////////////// start  윤주 메서드   ///////////////////////////////
+
+@Override
+public int isSeller(String memId) {
+return template.selectOne("member.isSeller",memId);
+}
+
+@Override
+public void insertAuth(Authority authority) {
+template.insert("member.insertAuth",authority);
+
+}
+
+@Override
+public void sellerRegister(SellerVO svo) {
+template.insert("member.sellerRegister",svo);
+
+}
+/////////////////////// end  윤주 메서드   ///////////////////////////////
 	
 
 }

@@ -131,5 +131,18 @@ public class MemberServiceImpl implements MemberService {
 		}
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 
+/////////////////////// start  윤주 메서드   ///////////////////////////////
 
+@Override
+public int isSeller(String memId) {
+return memberDAO.isSeller(memId);
+}
+
+@Transactional
+@Override
+public void sellerRegister(SellerVO svo) { //트랜젝션 처리
+memberDAO.insertAuth(new Authority(svo.getMemId(),"20"));
+memberDAO.sellerRegister(svo);
+}
+/////////////////////// end  윤주 메서드   ///////////////////////////////
 }
