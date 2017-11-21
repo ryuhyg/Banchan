@@ -98,6 +98,10 @@ public class MemberDAOImpl implements MemberDAO {
 		public List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo){
 			return template.selectList("member.getAllSameAddressSellerListByAddress", addressNo);
 		}
+		@Override
+		public List<SellerVO> getSameDongSellerListByAddress(String addressAPI){
+			return template.selectList("member.getSameDongSellerListByAddress", addressAPI);
+		}
 	/////////// end 위치기반 추천 메서드 ////////////////////   
 /////////////////////// end  광태 메서드   ///////////////////////////////
 		

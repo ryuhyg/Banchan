@@ -13,7 +13,44 @@
 <script>
 $(document).ready(function() {
 	
-	
+	$("#searchaddress").click(function() {
+		  new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+	                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+	                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                    extraRoadAddr += data.bname;
+	                }
+	                // 건물명이 있고, 공동주택일 경우 추가한다.
+	                if(data.buildingName !== '' && data.apartment === 'Y'){
+	                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                }
+	                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                if(extraRoadAddr !== ''){
+	                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+	                }
+	                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+	                if(fullRoadAddr !== ''){
+	                    fullRoadAddr += extraRoadAddr;
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	               // document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+	              //  document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+	               // document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+	               // $("#jibunAddress").val(data.jibunAddress);
+	                //$("#jibunAddress").trigger("change");
+
+	            }
+	        }).open();
+	});//$("#searchaddress").click
 	
 });//$(document).ready
 </script>
@@ -29,36 +66,21 @@ $(document).ready(function() {
 					<div class="col-sm-8">
 						<div class="blog-list blog-detail">
 							<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>위치기반</h3>
-		
-		
-								<div id="map" style="width:400px;height:270px;"></div>
+								
+							<input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
+							<br>
+							<input type="text" id="jibunAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly">
+							<br>	
+							<div id="map" style="width:400px;height:270px;"></div>
 							
 
 	<br>
-	<div id="tableDiv">
+	<div >
 		<table class="searchTable" >
-		<tbody >	
+		<tbody id="tbodyList">	
 		<c:forEach items="${list}" var="s">
-				<tr>
-				<th rowspan="4" class="searchImgTh">
-				<a href="">
-				<img class="searchImg" src="">
-				</a>
-				</th>
-				<td> <a href="">타이틀</a> </td>
-				</tr>				
+						
 				<tr><td>${s.memId}  | ${s.addressVO.addressNo}  |  ${s.sellerInfo} </td></tr>
-				<tr><td>${s.addressDe}  |  출연:${s.tel} |  등급: ${s.memName}</td></tr>	
-				<tr><td>
-				<%-- <c:if test="${sessionScope.membervo.authority eq '관리자'}">
-				<form action="DispatcherServlet">
-						<input type="hidden" name="command" value="cmdMeetingRegisterForm">
-						<input type="hidden" name="mNo" value="ㄹㄹㄹ">	
-						<input type="hidden" name="title" value="ㄹㄹ">					
-						<input type="submit" value="모임등록">
-				</form>
-				</c:if> --%>
- 				</td></tr>	
 		</c:forEach>				
 		</tbody>					
 		</table>
@@ -132,6 +154,6 @@ $(document).ready(function() {
 	daum.maps.event.addListener(marker, 'click', function() {
 	      // 마커 위에 인포윈도우를 표시합니다
 	      infowindow.open(map, marker); 
-	      $("#tableDiv").html("<td>dddd</td>");
+	      $("#tbodyList").append("<tr><td>"+d+"|"+ a+"|"+f+"</td></tr>");
 	});
 </script>

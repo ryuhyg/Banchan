@@ -36,6 +36,10 @@ public interface MemberDAO {
 		void registerMember(MemberVO memberVO);
 		//광태 회원가입시 권한 등록
 		void registerMemberBasicAuth(MemberVO memberVO);
+		// 같은 번지 주소 판매자 리스트
+		List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo);
+		// 동 주소 판매자 리스틑
+		List<SellerVO> getSameDongSellerListByAddress(String addressAPI);
 /////////////////////// end  광태 메서드   ///////////////////////////////	
 /////////////////////// start  윤주 메서드   ///////////////////////////////
 int isSeller(String memId);
@@ -46,11 +50,14 @@ void sellerRegister(SellerVO svo);
 /////////////////////// end  윤주 메서드   ///////////////////////////////
 
 
-		List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo);
+		
 
 
 //회원정보수정(정훈)
 		void getEditMembers(SellerVO vo);
+
+
+		
 
 
 	

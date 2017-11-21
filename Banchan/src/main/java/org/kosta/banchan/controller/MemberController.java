@@ -85,7 +85,7 @@ public class MemberController {
 	    	System.out.println("locationServicePage");
 	    	
 	    	List<SellerVO> list =
-	    			memberService.getAllSameAddressSellerListByAddress("1003");
+	    			memberService.getSameDongSellerListByAddress("서울 강남구 개포동 11-334");
 	    	model.addAttribute("list",list);
 	    	return "member/locationServicePage.tiles";
 	    }

@@ -36,8 +36,13 @@ public class TestUnit {
 		dao.registerNewAddressInfo(mvo)*/
 
 		//System.out.println(sellerDAO.selectSellerTop3().get(0).getMemName());
-		List<SellerVO> list =mDAO.getAllSameAddressSellerListByAddress("1003");
-		System.out.println(list.get(0).getAddressVO());
+		/*List<SellerVO> list =mDAO.getAllSameAddressSellerListByAddress("1003");
+		System.out.println(list.get(0).getAddressVO());*/
+		
+		String temp = "서울 강남구 개포동 11-1";
+		int lastIndex=  temp.lastIndexOf(" ");
+		System.out.println(lastIndex);
+		System.out.println(temp.substring(0, temp.lastIndexOf(" ")));
 
 	}
 }

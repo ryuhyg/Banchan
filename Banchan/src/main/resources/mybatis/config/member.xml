@@ -75,6 +75,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  				FROM BAN_MEM m, address a , SELLER s  
  				WHERE m.ADDRESS_NO = #{value} AND m.ADDRESS_NO=a.ADDRESS_NO   AND m.MEM_ID=s.MEM_ID 	
  	</select>
+ 	
+ 	<resultMap type="sellerVO" id="sellerRMDong">
+ 		<result column="address_no" property="addressVO.addressNo"/>
+ 		<result column="latitude" property="addressVO.latitude"/>
+ 		<result column="longitude" property="addressVO.longitude"/> 
+ 	</resultMap> 
+ 	<select id="getSameDongSellerListByAddress" parameterType="string" resultMap="sellerRMDong">
+		SELECT s.mem_id,  s.seller_img, s.seller_info, s.seller_score,
+			   a.address_no, a.latitude, a.longitude 
+		FROM BAN_MEM b, ADDRESS a, mem_auth ma , seller s 
+		WHERE b.address_no = a.address_no
+		AND b.mem_id = s.mem_id  
+		AND b.mem_id = ma.mem_id 
+		AND a.address_API like '%'||#{value}||'%' 
+		AND ma.auth_no ='20'
+ 	</select>
 <!-- End 광태 -->
 
 <!-- Start 우정 -->
