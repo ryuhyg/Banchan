@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+    <sec:authentication var="mvo" property="principal" />
 <section id="recent-list" style="margin-top: 350px;">
 	<div class="container">
-		<form action="sellerRegister.do" method="post" enctype="multipart/form-data">
+		<form action="sellerRegister.do?id=${mvo.memId}" method="post" enctype="multipart/form-data">
 		<sec:csrfInput/>
 		프로필사진 업로드
 		<input type="file" name="uploadImage">

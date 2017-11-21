@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- spring security custom tag를 사용하기 위한 선언 --%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-	
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#logoutAction").click(function() {
@@ -26,13 +25,22 @@
 							<a href="${pageContext.request.contextPath}/member/registerView.do" ><i class="icon fa fa-pencil-square-o"></i> 회원가입</a>
 							<a href="${pageContext.request.contextPath}/member/loginView.do"  ><i class="icon fa fa-user user"></i> 로그인</a>
 						</sec:authorize>
-						<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
+						
+						<sec:authorize access="hasRole('ROLE_BUYER') and !hasRole('ROLE_SELLER')"><!-- 오직 구매자 권한 설정 -->
+								<a href="" ><i class="icon fa fa-pencil-square-o"></i> 마이페이지</a>
 								<a href="#" id="logoutAction"><i class="icon fa fa-user user"></i>로그아웃</a>
-								<form id="logoutForm" action="${pageContext.request.contextPath}/member/logout.do" method="post" style="display: none">
+								<form id="logoutForm" action="${pageContext.request.contextPath}/logout.do" method="post" style="display: none">
 										<sec:csrfInput />
 								</form>
-						</sec:authorize>
+								<a href="${pageContext.request.contextPath}/member/sellerRegisterForm.do" ><i class="icon fa fa-pencil-square-o"></i> 판매자 등록</a>
+								
+						</sec:authorize>						
 						<sec:authorize access="hasRole('ROLE_SELLER')"><!-- 판매자 권한 설정 -->
+						<a href="" ><i class="icon fa fa-pencil-square-o"></i> 마이페이지</a>
+								<a href="#" id="logoutAction"><i class="icon fa fa-user user"></i>로그아웃</a>
+								<form id="logoutForm" action="${pageContext.request.contextPath}/logout.do" method="post" style="display: none">
+										<sec:csrfInput />
+								</form>
 							<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=java2"  ><i class="icon fa fa-user user"></i> 판매자 마이페이지</a>
 						</sec:authorize>
 

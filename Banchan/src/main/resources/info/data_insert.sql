@@ -25,9 +25,10 @@ insert into pw_qna(pw_qna_no,pw_quest) values(4,'학창시절 별명은?');
 
 
 -- AUTH
-insert into auth(auth_no,auth_name) values(10,'role_buyer');
-insert into auth(auth_no,auth_name) values(20,'role_seller');
-insert into auth(auth_no,auth_name) values(30,'role_admin');
+insert into auth(auth_no,auth_name) values(10,'ROLE_BUYER');
+insert into auth(auth_no,auth_name) values(20,'ROLE_SELLER');
+insert into auth(auth_no,auth_name) values(30,'ROLE_ADMIN');
+
 
 
 -- BAN_MEM
@@ -196,9 +197,21 @@ drop sequence address_seq;
 drop sequence mem_auth_seq;
 drop sequence category_seq start;
 drop sequence food_seq;
-drop sequence food_sell_seq;
+drop sequence food_sell_seq; 
 drop sequence trade_seq;
 drop sequence review_seq;
 drop sequence answer_seq;
 
-
+/*top3 sql*/
+select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score 
+					from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
+					s, ban_mem m, address a 
+					where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3
+		
+					
+					select * from seller;
+delete from seller where mem_id='java';
+select * from mem_auth;
+delete from mem_auth where mem_id='java' and auth_no='20';
+commit
+				

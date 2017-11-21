@@ -51,5 +51,9 @@ String getSellerNameByMemId(String memId);
 		List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo);
 
 
-		
+//회원정보수정(정훈)
+		void getEditMembers(SellerVO vo);
+
+
+	
 }

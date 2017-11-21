@@ -60,6 +60,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				WHERE 		 mem_id=#{memId} 
 		</select>
 	<!-- End 위치 기반  쿼리쿼리쿼리 Query -->
+	<resultMap type="sellerVO" id="sellerRM3">
+ 	 <result column="address_no" property="addressVO.addressNo"/>
+  		<result column="address_api" property="addressVO.addressAPI"/>
+ 		<result column="latitude" property="addressVO.latitude"/>
+ 		<result column="longitude" property="addressVO.longitude"/> 
+ 	</resultMap> 
+ 	<select id="getAllSameAddressSellerListByAddress" resultMap="sellerRM3" parameterType="string">
+ 				SELECT m.MEM_ID, m.PW, m.BIRTH, m.TEL, m.ADDRESS_DE, 
+ 								m.PW_QNA_NO, m.ENABLE_NO, 
+ 								m.MEM_NAME, m.PW_ANSWER, a.ADDRESS_NO,
+ 							a.ADDRESS_API, a.LATITUDE , a.LONGITUDE ,  
+ 								s.SELLER_IMG, s.SELLER_INFO, s.SELLER_SCORE 
+ 				FROM BAN_MEM m, address a , SELLER s  
+ 				WHERE m.ADDRESS_NO = #{value} AND m.ADDRESS_NO=a.ADDRESS_NO   AND m.MEM_ID=s.MEM_ID 	
+ 	</select>
 <!-- End 광태 -->
 
 <!-- Start 우정 -->
@@ -99,6 +114,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					s, ban_mem m, address a 
 					where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3]]>
 	</select>
+	<update id="getEditMembers" parameterType="sellerVO">
+			//////해야됨.
+	</update>
 <!-- End 정훈 -->
 
 <!-- Start 향걸 -->
@@ -113,10 +131,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 where mem_id=#{value} and enable_no=11
  	</select>
  	<!-- Spring Security에서 권한 체크를 위해 사용 -->
+ 	<resultMap type="addressVO" id="">
+ 	
+ 	</resultMap>
 	<select id="selectAuthorityByMemId"  resultType="authority">
-		SELECT ma.mem_id, a.auth_name
-		FROM mem_auth ma, auth a
-		WHERE ma.auth_no=a.auth_no and ma.mem_id=#{value}
+		SELECT bm.mem_id, bm.pw, bm.address_no, bm.address_de, bm.pw_QNA_NO, bm.mem_name, bm.pw_answer, a.auth_name, a.auth_no  
+		FROM ban_mem bm, mem_auth ma, auth a
+		WHERE ma.mem_id=bm.mem_id and a.auth_no=ma.auth_no and bm.mem_id=#{value}
 	</select>
  	<select id="idcheck" resultType="int">
 		select count(*) from  ban_mem where mem_id=#{value}
