@@ -9,7 +9,11 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54"></script>  
  <!-- 우편번호 api -->
  <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
 	
@@ -45,12 +49,42 @@ $(document).ready(function() {
 	               // document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
 	              //  document.getElementById('sample4_roadAddress').value = fullRoadAddr;
 	               // document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
-	               // $("#jibunAddress").val(data.jibunAddress);
-	                //$("#jibunAddress").trigger("change");
-
+	                $("#jibunAddress").val(data.jibunAddress);
+	                $("#jibunAddress").trigger("change");
 	            }
 	        }).open();
 	});//$("#searchaddress").click
+	
+	$("#jibunAddress").change(function() {
+		//alert($(this).val());
+		// 주소-좌표 변환 객체를 생성합니다  
+		var geocoder = new daum.maps.services.Geocoder();
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch($(this).val(), function(result, status) {
+
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === daum.maps.services.Status.OK) {
+
+		        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new daum.maps.Marker({
+		            map: map,
+		            position: coords
+		        });
+
+		        // 인포윈도우로 장소에 대한 설명을 표시합니다
+		        var infowindow = new daum.maps.InfoWindow({
+		            content: '<div style="width:100px;text-align:center;padding:6px 0;">검색위치</div>'
+		        });
+		        infowindow.open(map, marker);
+
+		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+		    }
+		});   
+	});//$("#jibunAddress").change 
+	
 	
 });//$(document).ready
 </script>
@@ -76,11 +110,10 @@ $(document).ready(function() {
 
 	<br>
 	<div >
-		<table class="searchTable" >
+		<table class="table table-striped" >
 		<tbody id="tbodyList">	
 		<c:forEach items="${list}" var="s">
-						
-				<tr><td>${s.memId}  | ${s.addressVO.addressNo}  |  ${s.sellerInfo} </td></tr>
+				<tr><td><a href="#">${s.memId}</a>  | ${s.addressVO.addressNo}  |  ${s.sellerInfo} </td></tr>
 		</c:forEach>				
 		</tbody>					
 		</table>
@@ -94,6 +127,7 @@ $(document).ready(function() {
 					</div>
 				</div>
 	</div>
+	
 </section>
 
 
@@ -124,36 +158,71 @@ $(document).ready(function() {
 	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 	////////////////////////////
 	
-	var imageSrc = 'http://cfile29.uf.tistory.com/image/26141842593FFAC702AAF0', // 마커이미지의 주소입니다    
-    imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
-    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-      
-	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-	var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
-	    markerPosition = new daum.maps.LatLng(${list[0].addressVO.latitude}, ${list[0].addressVO.longitude}); // 마커가 표시될 위치입니다
+	// 마커를 표시할 위치와 title 객체 배열입니다 
+	var positions = [	
+		<c:forEach items="${list}" var="s" >
+			{
+		        title: '${s.addressVO.addressNo}', 
+		        latlng: new daum.maps.LatLng(${s.addressVO.latitude}, ${s.addressVO.longitude})
+		    },
+		</c:forEach>
+	];
 	
-	// 마커를 생성합니다
-	var marker = new daum.maps.Marker({
-	    position: markerPosition, 
-	    image: markerImage // 마커이미지 설정 
-	});
 	
-	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);  
-	
-	var iwContent = '<div style="padding:5px;">Hello World! <br><a href="http://map.daum.net/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">존맛</a> <a href="http://map.daum.net/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-    iwPosition = new daum.maps.LatLng(${list[0].addressVO.latitude}, ${list[0].addressVO.longitude}); //인포윈도우 표시 위치입니다
+	for (var i = 0; i < positions.length; i ++) {
+	    // 마커를 생성합니다
+	    var marker = new daum.maps.Marker({
+	        map: map, // 마커를 표시할 지도
+	        position: positions[i].latlng // 마커의 위치
+	    });
+	    var iwContent = '<div style="padding:5px;"></div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
-	// 인포윈도우를 생성합니다
-	var infowindow = new daum.maps.InfoWindow({
-	    position : iwPosition, 
-	    content : iwContent 
-	});
-	  
-	// 마커에 클릭이벤트를 등록합니다
-	daum.maps.event.addListener(marker, 'click', function() {
-	      // 마커 위에 인포윈도우를 표시합니다
-	      infowindow.open(map, marker); 
-	      $("#tbodyList").append("<tr><td>"+d+"|"+ a+"|"+f+"</td></tr>");
-	});
+	    // 마커에 표시할 인포윈도우를 생성합니다 
+	    var infowindow = new daum.maps.InfoWindow({
+	        content: iwContent // 인포윈도우에 표시할 내용
+	    });
+
+	    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+	    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+	    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+	    daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+	    daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+	    daum.maps.event.addListener(marker, 'click', makeClickListener(positions[i].title));
+	}
+
+	
+	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+	function makeOverListener(map, marker, infowindow) {
+	    return function() {
+	        infowindow.open(map, marker);
+	    };
+	}
+
+	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+	function makeOutListener(infowindow) {
+	    return function() {
+	        infowindow.close();
+	    };
+	}
+	// 마커 클릭시 이벤트 입니다
+	function makeClickListener(title) {
+	    return function() {
+	    	 var strTemp="";
+	    			 <c:forEach items="${list}" var="s" >
+	    			 	if (title=='${s.addressVO.addressNo}') {
+	    		strTemp +="<tr><td rowspan='3'>"+
+				"<a href='#'>"+
+				"<img src='/banchan/resources/images/김래원.jpg' style='width: 100px;height:100px;'>"+
+				"</a>"+
+				"</td>"+
+				"<td> <a href='#'>"+"???여긴 뭐다냐 ??"+"</a> </td>"+
+				"</tr>"+			
+				"<tr><td>"+"별점 :  "+"</td></tr>"+
+				"<tr><td>"+"판매자 소개: ${s.sellerInfo}"+"</td></tr>";
+	    		}
+	    			 </c:forEach>
+	    			 alert(strTemp);
+	    			 $("#tbodyList").html(strTemp); 
+	    };
+	}
 </script>
