@@ -5,19 +5,28 @@ import org.springframework.web.multipart.MultipartFile;
 public class SellerVO extends MemberVO {
 
     private String memId;
-    private MultipartFile uploadImage; // 파일업로드를 위한 변수 
-    private String sellerImage;
+    private String sellerImg;
     private String sellerInfo;
     private float sellerScore;
 	
 	public SellerVO() {
 		super();
+		//this.setAddressVO(new AddressVO());
 	}
+
 	
-	
-	public MultipartFile getUploadImage() {
-		return uploadImage;
+/*	@Override
+	public String toString() {
+		return "SellerVO [MemberVO [memId=" + memId+", pw=" + super.getPw()+ ", memName=" + super.getMemName() 
+		+ ", birth=" + super.getBirth() + ", tel=" + super.getTel()+ ", addressDe=" +super.getAddressDe()
+		+ ", pwAnswer=" + super.getPwAnswer() + ", enableNo=" + super.getEnableNo()+ ", pwQnaNo="+super.getPwQnaNo()
+		+ ", pwQnaNo="+ super.getPwQnaNo() + "AddressVO [ addressNO=" + super.getAddressVO().getAddressNo()
+		+"addressAPI=" + super.getAddressVO().getAddressAPI()+"Latitude=" + super.getAddressVO().getLatitude()+"Longitude=" + super.getAddressVO().getLongitude()+"]]"
+		+ ", sellerImg=" + sellerImg + ", sellerInfo=" + sellerInfo + ", sellerScore="
+				+ sellerScore + "]";
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 	}
+<<<<<<< HEAD
 
 
 	public void setUploadImage(MultipartFile uploadImage) {
@@ -38,19 +47,21 @@ public class SellerVO extends MemberVO {
 		this.uploadImage = uploadImage;
 		this.sellerInfo = sellerInfo;
 	}
+*/
 
 
 	public String getMemId() {
 		return memId;
 	}
+
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-	public String getSellerImage() {
-		return sellerImage;
+	public String getsellerImg() {
+		return sellerImg;
 	}
-	public void setSellerImage(String sellerImage) {
-		this.sellerImage = sellerImage;
+	public void setsellerImg(String sellerImg) {
+		this.sellerImg = sellerImg;
 	}
 	public String getSellerInfo() {
 		return sellerInfo;
@@ -68,8 +79,9 @@ public class SellerVO extends MemberVO {
 
 	@Override
 	public String toString() {
-		return "SellerVO [memId=" + memId + ", uploadImage=" + uploadImage + ", sellerImage=" + sellerImage
-				+ ", sellerInfo=" + sellerInfo + ", sellerScore=" + sellerScore + "]";
+		return "SellerVO [memId=" + memId + ", sellerImg=" + sellerImg + ", sellerInfo=" + sellerInfo + ", sellerScore="
+				+ sellerScore + "]";
 	}
+	
 	
 }

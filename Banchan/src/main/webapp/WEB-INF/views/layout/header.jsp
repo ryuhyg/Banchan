@@ -14,26 +14,29 @@
 	</script>
 	
 		<header class="menu-base" id="header-container-box">
-			<div class="info"><!-- info -->
+			<div class="info" style="height: 50px;"><!-- info -->
 				<div class="container">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-4">
 						</div>
-					<%-- 	<sec:authorize access="!isAuthenticated()"><!-- 비회원 권한 설정 --> --%>
-						<div id="login-pan" class="col-md-6">
+						<div class="col-md-4">
+						</div>
+						<div id="login-pan" class="col-md-4">
+						<sec:authorize access="!isAuthenticated()"><!-- 비회원 권한 설정 -->
 							<a href="${pageContext.request.contextPath}/member/registerView.do" ><i class="icon fa fa-pencil-square-o"></i> 회원가입</a>
 							<a href="${pageContext.request.contextPath}/member/loginView.do"  ><i class="icon fa fa-user user"></i> 로그인</a>
-						</div>
-						<%-- </sec:authorize>
-						<sec:authorize access="hasRole('ROLE_SELLER)"><!-- 구매자 권한 설정 --> --%>
+						</sec:authorize>
+						<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
 								<a href="#" id="logoutAction"><i class="icon fa fa-user user"></i>로그아웃</a>
 								<form id="logoutForm" action="${pageContext.request.contextPath}/member/logout.do" method="post" style="display: none">
 										<sec:csrfInput />
 								</form>
-						<%-- </sec:authorize>
-						<sec:authorize access="hasRole('ROLE_BUYER)"><!-- 판매자 권한 설정 --> --%>
-							<a href="${pageContext.request.contextPath}/member/seller_myPage.do"  ><i class="icon fa fa-user user"></i> 판매자 마이페이지</a>
-						<%-- </sec:authorize> --%>
+						</sec:authorize>
+						<sec:authorize access="hasRole('ROLE_SELLER')"><!-- 판매자 권한 설정 -->
+							<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=java2"  ><i class="icon fa fa-user user"></i> 판매자 마이페이지</a>
+						</sec:authorize>
+
+						</div>
 					</div>
 				</div>			
 			</div><!-- /.info -->
@@ -54,7 +57,7 @@
 							<li class="has_submenu">
 								<a href="">음식찾기</a>
 								<ul>
-									<li><a href="">위치중심으로 찾기</a></li>
+									<li><a href="${pageContext.request.contextPath}/locationServicePage.do">위치중심으로 찾기</a></li>
 									<li><a href="">카테고리로 찾기</a></li>
 									
 								</ul>
@@ -74,5 +77,7 @@
 		
 
 		
+	
+	
 	
 

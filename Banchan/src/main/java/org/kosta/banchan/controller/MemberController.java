@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MemberController {
 	@Resource
 	private MemberService memberService;
+	
 	/*
 	 *  회원정보수정시 비밀번호 암호화처리를 위한 객체를 주입받는다
 	 *  spring-security.xml 에서 bean 설정이 되어 있음 
@@ -41,10 +42,6 @@ public class MemberController {
 		return "member/registerView.tiles";		
 	}	
 	
-	@RequestMapping("seller_myPage.do")
-	public String sellerDetail() {
-		return "member/seller_myPage.tiles";
-	}
 
 	@RequestMapping("login_fail.do")
 	public String loginFail() {
@@ -79,52 +76,40 @@ public class MemberController {
 	    	
 	    	return "redirect:member/loginView.do";
 	    }
+	    
+	   ///////////////start 위치기반//////////
+	    @RequestMapping("locationServicePage.do")
+	    public String locationServicePage(Model model) {
+	    	
+	    	System.out.println("locationServicePage");
+	    	
+	    	List<SellerVO> list =
+	    			memberService.getAllSameAddressSellerListByAddress("1003");
+	    	model.addAttribute("list",list);
+	    	return "member/locationServicePage.tiles";
+	    }
+	    ////////////// end 위치기반 ///////////
 	/////////////////////// end  광태 메서드   ///////////////////////////////
 	    
-	/////////////////////// start  윤주 메서드   ///////////////////////////////
-	    //판매자 등록 폼(이미 판매자로 등록되어있으면 sellerRegisterForm_fail.jsp로 alert띄움)
-	    @RequestMapping("sellerRegisterForm.do")
-	    public String sellerRegisterForm() {
-	    	String memId = "java";//로그인 기능 구현되면 세션의 아이디 정보를 가져와서 memId에 할당예정
-	    	int sellerCheck = memberService.isSeller(memId);
-	    	if(sellerCheck==0)
-	    		return "member/sellerRegisterForm.tiles";
-	    	else
-	    		return "member/sellerRegisterForm_fail";
-	    }
-	    
-		private String uploadPath;//프로필사진 업로드 경로
-		//판매자등록 메서드
-	    @RequestMapping(value = "sellerRegister.do",method = RequestMethod.POST)
-	    public String sellerRegister(SellerVO svo,HttpServletRequest request) {
-	    	uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
-			File uploadDir=new File(uploadPath);
-			if(uploadDir.exists()==false)
-				uploadDir.mkdirs();
-			MultipartFile file=svo.getUploadImage();//파일 
-			System.out.println(file+"<==");
-			//System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
-			if(file!=null&&file.isEmpty()==false){
-				System.out.println("파일명:"+file.getOriginalFilename());
-				File uploadFile=new File(uploadPath+file.getOriginalFilename());
-				try {
-					file.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
-					System.out.println(uploadPath+file.getOriginalFilename()+" 파일업로드");
-				} catch (IllegalStateException | IOException e) {				
-					e.printStackTrace();
-				}
-			}
-			String memId="java"; // 로그인기능 구현되면 세션정보 가져올 예정
-			svo.setMemId(memId);
-			svo.setSellerImage(file.getOriginalFilename());
-			svo.setSellerInfo(request.getParameter("sellerInfo"));
-			memberService.sellerRegister(svo);
-			return "redirect:sellerRegister_ok.do";
-	    }
-	    @RequestMapping("sellerRegister_ok.do")
-	    public String sellerRegisterOk() {
-	    	return "member/sellerRegister_ok.tiles";
-	    }
-    /////////////////////// end  윤주 메서드   ///////////////////////////////
 	
+	
+/////////////////////// start  정훈 메서드   ///////////////////////////////
+	    @RequestMapping("selectSellerTop3.do")
+	    public String selectSellerTop3(Model model) {
+	    	
+	    	List<SellerVO> list=memberService.selectSellerTop3();
+	    	
+	    	model.addAttribute("list", list);
+	    	return "home.tiles";
+	    }
+/////////////////////// end  정훈 메서드   ///////////////////////////////
+////////////////////start 우정 메서드 ////////////////////////////
+	    @RequestMapping("sellerPageInfo.do")
+	    public String seller_myPage(Model model,String memId) {
+	    	SellerVO svo=memberService.selectSellerInfo(memId);
+	    	System.out.println(svo);
+	    	model.addAttribute("svo",svo);
+	    	return "member/seller_myPage.tiles";
+	    }
+////////////////////end 우정 메서드 ////////////////////////////
 }

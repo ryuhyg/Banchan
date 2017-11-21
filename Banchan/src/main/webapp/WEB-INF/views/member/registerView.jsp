@@ -91,7 +91,7 @@
 			var id=$(this).val().trim();
 			if(id.length<4 || id.length>10){
 				$("#passwordCheckView").html("비밀번호는 4자이상 10자 이하여야 함!").css(
-						"background","pink");
+						"color","pink");
 				checkPassword="";
 			}else{
 				$("#passwordCheckView").html("비밀번호 사용가능!").css(
@@ -326,7 +326,7 @@
 									</div>
 								</div>
 								<div class="row">
-									<div  class="col-xs-6">															
+									<div  class="col-xs-8">															
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>주소</label>
 										<div id="map" style="width:300px;height:170px;"></div><input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
 										<input type="text" name="addressVO.addressAPI"  id="jibunAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly">		

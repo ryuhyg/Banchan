@@ -3,6 +3,7 @@ package org.kosta.banchan.model.service;
 import java.util.List;
 
 import org.kosta.banchan.model.vo.Authority;
+import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
@@ -10,8 +11,9 @@ import org.kosta.banchan.model.vo.SellerVO;
 public interface MemberService {
 
 	MemberVO findMemberById(String id);
-
+/////////////////////// start  정훈 메서드   ///////////////////////////////
 	List<Authority> selectAuthorityByMemId(String id);
+/////////////////////// end  정훈 메서드   ///////////////////////////////
 
 	int idcheck(String id);
 	
@@ -24,12 +26,20 @@ public interface MemberService {
 	void registerMember(MemberVO memberVO);
 /////////////////////// end  광태 메서드   ///////////////////////////////
 	
-/////////////////////// start  윤주 메서드   ///////////////////////////////
+/*/////////////////////// start  윤주 메서드   ///////////////////////////////
 
 	int isSeller(String memId);
 		
 	void sellerRegister(SellerVO svo);
 /////////////////////// end  윤주 메서드   ///////////////////////////////
+*/
+	List<SellerVO> selectSellerTop3();
+	List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo);
+
+/////////////////////// start  우정 메서드   ///////////////////////////////	
+	SellerVO selectSellerInfo(String id);
+	List<FoodVO> selectFoodInfo(String id);
+/////////////////////// end  우정 메서드   ///////////////////////////////
 
 
 }

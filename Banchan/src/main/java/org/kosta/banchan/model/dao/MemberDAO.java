@@ -36,15 +36,15 @@ public interface MemberDAO {
 		void registerMember(MemberVO memberVO);
 		//광태 회원가입시 권한 등록
 		void registerMemberBasicAuth(MemberVO memberVO);
-/////////////////////// end  광태 메서드   ///////////////////////////////
-		
-/////////////////////// start  윤주 메서드   ///////////////////////////////
-		int isSeller(String memId);
-		
-		void insertAuth(Authority authority);
-		
-		void sellerRegister(SellerVO svo);
+/////////////////////// end  광태 메서드   ///////////////////////////////	
+/*/////////////////////// start  윤주 메서드   ///////////////////////////////
+int isSeller(String memId);
+
+void insertAuth(Authority authority);
+
+void sellerRegister(SellerVO svo);
 /////////////////////// end  윤주 메서드   ///////////////////////////////
-		
-		
+*/
+
+		List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo);
 }

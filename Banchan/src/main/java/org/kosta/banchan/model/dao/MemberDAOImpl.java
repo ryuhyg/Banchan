@@ -87,26 +87,19 @@ public class MemberDAOImpl implements MemberDAO {
 		public void registerMemberBasicAuth(MemberVO memberVO) {
 			template.insert("member.registerMemberBasicAuth",memberVO);
 		}
-/////////////////////// end  광태 메서드   ///////////////////////////////
 		
-/////////////////////// start  윤주 메서드   ///////////////////////////////
-
-		@Override
-		public int isSeller(String memId) {
-			return template.selectOne("member.isSeller",memId);
+	/////////// start 위치기반 추천 메서드 ////////////////////
+		
+		//회원 아이디로 addressNo 정보 받기 
+		public String findMemberAddressnoById(MemberVO memberVO) {
+			return template.selectOne("member.findMemberAddressnoById", memberVO);
 		}
-
 		@Override
-		public void insertAuth(Authority authority) {
-			template.insert("member.insertAuth",authority);
-			
+		public List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo){
+			return template.selectList("member.getAllSameAddressSellerListByAddress", addressNo);
 		}
-
-		@Override
-		public void sellerRegister(SellerVO svo) {
-			template.insert("member.sellerRegister",svo);
-			
-		}
-/////////////////////// end  윤주 메서드   ///////////////////////////////
+	/////////// end 위치기반 추천 메서드 ////////////////////   
+/////////////////////// end  광태 메서드   ///////////////////////////////
+	
 
 }
