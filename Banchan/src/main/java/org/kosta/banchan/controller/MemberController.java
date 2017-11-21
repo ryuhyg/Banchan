@@ -75,7 +75,7 @@ public class MemberController {
 	    	//System.out.println("memberVO :"+memberVO);
 	    	memberService.registerMember(memberVO);
 	    	
-	    	return "redirect:member/loginView.do";
+	    	return "redirect:member/registerMember_ok.do";
 	    }
 	    
 	   ///////////////start 위치기반//////////

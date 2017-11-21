@@ -99,6 +99,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					s, ban_mem m, address a 
 					where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3]]>
 	</select>
+	<update id="getEditMembers" parameterType="sellerVO">
+			//////해야됨.
+	</update>
 <!-- End 정훈 -->
 
 <!-- Start 향걸 -->
