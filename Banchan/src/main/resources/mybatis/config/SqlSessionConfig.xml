@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</typeAliases>	
 	<!-- mapper.xml 을 명시한다  -->
 	<mappers>	
-<!-- 		<mapper resource="mybatis/config/gt/member.xml"/>	
+		<mapper resource="mybatis/config/gt/member.xml"/>	
 		<mapper resource="mybatis/config/gt/food.xml"/>	
 		<mapper resource="mybatis/config/hg/member.xml"/>	
 		<mapper resource="mybatis/config/hg/food.xml"/>	
@@ -26,9 +26,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/config/yj/member.xml"/>	
 		<mapper resource="mybatis/config/yj/food.xml"/>	
 		<mapper resource="mybatis/config/ym/member.xml"/>	
-		<mapper resource="mybatis/config/ym/food.xml"/>	 -->
-		<mapper resource="mybatis/config/yj/member.xml"/>	
-		<mapper resource="mybatis/config/yj/food.xml"/>	
+		<mapper resource="mybatis/config/ym/food.xml"/>	
+		
 	</mappers>
 </configuration>
 
