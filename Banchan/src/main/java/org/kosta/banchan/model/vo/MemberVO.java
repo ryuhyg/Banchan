@@ -19,6 +19,11 @@ public class MemberVO {
 	public MemberVO() {
 		super();
 	}
+	public MemberVO(String memId, String memName) {
+		super();
+		this.memId = memId;
+		this.memName = memName;
+	}
 
 	@Override
 	public String toString() {

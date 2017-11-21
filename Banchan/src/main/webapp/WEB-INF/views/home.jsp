@@ -245,6 +245,7 @@
 				</div>
 				<div class="row text-center">
 					<a href="sellerRegisterForm.do" class="btn btn-reverse button-large">판매자 등록하기</a>
+					<a href="foodSellDetailForTest_YoonJoo.do">구매하기테스트입니다_윤주</a>
 				</div>
 			</div>
 		</section>

@@ -119,7 +119,12 @@ public void sellerRegister(SellerVO svo) {
 template.insert("member.sellerRegister",svo);
 
 }
+@Override
+public String getSellerNameByMemId(String memId) {
+	return template.selectOne("member.getSellerNameByMemId",memId);
+}
 /////////////////////// end  윤주 메서드   ///////////////////////////////
+
 	
 
 }

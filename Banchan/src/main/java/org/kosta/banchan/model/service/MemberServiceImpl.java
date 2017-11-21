@@ -144,5 +144,9 @@ public void sellerRegister(SellerVO svo) { //트랜젝션 처리
 memberDAO.insertAuth(new Authority(svo.getMemId(),"20"));
 memberDAO.sellerRegister(svo);
 }
+@Override
+public String getSellerNameByMemId(String memId) {
+	return memberDAO.getSellerNameByMemId(memId);
+}
 /////////////////////// end  윤주 메서드   ///////////////////////////////
 }
