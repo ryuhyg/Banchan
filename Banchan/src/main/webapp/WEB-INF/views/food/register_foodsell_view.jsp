@@ -3,22 +3,6 @@
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <section id="recent-list" style="margin-top: 350px">
-	<%-- <form action="${pageContext.request.contextPath}/registerFoodSell.do" method="post">
-	<sec:csrfInput/>
-		<h3>갓김치</h3>
-		거래일자 <input type="date" name="trDate"><br><br>
-		마감일자 <input type="date" name="closeDate"><br><br>		
-		거래장소 <input type="text" name="loc">	<br><br>
-		가격 <input type="number" name="price"><br><br>
-		준비수량 <input type="number" name="preQuantity"><br><br>
-		양 정보 <input type="text" name="unit"><br><br>
-		상세정보 <input type="text" name="sellDetail"><br><br>
-		<input type="hidden" name="foodVO.foodNo" value="1001"><br><br>
-		<input type="submit" value="판매등록하기">
-	</form> --%>
-	
-	
-	
 	
 <div class="container">
 	<div class="row">

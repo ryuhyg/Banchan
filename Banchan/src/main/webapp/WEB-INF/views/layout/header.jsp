@@ -33,6 +33,7 @@
 										<sec:csrfInput />
 								</form>
 								<a href="${pageContext.request.contextPath}/member/sellerRegisterForm.do" ><i class="icon fa fa-pencil-square-o"></i> 판매자 등록</a>
+								
 						</sec:authorize>						
 						<sec:authorize access="hasRole('ROLE_SELLER')"><!-- 판매자 권한 설정 -->
 						<a href="" ><i class="icon fa fa-pencil-square-o"></i> 마이페이지</a>

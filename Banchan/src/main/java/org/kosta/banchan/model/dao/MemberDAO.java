@@ -43,6 +43,8 @@ int isSeller(String memId);
 void insertAuth(Authority authority);
 
 void sellerRegister(SellerVO svo);
+
+String getSellerNameByMemId(String memId);
 /////////////////////// end  윤주 메서드   ///////////////////////////////
 
 

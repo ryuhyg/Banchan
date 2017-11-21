@@ -6,6 +6,9 @@ import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
 
 public interface FoodService {
+///////////////////start윤주/////////////////////////
+FoodVO getFoodInfoByFoodNo(String foodNo);
+///////////////////end윤주//////////////////////////
 
 	FoodVO getFoodByNo(String foodNo);
 
