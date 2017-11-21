@@ -6,7 +6,6 @@ public class FoodVO {
 
 
     private ArrayList<ReviewVO> reviewList;
-    private ArrayList<QuestionVO> questionList;
     private String foodNo;
     private String foodName;
     private String foodDe;
@@ -20,7 +19,7 @@ public class FoodVO {
 	}
 	@Override
 	public String toString() {
-		return "FoodVO [reviewList=" + reviewList + ", questionList=" + questionList + ", foodNo=" + foodNo
+		return "FoodVO [reviewList=" + reviewList+ ", foodNo=" + foodNo
 				+ ", foodName=" + foodName + ", foodDe=" + foodDe + ", foodScore=" + foodScore + ", foodMainImg="
 				+ foodMainImg + ", foodPostdate=" + foodPostdate + ", categoryNo=" + categoryNo + ", memId=" + memId
 				+ "]";
@@ -31,12 +30,7 @@ public class FoodVO {
 	public void setReviewList(ArrayList<ReviewVO> reviewList) {
 		this.reviewList = reviewList;
 	}
-	public ArrayList<QuestionVO> getQuestionList() {
-		return questionList;
-	}
-	public void setQuestionList(ArrayList<QuestionVO> questionList) {
-		this.questionList = questionList;
-	}
+	
 	public String getFoodNo() {
 		return foodNo;
 	}

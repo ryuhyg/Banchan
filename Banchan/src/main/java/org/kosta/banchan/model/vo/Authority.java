@@ -8,7 +8,6 @@ public class Authority {
 	public Authority() {
 		super();
 	}
-
 	public String getMemId() {
 		return memId;
 	}

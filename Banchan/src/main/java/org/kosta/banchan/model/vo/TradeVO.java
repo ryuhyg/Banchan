@@ -8,8 +8,7 @@ public class TradeVO {
     private String trReqDate;
     private String trFinDate;
     private String memId;
-    private String trStatusNo;
-   
+    private String trStatusNo;   
     private FoodSellVO foodSellVO;
 
 	public TradeVO() {
