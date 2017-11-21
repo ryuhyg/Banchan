@@ -25,9 +25,10 @@ insert into pw_qna(pw_qna_no,pw_quest) values(4,'학창시절 별명은?');
 
 
 -- AUTH
-insert into auth(auth_no,auth_name) values(10,'role_buyer');
-insert into auth(auth_no,auth_name) values(20,'role_seller');
-insert into auth(auth_no,auth_name) values(30,'role_admin');
+insert into auth(auth_no,auth_name) values(10,'ROLE_BUYER');
+insert into auth(auth_no,auth_name) values(20,'ROLE_SELLER');
+insert into auth(auth_no,auth_name) values(30,'ROLE_ADMIN');
+
 
 
 -- BAN_MEM
