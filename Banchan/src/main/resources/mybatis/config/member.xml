@@ -60,6 +60,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				WHERE 		 mem_id=#{memId} 
 		</select>
 	<!-- End 위치 기반  쿼리쿼리쿼리 Query -->
+	<resultMap type="sellerVO" id="sellerRM3">
+ 	 <result column="address_no" property="addressVO.addressNo"/>
+  		<result column="address_api" property="addressVO.addressAPI"/>
+ 		<result column="latitude" property="addressVO.latitude"/>
+ 		<result column="longitude" property="addressVO.longitude"/> 
+ 	</resultMap> 
+ 	<select id="getAllSameAddressSellerListByAddress" resultMap="sellerRM3" parameterType="string">
+ 				SELECT m.MEM_ID, m.PW, m.BIRTH, m.TEL, m.ADDRESS_DE, 
+ 								m.PW_QNA_NO, m.ENABLE_NO, 
+ 								m.MEM_NAME, m.PW_ANSWER, a.ADDRESS_NO,
+ 							a.ADDRESS_API, a.LATITUDE , a.LONGITUDE ,  
+ 								s.SELLER_IMG, s.SELLER_INFO, s.SELLER_SCORE 
+ 				FROM BAN_MEM m, address a , SELLER s  
+ 				WHERE m.ADDRESS_NO = #{value} AND m.ADDRESS_NO=a.ADDRESS_NO   AND m.MEM_ID=s.MEM_ID 	
+ 	</select>
 <!-- End 광태 -->
 
 <!-- Start 우정 -->
