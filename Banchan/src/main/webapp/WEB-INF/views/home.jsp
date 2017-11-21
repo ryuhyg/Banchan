@@ -63,7 +63,16 @@
 			</div>
 		</section>
 <!-- 슬라이드 부분끝 *************************** -->
-
+<!--  링크 섹션 -->
+	<section id="recent-list">
+		<div class="section-detail" style="border: 1px solid red">
+			<a href="">테스트1</a>
+			<a href="">테스트1</a>
+			<a href="">테스트1</a>
+			<a href="">테스트1</a>
+		</div>
+	</section>
+<!--  링크 섹션끝 -->
 		<section id="recent-list">
 			<div class="section-detail">
 				<h1>
