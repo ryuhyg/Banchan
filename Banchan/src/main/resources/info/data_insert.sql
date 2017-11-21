@@ -206,17 +206,14 @@ drop sequence review_seq;
 drop sequence answer_seq;
 
 
+
+/*top3 sql*/
 select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score 
 					from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
 					s, ban_mem m, address a 
 					where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3
+		
 					
-					
-update ban_mem m, seller s, address a
-set m.mem_name='이정훈', a.address_api='부산광역시 북구 덕천로259 30', s.seller_img='이미지저장test용', s.seller_info='정훈이표 맛있는 음식을 만들어드립니다'
-where mem_id='java2' and m.mem_id=s.mem_id and m.address_no=a.address_no
 
 
-
-
-
+	

@@ -48,7 +48,7 @@ public class MemberController {
 		return "member/login_fail";
 	}
 	
-	/////////////////////// start  광태 메서드   ///////////////////////////////
+/////////////////////// start  광태 메서드   ///////////////////////////////
 		// 광태 Ajax id check
 	    @RequestMapping("checkIdOnAjax.do")
 		@ResponseBody
