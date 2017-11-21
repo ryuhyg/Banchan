@@ -75,7 +75,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
 		
 		for(Authority au : list){
-			authorities.add(new SimpleGrantedAuthority(au.getAuthNo()));
+			authorities.add(new SimpleGrantedAuthority(au.getAuthName()));
 		}
 		/****************************************
 		 * 여기까지 왔으면 인증 완료 - Authentication객체 생성해서 리턴

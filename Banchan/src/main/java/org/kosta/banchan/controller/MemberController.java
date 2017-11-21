@@ -7,10 +7,13 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
+import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class MemberController {
 	@Resource
 	private MemberService memberService;
+	@Resource
+	private FoodService foodeService;
 	
 	/*
 	 *  회원정보수정시 비밀번호 암호화처리를 위한 객체를 주입받는다
@@ -31,7 +36,7 @@ public class MemberController {
 	@Resource
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	
+	/////////////////////////////////////향걸 start////////////////////////////////////
 	@RequestMapping("loginView.do")
 	public String loginView(){
 		return "member/loginView.tiles";
@@ -47,7 +52,7 @@ public class MemberController {
 	public String loginFail() {
 		return "member/login_fail";
 	}
-	
+	//////////////////////////////////////////////////////////////////////
 	/////////////////////// start  광태 메서드   ///////////////////////////////
 		// 광태 Ajax id check
 	    @RequestMapping("checkIdOnAjax.do")
@@ -104,11 +109,14 @@ public class MemberController {
 	    }
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 ////////////////////start 우정 메서드 ////////////////////////////
+	    @Secured("ROLE_SELLER")
 	    @RequestMapping("sellerPageInfo.do")
 	    public String seller_myPage(Model model,String memId) {
 	    	SellerVO svo=memberService.selectSellerInfo(memId);
-	    	System.out.println(svo);
+	    	//System.out.println(svo);
+	    	List<FoodVO> flist=foodeService.getFoodListByMemId(memId);
 	    	model.addAttribute("svo",svo);
+	    	model.addAttribute("flist",flist);
 	    	return "member/seller_myPage.tiles";
 	    }
 ////////////////////end 우정 메서드 ////////////////////////////
@@ -116,8 +124,10 @@ public class MemberController {
 /////////////////////// start  윤주 메서드   ///////////////////////////////
 //판매자 등록 폼(이미 판매자로 등록되어있으면 sellerRegisterForm_fail.jsp로 alert띄움)
 @RequestMapping("sellerRegisterForm.do")
-public String sellerRegisterForm() {
-String memId = "java";//로그인 기능 구현되면 세션의 아이디 정보를 가져와서 memId에 할당예정
+public String sellerRegisterForm(String id) {
+	System.out.println("sellerRegisterform id:"+id);
+
+String memId = id;//로그인 기능 구현되면 세션의 아이디 정보를 가져와서 memId에 할당예정
 int sellerCheck = memberService.isSeller(memId);
 if(sellerCheck==0)
 	return "member/sellerRegisterForm.tiles";
@@ -128,7 +138,8 @@ else
 private String uploadPath;//프로필사진 업로드 경로
 //판매자등록 메서드
 @RequestMapping(value = "sellerRegister.do",method = RequestMethod.POST)
-public String sellerRegister(SellerVO svo,HttpServletRequest request) {
+public String sellerRegister(String id, SellerVO svo,HttpServletRequest request) {
+	System.out.println("sellerRegister id:"+id);
 uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
 File uploadDir=new File(uploadPath);
 if(uploadDir.exists()==false)
@@ -146,7 +157,7 @@ if(file!=null&&file.isEmpty()==false){
 		e.printStackTrace();
 	}
 }
-String memId="java"; // 로그인기능 구현되면 세션정보 가져올 예정
+String memId= id; // 로그인기능 구현되면 세션정보 가져올 예정
 svo.setMemId(memId);
 svo.setSellerImg(file.getOriginalFilename());
 svo.setSellerInfo(request.getParameter("sellerInfo"));

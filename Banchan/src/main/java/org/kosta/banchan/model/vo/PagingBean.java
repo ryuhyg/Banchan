@@ -29,6 +29,7 @@ public class PagingBean {
 
 	public PagingBean() {
 	}
+	
 
 	public PagingBean(int totalPostCount) {
 		this.totalPostCount = totalPostCount;

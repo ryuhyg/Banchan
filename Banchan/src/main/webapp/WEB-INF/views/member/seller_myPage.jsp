@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+
 <section id="agent-page" style="margin-top: 350px;">
 			<div class="container">
 				<div class="row">
@@ -51,14 +53,16 @@
 
 				<div class="my-property" data-navigation=".my-property-nav">
 					<div class="crsl-wrap">
+					<!-- 받아온 음식 반복 구간 -->
+					<c:forEach items="${flist}" var="food">
 						<figure class="crsl-item">
 							<div class="box-ads box-grid">
 								<a class="hover-effect image image-fill" href="property-detail.html">
 									<span class="cover"></span>
 									<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
-									<h3 class="title">음식 이름</h3>
+									<h3 class="title">${food.foodName}</h3>
 								</a>								
-								<span class="description">음식 소개</span>
+								<span class="description">${food.foodDe}</span>
 								<dl class="detail">
 									<dt class="status">기타:</dt><dd><span>테스트1</span></dd>
 									<dt class="bed">기타:</dt><dd><span>테스트2</span></dd>
@@ -69,98 +73,8 @@
 								</div>
 							</div>
 						</figure>
-						<figure class="crsl-item">
-							<div class="box-ads box-grid">
-								<a class="hover-effect image image-fill" href="property-detail.html">
-									<span class="cover"></span>
-									<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
-									<h3 class="title">음식 이름</h3>
-								</a>								
-								<span class="description">음식 소개</span>
-								<dl class="detail">
-									<dt class="status">기타:</dt><dd><span>테스트1</span></dd>
-									<dt class="bed">기타:</dt><dd><span>테스트2</span></dd>
-									<dt class="bath">기타:</dt><dd><span>테스트3</span></dd>
-								</dl>
-								<div class="footer">
-									<a class="btn btn-default" href="property-detail.html">판매등록</a>
-								</div>
-							</div>
-						</figure>
-						<figure class="crsl-item">
-							<div class="box-ads box-grid">
-								<a class="hover-effect image image-fill" href="property-detail.html">
-									<span class="cover"></span>
-									<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
-									<h3 class="title">음식 이름</h3>
-								</a>								
-								<span class="description">음식 소개</span>
-								<dl class="detail">
-									<dt class="status">기타:</dt><dd><span>테스트1</span></dd>
-									<dt class="bed">기타:</dt><dd><span>테스트2</span></dd>
-									<dt class="bath">기타:</dt><dd><span>테스트3</span></dd>
-								</dl>
-								<div class="footer">
-									<a class="btn btn-default" href="property-detail.html">판매등록</a>
-								</div>
-							</div>
-						</figure>
-						<figure class="crsl-item">
-							<div class="box-ads box-grid">
-								<a class="hover-effect image image-fill" href="property-detail.html">
-									<span class="cover"></span>
-									<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
-									<h3 class="title">음식 이름</h3>
-								</a>								
-								<span class="description">음식 소개</span>
-								<dl class="detail">
-									<dt class="status">기타:</dt><dd><span>테스트1</span></dd>
-									<dt class="bed">기타:</dt><dd><span>테스트2</span></dd>
-									<dt class="bath">기타:</dt><dd><span>테스트3</span></dd>
-								</dl>
-								<div class="footer">
-									<a class="btn btn-default" href="property-detail.html">판매등록</a>
-								</div>
-							</div>
-						</figure>
-						<figure class="crsl-item">
-							<div class="box-ads box-grid">
-								<a class="hover-effect image image-fill" href="property-detail.html">
-									<span class="cover"></span>
-									<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
-									<h3 class="title">음식 이름</h3>
-								</a>								
-								<span class="description">음식 소개</span>
-								<dl class="detail">
-									<dt class="status">기타:</dt><dd><span>테스트1</span></dd>
-									<dt class="bed">기타:</dt><dd><span>테스트2</span></dd>
-									<dt class="bath">기타:</dt><dd><span>테스트3</span></dd>
-								</dl>
-								<div class="footer">
-									<a class="btn btn-default" href="property-detail.html">판매등록</a>
-								</div>
-							</div>
-						</figure>
-						<figure class="crsl-item">
-							<div class="box-ads box-grid">
-								<a class="hover-effect image image-fill" href="property-detail.html">
-									<span class="cover"></span>
-									<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
-									<h3 class="title">음식 이름</h3>
-								</a>								
-								<span class="description">음식 소개</span>
-								<dl class="detail">
-									<dt class="status">기타:</dt><dd><span>테스트1</span></dd>
-									<dt class="bed">기타:</dt><dd><span>테스트2</span></dd>
-									<dt class="bath">기타:</dt><dd><span>테스트3</span></dd>
-								</dl>
-								<div class="footer">
-									<a class="btn btn-default" href="property-detail.html">판매등록</a>
-								</div>
-							</div>
-						</figure>
-					</div>
-
+					</c:forEach>
+						
 					<div class="my-property-nav">
 						<p class="button-container">
 							<a href="#" class="next">next</a>
