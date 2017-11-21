@@ -11,7 +11,11 @@ public interface FoodService {
 
 	FoodSellVO getFoodSellDetailByNo(String foodSellNo);
 
+
 	List<FoodVO> getFoodListByMemId(String memId);
+
+	void registerFoodSell(FoodSellVO foodSellVO);
+
 
 
 }
