@@ -28,7 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from trade 
 		where food_sell_no=#{value}
 	</select>
-
+	<!-- [판매자] 실제 거래완료 후 거래완료확인 하여 거래상태를 바꿔줌  -->
+	<update id="updateTradeStatus" parameterType="string">
+		update trade set tr_status_no=2
+		where tr_no=#{value}
+	</update>
 <!-- End 지원 -->
 
 <!-- Start 영민 -->

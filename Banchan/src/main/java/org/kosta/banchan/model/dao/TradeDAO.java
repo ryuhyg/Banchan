@@ -8,5 +8,7 @@ public interface TradeDAO {
 
 	List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo);
 
+	void updateTradeStatus(String tradeNo);
+
 
 }

@@ -8,5 +8,7 @@ public interface TradeService {
 
 	List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo);
 
+	void updateTradeStatus(String tradeNo);
+
 
 }
