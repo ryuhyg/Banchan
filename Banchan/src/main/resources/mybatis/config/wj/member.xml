@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <!-- sellerInfo end -->
  	
  <!-- 판매자의 등록 음식과 등록음식에 대한 현재 판매 list를 가져오는 쿼리 -->
- 
+ <!-- 
  	<resultMap type="deptVO" id="deptRM2">
  	 	<result column="deptno"  property="deptno" />
  	 	<result column="dname"  property="dname"/>
@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 	select deptno,dname,loc from dept
  	 	order by deptno desc
  	 </select>
- 	 
+ 	
  	<resultMap type="foodVO" id="foodRM">
  	 	<result column="deptno"  property="deptno" />
  	 	<result column="dname"  property="dname"/>
@@ -54,6 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 	<include refid="selectEmp" ></include>
  	 	where deptno=#{value}
  	 </select> 
+ 	 
+ 	   -->
  	<select id="getFoodandSellList" parameterType="string">
  	select food_no,food_name,mem_id,food_de,food_score,
  	category_no,food_main_img,food_postdate
