@@ -70,7 +70,7 @@
 	<section id="recent-list">
 		<div class="section-detail" style="border: 1px solid red">
 			<a href="">테스트1</a>
-			<a href="">테스트1</a>
+			<a href="">테스트2</a>
 			<a href="">테스트1</a>
 			<a href="">테스트1</a>
 			<!-- 지원 링크 테스트 -->
