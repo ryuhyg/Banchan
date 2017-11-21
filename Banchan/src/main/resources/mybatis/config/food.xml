@@ -64,6 +64,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- End 영민 -->
 
 <!-- Start 윤주 -->
+	<select id="getFoodInfoByFoodNo" parameterType="string" resultType="foodVO">
+		select food_name,food_de
+		from food
+		where food_no=#{value}
+	</select>
+	<!-- insert into trade(tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no)
+		values(trade_seq.nextval, 1, sysdate, sysdate, 'java', 101010, 1);
+		
+		insert into tr_status(tr_status_no, tr_status) values(1,'거래중');      
+		insert into tr_status(tr_status_no, tr_status) values(2,'거래완료');      
+     
+ 		  private String trNo;
+    private int trQuantity;
+    private String trReqDate; 거래날짜
+    private String trFinDate; 주문마감날짜
+    private String memId;
+    private String trStatusNo;   
+    private FoodSellVO foodSellVO;
+ -->
+	<!-- <insert id="orderFood" parameterType="tradeVO">
+		insert into trade(tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no)
+		values(trade_seq.nextval, 1, sysdate, sysdate, 'java', 101010, 1)
+	</insert> -->
 <!-- End 윤주 -->
 </mapper>
 

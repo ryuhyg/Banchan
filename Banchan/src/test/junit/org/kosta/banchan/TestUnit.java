@@ -34,11 +34,11 @@ public class TestUnit {
 		mvo.getAddressVO().setLongitude(1442.11);
 		System.out.println(mvo);
 		dao.registerNewAddressInfo(mvo)*/
-		System.out.println(foodDAO.getFoodListByMemId("java2"));
+		//System.out.println(foodDAO.getFoodListByMemId("java2"));
 		//System.out.println(sellerDAO.selectSellerTop3().get(0).getMemName());
 		//List<SellerVO> list =mDAO.getAllSameAddressSellerListByAddress("1003");
 		//System.out.println(list.get(0).getAddressVO());
-		
+		System.out.println(sellerDAO.selectSellerInfo("java2"));
 		
 
 	}

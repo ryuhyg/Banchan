@@ -14,6 +14,14 @@ public class FoodDAOImpl implements FoodDAO {
 
 	@Resource
     private SqlSessionTemplate template;
+
+////////////////////start 윤주//////////////////////////
+	@Override
+	public FoodVO getFoodInfoByFoodNo(String foodNo) {
+		return template.selectOne("food.getFoodInfoByFoodNo",foodNo);
+	}
+//////////////////end 윤주//////////////////////////////
+
 	
 	/** [지원] 음식번호로 등록된 음식을 조회하는 메서드
 	 * 

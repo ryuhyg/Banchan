@@ -4,12 +4,12 @@ package org.kosta.banchan.model.vo;
 public class TradeVO {
 
     private String trNo;
-    private int trQuantity;
-    private String trReqDate;
-    private String trFinDate;
-    private String memId;
+    private int trQuantity;//
+    private String trReqDate; //거래 신청한 날짜
+    private String trFinDate; //거래완료 버튼 누른날짜
+    private String memId;//주문자아이디
     private String trStatusNo;   
-    private FoodSellVO foodSellVO;
+    private FoodSellVO foodSellVO;//foodSellNo
 
 	public TradeVO() {
 		super();

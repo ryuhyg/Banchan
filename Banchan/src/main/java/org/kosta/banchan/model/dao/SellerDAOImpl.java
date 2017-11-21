@@ -18,6 +18,7 @@ public class SellerDAOImpl implements SellerDAO {
 	//우정 seller+member+address 정보 받아오기
 	@Override
     public SellerVO selectSellerInfo(String id) {
+		System.out.println("selectSellerInfo  DAO");
         return template.selectOne("member.selectSellerInfo",id);
     }
 	@Override

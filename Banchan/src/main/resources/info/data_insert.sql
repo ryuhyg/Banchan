@@ -202,8 +202,6 @@ drop sequence trade_seq;
 drop sequence review_seq;
 drop sequence answer_seq;
 
-
-
 /*top3 sql*/
 select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score 
 					from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
@@ -216,7 +214,4 @@ delete from seller where mem_id='java';
 select * from mem_auth;
 delete from mem_auth where mem_id='java' and auth_no='20';
 commit
-					
-
-
-	
+				

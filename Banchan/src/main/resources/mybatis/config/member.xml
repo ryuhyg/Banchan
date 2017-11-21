@@ -162,6 +162,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into seller(mem_id, seller_img, seller_info, seller_score)
  		values(#{memId},#{sellerImg},#{sellerInfo},0)
  	</insert>
+ 	<select id="getSellerNameByMemId" parameterType="string" resultType="string">
+		select mem_name 
+		from ban_mem
+		where mem_id=#{value}
+	</select>
 <!-- End 윤주 -->
 
 </mapper>

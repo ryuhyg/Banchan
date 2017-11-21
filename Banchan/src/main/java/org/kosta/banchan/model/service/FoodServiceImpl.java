@@ -19,6 +19,13 @@ public class FoodServiceImpl implements FoodService {
     private FoodDAO foodDAO;
    @Resource
     private SellDAO sellDAO;
+  
+///////////////////start윤주/////////////////////////
+@Override
+public FoodVO getFoodInfoByFoodNo(String foodNo) {
+	return foodDAO.getFoodInfoByFoodNo(foodNo);
+}
+///////////////////end윤주////////////////////////
 
    
    /** [지원] 등록음식 상세정보 조회
@@ -62,5 +69,4 @@ public class FoodServiceImpl implements FoodService {
 		return foodDAO.getFoodListByMemId(memId);
 	}
 	
-
 }

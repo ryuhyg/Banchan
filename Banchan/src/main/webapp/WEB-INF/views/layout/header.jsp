@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-
+<sec:authentication var="mvo" property="principal" />
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#logoutAction").click(function() {
@@ -46,7 +46,7 @@
 								<form id="logoutForm" action="${pageContext.request.contextPath}/logout.do" method="post" style="display: none">
 										<sec:csrfInput />
 								</form>
-							<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=java2"  ><i class="icon fa fa-user user"></i> 판매자 마이페이지</a>
+							<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}"  ><i class="icon fa fa-user user"></i> 판매자 마이페이지</a>
 							 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="color: #1a1a1a; background-color: #fff; font-size: 12px; border: 0px; margin-top: 5px; float: right">
 						 <i class="icon fa fa-pencil-square-o"></i>마이페이지
   								<span class="caret"></span></button>
@@ -55,7 +55,7 @@
    											 <li><a href="#">내거래내역</a></li>
   											  <li><a href="#">회원탈퇴</a></li>
 									  </ul>
-						</sec:authorize>
+						</sec:authorize>							
 						</div>
 					</div>
 				</div>			

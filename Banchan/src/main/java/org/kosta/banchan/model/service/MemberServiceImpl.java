@@ -106,6 +106,7 @@ public class MemberServiceImpl implements MemberService {
 	   
 ////////////////////start 우정 메서드 ////////////////////////////
 	  public SellerVO selectSellerInfo(String id) {
+		  System.out.println("selectSellerInfo Service");
 		  return sellerDAO.selectSellerInfo(id);
 	  }
 	  public List<FoodVO> selectFoodInfo(String id) {
@@ -144,6 +145,10 @@ return memberDAO.isSeller(memId);
 public void sellerRegister(SellerVO svo) { //트랜젝션 처리
 memberDAO.insertAuth(new Authority(svo.getMemId(),"20"));
 memberDAO.sellerRegister(svo);
+}
+@Override
+public String getSellerNameByMemId(String memId) {
+	return memberDAO.getSellerNameByMemId(memId);
 }
 /////////////////////// end  윤주 메서드   ///////////////////////////////
 }
