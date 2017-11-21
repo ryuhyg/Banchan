@@ -107,8 +107,6 @@ public class MemberDAOImpl implements MemberDAO {
 /////////////////////// 회원정보 수정   ///////////////////////////////
 		//아이디를 찾는다//
 		@Override
-		public 
-		@Override
 		public void getEditMembers(SellerVO vo) {
 			template.update("member.getEditMembers", vo);
 		}
