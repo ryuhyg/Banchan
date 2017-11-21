@@ -32,15 +32,21 @@ public class FoodServiceImpl implements FoodService {
 	/** [지원] 판매음식상세정보 조회
 	 * 판매등록한 판매음식의 상세정보를 조회한다.
 	 * 판매음식상세정보 뿐 아니라 등록음식의 정보도 함께 조회한다. 
-	 * 판매음식상세정보를 가져온 후 등록음식 번호에 해당하는 음식정보를 가져와서 FoodSellVO의 FoodVo에 세팅해준다.
 	 * 
 	 */
 	@Override
 	public FoodSellVO getFoodSellDetailByNo(String foodSellNo) {
 		FoodSellVO foodSellVO=sellDAO.getFoodSellDetailByNo(foodSellNo);
-		//FoodVO foodVO=foodDAO.getFoodByNo(foodSellVO.getFoodNo());
-		//foodSellVO.setFoodVO(foodVO);
 		return foodSellVO;
+	}
+	
+	/** [지원] 판매음식등록
+	 * 선택한 등록음식을 판매하기 위해 판매음식등록한다. 
+	 * 
+	 */
+	@Override
+	public void registerFoodSell(FoodSellVO foodSellVO) {
+		sellDAO.registerFoodSell(foodSellVO);
 	}
 
 

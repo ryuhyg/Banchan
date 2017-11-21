@@ -6,5 +6,7 @@ public interface SellDAO {
 
 	FoodSellVO getFoodSellDetailByNo(String foodSellNo);
 
+	void registerFoodSell(FoodSellVO foodSellVO);
+
 
 }

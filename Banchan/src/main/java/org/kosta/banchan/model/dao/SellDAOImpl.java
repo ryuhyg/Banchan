@@ -29,10 +29,10 @@ public class SellDAOImpl implements SellDAO {
 	 * 
 	 * @param foodSellVO
 	 */
-	/*@Override
+	@Override
 	public void registerFoodSell(FoodSellVO foodSellVO) {
 		template.insert("food.registerFoodSell", foodSellVO);
-	}*/
+	}
 	
 	
 

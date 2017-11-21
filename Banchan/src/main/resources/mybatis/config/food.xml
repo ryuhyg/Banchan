@@ -18,22 +18,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- End 향걸 -->
 
 <!-- Start 지원 -->
+	<!-- 음식정보 상세조회 sql -->
 	<sql id="selectFoodDetail">
 		select food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id
 	</sql>
-
+	<!-- 음식번호로 음식상세정보 조회 -->
 	<select id="getFoodByNo" parameterType="string" resultType="foodVO">
 		<include refid="selectFoodDetail"/> 
 		from food
 		where food_no=#{value}
 	</select>
-
+	<!-- 판매음식번호로 판매음식정보 상세조회 -->
 	<select id="getFoodSellDetailByNo" parameterType="string" resultType="foodSellVO">
 		select f.food_no, f.food_name, f.food_de, f.food_score, f.food_main_img, f.food_postdate, f.category_no, f.mem_id
 		, fs.food_sell_no, fs.tr_date, fs.close_date, fs.loc, fs.price, fs.pre_quantity, fs.sell_postdate, fs.unit, fs.sell_detail
 		from food f, food_sell fs
 		where food_sell_no=#{value} and f.food_no=fs.food_no
 	</select>
+	<!-- 판매음식등록 -->
+	<insert id="registerFoodSell" parameterType="foodSellVO">
+ 		<selectKey keyProperty="foodSellNo" resultType="string" order="BEFORE">
+ 			select food_sell_seq.nextval from dual
+ 		</selectKey>
+	 		insert into food_sell(food_sell_no, tr_date, close_date, loc, price, 
+			pre_quantity, sell_postdate, unit, sell_detail, food_no)
+			values(#{foodSellNo}, #{trDate}, #{closeDate}, 
+			#{loc}, #{price}, #{preQuantity}, sysdate, #{unit}, #{sellDetail}, #{foodNo})
+ 	</insert>
 	
 	
 <!-- End 지원 -->

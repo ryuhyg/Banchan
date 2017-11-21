@@ -9,5 +9,7 @@ public interface FoodService {
 
 	FoodSellVO getFoodSellDetailByNo(String foodSellNo);
 
+	void registerFoodSell(FoodSellVO foodSellVO);
+
 
 }

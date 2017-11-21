@@ -19,12 +19,6 @@ public class FoodSellVO extends FoodVO{
 		super();
 	}
 
-	
-	
-	
-
-
-
 	@Override
 	public String toString() {
 		return "FoodSellVO [questionList=" + questionList + ", foodSellNo=" + foodSellNo + ", trDate=" + trDate
@@ -32,12 +26,6 @@ public class FoodSellVO extends FoodVO{
 				+ ", sellPostdate=" + sellPostdate + ", unit=" + unit + ", sellDetail=" + sellDetail + ", toString()="
 				+ super.toString() + "]";
 	}
-
-
-
-
-
-
 
 	public ArrayList<QuestionVO> getQuestionList() {
 		return questionList;
