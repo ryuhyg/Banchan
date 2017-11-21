@@ -13,21 +13,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</typeAliases>	
 	<!-- mapper.xml 을 명시한다  -->
 	<mappers>	
-		<mapper resource="mybatis/config/gt/member.xml"/>	
-		<mapper resource="mybatis/config/gt/food.xml"/>	
-		<mapper resource="mybatis/config/hg/member.xml"/>	
-		<mapper resource="mybatis/config/hg/food.xml"/>	
-		<mapper resource="mybatis/config/jh/member.xml"/>	
-		<mapper resource="mybatis/config/jh/food.xml"/>	
-		<mapper resource="mybatis/config/jw/member.xml"/>	
-		<mapper resource="mybatis/config/jw/food.xml"/>	
-		<mapper resource="mybatis/config/wj/member.xml"/>	
-		<mapper resource="mybatis/config/wj/food.xml"/>	
-		<mapper resource="mybatis/config/yj/member.xml"/>	
-		<mapper resource="mybatis/config/yj/food.xml"/>	
-		<mapper resource="mybatis/config/ym/member.xml"/>	
-		<mapper resource="mybatis/config/ym/food.xml"/>	
-		
+		<mapper resource="mybatis/config/feedback.xml"/>	
+		<mapper resource="mybatis/config/food.xml"/>	
+		<mapper resource="mybatis/config/member.xml"/>	
+		<mapper resource="mybatis/config/trade.xml"/>	
 	</mappers>
 </configuration>
 

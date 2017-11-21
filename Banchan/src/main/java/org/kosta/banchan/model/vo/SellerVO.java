@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class SellerVO extends MemberVO {
 
     private String memId;
+    private MultipartFile uploadImage;
     private String sellerImg;
     private String sellerInfo;
     private float sellerScore;
@@ -48,19 +49,31 @@ public class SellerVO extends MemberVO {
 		this.sellerInfo = sellerInfo;
 	}
 */
+	@Override
+	public String toString() {
+		return "SellerVO [memId=" + memId + ", uploadImage=" + uploadImage + ", sellerImg=" + sellerImg
+				+ ", sellerInfo=" + sellerInfo + ", sellerScore=" + sellerScore + "]";
+	}
 
-
+	
 	public String getMemId() {
 		return memId;
 	}
 
+
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-	public String getsellerImg() {
+	public MultipartFile getUploadImage() {
+		return uploadImage;
+	}
+	public void setUploadImage(MultipartFile uploadImage) {
+		this.uploadImage = uploadImage;
+	}
+	public String getSellerImg() {
 		return sellerImg;
 	}
-	public void setsellerImg(String sellerImg) {
+	public void setSellerImg(String sellerImg) {
 		this.sellerImg = sellerImg;
 	}
 	public String getSellerInfo() {
@@ -75,13 +88,8 @@ public class SellerVO extends MemberVO {
 	public void setSellerScore(float sellerScore) {
 		this.sellerScore = sellerScore;
 	}
-
-
-	@Override
-	public String toString() {
-		return "SellerVO [memId=" + memId + ", sellerImg=" + sellerImg + ", sellerInfo=" + sellerInfo + ", sellerScore="
-				+ sellerScore + "]";
-	}
+	
+	
 	
 	
 }
