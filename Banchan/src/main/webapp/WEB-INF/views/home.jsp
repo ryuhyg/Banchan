@@ -73,7 +73,7 @@
 						<h3>판매자 페이지</h3></a>
 	<section id="recent-list">
 		<div class="section-detail" style="border: 1px solid red">
-			<a href="">테스트1</a>
+			<a href="foodSellDetailForTest_YoonJoo.do">구매하기테스트입니다_윤주</a>
 			<a href="">테스트2</a>
 			<a href="">테스트3</a>
 			<a href="">테스트1</a>
@@ -256,17 +256,12 @@
 					<h2 style="color: #1a1a1a">직접 만든 음식을 주변 사람들과 나누며 수익을 창출해 보세요.</h2>	
 				</div>
 				<div class="row text-center">
-<<<<<<< HEAD
-					<a href="sellerRegisterForm.do" class="btn btn-reverse button-large">판매자 등록하기</a>
-					<a href="foodSellDetailForTest_YoonJoo.do">구매하기테스트입니다_윤주</a>
-=======
 			<sec:authorize access="!isAuthenticated()"><!-- 비회원 권한 설정 -->
-					<a href="" class="btn btn-reverse button-large">판매자 등록하기</a>
+					<a href="#" class="btn btn-reverse button-large">판매자 등록하기</a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
 					<a href="${pageContext.request.contextPath}/sellerRegisterForm.do?id=${mvo.memId}" class="btn btn-reverse button-large">판매자 등록하기</a>
 			</sec:authorize>
->>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 				</div>
 			</div>
 		</section>
