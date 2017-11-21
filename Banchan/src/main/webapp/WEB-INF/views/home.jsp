@@ -73,13 +73,13 @@
 						<h3>판매자 페이지</h3></a>
 	<section id="recent-list">
 		<div class="section-detail" style="border: 1px solid red">
-			<a href="foodSellDetailForTest_YoonJoo.do">구매하기테스트입니다_윤주</a>
-			<a href="">테스트2</a>
-			<a href="">테스트3</a>
-			<a href="">테스트1</a>
+			<a href="foodSellDetailForTest_YoonJoo.do">구매하기테스트입니다_윤주//</a>
+			<a href="">테스트2//</a>
+			<a href="">테스트3//</a>
 			<!-- 지원 링크 테스트 -->
-			<a href="${pageContext.request.contextPath}/registerFoodView.do">판매음식등록 테스트</a>
-			<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=101010">판매음식 상세정보</a>
+			<a href="${pageContext.request.contextPath}/registerFoodView.do">판매음식등록 테스트//</a>
+			<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=101010">판매음식 상세정보//</a>
+			<a href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=101010">판매음식당 거래요청리스트//</a>
 			
 		</div>
 	</section>

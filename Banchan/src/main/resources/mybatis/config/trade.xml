@@ -19,6 +19,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- End 향걸 -->
 
 <!-- Start 지원 -->
+	<!-- [판매자] 판매음식번호에 해당하는 거래요청 리스트 -->
+	<resultMap type="tradeVO" id="tradeRM">
+		<result property="foodSellVO.foodSellNo" column="food_sell_no"/>
+	</resultMap>
+	<select id="getSellerTradeListByFoodSellNo" parameterType="string" resultMap="tradeRM">
+		select tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no
+		from trade 
+		where food_sell_no=#{value}
+	</select>
+
 <!-- End 지원 -->
 
 <!-- Start 영민 -->
