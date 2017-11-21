@@ -38,7 +38,7 @@
 				</div>			
 			</div><!-- /.info -->
 			<div class="logo hidden-xs">
-				<a href="${pageContext.request.contextPath}/home.do"><img id="logo-header" src="${pageContext.request.contextPath}/resources/images/반창고.png" alt="Logo" /></a>
+				<a href="${pageContext.request.contextPath}/home.do"><img id="logo-header" src="${pageContext.request.contextPath}/resources/images/반창고.png" width=200 height=155 alt="Logo" /></a>
 			</div><!-- /.logo -->
 			<div class="menu-navbar">
 				<div class="container" id="menu-nav">

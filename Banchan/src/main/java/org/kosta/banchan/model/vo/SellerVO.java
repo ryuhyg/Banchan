@@ -1,20 +1,45 @@
 package org.kosta.banchan.model.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class SellerVO extends MemberVO {
 
- 
     private String memId;
+    private MultipartFile uploadImage; // 파일업로드를 위한 변수 
     private String sellerImage;
     private String sellerInfo;
     private float sellerScore;
+	
 	public SellerVO() {
 		super();
 	}
-	@Override
-	public String toString() {
-		return "SellerVO [memId=" + memId + ", sellerImage=" + sellerImage + ", sellerInfo=" + sellerInfo
-				+ ", sellerScore=" + sellerScore + "]";
+	
+	
+	public MultipartFile getUploadImage() {
+		return uploadImage;
 	}
+
+
+	public void setUploadImage(MultipartFile uploadImage) {
+		this.uploadImage = uploadImage;
+	}
+
+
+	public SellerVO(String memId, String sellerImage, String sellerInfo) {
+		super();
+		this.memId = memId;
+		this.sellerImage = sellerImage;
+		this.sellerInfo = sellerInfo;
+	}
+	
+
+	public SellerVO(MultipartFile uploadImage, String sellerInfo) {
+		super();
+		this.uploadImage = uploadImage;
+		this.sellerInfo = sellerInfo;
+	}
+
+
 	public String getMemId() {
 		return memId;
 	}
@@ -39,7 +64,12 @@ public class SellerVO extends MemberVO {
 	public void setSellerScore(float sellerScore) {
 		this.sellerScore = sellerScore;
 	}
-    
-    
 
+
+	@Override
+	public String toString() {
+		return "SellerVO [memId=" + memId + ", uploadImage=" + uploadImage + ", sellerImage=" + sellerImage
+				+ ", sellerInfo=" + sellerInfo + ", sellerScore=" + sellerScore + "]";
+	}
+	
 }

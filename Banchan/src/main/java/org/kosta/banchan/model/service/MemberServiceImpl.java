@@ -8,6 +8,7 @@ import org.kosta.banchan.model.dao.MemberDAO;
 import org.kosta.banchan.model.vo.Authority;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
+import org.kosta.banchan.model.vo.SellerVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,5 +87,20 @@ public class MemberServiceImpl implements MemberService {
 	
 	   }
    /////////////////////// end  광태 메서드   ///////////////////////////////
+	   /////////////////////// start  윤주 메서드   ///////////////////////////////
+
+	@Override
+	public int isSeller(String memId) {
+		return memberDAO.isSeller(memId);
+	}
+	
+	@Transactional
+	@Override
+	public void sellerRegister(SellerVO svo) { //트랜젝션 처리
+		memberDAO.insertAuth(new Authority(svo.getMemId(),"20"));
+		memberDAO.sellerRegister(svo);
+	}
+	   /////////////////////// end  윤주 메서드   ///////////////////////////////
+
 
 }

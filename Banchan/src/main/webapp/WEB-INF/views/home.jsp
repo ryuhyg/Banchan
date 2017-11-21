@@ -186,7 +186,7 @@
 					<h2 style="color: #1a1a1a">직접 만든 음식을 주변 사람들과 나누며 수익을 창출해 보세요.</h2>	
 				</div>
 				<div class="row text-center">
-					<a href="new-property.html" class="btn btn-reverse button-large">판매자 등록하기</a>
+					<a href="sellerRegisterForm.do" class="btn btn-reverse button-large">판매자 등록하기</a>
 				</div>
 			</div>
 		</section>

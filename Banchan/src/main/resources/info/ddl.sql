@@ -8,7 +8,7 @@ CREATE TABLE AUTH
    AUTH_NO NUMBER  PRIMARY KEY ,
    AUTH_NAME VARCHAR2(100)  NOT NULL 
 );
-
+select * from auth;
 /*
  *주소 생성 
  */
@@ -73,7 +73,7 @@ CREATE TABLE MEM_AUTH
    AUTH_NO NUMBER NOT NULL ,
    constraint FK_MEM_AUTH_AUTH_NO foreign key(AUTH_NO) references AUTH(AUTH_NO) ON DELETE CASCADE
 );
-
+select * from mem_auth;
 /*
  * 판매자 정보
  */

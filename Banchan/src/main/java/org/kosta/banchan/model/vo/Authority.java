@@ -6,6 +6,13 @@ public class Authority {
 	public Authority() {
 		super();
 	}
+	
+	public Authority(String memId, String authNo) {
+		super();
+		this.memId = memId;
+		this.authNo = authNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Authority [memId=" + memId + ", authNo=" + authNo + "]";

@@ -5,6 +5,7 @@ import java.util.List;
 import org.kosta.banchan.model.vo.Authority;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
+import org.kosta.banchan.model.vo.SellerVO;
 
 public interface MemberService {
 
@@ -22,6 +23,13 @@ public interface MemberService {
 	// 광태 회원가입 메소드
 	void registerMember(MemberVO memberVO);
 /////////////////////// end  광태 메서드   ///////////////////////////////
+	
+/////////////////////// start  윤주 메서드   ///////////////////////////////
+
+	int isSeller(String memId);
+		
+	void sellerRegister(SellerVO svo);
+/////////////////////// end  윤주 메서드   ///////////////////////////////
 
 
 }

@@ -10,6 +10,7 @@ import org.kosta.banchan.model.vo.AddressVO;
 import org.kosta.banchan.model.vo.Authority;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
+import org.kosta.banchan.model.vo.SellerVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -87,4 +88,25 @@ public class MemberDAOImpl implements MemberDAO {
 			template.insert("member.registerMemberBasicAuth",memberVO);
 		}
 /////////////////////// end  광태 메서드   ///////////////////////////////
+		
+/////////////////////// start  윤주 메서드   ///////////////////////////////
+
+		@Override
+		public int isSeller(String memId) {
+			return template.selectOne("member.isSeller",memId);
+		}
+
+		@Override
+		public void insertAuth(Authority authority) {
+			template.insert("member.insertAuth",authority);
+			
+		}
+
+		@Override
+		public void sellerRegister(SellerVO svo) {
+			template.insert("member.sellerRegister",svo);
+			
+		}
+/////////////////////// end  윤주 메서드   ///////////////////////////////
+
 }
