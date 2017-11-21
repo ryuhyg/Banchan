@@ -74,7 +74,7 @@
 							</div>
 						</figure>
 					</c:forEach>
-						
+					</div>	
 					<div class="my-property-nav">
 						<p class="button-container">
 							<a href="#" class="next">next</a>
