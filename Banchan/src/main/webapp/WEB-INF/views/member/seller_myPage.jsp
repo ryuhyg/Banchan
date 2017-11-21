@@ -57,16 +57,16 @@
 					<c:forEach items="${flist}" var="food">
 						<figure class="crsl-item">
 							<div class="box-ads box-grid">
-								<a class="hover-effect image image-fill" href="property-detail.html">
+								<a class="hover-effect image image-fill" href="property-detail.html">	
 									<span class="cover"></span>
-									<img alt="Sample images" src="http://placehold.it/1240x745/bbbbbb/ffffff">
+								<%-- 	<img alt="Sample images"  width="300px" height="200px" src="resources/images/${food.foodMainImg}"> --%>
+								<img alt="Sample images" src="resources/images/${food.foodMainImg}">
 									<h3 class="title">${food.foodName}</h3>
 								</a>								
-								<span class="description">${food.foodDe}</span>
-								<dl class="detail">
-									<dt class="status">기타:</dt><dd><span>테스트1</span></dd>
-									<dt class="bed">기타:</dt><dd><span>테스트2</span></dd>
-									<dt class="bath">기타:</dt><dd><span>테스트3</span></dd>
+								<span class="description" >${food.foodDe}</span>
+								<!-- <dl style="display:inline-block; height:60px"  class="detail" > -->
+								<dl class="detail" > 
+									<dt class="status">별점:</dt><dd><span>${food.foodScore}</span></dd>
 								</dl>
 								<div class="footer">
 									<a class="btn btn-default" href="property-detail.html">판매등록</a>
@@ -74,7 +74,7 @@
 							</div>
 						</figure>
 					</c:forEach>
-						
+					</div>	
 					<div class="my-property-nav">
 						<p class="button-container">
 							<a href="#" class="next">next</a>

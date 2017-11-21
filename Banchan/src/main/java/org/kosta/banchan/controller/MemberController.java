@@ -86,7 +86,7 @@ public class MemberController {
 	    @RequestMapping("locationServicePage.do")
 	    public String locationServicePage(Model model) {
 	    	
-	    	System.out.println("locationServicePage");
+	    	//System.out.println("locationServicePage");
 	    	
 	    	List<SellerVO> list =
 	    			memberService.getAllSameAddressSellerListByAddress("1003");
@@ -112,9 +112,11 @@ public class MemberController {
 	    @Secured("ROLE_SELLER")
 	    @RequestMapping("sellerPageInfo.do")
 	    public String seller_myPage(Model model,String memId) {
+	    	System.out.println("seller_myPAge 들어옴    id="+memId);
 	    	SellerVO svo=memberService.selectSellerInfo(memId);
-	    	//System.out.println(svo);
+	    	System.out.println("member 정보"+svo);
 	    	List<FoodVO> flist=foodeService.getFoodListByMemId(memId);
+	    	System.out.println("food 정보"+flist);
 	    	model.addAttribute("svo",svo);
 	    	model.addAttribute("flist",flist);
 	    	return "member/seller_myPage.tiles";
@@ -139,13 +141,13 @@ private String uploadPath;//프로필사진 업로드 경로
 //판매자등록 메서드
 @RequestMapping(value = "sellerRegister.do",method = RequestMethod.POST)
 public String sellerRegister(String id, SellerVO svo,HttpServletRequest request) {
-	System.out.println("sellerRegister id:"+id);
+	//System.out.println("sellerRegister id:"+id);
 uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
 File uploadDir=new File(uploadPath);
 if(uploadDir.exists()==false)
 	uploadDir.mkdirs();
 MultipartFile file=svo.getUploadImage();//파일 
-System.out.println(file+"<==");
+//System.out.println(file+"<==");
 //System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
 if(file!=null&&file.isEmpty()==false){
 	System.out.println("파일명:"+file.getOriginalFilename());

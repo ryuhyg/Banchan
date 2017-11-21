@@ -106,6 +106,7 @@ public class MemberServiceImpl implements MemberService {
 	   
 ////////////////////start 우정 메서드 ////////////////////////////
 	  public SellerVO selectSellerInfo(String id) {
+		  System.out.println("selectSellerInfo Service");
 		  return sellerDAO.selectSellerInfo(id);
 	  }
 	  public List<FoodVO> selectFoodInfo(String id) {
