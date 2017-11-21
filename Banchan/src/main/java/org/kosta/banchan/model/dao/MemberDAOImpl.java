@@ -100,6 +100,12 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 	/////////// end 위치기반 추천 메서드 ////////////////////   
 /////////////////////// end  광태 메서드   ///////////////////////////////
-	
+		
+/////////////////////// start 정훈 메서드   ///////////////////////////////
+/////////////////////// 회원정보 수정   ///////////////////////////////
+		@Override
+		public void getEditMembers(SellerVO vo) {
+			template.update("member.getEditMembers", vo);
+		}
 
 }
