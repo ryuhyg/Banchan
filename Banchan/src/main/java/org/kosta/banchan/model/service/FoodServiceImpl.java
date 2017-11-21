@@ -2,6 +2,8 @@ package org.kosta.banchan.model.service;
 
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.dao.FoodDAO;
@@ -17,6 +19,13 @@ public class FoodServiceImpl implements FoodService {
     private FoodDAO foodDAO;
    @Resource
     private SellDAO sellDAO;
+  
+///////////////////start윤주/////////////////////////
+@Override
+public FoodVO getFoodInfoByFoodNo(String foodNo) {
+	return foodDAO.getFoodInfoByFoodNo(foodNo);
+}
+///////////////////end윤주////////////////////////
 
    
    /** [지원] 등록음식 상세정보 조회
@@ -39,7 +48,8 @@ public class FoodServiceImpl implements FoodService {
 		FoodSellVO foodSellVO=sellDAO.getFoodSellDetailByNo(foodSellNo);
 		return foodSellVO;
 	}
-	
+
+
 	/** [지원] 판매음식등록
 	 * 선택한 등록음식을 판매하기 위해 판매음식등록한다. 
 	 * 
@@ -50,4 +60,13 @@ public class FoodServiceImpl implements FoodService {
 	}
 
 
+	/**[우정] 판매자페이지에서 음식리스트 조회
+	 * 판매가페이지에서 판매자가 등록한 음식을 조회한다.
+	 */
+	@Override
+	public List<FoodVO> getFoodListByMemId(String memId) {
+		//int TotalFoodCount= foodDAO.getTotalFoodCountByMemId(memId);
+		return foodDAO.getFoodListByMemId(memId);
+	}
+	
 }

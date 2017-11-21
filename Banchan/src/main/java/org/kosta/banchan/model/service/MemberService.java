@@ -31,6 +31,9 @@ public interface MemberService {
 	int isSeller(String memId);
 		
 	void sellerRegister(SellerVO svo);
+	
+	String getSellerNameByMemId(String memId);
+
 /////////////////////// end  윤주 메서드   ///////////////////////////////
 
 	List<SellerVO> selectSellerTop3();

@@ -61,11 +61,7 @@ insert into mem_auth(mem_auth_no, mem_id, auth_no) values(mem_auth_seq.nextval, 
 insert into mem_auth(mem_auth_no, mem_id, auth_no) values(mem_auth_seq.nextval, 'java2','20');
 insert into mem_auth(mem_auth_no, mem_id, auth_no) values(mem_auth_seq.nextval, 'spring2','20');
 insert into mem_auth(mem_auth_no, mem_id, auth_no) values(mem_auth_seq.nextval, 'ajax2','20');
-select * from seller;
-delete from seller where mem_id='java';
-select * from mem_auth;
-delete from mem_auth where mem_id='java' and auth_no='20';
-commit
+
 -- SELLER
 -- ID 뒤에 2 붙은 건 판매자 권한 가지고 있는 회원
 -- 이미지 경로: "C:\\Users\\kosta\\git\\FASTakeout\\FASTakeout\\WebContent\\upload" 이런식으로?
@@ -201,23 +197,21 @@ drop sequence address_seq;
 drop sequence mem_auth_seq;
 drop sequence category_seq start;
 drop sequence food_seq;
-drop sequence food_sell_seq;
+drop sequence food_sell_seq; 
 drop sequence trade_seq;
 drop sequence review_seq;
 drop sequence answer_seq;
 
-
+/*top3 sql*/
 select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score 
 					from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
 					s, ban_mem m, address a 
 					where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3
+		
 					
-					
-update ban_mem m, seller s, address a
-set m.mem_name='이정훈', a.address_api='부산광역시 북구 덕천로259 30', s.seller_img='이미지저장test용', s.seller_info='정훈이표 맛있는 음식을 만들어드립니다'
-where mem_id='java2' and m.mem_id=s.mem_id and m.address_no=a.address_no
-
-
-
-
-
+					select * from seller;
+delete from seller where mem_id='java';
+select * from mem_auth;
+delete from mem_auth where mem_id='java' and auth_no='20';
+commit
+				

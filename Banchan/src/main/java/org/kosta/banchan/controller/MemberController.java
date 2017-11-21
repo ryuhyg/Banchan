@@ -7,7 +7,9 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
+import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
@@ -24,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class MemberController {
 	@Resource
 	private MemberService memberService;
+	@Resource
+	private FoodService foodeService;
 	
 	/*
 	 *  회원정보수정시 비밀번호 암호화처리를 위한 객체를 주입받는다
@@ -48,7 +52,7 @@ public class MemberController {
 	public String loginFail() {
 		return "member/login_fail";
 	}
-	//////////////////////////////////////////////////////////////////////
+
 	/////////////////////// start  광태 메서드   ///////////////////////////////
 		// 광태 Ajax id check
 	    @RequestMapping("checkIdOnAjax.do")
@@ -82,7 +86,7 @@ public class MemberController {
 	    @RequestMapping("locationServicePage.do")
 	    public String locationServicePage(Model model) {
 	    	
-	    	System.out.println("locationServicePage");
+	    	//System.out.println("locationServicePage");
 	    	
 	    	List<SellerVO> list =
 	    			memberService.getSameDongSellerListByAddress("서울 강남구 개포동 11-334");
@@ -108,9 +112,13 @@ public class MemberController {
 	    @Secured("ROLE_SELLER")
 	    @RequestMapping("sellerPageInfo.do")
 	    public String seller_myPage(Model model,String memId) {
+	    	System.out.println("seller_myPAge 들어옴    id="+memId);
 	    	SellerVO svo=memberService.selectSellerInfo(memId);
-	    	System.out.println(svo);
+	    	System.out.println("member 정보"+svo);
+	    	List<FoodVO> flist=foodeService.getFoodListByMemId(memId);
+	    	System.out.println("food 정보"+flist);
 	    	model.addAttribute("svo",svo);
+	    	model.addAttribute("flist",flist);
 	    	return "member/seller_myPage.tiles";
 	    }
 ////////////////////end 우정 메서드 ////////////////////////////
@@ -133,13 +141,13 @@ private String uploadPath;//프로필사진 업로드 경로
 //판매자등록 메서드
 @RequestMapping(value = "sellerRegister.do",method = RequestMethod.POST)
 public String sellerRegister(String id, SellerVO svo,HttpServletRequest request) {
-	System.out.println("sellerRegister id:"+id);
+	//System.out.println("sellerRegister id:"+id);
 uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
 File uploadDir=new File(uploadPath);
 if(uploadDir.exists()==false)
 	uploadDir.mkdirs();
 MultipartFile file=svo.getUploadImage();//파일 
-System.out.println(file+"<==");
+//System.out.println(file+"<==");
 //System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
 if(file!=null&&file.isEmpty()==false){
 	System.out.println("파일명:"+file.getOriginalFilename());

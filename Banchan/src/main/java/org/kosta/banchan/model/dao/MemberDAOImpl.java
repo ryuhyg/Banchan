@@ -107,11 +107,14 @@ public class MemberDAOImpl implements MemberDAO {
 		
 
 /////////////////////// start 정훈 메서드   ///////////////////////////////
+		
 /////////////////////// 회원정보 수정   ///////////////////////////////
+		//아이디를 찾는다//
 		@Override
 		public void getEditMembers(SellerVO vo) {
 			template.update("member.getEditMembers", vo);
 		}
+/////////////////////// end  정훈 메서드   ///////////////////////////////		
 /////////////////////// start  윤주 메서드   ///////////////////////////////
 
 @Override
@@ -130,7 +133,12 @@ public void sellerRegister(SellerVO svo) {
 template.insert("member.sellerRegister",svo);
 
 }
+@Override
+public String getSellerNameByMemId(String memId) {
+	return template.selectOne("member.getSellerNameByMemId",memId);
+}
 /////////////////////// end  윤주 메서드   ///////////////////////////////
+
 	
 
 }

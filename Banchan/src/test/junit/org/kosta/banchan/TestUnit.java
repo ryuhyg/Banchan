@@ -1,16 +1,13 @@
 package org.kosta.banchan;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.kosta.banchan.model.dao.FoodDAO;
 import org.kosta.banchan.model.dao.MemberDAO;
 import org.kosta.banchan.model.dao.SellerDAO;
-import org.kosta.banchan.model.vo.AddressVO;
-import org.kosta.banchan.model.vo.MemberVO;
-import org.kosta.banchan.model.vo.SellerVO;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,7 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class TestUnit {
 	@Resource
 	private SellerDAO sellerDAO;
-	
+	@Resource
+	private FoodDAO foodDAO;
+	@Resource
+    private BCryptPasswordEncoder passwordEncoder;
 	@Resource
 	private MemberDAO mDAO;
 	@Test
@@ -34,8 +34,9 @@ public class TestUnit {
 		mvo.getAddressVO().setLongitude(1442.11);
 		System.out.println(mvo);
 		dao.registerNewAddressInfo(mvo)*/
-
+		//System.out.println(foodDAO.getFoodListByMemId("java2"));
 		//System.out.println(sellerDAO.selectSellerTop3().get(0).getMemName());
+
 		/*List<SellerVO> list =mDAO.getAllSameAddressSellerListByAddress("1003");
 		System.out.println(list.get(0).getAddressVO());*/
 		
@@ -44,5 +45,9 @@ public class TestUnit {
 		System.out.println(lastIndex);
 		System.out.println(temp.substring(0, temp.lastIndexOf(" ")));
 
+		//List<SellerVO> list =mDAO.getAllSameAddressSellerListByAddress("1003");
+		//System.out.println(list.get(0).getAddressVO());
+		System.out.println(sellerDAO.selectSellerInfo("java2"));
+		
 	}
 }
