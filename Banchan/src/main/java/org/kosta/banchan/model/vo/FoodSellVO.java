@@ -14,23 +14,28 @@ public class FoodSellVO extends FoodVO{
     private String sellPostdate;
     private String unit;
     private String sellDetail;
-
-   
-    private FoodVO foodVO;
-
+    
 	public FoodSellVO() {
 		super();
 	}
 
 	
 	
+	
+
+
+
 	@Override
 	public String toString() {
 		return "FoodSellVO [questionList=" + questionList + ", foodSellNo=" + foodSellNo + ", trDate=" + trDate
 				+ ", closeDate=" + closeDate + ", loc=" + loc + ", price=" + price + ", preQuantity=" + preQuantity
-				+ ", sellPostdate=" + sellPostdate + ", unit=" + unit + ", sellDetail=" + sellDetail + ", foodVO="
-				+ foodVO + "]";
+				+ ", sellPostdate=" + sellPostdate + ", unit=" + unit + ", sellDetail=" + sellDetail + ", toString()="
+				+ super.toString() + "]";
 	}
+
+
+
+
 
 
 
@@ -114,13 +119,6 @@ public class FoodSellVO extends FoodVO{
 		this.sellDetail = sellDetail;
 	}
 
-	public FoodVO getFoodVO() {
-		return foodVO;
-	}
-
-	public void setFoodVO(FoodVO foodVO) {
-		this.foodVO = foodVO;
-	}
     
     
 }
