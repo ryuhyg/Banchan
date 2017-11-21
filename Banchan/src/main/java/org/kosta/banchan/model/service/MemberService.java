@@ -26,13 +26,13 @@ public interface MemberService {
 	void registerMember(MemberVO memberVO);
 /////////////////////// end  광태 메서드   ///////////////////////////////
 	
-/*/////////////////////// start  윤주 메서드   ///////////////////////////////
+/////////////////////// start  윤주 메서드   ///////////////////////////////
 
 	int isSeller(String memId);
 		
 	void sellerRegister(SellerVO svo);
 /////////////////////// end  윤주 메서드   ///////////////////////////////
-*/
+
 	List<SellerVO> selectSellerTop3();
 	List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo);
 
@@ -40,6 +40,7 @@ public interface MemberService {
 	SellerVO selectSellerInfo(String id);
 	List<FoodVO> selectFoodInfo(String id);
 /////////////////////// end  우정 메서드   ///////////////////////////////
+	
 
 
 }

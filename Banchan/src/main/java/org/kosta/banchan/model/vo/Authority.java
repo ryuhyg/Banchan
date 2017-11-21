@@ -8,6 +8,18 @@ public class Authority {
 	public Authority() {
 		super();
 	}
+	
+	public Authority(String memId, String authNo) {
+		super();
+		this.memId = memId;
+		this.authNo = authNo;
+	}
+	/*	public Authority(String memId, String authName) {
+		super();
+		this.memId = memId;
+		this.authName = authName;
+	}*/
+
 	public String getMemId() {
 		return memId;
 	}
@@ -24,11 +36,6 @@ public class Authority {
 		super();
 		this.memId = memId;
 		this.authNo = authNo;
-		this.authName = authName;
-	}
-	public Authority(String memId, String authName) {
-		super();
-		this.memId = memId;
 		this.authName = authName;
 	}
 	public String getAuthName() {

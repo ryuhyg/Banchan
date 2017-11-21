@@ -18,6 +18,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- End 향걸 -->
 
 <!-- Start 지원 -->
+	<sql id="selectFoodDetail">
+		select food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id
+	</sql>
+
+	<select id="getFoodByNo" parameterType="string" resultType="foodVO">
+		<include refid="selectFoodDetail"/> 
+		from food
+		where food_no=#{value}
+	</select>
+
+	<select id="getFoodSellDetailByNo" parameterType="string" resultType="foodSellVO">
+		select f.food_no, f.food_name, f.food_de, f.food_score, f.food_main_img, f.food_postdate, f.category_no, f.mem_id
+		, fs.food_sell_no, fs.tr_date, fs.close_date, fs.loc, fs.price, fs.pre_quantity, fs.sell_postdate, fs.unit, fs.sell_detail
+		from food f, food_sell fs
+		where food_sell_no=#{value} and f.food_no=fs.food_no
+	</select>
+	
+	
 <!-- End 지원 -->
 
 <!-- Start 영민 -->
