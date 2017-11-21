@@ -7,7 +7,9 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
+import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
@@ -23,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class MemberController {
 	@Resource
 	private MemberService memberService;
+	@Resource
+	private FoodService foodeService;
 	
 	/*
 	 *  회원정보수정시 비밀번호 암호화처리를 위한 객체를 주입받는다
@@ -107,8 +111,10 @@ public class MemberController {
 	    @RequestMapping("sellerPageInfo.do")
 	    public String seller_myPage(Model model,String memId) {
 	    	SellerVO svo=memberService.selectSellerInfo(memId);
-	    	System.out.println(svo);
+	    	//System.out.println(svo);
+	    	List<FoodVO> flist=foodeService.getFoodListByMemId(memId);
 	    	model.addAttribute("svo",svo);
+	    	model.addAttribute("flist",flist);
 	    	return "member/seller_myPage.tiles";
 	    }
 ////////////////////end 우정 메서드 ////////////////////////////

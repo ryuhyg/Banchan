@@ -1,5 +1,7 @@
 package org.kosta.banchan.model.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.vo.FoodVO;
@@ -22,4 +24,13 @@ public class FoodDAOImpl implements FoodDAO {
 	public FoodVO getFoodByNo(String foodNo) {
 		return template.selectOne("food.getFoodByNo", foodNo);
 	}
+	@Override
+	public List<FoodVO> getFoodListByMemId(String memId) {
+		return template.selectList("food.getFoodListByMemId",memId);
+	}
+	/*@Override
+	public int getTotalFoodCountByMemId(String memId) {
+		return template.selectOne("getTotalFoodCountByMemId",memId);
+	}*/
+		
 }

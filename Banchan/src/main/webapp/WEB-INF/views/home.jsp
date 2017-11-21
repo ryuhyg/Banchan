@@ -22,6 +22,7 @@
     
     
  <!-- 슬라이드 부분 *************************** -->
+ 	
 	<section id="home-slide" class="header-margin-base">
 			<div class="home-slider" data-navigation=".home-slider-nav">
 				<div class="crsl-wrap">
@@ -64,6 +65,9 @@
 		</section>
 <!-- 슬라이드 부분끝 *************************** -->
 <!--  링크 섹션 -->
+
+<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=java2"  >
+						<h3>판매자 페이지</h3></a>
 	<section id="recent-list">
 		<div class="section-detail" style="border: 1px solid red">
 			<a href="">테스트1</a>
