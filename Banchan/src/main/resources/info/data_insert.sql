@@ -112,6 +112,7 @@ values(food_seq.nextval, '김치찌게', '돼지고기 베이스의 맛있는 �
 
 
 -- FOOD_SELL
+select * from food_sell;
 create sequence food_sell_seq start with 101010 nocache;
 
 insert into food_sell(food_sell_no, tr_date, close_date, loc, price, pre_quantity, sell_postdate, unit, sell_detail, food_no)
@@ -201,6 +202,7 @@ drop sequence food_seq;
 drop sequence food_sell_seq; 
 drop sequence trade_seq;
 drop sequence review_seq;
+drop sequence question_seq;
 drop sequence answer_seq;
 
 /*top3 sql*/
@@ -213,6 +215,7 @@ select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.selle
 					select * from seller;
 delete from seller where mem_id='java';
 select * from mem_auth;
+select *from AUTH
 delete from mem_auth where mem_id='java' and auth_no='20';
 commit
 				

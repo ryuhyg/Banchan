@@ -1,20 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript">
-	$(document).ready(function () {
-		$("#foodSellNo").val($(".sellfood").attr("id"));
-		$("#quantity").change(function() {
-			$("#orderQuantity").val($(this).val());
-		}); //change
-		
-		$("#orderFoodConfirm").submit(function() {
-			return confirm("구매하시겠습니까?");
-		}); //submit
-	}); //ready
+	function orderFoodConfirm(){
+		if($("#checkId").val()=="" || $("#checkId").val()==null){
+			/* var flag = confirm("로그인하셔야 구매가능합니다.로그인 하시겠습니까?");
+			if(flag==true){
+				alert("로그인하기!");
+				location.href="loginView.do";
+			}
+			else{
+				alert("구매안하기!");
+				return flag;
+			} */
+			
+			/* $(document).ready(function () {
+			$("#foodSellNo").val($(".sellfood").attr("id"));
+			$("#quantity").change(function() {
+				$("#orderQuantity").val($(this).val());
+			}); //change
+			
+			$("#orderFoodConfirm").submit(function() {
+				return confirm("구매하시겠습니까?");
+			}); //submit
+		}); //ready */
+		}
+	}
 </script>
 
+<sec:authentication var="mvo" property="principal" />
 <section id="recent-list" class="agency" style="margin-top: 350px">
-<%-- ${sellfood} --%>
 <div id="page-container">
 	<div class="container">
 		<div class="row">
@@ -30,7 +46,6 @@
 					</div>
 				</div>
 			</div>
-			
 			<div class="col-md-9">
 				<h1 class="name">${sellfood.foodName}</h1>
 				<div class="row">
@@ -47,14 +62,27 @@
 					</span>
 				</div>
 				<div class="row">
-				<hr style="border: 1px solid black">
-					<div class="col-md-2 " >
-							<label>구매수량</label>
-							<input class="form-control" type="number" name="quantity" id="quantity" value="1" />
-					</div>
+					<hr style="border: 1px solid black">
 				</div>
-				<div class="col-md-12 space-div" style="text-align: center">
-				
+				<div class="row">
+					<form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()" >
+					<div class="row"> 
+					<div class="col-md-2">
+						<label>구매수량</label>
+						<input type="number" name="trQuantity" id="trQuantity" class="form-control"/>
+						<input type="hidden" name="foodSellVO.foodSellNo" value="${sellfood.foodSellNo}" id="foodSellNo"/>
+ 						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
+ 						<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
+ 						</sec:authorize>
+					</div>
+					</div>
+ 						<div class="row" style="">
+						<input type="submit" class="btn btn-default" style="margin-top: 10px; " value="구매하기">
+						</div>
+					</form>
+				</div>
+					
+					<!-- <div class="col-md-12 space-div" style="text-align: center">			
 				<span class="sellfood" id=" ${sellfood.foodSellNo}"></span>
 				
 				<form action="${pageContext.request.contextPath}/orderFood.do"  id="orderFoodConfirm">
@@ -62,9 +90,7 @@
 					<input type="hidden" name="orderQuantity" id="orderQuantity"/>
 					<input type="submit" class="btn btn-default" value="구매하기">
 				</form>
-				
-				</div>
-			
+				</div>-->
 			</div> <!-- col-md-9 -->
 		</div> <!-- row -->
 	</div> <!-- container  -->
