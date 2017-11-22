@@ -184,6 +184,7 @@ $(document).ready(function() {
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
 								<div class="bs-callout callout-success" style="width: 800px">
 								  <h4 class="title">${foodSell.foodName}</h4>
+								  
 								  <span class="description" style="color:black;font-size:13px">
 								 
 									  <i class="fa fa-hand-o-right" style="font-weight: bold"> 음식정보:</i>  ${foodSell.foodDe}<br>
