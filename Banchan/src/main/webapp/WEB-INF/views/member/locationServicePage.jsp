@@ -50,12 +50,15 @@ $(document).ready(function() {
 	              //  document.getElementById('sample4_roadAddress').value = fullRoadAddr;
 	               // document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
 	                $("#jibunAddress").val(data.jibunAddress);
+	                /* $("#jibunAddress").trigger("change", [ data.jibunAddress.toString(), "bar" ]);
+	                // trigger 위와 같이 매개변수 전달시 function에서 (event, a,b ) 식으로 event 넣어줘야함. */
+	                $("#addressAPIId").val(data.jibunAddress);
 	                $("#jibunAddress").trigger("change");
 	            }
 	        }).open();
 	});//$("#searchaddress").click
 	
-	$("#jibunAddress").change(function() {
+	$("#jibunAddress").change(function( event,jibun, b) {
 		//alert($(this).val());
 		// 주소-좌표 변환 객체를 생성합니다  
 		var geocoder = new daum.maps.services.Geocoder();
@@ -81,11 +84,25 @@ $(document).ready(function() {
 
 		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 		        map.setCenter(coords);
+		        
+		        
+		  //////지도 정보
+			    // 지도의 현재 중심좌표를 얻어옵니다 
+			    var center = map.getCenter(); 
+
+			  
+			    $("#latitudeId").val(center.getLat());
+			    $("#longitudeId").val(center.getLng());
+			   // alert("center.getLng(): "+center.getLng())
+			    $("#addressAPIDongForm").trigger("submit");
 		    }
 		});   
+		
 	});//$("#jibunAddress").change 
 	
-	
+	$("#addressAPIDongForm").submit(function() {
+		
+	}); 
 });//$(document).ready
 </script>
 
@@ -103,18 +120,18 @@ $(document).ready(function() {
 								
 							<input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
 							<br>
-							<input type="text" id="jibunAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly">
+							<input type="text" id="jibunAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly" value="${addressVO.addressAPI}">
 							<br>	
 							<div id="map" style="width:400px;height:270px;"></div>
 							
-
 	<br>
 	<div >
+		<h3>판매자 정보</h3>
 		<table class="table table-striped" >
 		<tbody id="tbodyList">	
-		<c:forEach items="${list}" var="s">
-				<tr><td><a href="#">${s.memId}</a>  | ${s.addressVO.addressNo}  |  ${s.sellerInfo} </td></tr>
-		</c:forEach>				
+			<tr>
+				<td>지도에서 클릭하세요! </td>
+			</tr>				
 		</tbody>					
 		</table>
 	</div>
@@ -123,7 +140,12 @@ $(document).ready(function() {
 							
 							
 					<div class="col-sm-2"><!-- right -->
-
+						<form action="${pageContext.request.contextPath}/searchLocationByService_unsigned.do"
+						id="addressAPIDongForm">
+							<input type="hidden" id="addressAPIId" name="addressAPI" value="">
+							<input type="hidden" id="latitudeId" name="latitude" value="">
+							<input type="hidden" id="longitudeId" name="longitude" value="">
+						</form>
 					</div>
 				</div>
 	</div>
@@ -140,7 +162,7 @@ $(document).ready(function() {
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
-	        center: new daum.maps.LatLng(${list[0].addressVO.latitude}, ${list[0].addressVO.longitude}), // 지도의 중심좌표
+			center: new daum.maps.LatLng(${addressVO.latitude}, ${addressVO.longitude}), // 지도의 중심좌표 
 	        level: 3 // 지도의 확대 레벨
 	    };
 	
@@ -158,16 +180,34 @@ $(document).ready(function() {
 	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 	////////////////////////////
 	
+	var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+    imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
+    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+      
+	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+	var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
+	    markerPosition = new daum.maps.LatLng(${addressVO.latitude}, ${addressVO.longitude}); // 마커가 표시될 위치입니다
+	
+	// 마커를 생성합니다
+	var marker = new daum.maps.Marker({
+	    position: markerPosition, 
+	    image: markerImage // 마커이미지 설정 
+	});
+	
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
+		
+	
+	
 	// 마커를 표시할 위치와 title 객체 배열입니다 
 	var positions = [	
-		<c:forEach items="${list}" var="s" >
-			{
-		        title: '${s.addressVO.addressNo}', 
-		        latlng: new daum.maps.LatLng(${s.addressVO.latitude}, ${s.addressVO.longitude})
-		    },
-		</c:forEach>
+			<c:forEach items="${list}" var="s" >
+				{
+			        title: '${s.addressVO.addressNo}', 
+			        latlng: new daum.maps.LatLng(${s.addressVO.latitude}, ${s.addressVO.longitude})
+			    },
+			</c:forEach>
 	];
-	
 	
 	for (var i = 0; i < positions.length; i ++) {
 	    // 마커를 생성합니다
@@ -211,11 +251,11 @@ $(document).ready(function() {
 	    			 <c:forEach items="${list}" var="s" >
 	    			 	if (title=='${s.addressVO.addressNo}') {
 	    		strTemp +="<tr><td rowspan='3'>"+
-				"<a href='#'>"+
+				"<a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId=${s.memId}'>"+
 				"<img src='/banchan/resources/images/김래원.jpg' style='width: 100px;height:100px;'>"+
 				"</a>"+
 				"</td>"+
-				"<td> <a href='#'>"+"???여긴 뭐다냐 ??"+"</a> </td>"+
+				"<td> <a href='#'>"+"음식 상세정보 링크 설정해야 함"+"</a> </td>"+
 				"</tr>"+			
 				"<tr><td>"+"별점 :  "+"</td></tr>"+
 				"<tr><td>"+"판매자 소개: ${s.sellerInfo}"+"</td></tr>";

@@ -10,5 +10,7 @@ public interface TradeDAO {
 
 	void updateTradeStatus(String tradeNo);
 
+	List<TradeVO> getAllSellerTradeList(String sellerId);
+
 
 }

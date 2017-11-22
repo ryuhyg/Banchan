@@ -14,23 +14,23 @@
 				alert("구매안하기!");
 				return flag;
 			} */
+			
+			/* $(document).ready(function () {
+			$("#foodSellNo").val($(".sellfood").attr("id"));
+			$("#quantity").change(function() {
+				$("#orderQuantity").val($(this).val());
+			}); //change
+			
+			$("#orderFoodConfirm").submit(function() {
+				return confirm("구매하시겠습니까?");
+			}); //submit
+		}); //ready */
 		}
 	}
-	/* $(document).ready(function () {
-		$("#foodSellNo").val($(".sellfood").attr("id"));
-		$("#quantity").change(function() {
-			$("#orderQuantity").val($(this).val());
-		}); //change
-		
-		$("#orderFoodConfirm").submit(function() {
-			return confirm("구매하시겠습니까?");
-		}); //submit
-	}); //ready */
 </script>
 
 <sec:authentication var="mvo" property="principal" />
 <section id="recent-list" class="agency" style="margin-top: 350px">
-<%-- ${sellfood} --%>
 <div id="page-container">
 	<div class="container">
 		<div class="row">
@@ -46,7 +46,6 @@
 					</div>
 				</div>
 			</div>
-			
 			<div class="col-md-9">
 				<h1 class="name">${sellfood.foodName}</h1>
 				<div class="row">
@@ -63,26 +62,25 @@
 					</span>
 				</div>
 				<div class="row">
-				<!-- <hr style="border: 1px solid black"> 
-					 <div class="col-md-2 " >
-							<label>구매수량</label>
-							<input class="form-control" type="number" name="quantity" id="quantity" value="1" />
-					</div> -->
-					<div class="row">
 					<hr style="border: 1px solid black">
-						<div class="col-md-2 " >
+				</div>
+				<div class="row">
 					<form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()" >
+					<div class="row"> 
+					<div class="col-md-2">
 						<label>구매수량</label>
 						<input type="number" name="trQuantity" id="trQuantity" class="form-control"/>
 						<input type="hidden" name="foodSellVO.foodSellNo" value="${sellfood.foodSellNo}" id="foodSellNo"/>
  						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
  						<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
  						</sec:authorize>
-						<input type="submit" class="btn btn-default" value="구매하기">
-					</form>
-						</div>
 					</div>
-					
+					</div>
+ 						<div class="row" style="">
+						<input type="submit" class="btn btn-default" style="margin-top: 10px; " value="구매하기">
+						</div>
+					</form>
+				</div>
 					
 					<!-- <div class="col-md-12 space-div" style="text-align: center">			
 				<span class="sellfood" id=" ${sellfood.foodSellNo}"></span>
@@ -92,9 +90,7 @@
 					<input type="hidden" name="orderQuantity" id="orderQuantity"/>
 					<input type="submit" class="btn btn-default" value="구매하기">
 				</form>
-				
 				</div>-->
-			
 			</div> <!-- col-md-9 -->
 		</div> <!-- row -->
 	</div> <!-- container  -->

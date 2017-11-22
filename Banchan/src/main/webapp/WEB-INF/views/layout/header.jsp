@@ -10,6 +10,8 @@
 				$("#logoutForm").submit();
 			});  
 		});
+
+
 	</script>
 	
 		<header class="menu-base" id="header-container-box" style="top: 0px !important; ">
@@ -33,10 +35,9 @@
 								</form>
 								<a href="${pageContext.request.contextPath}/member/sellerRegisterForm.do?id=${mvo.memId}" ><i class="icon fa fa-pencil-square-o"></i> 판매자 등록</a>
 								 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="color: #1a1a1a; background-color: #fff; font-size: 12px; border: 0px; margin-top: 5px; float: right">
-						 <i class="icon fa fa-pencil-square-o"></i>마이페이지
-  								<span class="caret"></span></button>
+						 <i class="icon fa fa-pencil-square-o"></i>마이페이지<span class="caret"></span></button>
  									 <ul class="dropdown-menu">
-   										   <li><a href="${pageContext.request.contextPath}/editMemberView.do">회원정보수정</a></li>
+   										   <li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />">회원정보수정</a></li>
    											 <li><a href="#">내거래내역</a></li>
   											  <li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do">회원탈퇴</a></li>
 									  </ul>
@@ -51,7 +52,7 @@
 						 <i class="icon fa fa-pencil-square-o"></i>마이페이지
   								<span class="caret"></span></button>
  									 <ul class="dropdown-menu">
-   										   <li><a href="#">회원정보수정</a></li>
+   										   <li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />">회원정보수정</a></li>
    											 <li><a href="#">내거래내역</a></li>
   											  <li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do">회원탈퇴</a></li>
 									  </ul>

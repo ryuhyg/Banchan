@@ -78,18 +78,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<resultMap type="sellerVO" id="sellerRMDong">
  		<result column="address_no" property="addressVO.addressNo"/>
+ 		<result column="address_api" property="addressVO.addressAPI"/>
  		<result column="latitude" property="addressVO.latitude"/>
  		<result column="longitude" property="addressVO.longitude"/> 
  	</resultMap> 
  	<select id="getSameDongSellerListByAddress" parameterType="string" resultMap="sellerRMDong">
 		SELECT s.mem_id,  s.seller_img, s.seller_info, s.seller_score,
-			   a.address_no, a.latitude, a.longitude 
+			   a.address_no, a.address_api, a.latitude, a.longitude 
 		FROM BAN_MEM b, ADDRESS a, mem_auth ma , seller s 
 		WHERE b.address_no = a.address_no
 		AND b.mem_id = s.mem_id  
 		AND b.mem_id = ma.mem_id 
 		AND a.address_API like '%'||#{value}||'%' 
 		AND ma.auth_no ='20'
+ 	</select>
+ 	
+ 	<select id="getAddressAPIById" parameterType="string" resultType="addressVO">
+ 		SELECT 		 a.address_no, a.address_api, a.latitude, a.longitude 
+		FROM 		BAN_MEM m, address a 
+		WHERE 		m.address_no=a.address_no 
+		AND 		mem_id=#{value}
  	</select>
 <!-- End 광태 -->
 
@@ -131,13 +139,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3]]>
 	</select>
 	<update id="getEditMembers" parameterType="sellerVO">
-			//////해야됨.
+			
 	</update>
+	<select id="findPwQnaNo" parameterType="pwQnaVO" resultType="PwQnaVO">
+		select pw_qna_no, pw_Quest from pw_qna where pw_qna_no=#{value}
+	</select>
+	<select id="findMemberTypeById" parameterType="string" resultType="sellerVO">
+		select seller_img, seller_info from seller where mem_id=#{value}
+	</select>
+	
+<!-- update 구매자 -->
+	<update id="editMemberBuyer" parameterType="memberVO">
+		update ban_mem set mem_name=#{memName}, birth=#{birth}, tel=#{tel}, address_de=#{addressDe}, pw_answer=#{pwAnswer}, address_no=#{addressVO.addressNo}, pw_qna_no=#{pwQnaNo}
+	</update>
+
+<!-- 업데이트용 주소타입 존재하는지 확인 -->
+	 	<select id="checkAddressNoByAddressAPIByUpdate" parameterType="memberVO" resultType="string">
+			 		SELECT 	ADDRESS_NO 
+					FROM 		ADDRESS
+					WHERE 	ADDRESS_API= #{addressVO.addressAPI}
+	 	</select>
+
 <!-- End 정훈 -->
 
 <!-- Start 향걸 -->
 	<sql id="selectMember">
- 		select mem_id, pw, mem_name, birth, tel, address_de, pw_answer, enable_no, address_no, pw_qna_no from ban_mem
+ 		select mem_id, pw, mem_name, to_char(to_date(birth), 'yyyy-mm-dd')as birth, tel, address_de, pw_answer, enable_no, address_no, pw_qna_no from ban_mem
  	</sql> 	
  	<select id="selectMember" resultType="memberVO">
  		select mem_id,pw from ban_mem

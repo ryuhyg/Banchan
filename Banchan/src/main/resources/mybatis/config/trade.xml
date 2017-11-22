@@ -20,19 +20,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- Start 지원 -->
 	<!-- [판매자] 판매음식번호에 해당하는 거래요청 리스트 -->
-	<resultMap type="tradeVO" id="tradeRM">
+	<resultMap type="tradeVO" id="foodSellTradeRM">
 		<result property="foodSellVO.foodSellNo" column="food_sell_no"/>
 	</resultMap>
-	<select id="getSellerTradeListByFoodSellNo" parameterType="string" resultMap="tradeRM">
-		select tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no
-		from trade 
-		where food_sell_no=#{value}
+	<select id="getSellerTradeListByFoodSellNo" parameterType="string" resultMap="foodSellTradeRM">
+		select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date, t.mem_id, t.food_sell_no, t.tr_status_no, s.tr_status
+		from trade t, tr_status s
+		where food_sell_no=#{value} and t.tr_status_no=s.tr_status_no
 	</select>
 	<!-- [판매자] 실제 거래완료 후 거래완료확인 하여 거래상태를 바꿔줌  -->
 	<update id="updateTradeStatus" parameterType="string">
 		update trade set tr_status_no=2
 		where tr_no=#{value}
 	</update>
+	<!-- [판매자] 전체거래내역 조회 -->
+	
+	<resultMap type="tradeVO" id="sellerTradeRM">
+		<result property="foodSellVO.foodSellNo" column="food_sell_no"/>
+		<result property="foodSellVO.trDate" column="tr_date"/>
+		<result property="foodSellVO.loc" column="loc"/>
+		<result property="foodSellVO.price" column="price"/>
+		<result property="foodSellVO.foodNo" column="food_no"/>
+		<result property="foodSellVO.foodName" column="food_name"/>
+		<result property="foodSellVO.foodMainImg" column="food_main_img"/>
+		<result property="foodSellVO.sellerVO.memId" column="mem_id"/>
+		<result property="foodSellVO.sellerVO.memName" column="mem_name"/>
+		<result property="foodSellVO.sellerVO.tel" column="tel"/>
+	</resultMap>
+	<select id="getAllSellerTradeList" parameterType="string" resultMap="sellerTradeRM">
+		select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date, t.mem_id, t.food_sell_no, t.tr_status_no,
+			ts.tr_status, 
+			fs.tr_date, fs.loc, fs.price, fs.food_no,
+			f.food_name, f.food_main_img, f.mem_id,
+			bm.mem_name, bm.tel
+		from trade t, tr_status ts, food_sell fs, food f, seller s, ban_mem bm
+		where s.mem_id=#{value} and bm.mem_id=s.mem_id and s.mem_id=f.mem_id 
+			  and t.tr_status_no=ts.tr_status_no
+			  and t.food_sell_no=fs.food_sell_no
+			  and fs.food_no=f.food_no
+	</select>
 <!-- End 지원 -->
 
 <!-- Start 영민 -->

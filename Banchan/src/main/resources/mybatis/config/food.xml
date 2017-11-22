@@ -9,16 +9,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	food_main_img,food_postdate
 	from food
 </sql>
+
 <!-- Start 광태 -->
 <!-- End 광태 -->
 
 <!-- Start 우정 -->
+
 <select id="getFoodListByMemId" parameterType="string" resultType="foodVO">
 	<include refid="selectFood"></include>
 	where mem_id=#{value}
 </select>
 <select id="getTotalFoodCountByMemId" parameterType="string" resultType="int">
  select count(*) from food where mem_id=#{value}
+</select>
+<!-- 판매자의 판매목록 -->
+<select id="getFoodSellInfoByMemId" parameterType="string" resultType="foodSellVO">
+	select s.food_sell_no,f.food_no,tr_date,s.close_date,s.loc,
+	s.price,s.pre_quantity,s.sell_postdate,s.unit,sell_detail,
+	food_name,food_de,food_score,food_main_img,category_no
+	from FOOD_SELL s, (select food_no,food_name,food_de,food_score,food_main_img,category_no from FOOD where mem_id=#{value}) f
+	where s.close_date>sysdate and f.food_no=s.food_no
 </select>
 <!-- End 우정 -->
 
@@ -61,6 +71,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- End 지원 -->
 
 <!-- Start 영민 -->
+<select id="allCategorySelect" resultType="map">
+	select category_no, category_name from category
+</select>
+<insert id="foodRegister" parameterType="foodVO">
+	insert into food(food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id)
+	values(food_seq.nextval, #{foodName}, #{foodDe}, 0, #{foodMainImg}, sysdate, #{categoryNo}, #{memId})
+</insert>
 <!-- End 영민 -->
 
 <!-- Start 윤주 -->

@@ -3,6 +3,7 @@ package org.kosta.banchan.model.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -68,6 +69,27 @@ public class FoodServiceImpl implements FoodService {
 	public List<FoodVO> getFoodListByMemId(String memId) {
 		//int TotalFoodCount= foodDAO.getTotalFoodCountByMemId(memId);
 		return foodDAO.getFoodListByMemId(memId);
+	}
+	/**[우정] 판매자페이지에서 판매음식리스트 조회
+	 * 판매가페이지에서 판매자가 등록한 판매 음식을 조회한다.
+	 */
+	@Override
+	public List<FoodSellVO> getFoodSellInfoByMemId(String memId){
+		return foodDAO.getFoodSellInfoByMemId(memId);
+	}
+	
+	/*
+	 * 		[영민] 카테고리 받아와서 음식등록
+	 */
+	
+	   @Override
+		public void foodRegister(FoodVO fvo) {
+			foodDAO.foodRegister(fvo);
+		}
+
+	@Override
+	public List<Map<String, String>> allCategorySelect() {
+		return foodDAO.allCategorySelect();
 	}
 	
 }

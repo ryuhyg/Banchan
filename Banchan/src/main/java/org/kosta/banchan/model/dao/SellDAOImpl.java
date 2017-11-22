@@ -1,4 +1,6 @@
 package org.kosta.banchan.model.dao;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.vo.FoodSellVO;
@@ -33,6 +35,12 @@ public class SellDAOImpl implements SellDAO {
 	public void registerFoodSell(FoodSellVO foodSellVO) {
 		template.insert("food.registerFoodSell", foodSellVO);
 	}
+	
+	@Override
+	public List<FoodSellVO> getFoodSellInfoByMemId(String memId) {
+		return template.selectOne("food.getFoodSellInfoByMemId", memId);
+	}
+	
 	
 	
 

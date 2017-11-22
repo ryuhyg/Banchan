@@ -2,6 +2,8 @@ package org.kosta.banchan.model.vo;
 
 import java.util.ArrayList;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class FoodVO {
 
 
@@ -14,17 +16,35 @@ public class FoodVO {
     private String foodPostdate;
     private String categoryNo;
     private String memId;
+    private MultipartFile uploadImage;
+    private SellerVO sellerVO;
+    
 	public FoodVO() {
 		super();
 	}
 
 	@Override
 	public String toString() {
-		return "FoodVO [reviewList=" + reviewList+ ", foodNo=" + foodNo
-				+ ", foodName=" + foodName + ", foodDe=" + foodDe + ", foodScore=" + foodScore + ", foodMainImg="
-				+ foodMainImg + ", foodPostdate=" + foodPostdate + ", categoryNo=" + categoryNo + ", memId=" + memId
+		return "FoodVO [reviewList=" + reviewList + ", foodNo=" + foodNo + ", foodName=" + foodName + ", foodDe="
+				+ foodDe + ", foodScore=" + foodScore + ", foodMainImg=" + foodMainImg + ", foodPostdate="
+				+ foodPostdate + ", categoryNo=" + categoryNo + ", memId=" + memId + ", uploadImage=" + uploadImage
+				+ ", sellerVO=" + sellerVO + ", getUploadImage()=" + getUploadImage() + ", getReviewList()="
+				+ getReviewList() + ", getFoodNo()=" + getFoodNo() + ", getFoodName()=" + getFoodName()
+				+ ", getFoodDe()=" + getFoodDe() + ", getFoodScore()=" + getFoodScore() + ", getFoodMainImg()="
+				+ getFoodMainImg() + ", getFoodPostdate()=" + getFoodPostdate() + ", getCategoryNo()=" + getCategoryNo()
+				+ ", getMemId()=" + getMemId() + ", getSellerVO()=" + getSellerVO() + ", toString()=" + super.toString()
 				+ "]";
 	}
+
+
+	public MultipartFile getUploadImage() {
+		return uploadImage;
+	}
+
+	public void setUploadImage(MultipartFile uploadImage) {
+		this.uploadImage = uploadImage;
+	}
+
 	public ArrayList<ReviewVO> getReviewList() {
 		return reviewList;
 	}
@@ -81,8 +101,10 @@ public class FoodVO {
 		this.memId = memId;
 	}
 
-    
-
-
-
+	public SellerVO getSellerVO() {
+		return sellerVO;
+	}
+	public void setSellerVO(SellerVO sellerVO) {
+		this.sellerVO = sellerVO;
+	}
 }
