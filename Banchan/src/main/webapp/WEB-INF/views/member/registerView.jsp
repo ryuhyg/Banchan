@@ -216,10 +216,10 @@
 					//alert( center.getLat()+"ddd"+center.getLng());
 				    } 
 				    
-			}); //$("#jibunAddress").change    
+			});   
 			
 			
-		});//address click
+		});//$("#jibunAddress").change  
 		
 		//전화번호 양식에 맞게 입력했는지 확인
 		$("#telno").keyup(function() {

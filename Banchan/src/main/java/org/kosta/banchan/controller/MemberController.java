@@ -99,6 +99,7 @@ public class MemberController {
 	
 	
 /////////////////////// start  정훈 메서드   ///////////////////////////////
+	    //top3
 	    @RequestMapping("selectSellerTop3.do")
 	    public String selectSellerTop3(Model model) {
 	    	
@@ -107,6 +108,23 @@ public class MemberController {
 	    	model.addAttribute("list", list);
 	    	return "home.tiles";
 	    }
+	    //회원수정페이지로..
+	    @RequestMapping("editMemberView.do")
+	    public String editMemberView(Model model) {
+	    	List<PwQnaVO> pwQnaList =
+					memberService.getAllPwQnAList();
+	    	//request에 set해서 비밀번호 찾기 질문 리스트를 보냄.
+	    	model.addAttribute("pwQnaList", pwQnaList);   	
+	    		
+	    	return "member/editMemberView.tiles";
+	    }
+	    //회원수정
+	    @RequestMapping(value = "editMember.do", method = RequestMethod.POST)
+	    public String editMember(MemberVO memberVO) {
+	    
+	    	return "redirect:member/editMember_ok.do";
+	    }
+	    //회원수정완료
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 ////////////////////start 우정 메서드 ////////////////////////////
 	    @Secured("ROLE_SELLER")
