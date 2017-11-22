@@ -9,7 +9,7 @@
 			$("#logoutAction").click(function() {
 				$("#logoutForm").submit();
 			});
-		});
+		}); 
 	</script>
 	
 		<header class="menu-base" id="header-container-box">
