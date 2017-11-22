@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.TradeVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,9 +17,11 @@ public class FoodDAOImpl implements FoodDAO {
     private SqlSessionTemplate template;
 
 ////////////////////start 윤주//////////////////////////
+
 	@Override
-	public FoodVO getFoodInfoByFoodNo(String foodNo) {
-		return template.selectOne("food.getFoodInfoByFoodNo",foodNo);
+	public void orderFood(TradeVO tvo) {
+		template.insert("food.orderFood",tvo);
+		
 	}
 //////////////////end 윤주//////////////////////////////
 

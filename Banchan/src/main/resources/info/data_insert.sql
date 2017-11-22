@@ -111,6 +111,7 @@ values(food_seq.nextval, '김치찌게', '돼지고기 베이스의 맛있는 �
 
 
 -- FOOD_SELL
+select * from food_sell;
 create sequence food_sell_seq start with 101010 nocache;
 
 insert into food_sell(food_sell_no, tr_date, close_date, loc, price, pre_quantity, sell_postdate, unit, sell_detail, food_no)

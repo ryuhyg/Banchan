@@ -14,18 +14,8 @@ public class FoodSellVO extends FoodVO{
     private String unit;
     private String sellDetail;
 
-    private FoodVO foodVO;
-
 	public FoodSellVO() {
 		super();
-	}
-
-	@Override
-	public String toString() {
-		return "FoodSellVO [questionList=" + questionList + ", foodSellNo=" + foodSellNo + ", trDate=" + trDate
-				+ ", closeDate=" + closeDate + ", loc=" + loc + ", price=" + price + ", preQuantity=" + preQuantity
-				+ ", sellPostdate=" + sellPostdate + ", unit=" + unit + ", sellDetail=" + sellDetail + ", toString()="
-				+ super.toString() + "]";
 	}
 
 	public ArrayList<QuestionVO> getQuestionList() {

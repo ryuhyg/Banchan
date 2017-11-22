@@ -10,6 +10,7 @@ import org.kosta.banchan.model.dao.FoodDAO;
 import org.kosta.banchan.model.dao.SellDAO;
 import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,10 +22,10 @@ public class FoodServiceImpl implements FoodService {
     private SellDAO sellDAO;
   
 ///////////////////start윤주/////////////////////////
-@Override
-public FoodVO getFoodInfoByFoodNo(String foodNo) {
-	return foodDAO.getFoodInfoByFoodNo(foodNo);
-}
+	@Override
+	public void orderFood(TradeVO tvo) {
+		foodDAO.orderFood(tvo);
+	}
 ///////////////////end윤주////////////////////////
 
    
