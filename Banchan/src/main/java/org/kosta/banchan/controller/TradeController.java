@@ -38,6 +38,22 @@ public class TradeController {
 		model.addAttribute("tradeList", tradeService.getSellerTradeListByFoodSellNo(foodSellNo));
 		return "food/seller_foodTradeList.tiles";
 	}
+	
+	/** [지원] 판매자-전체거래내역조회
+	 * 해당 판매자가 판매한 음식의 모든 거래내역을 조회한다. 
+	 * 
+	 * @param sellerId
+	 * @param model
+	 * @return
+	 */
+	@Secured("ROLE_BUYER")
+	@RequestMapping("getAllSellerTradeList.do")
+	public String getAllSellerTradeList(String sellerId, Model model) {
+		model.addAttribute("tradeList", tradeService.getAllSellerTradeList(sellerId));
+		return "food/seller_allTradeList.tiles";
+	}
+	
+	
 	////////////////////////////start윤주////////////////////////////////
 	//나의 거래 내역 리스트 가져오기
 	@RequestMapping("myTradeList.do")
