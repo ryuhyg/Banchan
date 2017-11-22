@@ -19,15 +19,17 @@
 }
 .star_rating a:first-child {margin-left:0;}
 .star_rating a.on {color:#ffcc00;}
-</style>   
-    
+.home-top{
+	margin-top: 100px;
+}
+</style>
     
      
     
     
  <!-- 슬라이드 부분 *************************** -->
  	
-	<section id="home-slide" class="">
+	<section id="home-slide" class="home-top">
 			<div class="home-slider" data-navigation=".home-slider-nav">
 				<div class="crsl-wrap">
 						<div class="crsl-item" style="background-image: url('resources/images/img/main_img_00.jpg');">
@@ -255,7 +257,7 @@
 					<a href="#" class="btn btn-reverse button-large">판매자 등록하기</a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
-					<a href="${pageContext.request.contextPath}/sellerRegisterForm.do?id=${mvo.memId}" class="btn btn-reverse button-large">판매자 등록하기</a>
+					<a href="	" class="btn btn-reverse button-large">판매자 등록하기</a>
 			</sec:authorize>
 				</div>
 			</div>

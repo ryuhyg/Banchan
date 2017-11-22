@@ -13,12 +13,12 @@
 
 
 	</script>
-	
-		<header class="menu-base" id="header-container-box" style="top: 0px !important; ">
+		<%-- <img src="${pageContext.request.contextPath}/resources/images/logo/header_logo.png" style="float: right;"> --%>
+		<header class="menu-base" id="header-container-box" style="top: 0px !important; ">	
 			<div class="info" style="height: 50px;"><!-- info -->
 				<div class="container">
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-4">							
 						</div>
 						<div class="col-md-4">
 						</div>
@@ -33,7 +33,7 @@
 								<form id="logoutForm" action="${pageContext.request.contextPath}/logout.do" method="post" style="display: none">
 										<sec:csrfInput />
 								</form>
-								<a href="${pageContext.request.contextPath}/member/sellerRegisterForm.do?id=${mvo.memId}" ><i class="icon fa fa-pencil-square-o"></i> 판매자 등록</a>
+								<a href="${pageContext.request.contextPath}/sellerRegisterForm.do?id=${mvo.memId}" ><i class="icon fa fa-pencil-square-o"></i> 판매자 등록</a>
 								 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="color: #1a1a1a; background-color: #fff; font-size: 12px; border: 0px; margin-top: 5px; float: right">
 						 <i class="icon fa fa-pencil-square-o"></i>마이페이지<span class="caret"></span></button>
  									 <ul class="dropdown-menu">
@@ -71,7 +71,7 @@
 							<li class="has_submenu">
 								<a href="">Home</a>
 								<ul>
-									<li><a href="">홈으로</a></li>
+									<li><a href="${pageContext.request.contextPath}/home.do">홈으로</a></li>
 									<li><a href="">소개</a></li>
 								</ul>
 							</li>

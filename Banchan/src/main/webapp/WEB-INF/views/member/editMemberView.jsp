@@ -5,14 +5,12 @@
 	uri="http://www.springframework.org/security/tags"%>
 <!-- services와 clusterer, drawing 라이브러리 불러오기 : MAP sdk -->
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54&libraries=services,clusterer,drawing">
-	
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54&libraries=services,clusterer,drawing">	
 </script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54"></script>
 <!-- 우편번호 api -->
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-
 <!-- 스크립트 ajax 부분 -->
 
 <script type="text/javascript">
@@ -472,7 +470,7 @@
 		</div>
 	</div>
 </section>
-<section></section>
+<section>
 
 
 <script>
@@ -497,3 +495,5 @@
 	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 	////////////////////////////
 </script>
+
+</section>
