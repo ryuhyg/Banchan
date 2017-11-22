@@ -177,7 +177,7 @@ public class MemberController {
 	    //회원수정완료
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 ////////////////////start 우정 메서드 ////////////////////////////
-	    @Secured("ROLE_SELLER")
+	    //@Secured("ROLE_SELLER")
 	    @RequestMapping("sellerPageInfo.do")
 	    public String seller_myPage(Model model,String memId) {
 	    	SellerVO svo=memberService.selectSellerInfo(memId);

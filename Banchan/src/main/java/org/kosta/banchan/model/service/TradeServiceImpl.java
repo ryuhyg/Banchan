@@ -38,6 +38,21 @@ public class TradeServiceImpl implements TradeService {
     public void updateTradeStatus(String tradeNo) {
     	tradeDAO.updateTradeStatus(tradeNo);
     }
+    
+    /**[지원] 판매자 전체 거래내역 조회 
+     * 해당 판매자가 거래한 모든 거래내역을 조회한다. 
+     * 
+     * @param sellerId
+     * @return
+     */
+    @Override
+    public List<TradeVO> getAllSellerTradeList(String sellerId){
+    	return tradeDAO.getAllSellerTradeList(sellerId);
+    }
+    
+    
+    
+    
 	///////////////////////start윤주////////////////////////////////
 	@Override
 	public List<TradeVO> getTradeListByMemId(String memId) {
