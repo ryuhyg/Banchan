@@ -78,18 +78,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<resultMap type="sellerVO" id="sellerRMDong">
  		<result column="address_no" property="addressVO.addressNo"/>
+ 		<result column="address_api" property="addressVO.addressAPI"/>
  		<result column="latitude" property="addressVO.latitude"/>
  		<result column="longitude" property="addressVO.longitude"/> 
  	</resultMap> 
  	<select id="getSameDongSellerListByAddress" parameterType="string" resultMap="sellerRMDong">
 		SELECT s.mem_id,  s.seller_img, s.seller_info, s.seller_score,
-			   a.address_no, a.latitude, a.longitude 
+			   a.address_no, a.address_api, a.latitude, a.longitude 
 		FROM BAN_MEM b, ADDRESS a, mem_auth ma , seller s 
 		WHERE b.address_no = a.address_no
 		AND b.mem_id = s.mem_id  
 		AND b.mem_id = ma.mem_id 
 		AND a.address_API like '%'||#{value}||'%' 
 		AND ma.auth_no ='20'
+ 	</select>
+ 	
+ 	<select id="getAddressAPIById" parameterType="string" resultType="addressVO">
+ 		SELECT 		 a.address_no, a.address_api, a.latitude, a.longitude 
+		FROM 		BAN_MEM m, address a 
+		WHERE 		m.address_no=a.address_no 
+		AND 		mem_id=#{value}
  	</select>
 <!-- End 광태 -->
 

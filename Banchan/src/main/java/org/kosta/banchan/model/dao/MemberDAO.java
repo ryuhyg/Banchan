@@ -40,6 +40,8 @@ public interface MemberDAO {
 		List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo);
 		// 동 주소 판매자 리스틑
 		List<SellerVO> getSameDongSellerListByAddress(String addressAPI);
+		// addressAPI만 get
+		AddressVO getAddressAPIById(MemberVO memberVO);
 /////////////////////// end  광태 메서드   ///////////////////////////////	
 /////////////////////// start  윤주 메서드   ///////////////////////////////
 int isSeller(String memId);
@@ -57,6 +59,8 @@ String getSellerNameByMemId(String memId);
 
 //회원정보수정(정훈)
 		void getEditMembers(SellerVO vo);
+
+
 
 
 		
