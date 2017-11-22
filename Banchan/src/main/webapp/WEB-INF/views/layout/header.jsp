@@ -27,7 +27,7 @@
 						</sec:authorize>
 						
 						<sec:authorize access="hasRole('ROLE_BUYER') and !hasRole('ROLE_SELLER')"><!-- 오직 구매자 권한 설정 -->
-								<a href="" ><i class="icon fa fa-pencil-square-o"></i> 마이페이지</a>
+								<a href="${pageContext.request.contextPath}/editMemberView.do" ><i class="icon fa fa-pencil-square-o"></i> 회원정보수정</a>
 								<a href="#" id="logoutAction"><i class="icon fa fa-user user"></i>로그아웃</a>
 								<form id="logoutForm" action="${pageContext.request.contextPath}/logout.do" method="post" style="display: none">
 										<sec:csrfInput />
