@@ -6,6 +6,6 @@
     <sec:authentication var="mvo" property="principal" />
 		<section id="recent-list" style="margin-top: 350px;">
 			<form action="" method="post">
-				
+				비밀번호 찾기 입니다.
 			</form>
 		</section>

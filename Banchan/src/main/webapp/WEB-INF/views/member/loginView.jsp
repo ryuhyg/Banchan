@@ -26,7 +26,7 @@
 								<br>
 								<button type="submit" class="btn btn-reverse button-form" style="float: left" id="loginBtn" >로그인</button>
 								<a href="${pageContext.request.contextPath}/member/registerView.do"><button type="button"  class="btn btn-reverse button-form" style="margin-left: 25px" id="registerBtn" >회원가입</button></a>
-								<button type="button" class="btn btn-default button-form" style="float: right" id="findPasswordBtn">비밀번호찾기</button>
+								<a href="${pageContext.request.contextPath}/member/findPasswordView.do"><button type="button"  class="btn btn-reverse button-form" style="float: right;" id="findBtn" >비밀번호찾기</button></a>
 							</form>		
 							</div>
 							</div>	

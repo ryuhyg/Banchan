@@ -27,37 +27,25 @@
     
  <!-- 슬라이드 부분 *************************** -->
  	
-	<section id="home-slide" class="header-margin-base">
+	<section id="home-slide" class="">
 			<div class="home-slider" data-navigation=".home-slider-nav">
 				<div class="crsl-wrap">
-					<figure class="crsl-item" style="background-image: url('resources/images/img/main_img_00.jpg');">
+						<div class="crsl-item" style="background-image: url('resources/images/img/main_img_00.jpg');">
 						<div class="container slider-box">
-							<div class="content"><h2>There are many variations</h2></div>
-							<div class="content"><h1>Real Estate</h1></div>
-							<div class="content"><h3>If you are going to use a passage of Lorem Ipsum, you need to be sure anything</h3></div>
 						</div>
-					</figure>
-					<figure class="crsl-item" data-image="http://placehold.it/1920x1080/bbbbbb/ffffff">
+					</div>
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_01.jpg');">
 						<div class="container slider-box">
-							<div class="content"><h2>Curabitur tinunt facilisis ex</h2></div>
-							<div class="content"><h1>Home Design</h1></div>
-							<div class="content"><h3>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks</h3></div>
 						</div>
-					</figure>
-					<figure class="crsl-item" data-image="http://placehold.it/1920x1080/bbbbbb/ffffff">
+					</div>
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_02.jpg');">
 						<div class="container slider-box">
-							<div class="content"><h2>Uta ultrices lectus</h2></div>
-							<div class="content"><h1>Custom Tracker</h1></div>
-							<div class="content"><h3>It uses a dictionary of over 200 Latin words, combined with a handful of model</h3></div>
 						</div>
-					</figure>
-					<figure class="crsl-item" data-image="http://placehold.it/1920x1080/bbbbbb/ffffff">
+					</div>
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_03.jpg');">
 						<div class="container slider-box">
-							<div class="content"><h2>Praesent ultricies lorem massa</h2></div>
-							<div class="content"><h1>Quick Details</h1></div>
-							<div class="content"><h3>Phasellus blandit ultricies vehicula. Proin auctor sapien justo, vitaque velit</h3></div>
 						</div>
-					</figure>
+					</div>
 				</div>
 				<p class="home-slider-nav previus">
 					<a href="#" class="previous">previous</a>

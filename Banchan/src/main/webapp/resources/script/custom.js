@@ -10,10 +10,10 @@
 		// HeaderHeight
 		var $headerHeight = $('header').height();
 		// Menu height
-		var $menuHeight = $('#menu-nav').height();
+		var $menuHeight = $('header').height();
 		// Fixed
-		$(this).scrollTop() > 170 ? $headerFixed.css({'top': -($headerHeight-$menuHeight)+'px'}) 
-			                      : $headerFixed.css({'top': '0px'}) ;
+		/*$(this).scrollTop() > 170 ? $headerFixed.css({'top': -($headerHeight-$menuHeight)+'px'}) 
+			                      : $headerFixed.css({'top': '0px'}) ;*/
     });
 
 

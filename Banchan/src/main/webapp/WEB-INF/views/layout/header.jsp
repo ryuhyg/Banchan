@@ -8,11 +8,11 @@
 		$(document).ready(function() {
 			$("#logoutAction").click(function() {
 				$("#logoutForm").submit();
-			});
+			});  
 		});
 	</script>
 	
-		<header class="menu-base" id="header-container-box">
+		<header class="menu-base" id="header-container-box" style="top: 0px !important; ">
 			<div class="info" style="height: 50px;"><!-- info -->
 				<div class="container">
 					<div class="row">
@@ -38,7 +38,7 @@
  									 <ul class="dropdown-menu">
    										   <li><a href="${pageContext.request.contextPath}/editMemberView.do">회원정보수정</a></li>
    											 <li><a href="#">내거래내역</a></li>
-  											  <li><a href="#">회원탈퇴</a></li>
+  											  <li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do">회원탈퇴</a></li>
 									  </ul>
 						</sec:authorize>						
 						<sec:authorize access="hasRole('ROLE_SELLER')"><!-- 판매자 권한 설정 -->						
@@ -53,16 +53,16 @@
  									 <ul class="dropdown-menu">
    										   <li><a href="#">회원정보수정</a></li>
    											 <li><a href="#">내거래내역</a></li>
-  											  <li><a href="#">회원탈퇴</a></li>
+  											  <li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do">회원탈퇴</a></li>
 									  </ul>
 						</sec:authorize>							
 						</div>
 					</div>
 				</div>			
 			</div><!-- /.info -->
-			<div class="logo hidden-xs">
-				<a href="${pageContext.request.contextPath}/home.do"><img id="logo-header" src="${pageContext.request.contextPath}/resources/images/logo/반창고.png" width=200 height=155 alt="Logo" /></a>
-			</div><!-- /.logo -->
+	<%-- 		<div class="logo hidden-xs">
+				<a href="${pageContext.request.contextPath}/home.do"><img id="logo-header" src="${pageContext.request.contextPath}/resources/images/logo/반창고.png" alt="Logo" /></a>
+			</div><!-- /.logo --> --%>
 			<div class="menu-navbar">
 				<div class="container" id="menu-nav">
 					<nav id="navigation">
@@ -91,6 +91,7 @@
 						</ul>
 					</nav>
 				</div>
+				
 			</div><!-- /.menu -->
 				<a href="#" class="fixed-button top"><i class="fa fa-chevron-up"></i></a>
 		</header>
