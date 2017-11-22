@@ -40,14 +40,15 @@ public class TestUnit {
 		/*List<SellerVO> list =mDAO.getAllSameAddressSellerListByAddress("1003");
 		System.out.println(list.get(0).getAddressVO());*/
 		
-		String temp = "서울 강남구 개포동 11-1";
+		/*String temp = "서울 강남구 개포동 11-1";
 		int lastIndex=  temp.lastIndexOf(" ");
 		System.out.println(lastIndex);
-		System.out.println(temp.substring(0, temp.lastIndexOf(" ")));
+		System.out.println(temp.substring(0, temp.lastIndexOf(" ")));*/
 
 		//List<SellerVO> list =mDAO.getAllSameAddressSellerListByAddress("1003");
 		//System.out.println(list.get(0).getAddressVO());
-		System.out.println(sellerDAO.selectSellerInfo("java2"));
+		//System.out.println(sellerDAO.selectSellerInfo("java2"));
+		System.out.println(foodDAO.getFoodSellInfoByMemId("java2"));
 		
 	}
 }

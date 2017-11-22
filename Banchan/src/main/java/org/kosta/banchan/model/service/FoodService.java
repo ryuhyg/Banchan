@@ -19,6 +19,8 @@ FoodVO getFoodInfoByFoodNo(String foodNo);
 
 	void registerFoodSell(FoodSellVO foodSellVO);
 
+	List<FoodSellVO> getFoodSellInfoByMemId(String memId);
+
 
 
 }

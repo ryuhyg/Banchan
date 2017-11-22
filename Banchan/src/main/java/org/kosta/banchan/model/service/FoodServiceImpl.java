@@ -68,5 +68,12 @@ public FoodVO getFoodInfoByFoodNo(String foodNo) {
 		//int TotalFoodCount= foodDAO.getTotalFoodCountByMemId(memId);
 		return foodDAO.getFoodListByMemId(memId);
 	}
+	/**[우정] 판매자페이지에서 판매음식리스트 조회
+	 * 판매가페이지에서 판매자가 등록한 판매 음식을 조회한다.
+	 */
+	@Override
+	public List<FoodSellVO> getFoodSellInfoByMemId(String memId){
+		return foodDAO.getFoodSellInfoByMemId(memId);
+	}
 	
 }

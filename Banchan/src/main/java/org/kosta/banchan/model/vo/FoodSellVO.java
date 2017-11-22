@@ -13,9 +13,7 @@ public class FoodSellVO extends FoodVO{
     private String sellPostdate;
     private String unit;
     private String sellDetail;
-
-    private FoodVO foodVO;
-
+   
 	public FoodSellVO() {
 		super();
 	}

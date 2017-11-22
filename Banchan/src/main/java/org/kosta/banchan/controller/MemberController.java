@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
+import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
@@ -130,13 +131,12 @@ public class MemberController {
 	    @Secured("ROLE_SELLER")
 	    @RequestMapping("sellerPageInfo.do")
 	    public String seller_myPage(Model model,String memId) {
-	    	System.out.println("seller_myPAge 들어옴    id="+memId);
 	    	SellerVO svo=memberService.selectSellerInfo(memId);
-	    	System.out.println("member 정보"+svo);
 	    	List<FoodVO> flist=foodeService.getFoodListByMemId(memId);
-	    	System.out.println("food 정보"+flist);
+	    	List<FoodSellVO> fslist=foodeService.getFoodSellInfoByMemId(memId);
 	    	model.addAttribute("svo",svo);
 	    	model.addAttribute("flist",flist);
+	    	model.addAttribute("fslist",fslist);
 	    	return "member/seller_myPage.tiles";
 	    }
 ////////////////////end 우정 메서드 ////////////////////////////
