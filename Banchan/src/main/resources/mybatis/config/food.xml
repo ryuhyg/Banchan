@@ -61,6 +61,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- End 지원 -->
 
 <!-- Start 영민 -->
+<select id="allCategorySelect" resultType="map">
+	select category_no, category_name from category
+</select>
+<insert id="foodRegister" parameterType="foodVO">
+	insert into food(food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id)
+	values(food_seq.nextval, #{foodName}, #{foodDe}, 0, #{foodMainImg}, sysdate, #{categoryNo}, #{memId})
+</insert>
 <!-- End 영민 -->
 
 <!-- Start 윤주 -->

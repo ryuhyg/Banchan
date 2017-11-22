@@ -1,17 +1,24 @@
 package org.kosta.banchan.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.vo.FoodSellVO;
+import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FoodController {
@@ -84,5 +91,55 @@ public class FoodController {
     	model.addAttribute("sellfood", foodService.getFoodSellDetailByNo(foodSellNo));
     	return "food/foodsell_detail.tiles";
     }
+    
+    
+    ///////////////////// 영민 start ///////////////////////////////////
+    @RequestMapping("foodRegisterForm.do")
+    public String foodRegisterForm(Model model) {
+    	List<Map<String, String>> list=foodService.allCategorySelect();
+    	System.out.println("list :" + list);
+    	
+    	model.addAttribute("category", list);
+    	return "food/foodRegister.tiles";
+    }
+    @RequestMapping(value = "foodRegister.do",method = RequestMethod.POST)
+    public String foodRegister(String id,FoodVO fvo,HttpServletRequest request) {
+    	System.out.println("foodRegister fvo:"+fvo);
+    uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
+    File uploadDir=new File(uploadPath);
+    if(uploadDir.exists()==false)
+    	uploadDir.mkdirs();
+    MultipartFile file=fvo.getUploadImage();//파일 
+    System.out.println(file+"<==");
+    //System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
+    if(file!=null&&file.isEmpty()==false){
+    	System.out.println("파일명:"+file.getOriginalFilename());
+    	File uploadFile=new File(uploadPath+file.getOriginalFilename());
+    	try {
+    		file.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
+    		System.out.println(uploadPath+file.getOriginalFilename()+" 파일업로드");
+    	} catch (IllegalStateException | IOException e) {				
+    		e.printStackTrace();
+    	}
+    }
+   // String memId=""; // 로그인기능 구현되면 세션정보 가져올 예정
+   
+    fvo.setMemId(id);
+    //fvo.setFoodScore(score);
+    fvo.setFoodName(request.getParameter("foodname"));
+    fvo.setFoodMainImg(file.getOriginalFilename());
+    fvo.setFoodDe(request.getParameter("foodInfo"));
+    fvo.setCategoryNo(request.getParameter("category"));
+    System.out.println("카테고리 no:"+request.getParameter("category"));
+    System.out.println("fvo2:"+fvo);
+    foodService.foodRegister(fvo);
+    
+    return "redirect:foodRegister_ok.do";	
+    }
+    @RequestMapping("foodRegister_ok.do")
+    public String foodRegister_ok() {
+    	return "food/foodRegister_ok.tiles";
+    }
+    //////////////////////////영민 end//////////////////////////////////////
     
 }

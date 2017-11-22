@@ -2,6 +2,8 @@ package org.kosta.banchan.model.vo;
 
 import java.util.ArrayList;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class FoodVO {
 
 
@@ -14,17 +16,27 @@ public class FoodVO {
     private String foodPostdate;
     private String categoryNo;
     private String memId;
+    private MultipartFile uploadImage;
 	public FoodVO() {
 		super();
 	}
 
 	@Override
 	public String toString() {
-		return "FoodVO [reviewList=" + reviewList+ ", foodNo=" + foodNo
-				+ ", foodName=" + foodName + ", foodDe=" + foodDe + ", foodScore=" + foodScore + ", foodMainImg="
-				+ foodMainImg + ", foodPostdate=" + foodPostdate + ", categoryNo=" + categoryNo + ", memId=" + memId
+		return "FoodVO [reviewList=" + reviewList + ", foodNo=" + foodNo + ", foodName=" + foodName + ", foodDe="
+				+ foodDe + ", foodScore=" + foodScore + ", foodMainImg=" + foodMainImg + ", foodPostdate="
+				+ foodPostdate + ", categoryNo=" + categoryNo + ", memId=" + memId + ", uploadImage=" + uploadImage
 				+ "]";
 	}
+
+	public MultipartFile getUploadImage() {
+		return uploadImage;
+	}
+
+	public void setUploadImage(MultipartFile uploadImage) {
+		this.uploadImage = uploadImage;
+	}
+
 	public ArrayList<ReviewVO> getReviewList() {
 		return reviewList;
 	}

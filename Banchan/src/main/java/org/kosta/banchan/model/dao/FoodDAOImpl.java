@@ -1,6 +1,7 @@
 package org.kosta.banchan.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -43,5 +44,16 @@ public class FoodDAOImpl implements FoodDAO {
 	public int getTotalFoodCountByMemId(String memId) {
 		return template.selectOne("getTotalFoodCountByMemId",memId);
 	}*/
+	/*
+	 * 		[영민] 카테고리 받아와서 음식등록 하는 페이지
+	 */
+	public void foodRegister(FoodVO fvo) {
+		template.insert("food.foodRegister", fvo);
+	}
+
+	@Override
+	public List<Map<String, String>> allCategorySelect() {
+		return template.selectList("food.allCategorySelect");
+	}
 		
 }
