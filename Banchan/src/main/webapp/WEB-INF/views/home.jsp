@@ -81,7 +81,7 @@
 			<!-- 지원 링크 테스트 -->
 			<a href="${pageContext.request.contextPath}/registerFoodView.do">판매음식등록 테스트//</a>
 			<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=101010">판매음식 상세정보//</a>
-			<a href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=101010">판매음식당 거래요청리스트//</a>
+			<a href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=101042">판매음식당 거래요청리스트//</a>
 		</div>
 	</section>
 <!--  링크 섹션끝 -->
