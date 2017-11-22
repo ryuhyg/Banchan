@@ -94,18 +94,26 @@ public class MemberServiceImpl implements MemberService {
 	   public void getAllNearSellerListByAddress() {
 		   // 현재 로그인된 회원 아이디로 addressNO get
 		   
-		   // 멤버 테이블에서 addressNO 같은 회원들 List 로 get 후 return
-		   
+		   // 멤버 테이블에서 addressNO 같은 회원들 List 로 get 후 return	   
 	   }
+	   
 	   @Override
 	   public List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo){
 		   return memberDAO.getAllSameAddressSellerListByAddress(addressNo);
+	   }
+	   
+	   @Override
+	   public List<SellerVO> getSameDongSellerListByAddress(String addressAPI){
+		   String temp = addressAPI.substring(0, addressAPI.lastIndexOf(" "));
+			System.out.println("temp : " + temp);
+		   return memberDAO.getSameDongSellerListByAddress(temp);
 	   }
 	   /////////// end 위치기반 추천 메서드 ////////////////////   
    /////////////////////// end  광태 메서드   ///////////////////////////////
 	   
 ////////////////////start 우정 메서드 ////////////////////////////
 	  public SellerVO selectSellerInfo(String id) {
+		  System.out.println("selectSellerInfo Service");
 		  return sellerDAO.selectSellerInfo(id);
 	  }
 	  public List<FoodVO> selectFoodInfo(String id) {
@@ -144,6 +152,10 @@ return memberDAO.isSeller(memId);
 public void sellerRegister(SellerVO svo) { //트랜젝션 처리
 memberDAO.insertAuth(new Authority(svo.getMemId(),"20"));
 memberDAO.sellerRegister(svo);
+}
+@Override
+public String getSellerNameByMemId(String memId) {
+	return memberDAO.getSellerNameByMemId(memId);
 }
 /////////////////////// end  윤주 메서드   ///////////////////////////////
 }

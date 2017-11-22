@@ -17,6 +17,7 @@ public class FoodVO {
 	public FoodVO() {
 		super();
 	}
+
 	@Override
 	public String toString() {
 		return "FoodVO [reviewList=" + reviewList+ ", foodNo=" + foodNo

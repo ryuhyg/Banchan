@@ -1,8 +1,11 @@
 package org.kosta.banchan.model.dao;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.kosta.banchan.model.vo.TradeVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +14,26 @@ public class TradeDAOImpl implements TradeDAO {
 
 	@Resource
     private SqlSessionTemplate template;
+	
+	
+	/** [지원] 판매자 구매요청리스트 
+	 * 해당 판매음식에 대한 구매요청 리스트 조회 
+	 */
+	@Override	
+	public List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo){
+		return template.selectList("trade.getSellerTradeListByFoodSellNo", foodSellNo);
+	}
+	
+	
+	/** [지원] 판매자 거래완료확인
+	 * 실제 거래가 완료된 후 거래완료 확인을 한다. 
+	 * 판매자가 거래완료 버튼을 누르면 trade 테이블의 해당 trade_no 에 대한 tr_status가 '거래완료'로 변경된다.
+	 * 
+	 * @param tradeNo
+	 */
+	@Override
+	public void updateTradeStatus(String tradeNo) {
+		template.update("trade.updateTradeStatus", tradeNo);
+	}
 
 }
