@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	s.price,s.pre_quantity,s.sell_postdate,s.unit,sell_detail,
 	food_name,food_de,food_score,food_main_img,category_no
 	from FOOD_SELL s, (select food_no,food_name,food_de,food_score,food_main_img,category_no from FOOD where mem_id=#{value}) f
-	where s.close_date>sysdate and f.food_no=s.food_no
+	where s.close_date>sysdate and f.food_no=s.food_no order by s.sell_postdate desc
 </select>
 <!-- End 우정 -->
 

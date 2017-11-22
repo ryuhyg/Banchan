@@ -54,6 +54,12 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
     padding: 20px;
     font-size: 1.2em;
 } 
+#tab2Container{
+
+    padding: 10px;
+    border: 5px solid gray;
+    margin: 0; 
+}
 
 </style>
 
@@ -87,6 +93,7 @@ $(document).ready(function() {
 								</span>
 								<div class="bs-callout callout-success">
 								  <h4 class="title">믿고먹는 주부님</h4>
+								  <span class="address"><i class="fa fa-map-marker"></i>&nbsp;${svo.addressVO.addressAPI}</span>
 								  <p class="text">${svo.sellerInfo }</p>
 								</div>
 							</div><!-- /.col-md-8 -->
@@ -141,8 +148,7 @@ $(document).ready(function() {
 								<div class="box-ads box-grid">
 									<a class="hover-effect image image-fill" href="property-detail.html">	
 										<span class="cover"></span>
-									<%-- 	<img alt="Sample images"  width="300px" height="200px" src="resources/images/${food.foodMainImg}"> --%>
-									<img alt="Sample images" src="resources/images/${food.foodMainImg}">
+										<img alt="Sample images"  width="300px" height="200px" src="resources/images/${food.foodMainImg}"> 
 										<h3 class="title">${food.foodName}</h3>
 									</a>								
 									<span class="description" >${food.foodDe}</span>
@@ -170,26 +176,42 @@ $(document).ready(function() {
 				<!-- tab2 -->
 				<div id="tab2" class="tab_content" style="display: none;">
 						<!-- 받아온 음식 반복 구간 -->
-						<div class="crsl-wrap">
-								
-						<c:forEach items="${fslist}" var="foodSell">
-							<figure class="crsl-item">
-								<div class="box-ads box-grid">
-									<a class="hover-effect image image-fill" href="property-detail.html">	
-										<span class="cover"></span>
-										<img alt="Sample images"  width="300px" height="200px" src="resources/images/${foodSell.foodMainImg}">
-									<img alt="Sample images" src="resources/images/${foodSell.foodMainImg}">
-										<h3 class="title">${foodSell.foodName}</h3>
-									</a>								
-									<span class="description" >${foodSell.foodDe}</span>
-									<!-- <dl style="display:inline-block; height:60px"  class="detail" > -->
-									<dl class="detail" > 
-										<dt class="status">별점:</dt><dd><span>${foodSell.foodScore}</span></dd>
-									</dl> 
+			
+				<c:forEach items="${fslist}" var="foodSell">
+					<div class="tab2Container">
+					<div class="col-md-9">
+						<div class="row"  style="vertical-align: middle">
+							<div class="col-sm-8 col-md-8 col-sm-push-4">
+								<div class="bs-callout callout-success" style="width: 800px">
+								  <h4 class="title">${foodSell.foodName}</h4>
+								  <span class="description" style="color:black;font-size:13px">
+								 
+									  <i class="fa fa-hand-o-right" style="font-weight: bold"> 음식정보:</i>  ${foodSell.foodDe}<br>
+									  <i class="fa fa-hand-o-right" style="font-weight: bold"> 판매 상세 정보:</i>  ${foodSell.sellDetail}<br>
+									 
+									  <i class="fa fa-credit-card" style="font-weight: bold"> 가격:</i>  ${foodSell.price}<br>
+									  <i class="fa fa-ticket" style="font-weight: bold"> 남은 수량:</i>  ${foodSell.price}<br>
+									  
+									  <i class="fa fa-calendar" style="font-weight: bold"> 거래 날짜:</i>  ${foodSell.trDate}<br>
+									  <i class="fa fa-close" aria-hidden="true" style="font-weight: bold"> 판매 종료 날짜:</i>  ${foodSell.closeDate}<br>
+									  <i class="fa fa-map-marker"style="font-weight: bold"> 거래 장소:</i>${foodSell.loc }<br>
+								  </span>
+								  
+								</div><!-- bs-callout callout-success -->
+							</div><!-- /.col-md-8 -->
+							<div class="col-sm-4 col-md-4 col-sm-pull-8" >
+								<!-- . Agent Box -->
+								<div class="tab2img" >
+									<img alt="Sample images"  width="250px" height="150px" src="resources/images/${foodSell.foodMainImg}">
 								</div>
-							</figure>
+						</div><!-- /.col-md-4 -->
+						</div><!-- /.row -->
+
+					</div>
+					</div>
+									
+							
 						</c:forEach>
-				</div>	
 						
 						
 				</div>

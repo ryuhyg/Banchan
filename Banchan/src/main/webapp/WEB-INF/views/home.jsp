@@ -59,7 +59,7 @@
 
 
 <!--  링크 테스트 섹션 -->
-<h3><a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=java2"  >
+<h3><a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=aaaa"  >
 						판매자 페이지</a></h3>
 	<section id="recent-list">
 		<div class="section-detail" style="border: 1px solid red">
