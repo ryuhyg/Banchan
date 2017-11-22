@@ -60,6 +60,24 @@ String getSellerNameByMemId(String memId);
 //회원정보수정(정훈)
 		void getEditMembers(SellerVO vo);
 
+//질문찾아오기(정훈)
+		PwQnaVO findPwQnaNo(String pwQnaNo);
+
+//회원정보수정-구매자(정훈)
+		void editMemberBuyer(MemberVO memberVO);
+
+//회원정보수정-판매자(정훈)
+		void editMemberSeller(MemberVO memberVO);
+
+//업데이트용 주소타입 존재 체크(정훈)
+		String checkAddressNoByAddressAPIByUpdate(MemberVO memberVO);
+
+//업데이트용 새로운 주소지 등록(정훈)
+		void registerNewAddressInfoByUpdate(AddressVO addressVO);
+
+//회원이 구매자인지 판매자 인지 판별(정훈)
+		SellerVO findMemberTypeById(String memId);
+
 
 
 

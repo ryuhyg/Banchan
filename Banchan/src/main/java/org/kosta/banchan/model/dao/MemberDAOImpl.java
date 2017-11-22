@@ -113,11 +113,43 @@ public class MemberDAOImpl implements MemberDAO {
 /////////////////////// start 정훈 메서드   ///////////////////////////////
 		
 /////////////////////// 회원정보 수정   ///////////////////////////////
-		//아이디를 찾는다//
+	
+		//질문답 찾아오기(정훈)
 		@Override
-		public void getEditMembers(SellerVO vo) {
-			template.update("member.getEditMembers", vo);
+		public PwQnaVO findPwQnaNo(String pwQnaNo) {
+			return template.selectOne("member.findPwQnaNo",pwQnaNo);
 		}
+		//정훈 업데이트용 주소타입 존재 체크
+				@Override 
+				public String checkAddressNoByAddressAPIByUpdate(MemberVO memberVO) {
+					
+					return template.selectOne("member.checkAddressNoByAddressAPIByUpdate", memberVO);
+				}
+				
+				//정훈 업데이트용 새로운 주소지 등록
+				@Override
+				public void registerNewAddressInfoByUpdate(AddressVO addressVO) {
+					//System.out.println("전 :" +memberVO);
+					template.update("member.registerNewAddressInfoByUpdate", addressVO);
+					//System.out.println("후 :" +memberVO);
+				}
+		//회원정보수정-구매자(정훈)
+		@Override
+		public void editMemberBuyer(MemberVO memberVO) {
+			template.update("member.editMemberBuyer", memberVO);
+		}
+		//회원정보수정-판매자(정훈)
+		@Override 
+		public void editMemberSeller(MemberVO memberVO) {
+			template.update("member.editMemberSeller", memberVO);
+		}
+		//회원이 판매자 인지 구매자인지 판별(정훈)
+		@Override
+		public SellerVO findMemberTypeById(String memId) {
+			return template.selectOne("member.findMemberTypeById", memId);
+		}
+		
+		
 /////////////////////// end  정훈 메서드   ///////////////////////////////		
 /////////////////////// start  윤주 메서드   ///////////////////////////////
 
@@ -142,6 +174,12 @@ public String getSellerNameByMemId(String memId) {
 	return template.selectOne("member.getSellerNameByMemId",memId);
 }
 /////////////////////// end  윤주 메서드   ///////////////////////////////
+
+@Override
+public void getEditMembers(SellerVO vo) {
+	// TODO Auto-generated method stub
+	
+}
 
 	
 

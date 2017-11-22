@@ -317,19 +317,16 @@
 						<i class="icon fa fa-comment" style="margin-right: 5px"></i>회원정보수정
 					</h3>
 
-					<form class="form-large grey-color"
-						action="${pageContext.request.contextPath}/editMember.do"
-						method="post" id="regForm">
+					<form class="form-large grey-color"	action="${pageContext.request.contextPath}/editMember.do" method="post" id="regForm">
 						<sec:csrfInput />
 						<%-- csrf 토큰 --%>
 						<div class="row">
 							<div class="col-xs-6">
-								<label for="id"> <i class="fa fa-user user"
-									style="margin-right: 5px"></i>아이디
-								</label> <input type="text" name="memId" id="id"
-									class="margin-bottom form-control" placeholder="아이디"
-									value="<sec:authentication property="principal.memId"/>"
-									readonly="readonly">
+								<label for="id"> 
+								<i class="fa fa-user user" style="margin-right: 5px"></i>아이디</label> 
+								<input type="text" name="memId" id="id" class="margin-bottom form-control" placeholder="아이디" 	
+								value="<sec:authentication property="principal.memId"/>"
+								readonly="readonly">
 							</div>
 							<div class="col-xs-6" style="margin-top: 32px;">
 								<span id="idCheckView"></span>
@@ -370,7 +367,8 @@
 							<div class="col-xs-6">
 								<label for="password"><i class="fa fa-ellipsis-h"
 									style="margin-right: 5px"></i>생년월일</label> <input type="date"
-									name="birth" class="margin-bottom form-control">
+									name="birth" class="margin-bottom form-control"
+									value="<sec:authentication property="principal.birth"/>">
 							</div>
 						</div>
 						<div class="row">
@@ -388,6 +386,29 @@
 							</div>
 						</div>
 						<div class="row">
+							<div class="col-xs-6">
+								<label for="password"><i class="fa fa-ellipsis-h"
+									style="margin-right: 5px"></i>판매자 소개</label>
+						
+						<c:choose>
+						<c:when test="${svo!=null}">
+		<br>
+		<textarea rows="8" cols="40" name="sellerInfo">
+			${svo.memInfo}
+		</textarea>
+		<br>
+		</c:when>
+		<c:otherwise>
+		<br>
+		<textarea rows="8" cols="40" name="sellerInfo" readonly="readonly">
+			
+		</textarea>
+		<br>
+		</c:otherwise>
+		</c:choose>
+		</div>
+		</div>
+						<div class="row">
 							<div class="col-xs-8">
 								<label for="password"><i class="fa fa-ellipsis-h"
 									style="margin-right: 5px"></i>주소</label>
@@ -397,18 +418,20 @@
 									name="addressVO.addressAPI" id="jibunAddress"
 									class="margin-bottom form-control" placeholder="검색 주소"
 									readonly="readonly"> <input type="text"
-									name="addressDe" id="detailAddress" value="<sec:authentication property="principal.addressDe"/>"
+									name="addressDe" id="detailAddress"
+									value="<sec:authentication property="principal.addressDe"/>"
 									class="margin-bottom form-control" placeholder="상세주소 입력">
 							</div>
 						</div>
-						
-						
+
+
 						<div class="row">
 							<div class="col-xs-8" style="margin-bottom: 10px">
 								<label for="password"><i class="fa fa-ellipsis-h"
 									style="margin-right: 5px"></i>비밀번호 찾기 질문</label> <select
 									id="pwQnaSelect">
-									<option value="100" selected="selected"><sec:authentication property="principal.pwQnaNo"/></option>
+									<option value="100"
+										selected="<sec:authentication property="principal.pwQnaNo"/>">${pvo.pwQuest}</option>
 									<c:forEach items="${pwQnaList}" var="p">
 										<option value="${p.pwQnaNo}">${p.pwQuest}</option>
 									</c:forEach>
@@ -420,14 +443,15 @@
 								<label for="password"><i class="fa fa-ellipsis-h"
 									style="margin-right: 5px"></i>비밀번호 찾기 답변</label> <input type="text"
 									name="pwAnswer" id="pwAnswer"
-									class="margin-bottom form-control" value="<sec:authentication property="principal.pwAnswer"/>">
+									class="margin-bottom form-control"
+									value="<sec:authentication property="principal.pwAnswer"/>">
 							</div>
 						</div>
 						<br> <br>
 						<div class="row">
 							<div align="center">
 								<input type="submit" class="btn btn-reverse button-form"
-									value="가입하기">
+									value="수정하기">
 								<button type="button" class="btn btn-default button-form"
 									id="returnBtn">돌아가기</button>
 							</div>

@@ -14,9 +14,14 @@ public interface MemberService {
 	MemberVO findMemberById(String id);
 /////////////////////// start  정훈 메서드   ///////////////////////////////
 	List<Authority> selectAuthorityByMemId(String id);
+	PwQnaVO findPwQnaNo(String pwQnaNo);
+	SellerVO findMemberTypeById(String memId);
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 
 	int idcheck(String id);
+	
+	
+	
 	
 /////////////////////// start  광태 메서드   ///////////////////////////////
 	// 광태 ajax id check
@@ -46,7 +51,6 @@ public interface MemberService {
 	SellerVO selectSellerInfo(String id);
 	List<FoodVO> selectFoodInfo(String id);
 /////////////////////// end  우정 메서드   ///////////////////////////////
-	
 	
 
 

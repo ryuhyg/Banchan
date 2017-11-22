@@ -24,9 +24,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="foodSellVO.foodSellNo" column="food_sell_no"/>
 	</resultMap>
 	<select id="getSellerTradeListByFoodSellNo" parameterType="string" resultMap="tradeRM">
-		select tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no
-		from trade 
-		where food_sell_no=#{value}
+		select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date, t.mem_id, t.food_sell_no, t.tr_status_no, s.tr_status
+		from trade t, tr_status s
+		where food_sell_no=#{value} and t.tr_status_no=s.tr_status_no
 	</select>
 	<!-- [판매자] 실제 거래완료 후 거래완료확인 하여 거래상태를 바꿔줌  -->
 	<update id="updateTradeStatus" parameterType="string">

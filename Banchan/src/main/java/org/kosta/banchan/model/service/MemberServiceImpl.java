@@ -142,6 +142,14 @@ public class MemberServiceImpl implements MemberService {
 			}
 			return list;
 		}
+	   @Override
+	   public PwQnaVO findPwQnaNo(String pwQnaNo) {
+		   return memberDAO.findPwQnaNo(pwQnaNo);
+	   }
+	   @Override
+	   public SellerVO findMemberTypeById(String memId) {
+		   return memberDAO.findMemberTypeById(memId); 
+	   }
 
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 
