@@ -5,7 +5,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <sec:authentication var="mvo" property="principal" />
 	<script type="text/javascript">
-		$(document).ready(function() {
+		$(document).ready(function() { 
 			$("#logoutAction").click(function() {
 				$("#logoutForm").submit();
 			});  
