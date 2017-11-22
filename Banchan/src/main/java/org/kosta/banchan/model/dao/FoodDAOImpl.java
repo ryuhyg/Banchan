@@ -1,11 +1,13 @@
 package org.kosta.banchan.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.TradeVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,9 +19,11 @@ public class FoodDAOImpl implements FoodDAO {
     private SqlSessionTemplate template;
 
 ////////////////////start 윤주//////////////////////////
+
 	@Override
-	public FoodVO getFoodInfoByFoodNo(String foodNo) {
-		return template.selectOne("food.getFoodInfoByFoodNo",foodNo);
+	public void orderFood(TradeVO tvo) {
+		template.insert("food.orderFood",tvo);
+		
 	}
 //////////////////end 윤주//////////////////////////////
 
@@ -49,5 +53,16 @@ public class FoodDAOImpl implements FoodDAO {
 	public int getTotalFoodCountByMemId(String memId) {
 		return template.selectOne("getTotalFoodCountByMemId",memId);
 	}*/
+	/*
+	 * 		[영민] 카테고리 받아와서 음식등록 하는 페이지
+	 */
+	public void foodRegister(FoodVO fvo) {
+		template.insert("food.foodRegister", fvo);
+	}
+
+	@Override
+	public List<Map<String, String>> allCategorySelect() {
+		return template.selectList("food.allCategorySelect");
+	}
 		
 }

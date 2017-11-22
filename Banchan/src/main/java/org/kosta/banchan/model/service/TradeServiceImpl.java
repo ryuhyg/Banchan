@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.kosta.banchan.model.dao.SellDAO;
 import org.kosta.banchan.model.dao.TradeDAO;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ public class TradeServiceImpl implements TradeService {
 
     @Resource
     private TradeDAO tradeDAO;
+    @Resource
+    private SellDAO sellDAO;
 
     /** [지원] 판매자 구매요청리스트 
 	 * 해당 판매음식에 대한 구매요청 리스트 조회 

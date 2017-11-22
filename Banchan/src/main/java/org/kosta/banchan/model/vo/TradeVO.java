@@ -9,6 +9,7 @@ public class TradeVO {
     private String trFinDate; //거래완료 버튼 누른날짜
     private String memId;//주문자아이디
     private String trStatusNo;   
+    private String trStatus;
     private FoodSellVO foodSellVO;//foodSellNo
 
 	public TradeVO() {
@@ -18,7 +19,7 @@ public class TradeVO {
 	@Override
 	public String toString() {
 		return "TradeVO [trNo=" + trNo + ", trQuantity=" + trQuantity + ", trReqDate=" + trReqDate + ", trFinDate="
-				+ trFinDate + ", memId=" + memId + ", trStatusNo=" + trStatusNo
+				+ trFinDate + ", memId=" + memId + ", trStatusNo=" + trStatusNo + ", trStatus=" + trStatus
 				+ ", foodSellVO=" + foodSellVO + "]";
 	}
 
@@ -77,6 +78,12 @@ public class TradeVO {
 	public void setFoodSellVO(FoodSellVO foodSellVO) {
 		this.foodSellVO = foodSellVO;
 	}
-    
-    
+
+	public String getTrStatus() {
+		return trStatus;
+	}
+
+	public void setTrStatus(String trStatus) {
+		this.trStatus = trStatus;
+	}
 }

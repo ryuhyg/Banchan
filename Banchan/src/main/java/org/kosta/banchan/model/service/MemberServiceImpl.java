@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.kosta.banchan.model.dao.MemberDAO;
 import org.kosta.banchan.model.dao.SellerDAO;
+import org.kosta.banchan.model.vo.AddressVO;
 import org.kosta.banchan.model.vo.Authority;
 import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
@@ -108,6 +109,10 @@ public class MemberServiceImpl implements MemberService {
 			System.out.println("temp : " + temp);
 		   return memberDAO.getSameDongSellerListByAddress(temp);
 	   }
+	   @Override
+	   public AddressVO getAddressAPIById(MemberVO memberVO) {
+		   return memberDAO.getAddressAPIById(memberVO);
+	   }
 	   /////////// end 위치기반 추천 메서드 ////////////////////   
    /////////////////////// end  광태 메서드   ///////////////////////////////
 	   
@@ -137,6 +142,14 @@ public class MemberServiceImpl implements MemberService {
 			}
 			return list;
 		}
+	   @Override
+	   public PwQnaVO findPwQnaNo(String pwQnaNo) {
+		   return memberDAO.findPwQnaNo(pwQnaNo);
+	   }
+	   @Override
+	   public SellerVO findMemberTypeById(String memId) {
+		   return memberDAO.findMemberTypeById(memId); 
+	   }
 
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 

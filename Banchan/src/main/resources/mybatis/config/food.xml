@@ -71,32 +71,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- End 지원 -->
 
 <!-- Start 영민 -->
+<select id="allCategorySelect" resultType="map">
+	select category_no, category_name from category
+</select>
+<insert id="foodRegister" parameterType="foodVO">
+	insert into food(food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id)
+	values(food_seq.nextval, #{foodName}, #{foodDe}, 0, #{foodMainImg}, sysdate, #{categoryNo}, #{memId})
+</insert>
 <!-- End 영민 -->
 
 <!-- Start 윤주 -->
-	<select id="getFoodInfoByFoodNo" parameterType="string" resultType="foodVO">
-		select food_name,food_de
-		from food
-		where food_no=#{value}
-	</select>
-	<!-- insert into trade(tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no)
-		values(trade_seq.nextval, 1, sysdate, sysdate, 'java', 101010, 1);
-		
-		insert into tr_status(tr_status_no, tr_status) values(1,'거래중');      
-		insert into tr_status(tr_status_no, tr_status) values(2,'거래완료');      
-     
- 		  private String trNo;
-    private int trQuantity;
-    private String trReqDate; 거래날짜
-    private String trFinDate; 주문마감날짜
-    private String memId;
-    private String trStatusNo;   
-    private FoodSellVO foodSellVO;
- -->
-	<!-- <insert id="orderFood" parameterType="tradeVO">
+  <insert id="orderFood" parameterType="tradeVO">
 		insert into trade(tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no)
-		values(trade_seq.nextval, 1, sysdate, sysdate, 'java', 101010, 1)
-	</insert> -->
+		values(trade_seq.nextval,#{trQuantity}, sysdate, sysdate,#{memId},#{foodSellVO.foodSellNo}, 1)
+	</insert>
 <!-- End 윤주 -->
 </mapper>
 

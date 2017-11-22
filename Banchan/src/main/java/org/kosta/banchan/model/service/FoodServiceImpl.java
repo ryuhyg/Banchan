@@ -3,6 +3,7 @@ package org.kosta.banchan.model.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,6 +11,7 @@ import org.kosta.banchan.model.dao.FoodDAO;
 import org.kosta.banchan.model.dao.SellDAO;
 import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,10 +23,10 @@ public class FoodServiceImpl implements FoodService {
     private SellDAO sellDAO;
   
 ///////////////////start윤주/////////////////////////
-@Override
-public FoodVO getFoodInfoByFoodNo(String foodNo) {
-	return foodDAO.getFoodInfoByFoodNo(foodNo);
-}
+	@Override
+	public void orderFood(TradeVO tvo) {
+		foodDAO.orderFood(tvo);
+	}
 ///////////////////end윤주////////////////////////
 
    
@@ -74,6 +76,20 @@ public FoodVO getFoodInfoByFoodNo(String foodNo) {
 	@Override
 	public List<FoodSellVO> getFoodSellInfoByMemId(String memId){
 		return foodDAO.getFoodSellInfoByMemId(memId);
+	}
+	
+	/*
+	 * 		[영민] 카테고리 받아와서 음식등록
+	 */
+	
+	   @Override
+		public void foodRegister(FoodVO fvo) {
+			foodDAO.foodRegister(fvo);
+		}
+
+	@Override
+	public List<Map<String, String>> allCategorySelect() {
+		return foodDAO.allCategorySelect();
 	}
 	
 }

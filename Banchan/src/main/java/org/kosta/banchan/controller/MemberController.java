@@ -9,12 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
+
 import org.kosta.banchan.model.vo.FoodSellVO;
+
+import org.kosta.banchan.model.vo.AddressVO;
 import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,15 +90,44 @@ public class MemberController {
 	    
 	   ///////////////start 위치기반//////////
 	    @RequestMapping("locationServicePage.do")
-	    public String locationServicePage(Model model) {
+	    public String locationServicePage(Model model, Authentication authentication) {
 	    	
-	    	//System.out.println("locationServicePage");
+	    	List<SellerVO> list = null;
 	    	
-	    	List<SellerVO> list =
-	    			memberService.getSameDongSellerListByAddress("서울 강남구 개포동 11-334");
+	    	// 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다
+			if( SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) { 
+				
+				System.out.println("비로그인 상태  위치기반 접속!");
+				AddressVO avo = new AddressVO();
+				avo.setAddressAPI("경기도 성남시 분당구 삼평동 대왕판교로 660");
+				avo.setLatitude(37.4008198);
+				avo.setLongitude(127.10651510000002);
+				model.addAttribute("addressVO",avo);
+			}else {
+				System.out.println("로그인 상태");
+				MemberVO mvo =(MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				mvo.setAddressVO(memberService.getAddressAPIById(mvo)); 
+				//System.out.println("mvo.getAddressVO() : "+mvo.getAddressVO());
+				list = memberService.getSameDongSellerListByAddress(mvo.getAddressVO().getAddressAPI());
+				model.addAttribute("addressVO",mvo.getAddressVO());
+				
+			}
+			model.addAttribute("list",list);
+	    	return "member/locationServicePage.tiles";	
+	    	
+	    }
+	    @RequestMapping("searchLocationByService_unsigned.do")
+	    public String searchLocationByService(Model model,AddressVO addressVO) {
+	    	System.out.println("searchLocationByService_unsigned!!!");
+	    	System.out.println("addressVO :"+addressVO);
+	    	List<SellerVO> list = null;
+	    		list = memberService.getSameDongSellerListByAddress(addressVO.getAddressAPI());
+	    	
+	    	model.addAttribute("addressVO",addressVO);
 	    	model.addAttribute("list",list);
 	    	return "member/locationServicePage.tiles";
 	    }
+	    
 	    ////////////// end 위치기반 ///////////
 	/////////////////////// end  광태 메서드   ///////////////////////////////
 	    
@@ -111,9 +145,16 @@ public class MemberController {
 	    }
 	    //회원수정페이지로..
 	    @RequestMapping("editMemberView.do")
-	    public String editMemberView(Model model) {
+	    public String editMemberView(Model model, String pwQnaNo, String memId) {
 	    	List<PwQnaVO> pwQnaList =
 					memberService.getAllPwQnAList();
+	    	PwQnaVO pvo=memberService.findPwQnaNo(pwQnaNo);
+   	    	SellerVO svo=memberService.findMemberTypeById(memId);
+   	    	if(svo!=null) {
+	    	model.addAttribute("svo", svo);
+   	    	}
+	    	model.addAttribute("pvo", pvo);
+	    	//회원이 판매자 이면 판매자 아니면 구매자 보냄.
 	    	//request에 set해서 비밀번호 찾기 질문 리스트를 보냄.
 	    	model.addAttribute("pwQnaList", pwQnaList);   	
 	    		
@@ -122,9 +163,17 @@ public class MemberController {
 	    //회원수정
 	    @RequestMapping(value = "editMember.do", method = RequestMethod.POST)
 	    public String editMember(MemberVO memberVO) {
+	    	
 	    
 	    	return "redirect:member/editMember_ok.do";
 	    }
+/*	    //비밀번호 질문 받아오기
+	    @RequestMapping("findPwQnaNo.do")
+	    public String findPwQnaNo(String pwQnaNo, Model model) {
+	    	System.out.println("memberController:" + pwQnaNo);
+	    	
+			return "member/editMemberView.tiles";*/
+	    
 	    //회원수정완료
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 ////////////////////start 우정 메서드 ////////////////////////////
