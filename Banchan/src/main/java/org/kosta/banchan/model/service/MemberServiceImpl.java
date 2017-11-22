@@ -82,8 +82,8 @@ public class MemberServiceImpl implements MemberService {
 				
 				// 멤버 테이블 insert
 					// 전화번호 - 제거
-					String tempTel= memberVO.getTel();
-					memberVO.setTel(tempTel.replaceAll("-", ""));
+				//	String tempTel= memberVO.getTel();
+				//	memberVO.setTel(tempTel.replaceAll("-", ""));
 					memberDAO.registerMember(memberVO);
 				// 권한 테이블 insert
 					memberDAO.registerMemberBasicAuth(memberVO);
