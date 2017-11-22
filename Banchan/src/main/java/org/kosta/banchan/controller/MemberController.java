@@ -110,9 +110,16 @@ public class MemberController {
 	    }
 	    //회원수정페이지로..
 	    @RequestMapping("editMemberView.do")
-	    public String editMemberView(Model model) {
+	    public String editMemberView(Model model, String pwQnaNo, String memId) {
 	    	List<PwQnaVO> pwQnaList =
 					memberService.getAllPwQnAList();
+	    	PwQnaVO pvo=memberService.findPwQnaNo(pwQnaNo);
+   	    	SellerVO svo=memberService.findMemberTypeById(memId);
+   	    	if(svo!=null) {
+	    	model.addAttribute("svo", svo);
+   	    	}
+	    	model.addAttribute("pvo", pvo);
+	    	//회원이 판매자 이면 판매자 아니면 구매자 보냄.
 	    	//request에 set해서 비밀번호 찾기 질문 리스트를 보냄.
 	    	model.addAttribute("pwQnaList", pwQnaList);   	
 	    		
@@ -121,9 +128,17 @@ public class MemberController {
 	    //회원수정
 	    @RequestMapping(value = "editMember.do", method = RequestMethod.POST)
 	    public String editMember(MemberVO memberVO) {
+	    	
 	    
 	    	return "redirect:member/editMember_ok.do";
 	    }
+/*	    //비밀번호 질문 받아오기
+	    @RequestMapping("findPwQnaNo.do")
+	    public String findPwQnaNo(String pwQnaNo, Model model) {
+	    	System.out.println("memberController:" + pwQnaNo);
+	    	
+			return "member/editMemberView.tiles";*/
+	    
 	    //회원수정완료
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 ////////////////////start 우정 메서드 ////////////////////////////

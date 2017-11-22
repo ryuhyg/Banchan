@@ -21,6 +21,7 @@ public class SellerDAOImpl implements SellerDAO {
 		System.out.println("selectSellerInfo  DAO");
         return template.selectOne("member.selectSellerInfo",id);
     }
+	//TOP3 뽑아오기(정훈)
 	@Override
     public List<SellerVO> selectSellerTop3() {
         

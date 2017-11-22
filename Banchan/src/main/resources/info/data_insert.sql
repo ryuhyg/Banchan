@@ -62,6 +62,7 @@ insert into mem_auth(mem_auth_no, mem_id, auth_no) values(mem_auth_seq.nextval, 
 insert into mem_auth(mem_auth_no, mem_id, auth_no) values(mem_auth_seq.nextval, 'spring2','20');
 insert into mem_auth(mem_auth_no, mem_id, auth_no) values(mem_auth_seq.nextval, 'ajax2','20');
 
+
 -- SELLER
 -- ID 뒤에 2 붙은 건 판매자 권한 가지고 있는 회원
 -- 이미지 경로: "C:\\Users\\kosta\\git\\FASTakeout\\FASTakeout\\WebContent\\upload" 이런식으로?
