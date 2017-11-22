@@ -3,6 +3,7 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	<sec:authentication var="mvo" property="principal" />
  	
  <!-- 별점 style부분 ************************* -->
@@ -67,8 +68,9 @@
 			</div>
 		</section>
 <!-- 슬라이드 부분끝 *************************** -->
-<!--  링크 섹션 -->
 
+
+<!--  링크 테스트 섹션 -->
 <a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=java2"  >
 						<h3>판매자 페이지</h3></a>
 	<section id="recent-list">
@@ -84,6 +86,8 @@
 		</div>
 	</section>
 <!--  링크 섹션끝 -->
+
+
 		<section id="recent-list">
 			<div class="section-detail">
 				<h1>
@@ -104,7 +108,7 @@
 				<h2>주부님들의 반찬으로 인스턴스 식품에 찌든 여러분을 정화 시키는 맛</h2>		
 			</div>
 			
-			 
+<c:if test="${fn.length(list)!=0}">
 <!-- 인기 주부님 목록 -->
 			<div class="container">
 				<div class="list-box-title">
@@ -245,8 +249,9 @@
 					</div><!-- ./col-md-4 -->
 				</div>
 			</div>
+</c:if>	 
 		</section>
-
+		
 		<section id="submit-property" data-parallax-speed="0">
 			 
 			<span class="overlay"></span>

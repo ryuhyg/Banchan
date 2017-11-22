@@ -31,7 +31,7 @@
 								<form id="logoutForm" action="${pageContext.request.contextPath}/logout.do" method="post" style="display: none">
 										<sec:csrfInput />
 								</form>
-								<a href="${pageContext.request.contextPath}/member/sellerRegisterForm.do" ><i class="icon fa fa-pencil-square-o"></i> 판매자 등록</a>
+								<a href="${pageContext.request.contextPath}/member/sellerRegisterForm.do?id=${mvo.memId}" ><i class="icon fa fa-pencil-square-o"></i> 판매자 등록</a>
 								 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="color: #1a1a1a; background-color: #fff; font-size: 12px; border: 0px; margin-top: 5px; float: right">
 						 <i class="icon fa fa-pencil-square-o"></i>마이페이지
   								<span class="caret"></span></button>
