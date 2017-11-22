@@ -22,7 +22,7 @@
 .home-top{
 	margin-top: 100px;
 }
-</style>
+</style> 
     
      
     
