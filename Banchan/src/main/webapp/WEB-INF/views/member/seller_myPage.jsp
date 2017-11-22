@@ -180,7 +180,7 @@ $(document).ready(function() {
 				<c:forEach items="${fslist}" var="foodSell">
 					<div class="tab2Container">
 					<div class="col-md-9">
-						<div class="row"  style="vertical-align: middle">
+						<div class="row" style="vertical-align: middle">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
 								<div class="bs-callout callout-success" style="width: 800px">
 								  <h4 class="title">${foodSell.foodName}</h4>
