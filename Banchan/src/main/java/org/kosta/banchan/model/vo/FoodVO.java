@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FoodVO {
 
-
     private ArrayList<ReviewVO> reviewList;
     private String foodNo;
     private String foodName;

@@ -59,13 +59,16 @@
 
 
 <!--  링크 테스트 섹션 -->
-<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=java2"  >
-						<h3>판매자 페이지</h3></a>
+<h3><a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=java2"  >
+						판매자 페이지</a></h3>
 	<section id="recent-list">
 		<div class="section-detail" style="border: 1px solid red">
-			<a href="foodSellDetailForTest_YoonJoo.do">구매하기테스트입니다_윤주//</a>
 			<a href="">테스트2//</a>
 			<a href="">테스트3//</a>
+			<!-- 윤주 링크 테스트 -->
+			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
+			<a href="myTradeList.do?memId=${mvo.memId }">나의구매내역테스트_윤주//</a>
+			</sec:authorize>
 			<!-- 지원 링크 테스트 -->
 			<a href="${pageContext.request.contextPath}/registerFoodView.do">판매음식등록 테스트//</a>
 			<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=101010">판매음식 상세정보//</a>

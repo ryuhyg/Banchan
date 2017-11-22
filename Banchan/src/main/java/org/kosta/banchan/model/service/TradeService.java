@@ -9,6 +9,8 @@ public interface TradeService {
 	List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo);
 
 	void updateTradeStatus(String tradeNo);
-
+	////////////////start윤주///////////////////
+	List<TradeVO> getTradeListByMemId(String memId);
+	////////////////end윤주////////////////////
 
 }

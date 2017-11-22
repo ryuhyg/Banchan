@@ -47,5 +47,11 @@ public class TradeDAOImpl implements TradeDAO {
 	public List<TradeVO> getAllSellerTradeList(String sellerId){
 		return template.selectList("trade.getAllSellerTradeList", sellerId);
 	}
+	//////////////////////start 윤주//////////////////////////
+	@Override
+	public List<TradeVO> getTradeListByMemId(String memId) {
+	return template.selectList("trade.getTradeListByMemId",memId);
+	}
+	//////////////////////end 윤주/////////////////////////////
 
 }

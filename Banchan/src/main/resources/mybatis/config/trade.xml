@@ -65,6 +65,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- End 영민 -->
 
 <!-- Start 윤주 -->
+<resultMap type="tradeVO" id="tradeRM2">
+ 	  	<result column="tr_no" property="trNo"/>
+  		<result column="tr_quantity" property="trQuantity"/>
+  		<result column="tr_req_date" property="trReqDate"/>
+  		<result column="tr_fin_date" property="trFinDate"/>
+ 		<result column="tr_status" property="trStatus"/>
+ 		<result column="tr_date" property="foodSellVO.trDate"/>
+ 		<result column="close_date" property="foodSellVO.closeDate"/>
+ 		<result column="loc" property="foodSellVO.loc"/>
+ 		<result column="price" property="foodSellVO.price"/>
+ 		<result column="unit" property="foodSellVO.unit"/>
+ 		<result column="food_name" property="foodSellVO.foodName"/>
+ 		<result column="mem_name" property="foodSellVO.sellerVO.memName"/>
+ 		<result column="tel" property="foodSellVO.sellerVO.tel"/>
+</resultMap>
+<select id="getTradeListByMemId" parameterType="string" resultMap="tradeRM2">
+	SELECT t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,
+		   trs.tr_status,
+	       fs.tr_date, fs.close_date, fs.loc, fs.price, fs.unit,
+	       f.food_name,
+	       m.mem_name,m.tel
+	FROM trade t, food_sell fs, food f,tr_status trs,ban_mem m
+	WHERE t.mem_id=#{value} and t.food_sell_no=fs.food_sell_no and fs.food_no=f.food_no
+	      and t.tr_status_no=trs.tr_status_no and f.mem_id=m.mem_id
+</select>
+
 <!-- End 윤주 -->
 </mapper>
 

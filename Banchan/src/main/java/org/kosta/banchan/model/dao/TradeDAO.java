@@ -11,6 +11,8 @@ public interface TradeDAO {
 	void updateTradeStatus(String tradeNo);
 
 	List<TradeVO> getAllSellerTradeList(String sellerId);
-
+	////////////////////Start 윤주 //////////////////////////
+	List<TradeVO> getTradeListByMemId(String memId);
+	////////////////////END 윤주 //////////////////////////
 
 }

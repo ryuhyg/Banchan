@@ -38,4 +38,12 @@ public class TradeServiceImpl implements TradeService {
     public void updateTradeStatus(String tradeNo) {
     	tradeDAO.updateTradeStatus(tradeNo);
     }
+	///////////////////////start윤주////////////////////////////////
+	@Override
+	public List<TradeVO> getTradeListByMemId(String memId) {
+	System.out.println("getTradeListByMemId memId:"+memId);
+	return tradeDAO.getTradeListByMemId(memId);
+	
+	}
+	///////////////////////end윤주///////////////////////////////////
 }
