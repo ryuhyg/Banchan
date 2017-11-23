@@ -18,7 +18,7 @@ public class HomeController {
 	@RequestMapping("home.do")
 	public String home(){
 		//Spring Security 권한 출력 
-		//System.out.println("home "+SecurityContextHolder.getContext().getAuthentication().getPrincipal());		
+		System.out.println("home "+SecurityContextHolder.getContext().getAuthentication().getPrincipal());		
 		return "redirect:selectSellerTop3.do";
 	}
 	

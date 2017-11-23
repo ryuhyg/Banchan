@@ -91,5 +91,8 @@ public class FoodServiceImpl implements FoodService {
 	public List<Map<String, String>> allCategorySelect() {
 		return foodDAO.allCategorySelect();
 	}
+	public FoodVO getFoodMemInfo(String no) {
+		return foodDAO.getFoodMemInfo(no);
+	}
 	
 }
