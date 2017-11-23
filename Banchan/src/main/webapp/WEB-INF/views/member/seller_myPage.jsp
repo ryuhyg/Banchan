@@ -166,8 +166,14 @@ $(document).ready(function() {
 									<dl class="detail" > 
 										<dt class="status">별점:</dt><dd><span>${food.foodScore}</span></dd>
 									</dl> 
-									<div class="footer">
-										<a class="btn btn-default" href="${pageContext.request.contextPath}/registerFoodView.do?foodNo=${food.foodNo}">판매등록</a>
+									<div class="footer" style="height:50px">
+										<!-- <a class="btn btn-default" href="#"></a>
+										<a class="btn btn-default" href="#"></a> -->
+										
+										<button type="button" style="margin-top:60px; margin-left: 5px" class="btn btn-default btn-xs">수정</button>
+										<button type="button" style="margin-top:60px" class="btn btn-default btn-xs">삭제</button> 
+										<button type="button" style="margin-top:60px; margin-left: 50px" class="btn btn-default btn-xs">판매등록</button>
+										<%-- <a  style="display:inline-block" class="btn btn-default" href="${pageContext.request.contextPath}/registerFoodView.do?foodNo=${food.foodNo}">판매등록</a> --%>
 									</div>
 								</div>
 							</figure>
