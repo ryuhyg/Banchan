@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<script type="text/javascript">
+<script type="text/javascript"> 
 $(document).ready(function() { 
 		alert("회원 탈퇴가 완료 되었습니다.");
 		/* $("#logoutForm").submit(function(){
