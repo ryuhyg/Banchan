@@ -78,6 +78,12 @@ String getSellerNameByMemId(String memId);
 //회원이 구매자인지 판매자 인지 판별(정훈)
 		SellerVO findMemberTypeById(String memId);
 
+//회원이 구매자인지 판매자 인지 판별(정훈)
+		void editMemberSellerInfoAndImage(SellerVO vo);
+
+//주소정보 들고오기(정훈)
+		AddressVO findMemberAddressAPIById(String memId);
+
 
 
 

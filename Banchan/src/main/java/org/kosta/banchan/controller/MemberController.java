@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.vo.AddressVO;
@@ -58,6 +56,7 @@ public class MemberController {
 	public String loginFail() {
 		return "member/login_fail";
 	}
+
 
 	/////////////////////// start 광태 메서드 ///////////////////////////////
 	// 광태 Ajax id check

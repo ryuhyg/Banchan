@@ -10,7 +10,6 @@ import org.kosta.banchan.model.dao.FoodDAO;
 import org.kosta.banchan.model.dao.MemberDAO;
 import org.kosta.banchan.model.dao.SellerDAO;
 import org.kosta.banchan.model.vo.SellerVO;
-//github.com/ryuhyg/Banchan.git
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
