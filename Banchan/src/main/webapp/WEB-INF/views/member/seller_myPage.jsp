@@ -2,6 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		var foodNo=$("#foodNo").val();
+		$("#updatebtn").click(function(){
+			alert(1);			
+		});
+		$("#deletebtn").click(function(){
+			alert(1);
+		});
+		$("#sellerbtn").click(function(){
+			location.href="${pageContext.request.contextPath}/registerFoodView.do?foodNo="+foodNo;	
+		});
+	});
+</script>
 <style type="text/css">
 ul.tab {
     margin: 0;
@@ -147,6 +161,8 @@ $(document).ready(function() {
 							<figure class="crsl-item">
 								<div class="box-ads box-grid">
 									<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/foodDetailView.do?no=${food.foodNo}">	
+										<input type="hidden" id="foodNo" value="${food.foodNo }">
+										
 										<span class="cover"></span>
 										<img alt="Sample images"  width="300px" height="200px" src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}"> 
 										<h3 class="title">${food.foodName}</h3>
@@ -160,9 +176,9 @@ $(document).ready(function() {
 										<!-- <a class="btn btn-default" href="#"></a>
 										<a class="btn btn-default" href="#"></a> -->
 										
-										<button type="button" style="margin-top:60px; margin-left: 5px" class="btn btn-default btn-xs">수정</button>
-										<button type="button" style="margin-top:60px" class="btn btn-default btn-xs">삭제</button> 
-										<button type="button" style="margin-top:60px; margin-left: 50px" class="btn btn-default btn-xs">판매등록</button>
+										<button type="button" id="updatebtn" style="margin-top:60px; margin-left: 5px" class="btn btn-default btn-xs">수정</button>
+										<button type="button" id="deletebtn" style="margin-top:60px" class="btn btn-default btn-xs">삭제</button> 
+										<button type="button" id="sellerbtn" style="margin-top:60px; margin-left: 50px" class="btn btn-default btn-xs">판매등록</button>
 										<%-- <a  style="display:inline-block" class="btn btn-default" href="${pageContext.request.contextPath}/registerFoodView.do?foodNo=${food.foodNo}">판매등록</a> --%>
 									</div>
 								</div>
