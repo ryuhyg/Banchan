@@ -61,7 +61,13 @@ public class MemberController {
    public String loginFail() {
       return "member/login_fail";
    }
-
+   
+   @RequestMapping("deleteMember.do")
+   public String deleteMember(String memId) {
+	   memberService.deleteMember(memId);
+	   return "member/deleteMember_result";
+   }
+   //////////////////////// END 향걸 /////////////////////////////////////
    /////////////////////// start  광태 메서드   ///////////////////////////////
       // 광태 Ajax id check
        @RequestMapping("checkIdOnAjax.do")

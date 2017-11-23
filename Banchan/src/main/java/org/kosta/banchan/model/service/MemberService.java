@@ -21,7 +21,7 @@ public interface MemberService {
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 
 	int idcheck(String id);
-	
+	void deleteMember(String memId);
 	
 	
 	
@@ -54,6 +54,8 @@ public interface MemberService {
 	SellerVO selectSellerInfo(String id);
 	List<FoodVO> selectFoodInfo(String id);
 /////////////////////// end  우정 메서드   ///////////////////////////////
+	
+	
 	
 
 

@@ -45,6 +45,11 @@ public class MemberServiceImpl implements MemberService {
    public int idcheck(String id) {
 	   return memberDAO.idcheck(id);
    }
+   @Override
+   public	void deleteMember(String memId) {
+	   memberDAO.deleteMember(memId);
+	   memberDAO.deleteMemberAuth(memId);
+   }
    /////////////////////// start  광태 메서드   ///////////////////////////////
 	 //광태  회원가입 ajax id check
 	   @Override
