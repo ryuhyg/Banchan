@@ -35,5 +35,23 @@ public class TradeDAOImpl implements TradeDAO {
 	public void updateTradeStatus(String tradeNo) {
 		template.update("trade.updateTradeStatus", tradeNo);
 	}
+	
+	
+	/** [지원] 판매자 전체거래내역조회
+	 * 로그인한 판매자 아이디에 해당하는 전체 거래내역을 조회한다. 
+	 * 
+	 * @param sellerId
+	 * @return
+	 */
+	@Override
+	public List<TradeVO> getAllSellerTradeList(String sellerId){
+		return template.selectList("trade.getAllSellerTradeList", sellerId);
+	}
+	//////////////////////start 윤주//////////////////////////
+	@Override
+	public List<TradeVO> getTradeListByMemId(String memId) {
+	return template.selectList("trade.getTradeListByMemId",memId);
+	}
+	//////////////////////end 윤주/////////////////////////////
 
 }

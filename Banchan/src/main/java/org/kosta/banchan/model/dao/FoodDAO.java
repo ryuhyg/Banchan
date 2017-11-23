@@ -3,6 +3,8 @@ package org.kosta.banchan.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.kosta.banchan.model.vo.FoodSellVO;
+//github.com/ryuhyg/Banchan.git
 import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.TradeVO;
 
@@ -14,6 +16,8 @@ public interface FoodDAO {
 	FoodVO getFoodByNo(String foodNo);
 
 	List<FoodVO> getFoodListByMemId(String memId);
+
+	List<FoodSellVO> getFoodSellInfoByMemId(String memId);
 
 	/*int getTotalFoodCountByMemId(String memId);*/
 

@@ -1,5 +1,7 @@
 package org.kosta.banchan.model.dao;
 
+import java.util.List;
+
 import org.kosta.banchan.model.vo.FoodSellVO;
 
 public interface SellDAO {
@@ -8,5 +10,6 @@ public interface SellDAO {
 
 	void registerFoodSell(FoodSellVO foodSellVO);
 
+	List<FoodSellVO> getFoodSellInfoByMemId(String memId);
 
 }

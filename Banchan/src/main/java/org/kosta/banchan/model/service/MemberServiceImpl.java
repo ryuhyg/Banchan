@@ -109,6 +109,10 @@ public class MemberServiceImpl implements MemberService {
 			System.out.println("temp : " + temp);
 		   return memberDAO.getSameDongSellerListByAddress(temp);
 	   }
+	   @Override
+	   public AddressVO getAddressAPIById(MemberVO memberVO) {
+		   return memberDAO.getAddressAPIById(memberVO);
+	   }
 	   /////////// end 위치기반 추천 메서드 ////////////////////   
    /////////////////////// end  광태 메서드   ///////////////////////////////
 	   

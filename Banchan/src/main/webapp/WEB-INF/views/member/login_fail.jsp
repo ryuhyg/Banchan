@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript">
 alert("${SPRING_SECURITY_LAST_EXCEPTION.message}!");
-location.href="home.do";
+location.href="loginView.do";
 </script>

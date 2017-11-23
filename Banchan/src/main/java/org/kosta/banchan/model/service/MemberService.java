@@ -14,7 +14,6 @@ public interface MemberService {
 	MemberVO findMemberById(String id);
 /////////////////////// start  정훈 메서드   ///////////////////////////////
 	List<Authority> selectAuthorityByMemId(String id);
-	List<SellerVO> getSameDongSellerListByAddress(String addressAPI);
 	PwQnaVO findPwQnaNo(String pwQnaNo);
 	SellerVO findMemberTypeById(String memId);
 	void editMemberService(MemberVO memberVO, SellerVO vo);
@@ -34,6 +33,8 @@ public interface MemberService {
 	List<PwQnaVO> getAllPwQnAList();
 	// 광태 회원가입 메소드
 	void registerMember(MemberVO memberVO);
+	List<SellerVO> getSameDongSellerListByAddress(String addressAPI);
+	AddressVO getAddressAPIById(MemberVO memberVO);
 /////////////////////// end  광태 메서드   ///////////////////////////////
 	
 /////////////////////// start  윤주 메서드   ///////////////////////////////
@@ -56,10 +57,7 @@ public interface MemberService {
 	
 
 
-	
-	
-	
-	
+
 	
 
 

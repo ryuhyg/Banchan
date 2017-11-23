@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -36,10 +37,18 @@ public class FoodDAOImpl implements FoodDAO {
 	public FoodVO getFoodByNo(String foodNo) {
 		return template.selectOne("food.getFoodByNo", foodNo);
 	}
+///////////////////start 우정//////////////////////////////
 	@Override
 	public List<FoodVO> getFoodListByMemId(String memId) {
 		return template.selectList("food.getFoodListByMemId",memId);
 	}
+	
+	@Override
+	public List<FoodSellVO> getFoodSellInfoByMemId(String memId){
+		return template.selectList("getFoodSellInfoByMemId",memId);
+	}
+///////////////////end 우정//////////////////////////////
+
 	/*@Override
 	public int getTotalFoodCountByMemId(String memId) {
 		return template.selectOne("getTotalFoodCountByMemId",memId);

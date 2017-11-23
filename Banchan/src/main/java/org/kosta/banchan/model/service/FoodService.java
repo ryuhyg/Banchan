@@ -27,6 +27,8 @@ public interface FoodService {
 	List<Map<String, String>> allCategorySelect();
 	////////영민 end /////////
 
+	List<FoodSellVO> getFoodSellInfoByMemId(String memId);
+
 
 
 }

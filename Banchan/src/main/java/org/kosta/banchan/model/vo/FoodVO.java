@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FoodVO {
 
-
     private ArrayList<ReviewVO> reviewList;
     private String foodNo;
     private String foodName;
@@ -17,6 +16,8 @@ public class FoodVO {
     private String categoryNo;
     private String memId;
     private MultipartFile uploadImage;
+    private SellerVO sellerVO;
+    
 	public FoodVO() {
 		super();
 	}
@@ -26,8 +27,14 @@ public class FoodVO {
 		return "FoodVO [reviewList=" + reviewList + ", foodNo=" + foodNo + ", foodName=" + foodName + ", foodDe="
 				+ foodDe + ", foodScore=" + foodScore + ", foodMainImg=" + foodMainImg + ", foodPostdate="
 				+ foodPostdate + ", categoryNo=" + categoryNo + ", memId=" + memId + ", uploadImage=" + uploadImage
+				+ ", sellerVO=" + sellerVO + ", getUploadImage()=" + getUploadImage() + ", getReviewList()="
+				+ getReviewList() + ", getFoodNo()=" + getFoodNo() + ", getFoodName()=" + getFoodName()
+				+ ", getFoodDe()=" + getFoodDe() + ", getFoodScore()=" + getFoodScore() + ", getFoodMainImg()="
+				+ getFoodMainImg() + ", getFoodPostdate()=" + getFoodPostdate() + ", getCategoryNo()=" + getCategoryNo()
+				+ ", getMemId()=" + getMemId() + ", getSellerVO()=" + getSellerVO() + ", toString()=" + super.toString()
 				+ "]";
 	}
+
 
 	public MultipartFile getUploadImage() {
 		return uploadImage;
@@ -93,8 +100,10 @@ public class FoodVO {
 		this.memId = memId;
 	}
 
-    
-
-
-
+	public SellerVO getSellerVO() {
+		return sellerVO;
+	}
+	public void setSellerVO(SellerVO sellerVO) {
+		this.sellerVO = sellerVO;
+	}
 }

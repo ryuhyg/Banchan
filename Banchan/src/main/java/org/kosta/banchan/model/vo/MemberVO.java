@@ -1,10 +1,15 @@
 package org.kosta.banchan.model.vo;
 
+import java.io.Serializable;
 
-public class MemberVO {
+public class MemberVO implements Serializable{
 
    
-    private String memId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2707970356262471354L;
+	private String memId;
     private String pw;
     private String memName;
     private String birth;

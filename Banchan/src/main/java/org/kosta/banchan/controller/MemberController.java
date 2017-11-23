@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.vo.AddressVO;
+import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,15 +88,44 @@ public class MemberController {
 	    
 	   ///////////////start 위치기반//////////
 	    @RequestMapping("locationServicePage.do")
-	    public String locationServicePage(Model model) {
+	    public String locationServicePage(Model model, Authentication authentication) {
 	    	
-	    	//System.out.println("locationServicePage");
+	    	List<SellerVO> list = null;
 	    	
-	    	List<SellerVO> list =
-	    			memberService.getSameDongSellerListByAddress("서울 강남구 개포동 11-334");
+	    	// 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다
+			if( SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) { 
+				
+				System.out.println("비로그인 상태  위치기반 접속!");
+				AddressVO avo = new AddressVO();
+				avo.setAddressAPI("경기도 성남시 분당구 삼평동 대왕판교로 660");
+				avo.setLatitude(37.4008198);
+				avo.setLongitude(127.10651510000002);
+				model.addAttribute("addressVO",avo);
+			}else {
+				System.out.println("로그인 상태");
+				MemberVO mvo =(MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				mvo.setAddressVO(memberService.getAddressAPIById(mvo)); 
+				//System.out.println("mvo.getAddressVO() : "+mvo.getAddressVO());
+				list = memberService.getSameDongSellerListByAddress(mvo.getAddressVO().getAddressAPI());
+				model.addAttribute("addressVO",mvo.getAddressVO());
+				
+			}
+			model.addAttribute("list",list);
+	    	return "member/locationServicePage.tiles";	
+	    	
+	    }
+	    @RequestMapping("searchLocationByService_unsigned.do")
+	    public String searchLocationByService(Model model,AddressVO addressVO) {
+	    	System.out.println("searchLocationByService_unsigned!!!");
+	    	System.out.println("addressVO :"+addressVO);
+	    	List<SellerVO> list = null;
+	    		list = memberService.getSameDongSellerListByAddress(addressVO.getAddressAPI());
+	    	
+	    	model.addAttribute("addressVO",addressVO);
 	    	model.addAttribute("list",list);
 	    	return "member/locationServicePage.tiles";
 	    }
+	    
 	    ////////////// end 위치기반 ///////////
 	/////////////////////// end  광태 메서드   ///////////////////////////////
 	    
@@ -164,16 +195,15 @@ public class MemberController {
 	    //회원수정완료
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 ////////////////////start 우정 메서드 ////////////////////////////
-	    @Secured("ROLE_SELLER")
+	    //@Secured("ROLE_SELLER")
 	    @RequestMapping("sellerPageInfo.do")
 	    public String seller_myPage(Model model,String memId) {
-	    	System.out.println("seller_myPAge 들어옴    id="+memId);
 	    	SellerVO svo=memberService.selectSellerInfo(memId);
-	    	System.out.println("member 정보"+svo);
 	    	List<FoodVO> flist=foodeService.getFoodListByMemId(memId);
-	    	System.out.println("food 정보"+flist);
+	    	List<FoodSellVO> fslist=foodeService.getFoodSellInfoByMemId(memId);
 	    	model.addAttribute("svo",svo);
 	    	model.addAttribute("flist",flist);
+	    	model.addAttribute("fslist",fslist);
 	    	return "member/seller_myPage.tiles";
 	    }
 ////////////////////end 우정 메서드 ////////////////////////////

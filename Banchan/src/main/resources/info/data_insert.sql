@@ -112,7 +112,6 @@ values(food_seq.nextval, '김치찌게', '돼지고기 베이스의 맛있는 �
 
 
 -- FOOD_SELL
-select * from food_sell;
 create sequence food_sell_seq start with 101010 nocache;
 
 insert into food_sell(food_sell_no, tr_date, close_date, loc, price, pre_quantity, sell_postdate, unit, sell_detail, food_no)
@@ -194,7 +193,7 @@ insert into answer(ans_no, ans_content, ans_postdate, mem_id, quest_no)
 values(answer_seq.nextval, '많이 짜진 않습니다!', sysdate, 'java2',3);
 
 
-
+ 
 drop sequence address_seq;
 drop sequence mem_auth_seq;
 drop sequence category_seq start;

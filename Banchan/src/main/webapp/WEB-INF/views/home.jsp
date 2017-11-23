@@ -19,45 +19,35 @@
 }
 .star_rating a:first-child {margin-left:0;}
 .star_rating a.on {color:#ffcc00;}
-</style>   
-    
+.home-top{
+	margin-top: 100px;
+}
+</style> 
     
      
     
     
  <!-- 슬라이드 부분 *************************** -->
  	
-	<section id="home-slide" class="header-margin-base">
+	<section id="home-slide" class="home-top">
 			<div class="home-slider" data-navigation=".home-slider-nav">
 				<div class="crsl-wrap">
-					<figure class="crsl-item" style="background-image: url('resources/images/img/main_img_00.jpg');">
+						<div class="crsl-item" style="background-image: url('resources/images/img/main_img_00.jpg');">
 						<div class="container slider-box">
-							<div class="content"><h2>There are many variations</h2></div>
-							<div class="content"><h1>Real Estate</h1></div>
-							<div class="content"><h3>If you are going to use a passage of Lorem Ipsum, you need to be sure anything</h3></div>
 						</div>
-					</figure>
-					<figure class="crsl-item" data-image="http://placehold.it/1920x1080/bbbbbb/ffffff">
+					</div>
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_01.jpg');">
 						<div class="container slider-box">
-							<div class="content"><h2>Curabitur tinunt facilisis ex</h2></div>
-							<div class="content"><h1>Home Design</h1></div>
-							<div class="content"><h3>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks</h3></div>
 						</div>
-					</figure>
-					<figure class="crsl-item" data-image="http://placehold.it/1920x1080/bbbbbb/ffffff">
+					</div>
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_02.jpg');">
 						<div class="container slider-box">
-							<div class="content"><h2>Uta ultrices lectus</h2></div>
-							<div class="content"><h1>Custom Tracker</h1></div>
-							<div class="content"><h3>It uses a dictionary of over 200 Latin words, combined with a handful of model</h3></div>
 						</div>
-					</figure>
-					<figure class="crsl-item" data-image="http://placehold.it/1920x1080/bbbbbb/ffffff">
+					</div>
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_03.jpg');">
 						<div class="container slider-box">
-							<div class="content"><h2>Praesent ultricies lorem massa</h2></div>
-							<div class="content"><h1>Quick Details</h1></div>
-							<div class="content"><h3>Phasellus blandit ultricies vehicula. Proin auctor sapien justo, vitaque velit</h3></div>
 						</div>
-					</figure>
+					</div>
 				</div>
 				<p class="home-slider-nav previus">
 					<a href="#" class="previous">previous</a>
@@ -71,17 +61,24 @@
 
 
 <!--  링크 테스트 섹션 -->
-<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=java2"  >
-						<h3>판매자 페이지</h3></a>
+<h3><a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=aaaa"  >
+						판매자 페이지</a></h3>
 	<section id="recent-list">
 		<div class="section-detail" style="border: 1px solid red">
-			<a href="foodSellDetailForTest_YoonJoo.do">구매하기테스트입니다_윤주//</a>
 			<a href="">테스트2//</a>
 			<a href="">테스트3//</a>
+			<!-- 윤주 링크 테스트 -->
+			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
+			<a href="myTradeList.do?memId=${mvo.memId }">나의구매내역테스트_윤주//</a>
+			</sec:authorize>
 			<!-- 지원 링크 테스트 -->
 			<a href="${pageContext.request.contextPath}/registerFoodView.do">판매음식등록 테스트//</a>
 			<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=101010">판매음식 상세정보//</a>
-			<a href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=101042">판매음식당 거래요청리스트//</a>
+			<a href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=101042">[판매자]판매음식당 거래요청리스트//</a>
+			<sec:authorize access="hasRole('ROLE_SELLER')">
+				<a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}">[판매자]전체 거래요청리스트//</a>
+			</sec:authorize>
+			
 		</div>
 	</section>
 <!--  링크 섹션끝 -->
@@ -264,7 +261,7 @@
 					<a href="#" class="btn btn-reverse button-large">판매자 등록하기</a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
-					<a href="${pageContext.request.contextPath}/sellerRegisterForm.do?id=${mvo.memId}" class="btn btn-reverse button-large">판매자 등록하기</a>
+					<a href="	" class="btn btn-reverse button-large">판매자 등록하기</a>
 			</sec:authorize>
 				</div>
 			</div>

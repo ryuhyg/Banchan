@@ -102,6 +102,10 @@ public class MemberDAOImpl implements MemberDAO {
 		public List<SellerVO> getSameDongSellerListByAddress(String addressAPI){
 			return template.selectList("member.getSameDongSellerListByAddress", addressAPI);
 		}
+		@Override
+		public AddressVO getAddressAPIById(MemberVO memberVO) {
+			return template.selectOne("member.getAddressAPIById", memberVO.getMemId());
+		}
 	/////////// end 위치기반 추천 메서드 ////////////////////   
 /////////////////////// end  광태 메서드   ///////////////////////////////
 		
