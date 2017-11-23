@@ -3,8 +3,8 @@ package org.kosta.banchan.model.vo;
 import org.springframework.web.multipart.MultipartFile;
 
 public class SellerVO extends MemberVO {
-
-    private String memId;
+	
+	private String memId;
     private String sellerImg;
     private String sellerInfo;
     private float sellerScore;
