@@ -105,9 +105,13 @@ public class MemberServiceImpl implements MemberService {
 	   
 	   @Override
 	   public List<SellerVO> getSameDongSellerListByAddress(String addressAPI){
-		   String temp = addressAPI.substring(0, addressAPI.lastIndexOf(" "));
-			System.out.println("temp : " + temp);
-		   return memberDAO.getSameDongSellerListByAddress(temp);
+
+			int first = addressAPI.indexOf(" ");
+			String temp = addressAPI.substring(addressAPI.indexOf(" ")+1, addressAPI.length());
+			int second =temp.indexOf(" ");
+			String temp2 = addressAPI.substring(0, first+second+1);
+			System.out.println(temp2);
+		   return memberDAO.getSameDongSellerListByAddress(temp2);
 	   }
 	   @Override
 	   public AddressVO getAddressAPIById(MemberVO memberVO) {
