@@ -45,6 +45,11 @@ public class MemberServiceImpl implements MemberService {
    public int idcheck(String id) {
 	   return memberDAO.idcheck(id);
    }
+   @Override
+   public	void deleteMember(String memId) {
+	   memberDAO.deleteMember(memId);
+	   memberDAO.deleteMemberAuth(memId);
+   }
    /////////////////////// start  광태 메서드   ///////////////////////////////
 	 //광태  회원가입 ajax id check
 	   @Override
@@ -121,10 +126,12 @@ public class MemberServiceImpl implements MemberService {
    /////////////////////// end  광태 메서드   ///////////////////////////////
 	   
 ////////////////////start 우정 메서드 ////////////////////////////
+	   @Override
 	  public SellerVO selectSellerInfo(String id) {
 		  System.out.println("selectSellerInfo Service");
 		  return sellerDAO.selectSellerInfo(id);
 	  }
+	  @Override
 	  public List<FoodVO> selectFoodInfo(String id) {
 		  return sellerDAO.selectFoodInfo(id);
 	  }

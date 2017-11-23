@@ -12,7 +12,7 @@ public interface MemberDAO {
 
 	List<MemberVO> selectMember();
 
-
+/////////////////////Start 향걸/////////////////////////////
 	MemberVO findMemberById(String id);
 
 	int idcheck(String id);
@@ -20,8 +20,11 @@ public interface MemberDAO {
 	void registerRole(Authority authority);
 
 	List<Authority> selectAuthorityByMemId(String memId);
-
-
+	//회원 탈퇴(
+			void deleteMember(String memId);
+	//권한 삭제		
+			void deleteMemberAuth(String memId);
+///////////////////////End 향걸 //////////////////////////////////
 
 /////////////////////// start  광태 메서드   ///////////////////////////////
 		//광태 ajax id check
@@ -83,6 +86,9 @@ String getSellerNameByMemId(String memId);
 
 //주소정보 들고오기(정훈)
 		AddressVO findMemberAddressAPIById(String memId);
+
+	
+
 
 
 

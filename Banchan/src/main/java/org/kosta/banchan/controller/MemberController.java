@@ -61,7 +61,13 @@ public class MemberController {
    public String loginFail() {
       return "member/login_fail";
    }
-
+   
+   @RequestMapping("deleteMember.do")
+   public String deleteMember(String memId) {
+	   memberService.deleteMember(memId);
+	   return "member/deleteMember_result";
+   }
+   //////////////////////// END 향걸 /////////////////////////////////////
    /////////////////////// start  광태 메서드   ///////////////////////////////
       // 광태 Ajax id check
        @RequestMapping("checkIdOnAjax.do")
@@ -201,7 +207,7 @@ public class MemberController {
 /////////////////////// end  정훈 메서드   ///////////////////////////////
        
 ////////////////////start 우정 메서드 ////////////////////////////
-       @Secured("ROLE_SELLER")
+   
        @RequestMapping("sellerPageInfo.do")
        public String seller_myPage(Model model, String memId) {
           SellerVO svo = memberService.selectSellerInfo(memId);
@@ -259,12 +265,12 @@ return "redirect:sellerRegister_ok.do";
 }
 @RequestMapping("sellerRegister_ok.do")
 public String sellerRegisterOk() {
-	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
-	updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_SELLER")); 																		
-		Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(),
-				updatedAuthorities);
-		SecurityContextHolder.getContext().setAuthentication(newAuth);
+   Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
+   updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_SELLER"));                                                       
+      Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(),
+            updatedAuthorities);
+      SecurityContextHolder.getContext().setAuthentication(newAuth);
 return "member/sellerRegister_ok.tiles";
 }
 /////////////////////// end  윤주 메서드   ///////////////////////////////

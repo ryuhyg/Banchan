@@ -214,6 +214,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT PW_QUEST,PW_QNA_NO
 		FROM PW_QNA
 	</select>
+	<update id="deleteMember">
+		update ban_mem set ENABLE_no=22 where mem_Id=#{value}
+	</update>
+	<delete id="deleteMemberAuth">
+		delete from MEM_AUTH where mem_id=#{value}
+	</delete>
 <!-- End 향걸 -->
 
 <!-- Start 지원 -->
