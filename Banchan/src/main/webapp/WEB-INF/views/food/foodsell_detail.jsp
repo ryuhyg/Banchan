@@ -5,28 +5,21 @@
 <script type="text/javascript">
 	function orderFoodConfirm(){
 		if($("#checkId").val()=="" || $("#checkId").val()==null){
-			/* var flag = confirm("로그인하셔야 구매가능합니다.로그인 하시겠습니까?");
+			var flag = confirm("로그인하셔야 구매가능합니다.로그인 하시겠습니까?");
 			if(flag==true){
 				alert("로그인하기!");
-				location.href="loginView.do";
+				location.href="${pageContext.request.contextPath}/loginView.do";
 			}
 			else{
 				alert("구매안하기!");
-				return flag;
-			} */
-			
-			/* $(document).ready(function () {
-			$("#foodSellNo").val($(".sellfood").attr("id"));
-			$("#quantity").change(function() {
-				$("#orderQuantity").val($(this).val());
-			}); //change
-			
-			$("#orderFoodConfirm").submit(function() {
-				return confirm("구매하시겠습니까?");
-			}); //submit
-		}); //ready */
+			} 
+			return false;
+		} else{
+			return confirm("구매하시겠습니까?");
 		}
+		
 	}
+
 </script>
 
 <sec:authentication var="mvo" property="principal" />
@@ -69,7 +62,7 @@
 					<div class="row"> 
 					<div class="col-md-2">
 						<label>구매수량</label>
-						<input type="number" name="trQuantity" id="trQuantity" class="form-control"/>
+						<input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control"/>
 						<input type="hidden" name="foodSellVO.foodSellNo" value="${sellfood.foodSellNo}" id="foodSellNo"/>
  						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
  						<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
@@ -77,20 +70,11 @@
 					</div>
 					</div>
  						<div class="row" style="">
-						<input type="submit" class="btn btn-default" style="margin-top: 10px; " value="구매하기">
+						<input type="submit"  class="btn btn-default" style="margin-top: 10px; " value="구매하기">
 						</div>
 					</form>
 				</div>
 					
-					<!-- <div class="col-md-12 space-div" style="text-align: center">			
-				<span class="sellfood" id=" ${sellfood.foodSellNo}"></span>
-				
-				<form action="${pageContext.request.contextPath}/orderFood.do"  id="orderFoodConfirm">
-					<input type="hidden" name="foodSellVO.foodSellNo" id="foodSellNo"/>
-					<input type="hidden" name="orderQuantity" id="orderQuantity"/>
-					<input type="submit" class="btn btn-default" value="구매하기">
-				</form>
-				</div>-->
 			</div> <!-- col-md-9 -->
 		</div> <!-- row -->
 	</div> <!-- container  -->
