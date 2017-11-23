@@ -5,6 +5,12 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("#trQuantity").change(function () {
+			//구매수량이 준비수량보다 적은지 확인
+			var preQuantity=$("#preQuantity").text();
+			if(parseInt($(this).val()) > parseInt(preQuantity)){
+				alert("준비수량이 부족합니다!");
+				$("#trQuantity").val(1);
+			}
 			var orderPrice=$(this).val()*$("#price").text();
 			$("#orderPrice").text(orderPrice);
 		}); //change
@@ -22,7 +28,7 @@
 			} 
 			return false;
 		} else{
-			return confirm("구매하시겠습니까?");
+			return confirm("구매하시겠습니까?");	
 		}
 		
 	}
@@ -41,7 +47,7 @@
 				<div class="agent-box-card grey">
 					<div class="image-content">
 						<div class="image image-fill">
-							<img alt="Image Sample" src="http://placehold.it/512/bbbbbb/ffffff">
+							<img alt="Image Sample" src="${sellfood.foodMainImg}">
 						</div>						
 					</div>
 				</div>
@@ -49,26 +55,53 @@
 			<div class="col-md-9">
 				<h1 class="name">${sellfood.foodName}</h1>
 				<div class="row">
-					<span class="text">
-					예약마감일: ${sellfood.closeDate}<br>
-					거래일: ${sellfood.trDate }<br>
-					거래장소(상세): ${sellfood.loc}<br>
-					가격: <span id="price">${sellfood.price}</span><br>
-					준비수량:  ${sellfood.preQuantity} 개<br>
-					수량당 양 : ${sellfood.unit}<br>
-					음식소개:  ${sellfood.foodDe}<br>
-					음식평점: ${sellfood.foodScore}<br>
-					판매 상세정보: ${sellfood.sellDetail}<br>
-					</span>
-				</div>
-				<div class="row">
-					<hr style="border: 1px solid black">
-				</div>
-				<div class="row">
+				<div class="col-md-11">
+				<table class="table">
+					<tr>
+						<th>음식평점</th>
+						<td colspan="3">${sellfood.foodScore}</td>
+					</tr>
+					<tr>
+						<th>예약마감일</th>
+						<td>${sellfood.closeDate}</td>
+						<th>거래일</th>
+						<td>${sellfood.trDate}</td>
+					</tr>
+					<tr>
+						<th>가격</th>
+						<td><span id="price">${sellfood.price}</span> 원</td>
+						<th>양(개당)</th>
+						<td>${sellfood.unit}</td>
+					</tr>
+					<tr>
+						<th>준비수량</th>
+						<td><span id="preQuantity">${sellfood.preQuantity}</span>개</td>
+						<th>남은수량</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>거래장소</th>
+						<td colspan="3">${sellfood.loc}</td>
+					</tr>
+					<tr>
+						<th>음식소개</th>
+						<td colspan="3">${sellfood.foodDe}</td>
+					</tr>
+					<tr>
+						<th>판매추가정보</th>
+						<td colspan="3">${sellfood.sellDetail}</td>
+					</tr>						
+				</table>
+				</div> <!-- col-md-10 --> 
+				</div> <!-- row  -->
+				<div class="row col-md-11">
+				<hr>
 					<form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()" >
 					<div class="row"> 
-					  <label class="control-label">구매수량:</label>
-				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" size="10px"/>
+					 <div class="col-sm-2" style="text-align: right">구매수량:</div>
+					  <div class="col-sm-2">
+				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
+				      </div>
 						<input type="hidden" name="foodSellVO.foodSellNo" value="${sellfood.foodSellNo}" id="foodSellNo"/>
  						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
  						<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
@@ -76,28 +109,15 @@
 				      	<label class="control-label" for="거래가격">거래가격:
 						<span id="orderPrice"></span>
 						</label>
-				      
-					<%-- <div class="col-md-2">
-						<label>구매수량</label>
-						<input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control"/>
-						<input type="hidden" name="foodSellVO.foodSellNo" value="${sellfood.foodSellNo}" id="foodSellNo"/>
- 						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
- 						<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
- 						</sec:authorize>
-					</div>
-					<div class="col-md-2">
-						<label class="control-label" for="거래가격">거래가격:
-						<span id="orderPrice"></span>
-						</label>
-					</div> --%>
-					</div>
- 						<div class="row" >
-						<input type="submit"  class="btn btn-default" style="margin-top: 10px; " value="구매하기">
+				  
+					</div> <!-- row -->
+ 						<div class="row" align="center">
+						<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
 						</div>
 					</form>
 				</div>
-					
-			</div> <!-- col-md-9 -->
+			</div> <!-- col-md-9 -->		
+			
 		</div> <!-- row -->
 	</div> <!-- container  -->
 </div> <!-- page-container -->

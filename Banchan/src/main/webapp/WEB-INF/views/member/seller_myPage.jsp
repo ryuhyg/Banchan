@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<sec:authentication var="mvo" property="principal" />
+ 	
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <style type="text/css">
 ul.tab {
@@ -84,10 +86,12 @@ $(document).ready(function() {
 <section id="agent-page" style="margin-top: 350px;">
 			<div class="container">
 				<div class="row">
+				<div class="col-md-1"></div>
 					<div class="col-md-9">
 						<div class="row">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
-								<h1 class="name">${svo.memName } </h1>
+								
+									<h1 class="name">${svo.memName } </h1>
 								<span class="text">
 								주부님 소개
 								</span>
@@ -122,10 +126,16 @@ $(document).ready(function() {
 
 							</div><!-- /.col-md-4 -->
 						</div><!-- /.row -->
-
+					</div><!-- col-md-9 -->
+					<div class="col-md-2">  
+					<sec:authorize access="hasRole('ROLE_BUYER')">
+						<div style="margin-bottom: 2px"> 
+					 	<a class="btn btn-default" style="width: 70%;" >판매내역보기</a>
+						</div>
+						<a  href="${pageContext.request.contextPath}/foodRegisterForm.do" class="btn btn-default" style="width: 70%" >음식 등록</a> 
+					</sec:authorize>	
 					</div>
-					<input type="button" value="판매내역보기">
-				</div><!-- ./row -->
+				</div><!-- ./row --> 
 				
 			
 				
@@ -156,8 +166,14 @@ $(document).ready(function() {
 									<dl class="detail" > 
 										<dt class="status">별점:</dt><dd><span>${food.foodScore}</span></dd>
 									</dl> 
-									<div class="footer">
-										<a class="btn btn-default" href="${pageContext.request.contextPath}/registerFoodView.do?foodNo=${food.foodNo}">판매등록</a>
+									<div class="footer" style="height:50px">
+										<!-- <a class="btn btn-default" href="#"></a>
+										<a class="btn btn-default" href="#"></a> -->
+										
+										<button type="button" style="margin-top:60px; margin-left: 5px" class="btn btn-default btn-xs">수정</button>
+										<button type="button" style="margin-top:60px" class="btn btn-default btn-xs">삭제</button> 
+										<button type="button" style="margin-top:60px; margin-left: 50px" class="btn btn-default btn-xs">판매등록</button>
+										<%-- <a  style="display:inline-block" class="btn btn-default" href="${pageContext.request.contextPath}/registerFoodView.do?foodNo=${food.foodNo}">판매등록</a> --%>
 									</div>
 								</div>
 							</figure>
@@ -197,22 +213,20 @@ $(document).ready(function() {
 								<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 10px;" >
 								<!-- . Agent Box -->
 								<div class="tab2img" >
-									<img alt="Sample images"  width="250px" height="150px" src="resources/images/${foodSell.foodMainImg}">
+									<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo}"><img alt="Sample images"  width="250px" height="150px" src="resources/images/${foodSell.foodMainImg}"></a>
 								</div>
 						</div><!-- /.col-md-4 -->
 						</div><!-- /.row -->
 
 					</div>
 					</div>
-									
-							
 						</c:forEach>
 						
-						
+				
 				</div>
 				
 			</div><!-- tab_container -->
 		</div><!-- tabcontainer -->
-			
+					
 			</div><!-- ./container -->
 		</section><!-- /#about-us -->
