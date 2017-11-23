@@ -4,7 +4,7 @@
 <sec:authentication var="mvo" property="principal" />
  	
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>
+<script> 
 	$(document).ready(function(){
 		var foodNo=$("#foodNo").val();
 		$("#updatebtn").click(function(){
