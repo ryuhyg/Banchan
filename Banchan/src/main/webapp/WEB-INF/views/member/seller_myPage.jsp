@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <style type="text/css">
 ul.tab {
@@ -187,20 +187,14 @@ $(document).ready(function() {
 								  
 								  <span class="description" style="color:black;font-size:13px">
 								 
-									  <i class="fa fa-hand-o-right" style="font-weight: bold"> 음식정보:</i>  ${foodSell.foodDe}<br>
-									  <i class="fa fa-hand-o-right" style="font-weight: bold"> 판매 상세 정보:</i>  ${foodSell.sellDetail}<br>
-									 
-									  <i class="fa fa-credit-card" style="font-weight: bold"> 가격:</i>  ${foodSell.price}<br>
 									  <i class="fa fa-ticket" style="font-weight: bold"> 남은 수량:</i>  ${foodSell.price}<br>
-									  
 									  <i class="fa fa-calendar" style="font-weight: bold"> 거래 날짜:</i>  ${foodSell.trDate}<br>
 									  <i class="fa fa-close" aria-hidden="true" style="font-weight: bold"> 판매 종료 날짜:</i>  ${foodSell.closeDate}<br>
-									  <i class="fa fa-map-marker"style="font-weight: bold"> 거래 장소:</i>${foodSell.loc }<br>
 								  </span>
 								  
 								</div><!-- bs-callout callout-success -->
-							</div><!-- /.col-md-8 -->
-							<div class="col-sm-4 col-md-4 col-sm-pull-8" >
+								</div><!-- /.col-md-8 -->
+								<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 10px;" >
 								<!-- . Agent Box -->
 								<div class="tab2img" >
 									<img alt="Sample images"  width="250px" height="150px" src="resources/images/${foodSell.foodMainImg}">
