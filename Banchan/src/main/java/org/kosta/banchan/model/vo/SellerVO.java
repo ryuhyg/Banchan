@@ -5,7 +5,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class SellerVO extends MemberVO {
 
-    private String memId;
+	private static final long serialVersionUID = 4427951495449264548L;
+	
+	private String memId;
     private String sellerImg;
     private String sellerInfo;
     private float sellerScore;
