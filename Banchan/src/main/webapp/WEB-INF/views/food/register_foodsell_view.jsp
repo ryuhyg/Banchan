@@ -40,7 +40,7 @@
 					</div>
 				</div>
 		</div>
-		<div class="row">
+		<div class= "row">
 	 		<div  class="container-fluid">										
 				<label for="sellDetail"><i class="fa fa-ellipsis-h" style="margin-right: 5px;padding-top: 30px"></i>음식 상세정보</label><br>
 				<textarea rows="4" cols="52" name="sellDetail" style="width: 100%" readonly="readonly">${fvo.foodDe}</textarea>
