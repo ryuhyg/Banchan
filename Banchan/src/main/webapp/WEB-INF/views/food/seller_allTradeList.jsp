@@ -25,6 +25,7 @@
 			<th>구매수량</th>
 			<th>주문가격</th>
 			<th>거래상태</th>
+			<th>거래완료</th>
 		</tr>
 		<c:forEach items="${tradeList }" var="trade">
 		<tr>
@@ -41,6 +42,7 @@
 			</td>
 			<td id="orderPrice">${trade.trQuantity * trade.foodSellVO.price} </td>
 			<td>${trade.trStatus }</td>
+			<td><button type="button" class="btn btn-default" style="background-color: #cc0000; border: 0px">거래완료</button></td>
 		</tr>
 		</c:forEach>
 	</table>
