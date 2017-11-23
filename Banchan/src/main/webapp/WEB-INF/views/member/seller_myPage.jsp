@@ -8,7 +8,7 @@ ul.tab {
     padding: 0;
     float: left;
     list-style: none;
-    height: 32px;
+    height:  32px;
     border-bottom: 1px solid #999;
     border-left: 1px solid #999;
     width: 100%;
