@@ -13,7 +13,7 @@
 	<div class="row">
 	<h3>전체거래내역</h3>
 	<table class="table table-hover" style="text-align: center">
-		<tr>
+		<tr> 
 			<th>거래번호</th>
 			<th>음식사진</th>
 			<th>음식명</th>
