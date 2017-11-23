@@ -12,7 +12,7 @@
 			<div class="blog-list blog-detail">
 		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매등록</h3>
 
-
+ 
 		<form class="form-large grey-color" action="${pageContext.request.contextPath}/registerFoodSell.do?foodNo=${fvo.foodNo}" method="post"  id="regForm" >
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 		<div>
