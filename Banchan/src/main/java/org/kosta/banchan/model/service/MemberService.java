@@ -16,9 +16,12 @@ public interface MemberService {
 	List<Authority> selectAuthorityByMemId(String id);
 	PwQnaVO findPwQnaNo(String pwQnaNo);
 	SellerVO findMemberTypeById(String memId);
+	void editMemberService(MemberVO memberVO, SellerVO vo);
+	AddressVO findMemberAddressAPIById(String memId);
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 
 	int idcheck(String id);
+	
 	
 	
 	
@@ -51,6 +54,10 @@ public interface MemberService {
 	SellerVO selectSellerInfo(String id);
 	List<FoodVO> selectFoodInfo(String id);
 /////////////////////// end  우정 메서드   ///////////////////////////////
+	
+
+
+
 	
 
 
