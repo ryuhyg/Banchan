@@ -57,7 +57,10 @@ public class FoodController {
 
 
     @RequestMapping("registerFoodView.do")
-    public String registerFoodView() {
+    public String registerFoodView(String foodNo,Model model) {
+    	FoodVO fvo=foodService.getFoodByNo(foodNo);
+    	System.out.println("이거야!!"+fvo.getFoodMainImg());
+    	model.addAttribute("fvo",fvo);
     	return "food/register_foodsell_view.tiles";
     }
     
