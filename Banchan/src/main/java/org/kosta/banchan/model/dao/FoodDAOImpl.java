@@ -64,5 +64,8 @@ public class FoodDAOImpl implements FoodDAO {
 	public List<Map<String, String>> allCategorySelect() {
 		return template.selectList("food.allCategorySelect");
 	}
+	public FoodVO getFoodMemInfo(String no) {
+		return template.selectOne("food.getFoodMemInfo", no);
+	}
 		
 }

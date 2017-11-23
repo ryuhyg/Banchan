@@ -140,6 +140,16 @@ public class FoodController {
     public String foodRegister_ok() {
     	return "food/foodRegister_ok.tiles";
     }
+    
+    @RequestMapping("foodDetailView.do")
+    public String foodDetailView(String no, Model model) {
+    	System.out.println("음식번호 테스트:"+no);
+    	FoodVO food=foodService.getFoodMemInfo(no);
+    	System.out.println("food결과 :"+food);
+    	model.addAttribute("food", food);
+    	
+    	return "food/foodDetailView.tiles";
+    }
     //////////////////////////영민 end//////////////////////////////////////
     
 }
