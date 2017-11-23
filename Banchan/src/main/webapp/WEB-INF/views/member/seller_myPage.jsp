@@ -148,7 +148,7 @@ $(document).ready(function() {
 								<div class="box-ads box-grid">
 									<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/foodDetailView.do?no=${food.foodNo}">	
 										<span class="cover"></span>
-										<img alt="Sample images"  width="300px" height="200px" src="resources/images/${food.foodMainImg}"> 
+										<img alt="Sample images"  width="300px" height="200px" src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}"> 
 										<h3 class="title">${food.foodName}</h3>
 									</a>								
 									<span class="description" >${food.foodDe}</span>
@@ -157,7 +157,7 @@ $(document).ready(function() {
 										<dt class="status">별점:</dt><dd><span>${food.foodScore}</span></dd>
 									</dl> 
 									<div class="footer">
-										<a class="btn btn-default" href="property-detail.html">판매등록</a>
+										<a class="btn btn-default" href="${pageContext.request.contextPath}/registerFoodView.do?foodNo=${food.foodNo}">판매등록</a>
 									</div>
 								</div>
 							</figure>

@@ -13,6 +13,7 @@
 
     <script type="text/javascript">
 	$(document).ready(function(){
+		
 		var checkResultId="";	
 		var checkPassword="";
 		var checkPasswordRe="";
@@ -36,6 +37,10 @@
 			}
 			if($("#regForm :input[name=memName]").val().trim()==""){
 				alert("이름을 입력하세요");				
+				return false;
+			}
+			if($("#birth").val().length>10){
+				alert("생년월일을 정확하게 입력해주세요!");
 				return false;
 			}
 			if($("#regForm :input[name=addressDe]").val().trim()==""){
@@ -312,7 +317,7 @@
 								<div class="row">
 									<div  class="col-xs-6">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>생년월일</label>
-										<input type="date"  name="birth" class="margin-bottom form-control" >
+										<input type="date" id="birth" name="birth" class="margin-bottom form-control">
 									</div>
 								</div>
 								<div class="row">

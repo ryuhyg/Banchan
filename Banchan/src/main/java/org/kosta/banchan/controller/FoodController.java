@@ -57,7 +57,10 @@ public class FoodController {
 
 
     @RequestMapping("registerFoodView.do")
-    public String registerFoodView() {
+    public String registerFoodView(String foodNo,Model model) {
+    	FoodVO fvo=foodService.getFoodByNo(foodNo);
+    	System.out.println("이거야!!"+fvo.getFoodMainImg());
+    	model.addAttribute("fvo",fvo);
     	return "food/register_foodsell_view.tiles";
     }
     
@@ -105,7 +108,11 @@ public class FoodController {
     @RequestMapping(value = "foodRegister.do",method = RequestMethod.POST)
     public String foodRegister(String id,FoodVO fvo,HttpServletRequest request) {
     	System.out.println("foodRegister fvo:"+fvo);
-    uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
+    	
+    /* 테스트 경로 */	
+    uploadPath="C://Users/kosta/git/Banchan/Banchan/src/main/webapp/resources/images/";
+    /* 서버 경로 */
+    //uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
     File uploadDir=new File(uploadPath);
     if(uploadDir.exists()==false)
     	uploadDir.mkdirs();
@@ -117,7 +124,9 @@ public class FoodController {
     	File uploadFile=new File(uploadPath+file.getOriginalFilename());
     	try {
     		file.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
+    		System.out.println("-------------------------------------------");
     		System.out.println(uploadPath+file.getOriginalFilename()+" 파일업로드");
+    		System.out.println("-------------------------------------------");
     	} catch (IllegalStateException | IOException e) {				
     		e.printStackTrace();
     	}
