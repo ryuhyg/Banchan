@@ -14,6 +14,13 @@ public class SellerVO extends MemberVO {
 	public SellerVO() {
 		super();
 	}
+	
+	public SellerVO(String sellerImg, String sellerInfo) {
+		super();
+		this.sellerImg = sellerImg;
+		this.sellerInfo = sellerInfo;
+	}
+
 	public String getMemId() {
 		return memId;
 	}

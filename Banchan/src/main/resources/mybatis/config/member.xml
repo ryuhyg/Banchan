@@ -142,16 +142,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 <!-- update 구매자 -->
 	<update id="editMemberBuyer" parameterType="memberVO">
-		update ban_mem set mem_name=#{memName}, birth=#{birth}, tel=#{tel}, address_de=#{addressDe}, pw_answer=#{pwAnswer}, address_no=#{addressVO.addressNo}, pw_qna_no=#{pwQnaNo}
+		update ban_mem set pw=#{pw}, mem_name=#{memName}, birth=#{birth}, tel=#{tel}, address_de=#{addressDe}, pw_answer=#{pwAnswer}, address_no=#{addressVO.addressNo}, pw_qna_no=#{pwQnaNo}
+		where mem_id=#{memId}
 	</update>
 
-<!-- 업데이트용 주소타입 존재하는지 확인 -->
+<!-- update 판매자 -->
+	<update id="editMemberSeller" parameterType="memberVO">
+		update ban_mem set pw=#{pw}, mem_name=#{memName}, birth=#{birth}, tel=#{tel}, address_de=#{addressDe}, pw_answer=#{pwAnswer}, address_no=#{addressVO.addressNo}, pw_qna_no=#{pwQnaNo}
+		where mem_id=#{memId}
+	</update>
+
+<!-- 주소타입 존재하는지 확인 -->
 	 	<select id="checkAddressNoByAddressAPIByUpdate" parameterType="memberVO" resultType="string">
 			 		SELECT 	ADDRESS_NO 
 					FROM 		ADDRESS
 					WHERE 	ADDRESS_API= #{addressVO.addressAPI}
 	 	</select>
-
+	 	
+	 	<!-- ADDRESS 테이블에 새로운 주소지 등록 --><!-- address_API가 시스템상 유일값인데 pk처럼 중복방지 방법이 없을까요.. 현재 pk는 시퀀스인 상태고 -->
+	 	<insert id="registerNewAddressInfoByUpdate" parameterType="addressVO">
+	 		<selectKey keyProperty="addressNo" resultType="string" order="BEFORE"> <!-- keyProperty="addressVO.addressNo" 이것도 사용가능 -->
+	 				SELECT	 address_seq.nextval
+	 				FROM		 dual
+	 		</selectKey>
+	 				INSERT INTO 	ADDRESS(ADDRESS_NO, ADDRESS_API, LATITUDE, LONGITUDE) 
+					VALUES(#{addressNo},#{addressAPI},#{latitude},#{longitude})
+	 	</insert>
+		<update id="editMemberSellerInfoAndImage" parameterType="sellerVO">
+ 		update seller set seller_img=#{sellerImg}, seller_info=#{sellerInfo} where mem_id=#{memId}
+ 	</update>
+ <!--  주소들고오기 -->
+ 	<select id="findMemberAddressAPIById" parameterType="string" resultType="addressVO">
+ 		SELECT a.ADDRESS_API, a.LATITUDE, a.LONGITUDE
+		FROM ban_mem m, ADDRESS a
+		WHERE a.address_no=m.address_no and m.mem_id=#{value}
+ 	</select>
 <!-- End 정훈 -->
 
 <!-- Start 향걸 -->

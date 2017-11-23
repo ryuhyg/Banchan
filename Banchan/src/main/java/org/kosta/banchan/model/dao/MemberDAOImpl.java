@@ -139,10 +139,20 @@ public class MemberDAOImpl implements MemberDAO {
 		public void editMemberSeller(MemberVO memberVO) {
 			template.update("member.editMemberSeller", memberVO);
 		}
+		//회원정보수정-판매자(이미지, 판매자정보)(정훈)
+		@Override
+		public void editMemberSellerInfoAndImage(SellerVO vo) {
+			template.update("member.editMemberSellerInfoAndImage",vo);
+		}
 		//회원이 판매자 인지 구매자인지 판별(정훈)
 		@Override
 		public SellerVO findMemberTypeById(String memId) {
 			return template.selectOne("member.findMemberTypeById", memId);
+		}
+		//주소정보 들고오기(정훈)
+		@Override
+		public AddressVO findMemberAddressAPIById(String memId) {
+			return template.selectOne("member.findMemberAddressAPIById", memId);
 		}
 		
 		

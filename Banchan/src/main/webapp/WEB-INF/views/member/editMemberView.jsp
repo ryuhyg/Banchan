@@ -317,9 +317,20 @@
 						<i class="icon fa fa-comment" style="margin-right: 5px"></i>회원정보수정
 					</h3>
 
-					<form class="form-large grey-color"	action="${pageContext.request.contextPath}/editMember.do" method="post" id="regForm">
-						<sec:csrfInput />
+					<form class="form-large grey-color"	action="${pageContext.request.contextPath}/editMember.do" method="post" id="regForm" enctype="multipart/form-data">
+						<div class="row">
+							<div class="col-xs-6">
+								
+								<c:if test="${svo!=null}">
+								<label for="id"> 
+								<i class="fa fa-user user" style="margin-right: 5px"></i>회원이미지</label> 
+								<input type="file" name="uploadImage" id="updateImage" class="margin-bottom form-control">
+								</c:if>
+								</div>
+								</div>
+								
 						<%-- csrf 토큰 --%>
+						<sec:csrfInput />
 						<div class="row">
 							<div class="col-xs-6">
 								<label for="id"> 
@@ -390,22 +401,13 @@
 								<label for="password"><i class="fa fa-ellipsis-h"
 									style="margin-right: 5px"></i>판매자 소개</label>
 						
-						<c:choose>
-						<c:when test="${svo!=null}">
 		<br>
-		<textarea rows="8" cols="40" name="sellerInfo">
-			${svo.memInfo}
-		</textarea>
+						
+						<c:if test="${svo!=null}">
+		<textarea rows="8" cols="40" name="sellerInfo">${svo.sellerInfo}</textarea>
 		<br>
-		</c:when>
-		<c:otherwise>
-		<br>
-		<textarea rows="8" cols="40" name="sellerInfo" readonly="readonly">
-			
-		</textarea>
-		<br>
-		</c:otherwise>
-		</c:choose>
+		</c:if>
+	
 		</div>
 		</div>
 						<div class="row">
@@ -417,7 +419,7 @@
 									value="주소 찾기"> <input type="text"
 									name="addressVO.addressAPI" id="jibunAddress"
 									class="margin-bottom form-control" placeholder="검색 주소"
-									readonly="readonly"> <input type="text"
+									readonly="readonly" value="${avo.addressAPI}"> <input type="text"
 									name="addressDe" id="detailAddress"
 									value="<sec:authentication property="principal.addressDe"/>"
 									class="margin-bottom form-control" placeholder="상세주소 입력">
@@ -478,7 +480,7 @@
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
-		center : new daum.maps.LatLng(33.45757984985129, 126.55277187967573), // 지도의 중심좌표
+		center : new daum.maps.LatLng(${avo.latitude}, ${avo.longitude}), // 지도의 중심좌표
 		level : 3
 	// 지도의 확대 레벨
 	};

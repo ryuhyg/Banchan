@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
+import org.kosta.banchan.model.vo.AddressVO;
 import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
@@ -16,6 +17,7 @@ import org.kosta.banchan.model.vo.SellerVO;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -113,6 +115,7 @@ public class MemberController {
 	    public String editMemberView(Model model, String pwQnaNo, String memId) {
 	    	List<PwQnaVO> pwQnaList =
 					memberService.getAllPwQnAList();
+	    	AddressVO avo=memberService.findMemberAddressAPIById(memId);
 	    	PwQnaVO pvo=memberService.findPwQnaNo(pwQnaNo);
    	    	SellerVO svo=memberService.findMemberTypeById(memId);
    	    	if(svo!=null) {
@@ -121,16 +124,35 @@ public class MemberController {
 	    	model.addAttribute("pvo", pvo);
 	    	//회원이 판매자 이면 판매자 아니면 구매자 보냄.
 	    	//request에 set해서 비밀번호 찾기 질문 리스트를 보냄.
-	    	model.addAttribute("pwQnaList", pwQnaList);   	
+	    	model.addAttribute("pwQnaList", pwQnaList);  
+	    	model.addAttribute("avo", avo);
 	    		
 	    	return "member/editMemberView.tiles";
 	    }
 	    //회원수정
+	    @Transactional
 	    @RequestMapping(value = "editMember.do", method = RequestMethod.POST)
-	    public String editMember(MemberVO memberVO) {
-	    	
-	    
-	    	return "redirect:member/editMember_ok.do";
+	    public String editMember(MemberVO mvo, SellerVO vo, HttpServletRequest request) {
+	      	uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
+	    	File uploadDir=new File(uploadPath);
+	    	if(uploadDir.exists()==false)
+	    		uploadDir.mkdirs();
+	    	MultipartFile file=vo.getUploadImage();//파일 
+	    	//System.out.println(file+"<==");
+	    	//System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
+	    	if(file!=null&&file.isEmpty()==false){
+	    		System.out.println("파일명:"+file.getOriginalFilename());
+	    		File uploadFile=new File(uploadPath+file.getOriginalFilename());
+	    		try {
+	    			file.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
+	    			System.out.println(uploadPath+file.getOriginalFilename()+" 파일업로드");
+	    		} catch (IllegalStateException | IOException e) {				
+	    			e.printStackTrace();
+	    		}
+	    	}
+	    	vo.setSellerImg(file.getOriginalFilename());
+	    	memberService.editMemberService(mvo, vo);
+	       	return "redirect:member/editMember_ok.do";
 	    }
 /*	    //비밀번호 질문 받아오기
 	    @RequestMapping("findPwQnaNo.do")
