@@ -157,7 +157,7 @@ $(document).ready(function() {
 										<dt class="status">별점:</dt><dd><span>${food.foodScore}</span></dd>
 									</dl> 
 									<div class="footer">
-										<a class="btn btn-default" href="property-detail.html">판매등록</a>
+										<a class="btn btn-default" href="${pageContext.request.contextPath}/registerFoodView.do?foodNo=${food.foodNo}">판매등록</a>
 									</div>
 								</div>
 							</figure>
