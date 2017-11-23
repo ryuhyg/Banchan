@@ -110,6 +110,9 @@ public class MemberController {
 				//System.out.println("mvo.getAddressVO() : "+mvo.getAddressVO());
 				list = memberService.getSameDongSellerListByAddress(mvo.getAddressVO().getAddressAPI());
 				model.addAttribute("addressVO",mvo.getAddressVO());
+				///////////////////
+				Object obj =SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				System.out.println(obj.toString());
 				
 			}
 			model.addAttribute("list",list);
@@ -235,6 +238,7 @@ return "redirect:sellerRegister_ok.do";
 }
 @RequestMapping("sellerRegister_ok.do")
 public String sellerRegisterOk() {
+
 return "member/sellerRegister_ok.tiles";
 }
 /////////////////////// end  윤주 메서드   ///////////////////////////////

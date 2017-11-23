@@ -26,7 +26,9 @@ $(document).ready(function() {
 	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 	                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
 	                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
+					alert(fullRoadAddr);
+					alert(extraRoadAddr);
+					alert(data.jibunAddress);
 	                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
 	                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
 	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -44,11 +46,11 @@ $(document).ready(function() {
 	                if(fullRoadAddr !== ''){
 	                    fullRoadAddr += extraRoadAddr;
 	                }
-
+	                alert("444"+data.jibunAddress);
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	               // document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-	              //  document.getElementById('sample4_roadAddress').value = fullRoadAddr;
-	               // document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+	                // document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+	              	// document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+	                // document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
 	                $("#jibunAddress").val(data.jibunAddress);
 	                /* $("#jibunAddress").trigger("change", [ data.jibunAddress.toString(), "bar" ]);
 	                // trigger 위와 같이 매개변수 전달시 function에서 (event, a,b ) 식으로 event 넣어줘야함. */
@@ -108,35 +110,33 @@ $(document).ready(function() {
 
 
 
-<section id="recent-list" style="margin-top: 250px;">
+<section id="recent-list" style="margin-top: 100px;">
 	<div class="container">
 			<div class="row">
 				<div class="col-sm-2"><!-- left -->
 				
-				</div>
+				</div> 
 					<div class="col-sm-8">
-						<div class="blog-list blog-detail">
-							<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>위치기반</h3>
-								
+						<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px; width: inherit;"></i> 위치기반 검색 서비스 </h3>
+					<hr>
+						<div class="col-sm-6 blog-list blog-detail" style="padding-top: 9px;">		
 							<input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
 							<br>
 							<input type="text" id="jibunAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly" value="${addressVO.addressAPI}">
 							<br>	
-							<div id="map" style="width:400px;height:270px;"></div>
-							
-	<br>
-	<div >
-		<h3>판매자 정보</h3>
-		<table class="table table-striped" >
-		<tbody id="tbodyList">	
-			<tr>
-				<td>지도에서 클릭하세요! </td>
-			</tr>				
-		</tbody>					
-		</table>
-	</div>
-						</div>
-					</div>	
+							<div id="map" style="width:100%;height:270px;"></div>
+						</div><!-- end주소 검색 div  -->
+						<div id="sellerTable" class="col-sm-6">
+							<h4>판매자 정보</h4> 
+							<table class="table table-striped" >
+							<tbody id="tbodyList">	
+								<tr>
+									<td>지도에서 마커를 클릭하세요! </td>
+								</tr>				
+							</tbody>					
+							</table>
+						</div><!-- end 판매자 리스트  -->				
+					</div><!-- <div class="col-sm-8"> -->	
 							
 							
 					<div class="col-sm-2"><!-- right -->
@@ -215,7 +215,7 @@ $(document).ready(function() {
 	        map: map, // 마커를 표시할 지도
 	        position: positions[i].latlng // 마커의 위치
 	    });
-	    var iwContent = '<div style="padding:5px;"></div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	    var iwContent = '<div style="padding:5px;">주부님 보기</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
 	    // 마커에 표시할 인포윈도우를 생성합니다 
 	    var infowindow = new daum.maps.InfoWindow({
@@ -261,7 +261,7 @@ $(document).ready(function() {
 				"<tr><td>"+"판매자 소개: ${s.sellerInfo}"+"</td></tr>";
 	    		}
 	    			 </c:forEach>
-	    			 alert(strTemp);
+	    			 //alert(strTemp);
 	    			 $("#tbodyList").html(strTemp); 
 	    };
 	}
