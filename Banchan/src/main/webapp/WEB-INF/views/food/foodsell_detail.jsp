@@ -5,6 +5,12 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("#trQuantity").change(function () {
+			//구매수량이 준비수량보다 적은지 확인
+			var preQuantity=$("#preQuantity").text();
+			if(parseInt($(this).val()) > parseInt(preQuantity)){
+				alert("준비수량이 부족합니다!");
+				$("#trQuantity").val(1);
+			}
 			var orderPrice=$(this).val()*$("#price").text();
 			$("#orderPrice").text(orderPrice);
 		}); //change
@@ -22,7 +28,7 @@
 			} 
 			return false;
 		} else{
-			return confirm("구매하시겠습니까?");
+			return confirm("구매하시겠습니까?");	
 		}
 		
 	}
@@ -54,7 +60,8 @@
 					거래일: ${sellfood.trDate }<br>
 					거래장소(상세): ${sellfood.loc}<br>
 					가격: <span id="price">${sellfood.price}</span><br>
-					준비수량:  ${sellfood.preQuantity} 개<br>
+					준비수량: <span id="preQuantity">${sellfood.preQuantity}</span> 개<br>
+					남은수량:  <br>
 					수량당 양 : ${sellfood.unit}<br>
 					음식소개:  ${sellfood.foodDe}<br>
 					음식평점: ${sellfood.foodScore}<br>
@@ -67,8 +74,10 @@
 				<div class="row">
 					<form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()" >
 					<div class="row"> 
-					  <label class="control-label">구매수량:</label>
-				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" size="10px"/>
+					 <div class="col-sm-2" style="text-align: right">구매수량:</div>
+					  <div class="col-sm-2">
+				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
+				      </div>
 						<input type="hidden" name="foodSellVO.foodSellNo" value="${sellfood.foodSellNo}" id="foodSellNo"/>
  						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
  						<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
@@ -90,9 +99,9 @@
 						<span id="orderPrice"></span>
 						</label>
 					</div> --%>
-					</div>
- 						<div class="row" >
-						<input type="submit"  class="btn btn-default" style="margin-top: 10px; " value="구매하기">
+					</div> <!-- row -->
+ 						<div class="row" align="center">
+						<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
 						</div>
 					</form>
 				</div>
