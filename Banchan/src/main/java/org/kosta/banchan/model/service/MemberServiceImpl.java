@@ -150,6 +150,42 @@ public class MemberServiceImpl implements MemberService {
 	   public SellerVO findMemberTypeById(String memId) {
 		   return memberDAO.findMemberTypeById(memId); 
 	   }
+	   @Override
+	   public AddressVO findMemberAddressAPIById(String memId) {
+		   return memberDAO.findMemberAddressAPIById(memId);
+	   }
+	   @Transactional
+	   @Override
+	   public void editMemberService(MemberVO memberVO, SellerVO vo) {
+		// 비밀번호를 bcrypt 알고리즘으로 암호화
+			String encodedPwd = passwordEncoder.encode(memberVO.getPw());
+			memberVO.setPw(encodedPwd);
+			
+			// 주소 타입이 존재하는지 확인
+			String addressNO= memberDAO.checkAddressNoByAddressAPIByUpdate(memberVO);
+			if(addressNO !=null) {
+				//memberVO안에 addressVO의 addressNo에 SET
+				memberVO.getAddressVO().setAddressNo(addressNO);
+			}
+			// 주소 테이블 insert
+			else if( addressNO == null) {
+				//시퀀스 이용하여 주소테이블에 insert ( 번호, api 주소, 위도,경도) , 
+				// registerNewAddressInfo메서드  실행후 memberVO의 addressNo변수에는 insert시의 address_no값이 set 된다.
+				memberDAO.registerNewAddressInfoByUpdate(memberVO.getAddressVO());		
+			}
+			SellerVO svo=memberDAO.findMemberTypeById(memberVO.getMemId());
+			if(svo!=null) {
+				memberDAO.editMemberSeller(memberVO);
+				memberDAO.editMemberSellerInfoAndImage(vo);
+			}else {
+				memberDAO.editMemberBuyer(memberVO);
+			}
+			
+			}
+
+ 
+
+	
 
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 
