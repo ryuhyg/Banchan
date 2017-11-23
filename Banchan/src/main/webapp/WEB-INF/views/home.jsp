@@ -261,7 +261,7 @@
 					<a href="#" class="btn btn-reverse button-large">판매자 등록하기</a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
-					<a href="	" class="btn btn-reverse button-large">판매자 등록하기</a>
+					<a href="${pageContext.request.contextPath}/sellerRegisterForm.do?id=${mvo.memId}" class="btn btn-reverse button-large">판매자 등록하기</a>
 			</sec:authorize>
 				</div>
 			</div>
