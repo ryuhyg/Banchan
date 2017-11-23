@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.kosta.banchan.model.dao.FoodDAO;
 import org.kosta.banchan.model.dao.MemberDAO;
 import org.kosta.banchan.model.dao.SellerDAO;
+import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.SellerVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
@@ -49,23 +50,26 @@ public class TestUnit {
 		System.out.println(lastIndex);
 		System.out.println(temp.substring(0, temp.lastIndexOf(" ")));*/
 
-		List<SellerVO> list= 
-		mDAO.getSameDongSellerListByAddress("강남시 ");
-		System.out.println(list);
-
-		//List<SellerVO> list =mDAO.getAllSameAddressSellerListByAddress("1003");
-		//System.out.println(list.get(0).getAddressVO());
-
-		//System.out.println(sellerDAO.selectSellerInfo("java2"));
-		System.out.println(foodDAO.getFoodSellInfoByMemId("java2"));
-
-
-		/*System.out.println(sellerDAO.selectSellerInfo("java2"));*/
-
-		System.out.println(sellerDAO.selectSellerInfo("java2"));
-		System.out.println(mDAO.findPwQnaNo("1"));
-		System.out.println(mDAO.findMemberTypeById("java2"));
-
+//		List<SellerVO> list= 
+//		mDAO.getSameDongSellerListByAddress("강남시 ");
+//		System.out.println(list);
+//
+//		//List<SellerVO> list =mDAO.getAllSameAddressSellerListByAddress("1003");
+//		//System.out.println(list.get(0).getAddressVO());
+//
+//		//System.out.println(sellerDAO.selectSellerInfo("java2"));
+//		System.out.println(foodDAO.getFoodSellInfoByMemId("java2"));
+//
+//
+//		/*System.out.println(sellerDAO.selectSellerInfo("java2"));*/
+//
+//		System.out.println(sellerDAO.selectSellerInfo("java2"));
+//		System.out.println(mDAO.findPwQnaNo("1"));
+//		System.out.println(mDAO.findMemberTypeById("java2"));
+		
+		String no="1033";
+		FoodVO vo=foodDAO.getFoodMemInfo(no);
+		System.out.println("vo :"+vo);
 		
 	}
 }

@@ -29,6 +29,7 @@ public interface FoodService {
 
 	List<FoodSellVO> getFoodSellInfoByMemId(String memId);
 
+	FoodVO getFoodMemInfo(String no);
 
 
 }

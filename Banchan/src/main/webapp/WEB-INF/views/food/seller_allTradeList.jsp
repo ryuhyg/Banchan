@@ -13,7 +13,7 @@
 	<div class="row">
 	<h3>전체거래내역</h3>
 	<table class="table table-hover" style="text-align: center">
-		<tr>
+		<tr> 
 			<th>거래번호</th>
 			<th>음식사진</th>
 			<th>음식명</th>
@@ -25,6 +25,7 @@
 			<th>구매수량</th>
 			<th>주문가격</th>
 			<th>거래상태</th>
+			<th>거래완료</th>
 		</tr>
 		<c:forEach items="${tradeList }" var="trade">
 		<tr>
@@ -41,6 +42,7 @@
 			</td>
 			<td id="orderPrice">${trade.trQuantity * trade.foodSellVO.price} </td>
 			<td>${trade.trStatus }</td>
+			<td><button type="button" class="btn btn-default" style="background-color: #cc0000; border: 0px">거래완료</button></td>
 		</tr>
 		</c:forEach>
 	</table>

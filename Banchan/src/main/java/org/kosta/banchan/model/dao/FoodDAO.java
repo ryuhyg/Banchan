@@ -24,4 +24,6 @@ public interface FoodDAO {
 	void foodRegister(FoodVO fvo);
 
 	List<Map<String, String>> allCategorySelect();
+	
+	FoodVO getFoodMemInfo(String no);
 }

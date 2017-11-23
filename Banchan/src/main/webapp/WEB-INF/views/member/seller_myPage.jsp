@@ -146,7 +146,7 @@ $(document).ready(function() {
 						<c:forEach items="${flist}" var="food">
 							<figure class="crsl-item">
 								<div class="box-ads box-grid">
-									<a class="hover-effect image image-fill" href="property-detail.html">	
+									<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/foodDetailView.do?no=${food.foodNo}">	
 										<span class="cover"></span>
 										<img alt="Sample images"  width="300px" height="200px" src="resources/images/${food.foodMainImg}"> 
 										<h3 class="title">${food.foodName}</h3>

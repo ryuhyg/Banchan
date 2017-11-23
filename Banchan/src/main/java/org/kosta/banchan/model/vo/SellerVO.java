@@ -2,9 +2,12 @@ package org.kosta.banchan.model.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
 public class SellerVO extends MemberVO {
 
-    private String memId;
+	private static final long serialVersionUID = 4427951495449264548L;
+	
+	private String memId;
     private String sellerImg;
     private String sellerInfo;
     private float sellerScore;
@@ -54,8 +57,11 @@ public class SellerVO extends MemberVO {
 	@Override
 	public String toString() {
 		return "SellerVO [memId=" + memId + ", sellerImg=" + sellerImg + ", sellerInfo=" + sellerInfo + ", sellerScore="
-				+ sellerScore + ", uploadImage=" + uploadImage + "]";
+				+ sellerScore + ", uploadImage=" + uploadImage + ", getMemId()=" + getMemId() + ", getSellerImg()="
+				+ getSellerImg() + ", getSellerInfo()=" + getSellerInfo() + ", getSellerScore()=" + getSellerScore()
+				+ ", getUploadImage()=" + getUploadImage() + ", toString()=" + super.toString() + "]";
 	}
+
    
     
 
