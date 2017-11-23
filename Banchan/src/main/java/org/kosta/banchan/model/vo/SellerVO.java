@@ -47,8 +47,11 @@ public class SellerVO extends MemberVO {
 	@Override
 	public String toString() {
 		return "SellerVO [memId=" + memId + ", sellerImg=" + sellerImg + ", sellerInfo=" + sellerInfo + ", sellerScore="
-				+ sellerScore + ", uploadImage=" + uploadImage + "]";
+				+ sellerScore + ", uploadImage=" + uploadImage + ", getMemId()=" + getMemId() + ", getSellerImg()="
+				+ getSellerImg() + ", getSellerInfo()=" + getSellerInfo() + ", getSellerScore()=" + getSellerScore()
+				+ ", getUploadImage()=" + getUploadImage() + ", toString()=" + super.toString() + "]";
 	}
+
    
     
 

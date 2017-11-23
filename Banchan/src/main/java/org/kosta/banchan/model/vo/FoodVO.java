@@ -22,6 +22,9 @@ public class FoodVO {
 		super();
 	}
 
+
+
+
 	@Override
 	public String toString() {
 		return "FoodVO [reviewList=" + reviewList + ", foodNo=" + foodNo + ", foodName=" + foodName + ", foodDe="
@@ -34,6 +37,8 @@ public class FoodVO {
 				+ ", getMemId()=" + getMemId() + ", getSellerVO()=" + getSellerVO() + ", toString()=" + super.toString()
 				+ "]";
 	}
+
+
 
 
 	public MultipartFile getUploadImage() {
