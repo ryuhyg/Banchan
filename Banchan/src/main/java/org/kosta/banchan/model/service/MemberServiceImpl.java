@@ -205,6 +205,28 @@ public class MemberServiceImpl implements MemberService {
 				memberDAO.editMemberSellerInfoAndImage(svo);
 				memberDAO.editMemberSeller(svo);
 			}
+	   @Transactional
+	   @Override
+	   public void editSellerMemberNoImageService(SellerVO svo) {
+		// 비밀번호를 bcrypt 알고리즘으로 암호화
+			String encodedPwd = passwordEncoder.encode(svo.getPw());
+				svo.setPw(encodedPwd);
+					
+		// 주소 타입이 존재하는지 확인
+			String addressNO= memberDAO.checkAddressNoByAddressAPIByUpdate(svo);
+				if(addressNO !=null) {
+					//memberVO안에 addressVO의 addressNo에 SET
+					svo.getAddressVO().setAddressNo(addressNO);
+				}
+					// 주소 테이블 insert
+					else if( addressNO == null) {
+						//시퀀스 이용하여 주소테이블에 insert ( 번호, api 주소, 위도,경도) , 
+						// registerNewAddressInfo메서드  실행후 memberVO의 addressNo변수에는 insert시의 address_no값이 set 된다.
+						memberDAO.registerNewAddressInfoByUpdate(svo.getAddressVO());		
+					}
+						memberDAO.editMemberSellerNoImage(svo);
+						memberDAO.editMemberSeller(svo);
+					}
 	   		
 	  
  

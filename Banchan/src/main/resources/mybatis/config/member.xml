@@ -154,7 +154,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where mem_id=#{memId}
 	</update>
 
-<!-- update 판매자 -->
+<!-- update 판매자-->
 	<update id="editMemberSeller" parameterType="sellerVO">
 		update ban_mem set pw=#{pw}, mem_name=#{memName}, birth=#{birth}, tel=#{tel}, address_de=#{addressDe}, pw_answer=#{pwAnswer}, address_no=#{addressVO.addressNo}, pw_qna_no=#{pwQnaNo}
 		where mem_id=#{memId}
@@ -176,9 +176,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 				INSERT INTO 	ADDRESS(ADDRESS_NO, ADDRESS_API, LATITUDE, LONGITUDE) 
 					VALUES(#{addressNo},#{addressAPI},#{latitude},#{longitude})
 	 	</insert>
+	 	<!-- 판매자 이미지, 정보 저장-이미지 있을 때 -->
 		<update id="editMemberSellerInfoAndImage" parameterType="sellerVO">
  		update seller set seller_img=#{sellerImg}, seller_info=#{sellerInfo} where mem_id=#{memId}
  	</update>
+ 	  	<!-- 판매자 이미지, 정보 저장-이미지 업을 때 -->
+ 	  	<update id="editMemberSellerNoImage" parameterType="sellerVO">
+ 	  	update seller set seller_info=#{sellerInfo} where mem_id=#{memId}
+ 	  	</update>
+		
  <!--  주소들고오기 -->
  	<select id="findMemberAddressAPIById" parameterType="string" resultType="addressVO">
  		SELECT a.ADDRESS_API, a.LATITUDE, a.LONGITUDE

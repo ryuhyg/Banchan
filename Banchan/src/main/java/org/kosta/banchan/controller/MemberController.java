@@ -172,15 +172,28 @@ public class MemberController {
              }
        }
        //회원수정-구매자
+       @Secured("ROLE_BUYER")
        @RequestMapping(value ="editBuyerMember.do", method = RequestMethod.POST)
        public String editBuyerMember(MemberVO mvo) {
-    	   memberService.editBuyerMemberService(mvo);
+    	   //security 세션정보를 셋팅해줘야 됨.
+           MemberVO mvoBuyerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //security 세션 정보(수정전)
+                  
+           memberService.editBuyerMemberService(mvo); //update
+           mvoBuyerMember.setMemName(mvo.getPw()); //mvoBuyerMember에 업데이트 된 값 셋팅 (웹페이지에 갱신된 정보를 표현하기 위함)
+           mvoBuyerMember.setMemName(mvo.getMemName()); //안그러면 로그아웃했다가 다시 로그인해야 수정된 정보가 출력됨
+           mvoBuyerMember.setBirth(mvo.getBirth());
+           mvoBuyerMember.setTel(mvo.getTel());
+           mvoBuyerMember.setAddressDe(mvo.getAddressDe());
+           mvoBuyerMember.setPwAnswer(mvo.getPwAnswer());
+           mvoBuyerMember.setPwQnaNo(mvo.getPwQnaNo());
+          
        return "redirect:member/editMember_ok.do";
        }
           
-      //회원수정-판매자 
+      //회원수정-판매자
+       @Secured("ROLE_SELLER")
       @RequestMapping(value = "editSellerMember.do", method = RequestMethod.POST)
-       public String editMember(SellerVO svo, HttpServletRequest request) {
+       public String editMember(SellerVO svo, HttpServletRequest request, Model model) {
             uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
           File uploadDir=new File(uploadPath);
           if(uploadDir.exists()==false)
@@ -196,10 +209,49 @@ public class MemberController {
                 e.printStackTrace();
              }
           }
-          svo.setSellerImg(file.getOriginalFilename());
-          memberService.editSellerMemberService(svo);
-             return "redirect:member/editMember_ok.do";
+          String imageName=(String)file.getOriginalFilename();
+          System.out.println("updateImage:" + imageName);
+          if(imageName.equals("null")||imageName.equals("")) {
+          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	         
+    	  memberService.editSellerMemberNoImageService(svo); // 업데이트
+    	  mvoSellerMember.setMemName(svo.getPw());
+    	  mvoSellerMember.setMemName(svo.getMemName());
+    	  mvoSellerMember.setBirth(svo.getBirth());
+    	  mvoSellerMember.setTel(svo.getTel());
+    	  mvoSellerMember.setAddressDe(svo.getAddressDe());
+    	  mvoSellerMember.setPwAnswer(svo.getPwAnswer());
+    	  mvoSellerMember.setPwQnaNo(svo.getPwQnaNo());
+    	   }else {
+          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+          
+          svo.setSellerImg(file.getOriginalFilename()); //이미지 업데이트 
+          memberService.editSellerMemberService(svo); // 업데이트
+          mvoSellerMember.setMemName(svo.getPw());
+          mvoSellerMember.setMemName(svo.getMemName());
+          mvoSellerMember.setBirth(svo.getBirth());
+          mvoSellerMember.setTel(svo.getTel());
+          mvoSellerMember.setAddressDe(svo.getAddressDe());
+          mvoSellerMember.setPwAnswer(svo.getPwAnswer());
+          mvoSellerMember.setPwQnaNo(svo.getPwQnaNo());
+          
+      }
+          return "redirect:member/editMember_ok.do";
        }
+
+          
+          
+        //수정세션..  
+  		/*System.out.println("Spring Security 세션 수정 전 회원정보:" + pvo);		
+  		memberService.updateMember(memberVO);//service에서 변경될 비밀번호를 암호화한다 
+  		// 수정한 회원정보로 Spring Security 세션 회원정보를 업데이트한다
+  		pvo.setPassword(memberVO.getPassword());
+  		pvo.setName(memberVO.getName());
+  		pvo.setAddress(memberVO.getAddress());
+  		System.out.println("Spring Security 세션 수정 후 회원정보:" + pvo);*/
+        
+  		
+  		
        
        
        
