@@ -32,8 +32,8 @@ public class TradeDAOImpl implements TradeDAO {
 	 * @param tradeNo
 	 */
 	@Override
-	public void updateTradeStatus(String tradeNo) {
-		template.update("trade.updateTradeStatus", tradeNo);
+	public void completeTrade(String tradeNo) {
+		template.update("trade.completeTrade", tradeNo);
 	}
 	
 	
@@ -53,5 +53,12 @@ public class TradeDAOImpl implements TradeDAO {
 	return template.selectList("trade.getTradeListByMemId",memId);
 	}
 	//////////////////////end 윤주/////////////////////////////
+	
+	//우정
+	@Override
+	public int getTradeCountByFoodSellNo(String foodSellNo) {
+	return template.selectOne("trade.getTradeCountByFoodSellNo",foodSellNo);
+	
+	}
 
 }

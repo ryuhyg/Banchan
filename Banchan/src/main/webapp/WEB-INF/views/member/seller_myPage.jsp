@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec"
+   uri="http://www.springframework.org/security/tags"%>
 <sec:authentication var="mvo" property="principal" />
- 	
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <script> 
 	$(document).ready(function(){
 		$("button[name='update']").click(function(){
@@ -98,13 +100,14 @@ $(document).ready(function() {
 
 
 <section id="agent-page" style="margin-top: 350px;">
+<br>
+
 			<div class="container">
 				<div class="row">
 				<div class="col-md-1"></div>
 					<div class="col-md-9">
 						<div class="row">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
-								
 									<h1 class="name">${svo.memName } </h1>
 								<span class="text">
 								주부님 소개
@@ -121,12 +124,12 @@ $(document).ready(function() {
 									<div class="image-content">
 										<div class="image image-fill">
 											<!-- <img alt="Image Sample" src="resources/images/${svo.sellerImg }"> -->
-											<img alt="Image Sample" src="resources/images/${svo.sellerImg }">
+											<img alt="Image Sample"  width="300px" height="250px"  src="resources/images/${svo.sellerImg }">
 										</div>						
 									</div>
 									<div class="info-agent">
 										<div class="text" style="text-align:center">
-											<b>별점:${svo.sellerScore}</b>
+											<b>주부님별점:${svo.sellerScore}</b>
 										</div>
 										<ul class="contact">
 											<li><a class="icon" href="#"><i class="fa fa-facebook"></i></a></li>
@@ -142,10 +145,15 @@ $(document).ready(function() {
 						</div><!-- /.row -->
 					</div><!-- col-md-9 -->
 					<div class="col-md-2">  
+
+					<sec:authorize access="isAuthenticated()">
+				<c:if test="${mvo.memId==svo.memId}">
 						<div style="margin-bottom: 2px"> 
-					 	<a class="btn btn-default" style="width: 70%;" >판매내역보기</a>
+					 	<a href="getAllSellerTradeList.do?sellerId=${mvo.memId }" class="btn btn-default" style="width: 70%;" >판매내역보기</a>
 						</div>
-						<a  href="${pageContext.request.contextPath}/foodRegisterForm.do" class="btn btn-default" style="width: 70%" >음식 등록</a> 
+						<a  href="${pageContext.request.contextPath}/foodRegisterForm.do" class="btn btn-default" style="width: 70%" >음식 등록</a>
+					</c:if> 
+					</sec:authorize>
 					</div>
 				</div><!-- ./row --> 
 				
@@ -180,6 +188,8 @@ $(document).ready(function() {
 									<dl class="detail" > 
 										<dt class="status">별점:</dt><dd><span>${food.foodScore}</span></dd>
 									</dl> 
+								<sec:authorize access="isAuthenticated()">
+									<c:if test="${mvo.memId==svo.memId}">
 									<div class="footer" style="height:50px">
 										<!-- <a class="btn btn-default" href="#"></a>
 										<a class="btn btn-default" href="#"></a> -->
@@ -189,6 +199,8 @@ $(document).ready(function() {
 										<button type="button" name="delete" value="${food.foodNo }" style="margin-top:60px" class="btn btn-default btn-xs">삭제</button> 
 										<button type="button" name="seller" value="${food.foodNo }" style="margin-top:60px; margin-left: 50px" class="btn btn-default btn-xs">판매등록</button>
 									</div>
+									</c:if>
+									</sec:authorize>
 								</div>
 							</figure>
 						</c:forEach>
@@ -214,22 +226,24 @@ $(document).ready(function() {
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
 								<div class="bs-callout callout-success" style="width: 800px">
 								  <h4 class="title">${foodSell.foodName}</h4>
-								  
 								  <span class="description" style="color:black;font-size:13px">
-								 
 									  <i class="fa fa-ticket" style="font-weight: bold"> 남은 수량:</i>  ${foodSell.price}<br>
 									  <i class="fa fa-calendar" style="font-weight: bold"> 거래 날짜:</i>  ${foodSell.trDate}<br>
-									  <i class="fa fa-close" aria-hidden="true" style="font-weight: bold"> 판매 종료 날짜:</i>  ${foodSell.closeDate}<br>
+									  <i class="fa fa-close" aria-hidden="true" style="font-weight: bold"> 판매 종료 날짜:</i>  ${foodSell.closeDate}
+									<sec:authorize access="isAuthenticated()">
+									<c:if test="${mvo.memId==svo.memId}">
+								 	 <a  style="display:inline-block;float: right;" class="btn btn-default" href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=${foodSell.foodSellNo}">거래 내역 보기</a>
+									</c:if>
+									</sec:authorize>		
 								  </span>
-								  
 								</div><!-- bs-callout callout-success -->
-								</div><!-- /.col-md-8 -->
-								<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 10px;" >
+							</div><!-- /.col-md-8 -->
+							<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
 								<!-- . Agent Box -->
 								<div class="tab2img" >
 									<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo}"><img alt="Sample images"  width="250px" height="150px" src="resources/images/${foodSell.foodMainImg}"></a>
 								</div>
-						</div><!-- /.col-md-4 -->
+							</div><!-- /.col-md-4 -->
 						</div><!-- /.row -->
 
 					</div>

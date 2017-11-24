@@ -10,6 +10,10 @@
  <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
     
 <!-- 스크립트 ajax 부분 -->    
+<!-- 입력폼 이쁘게 -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
 	$(document).ready(function(){
@@ -80,13 +84,13 @@
                 },
 				success:function(data){						
 					if(data=="fail"){
-					$("#idCheckView").html(id+" 사용불가!").css("background","red");
-						checkResultId="";
-					}else{						
-						$("#idCheckView").html(id+" 사용가능!").css(
-								"background","white");		
-						checkResultId=id;
-					}					
+						$("#idCheckView").html(id+" 사용불가!").css("background","red");
+							checkResultId="";
+						}else{						
+							$("#idCheckView").html(id+" 사용가능!").css(
+									"background","white");		
+							checkResultId=id;
+						}				
 				}//callback			
 			});//ajax
 		});//keyup
@@ -103,12 +107,13 @@
 						"background","white");
 				checkPassword="passwordOK";
 			}
+			$("#regForm :input[id=passwordRe]").trigger("keyup");
 			
 		});//keyup
 		
 		//비밀번호 일치 체크
 		$("#regForm :input[id=passwordRe]").keyup(function() {
-			if($("#regForm :input[id=password]").val().trim()==""){
+			if($("#regForm :input[id=password]").val().trim()==""&& !checkPassword==""){
 				
 				$("#regForm :input[id=passwordRe]").val("");
 				$("#regForm :input[id=password]").focus();
@@ -132,42 +137,45 @@
 		            oncomplete: function(data) {
 		                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-		                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+		            	// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-		                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-		                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+		                var fullAddr = ''; // 최종 주소 변수
+		                var extraAddr = ''; // 조합형 주소 변수
 
-		                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-		                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-		                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-		                    extraRoadAddr += data.bname;
+		                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+		                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+		                    fullAddr = data.roadAddress;
+		                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+		                    fullAddr = data.roadAddress;
 		                }
-		                // 건물명이 있고, 공동주택일 경우 추가한다.
-		                if(data.buildingName !== '' && data.apartment === 'Y'){
-		                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-		                }
-		                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-		                if(extraRoadAddr !== ''){
-		                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-		                }
-		                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-		                if(fullRoadAddr !== ''){
-		                    fullRoadAddr += extraRoadAddr;
+
+						   // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+		                if(data.userSelectedType === 'R'){
+		                    //법정동명이 있을 경우 추가한다.
+		                    if(data.bname !== ''){
+		                        extraAddr += data.bname;
+		                    }
+		                    // 건물명이 있을 경우 추가한다.
+		                    if(data.buildingName !== ''){
+		                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		                    }
+		                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+		                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
 		                }
 
 		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 		               // document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
 		              //  document.getElementById('sample4_roadAddress').value = fullRoadAddr;
 		               // document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
-		                $("#jibunAddress").val(data.jibunAddress);
-		                $("#jibunAddress").trigger("change");
+		                $("#roadAddress").val(fullAddr);
+		                $("#roadAddress").trigger("change");
 
 		            }
 		        }).open();
 			
 		});//$("#searchaddress").click
 		
-		$("#jibunAddress").change(function() {
+		$("#roadAddress").change(function() {
 				//alert($(this).val());
 				// 주소-좌표 변환 객체를 생성합니다  
 				var geocoder = new daum.maps.services.Geocoder();
@@ -333,8 +341,8 @@
 								<div class="row">
 									<div  class="col-xs-8">															
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>주소</label>
-										<div id="map" style="width:300px;height:170px;"></div><input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
-										<input type="text" name="addressVO.addressAPI"  id="jibunAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly">		
+										<div id="map" style="width:450px;height:170px;"></div><input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
+										<input type="text" name="addressVO.addressAPI"  id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly">		
 										<input type="text" name="addressDe"  id="detailAddress" class="margin-bottom form-control" placeholder="상세주소 입력">							
 									</div>
 								</div>

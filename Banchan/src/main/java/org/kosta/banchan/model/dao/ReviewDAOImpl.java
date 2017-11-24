@@ -2,6 +2,7 @@ package org.kosta.banchan.model.dao;
 
 import javax.annotation.Resource;
 
+import org.kosta.banchan.model.vo.ReviewVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +10,14 @@ import org.springframework.stereotype.Repository;
 public class ReviewDAOImpl implements ReviewDAO {
 	@Resource
     private SqlSessionTemplate template;
-
+	///////////////start윤주//////////////////////////
+	@Override
+	public void reviewRegister(ReviewVO rvo) {
+		template.insert("feedback.reviewRegister",rvo);
+	}
+	@Override
+	public void updateSellerScore(String memId) {
+		template.update("feedback.updateSellerScore", memId);
+	}
+	////////////////end윤주///////////////////////////
 }
