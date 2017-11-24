@@ -16,7 +16,6 @@ import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -103,8 +102,7 @@ public class MemberController {
           List<AddressVO> list = null;
           
           // 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다
-         if( SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) { 
-            
+         if( SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {     
             System.out.println("비로그인 상태  위치기반 접속!");
             AddressVO avo = new AddressVO();
             avo.setAddressAPI("경기도 성남시 분당구 삼평동 대왕판교로 660");
@@ -114,12 +112,11 @@ public class MemberController {
             list = memberService.getNearSellerAddressByAddressAPI(avo.getAddressAPI());
          }
          else {
-            System.out.println("로그인 상태");
+            System.out.println("로그인 상태!");
             MemberVO mvo =(MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             mvo.setAddressVO(memberService.getAddressAPIById(mvo)); 
             list = memberService.getNearSellerAddressByAddressAPI(mvo.getAddressVO().getAddressAPI());
             model.addAttribute("addressVO",mvo.getAddressVO());
-
          }
          model.addAttribute("list",list);
           return "member/locationServicePage.tiles";   
