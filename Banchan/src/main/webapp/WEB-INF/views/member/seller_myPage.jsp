@@ -6,15 +6,15 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script> 
 	$(document).ready(function(){
-		var foodNo=$("#foodNo").val();
-		$("#updatebtn").click(function(){
-			alert(1);			
+		$("button[name='update']").click(function(){
+			//alert($(this).val());
+			location.href="${pageContext.request.contextPath}/updateRegViewFood.do?foodNo="+$(this).val();
 		});
-		$("#deletebtn").click(function(){
-			alert(1);
-		});
-		$("#sellerbtn").click(function(){
-			location.href="${pageContext.request.contextPath}/registerFoodView.do?foodNo="+foodNo;	
+		$("button[name='delete']").click(function(){
+			location.href="${pageContext.request.contextPath}/deleteRegFood.do?foodNo="+$(this).val();
+			});
+		$("button[name='seller']").click(function(){
+			location.href="${pageContext.request.contextPath}/registerFoodView.do?foodNo="+$(this).val();	
 		});
 	});
 </script>
@@ -142,12 +142,10 @@ $(document).ready(function() {
 						</div><!-- /.row -->
 					</div><!-- col-md-9 -->
 					<div class="col-md-2">  
-					<sec:authorize access="hasRole('ROLE_BUYER')">
 						<div style="margin-bottom: 2px"> 
 					 	<a class="btn btn-default" style="width: 70%;" >판매내역보기</a>
 						</div>
 						<a  href="${pageContext.request.contextPath}/foodRegisterForm.do" class="btn btn-default" style="width: 70%" >음식 등록</a> 
-					</sec:authorize>	
 					</div>
 				</div><!-- ./row --> 
 				
@@ -170,8 +168,8 @@ $(document).ready(function() {
 						<c:forEach items="${flist}" var="food">
 							<figure class="crsl-item">
 								<div class="box-ads box-grid">
-									<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/foodDetailView.do?no=${food.foodNo}">	
-										<input type="hidden" id="foodNo" value="${food.foodNo }">
+									<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/foodDetailView.do?foodNo=${food.foodNo}">	
+									<%-- 	<input type="hidden" id="foodNo" value="${food.foodNo }"> --%>
 										
 										<span class="cover"></span>
 										<img alt="Sample images"  width="300px" height="200px" src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}"> 
@@ -186,10 +184,10 @@ $(document).ready(function() {
 										<!-- <a class="btn btn-default" href="#"></a>
 										<a class="btn btn-default" href="#"></a> -->
 										
-										<button type="button" id="updatebtn" style="margin-top:60px; margin-left: 5px" class="btn btn-default btn-xs">수정</button>
-										<button type="button" id="deletebtn" style="margin-top:60px" class="btn btn-default btn-xs">삭제</button> 
-										<button type="button" id="sellerbtn" style="margin-top:60px; margin-left: 50px" class="btn btn-default btn-xs">판매등록</button>
 										<%-- <a  style="display:inline-block" class="btn btn-default" href="${pageContext.request.contextPath}/registerFoodView.do?foodNo=${food.foodNo}">판매등록</a> --%>
+										<button type="button" name="update" value="${food.foodNo }" style="margin-top:60px; margin-left: 5px" class="btn btn-default btn-xs">수정</button>
+										<button type="button" name="delete" value="${food.foodNo }" style="margin-top:60px" class="btn btn-default btn-xs">삭제</button> 
+										<button type="button" name="seller" value="${food.foodNo }" style="margin-top:60px; margin-left: 50px" class="btn btn-default btn-xs">판매등록</button>
 									</div>
 								</div>
 							</figure>

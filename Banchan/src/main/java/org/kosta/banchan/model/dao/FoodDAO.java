@@ -25,5 +25,11 @@ public interface FoodDAO {
 
 	List<Map<String, String>> allCategorySelect();
 	
-	FoodVO getFoodMemInfo(String no);
+	FoodVO getFoodMemInfo(String foodNo);
+
+	List<FoodVO> selectRegFoodByNo(String foodNo);
+	
+	void deleteRegFood(String foodNo);
+	
+	void updateRegFood(FoodVO fvo);
 }

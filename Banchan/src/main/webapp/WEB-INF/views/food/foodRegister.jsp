@@ -17,12 +17,14 @@ function getimagereview(html, $target) {
 }
 </script>
 <section id="recent-list" style="margin-top: 350px;">
+<c:choose>
+<c:when test="${message!='ok'}">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-1">
 				<!-- left -->
 			</div>
-
+			<!--  음식 등록 페이지 -->
 			<div class="col-sm-10">
 				<div class="blog-list blog-detail">
 					<form class="form-large grey-color" action="foodRegister.do" method="post" enctype="multipart/form-data">
@@ -53,10 +55,56 @@ function getimagereview(html, $target) {
 				</div>
 			</div>
 		</div>
-
+		</c:when>
+<c:otherwise>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-1">
+				<!-- left -->
+			</div>
+			<!--  등록 음식 수정 페이지 -->
+				<div class="col-sm-10">
+				<div class="blog-list blog-detail">
+					<form class="form-large grey-color" action="updateRegFood.do" method="post" enctype="multipart/form-data">
+					<h3 class="title-form">
+						<i class="icon fa fa-comment" style="margin-right: 5px"></i><input type="text" name="foodname" value="${beFood.foodName}"></h3>
+						<input type="hidden" name="id" value="${mvo.memId}">
+						<input type="hidden" name="foodNo" value="${foodNo}">
+						<sec:csrfInput/>
+						<%-- csrf 토큰 --%>
+						<div class="row">
+							
+						<div class="col-xs-5" style="float: left" class="row">
+						<select name="category">
+								<c:forEach items="${category}" var="categorylist">
+								<c:choose>
+								<c:when test="${beFood.categoryNo==categorylist.CATEGORY_NO }">
+								<option value="${categorylist.CATEGORY_NO }" selected="selected">${categorylist.CATEGORY_NAME}</option>
+								</c:when>
+									<c:otherwise>
+									<option value="${categorylist.CATEGORY_NO }">${categorylist.CATEGORY_NAME}</option>
+									</c:otherwise>
+									</c:choose>
+								</c:forEach>
+						</select>
+						<div style="margin-top: 10px;">
+							<input type="file" name="uploadImage" id="cma_file" accept="image/*" onchange="getimagereview(this,$('#cma_image'))" />
+							 <div id="cma_image" style="display:none;"></div>
+						</div>
+						</div>
+						<div class="col-xs-7" style="float: right" class="row">
+							<textarea rows="10" cols="52" name="foodInfo" style="width: 100%; height: 100%;">${beFood.foodDe}</textarea>
+							<input type="submit" value="수정" >	
+						</div>
+						</div>
+						</form>
+				</div>
+			</div>
+		</div>
 		<div class="col-sm-1">
 			<!-- right -->
 		</div>
 	</div>
-
+</c:otherwise>
+</c:choose>
 </section>
