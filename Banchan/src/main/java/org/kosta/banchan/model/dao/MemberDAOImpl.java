@@ -120,19 +120,15 @@ public class MemberDAOImpl implements MemberDAO {
 			return template.selectOne("member.findPwQnaNo",pwQnaNo);
 		}
 		//정훈 업데이트용 주소타입 존재 체크
-				@Override 
-				public String checkAddressNoByAddressAPIByUpdate(MemberVO memberVO) {
-					
-					return template.selectOne("member.checkAddressNoByAddressAPIByUpdate", memberVO);
-				}
-				
-				//정훈 업데이트용 새로운 주소지 등록
-				@Override
-				public void registerNewAddressInfoByUpdate(AddressVO addressVO) {
-					//System.out.println("전 :" +memberVO);
-					template.update("member.registerNewAddressInfoByUpdate", addressVO);
-					//System.out.println("후 :" +memberVO);
-				}
+		@Override 
+		public String checkAddressNoByAddressAPIByUpdate(MemberVO memberVO) {
+			return template.selectOne("member.checkAddressNoByAddressAPIByUpdate", memberVO);
+		}
+		//정훈 업데이트용 새로운 주소지 등록
+		@Override
+		public void registerNewAddressInfoByUpdate(AddressVO addressVO) {
+			template.update("member.registerNewAddressInfoByUpdate", addressVO);
+		}
 		//회원정보수정-구매자(정훈)
 		@Override
 		public void editMemberBuyer(MemberVO memberVO) {
@@ -140,13 +136,13 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 		//회원정보수정-판매자(정훈)
 		@Override 
-		public void editMemberSeller(MemberVO memberVO) {
-			template.update("member.editMemberSeller", memberVO);
+		public void editMemberSeller(SellerVO svo) {
+			template.update("member.editMemberSeller", svo);
 		}
 		//회원정보수정-판매자(이미지, 판매자정보)(정훈)
 		@Override
-		public void editMemberSellerInfoAndImage(SellerVO vo) {
-			template.update("member.editMemberSellerInfoAndImage",vo);
+		public void editMemberSellerInfoAndImage(SellerVO svo) {
+			template.update("member.editMemberSellerInfoAndImage",svo);
 		}
 		//회원이 판매자 인지 구매자인지 판별(정훈)
 		@Override

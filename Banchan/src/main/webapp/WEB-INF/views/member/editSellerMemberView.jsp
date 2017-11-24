@@ -315,20 +315,16 @@
  						<i class="icon fa fa-comment" style="margin-right: 5px"></i>회원정보수정
  					</h3>
  
- 					<form class="form-large grey-color"	action="${pageContext.request.contextPath}/editMember.do" method="post" id="regForm" enctype="multipart/form-data">
+ 					<form class="form-large grey-color"	action="${pageContext.request.contextPath}/editSellerMember.do" method="post" id="regForm" enctype="multipart/form-data">
+ 						<%-- csrf 토큰 --%>
+ 						<sec:csrfInput />
  						<div class="row">
  							<div class="col-xs-6">
- 								
- 								<c:if test="${svo!=null}">
  								<label for="id"> 
  								<i class="fa fa-user user" style="margin-right: 5px"></i>회원이미지</label> 
  								<input type="file" name="uploadImage" id="updateImage" class="margin-bottom form-control">
- 								</c:if>
- 								</div>
- 								</div>
- 								
- 						<%-- csrf 토큰 --%>
- 						<sec:csrfInput />
+ 							</div>
+ 						</div>
  						<div class="row">
  							<div class="col-xs-6">
  								<label for="id"> 
@@ -397,15 +393,8 @@
  						<div class="row">
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px"></i>판매자 소개</label>
- 						
- 		<br>
- 						
- 						<c:if test="${svo!=null}">
- 		<textarea rows="8" cols="40" name="sellerInfo">${svo.sellerInfo}</textarea>
- 		<br>
- 		</c:if>
- 	
+ 									style="margin-right: 5px"></i>판매자 소개</label><br>
+ 						<textarea rows="8" cols="40" name="sellerInfo">${svo.sellerInfo}</textarea><br>
  		</div>
  		</div>
  						<div class="row">
@@ -423,8 +412,6 @@
  									class="margin-bottom form-control" placeholder="상세주소 입력">
  							</div>
  						</div>
- 
- 
  						<div class="row">
  							<div class="col-xs-8" style="margin-bottom: 10px">
  								<label for="password"><i class="fa fa-ellipsis-h"
@@ -458,8 +445,8 @@
  						</div>
  
  						<input type="hidden" name="addressVO.latitude" id="latitude"
- 							value=""> <input type="hidden" name="addressVO.longitude"
- 							id="longitude" value="">
+ 							value="${avo.latitude}"> <input type="hidden" name="addressVO.longitude"
+ 							id="longitude" value="${avo.longitude}">
  					</form>
  				</div>
  			</div>
