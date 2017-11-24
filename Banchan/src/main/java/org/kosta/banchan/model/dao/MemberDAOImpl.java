@@ -57,6 +57,10 @@ public class MemberDAOImpl implements MemberDAO {
 		public void deleteMemberAuth(String memId) {
 			template.delete("deleteMemberAuth",memId);
 		}
+		@Override
+		public int findPasswordCheck(MemberVO mvo) {
+			return template.selectOne("findPasswordCheck", mvo);
+		}
 
 /////////////////////// start  광태 메서드   ///////////////////////////////	
 	//광태 ajax id check

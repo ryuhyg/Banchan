@@ -24,6 +24,8 @@ public interface MemberDAO {
 			void deleteMember(String memId);
 	//권한 삭제		
 			void deleteMemberAuth(String memId);
+	//회원확인		
+			int findPasswordCheck(MemberVO mvo);
 ///////////////////////End 향걸 //////////////////////////////////
 
 /////////////////////// start  광태 메서드   ///////////////////////////////
@@ -86,6 +88,8 @@ String getSellerNameByMemId(String memId);
 
 //주소정보 들고오기(정훈)
 		AddressVO findMemberAddressAPIById(String memId);
+
+		
 
 	
 

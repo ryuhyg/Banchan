@@ -16,7 +16,6 @@ import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -61,15 +60,32 @@ public class MemberController {
       return "member/login_fail";
    }
    
-   @RequestMapping("deleteMember.do")
-   public String deleteMember(String memId) {
+   @RequestMapping(value="deleteMember.do",method = RequestMethod.POST)
+	public String deleteMember(String memId) {
 	   memberService.deleteMember(memId);
-	   return "member/deleteMember_result";
+	   return "redirect:member/deleteMember_result.do";
+   }
+   @RequestMapping("findPasswordCheck.do")
+   public String findPasswordCheck(String id,String name,String telNo) {  
+	   System.out.println("id"+id+"name"+name+"tel"+telNo);
+	   MemberVO mvo = new MemberVO(id,name,telNo);
+	  int idCheck = memberService.findPasswordCheck(mvo);
+	  if(idCheck!=0) {
+		  return "redirect:member/findPassword_ok.do?id="+id ;
+	  }else {
+		  return "member/findPassword_fail"; 	  
+	  }
+		  
+	  }
+   @RequestMapping("findPassword_ok.do")
+   public String findPasswordQna(String id){
+	   
+	return "member/findPassword_result";	   
    }
    //////////////////////// END 향걸 /////////////////////////////////////
    /////////////////////// start  광태 메서드   ///////////////////////////////
-      // 광태 Ajax id check
-       @RequestMapping("checkIdOnAjax.do")
+      // 광태 Ajax id check 
+      @RequestMapping("checkIdOnAjax.do")
       @ResponseBody
       public String checkIdOnAjax(String id) {
          return memberService.checkIdOnAjax(id);

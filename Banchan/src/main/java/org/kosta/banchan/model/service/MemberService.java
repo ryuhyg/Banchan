@@ -23,7 +23,7 @@ public interface MemberService {
 
 	int idcheck(String id);
 	void deleteMember(String memId);
-	
+	int findPasswordCheck(MemberVO mvo);
 	
 	
 	
@@ -55,6 +55,7 @@ public interface MemberService {
 	SellerVO selectSellerInfo(String id);
 	List<FoodVO> selectFoodInfo(String id);
 /////////////////////// end  우정 메서드   ///////////////////////////////
+	
 	
 
 

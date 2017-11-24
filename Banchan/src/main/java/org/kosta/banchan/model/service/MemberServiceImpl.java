@@ -50,6 +50,10 @@ public class MemberServiceImpl implements MemberService {
 	   memberDAO.deleteMember(memId);
 	   memberDAO.deleteMemberAuth(memId);
    }
+   @Override
+   public int findPasswordCheck(MemberVO mvo) {
+		return memberDAO.findPasswordCheck(mvo);
+   } 
    /////////////////////// start  광태 메서드   ///////////////////////////////
 	 //광태  회원가입 ajax id check
 	   @Override
@@ -71,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
 		   
 		   		// 비밀번호를 bcrypt 알고리즘으로 암호화
 				String encodedPwd = passwordEncoder.encode(memberVO.getPw());
-				memberVO.setPw(encodedPwd);
+				memberVO.setPw(encodedPwd); 
 				
 				// 주소 타입이 존재하는지 확인
 				String addressNO= memberDAO.checkAddressNoByAddressAPI(memberVO);

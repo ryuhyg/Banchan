@@ -220,6 +220,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteMemberAuth">
 		delete from MEM_AUTH where mem_id=#{value}
 	</delete>
+	<select id="findPasswordCheck" resultType="int">
+		select count(*) from ban_mem where mem_Id=#{memId} and mem_Name=#{memName} and tel=#{tel}
+	</select>
 <!-- End 향걸 -->
 
 <!-- Start 지원 -->
