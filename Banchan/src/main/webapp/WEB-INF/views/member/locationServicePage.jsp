@@ -20,7 +20,6 @@
 <script>
 
 $(document).ready(function() {
-
 	$("#searchaddress").click(function() {
 		  new daum.Postcode({
 	            oncomplete: function(data) {
