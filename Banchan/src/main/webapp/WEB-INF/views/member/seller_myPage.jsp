@@ -4,8 +4,8 @@
 <%@taglib prefix="sec"
    uri="http://www.springframework.org/security/tags"%>
 <sec:authentication var="mvo" property="principal" />
- 	
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <script> 
 	$(document).ready(function(){
 		var foodNo=$("#foodNo").val();
@@ -100,6 +100,8 @@ $(document).ready(function() {
 
 
 <section id="agent-page" style="margin-top: 350px;">
+<br>
+
 			<div class="container">
 				<div class="row">
 				<div class="col-md-1"></div>

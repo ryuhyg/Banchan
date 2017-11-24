@@ -32,8 +32,8 @@ public class TradeDAOImpl implements TradeDAO {
 	 * @param tradeNo
 	 */
 	@Override
-	public void updateTradeStatus(String tradeNo) {
-		template.update("trade.updateTradeStatus", tradeNo);
+	public void completeTrade(String tradeNo) {
+		template.update("trade.completeTrade", tradeNo);
 	}
 	
 	
