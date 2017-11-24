@@ -164,7 +164,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where mem_id=#{memId}
 	</update>
 
-<!-- update 판매자 -->
+<!-- update 판매자-->
 	<update id="editMemberSeller" parameterType="sellerVO">
 		update ban_mem set pw=#{pw}, mem_name=#{memName}, birth=#{birth}, tel=#{tel}, address_de=#{addressDe}, pw_answer=#{pwAnswer}, address_no=#{addressVO.addressNo}, pw_qna_no=#{pwQnaNo}
 		where mem_id=#{memId}
@@ -186,9 +186,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 				INSERT INTO 	ADDRESS(ADDRESS_NO, ADDRESS_API, LATITUDE, LONGITUDE) 
 					VALUES(#{addressNo},#{addressAPI},#{latitude},#{longitude})
 	 	</insert>
+	 	<!-- 판매자 이미지, 정보 저장-이미지 있을 때 -->
 		<update id="editMemberSellerInfoAndImage" parameterType="sellerVO">
  		update seller set seller_img=#{sellerImg}, seller_info=#{sellerInfo} where mem_id=#{memId}
  	</update>
+ 	  	<!-- 판매자 이미지, 정보 저장-이미지 업을 때 -->
+ 	  	<update id="editMemberSellerNoImage" parameterType="sellerVO">
+ 	  	update seller set seller_info=#{sellerInfo} where mem_id=#{memId}
+ 	  	</update>
+		
  <!--  주소들고오기 -->
  	<select id="findMemberAddressAPIById" parameterType="string" resultType="addressVO">
  		SELECT a.ADDRESS_API, a.LATITUDE, a.LONGITUDE
@@ -230,6 +236,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteMemberAuth">
 		delete from MEM_AUTH where mem_id=#{value}
 	</delete>
+	<select id="findPasswordCheck" resultType="int">
+		select count(*) from ban_mem where mem_Id=#{memId} and mem_Name=#{memName} and tel=#{tel}
+	</select>
 <!-- End 향걸 -->
 
 <!-- Start 지원 -->
@@ -256,6 +265,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where mem_id=#{value}
 	</select>
 <!-- End 윤주 -->
+
+
+<!-- Start 지원 -->
+<resultMap type="memberVO" id="memberInfoRM">
+	<result property="addressVO.addressAPI" column="address_api"/>
+</resultMap>
+<select id="getBuyerInfo" parameterType="string" resultMap="memberInfoRM">
+	select mem_id, mem_name, tel, address_api
+	from ban_mem m, address a
+	where m.address_no=a.address_no and m.mem_id=#{value}
+</select>
+
+
+<!-- End 지원  -->
+
 
 </mapper>
 

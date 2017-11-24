@@ -57,6 +57,10 @@ public class MemberDAOImpl implements MemberDAO {
 		public void deleteMemberAuth(String memId) {
 			template.delete("deleteMemberAuth",memId);
 		}
+		@Override
+		public int findPasswordCheck(MemberVO mvo) {
+			return template.selectOne("findPasswordCheck", mvo);
+		}
 
 /////////////////////// start  광태 메서드   ///////////////////////////////	
 	//광태 ajax id check
@@ -149,6 +153,11 @@ public class MemberDAOImpl implements MemberDAO {
 		public void editMemberSeller(SellerVO svo) {
 			template.update("member.editMemberSeller", svo);
 		}
+		//회원정보수정-판매자-이미지없을 때(정훈)
+		@Override
+		public void editMemberSellerNoImage(SellerVO svo) {
+			template.update("member.editMemberSellerNoImage", svo);
+		}
 		//회원정보수정-판매자(이미지, 판매자정보)(정훈)
 		@Override
 		public void editMemberSellerInfoAndImage(SellerVO svo) {
@@ -197,6 +206,12 @@ public void getEditMembers(SellerVO vo) {
 	
 }
 
+/////////////////////// start  지원 메서드   ///////////////////////////////
+@Override
+public MemberVO getBuyerInfo(String buyerId) {
+	return template.selectOne("member.getBuyerInfo", buyerId);
+}
+/////////////////////// end  지원 메서드   ///////////////////////////////
 	
 
 }

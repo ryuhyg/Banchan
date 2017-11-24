@@ -23,8 +23,9 @@
 						<sec:csrfInput />
 						<%-- csrf 토큰 --%>
 						<a style="text-align: center; margin-top: 10px">회원 탈퇴 하시겠습니까?</a><br>
-						<br> <br>
+						<br>
 						같은 아이디로는 재가입이 불가능 합니다.
+						 <br> <br>
 						<div align="center">
 							<button type="submit" class="btn btn-reverse button-form"
 								id="deleteBtn">예</button>

@@ -50,6 +50,10 @@ public class MemberServiceImpl implements MemberService {
 	   memberDAO.deleteMember(memId);
 	   memberDAO.deleteMemberAuth(memId);
    }
+   @Override
+   public int findPasswordCheck(MemberVO mvo) {
+		return memberDAO.findPasswordCheck(mvo);
+   } 
    /////////////////////// start  광태 메서드   ///////////////////////////////
 	 //광태  회원가입 ajax id check
 	   @Override
@@ -71,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
 		   
 		   		// 비밀번호를 bcrypt 알고리즘으로 암호화
 				String encodedPwd = passwordEncoder.encode(memberVO.getPw());
-				memberVO.setPw(encodedPwd);
+				memberVO.setPw(encodedPwd); 
 				
 				// 주소 타입이 존재하는지 확인
 				String addressNO= memberDAO.checkAddressNoByAddressAPI(memberVO);
@@ -130,7 +134,6 @@ public class MemberServiceImpl implements MemberService {
 ////////////////////start 우정 메서드 ////////////////////////////
 	   @Override
 	  public SellerVO selectSellerInfo(String id) {
-		  System.out.println("selectSellerInfo Service");
 		  return sellerDAO.selectSellerInfo(id);
 	  }
 	  @Override
@@ -211,6 +214,28 @@ public class MemberServiceImpl implements MemberService {
 				memberDAO.editMemberSellerInfoAndImage(svo);
 				memberDAO.editMemberSeller(svo);
 			}
+	   @Transactional
+	   @Override
+	   public void editSellerMemberNoImageService(SellerVO svo) {
+		// 비밀번호를 bcrypt 알고리즘으로 암호화
+			String encodedPwd = passwordEncoder.encode(svo.getPw());
+				svo.setPw(encodedPwd);
+					
+		// 주소 타입이 존재하는지 확인
+			String addressNO= memberDAO.checkAddressNoByAddressAPIByUpdate(svo);
+				if(addressNO !=null) {
+					//memberVO안에 addressVO의 addressNo에 SET
+					svo.getAddressVO().setAddressNo(addressNO);
+				}
+					// 주소 테이블 insert
+					else if( addressNO == null) {
+						//시퀀스 이용하여 주소테이블에 insert ( 번호, api 주소, 위도,경도) , 
+						// registerNewAddressInfo메서드  실행후 memberVO의 addressNo변수에는 insert시의 address_no값이 set 된다.
+						memberDAO.registerNewAddressInfoByUpdate(svo.getAddressVO());		
+					}
+						memberDAO.editMemberSellerNoImage(svo);
+						memberDAO.editMemberSeller(svo);
+					}
 	   		
 	  
  
@@ -238,6 +263,13 @@ public String getSellerNameByMemId(String memId) {
 }
 /////////////////////// end  윤주 메서드   ///////////////////////////////
 
+
 	
+/////////////////////// start 지원   ///////////////////////////////
+	@Override
+	public MemberVO getBuyerInfo(String buyerId) {
+		return memberDAO.getBuyerInfo(buyerId);
+	}
+/////////////////////// end 지원   ///////////////////////////////
 
 }

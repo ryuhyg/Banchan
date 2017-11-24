@@ -4,7 +4,7 @@
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
     
-		<section id="recent-list" style="margin-top: 350px;">
+		<section id="recent-list" style="margin-top: 150px;">
 	<div class="container">
 				<div class="row">
 				<div class="col-sm-4"><!-- left -->

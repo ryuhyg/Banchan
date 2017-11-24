@@ -53,5 +53,12 @@ public class TradeDAOImpl implements TradeDAO {
 	return template.selectList("trade.getTradeListByMemId",memId);
 	}
 	//////////////////////end 윤주/////////////////////////////
+	
+	//우정
+	@Override
+	public int getTradeCountByFoodSellNo(String foodSellNo) {
+	return template.selectOne("trade.getTradeCountByFoodSellNo",foodSellNo);
+	
+	}
 
 }

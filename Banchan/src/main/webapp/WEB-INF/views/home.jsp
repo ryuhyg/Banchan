@@ -23,9 +23,7 @@
 	margin-top: 100px;
 }
 </style> 
-    
-     
-    
+  
     
  <!-- 슬라이드 부분 *************************** -->
  	
@@ -61,15 +59,19 @@
 
 
 <!--  링크 테스트 섹션 -->
-<h3><a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=aaaa"  >
-						판매자 페이지</a></h3>
 	<section id="recent-list">
-		<div class="section-detail" style="border: 1px solid red">
+		
+			
 			<a href="">테스트2//</a>
 			<a href="">테스트3//</a>
 			<!-- 윤주 링크 테스트 -->
 			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
-			<a href="myTradeList.do?memId=${mvo.memId }">나의구매내역테스트_윤주//</a>
+
+				<div class="section-detail" style="border: 1px solid red">
+				<h3><a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}"  >
+								판매자 페이지</a></h3>			
+			<a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId }">나의구매내역테스트_윤주//</a>
+
 			</sec:authorize>
 			<!-- 지원 링크 테스트 -->
 			<a href="${pageContext.request.contextPath}/registerFoodView.do">판매음식등록 테스트//</a>

@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- spring security custom tag를 사용하기 위한 선언 --%>
-<%@taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<sec:authentication var="mvo" property="principal" />
-<script type="text/javascript">
-
-</script>
-		<section id="recent-list" style="margin-top: 150px;">
+<section id="recent-list" style="margin-top: 150px;">
 			<div class="container">
 				<div class="row">
 				<div class="col-sm-4"><!-- left -->
@@ -15,17 +8,13 @@
 				</div>
 					<div class="col-sm-4">
 						<div class="blog-list blog-detail">
-		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px; font-weight: bold;"></i>비밀번호 찾기</h3>
+		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px; font-weight: bold;"></i>비밀번호 찾기 답변</h3>
 							<form class="form-large grey-color" id="findPassForm" name="findPassForm" action="${pageContext.request.contextPath }/findPasswordCheck.do" method="get">
 										
 										<label for="id" style="font-weight: bold;"> <i class="fa fa-user user" style="margin-right: 5px"></i>아이디</label>
-										<input type="text" placeholder="아이디" name="id" id="id" class="margin-bottom form-control">
-								
+												
 										<label for="password" style="font-weight: bold;"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>이름</label>
 										<input type="text" placeholder="이름" name="name" id="name" class="margin-bottom form-control">
-										
-										<label for="password" style="font-weight: bold;"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>전화번호</label>
-										<input type="number" placeholder="전화번호" name="telNo" id="telNo" class="margin-bottom form-control">
 								<br>
 								<div align="center"> 
 								<button type="submit" class="btn btn-reverse button-form"  id="findPassBtn" >확인</button>

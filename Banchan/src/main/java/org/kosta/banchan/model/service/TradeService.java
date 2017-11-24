@@ -2,6 +2,7 @@ package org.kosta.banchan.model.service;
 
 import java.util.List;
 
+import org.kosta.banchan.model.vo.PagingBean;
 import org.kosta.banchan.model.vo.TradeVO;
 
 public interface TradeService {
@@ -17,6 +18,9 @@ public interface TradeService {
 	////////////////start윤주///////////////////
 	List<TradeVO> getTradeListByMemId(String memId);
 	////////////////end윤주////////////////////
+	
+	//우정
+	int getTradeCountByFoodSellNo(String foodSellNo);
 
 
 }

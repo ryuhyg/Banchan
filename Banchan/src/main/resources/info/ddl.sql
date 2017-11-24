@@ -182,9 +182,21 @@ CREATE TABLE REVIEW
    SCORE NUMBER  NULL ,
    REV_CONTENT CLOB  NOT NULL ,
    REV_POSTDATE DATE  NOT NULL ,
-   TR_NO NUMBER  NOT NULL,
-    constraint REVIEW_FK foreign key(TR_NO) references TRADE(TR_NO)
+   FOOD_NO NUMBER  NOT NULL,
+    constraint REVIEW_FK foreign key(FOOD_NO) references FOOD(FOOD_NO)
 );
+
+--table 생성
+CREATE TABLE REVIEW
+(
+   REV_NO NUMBER  PRIMARY KEY,
+   SCORE NUMBER  NULL ,
+   REV_CONTENT CLOB  NOT NULL ,
+   REV_POSTDATE DATE  NOT NULL ,
+   FOOD_NO NUMBER  NOT NULL,
+    constraint REVIEW_FK foreign key(FOOD_NO) references FOOD(FOOD_NO)
+);
+
 
 /*
  * 질문
