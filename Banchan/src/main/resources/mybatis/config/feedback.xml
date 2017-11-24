@@ -24,6 +24,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- End 영민 -->
 
 <!-- Start 윤주 -->
+<insert id="reviewRegister" parameterType="reviewVO">
+	insert into review(rev_no,score,rev_postdate,rev_content,food_no)
+	values(review_seq.nextval,#{score},sysdate,#{revContent},#{foodNo})
+</insert>
+<update id="updateSellerScore" parameterType="string">
+	update seller set seller_score=
+	(select sum(score)/count(*)
+	 from review r,food f
+	 where f.mem_id=#{value} and r.food_no=f.food_no)
+	where mem_id=#{value}
+</update>
 <!-- End 윤주 -->
 </mapper>
 

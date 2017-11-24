@@ -69,7 +69,7 @@
 			<a href="">테스트3//</a>
 			<!-- 윤주 링크 테스트 -->
 			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
-			<a href="myTradeList.do?memId=${mvo.memId }">나의구매내역테스트_윤주//</a>
+			<a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId }">나의구매내역테스트_윤주//</a>
 			</sec:authorize>
 			<!-- 지원 링크 테스트 -->
 			<a href="${pageContext.request.contextPath}/registerFoodView.do">판매음식등록 테스트//</a>

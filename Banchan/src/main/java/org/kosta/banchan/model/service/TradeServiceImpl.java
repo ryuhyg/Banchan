@@ -56,9 +56,7 @@ public class TradeServiceImpl implements TradeService {
 	///////////////////////start윤주////////////////////////////////
 	@Override
 	public List<TradeVO> getTradeListByMemId(String memId) {
-	System.out.println("getTradeListByMemId memId:"+memId);
-	return tradeDAO.getTradeListByMemId(memId);
-	
+		return tradeDAO.getTradeListByMemId(memId);
 	}
 	///////////////////////end윤주///////////////////////////////////
 }

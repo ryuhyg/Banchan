@@ -7,15 +7,12 @@ public class ReviewVO {
     private int score;
     private String revContent;
     private String revPostdate;
-    private String trNo;
+    private String foodNo;
+    private String memId; //+작성자 아이디(누가 작성했는지 식별)
 	public ReviewVO() {
 		super();
 	}
-	@Override
-	public String toString() {
-		return "ReviewVO [revNo=" + revNo + ", score=" + score + ", revContent=" + revContent + ", revPostdate="
-				+ revPostdate + ", trNo=" + trNo + "]";
-	}
+	
 	public String getRevNo() {
 		return revNo;
 	}
@@ -40,15 +37,29 @@ public class ReviewVO {
 	public void setRevPostdate(String revPostdate) {
 		this.revPostdate = revPostdate;
 	}
-	public String getTrNo() {
-		return trNo;
+	
+
+	public String getFoodNo() {
+		return foodNo;
 	}
-	public void setTrNo(String trNo) {
-		this.trNo = trNo;
+
+	public void setFoodNo(String foodNo) {
+		this.foodNo = foodNo;
 	}
 
-    
+	public String getMemId() {
+		return memId;
+	}
 
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
 
+	@Override
+	public String toString() {
+		return "ReviewVO [revNo=" + revNo + ", score=" + score + ", revContent=" + revContent + ", revPostdate="
+				+ revPostdate + ", foodNo=" + foodNo + ", memId=" + memId + "]";
+	}
 
+	
 }

@@ -16,7 +16,6 @@ import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -224,54 +223,52 @@ public class MemberController {
 //판매자 등록 폼(이미 판매자로 등록되어있으면 sellerRegisterForm_fail.jsp로 alert띄움)
 @RequestMapping("sellerRegisterForm.do")
 public String sellerRegisterForm(String id) {
-   System.out.println("sellerRegisterform id:"+id);
-
-String memId = id;//로그인 기능 구현되면 세션의 아이디 정보를 가져와서 memId에 할당예정
-int sellerCheck = memberService.isSeller(memId);
-if(sellerCheck==0)
-   return "member/sellerRegisterForm.tiles";
-else
-   return "member/sellerRegisterForm_fail";
+	String memId = id;//로그인 기능 구현되면 세션의 아이디 정보를 가져와서 memId에 할당예정
+	int sellerCheck = memberService.isSeller(memId);
+	if(sellerCheck==0)
+	   return "member/sellerRegisterForm.tiles";
+	else
+	   return "member/sellerRegisterForm_fail";
 }
-
 private String uploadPath;//프로필사진 업로드 경로
 //판매자등록 메서드
 @RequestMapping(value = "sellerRegister.do",method = RequestMethod.POST)
 public String sellerRegister(String id, SellerVO svo,HttpServletRequest request) {
-   //System.out.println("sellerRegister id:"+id);
-uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
-File uploadDir=new File(uploadPath);
-if(uploadDir.exists()==false)
-   uploadDir.mkdirs();
-MultipartFile file=svo.getUploadImage();//파일 
-//System.out.println(file+"<==");
-//System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
-if(file!=null&&file.isEmpty()==false){
-   System.out.println("파일명:"+file.getOriginalFilename());
-   File uploadFile=new File(uploadPath+file.getOriginalFilename());
-   try {
-      file.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
-      System.out.println(uploadPath+file.getOriginalFilename()+" 파일업로드");
-   } catch (IllegalStateException | IOException e) {            
-      e.printStackTrace();
-   }
-}
-String memId= id; // 로그인기능 구현되면 세션정보 가져올 예정
-svo.setMemId(memId);
-svo.setSellerImg(file.getOriginalFilename());
-svo.setSellerInfo(request.getParameter("sellerInfo"));
-memberService.sellerRegister(svo);
-return "redirect:sellerRegister_ok.do";
+	//개발시 경로
+	uploadPath="C://Users/kosta/git/Banchan/Banchan/src/main/webapp/resources/images/";
+	//uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
+	File uploadDir=new File(uploadPath);
+	if(uploadDir.exists()==false)
+	   uploadDir.mkdirs();
+	MultipartFile file=svo.getUploadImage();//파일 
+	//System.out.println(file+"<==");
+	//System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
+	if(file!=null&&file.isEmpty()==false){
+	   System.out.println("파일명:"+file.getOriginalFilename());
+	   File uploadFile=new File(uploadPath+file.getOriginalFilename());
+	   try {
+	      file.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
+	      System.out.println(uploadPath+file.getOriginalFilename()+" 파일업로드");
+	   } catch (IllegalStateException | IOException e) {            
+	      e.printStackTrace();
+	   }
+	}
+	String memId= id; // 로그인기능 구현되면 세션정보 가져올 예정
+	svo.setMemId(memId);
+	svo.setSellerImg(file.getOriginalFilename());
+	svo.setSellerInfo(request.getParameter("sellerInfo"));
+	memberService.sellerRegister(svo);
+	return "redirect:sellerRegister_ok.do";
 }
 @RequestMapping("sellerRegister_ok.do")
 public String sellerRegisterOk() {
    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-      List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
+   List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
    updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_SELLER"));                                                       
-      Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(),
+   Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(),
             updatedAuthorities);
-      SecurityContextHolder.getContext().setAuthentication(newAuth);
-return "member/sellerRegister_ok.tiles";
+   SecurityContextHolder.getContext().setAuthentication(newAuth);
+   return "member/sellerRegister_ok.tiles";
 }
 /////////////////////// end  윤주 메서드   ///////////////////////////////
 }

@@ -60,7 +60,6 @@ public class TradeController {
 	public ModelAndView getTradeListByMemId(String memId) {
 	ModelAndView mv = new ModelAndView();
 	List<TradeVO> tlist = tradeService.getTradeListByMemId(memId);
-	System.out.println("tradeController tlist:"+tlist);
 	mv.addObject("tlist",tlist);
 	mv.setViewName("member/myTradeList.tiles");
 	return mv;
