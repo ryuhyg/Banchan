@@ -7,8 +7,11 @@ import javax.annotation.Resource;
 import org.kosta.banchan.model.service.FeedbackService;
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.TradeService;
+import org.kosta.banchan.model.vo.MemberVO;
+import org.kosta.banchan.model.vo.SellerVO;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,15 +19,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class TradeController {
-	
+
 	@Resource
 	private FoodService foodService;
 	@Resource
-    private TradeService tradeService;
+	private TradeService tradeService;
 	@Resource
-    private FeedbackService feedbackService;
+	private FeedbackService feedbackService;
 
-	/** [지원] 판매자-해당 판매상품에 관한 거래요청리스트 조회 
+	/**
+	 * [지원] 판매자-해당 판매상품에 관한 거래요청리스트 조회
 	 * 
 	 * @param foodSellNo
 	 * @param model
@@ -38,32 +42,52 @@ public class TradeController {
 		model.addAttribute("tradeList", tradeService.getSellerTradeListByFoodSellNo(foodSellNo));
 		return "food/seller_foodTradeList.tiles";
 	}
-	
-	/** [지원] 판매자-전체거래내역조회
-	 * 해당 판매자가 판매한 음식의 모든 거래내역을 조회한다. 
+
+	/**
+	 * [지원] 판매자-전체거래내역조회 해당 판매자가 판매한 음식의 모든 거래내역을 조회한다.
 	 * 
 	 * @param sellerId
 	 * @param model
 	 * @return
 	 */
-	@Secured("ROLE_BUYER")
+	@Secured("ROLE_SELLER")
 	@RequestMapping("getAllSellerTradeList.do")
 	public String getAllSellerTradeList(String sellerId, Model model) {
 		model.addAttribute("tradeList", tradeService.getAllSellerTradeList(sellerId));
 		return "food/seller_allTradeList.tiles";
 	}
-	
-	
-	////////////////////////////start윤주////////////////////////////////
-	//나의 거래 내역 리스트 가져오기
+
+	/** 
+	 * [지원] 거래완료확인
+	 * 거래완료버튼을 누르면 거래상태를 '거래완료'로 변경
+	 * 로그인 되어있을 경우 redirect로 다시 전체거래내역 보기로 이동
+	 * 
+	 * @param tradeNo
+	 * @return
+	 */
+	@Secured("ROLE_SELLER")
+	@RequestMapping("completeTrade.do")
+	public String completeTrade(String tradeNo) {
+		tradeService.completeTrade(tradeNo);
+		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+			return "redirect:loginView.do";
+		} else {
+			MemberVO mvo= (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			System.out.println("mvo Id: "+mvo.getMemId());
+			return "redirect:getAllSellerTradeList.do?sellerId="+mvo.getMemId();
+		}
+	}
+
+	//////////////////////////// start윤주////////////////////////////////
+	// 나의 거래 내역 리스트 가져오기
 	@RequestMapping("myTradeList.do")
 	public ModelAndView getTradeListByMemId(String memId) {
-	ModelAndView mv = new ModelAndView();
-	List<TradeVO> tlist = tradeService.getTradeListByMemId(memId);
-	System.out.println("tradeController tlist:"+tlist);
-	mv.addObject("tlist",tlist);
-	mv.setViewName("member/myTradeList.tiles");
-	return mv;
+		ModelAndView mv = new ModelAndView();
+		List<TradeVO> tlist = tradeService.getTradeListByMemId(memId);
+		System.out.println("tradeController tlist:" + tlist);
+		mv.addObject("tlist", tlist);
+		mv.setViewName("member/myTradeList.tiles");
+		return mv;
 	}
-	////////////////////////////end윤주//////////////////////////////////
+	//////////////////////////// end윤주//////////////////////////////////
 }

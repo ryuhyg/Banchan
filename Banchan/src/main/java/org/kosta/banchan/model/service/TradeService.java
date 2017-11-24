@@ -8,7 +8,7 @@ public interface TradeService {
 
 	////////////////start 지원///////////////////
 	List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo);
-	void updateTradeStatus(String tradeNo);
+	void completeTrade(String tradeNo);
 	List<TradeVO> getAllSellerTradeList(String sellerId);
 	////////////////end 지원///////////////////
 
