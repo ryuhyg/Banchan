@@ -17,22 +17,18 @@
 	}); //ready
 	
 	function orderFoodConfirm(){
-		if($("#checkId").val()=="" || $("#checkId").val()==null){
-			var flag = confirm("로그인하셔야 구매가능합니다.로그인 하시겠습니까?");
-			if(flag==true){
-				alert("로그인하기!");
-				location.href="${pageContext.request.contextPath}/loginView.do";
-			}
-			else{
-				alert("구매안하기!");
-			} 
-			return false;
-		} else{
-			return confirm("구매하시겠습니까?");	
+		var isLogin = $("#checkId").val();
+		if(isLogin==null || isLogin==""){
+			var flag = confirm("로그인하셔야 구매 가능합니다. 로그인하시겠습니까?");
+			if(flag)
+				location.href="loginView.do";
+			else
+				history.go(0);
 		}
-		
+		else
+			return confirm("구매하시겠습니까?");
+		return false;
 	}
-
 </script>
 
 <sec:authentication var="mvo" property="principal" />
@@ -118,12 +114,6 @@
 				</div>
 			</div> <!-- col-md-9 -->	
 		</div> <!-- row -->
-		
-		<!-- 후기 작성 영역 _ 윤주 -->
-		<div class="row">
-		
-		</div>			
-		
 	</div> <!-- container  -->
 </div> <!-- page-container -->
 </section>	<!-- recent-list -->			

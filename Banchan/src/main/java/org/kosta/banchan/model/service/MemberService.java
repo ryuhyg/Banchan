@@ -19,6 +19,7 @@ public interface MemberService {
 	void editSellerMemberService(SellerVO svo);
 	AddressVO findMemberAddressAPIById(String memId);
 	void editBuyerMemberService(MemberVO mvo);
+	void editSellerMemberNoImageService(SellerVO svo);
 /////////////////////// end  정훈 메서드   ///////////////////////////////
 
 	int idcheck(String id);
@@ -57,11 +58,12 @@ public interface MemberService {
 /////////////////////// end  우정 메서드   ///////////////////////////////
 	
 	
+
 	
 /////////////////////// start  지원 메서드   ///////////////////////////////
 	MemberVO getBuyerInfo(String buyerId);
 /////////////////////// end  지원 메서드   ///////////////////////////////
-	
+
 
 
 }
