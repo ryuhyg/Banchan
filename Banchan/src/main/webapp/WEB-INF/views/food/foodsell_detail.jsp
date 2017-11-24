@@ -116,9 +116,14 @@
 						</div>
 					</form>
 				</div>
-			</div> <!-- col-md-9 -->		
-			
+			</div> <!-- col-md-9 -->	
 		</div> <!-- row -->
+		
+		<!-- 후기 작성 영역 _ 윤주 -->
+		<div class="row">
+		
+		</div>			
+		
 	</div> <!-- container  -->
 </div> <!-- page-container -->
 </section>	<!-- recent-list -->			
