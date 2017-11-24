@@ -35,8 +35,8 @@ public class TradeServiceImpl implements TradeService {
 	 * @param tradeNo
 	 */
     @Override
-    public void updateTradeStatus(String tradeNo) {
-    	tradeDAO.updateTradeStatus(tradeNo);
+    public void completeTrade(String tradeNo) {
+    	tradeDAO.completeTrade(tradeNo);
     }
     
     /**[지원] 판매자 전체 거래내역 조회 
@@ -56,9 +56,7 @@ public class TradeServiceImpl implements TradeService {
 	///////////////////////start윤주////////////////////////////////
 	@Override
 	public List<TradeVO> getTradeListByMemId(String memId) {
-	System.out.println("getTradeListByMemId memId:"+memId);
-	return tradeDAO.getTradeListByMemId(memId);
-	
+		return tradeDAO.getTradeListByMemId(memId);
 	}
 	///////////////////////end윤주///////////////////////////////////
 }

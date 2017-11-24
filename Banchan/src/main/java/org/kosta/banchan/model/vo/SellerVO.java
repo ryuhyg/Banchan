@@ -7,13 +7,11 @@ public class SellerVO extends MemberVO {
 
 	private static final long serialVersionUID = 4427951495449264548L;
 	
-	private String memId;
     private String sellerImg;
     private String sellerInfo;
     private float sellerScore;
     private MultipartFile uploadImage;
     
-   
 	public SellerVO() {
 		super();
 	}
@@ -22,13 +20,6 @@ public class SellerVO extends MemberVO {
 		super();
 		this.sellerImg = sellerImg;
 		this.sellerInfo = sellerInfo;
-	}
-
-	public String getMemId() {
-		return memId;
-	}
-	public void setMemId(String memId) {
-		this.memId = memId;
 	}
 	public String getSellerImg() {
 		return sellerImg;
@@ -54,15 +45,11 @@ public class SellerVO extends MemberVO {
 	public void setUploadImage(MultipartFile uploadImage) {
 		this.uploadImage = uploadImage;
 	}
+
 	@Override
 	public String toString() {
-		return "SellerVO [memId=" + memId + ", sellerImg=" + sellerImg + ", sellerInfo=" + sellerInfo + ", sellerScore="
-				+ sellerScore + ", uploadImage=" + uploadImage + ", getMemId()=" + getMemId() + ", getSellerImg()="
-				+ getSellerImg() + ", getSellerInfo()=" + getSellerInfo() + ", getSellerScore()=" + getSellerScore()
-				+ ", getUploadImage()=" + getUploadImage() + ", toString()=" + super.toString() + "]";
+		return "SellerVO [sellerImg=" + sellerImg + ", sellerInfo=" + sellerInfo + ", sellerScore=" + sellerScore
+				+ ", uploadImage=" + uploadImage + "]";
 	}
-
-   
-    
-
+	
 }

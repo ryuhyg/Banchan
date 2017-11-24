@@ -38,18 +38,14 @@ public class FoodController {
     public String orderFood(HttpServletRequest request) {
     	
     	int trQuantity = Integer.parseInt(request.getParameter("trQuantity"));
-    	System.out.println("q:"+trQuantity);
     	String memId = request.getParameter("memId");
-    	System.out.println("mid:"+memId);
     	String foodSellNo = request.getParameter("foodSellVO.foodSellNo");
-    	System.out.println("fsno:"+foodSellNo);
     	
     	TradeVO tvo = new TradeVO();
     	tvo.setTrQuantity(trQuantity);
     	tvo.setMemId(memId);
     	tvo.setFoodSellVO(new FoodSellVO());
     	tvo.getFoodSellVO().setFoodSellNo(foodSellNo);
-    	System.out.println("tvo:"+tvo);
     	foodService.orderFood(tvo);
     	return "food/orderFood_ok.tiles";
     }
@@ -72,9 +68,9 @@ public class FoodController {
      */
     @RequestMapping(method=RequestMethod.POST , value="registerFoodSell.do")
     public String registerFoodSell(FoodSellVO foodSellVO) {
-    	System.out.println("foodSellVO : "+ foodSellVO);
+    	//System.out.println("foodSellVO : "+ foodSellVO);
     	foodService.registerFoodSell(foodSellVO);
-    	System.out.println(" 메서드 후 foodSellVO : "+ foodSellVO); //ok 
+    	//System.out.println(" 메서드 후 foodSellVO : "+ foodSellVO); //ok 
     	return "redirect:getFoodSellDetail.do?foodSellNo="+foodSellVO.getFoodSellNo();
     }
     

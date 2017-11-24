@@ -8,7 +8,7 @@ public interface TradeDAO {
 
 	List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo);
 
-	void updateTradeStatus(String tradeNo);
+	void completeTrade(String tradeNo);
 
 	List<TradeVO> getAllSellerTradeList(String sellerId);
 	////////////////////Start 윤주 //////////////////////////
