@@ -167,33 +167,50 @@ public class MemberServiceImpl implements MemberService {
 	   }
 	   @Transactional
 	   @Override
-	   public void editMemberService(MemberVO memberVO, SellerVO vo) {
+	   public void editBuyerMemberService(MemberVO mvo){
 		// 비밀번호를 bcrypt 알고리즘으로 암호화
-			String encodedPwd = passwordEncoder.encode(memberVO.getPw());
-			memberVO.setPw(encodedPwd);
+			String encodedPwd = passwordEncoder.encode(mvo.getPw());
+			mvo.setPw(encodedPwd);
 			
 			// 주소 타입이 존재하는지 확인
-			String addressNO= memberDAO.checkAddressNoByAddressAPIByUpdate(memberVO);
+			String addressNO= memberDAO.checkAddressNoByAddressAPIByUpdate(mvo);
 			if(addressNO !=null) {
 				//memberVO안에 addressVO의 addressNo에 SET
-				memberVO.getAddressVO().setAddressNo(addressNO);
+				mvo.getAddressVO().setAddressNo(addressNO);
 			}
 			// 주소 테이블 insert
 			else if( addressNO == null) {
 				//시퀀스 이용하여 주소테이블에 insert ( 번호, api 주소, 위도,경도) , 
 				// registerNewAddressInfo메서드  실행후 memberVO의 addressNo변수에는 insert시의 address_no값이 set 된다.
-				memberDAO.registerNewAddressInfoByUpdate(memberVO.getAddressVO());		
+				memberDAO.registerNewAddressInfoByUpdate(mvo.getAddressVO());		
 			}
-			SellerVO svo=memberDAO.findMemberTypeById(memberVO.getMemId());
-			if(svo!=null) {
-				memberDAO.editMemberSeller(memberVO);
-				memberDAO.editMemberSellerInfoAndImage(vo);
-			}else {
-				memberDAO.editMemberBuyer(memberVO);
+				memberDAO.editMemberBuyer(mvo);
 			}
+	   
+	   @Transactional
+	   @Override
+	   public void editSellerMemberService(SellerVO svo){
+		// 비밀번호를 bcrypt 알고리즘으로 암호화
+			String encodedPwd = passwordEncoder.encode(svo.getPw());
+			svo.setPw(encodedPwd);
 			
+			// 주소 타입이 존재하는지 확인
+			String addressNO= memberDAO.checkAddressNoByAddressAPIByUpdate(svo);
+			if(addressNO !=null) {
+				//memberVO안에 addressVO의 addressNo에 SET
+				svo.getAddressVO().setAddressNo(addressNO);
 			}
-
+			// 주소 테이블 insert
+			else if( addressNO == null) {
+				//시퀀스 이용하여 주소테이블에 insert ( 번호, api 주소, 위도,경도) , 
+				// registerNewAddressInfo메서드  실행후 memberVO의 addressNo변수에는 insert시의 address_no값이 set 된다.
+				memberDAO.registerNewAddressInfoByUpdate(svo.getAddressVO());		
+			}
+				memberDAO.editMemberSellerInfoAndImage(svo);
+				memberDAO.editMemberSeller(svo);
+			}
+	   		
+	  
  
 
 	
@@ -218,4 +235,7 @@ public String getSellerNameByMemId(String memId) {
 	return memberDAO.getSellerNameByMemId(memId);
 }
 /////////////////////// end  윤주 메서드   ///////////////////////////////
+
+	
+
 }
