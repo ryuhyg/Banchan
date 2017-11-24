@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result column="longitude" property="addressVO.longitude"/> 
  	</resultMap> 
  	<select id="getSameDongSellerListByAddress" parameterType="string" resultMap="sellerRMDong">
-		SELECT s.mem_id,  s.seller_img, s.seller_info, s.seller_score,
+		SELECT s.mem_id,  s.seller_img, s.seller_info, s.seller_score, b.mem_name,  
 			   a.address_no, a.address_api, a.latitude, a.longitude 
 		FROM BAN_MEM b, ADDRESS a, mem_auth ma , seller s 
 		WHERE b.address_no = a.address_no
@@ -155,7 +155,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 <!-- update 판매자 -->
-	<update id="editMemberSeller" parameterType="memberVO">
+	<update id="editMemberSeller" parameterType="sellerVO">
 		update ban_mem set pw=#{pw}, mem_name=#{memName}, birth=#{birth}, tel=#{tel}, address_de=#{addressDe}, pw_answer=#{pwAnswer}, address_no=#{addressVO.addressNo}, pw_qna_no=#{pwQnaNo}
 		where mem_id=#{memId}
 	</update>

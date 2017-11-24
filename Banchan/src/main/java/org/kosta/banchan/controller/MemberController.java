@@ -23,7 +23,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -130,7 +129,8 @@ public class MemberController {
           System.out.println("addressVO :"+addressVO);
           List<SellerVO> list = null;
              list = memberService.getSameDongSellerListByAddress(addressVO.getAddressAPI());
-          
+            System.out.println("************************");
+            System.out.println(list);
           model.addAttribute("addressVO",addressVO);
           model.addAttribute("list",list);
           return "member/locationServicePage.tiles";
@@ -142,45 +142,50 @@ public class MemberController {
    
    
 /////////////////////// start  정훈 메서드   ///////////////////////////////
-       //top3
+       //이달의 주부 Top3 리스트
        @RequestMapping("selectSellerTop3.do")
        public String selectSellerTop3(Model model) {
-          
           List<SellerVO> list=memberService.selectSellerTop3();
-          
           model.addAttribute("list", list);
           return "home.tiles";
        }
-       //회원수정페이지로..
+       //회원수정페이지로 -> 판매자, 구매자
        @RequestMapping("editMemberView.do")
        public String editMemberView(Model model, String pwQnaNo, String memId) {
-          List<PwQnaVO> pwQnaList =
-               memberService.getAllPwQnAList();
-          AddressVO avo=memberService.findMemberAddressAPIById(memId);
-          PwQnaVO pvo=memberService.findPwQnaNo(pwQnaNo);
-             SellerVO svo=memberService.findMemberTypeById(memId);
+          List<PwQnaVO> pwQnaList = memberService.getAllPwQnAList(); //질문리스트
+          AddressVO avo=memberService.findMemberAddressAPIById(memId); //주소찾기
+          System.out.println("address:" +avo.getAddressAPI());
+          PwQnaVO pvo=memberService.findPwQnaNo(pwQnaNo); //질문찾기
+          SellerVO svo=memberService.findMemberTypeById(memId); //회원타입 검색
+          //회원 타입 검색해서 판매자와 구매자로 분기
              if(svo!=null) {
-          model.addAttribute("svo", svo);
+            	 model.addAttribute("svo", svo);
+            	 model.addAttribute("pvo", pvo);
+            	 model.addAttribute("avo", avo);
+            	 model.addAttribute("pwQnaList", pwQnaList);
+          return "member/editSellerMemberView.tiles"; //판매자 회원수정 페이지로...
+             }else {
+            	 model.addAttribute("pvo", pvo);
+            	 model.addAttribute("avo", avo);
+            	 model.addAttribute("pwQnaList", pwQnaList);
+          return "member/editBuyerMemberView.tiles"; //구매자 회원수정 페이지로...
              }
-          model.addAttribute("pvo", pvo);
-          //회원이 판매자 이면 판매자 아니면 구매자 보냄.
-          //request에 set해서 비밀번호 찾기 질문 리스트를 보냄.
-          model.addAttribute("pwQnaList", pwQnaList);  
-          model.addAttribute("avo", avo);
-             
-          return "member/editMemberView.tiles";
        }
-       //회원수정
-       @Transactional
-       @RequestMapping(value = "editMember.do", method = RequestMethod.POST)
-       public String editMember(MemberVO mvo, SellerVO vo, HttpServletRequest request) {
+       //회원수정-구매자
+       @RequestMapping(value ="editBuyerMember.do", method = RequestMethod.POST)
+       public String editBuyerMember(MemberVO mvo) {
+    	   memberService.editBuyerMemberService(mvo);
+       return "redirect:member/editMember_ok.do";
+       }
+          
+      //회원수정-판매자 
+      @RequestMapping(value = "editSellerMember.do", method = RequestMethod.POST)
+       public String editMember(SellerVO svo, HttpServletRequest request) {
             uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
           File uploadDir=new File(uploadPath);
           if(uploadDir.exists()==false)
              uploadDir.mkdirs();
-          MultipartFile file=vo.getUploadImage();//파일 
-          //System.out.println(file+"<==");
-          //System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
+          MultipartFile file=svo.getUploadImage();//파일 
           if(file!=null&&file.isEmpty()==false){
              System.out.println("파일명:"+file.getOriginalFilename());
              File uploadFile=new File(uploadPath+file.getOriginalFilename());
@@ -191,10 +196,15 @@ public class MemberController {
                 e.printStackTrace();
              }
           }
-          vo.setSellerImg(file.getOriginalFilename());
-          memberService.editMemberService(mvo, vo);
+          svo.setSellerImg(file.getOriginalFilename());
+          memberService.editSellerMemberService(svo);
              return "redirect:member/editMember_ok.do";
        }
+       
+       
+       
+       
+       
 /*       //비밀번호 질문 받아오기
        @RequestMapping("findPwQnaNo.do")
        public String findPwQnaNo(String pwQnaNo, Model model) {

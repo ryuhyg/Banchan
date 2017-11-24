@@ -70,7 +70,7 @@ String getSellerNameByMemId(String memId);
 		void editMemberBuyer(MemberVO memberVO);
 
 //회원정보수정-판매자(정훈)
-		void editMemberSeller(MemberVO memberVO);
+		void editMemberSeller(SellerVO svo);
 
 //업데이트용 주소타입 존재 체크(정훈)
 		String checkAddressNoByAddressAPIByUpdate(MemberVO memberVO);
@@ -89,6 +89,9 @@ String getSellerNameByMemId(String memId);
 
 	
 
+
+
+		
 
 
 
