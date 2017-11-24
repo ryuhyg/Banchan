@@ -143,10 +143,11 @@ public class FoodController {
     System.out.println("fvo2:"+fvo);
     foodService.foodRegister(fvo);
     
-    return "redirect:foodRegister_ok.do";	
+    return "redirect:foodRegister_ok.do?memId="+id;	
     }
     @RequestMapping("foodRegister_ok.do")
-    public String foodRegister_ok() {
+    public String foodRegister_ok(String memId,Model model) {
+    	model.addAttribute("memId",memId);
     	return "food/foodRegister_ok.tiles";
     }
     

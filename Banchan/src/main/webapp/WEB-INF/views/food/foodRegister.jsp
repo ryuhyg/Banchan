@@ -26,6 +26,7 @@ function getimagereview(html, $target) {
 			<div class="col-sm-10">
 				<div class="blog-list blog-detail">
 					<form class="form-large grey-color" action="foodRegister.do" method="post" enctype="multipart/form-data">
+					
 					<h3 class="title-form">
 						<i class="icon fa fa-comment" style="margin-right: 5px"></i><input type="text" name="foodname"></h3>
 						<input type="hidden" name="id" value="${mvo.memId}">

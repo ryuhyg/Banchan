@@ -219,7 +219,7 @@ public class MemberController {
    
        @RequestMapping("sellerPageInfo.do")
        public String seller_myPage(Model model, String memId) {
-          SellerVO svo = memberService.selectSellerInfo(memId);
+    	  SellerVO svo = memberService.selectSellerInfo(memId);
           List<FoodVO> flist = foodeService.getFoodListByMemId(memId);
           List<FoodSellVO> fslist = foodeService.getFoodSellInfoByMemId(memId);
           model.addAttribute("svo", svo);

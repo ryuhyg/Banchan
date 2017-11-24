@@ -15,4 +15,6 @@ public interface TradeDAO {
 	List<TradeVO> getTradeListByMemId(String memId);
 	////////////////////END 윤주 //////////////////////////
 
+	int getTradeCountByFoodSellNo(String foodSellNo);
+
 }

@@ -124,7 +124,6 @@ public class MemberServiceImpl implements MemberService {
 ////////////////////start 우정 메서드 ////////////////////////////
 	   @Override
 	  public SellerVO selectSellerInfo(String id) {
-		  System.out.println("selectSellerInfo Service");
 		  return sellerDAO.selectSellerInfo(id);
 	  }
 	  @Override
