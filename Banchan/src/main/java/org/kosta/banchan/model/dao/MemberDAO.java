@@ -71,8 +71,11 @@ String getSellerNameByMemId(String memId);
 //회원정보수정-구매자(정훈)
 		void editMemberBuyer(MemberVO memberVO);
 
-//회원정보수정-판매자(정훈)
+//회원정보수정-판매자(정훈)-이미지있을 때
 		void editMemberSeller(SellerVO svo);
+
+//회원정보수정-판매자(정훈)-이미지없을 때
+		void editMemberSellerNoImage(SellerVO svo);
 
 //업데이트용 주소타입 존재 체크(정훈)
 		String checkAddressNoByAddressAPIByUpdate(MemberVO memberVO);
@@ -83,25 +86,16 @@ String getSellerNameByMemId(String memId);
 //회원이 구매자인지 판매자 인지 판별(정훈)
 		SellerVO findMemberTypeById(String memId);
 
-//회원이 구매자인지 판매자 인지 판별(정훈)
+//회원 이미지 저장(정훈)
 		void editMemberSellerInfoAndImage(SellerVO vo);
-
+	
 //주소정보 들고오기(정훈)
 		AddressVO findMemberAddressAPIById(String memId);
 
-		
 
-	
-
-
-
-		
-
-
-
-
-		
-
+/////////////////////// start  지원 메서드   ///////////////////////////////
+		MemberVO getBuyerInfo(String buyerId);
+/////////////////////// end  지원 메서드   ///////////////////////////////
 
 	
 }

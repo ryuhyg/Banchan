@@ -67,9 +67,19 @@ public class TestUnit {
 //		System.out.println(mDAO.findPwQnaNo("1"));
 //		System.out.println(mDAO.findMemberTypeById("java2"));
 		
-		String no="1033";
+		/*String no="1033";
 		FoodVO vo=foodDAO.getFoodMemInfo(no);
-		System.out.println("vo :"+vo);
+		System.out.println("vo :"+vo);*/
+		
+		String str ="경기 성남시 분당구 안양판교로 1192 (백현동)";
+		System.out.println(str.indexOf(" "));
+		int first = str.indexOf(" ");
+		String temp = str.substring(str.indexOf(" ")+1, str.length());
+		System.out.println(temp);
+		int second =temp.indexOf(" ");
+		System.out.println(first+second);
+		String temp2 = str.substring(0, first+second+1);
+		System.out.println(temp2);
 		
 	}
 }

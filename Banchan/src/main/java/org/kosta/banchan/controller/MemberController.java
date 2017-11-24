@@ -16,6 +16,7 @@ import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -146,7 +147,8 @@ public class MemberController {
           System.out.println("addressVO :"+addressVO);
           List<SellerVO> list = null;
              list = memberService.getSameDongSellerListByAddress(addressVO.getAddressAPI());
-          
+            System.out.println("************************");
+            System.out.println(list);
           model.addAttribute("addressVO",addressVO);
           model.addAttribute("list",list);
           return "member/locationServicePage.tiles";
@@ -188,15 +190,28 @@ public class MemberController {
              }
        }
        //회원수정-구매자
+       @Secured("ROLE_BUYER")
        @RequestMapping(value ="editBuyerMember.do", method = RequestMethod.POST)
        public String editBuyerMember(MemberVO mvo) {
-    	   memberService.editBuyerMemberService(mvo);
+    	   //security 세션정보를 셋팅해줘야 됨.
+           MemberVO mvoBuyerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //security 세션 정보(수정전)
+                  
+           memberService.editBuyerMemberService(mvo); //update
+           mvoBuyerMember.setMemName(mvo.getPw()); //mvoBuyerMember에 업데이트 된 값 셋팅 (웹페이지에 갱신된 정보를 표현하기 위함)
+           mvoBuyerMember.setMemName(mvo.getMemName()); //안그러면 로그아웃했다가 다시 로그인해야 수정된 정보가 출력됨
+           mvoBuyerMember.setBirth(mvo.getBirth());
+           mvoBuyerMember.setTel(mvo.getTel());
+           mvoBuyerMember.setAddressDe(mvo.getAddressDe());
+           mvoBuyerMember.setPwAnswer(mvo.getPwAnswer());
+           mvoBuyerMember.setPwQnaNo(mvo.getPwQnaNo());
+          
        return "redirect:member/editMember_ok.do";
        }
           
-      //회원수정-판매자 
+      //회원수정-판매자
+       @Secured("ROLE_SELLER")
       @RequestMapping(value = "editSellerMember.do", method = RequestMethod.POST)
-       public String editMember(SellerVO svo, HttpServletRequest request) {
+       public String editMember(SellerVO svo, HttpServletRequest request, Model model) {
             uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
           File uploadDir=new File(uploadPath);
           if(uploadDir.exists()==false)
@@ -212,10 +227,49 @@ public class MemberController {
                 e.printStackTrace();
              }
           }
-          svo.setSellerImg(file.getOriginalFilename());
-          memberService.editSellerMemberService(svo);
-             return "redirect:member/editMember_ok.do";
+          String imageName=(String)file.getOriginalFilename();
+          System.out.println("updateImage:" + imageName);
+          if(imageName.equals("null")||imageName.equals("")) {
+          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	         
+    	  memberService.editSellerMemberNoImageService(svo); // 업데이트
+    	  mvoSellerMember.setMemName(svo.getPw());
+    	  mvoSellerMember.setMemName(svo.getMemName());
+    	  mvoSellerMember.setBirth(svo.getBirth());
+    	  mvoSellerMember.setTel(svo.getTel());
+    	  mvoSellerMember.setAddressDe(svo.getAddressDe());
+    	  mvoSellerMember.setPwAnswer(svo.getPwAnswer());
+    	  mvoSellerMember.setPwQnaNo(svo.getPwQnaNo());
+    	   }else {
+          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+          
+          svo.setSellerImg(file.getOriginalFilename()); //이미지 업데이트 
+          memberService.editSellerMemberService(svo); // 업데이트
+          mvoSellerMember.setMemName(svo.getPw());
+          mvoSellerMember.setMemName(svo.getMemName());
+          mvoSellerMember.setBirth(svo.getBirth());
+          mvoSellerMember.setTel(svo.getTel());
+          mvoSellerMember.setAddressDe(svo.getAddressDe());
+          mvoSellerMember.setPwAnswer(svo.getPwAnswer());
+          mvoSellerMember.setPwQnaNo(svo.getPwQnaNo());
+          
+      }
+          return "redirect:member/editMember_ok.do";
        }
+
+          
+          
+        //수정세션..  
+  		/*System.out.println("Spring Security 세션 수정 전 회원정보:" + pvo);		
+  		memberService.updateMember(memberVO);//service에서 변경될 비밀번호를 암호화한다 
+  		// 수정한 회원정보로 Spring Security 세션 회원정보를 업데이트한다
+  		pvo.setPassword(memberVO.getPassword());
+  		pvo.setName(memberVO.getName());
+  		pvo.setAddress(memberVO.getAddress());
+  		System.out.println("Spring Security 세션 수정 후 회원정보:" + pvo);*/
+        
+  		
+  		
        
        
        
@@ -235,7 +289,7 @@ public class MemberController {
    
        @RequestMapping("sellerPageInfo.do")
        public String seller_myPage(Model model, String memId) {
-          SellerVO svo = memberService.selectSellerInfo(memId);
+    	  SellerVO svo = memberService.selectSellerInfo(memId);
           List<FoodVO> flist = foodeService.getFoodListByMemId(memId);
           List<FoodSellVO> fslist = foodeService.getFoodSellInfoByMemId(memId);
           model.addAttribute("svo", svo);
@@ -249,54 +303,52 @@ public class MemberController {
 //판매자 등록 폼(이미 판매자로 등록되어있으면 sellerRegisterForm_fail.jsp로 alert띄움)
 @RequestMapping("sellerRegisterForm.do")
 public String sellerRegisterForm(String id) {
-   System.out.println("sellerRegisterform id:"+id);
-
-String memId = id;//로그인 기능 구현되면 세션의 아이디 정보를 가져와서 memId에 할당예정
-int sellerCheck = memberService.isSeller(memId);
-if(sellerCheck==0)
-   return "member/sellerRegisterForm.tiles";
-else
-   return "member/sellerRegisterForm_fail";
+	String memId = id;//로그인 기능 구현되면 세션의 아이디 정보를 가져와서 memId에 할당예정
+	int sellerCheck = memberService.isSeller(memId);
+	if(sellerCheck==0)
+	   return "member/sellerRegisterForm.tiles";
+	else
+	   return "member/sellerRegisterForm_fail";
 }
-
 private String uploadPath;//프로필사진 업로드 경로
 //판매자등록 메서드
 @RequestMapping(value = "sellerRegister.do",method = RequestMethod.POST)
 public String sellerRegister(String id, SellerVO svo,HttpServletRequest request) {
-   //System.out.println("sellerRegister id:"+id);
-uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
-File uploadDir=new File(uploadPath);
-if(uploadDir.exists()==false)
-   uploadDir.mkdirs();
-MultipartFile file=svo.getUploadImage();//파일 
-//System.out.println(file+"<==");
-//System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
-if(file!=null&&file.isEmpty()==false){
-   System.out.println("파일명:"+file.getOriginalFilename());
-   File uploadFile=new File(uploadPath+file.getOriginalFilename());
-   try {
-      file.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
-      System.out.println(uploadPath+file.getOriginalFilename()+" 파일업로드");
-   } catch (IllegalStateException | IOException e) {            
-      e.printStackTrace();
-   }
-}
-String memId= id; // 로그인기능 구현되면 세션정보 가져올 예정
-svo.setMemId(memId);
-svo.setSellerImg(file.getOriginalFilename());
-svo.setSellerInfo(request.getParameter("sellerInfo"));
-memberService.sellerRegister(svo);
-return "redirect:sellerRegister_ok.do";
+	//개발시 경로
+	uploadPath="C://Users/kosta/git/Banchan/Banchan/src/main/webapp/resources/images/";
+	//uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
+	File uploadDir=new File(uploadPath);
+	if(uploadDir.exists()==false)
+	   uploadDir.mkdirs();
+	MultipartFile file=svo.getUploadImage();//파일 
+	//System.out.println(file+"<==");
+	//System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
+	if(file!=null&&file.isEmpty()==false){
+	   System.out.println("파일명:"+file.getOriginalFilename());
+	   File uploadFile=new File(uploadPath+file.getOriginalFilename());
+	   try {
+	      file.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
+	      System.out.println(uploadPath+file.getOriginalFilename()+" 파일업로드");
+	   } catch (IllegalStateException | IOException e) {            
+	      e.printStackTrace();
+	   }
+	}
+	String memId= id; // 로그인기능 구현되면 세션정보 가져올 예정
+	svo.setMemId(memId);
+	svo.setSellerImg(file.getOriginalFilename());
+	svo.setSellerInfo(request.getParameter("sellerInfo"));
+	memberService.sellerRegister(svo);
+	return "redirect:sellerRegister_ok.do";
 }
 @RequestMapping("sellerRegister_ok.do")
 public String sellerRegisterOk() {
    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-      List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
+   List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
    updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_SELLER"));                                                       
-      Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(),
+   Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(),
             updatedAuthorities);
-      SecurityContextHolder.getContext().setAuthentication(newAuth);
-return "member/sellerRegister_ok.tiles";
+   SecurityContextHolder.getContext().setAuthentication(newAuth);
+   return "member/sellerRegister_ok.tiles";
 }
 /////////////////////// end  윤주 메서드   ///////////////////////////////
 }

@@ -291,8 +291,41 @@
  								checkPwAnswer = "";
  							}
  						});//$("#pwAnswerId").keyup
- 
+ 						
+ 					
  					});//ready
+ 					
+ 					
+ 					function file_change(file){
+ 					var str=file.lastIndexOf("\\")+1;	//파일 마지막 "\" 루트의 길이 이후부터 글자를 잘라 파일명만 가져온다.
+ 					file = file.substring(str, file.length);
+ 					document.getElementById('fileName').value=file;
+ 					}
+ 					
+ 			
+ 			        $(function() {
+ 			            $("#updateImage").on('change', function(){
+ 			                readURL(this);
+ 			            });
+ 			        });
+
+ 			        function readURL(input) {
+ 			            if (input.files && input.files[0]) {
+ 			            var reader = new FileReader();
+
+ 			            reader.onload = function (e) {
+ 			                    $('#blah').attr('src', e.target.result);
+ 			                }
+
+ 			              reader.readAsDataURL(input.files[0]);
+ 			            }
+ 			        }
+
+
+ 			
+ 				
+ 				
+ 				
  </script>
  
  
@@ -321,10 +354,13 @@
  						<div class="row">
  							<div class="col-xs-6">
  								<label for="id"> 
- 								<i class="fa fa-user user" style="margin-right: 5px"></i>회원이미지</label> 
- 								<input type="file" name="uploadImage" id="updateImage" class="margin-bottom form-control">
+ 								<p><i class="fa fa-user user" style="margin-right: 5px"></i>회원이미지</label></p>
+ 								<img id="blah" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg}" alt="" width="200" height="200" />
+ 								<input type="file" name="uploadImage" id="updateImage" class="margin-bottom form-control" onchange="javascript:file_change(this.value);">
+ 								<input id="fileName" class="margin-bottom form-control" readonly value="${svo.sellerImg}" placeholder="${svo.sellerImg}"/>
  							</div>
  						</div>
+ 						
  						<div class="row">
  							<div class="col-xs-6">
  								<label for="id"> 
@@ -417,7 +453,7 @@
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>비밀번호 찾기 질문</label> <select
  									id="pwQnaSelect">
- 									<option value="100"
+ 									<option value="${pvo.pwQnaNo}"
  										selected="<sec:authentication property="principal.pwQnaNo"/>">${pvo.pwQuest}</option>
  									<c:forEach items="${pwQnaList}" var="p">
  										<option value="${p.pwQnaNo}">${p.pwQuest}</option>

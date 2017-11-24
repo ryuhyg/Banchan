@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where food_sell_no=#{value} and t.tr_status_no=s.tr_status_no
 	</select>
 	<!-- [판매자] 실제 거래완료 후 거래완료확인 하여 거래상태를 바꿔줌  -->
-	<update id="updateTradeStatus" parameterType="string">
+	<update id="completeTrade" parameterType="string">
 		update trade set tr_status_no=2
 		where tr_no=#{value}
 	</update>
@@ -64,22 +64,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		<result column="tr_quantity" property="trQuantity"/>
   		<result column="tr_req_date" property="trReqDate"/>
   		<result column="tr_fin_date" property="trFinDate"/>
+  		<result column="food_sell_no" property="foodSellVO.foodSellNo"/>
  		<result column="tr_status" property="trStatus"/>
  		<result column="tr_date" property="foodSellVO.trDate"/>
  		<result column="close_date" property="foodSellVO.closeDate"/>
  		<result column="loc" property="foodSellVO.loc"/>
  		<result column="price" property="foodSellVO.price"/>
  		<result column="unit" property="foodSellVO.unit"/>
+ 		<result column="food_no" property="foodSellVO.foodNo"/>
  		<result column="food_name" property="foodSellVO.foodName"/>
+ 		<result column="mem_id" property="foodSellVO.sellerVO.memId"/>
  		<result column="mem_name" property="foodSellVO.sellerVO.memName"/>
  		<result column="tel" property="foodSellVO.sellerVO.tel"/>
 </resultMap>
 <select id="getTradeListByMemId" parameterType="string" resultMap="tradeRM2">
-	SELECT t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,
-		   trs.tr_status,
+	SELECT t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,t.food_sell_no,
+		   trs.tr_status_no,trs.tr_status,
 	       fs.tr_date, fs.close_date, fs.loc, fs.price, fs.unit,
-	       f.food_name,
-	       m.mem_name,m.tel
+	       f.food_no,f.food_name,
+	       m.mem_id,m.mem_name,m.tel
 	FROM trade t, food_sell fs, food f,tr_status trs,ban_mem m
 	WHERE t.mem_id=#{value} and t.food_sell_no=fs.food_sell_no and fs.food_no=f.food_no
 	      and t.tr_status_no=trs.tr_status_no and f.mem_id=m.mem_id
