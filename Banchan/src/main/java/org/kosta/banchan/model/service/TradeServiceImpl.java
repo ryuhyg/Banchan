@@ -35,8 +35,8 @@ public class TradeServiceImpl implements TradeService {
 	 * @param tradeNo
 	 */
     @Override
-    public void updateTradeStatus(String tradeNo) {
-    	tradeDAO.updateTradeStatus(tradeNo);
+    public void completeTrade(String tradeNo) {
+    	tradeDAO.completeTrade(tradeNo);
     }
     
     /**[지원] 판매자 전체 거래내역 조회 
