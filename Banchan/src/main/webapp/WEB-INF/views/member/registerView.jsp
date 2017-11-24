@@ -107,12 +107,13 @@
 						"background","white");
 				checkPassword="passwordOK";
 			}
+			$("#regForm :input[id=passwordRe]").trigger("keyup");
 			
 		});//keyup
 		
 		//비밀번호 일치 체크
 		$("#regForm :input[id=passwordRe]").keyup(function() {
-			if($("#regForm :input[id=password]").val().trim()==""){
+			if($("#regForm :input[id=password]").val().trim()==""&& !checkPassword==""){
 				
 				$("#regForm :input[id=passwordRe]").val("");
 				$("#regForm :input[id=password]").focus();
@@ -340,7 +341,7 @@
 								<div class="row">
 									<div  class="col-xs-8">															
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>주소</label>
-										<div id="map" style="width:300px;height:170px;"></div><input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
+										<div id="map" style="width:450px;height:170px;"></div><input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
 										<input type="text" name="addressVO.addressAPI"  id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly">		
 										<input type="text" name="addressDe"  id="detailAddress" class="margin-bottom form-control" placeholder="상세주소 입력">							
 									</div>

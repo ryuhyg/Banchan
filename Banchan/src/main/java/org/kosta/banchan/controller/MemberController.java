@@ -130,7 +130,8 @@ public class MemberController {
           System.out.println("addressVO :"+addressVO);
           List<SellerVO> list = null;
              list = memberService.getSameDongSellerListByAddress(addressVO.getAddressAPI());
-          
+            System.out.println("************************");
+            System.out.println(list);
           model.addAttribute("addressVO",addressVO);
           model.addAttribute("list",list);
           return "member/locationServicePage.tiles";
