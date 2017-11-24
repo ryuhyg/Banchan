@@ -20,6 +20,8 @@ public class MemberDAOImpl implements MemberDAO {
 	@Resource
     private SqlSessionTemplate template;
     
+	
+	
 	@Override
     public List<MemberVO> selectMember() {
         return template.selectList("member.selectMember");
@@ -46,6 +48,14 @@ public class MemberDAOImpl implements MemberDAO {
 		@Override	
 		public void registerRole(Authority authority){
 			template.insert("member.registerRole",authority);
+		}
+		@Override	
+		public void deleteMember(String memId) {
+			template.update("deleteMember",memId);
+		}
+		@Override
+		public void deleteMemberAuth(String memId) {
+			template.delete("deleteMemberAuth",memId);
 		}
 
 /////////////////////// start  광태 메서드   ///////////////////////////////	
