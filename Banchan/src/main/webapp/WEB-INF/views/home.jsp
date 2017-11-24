@@ -64,19 +64,21 @@
 			
 			<a href="">테스트2//</a>
 			<a href="">테스트3//</a>
+			<!-- 우정 링크 테스트 -->
+			<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=aaaa"  >판매자 페이지</a>
 			<!-- 윤주 링크 테스트 -->
 			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
-
-				<div class="section-detail" style="border: 1px solid red">
 				<h3><a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}"  >
 								판매자 페이지</a></h3>			
+
+			<div class="section-detail" style="border: 1px solid red">
 			<a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId }">나의구매내역테스트_윤주//</a>
 
 			</sec:authorize>
 			<!-- 지원 링크 테스트 -->
 			<a href="${pageContext.request.contextPath}/registerFoodView.do">판매음식등록 테스트//</a>
 			<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=101010">판매음식 상세정보//</a>
-			<a href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=101042">[판매자]판매음식당 거래요청리스트//</a>
+			<a href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=101019&pageNo=1">[판매자]판매음식당 거래요청리스트//</a>
 			<sec:authorize access="hasRole('ROLE_SELLER')">
 				<a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}">[판매자]전체 거래요청리스트//</a>
 			</sec:authorize>

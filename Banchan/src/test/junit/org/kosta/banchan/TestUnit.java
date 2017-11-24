@@ -1,5 +1,6 @@
 package org.kosta.banchan;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,7 +10,9 @@ import org.junit.runner.RunWith;
 import org.kosta.banchan.model.dao.FoodDAO;
 import org.kosta.banchan.model.dao.MemberDAO;
 import org.kosta.banchan.model.dao.SellerDAO;
+import org.kosta.banchan.model.dao.TradeDAO;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.PagingBean;
 import org.kosta.banchan.model.vo.SellerVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,6 +30,9 @@ public class TestUnit {
     private BCryptPasswordEncoder passwordEncoder;
 	@Resource
 	private MemberDAO mDAO;
+	@Resource
+	private TradeDAO tradeDAO;
+	
 	
 	@Test
 	public void unitTest() {
@@ -71,7 +77,7 @@ public class TestUnit {
 		FoodVO vo=foodDAO.getFoodMemInfo(no);
 		System.out.println("vo :"+vo);*/
 		
-		String str ="경기 성남시 분당구 안양판교로 1192 (백현동)";
+		/*String str ="경기 성남시 분당구 안양판교로 1192 (백현동)";
 		System.out.println(str.indexOf(" "));
 		int first = str.indexOf(" ");
 		String temp = str.substring(str.indexOf(" ")+1, str.length());
@@ -79,7 +85,21 @@ public class TestUnit {
 		int second =temp.indexOf(" ");
 		System.out.println(first+second);
 		String temp2 = str.substring(0, first+second+1);
-		System.out.println(temp2);
+		System.out.println(temp2);*/
+		
+		
+		int totalCount=tradeDAO.getTradeCountByFoodSellNo("101019");
+		System.out.println("totalCount:"+totalCount);
+		PagingBean pagingBean=null;
+		HashMap<String,Integer> paramMap=new HashMap<String,Integer>();
+		
+		pagingBean=new PagingBean(totalCount,1);
+		System.out.println("PagingBean st:"+pagingBean.getStartRowNumber()+"PagingBean end:"+pagingBean.getEndRowNumber());
+		paramMap.put("startRowNumber",pagingBean.getStartRowNumber());
+		paramMap.put("endRowNumber", pagingBean.getEndRowNumber());
+		paramMap.put("foodSellNo", Integer.parseInt("101019"));
+		
+		System.out.println(tradeDAO.getSellerTradeListByFoodSellNo(paramMap));
 		
 	}
 }

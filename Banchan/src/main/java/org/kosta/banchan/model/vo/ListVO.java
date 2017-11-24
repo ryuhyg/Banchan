@@ -9,11 +9,16 @@ public class ListVO<T> {
 	public ListVO() {
 		super();
 	}
+	
+
+	
 	@Override
 	public String toString() {
-		return "ListVO [pb=" + pb + "]";
+		return "ListVO [list=" + list + ", pb=" + pb + ", getList()=" + getList() + ", getPb()=" + getPb() + "]";
 	}
-	
+
+
+
 	public ListVO(List<T> list, PagingBean pb) {
 		super();
 		this.list = list;

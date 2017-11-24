@@ -2,12 +2,14 @@ package org.kosta.banchan.model.service;
 
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.dao.SellDAO;
 import org.kosta.banchan.model.dao.TradeDAO;
+import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.PagingBean;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.stereotype.Service;
@@ -24,8 +26,21 @@ public class TradeServiceImpl implements TradeService {
 	 * 해당 판매음식에 대한 구매요청 리스트 조회 
      */
     @Override
-    public List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo){
-    	return tradeDAO.getSellerTradeListByFoodSellNo(foodSellNo);
+    public ListVO<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo,String pageNo){
+    	int totalCount=tradeDAO.getTradeCountByFoodSellNo(foodSellNo);
+		PagingBean pagingBean=null;
+		HashMap<String,Integer> paramMap=new HashMap<String,Integer>();
+		if(pageNo==null)
+			pagingBean=new PagingBean(totalCount);
+		else
+			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
+		paramMap.put("startRowNumber",pagingBean.getStartRowNumber());
+		paramMap.put("endRowNumber", pagingBean.getEndRowNumber());
+		paramMap.put("foodSellNo", Integer.parseInt(foodSellNo));
+		
+		//start,end,foodSell no를 저장한 map를 param으로 
+		return new ListVO<TradeVO>(tradeDAO.getSellerTradeListByFoodSellNo(paramMap),pagingBean);
+    	//return tradeDAO.getSellerTradeListByFoodSellNo(foodSellNo);
     }
     
     

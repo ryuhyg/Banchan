@@ -39,12 +39,13 @@ public class TradeController {
 	 * @param model
 	 * @return
 	 */
-	@Secured("ROLE_SELLER")
+	//@Secured("ROLE_SELLER")
 	@RequestMapping("getSellerTradeListByFoodSellNo.do")
-	public String getSellerTradeListByFoodSellNo(String foodSellNo, Model model) {
-		System.out.println(tradeService.getSellerTradeListByFoodSellNo(foodSellNo));
+	public String getSellerTradeListByFoodSellNo(String foodSellNo,String pageNo, Model model) {
+		//System.out.println(tradeService.getSellerTradeListByFoodSellNo(foodSellNo));
+		System.out.println(tradeService.getSellerTradeListByFoodSellNo(foodSellNo,pageNo));
 		model.addAttribute("foodSell", foodService.getFoodSellDetailByNo(foodSellNo));
-		model.addAttribute("tradeList", tradeService.getSellerTradeListByFoodSellNo(foodSellNo));
+		model.addAttribute("tradeList", tradeService.getSellerTradeListByFoodSellNo(foodSellNo,pageNo));
 		return "food/seller_foodTradeList.tiles";
 	}
 
