@@ -87,17 +87,10 @@ String getSellerNameByMemId(String memId);
 //주소정보 들고오기(정훈)
 		AddressVO findMemberAddressAPIById(String memId);
 
-	
 
-
-
-		
-
-
-
-
-		
-
+/////////////////////// start  지원 메서드   ///////////////////////////////
+		MemberVO getBuyerInfo(String buyerId);
+/////////////////////// end  지원 메서드   ///////////////////////////////
 
 	
 }

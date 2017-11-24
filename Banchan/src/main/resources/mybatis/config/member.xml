@@ -247,6 +247,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 <!-- End 윤주 -->
 
+
+<!-- Start 지원 -->
+<resultMap type="memberVO" id="memberInfoRM">
+	<result property="addressVO.addressAPI" column="address_api"/>
+</resultMap>
+<select id="getBuyerInfo" parameterType="string" resultMap="memberInfoRM">
+	select mem_id, mem_name, tel, address_api
+	from ban_mem m, address a
+	where m.address_no=a.address_no and m.mem_id=#{value}
+</select>
+
+
+<!-- End 지원  -->
+
+
 </mapper>
 
 

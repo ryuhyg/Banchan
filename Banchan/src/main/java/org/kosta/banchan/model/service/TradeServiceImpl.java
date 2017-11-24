@@ -41,6 +41,7 @@ public class TradeServiceImpl implements TradeService {
     
     /**[지원] 판매자 전체 거래내역 조회 
      * 해당 판매자가 거래한 모든 거래내역을 조회한다. 
+     * 구매자의 정보도 함께 조회하여 보낸다.
      * 
      * @param sellerId
      * @return

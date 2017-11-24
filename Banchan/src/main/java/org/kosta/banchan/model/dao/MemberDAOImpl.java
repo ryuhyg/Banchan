@@ -197,6 +197,12 @@ public void getEditMembers(SellerVO vo) {
 	
 }
 
+/////////////////////// start  지원 메서드   ///////////////////////////////
+@Override
+public MemberVO getBuyerInfo(String buyerId) {
+	return template.selectOne("member.getBuyerInfo", buyerId);
+}
+/////////////////////// end  지원 메서드   ///////////////////////////////
 	
 
 }

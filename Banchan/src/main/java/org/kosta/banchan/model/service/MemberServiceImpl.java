@@ -232,6 +232,13 @@ public String getSellerNameByMemId(String memId) {
 }
 /////////////////////// end  윤주 메서드   ///////////////////////////////
 
+
 	
+/////////////////////// start 지원   ///////////////////////////////
+	@Override
+	public MemberVO getBuyerInfo(String buyerId) {
+		return memberDAO.getBuyerInfo(buyerId);
+	}
+/////////////////////// end 지원   ///////////////////////////////
 
 }
