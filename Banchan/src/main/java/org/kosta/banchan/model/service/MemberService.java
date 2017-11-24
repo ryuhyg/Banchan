@@ -34,8 +34,8 @@ public interface MemberService {
 	List<PwQnaVO> getAllPwQnAList();
 	// 광태 회원가입 메소드
 	void registerMember(MemberVO memberVO);
-	List<SellerVO> getSameDongSellerListByAddress(String addressAPI);
 	AddressVO getAddressAPIById(MemberVO memberVO);
+	List<AddressVO> getNearSellerAddressByAddressAPI(String addressAPI);
 /////////////////////// end  광태 메서드   ///////////////////////////////
 	
 /////////////////////// start  윤주 메서드   ///////////////////////////////
@@ -55,6 +55,7 @@ public interface MemberService {
 	SellerVO selectSellerInfo(String id);
 	List<FoodVO> selectFoodInfo(String id);
 /////////////////////// end  우정 메서드   ///////////////////////////////
+	
 	
 
 

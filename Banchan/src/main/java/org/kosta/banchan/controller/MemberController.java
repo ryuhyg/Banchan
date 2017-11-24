@@ -100,7 +100,7 @@ public class MemberController {
        @RequestMapping("locationServicePage.do")
        public String locationServicePage(Model model, Authentication authentication) {
           
-          List<SellerVO> list = null;
+          List<AddressVO> list = null;
           
           // 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다
          if( SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) { 
@@ -111,25 +111,26 @@ public class MemberController {
             avo.setLatitude(37.4008198);
             avo.setLongitude(127.10651510000002);
             model.addAttribute("addressVO",avo);
-         }else {
+            list = memberService.getNearSellerAddressByAddressAPI(avo.getAddressAPI());
+         }
+         else {
             System.out.println("로그인 상태");
             MemberVO mvo =(MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             mvo.setAddressVO(memberService.getAddressAPIById(mvo)); 
-            //System.out.println("mvo.getAddressVO() : "+mvo.getAddressVO());
-            list = memberService.getSameDongSellerListByAddress(mvo.getAddressVO().getAddressAPI());
+            list = memberService.getNearSellerAddressByAddressAPI(mvo.getAddressVO().getAddressAPI());
             model.addAttribute("addressVO",mvo.getAddressVO());
-            
+
          }
          model.addAttribute("list",list);
           return "member/locationServicePage.tiles";   
           
        }
-       @RequestMapping("searchLocationByService_unsigned.do")
+       @RequestMapping("searchLocationByService.do")
        public String searchLocationByService(Model model,AddressVO addressVO) {
           System.out.println("searchLocationByService_unsigned!!!");
           System.out.println("addressVO :"+addressVO);
-          List<SellerVO> list = null;
-             list = memberService.getSameDongSellerListByAddress(addressVO.getAddressAPI());
+          List<AddressVO> list = null;
+             list = memberService.getNearSellerAddressByAddressAPI(addressVO.getAddressAPI());
             System.out.println("************************");
             System.out.println(list);
           model.addAttribute("addressVO",addressVO);

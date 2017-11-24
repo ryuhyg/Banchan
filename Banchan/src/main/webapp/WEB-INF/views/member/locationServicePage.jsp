@@ -145,7 +145,7 @@ $(document).ready(function() {
 							
 							
 					<div class="col-sm-2"><!-- right -->
-						<form action="${pageContext.request.contextPath}/searchLocationByService_unsigned.do"
+						<form action="${pageContext.request.contextPath}/searchLocationByService.do"
 						id="addressAPIDongForm">
 							<input type="hidden" id="addressAPIId" name="addressAPI" value="">
 							<input type="hidden" id="latitudeId" name="latitude" value="">
@@ -204,8 +204,8 @@ $(document).ready(function() {
 	var positions = [	
 			<c:forEach items="${list}" var="s" >
 				{
-			        title: '${s.addressVO.addressNo}', 
-			        latlng: new daum.maps.LatLng(${s.addressVO.latitude}, ${s.addressVO.longitude})
+			        title: '${s.addressNo}', 
+			        latlng: new daum.maps.LatLng(${s.latitude}, ${s.longitude})
 			    },
 			</c:forEach>
 	];
@@ -230,7 +230,7 @@ $(document).ready(function() {
 	    daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 	    daum.maps.event.addListener(marker, 'click', makeClickListener(positions[i].title));
 	}
-
+ 
 	
 	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
 	function makeOverListener(map, marker, infowindow) {
@@ -248,26 +248,11 @@ $(document).ready(function() {
 	// 마커 클릭시 이벤트 입니다
 	function makeClickListener(title) {
 	    return function() {
-	    	 var strTemp="";
-	    			 <c:forEach items="${list}" var="s" >
-	    			 	if (title=='${s.addressVO.addressNo}') {
-	    		strTemp +="<tr><td rowspan='3'>"+
-				"<a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId=${s.memId}'>"+
-				"<img src='/banchan/resources/images/김래원.jpg' style='width: 100px;height:100px;'>"+
-				"</a>"+
-				"</td>"+
-				"<td> <a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId=${s.memId}'>"+'${s.memName}'+"</a> </td>"+
-				"</tr>"+			
-				"<tr><td>"+'별점 : ${s.sellerScore}'  +"</td></tr>"+
-				"<tr><td>"+"판매자 소개 : ${s.sellerInfo}"+"</td></tr>";
-	    		}
-	    			 </c:forEach>
-	    			 //alert(strTemp);
-	    			 $("#tbodyList").html(strTemp); 
+	    	alert(1);
+	    	
 	    };
-	} 
-	
-	//////////////////////////////
+	};
+//////////////////////////////거리 거리 거리 거리 //////////////////////////////////////////	
 
 var drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
 var moveLine; // 선이 그려지고 있을때 마우스 움직임에 따라 그려질 선 객체 입니다

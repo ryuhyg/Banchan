@@ -99,6 +99,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE 		m.address_no=a.address_no 
 		AND 		mem_id=#{value}
  	</select>
+ 	
+ 	
+ 	<select id="getNearSellerAddressByAddressAPI" parameterType="string" resultType="addressVO">
+ 		SELECT a.address_no, a.address_api, a.latitude, a.longitude 
+		FROM BAN_MEM b, ADDRESS a, mem_auth ma
+		WHERE b.address_no = a.address_no  
+		AND b.mem_id = ma.mem_id 
+		AND a.address_API like '%'||#{value}||'%'
+		AND ma.auth_no ='20'
+ 	</select>
 <!-- End 광태 -->
 
 <!-- Start 우정 -->

@@ -108,11 +108,6 @@ public class MemberServiceImpl implements MemberService {
 		   return memberDAO.getAllSameAddressSellerListByAddress(addressNo);
 	   }
 	   
-	   @Override
-	   public List<SellerVO> getSameDongSellerListByAddress(String addressAPI){
- 
-		   return memberDAO.getSameDongSellerListByAddress(cutAddressAPI(addressAPI));
-	   }
 	   private String cutAddressAPI(String addressAPI) {
 		   int first = addressAPI.indexOf(" ");
 			String temp = addressAPI.substring(addressAPI.indexOf(" ")+1, addressAPI.length());
@@ -124,6 +119,10 @@ public class MemberServiceImpl implements MemberService {
 	   @Override
 	   public AddressVO getAddressAPIById(MemberVO memberVO) {
 		   return memberDAO.getAddressAPIById(memberVO);
+	   }
+	   @Override
+	   public List<AddressVO> getNearSellerAddressByAddressAPI(String addressAPI) {
+		   return memberDAO.getNearSellerAddressByAddressAPI(cutAddressAPI(addressAPI));
 	   }
 	   /////////// end 위치기반 추천 메서드 ////////////////////   
    /////////////////////// end  광태 메서드   ///////////////////////////////
