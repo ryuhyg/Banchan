@@ -50,7 +50,7 @@ function reviewCheck(){
 }
 </script>    
 <sec:authentication var="mvo" property="principal" />
-<section id="recent-list" style="margin-top: 350px;">
+<section id="recent-list" style="margin-top: 150px;">
 	<div class="container">
 [후기작성]
 <form action="${pageContext.request.contextPath}/reviewRegister.do" onsubmit="return reviewCheck()">

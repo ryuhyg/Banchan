@@ -14,7 +14,7 @@ function getimagereview(html, $target) {
     }
 }
 </script>
-<section id="recent-list" style="margin-top: 350px;">
+<section id="recent-list" style="margin-top: 150px;">
 	<div class="container">
 		<form action="sellerRegister.do?id=${mvo.memId}" method="post" enctype="multipart/form-data">
 		<sec:csrfInput/>

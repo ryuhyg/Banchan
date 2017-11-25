@@ -123,7 +123,7 @@ $(document).ready(function() {
 
 
 
-<section id="agent-page" style="margin-top: 350px;">
+<section id="agent-page" style="margin-top: 150px;">
 <br>
 
 			<div class="container">

@@ -17,7 +17,7 @@ function reviewRegisterCheck(){
 }
 </script> 윤주....실패... -->
 
-<section id="recent-list" style="margin-top: 350px;">
+<section id="recent-list" style="margin-top: 150px;">
 	<div class="container">
 	<h3>[나의 거래 내역]</h3>
 <c:choose>
