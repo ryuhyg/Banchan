@@ -332,7 +332,7 @@
 									<div  class="col-xs-6">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>전화번호  (   -   포함하여 입력해주세요! )</label>
 										<!-- <input type="text" name="tel"  class="margin-bottom form-control" placeholder="전화번호"> -->
-										<input  class="margin-bottom form-control"  type="tel" name="tel" id="telno" title=" -  포함하여 입력해주세요!" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" maxlength="13">
+										<input  class="margin-bottom form-control"  type="tel" name="tel" id="telno" title=" -  포함하여 입력해주세요!" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" maxlength="13" required="required">
 									</div>
 									<div  class="col-xs-6" style="margin-top: 32px;">
 											<span id="telCheckView"></span>	

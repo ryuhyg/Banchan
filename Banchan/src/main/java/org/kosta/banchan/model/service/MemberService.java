@@ -5,6 +5,7 @@ import java.util.List;
 import org.kosta.banchan.model.vo.AddressVO;
 import org.kosta.banchan.model.vo.Authority;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
@@ -37,6 +38,9 @@ public interface MemberService {
 	void registerMember(MemberVO memberVO);
 	AddressVO getAddressAPIById(MemberVO memberVO);
 	List<AddressVO> getNearSellerAddressByAddressAPI(String addressAPI);
+	// maker paging
+	int getTotCountMarkerSellerList(String addressNo);
+	ListVO<SellerVO> getMarkerSellerListByAddressNo(String addressNo, String pageNo);
 /////////////////////// end  광태 메서드   ///////////////////////////////
 	
 /////////////////////// start  윤주 메서드   ///////////////////////////////
@@ -61,6 +65,8 @@ public interface MemberService {
 /////////////////////// start  지원 메서드   ///////////////////////////////
 	MemberVO getBuyerInfo(String buyerId);
 /////////////////////// end  지원 메서드   ///////////////////////////////
+	
+	
 
 
 }

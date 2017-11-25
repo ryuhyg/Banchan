@@ -109,6 +109,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND a.address_API like '%'||#{value}||'%'
 		AND ma.auth_no ='20'
  	</select>
+ 	
+ 	<!-- marker click시 seller List pagingbean Query -->
+ 	<select id="getMarkerSellerListByAddressNo" parameterType="map" resultType="sellerVO">
+ 		SELECT mem_id, seller_img, seller_info, seller_score, mem_name 
+		FROM (
+			SELECT row_number() over(order by s.seller_score desc) as rnum,
+				   s.mem_id,  s.seller_img, s.seller_info, s.seller_score, b.mem_name 
+			FROM BAN_MEM b, ADDRESS a, mem_auth ma , seller s 
+			WHERE b.address_no = a.address_no
+			AND b.mem_id = s.mem_id  
+			AND b.mem_id = ma.mem_id  
+			AND ma.auth_no ='20'
+			AND a.address_no = #{addressNo}
+		)
+		WHERE rnum between #{startRowNumber} and #{endRowNumber} 
+ 	</select>
+ 	<!-- getTotcount -->
+ 	<select id="getTotCountMarkerSellerList" parameterType="string" resultType="int">
+ 		SELECT count(*)
+		FROM BAN_MEM b, ADDRESS a, mem_auth ma , seller s 
+		WHERE b.address_no = a.address_no
+		AND b.mem_id = s.mem_id  
+		AND b.mem_id = ma.mem_id  
+		AND ma.auth_no ='20'
+		AND a.address_no = #{value}
+ 	</select>
 <!-- End 광태 -->
 
 <!-- Start 우정 -->

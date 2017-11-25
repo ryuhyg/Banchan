@@ -2,6 +2,7 @@
 package org.kosta.banchan.model.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -119,6 +120,14 @@ public class MemberDAOImpl implements MemberDAO {
 		@Override
 		public List<AddressVO> getNearSellerAddressByAddressAPI(String addressAPI) {
 			return template.selectList("member.getNearSellerAddressByAddressAPI",addressAPI);
+		}
+		@Override
+		public int getTotCountMarkerSellerList(String addressNo) {
+			return template.selectOne("member.getTotCountMarkerSellerList",addressNo);
+		}
+		@Override
+		public List<SellerVO> getMarkerSellerListByAddressNo(HashMap<String, Integer> paramMap){
+			return template.selectList("member.getMarkerSellerListByAddressNo", paramMap);
 		}
 	/////////// end 위치기반 추천 메서드 ////////////////////   
 /////////////////////// end  광태 메서드   ///////////////////////////////

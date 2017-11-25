@@ -13,6 +13,7 @@ import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.vo.AddressVO;
 import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
@@ -152,6 +153,16 @@ public class MemberController {
           model.addAttribute("list",list);
           return "member/locationServicePage.tiles";
        }
+       
+       @ResponseBody
+       @RequestMapping("getMarkerSellerListOnAjax.do")
+       public ListVO<SellerVO> getMarkerSellerListOnAjax(String addressNo) {
+    	   System.out.println("*ajax**********getMarkerSellerListOnAjax********************");
+    	   System.out.println(addressNo); //들어옴  	
+
+    	   return memberService.getMarkerSellerListByAddressNo(addressNo,"1");
+       }
+       
        
        ////////////// end 위치기반 ///////////
    /////////////////////// end  광태 메서드   ///////////////////////////////

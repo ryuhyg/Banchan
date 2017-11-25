@@ -1,5 +1,6 @@
 package org.kosta.banchan.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.kosta.banchan.model.vo.AddressVO;
@@ -46,6 +47,9 @@ public interface MemberDAO {
 		// addressAPI만 get
 		AddressVO getAddressAPIById(MemberVO memberVO);
 		List<AddressVO> getNearSellerAddressByAddressAPI(String addressAPI);
+		// maker pagingbean 
+		int getTotCountMarkerSellerList(String addressNo);
+		List<SellerVO> getMarkerSellerListByAddressNo(HashMap<String, Integer> paramMap);
 /////////////////////// end  광태 메서드   ///////////////////////////////	
 /////////////////////// start  윤주 메서드   ///////////////////////////////
 int isSeller(String memId);
@@ -93,6 +97,10 @@ String getSellerNameByMemId(String memId);
 /////////////////////// start  지원 메서드   ///////////////////////////////
 		MemberVO getBuyerInfo(String buyerId);
 /////////////////////// end  지원 메서드   ///////////////////////////////
+
+		
+
+		
 
 	
 }

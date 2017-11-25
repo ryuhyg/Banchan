@@ -1,7 +1,6 @@
 package org.kosta.banchan;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -11,9 +10,7 @@ import org.kosta.banchan.model.dao.FoodDAO;
 import org.kosta.banchan.model.dao.MemberDAO;
 import org.kosta.banchan.model.dao.SellerDAO;
 import org.kosta.banchan.model.dao.TradeDAO;
-import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.PagingBean;
-import org.kosta.banchan.model.vo.SellerVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -88,7 +85,7 @@ public class TestUnit {
 		System.out.println(temp2);*/
 		
 		
-		int totalCount=tradeDAO.getTradeCountByFoodSellNo("101019");
+		/*int totalCount=tradeDAO.getTradeCountByFoodSellNo("101019");
 		System.out.println("totalCount:"+totalCount);
 		PagingBean pagingBean=null;
 		HashMap<String,Integer> paramMap=new HashMap<String,Integer>();
@@ -99,7 +96,15 @@ public class TestUnit {
 		paramMap.put("endRowNumber", pagingBean.getEndRowNumber());
 		paramMap.put("foodSellNo", Integer.parseInt("101019"));
 		
-		System.out.println(tradeDAO.getSellerTradeListByFoodSellNo(paramMap));
+		System.out.println(tradeDAO.getSellerTradeListByFoodSellNo(paramMap));*/
 		
+		PagingBean pagingBean=new PagingBean(1,3,4,mDAO.getTotCountMarkerSellerList("1039"));
+		System.out.println(mDAO.getTotCountMarkerSellerList("1039"));
+		HashMap<String, Integer> paramMap = new HashMap<String,Integer>();
+		paramMap.put("startRowNumber", pagingBean.getStartRowNumber());
+		paramMap.put("endRowNumber", pagingBean.getEndRowNumber());
+		paramMap.put("addressNo", 1039);
+		System.out.println(paramMap.get("endRowNumber"));
+		System.out.println(mDAO.getMarkerSellerListByAddressNo(paramMap));
 	}
 }

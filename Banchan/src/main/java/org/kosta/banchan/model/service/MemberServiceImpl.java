@@ -1,5 +1,6 @@
 package org.kosta.banchan.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,7 +10,9 @@ import org.kosta.banchan.model.dao.SellerDAO;
 import org.kosta.banchan.model.vo.AddressVO;
 import org.kosta.banchan.model.vo.Authority;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.MemberVO;
+import org.kosta.banchan.model.vo.PagingBean;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -127,6 +130,24 @@ public class MemberServiceImpl implements MemberService {
 	   @Override
 	   public List<AddressVO> getNearSellerAddressByAddressAPI(String addressAPI) {
 		   return memberDAO.getNearSellerAddressByAddressAPI(cutAddressAPI(addressAPI));
+	   }
+	   @Override
+		public int getTotCountMarkerSellerList(String addressNo) {
+			return memberDAO.getTotCountMarkerSellerList(addressNo);
+		}
+	   @Override
+	   public ListVO<SellerVO> getMarkerSellerListByAddressNo(String addressNo,String pageNo){
+			ListVO<SellerVO> markerSellerList= new ListVO<SellerVO>();
+		   HashMap<String, Integer> paramMap= new HashMap<String, Integer>();
+		   
+		   PagingBean pagingBean=new PagingBean(Integer.parseInt(pageNo),2,3,memberDAO.getTotCountMarkerSellerList(addressNo));
+		    paramMap.put("startRowNumber", pagingBean.getStartRowNumber());
+			paramMap.put("endRowNumber", pagingBean.getEndRowNumber());
+			paramMap.put("addressNo", Integer.parseInt(addressNo.trim()));
+			
+	    	markerSellerList.setList(memberDAO.getMarkerSellerListByAddressNo(paramMap));
+	    	markerSellerList.setPb(pagingBean);
+		   return markerSellerList;
 	   }
 	   /////////// end 위치기반 추천 메서드 ////////////////////   
    /////////////////////// end  광태 메서드   ///////////////////////////////
