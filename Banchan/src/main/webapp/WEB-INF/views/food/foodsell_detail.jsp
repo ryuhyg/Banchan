@@ -9,7 +9,7 @@
 			var preQuantity=$("#preQuantity").text();
 			if(parseInt($(this).val()) > parseInt(preQuantity)){
 				alert("준비수량이 부족합니다!");
-				$("#trQuantity").val(1);
+				$("#trQuantity").val(1); 
 			}
 			var orderPrice=$(this).val()*$("#price").text();
 			$("#orderPrice").text(orderPrice);
