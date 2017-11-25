@@ -115,9 +115,25 @@ $(document).ready(function() {
         return false;
     });
     
-    $(".pagination a").click(function(){
-    	alert($(this).attr('id'));
-    });
+    
+   /**paging ajax 부분 **/
+    /* $(".pagination a").click(function(){
+    	type:"get",
+    	url:"${pageContext.request.contextPath}/sellerPageInfo.do"
+    	data:"memId="+$("#sellerId").val()+"pageNo="+$(this).attr('id'),
+    	dataType:"json",
+    	success:function(json){					
+			var data="<table border='1' cellpadding='5'>";
+			for(var i=0;i<json.length;i++){
+				data+="<tr>";
+				data+="<td>"+json[i].id+"</td>";
+				data+="<td>"+json[i].name+"</td>";
+				data+="</tr>";
+			}
+			data+="</table>";
+			$("#memberListView").html(data);				
+	}
+    }); */
 });
 </script>
 
@@ -128,11 +144,12 @@ $(document).ready(function() {
 
 			<div class="container">
 				<div class="row">
-				<div class="col-md-1"></div>
+				<div class="col-md-1" ></div>
 					<div class="col-md-9">
 						<div class="row">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
-									<h1 class="name">${svo.memName } </h1>
+									<input type="hidden" id="sellerId" value="${svo.memId }">
+									<h1 class="name" >${svo.memName } </h1>
 								<span class="text">
 								주부님 소개
 								</span>
@@ -204,7 +221,7 @@ $(document).ready(function() {
 									<%-- 	<input type="hidden" id="foodNo" value="${food.foodNo }"> --%>
 										
 										<span class="cover"></span>
-										<img alt="Sample images"  width="300px" height="200px" src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}"> 
+										<img alt="Sample images"  style="size: inherit;" src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}"> 
 										<h3 class="title">${food.foodName}</h3>
 									</a>								
 									<span class="description" >${food.foodDe}</span>
@@ -245,6 +262,8 @@ $(document).ready(function() {
 			
 				<div class="tab2Container">
 				<div class="col-md-9">
+				<span id="foodSellInfo"></span>
+				<!-- 여기서 부터 ajax 시작 -->
 				<c:forEach items="${lvo.list}" var="foodSell">
 						<div class="row" style="vertical-align: middle">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
@@ -272,6 +291,7 @@ $(document).ready(function() {
 						</div><!-- /.row -->
 
 					
+					</c:forEach>
 					<div class="paginationContainer" style="text-align: center;">
 						 <div class="pagination" >
 										<c:set var="pb" value="${lvo.pb}"></c:set>
@@ -298,7 +318,7 @@ $(document).ready(function() {
 											 		
 						</div> 
 					</div><!-- paginationContainer -->
-					</c:forEach>
+					<!-- 여기가 ajax 끝 -->
 					</div>
 					</div>
 						
