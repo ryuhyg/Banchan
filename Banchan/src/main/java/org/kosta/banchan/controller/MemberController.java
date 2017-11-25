@@ -171,7 +171,6 @@ public class MemberController {
        public String editMemberView(Model model, String pwQnaNo, String memId) {
           List<PwQnaVO> pwQnaList = memberService.getAllPwQnAList(); //질문리스트
           AddressVO avo=memberService.findMemberAddressAPIById(memId); //주소찾기
-          System.out.println("address:" +avo.getAddressAPI());
           PwQnaVO pvo=memberService.findPwQnaNo(pwQnaNo); //질문찾기
           SellerVO svo=memberService.findMemberTypeById(memId); //회원타입 검색
           //회원 타입 검색해서 판매자와 구매자로 분기
@@ -226,10 +225,10 @@ public class MemberController {
                 e.printStackTrace();
              }
           }
+          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
           String imageName=(String)file.getOriginalFilename();
           System.out.println("updateImage:" + imageName);
           if(imageName.equals("null")||imageName.equals("")) {
-          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	         
     	  memberService.editSellerMemberNoImageService(svo); // 업데이트
     	  mvoSellerMember.setMemName(svo.getPw());
@@ -239,9 +238,8 @@ public class MemberController {
     	  mvoSellerMember.setAddressDe(svo.getAddressDe());
     	  mvoSellerMember.setPwAnswer(svo.getPwAnswer());
     	  mvoSellerMember.setPwQnaNo(svo.getPwQnaNo());
-    	   }else {
-          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-          
+    	  }else {
+                    
           svo.setSellerImg(file.getOriginalFilename()); //이미지 업데이트 
           memberService.editSellerMemberService(svo); // 업데이트
           mvoSellerMember.setMemName(svo.getPw());
@@ -253,6 +251,7 @@ public class MemberController {
           mvoSellerMember.setPwQnaNo(svo.getPwQnaNo());
           
       }
+          model.addAttribute("mvoSellerMember", mvoSellerMember);
           return "redirect:member/editMember_ok.do";
        }
 
