@@ -447,7 +447,7 @@
  									name="addressDe" id="detailAddress"
  									value="<sec:authentication property="principal.addressDe"/>"
  									class="margin-bottom form-control" placeholder="상세주소 입력">
- 							</div>
+ 							</div> 
  						</div>
  						<div class="row">
  							<div class="col-xs-8" style="margin-bottom: 10px">
