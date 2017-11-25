@@ -142,7 +142,6 @@ insert into tr_status(tr_status_no, tr_status) values(2,'거래완료');
       
 -- TRADE
 create sequence trade_seq nocache;
-
 insert into trade(tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no)
 values(trade_seq.nextval, 1, sysdate, sysdate, 'java', 101010, 1);
 insert into trade(tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no)

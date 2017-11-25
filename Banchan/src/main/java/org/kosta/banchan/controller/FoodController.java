@@ -47,6 +47,10 @@ public class FoodController {
     	tvo.setFoodSellVO(new FoodSellVO());
     	tvo.getFoodSellVO().setFoodSellNo(foodSellNo);
     	foodService.orderFood(tvo);
+    	return "redirect:orderFood_ok.do";
+    }
+    @RequestMapping("orderFood_ok.do")
+    public String orderFoodOk() {
     	return "food/orderFood_ok.tiles";
     }
     /////////////////////////end 윤주///////////////////////////////////
@@ -84,9 +88,9 @@ public class FoodController {
      */
     @RequestMapping("getFoodSellDetail.do")
     public String getFoodSellDetail(String foodSellNo,Model model) {
-    	System.out.println("foodSellNo : "+ foodSellNo);
-    	System.out.println(foodService.getFoodSellDetailByNo(foodSellNo));
-    	
+    	//System.out.println("foodSellNo : "+ foodSellNo);
+    	//System.out.println(foodService.getFoodSellDetailByNo(foodSellNo));
+    	model.addAttribute("leftQuantity",foodService.getLeftQuantityByFoodSellNo(foodSellNo));
     	model.addAttribute("sellfood", foodService.getFoodSellDetailByNo(foodSellNo));
     	return "food/foodsell_detail.tiles";
     }
@@ -108,15 +112,16 @@ public class FoodController {
     /* 테스트 경로 */	
     uploadPath="C://Users/kosta/git/Banchan/Banchan/src/main/webapp/resources/images/";
     /* 서버 경로 */
-    //uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
+   // uploadPath=request.getSession().getServletContext().getRealPath("/resources/images/");
+    
     File uploadDir=new File(uploadPath);
     if(uploadDir.exists()==false)
     	uploadDir.mkdirs();
     MultipartFile file=fvo.getUploadImage();//파일 
-    System.out.println(file+"<==");
+    System.out.println("File명이 뭐니? :"+file.toString());
     //System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
     if(file!=null&&file.isEmpty()==false){
-    	System.out.println("파일명:"+file.getOriginalFilename());
+    	//System.out.println("파일명:"+file.getOriginalFilename());
     	File uploadFile=new File(uploadPath+file.getOriginalFilename());
     	try {
     		file.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
@@ -198,6 +203,7 @@ public class FoodController {
     	System.out.println("수정하려는 fvo 값:"+fvo);
     	System.out.println("받은 아이디 값 : "+id);
     	
+    	System.out.println("이미지정보 확인하자"+request.getParameter("beforeFoodImg"));
     	/* 테스트 경로 */	
         uploadPath="C://Users/kosta/git/Banchan/Banchan/src/main/webapp/resources/images/";
         /* 서버 경로 */
@@ -207,7 +213,6 @@ public class FoodController {
         	uploadDir.mkdirs();
         MultipartFile file=fvo.getUploadImage();//파일 
         System.out.println(file+"<==");
-        System.out.println("file이 뭐니? :"+file);
         //System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
         if(file!=null&&file.isEmpty()==false){
         	System.out.println("파일명:"+file.getOriginalFilename());
@@ -221,22 +226,33 @@ public class FoodController {
         		e.printStackTrace();
         	}
         }
-       // String memId=""; // 로그인기능 구현되면 세션정보 가져올 예정
-       
-        fvo.setMemId(id);
-        //fvo.setFoodScore(score);
-        fvo.setFoodNo(request.getParameter("foodNo"));
-        fvo.setFoodName(request.getParameter("foodname"));
-        fvo.setFoodMainImg(file.getOriginalFilename());
-        fvo.setFoodDe(request.getParameter("foodInfo"));
-        fvo.setCategoryNo(request.getParameter("category"));
-        System.out.println("카테고리 no:"+request.getParameter("category"));
-        System.out.println("fvo2:"+fvo);
-        foodService.updateRegFood(fvo);
-        
-        return "redirect:updateRegFoodOk.do";	
+        String foodImage=(String)file.getOriginalFilename();
+        System.out.println("updateImage:" + foodImage);
+        if(foodImage.equals("null")||foodImage.equals("")) {
+        	System.out.println("이미지를 안줬을 경우 처리하는 부분");
+        	fvo.setMemId(id);
+            //fvo.setFoodScore(score);
+            fvo.setFoodNo(request.getParameter("foodNo"));
+            fvo.setFoodName(request.getParameter("foodname"));
+            fvo.setFoodDe(request.getParameter("foodInfo"));
+            fvo.setCategoryNo(request.getParameter("category"));
+            System.out.println("fvo2:"+fvo);
+            foodService.noimgUpdateRegFood(fvo);
+            return "redirect:updateRegFoodOk.do";
+        }else {
+	        fvo.setMemId(id);
+	        //fvo.setFoodScore(score);
+	        fvo.setFoodNo(request.getParameter("foodNo"));
+	        fvo.setFoodName(request.getParameter("foodname"));
+	        fvo.setFoodMainImg(file.getOriginalFilename());
+	        fvo.setFoodDe(request.getParameter("foodInfo"));
+	        fvo.setCategoryNo(request.getParameter("category"));
+	        System.out.println("fvo2:"+fvo);
+	        foodService.imgUpdateRegFood(fvo);
+	        
+	        return "redirect:updateRegFoodOk.do";	
+	        }
     }
-    
     @RequestMapping("updateRegFoodOk.do")
     public String updateRegFoodOk() {
     	return "food/updateRegFood_ok.tiles";

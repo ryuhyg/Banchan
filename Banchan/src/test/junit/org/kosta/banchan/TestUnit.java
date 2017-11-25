@@ -1,7 +1,5 @@
 package org.kosta.banchan;
 
-import java.util.HashMap;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -10,7 +8,6 @@ import org.kosta.banchan.model.dao.FoodDAO;
 import org.kosta.banchan.model.dao.MemberDAO;
 import org.kosta.banchan.model.dao.SellerDAO;
 import org.kosta.banchan.model.dao.TradeDAO;
-import org.kosta.banchan.model.vo.PagingBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -85,7 +82,10 @@ public class TestUnit {
 		System.out.println(temp2);*/
 		
 		
+
 		/*int totalCount=tradeDAO.getTradeCountByFoodSellNo("101019");
+		/*int totalCount=tradeDAO.getTradeCountByFoodSellNo("101020");
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 		System.out.println("totalCount:"+totalCount);
 		PagingBean pagingBean=null;
 		HashMap<String,Integer> paramMap=new HashMap<String,Integer>();
@@ -94,11 +94,12 @@ public class TestUnit {
 		System.out.println("PagingBean st:"+pagingBean.getStartRowNumber()+"PagingBean end:"+pagingBean.getEndRowNumber());
 		paramMap.put("startRowNumber",pagingBean.getStartRowNumber());
 		paramMap.put("endRowNumber", pagingBean.getEndRowNumber());
-		paramMap.put("foodSellNo", Integer.parseInt("101019"));
+		paramMap.put("foodSellNo", Integer.parseInt("101020"));
 		
+<<<<<<< HEAD
 		System.out.println(tradeDAO.getSellerTradeListByFoodSellNo(paramMap));*/
 		
-		PagingBean pagingBean=new PagingBean(1,3,4,mDAO.getTotCountMarkerSellerList("1039"));
+/*		PagingBean pagingBean=new PagingBean(1,3,4,mDAO.getTotCountMarkerSellerList("1039"));
 		System.out.println(mDAO.getTotCountMarkerSellerList("1039"));
 		HashMap<String, Integer> paramMap = new HashMap<String,Integer>();
 		paramMap.put("startRowNumber", pagingBean.getStartRowNumber());
@@ -106,5 +107,14 @@ public class TestUnit {
 		paramMap.put("addressNo", 1039);
 		System.out.println(paramMap.get("endRowNumber"));
 		System.out.println(mDAO.getMarkerSellerListByAddressNo(paramMap));
+
+		System.out.println(tradeDAO.getSellerTradeListByFoodSellNo(paramMap));
+		HashMap<String,String> paramMap=new HashMap<String,String>();
+		paramMap.put("startRowNumber","1");
+		paramMap.put("endRowNumber","3");
+		paramMap.put("memId", "aaaa");
+		System.out.println(foodDAO.getFoodSellInfoByMemId(paramMap));
+		*/
+
 	}
 }

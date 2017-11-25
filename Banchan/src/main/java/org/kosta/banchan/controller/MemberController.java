@@ -61,29 +61,49 @@ public class MemberController {
    public String loginFail() {
       return "member/login_fail";
    }
-   
+   //회원탈퇴
    @RequestMapping(value="deleteMember.do",method = RequestMethod.POST)
 	public String deleteMember(String memId) {
 	   memberService.deleteMember(memId);
 	   return "redirect:member/deleteMember_result.do";
    }
-   @RequestMapping("findPasswordCheck.do")
-   public String findPasswordCheck(String id,String name,String telNo) {  
-	   System.out.println("id"+id+"name"+name+"tel"+telNo);
+   //비밀번호 찾기 아이디확인
+   @RequestMapping(value="findPasswordCheck.do",method=RequestMethod.POST)//
+   public String findPasswordCheck(String id,String name,String telNo,Model model) {  
 	   MemberVO mvo = new MemberVO(id,name,telNo);
-	  int idCheck = memberService.findPasswordCheck(mvo);
+	  int idCheck = memberService.findPasswordCheck(mvo);//아이디 체크
+	  List<PwQnaVO> list = memberService.getAllPwQnAList();//질문 목록 가져오기
 	  if(idCheck!=0) {
-		  return "redirect:member/findPassword_ok.do?id="+id ;
+		  model.addAttribute("mvo",mvo);
+		  model.addAttribute("qnalist",list);
+		  return "member/findPassword_ok.tiles";
 	  }else {
 		  return "member/findPassword_fail"; 	  
-	  }
-		  
-	  }
-   @RequestMapping("findPassword_ok.do")
-   public String findPasswordQna(String id){
-	   
-	return "member/findPassword_result";	   
+	  }  
    }
+   //비밀번호 찾기 질문답변
+   @RequestMapping("findPasswordQna.do")
+   	public String findPasswordQna(String id,String name, String question,String answer,Model model) {
+	   MemberVO mvo = new MemberVO(id,name,question, answer);
+	   int qnaCheck =  memberService.findPasswordQnaCheck(mvo);
+	   if(qnaCheck!=0) {
+		   	model.addAttribute("qnamvo",mvo);
+   			return "redirect:member/findPasswordResult_ok.do";
+	   }else {
+		    return "member/findPasswordResult_fail";
+	   }
+   	}
+   @RequestMapping(value="resetPassword.do",method=RequestMethod.POST)
+   @ResponseBody
+   public String resetPassword(String id,String password) {
+	   System.out.println("id: "+id+"password: "+password);
+	   MemberVO mvo = new MemberVO();
+	   mvo.setMemId(id);
+	   mvo.setPwAnswer(password);
+	   memberService.resetPassword(mvo);
+	   return "ok";
+   }
+ 
    //////////////////////// END 향걸 /////////////////////////////////////
    /////////////////////// start  광태 메서드   ///////////////////////////////
       // 광태 Ajax id check 
@@ -182,7 +202,6 @@ public class MemberController {
        public String editMemberView(Model model, String pwQnaNo, String memId) {
           List<PwQnaVO> pwQnaList = memberService.getAllPwQnAList(); //질문리스트
           AddressVO avo=memberService.findMemberAddressAPIById(memId); //주소찾기
-          System.out.println("address:" +avo.getAddressAPI());
           PwQnaVO pvo=memberService.findPwQnaNo(pwQnaNo); //질문찾기
           SellerVO svo=memberService.findMemberTypeById(memId); //회원타입 검색
           //회원 타입 검색해서 판매자와 구매자로 분기
@@ -237,10 +256,10 @@ public class MemberController {
                 e.printStackTrace();
              }
           }
+          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
           String imageName=(String)file.getOriginalFilename();
           System.out.println("updateImage:" + imageName);
           if(imageName.equals("null")||imageName.equals("")) {
-          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	         
     	  memberService.editSellerMemberNoImageService(svo); // 업데이트
     	  mvoSellerMember.setMemName(svo.getPw());
@@ -250,9 +269,8 @@ public class MemberController {
     	  mvoSellerMember.setAddressDe(svo.getAddressDe());
     	  mvoSellerMember.setPwAnswer(svo.getPwAnswer());
     	  mvoSellerMember.setPwQnaNo(svo.getPwQnaNo());
-    	   }else {
-          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-          
+    	  }else {
+                    
           svo.setSellerImg(file.getOriginalFilename()); //이미지 업데이트 
           memberService.editSellerMemberService(svo); // 업데이트
           mvoSellerMember.setMemName(svo.getPw());
@@ -264,6 +282,7 @@ public class MemberController {
           mvoSellerMember.setPwQnaNo(svo.getPwQnaNo());
           
       }
+          model.addAttribute("mvoSellerMember", mvoSellerMember);
           return "redirect:member/editMember_ok.do";
        }
 
@@ -298,13 +317,13 @@ public class MemberController {
 ////////////////////start 우정 메서드 ////////////////////////////
    
        @RequestMapping("sellerPageInfo.do")
-       public String seller_myPage(Model model, String memId) {
+       public String seller_myPage(Model model, String memId,String pageNo) {
     	  SellerVO svo = memberService.selectSellerInfo(memId);
           List<FoodVO> flist = foodeService.getFoodListByMemId(memId);
-          List<FoodSellVO> fslist = foodeService.getFoodSellInfoByMemId(memId);
+          ListVO<FoodSellVO> fslist = foodeService.getFoodSellInfoByMemId(memId,pageNo);
           model.addAttribute("svo", svo);
           model.addAttribute("flist", flist);
-          model.addAttribute("fslist", fslist);
+          model.addAttribute("lvo", fslist);
           return "member/seller_myPage.tiles";
        }
 ////////////////////end 우정 메서드 ////////////////////////////

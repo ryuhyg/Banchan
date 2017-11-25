@@ -45,6 +45,14 @@ public class MemberVO implements Serializable{
 	}
 	
 
+	public MemberVO(String memId, String memName,String pwQnaNo, String pwAnswer) {
+		super();
+		this.memId = memId;
+		this.memName = memName;
+		this.pwQnaNo = pwQnaNo;
+		this.pwAnswer = pwAnswer;
+	}
+
 	public MemberVO(String memId, String memName, String tel) {
 		super();
 		this.memId = memId;

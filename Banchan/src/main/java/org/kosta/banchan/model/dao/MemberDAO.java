@@ -27,6 +27,10 @@ public interface MemberDAO {
 			void deleteMemberAuth(String memId);
 	//회원확인		
 			int findPasswordCheck(MemberVO mvo);
+	//비밀번호 질문 답변 확인		
+			int findPasswordQnaCheck(MemberVO mvo);
+	//비밀번호 리셋
+			void resetPassword(MemberVO mvo);
 ///////////////////////End 향걸 //////////////////////////////////
 
 /////////////////////// start  광태 메서드   ///////////////////////////////
@@ -98,9 +102,6 @@ String getSellerNameByMemId(String memId);
 		MemberVO getBuyerInfo(String buyerId);
 /////////////////////// end  지원 메서드   ///////////////////////////////
 
-		
-
-		
 
 	
 }

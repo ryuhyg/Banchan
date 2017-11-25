@@ -23,12 +23,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  select count(*) from food where mem_id=#{value}
 </select>
 <!-- 판매자의 판매목록 -->
-<select id="getFoodSellInfoByMemId" parameterType="string" resultType="foodSellVO">
-	select s.food_sell_no,f.food_no,tr_date,s.close_date,s.loc,
-	s.price,s.pre_quantity,s.sell_postdate,s.unit,sell_detail,
-	food_name,food_de,food_score,food_main_img,category_no
-	from FOOD_SELL s, (select food_no,food_name,food_de,food_score,food_main_img,category_no from FOOD where mem_id=#{value}) f
-	where s.close_date>sysdate and f.food_no=s.food_no order by s.sell_postdate desc
+<select id="getFoodSellInfoByMemId" parameterType="map" resultType="foodSellVO">
+		select fs.rnum,fs.food_sell_no,fs.tr_date,fs.close_date,fs.price,fs.pre_quantity,
+		fs.sell_postdate,fs.food_no,fs.food_name,fs.food_main_img,fs.category_no
+		from(select row_number() over(order by s.food_sell_no desc) as rnum,s.food_sell_no,s.tr_date,s.close_date,
+		s.price,s.pre_quantity,s.sell_postdate,
+		f.food_no,f.food_name,f.food_main_img,f.category_no
+		from (select food_no,food_sell_no,tr_date,close_date,price,pre_quantity,sell_postdate from FOOD_SELL ) s,
+		(select food_no,food_name,food_main_img,category_no from FOOD where mem_id=#{memId}) f
+		where s.close_date>sysdate and f.food_no=s.food_no
+		order by s.sell_postdate desc) fs
+		where fs.rnum between #{startRowNumber} and #{endRowNumber}
+</select>
+<select id="getAllFoodSellCountByMemId" parameterType="string" resultType="int">
+		select count(*)
+		from (select food_no from food where mem_id=#{value}) f, food_sell s 
+		where f.food_no=s.food_no and s.close_date>sysdate
 </select>
 <!-- End 우정 -->
 
@@ -96,8 +106,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <delete id="deleteRegFood" parameterType="string">
 	delete from food where food_no=#{value}
 </delete>
-<update id="updateRegFood" parameterType="foodVO">
+<update id="imgUpdateRegFood" parameterType="foodVO">
 	update food set 	food_name=#{foodName}, food_de=#{foodDe}, food_main_img=#{foodMainImg}, category_no=#{categoryNo}
+	where mem_id=#{memId} and food_no=#{foodNo}
+</update>
+<update id="noimgUpdateRegFood" parameterType="foodVO">
+	update food set 	food_name=#{foodName}, food_de=#{foodDe}, category_no=#{categoryNo}
 	where mem_id=#{memId} and food_no=#{foodNo}
 </update>
 <!-- End 영민 -->
@@ -107,6 +121,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into trade(tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no)
 		values(trade_seq.nextval,#{trQuantity}, sysdate, sysdate,#{memId},#{foodSellVO.foodSellNo}, 1)
 	</insert>
+	<select id="getsumQuantityByFoodSellNo" parameterType="string" resultType="int">
+		select sum(tr_quantity)
+		from(
+				select fs.pre_quantity,t.tr_quantity
+				from food_sell fs, trade t
+				where t.food_sell_no=#{value} and fs.food_sell_no=t.food_sell_no
+			)
+	</select>
+	<select id="getPreQuantityByFoodSellNo" parameterType="string" resultType="int">
+		select pre_quantity
+		from food_sell
+		where food_sell_no=#{value}
+	</select>
 <!-- End 윤주 -->
 </mapper>
 

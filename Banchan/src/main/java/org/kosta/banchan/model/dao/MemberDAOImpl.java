@@ -52,15 +52,23 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 		@Override	
 		public void deleteMember(String memId) {
-			template.update("deleteMember",memId);
+			template.update("member.deleteMember",memId);
 		}
 		@Override
 		public void deleteMemberAuth(String memId) {
-			template.delete("deleteMemberAuth",memId);
+			template.delete("member.deleteMemberAuth",memId);
 		}
 		@Override
 		public int findPasswordCheck(MemberVO mvo) {
-			return template.selectOne("findPasswordCheck", mvo);
+			return template.selectOne("member.findPasswordCheck", mvo);
+		}
+		@Override
+		public int findPasswordQnaCheck(MemberVO mvo) {
+			return template.selectOne("member.findPasswordQnaCheck",mvo);
+		}
+		@Override
+		public void resetPassword(MemberVO mvo) {
+			template.update("resetPassword",mvo);			
 		}
 
 /////////////////////// start  광태 메서드   ///////////////////////////////	
