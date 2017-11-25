@@ -83,10 +83,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="sellerVO.memName" column="mem_name"/>
 	</resultMap>
 	<select id="getFoodMemInfo" parameterType="string" resultMap="memberRM">
-			SELECT bm.mem_name, f.food_name, f.food_de, f.food_score, f.food_main_img
+			SELECT bm.mem_name, f.food_name, f.food_de, f.food_score, f.category_no, f.food_main_img
 			FROM ban_mem bm, seller s, food f
 			WHERE bm.mem_id=s.mem_id and s.mem_id=f.mem_id and f.food_no=#{value}
 	</select>
+	
+<select id="selectRegFoodByNo" parameterType="string" resultType="foodVO">
+	SELECT f.food_no, f.food_de, f.food_score, f.food_main_img, f.food_postdate
+	FROM food f, food_sell fs
+	WHERE f.food_no=fs.food_no and f.food_no=#{value}
+</select>
+<delete id="deleteRegFood" parameterType="string">
+	delete from food where food_no=#{value}
+</delete>
+<update id="updateRegFood" parameterType="foodVO">
+	update food set 	food_name=#{foodName}, food_de=#{foodDe}, food_main_img=#{foodMainImg}, category_no=#{categoryNo}
+	where mem_id=#{memId} and food_no=#{foodNo}
+</update>
 <!-- End 영민 -->
 
 <!-- Start 윤주 -->

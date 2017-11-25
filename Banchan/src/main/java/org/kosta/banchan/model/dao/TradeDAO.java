@@ -1,12 +1,13 @@
 package org.kosta.banchan.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.kosta.banchan.model.vo.TradeVO;
 
 public interface TradeDAO {
 
-	List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo);
+	List<TradeVO> getSellerTradeListByFoodSellNo(HashMap<String,Integer> paramMap);
 
 	void completeTrade(String tradeNo);
 
@@ -14,5 +15,7 @@ public interface TradeDAO {
 	////////////////////Start 윤주 //////////////////////////
 	List<TradeVO> getTradeListByMemId(String memId);
 	////////////////////END 윤주 //////////////////////////
+
+	int getTradeCountByFoodSellNo(String foodSellNo);
 
 }

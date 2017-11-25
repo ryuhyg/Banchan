@@ -30,7 +30,12 @@ public interface FoodService {
 
 	List<FoodSellVO> getFoodSellInfoByMemId(String memId);
 
-	FoodVO getFoodMemInfo(String no);
+	FoodVO getFoodMemInfo(String foodNo);
 
+	List<FoodVO> selectRegFoodByNo(String foodNo);
+	
+	void deleteRegFood(String foodNo);
+
+	void updateRegFood(FoodVO fvo);
 
 }

@@ -1,6 +1,7 @@
 package org.kosta.banchan.model.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -20,8 +21,8 @@ public class TradeDAOImpl implements TradeDAO {
 	 * 해당 판매음식에 대한 구매요청 리스트 조회 
 	 */
 	@Override	
-	public List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo){
-		return template.selectList("trade.getSellerTradeListByFoodSellNo", foodSellNo);
+	public List<TradeVO> getSellerTradeListByFoodSellNo(HashMap<String,Integer> paramMap){
+		return template.selectList("trade.getSellerTradeListByFoodSellNo", paramMap);
 	}
 	
 	
@@ -53,5 +54,12 @@ public class TradeDAOImpl implements TradeDAO {
 	return template.selectList("trade.getTradeListByMemId",memId);
 	}
 	//////////////////////end 윤주/////////////////////////////
+	
+	//우정
+	@Override
+	public int getTradeCountByFoodSellNo(String foodSellNo) {
+	return template.selectOne("trade.getTradeCountByFoodSellNo",foodSellNo);
+	
+	}
 
 }

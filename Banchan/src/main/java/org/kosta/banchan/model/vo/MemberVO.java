@@ -29,7 +29,7 @@ public class MemberVO implements Serializable{
 			String enableNo, String pwQnaNo) {
 		super();
 		this.memId = memId;
-		this.memName = memName;
+		this.memName = memName; 
 		this.birth = birth;
 		this.tel = tel;
 		this.addressDe = addressDe;
@@ -42,6 +42,14 @@ public class MemberVO implements Serializable{
 		super();
 		this.memId = memId;
 		this.memName = memName;
+	}
+	
+
+	public MemberVO(String memId, String memName, String tel) {
+		super();
+		this.memId = memId;
+		this.memName = memName;
+		this.tel = tel;
 	}
 
 	@Override

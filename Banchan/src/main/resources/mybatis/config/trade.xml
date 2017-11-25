@@ -10,6 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- End 광태 -->
 
 <!-- Start 우정 -->
+<select id="getTradeCountByFoodSellNo" parameterType="string" resultType="int">
+	select count(*) from trade where food_sell_no=#{value}
+</select>
 <!-- End 우정 -->
 
 <!-- Start 정훈 -->
@@ -23,10 +26,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="tradeVO" id="foodSellTradeRM">
 		<result property="foodSellVO.foodSellNo" column="food_sell_no"/>
 	</resultMap>
-	<select id="getSellerTradeListByFoodSellNo" parameterType="string" resultMap="foodSellTradeRM">
+	<select id="getSellerTradeListByFoodSellNo" parameterType="map" resultMap="foodSellTradeRM">
 		select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date, t.mem_id, t.food_sell_no, t.tr_status_no, s.tr_status
-		from trade t, tr_status s
-		where food_sell_no=#{value} and t.tr_status_no=s.tr_status_no
+		from (select row_number() over(order by tr_no desc) as rnum,tr_no,tr_quantity,tr_req_date,tr_fin_date,mem_id,food_sell_no,tr_status_no
+		from trade where food_sell_no=#{foodSellNo}) t,tr_status s
+		where t.tr_status_no=s.tr_status_no and t.rnum between #{startRowNumber} and #{endRowNumber}
+		order by t.tr_no desc
+
 	</select>
 	<!-- [판매자] 실제 거래완료 후 거래완료확인 하여 거래상태를 바꿔줌  -->
 	<update id="completeTrade" parameterType="string">

@@ -57,6 +57,10 @@ public class MemberDAOImpl implements MemberDAO {
 		public void deleteMemberAuth(String memId) {
 			template.delete("deleteMemberAuth",memId);
 		}
+		@Override
+		public int findPasswordCheck(MemberVO mvo) {
+			return template.selectOne("findPasswordCheck", mvo);
+		}
 
 /////////////////////// start  광태 메서드   ///////////////////////////////	
 	//광태 ajax id check
@@ -109,12 +113,12 @@ public class MemberDAOImpl implements MemberDAO {
 			return template.selectList("member.getAllSameAddressSellerListByAddress", addressNo);
 		}
 		@Override
-		public List<SellerVO> getSameDongSellerListByAddress(String addressAPI){
-			return template.selectList("member.getSameDongSellerListByAddress", addressAPI);
-		}
-		@Override
 		public AddressVO getAddressAPIById(MemberVO memberVO) {
 			return template.selectOne("member.getAddressAPIById", memberVO.getMemId());
+		}
+		@Override
+		public List<AddressVO> getNearSellerAddressByAddressAPI(String addressAPI) {
+			return template.selectList("member.getNearSellerAddressByAddressAPI",addressAPI);
 		}
 	/////////// end 위치기반 추천 메서드 ////////////////////   
 /////////////////////// end  광태 메서드   ///////////////////////////////
@@ -148,6 +152,11 @@ public class MemberDAOImpl implements MemberDAO {
 		@Override 
 		public void editMemberSeller(SellerVO svo) {
 			template.update("member.editMemberSeller", svo);
+		}
+		//회원정보수정-판매자-이미지없을 때(정훈)
+		@Override
+		public void editMemberSellerNoImage(SellerVO svo) {
+			template.update("member.editMemberSellerNoImage", svo);
 		}
 		//회원정보수정-판매자(이미지, 판매자정보)(정훈)
 		@Override
@@ -197,6 +206,12 @@ public void getEditMembers(SellerVO vo) {
 	
 }
 
+/////////////////////// start  지원 메서드   ///////////////////////////////
+@Override
+public MemberVO getBuyerInfo(String buyerId) {
+	return template.selectOne("member.getBuyerInfo", buyerId);
+}
+/////////////////////// end  지원 메서드   ///////////////////////////////
 	
 
 }
