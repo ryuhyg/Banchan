@@ -7,16 +7,26 @@
 	$(document).ready(function(){
 		var memId=$("#memId").val();
 		var result="${message}";
+		var foodNumber=$("#foodNo").val();
 		if(result=="fail"){
 			alert("판매중인 음식이 존재합니다.");
 			location.href="${pageContext.request.contextPath}/sellerPageInfo.do?memId="+memId;
 		}else{
-			alert("선택한 등록음식이 삭제되었습니다.");
-			location.href="${pageContext.request.contextPath}/sellerPageInfo.do?memId="+memId;
+			var text;
+			var result = confirm("선택한 음식을 삭제 하시겠습니까?");
+			if (result == true) {
+			    text = "선택한 음식이 삭제되었습니다";
+			    location.href="${pageContext.request.contextPath}/deleteRegFoodResult.do?foodNo="+foodNumber+"&memId="+memId
+			} else {
+			    text = "삭제가 취소 되었습니다.";
+			    location.href="${pageContext.request.contextPath}/sellerPageInfo.do?memId="+memId;
+			}
+			// alert("선택한 등록음식이 삭제되었습니다.");
+			// location.href="${pageContext.request.contextPath}/sellerPageInfo.do?memId="+memId;
 		}
 	});
 </script>
 <section id="recent-list" style="margin-top: 350px;">
-<input type="hidden" id="memId" value="${mvo.memId}">
-
+<input type="hidden" id="memId" value="${memId}">
+<input type="hidden" id="foodNo" value="${foodNo}">
 </section>

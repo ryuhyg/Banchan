@@ -13,7 +13,7 @@
 			location.href="${pageContext.request.contextPath}/updateRegViewFood.do?foodNo="+$(this).val();
 		});
 		$("button[name='delete']").click(function(){
-			location.href="${pageContext.request.contextPath}/deleteRegFood.do?foodNo="+$(this).val();
+			location.href="${pageContext.request.contextPath}/deleteRegFood.do?foodNo="+$(this).val()+"&memId="+$("#sellerId").val();
 			});
 		$("button[name='seller']").click(function(){
 			location.href="${pageContext.request.contextPath}/registerFoodView.do?foodNo="+$(this).val();	

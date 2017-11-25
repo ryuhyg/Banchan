@@ -96,7 +96,7 @@ public class FoodController {
     }
     
     
-    ///////////////////// 영민 start ///////////////////////////////////
+    ///////////////////// 영민 start /////////////////////////////////// 
     @RequestMapping("foodRegisterForm.do")
     public String foodRegisterForm(Model model) {
     	List<Map<String, String>> list=foodService.allCategorySelect();
@@ -163,17 +163,28 @@ public class FoodController {
     }
     
     @RequestMapping("deleteRegFood.do")
-    public String deleteRegFood(String foodNo, Model model) {
+    public String deleteRegFood(String foodNo, Model model, String memId) {
+    	System.out.println("삭제하기 전의 memId 확인 :"+memId);
     	String message="";
     	List<FoodVO> food=foodService.selectRegFoodByNo(foodNo);
     	System.out.println("Select foodIdResult :"+food);
     	if(food.size()==0) {
-    		foodService.deleteRegFood(foodNo);
+    		//foodService.deleteRegFood(foodNo);
     		model.addAttribute("message", "ok");
+    		model.addAttribute("foodNo", foodNo);
+    		model.addAttribute("memId", memId);
     	}else {
     		model.addAttribute("message", "fail");
+    		model.addAttribute("foodNo", foodNo);
+    		model.addAttribute("memId", memId);
     	}
     	return "food/deleteRegFood_result.tiles";
+    }
+    @RequestMapping("deleteRegFoodResult.do")
+    public String deleteRegFoodResult(String foodNo, String memId) {
+    	foodService.deleteRegFood(foodNo);
+    	System.out.println("memId 확인 :"+memId);
+    	return "redirect:sellerPageInfo.do?memId="+memId;
     }
     @RequestMapping("updateRegViewFood.do")
     public String updateRegViewFood(String foodNo, Model model) {
