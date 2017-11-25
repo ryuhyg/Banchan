@@ -40,8 +40,12 @@ public class SellDAOImpl implements SellDAO {
 	public List<FoodSellVO> getFoodSellInfoByMemId(String memId) {
 		return template.selectOne("food.getFoodSellInfoByMemId", memId);
 	}
-	
-	
-	
 
+	/////////////////start윤주//////////////////////////
+	@Override
+	public int getLeftQuantityByFoodSellNo(String foodSellNo) {
+		return template.selectOne("food.getLeftQuantityByFoodSellNo",foodSellNo);
+	}
+	//////////////////end윤주//////////////////////////////
+	
 }

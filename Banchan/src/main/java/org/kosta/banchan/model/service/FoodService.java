@@ -10,6 +10,7 @@ import org.kosta.banchan.model.vo.TradeVO;
 public interface FoodService {
 ///////////////////start윤주/////////////////////////
 	void orderFood(TradeVO tvo);
+	int getLeftQuantityByFoodSellNo(String foodSellNo);
 ///////////////////end윤주//////////////////////////
 
 	FoodVO getFoodByNo(String foodNo);
