@@ -144,7 +144,7 @@ $(document).ready(function() {
 
 			<div class="container">
 				<div class="row">
-				<div class="col-md-1"></div>
+				<div class="col-md-1" ></div>
 					<div class="col-md-9">
 						<div class="row">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
