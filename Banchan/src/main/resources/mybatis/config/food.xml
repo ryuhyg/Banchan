@@ -117,6 +117,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into trade(tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no)
 		values(trade_seq.nextval,#{trQuantity}, sysdate, sysdate,#{memId},#{foodSellVO.foodSellNo}, 1)
 	</insert>
+	<select id="getLeftQuantityByFoodSellNo" parameterType="string" resultType="int">
+		select sum(tr_quantity)
+		from(
+				select fs.pre_quantity,t.tr_quantity
+				from food_sell fs, trade t
+				where t.food_sell_no=#{value} and fs.food_sell_no=t.food_sell_no
+			)
+	</select>
 <!-- End 윤주 -->
 </mapper>
 

@@ -30,6 +30,11 @@ public class FoodServiceImpl implements FoodService {
 	public void orderFood(TradeVO tvo) {
 		foodDAO.orderFood(tvo);
 	}
+
+	@Override
+	public int getLeftQuantityByFoodSellNo(String foodSellNo) {
+		return sellDAO.getLeftQuantityByFoodSellNo(foodSellNo);
+	}
 ///////////////////end윤주////////////////////////
 
    
