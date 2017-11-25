@@ -113,10 +113,10 @@ public class FoodController {
     if(uploadDir.exists()==false)
     	uploadDir.mkdirs();
     MultipartFile file=fvo.getUploadImage();//파일 
-    System.out.println(file+"<==");
+    System.out.println("File명이 뭐니? :"+file.toString());
     //System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
     if(file!=null&&file.isEmpty()==false){
-    	System.out.println("파일명:"+file.getOriginalFilename());
+    	//System.out.println("파일명:"+file.getOriginalFilename());
     	File uploadFile=new File(uploadPath+file.getOriginalFilename());
     	try {
     		file.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
@@ -207,7 +207,6 @@ public class FoodController {
         	uploadDir.mkdirs();
         MultipartFile file=fvo.getUploadImage();//파일 
         System.out.println(file+"<==");
-        System.out.println("file이 뭐니? :"+file);
         //System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
         if(file!=null&&file.isEmpty()==false){
         	System.out.println("파일명:"+file.getOriginalFilename());
