@@ -96,8 +96,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <delete id="deleteRegFood" parameterType="string">
 	delete from food where food_no=#{value}
 </delete>
-<update id="updateRegFood" parameterType="foodVO">
+<update id="imgUpdateRegFood" parameterType="foodVO">
 	update food set 	food_name=#{foodName}, food_de=#{foodDe}, food_main_img=#{foodMainImg}, category_no=#{categoryNo}
+	where mem_id=#{memId} and food_no=#{foodNo}
+</update>
+<update id="noimgUpdateRegFood" parameterType="foodVO">
+	update food set 	food_name=#{foodName}, food_de=#{foodDe}, category_no=#{categoryNo}
 	where mem_id=#{memId} and food_no=#{foodNo}
 </update>
 <!-- End 영민 -->

@@ -36,6 +36,7 @@ public interface FoodService {
 	
 	void deleteRegFood(String foodNo);
 
-	void updateRegFood(FoodVO fvo);
-
+	void imgUpdateRegFood(FoodVO fvo);
+	
+	void noimgUpdateRegFood(FoodVO fvo);
 }

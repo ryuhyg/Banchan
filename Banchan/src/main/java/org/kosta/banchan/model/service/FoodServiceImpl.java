@@ -105,8 +105,11 @@ public class FoodServiceImpl implements FoodService {
 	public void deleteRegFood(String foodNo) {
 		foodDAO.deleteRegFood(foodNo);
 	}
-	public void updateRegFood(FoodVO fvo) {
-		foodDAO.updateRegFood(fvo);
+	public void imgUpdateRegFood(FoodVO fvo) {
+		foodDAO.imgUpdateRegFood(fvo);
+	}
+	public void noimgUpdateRegFood(FoodVO fvo) {
+		foodDAO.noimgUpdateRegFood(fvo);
 	}
 	
 }

@@ -73,8 +73,11 @@ public class FoodDAOImpl implements FoodDAO {
 	public void deleteRegFood(String foodNo) {
 		template.delete("food.deleteRegFood", foodNo);
 	}
-	public void updateRegFood(FoodVO fvo) {
-		template.update("food.updateRegFood", fvo);
+	public void imgUpdateRegFood(FoodVO fvo) {
+		template.update("food.imgUpdateRegFood", fvo);
+	}
+	public void noimgUpdateRegFood(FoodVO fvo) {
+		template.update("food.noimgUpdateRegFood", fvo);
 	}
 		
 }
