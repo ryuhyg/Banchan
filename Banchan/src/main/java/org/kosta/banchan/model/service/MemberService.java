@@ -25,7 +25,8 @@ public interface MemberService {
 	int idcheck(String id);
 	void deleteMember(String memId);
 	int findPasswordCheck(MemberVO mvo);
-	
+	int findPasswordQnaCheck(MemberVO mvo);
+	void resetPassword(MemberVO mvo);
 	
 	
 /////////////////////// start  광태 메서드   ///////////////////////////////
@@ -61,6 +62,7 @@ public interface MemberService {
 /////////////////////// start  지원 메서드   ///////////////////////////////
 	MemberVO getBuyerInfo(String buyerId);
 /////////////////////// end  지원 메서드   ///////////////////////////////
+	
 
 
 }

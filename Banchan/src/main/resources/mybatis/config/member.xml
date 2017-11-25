@@ -215,9 +215,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 where mem_id=#{value} and enable_no=11
  	</select>
  	<!-- Spring Security에서 권한 체크를 위해 사용 -->
- 	<resultMap type="addressVO" id="">
- 	
- 	</resultMap>
 	<select id="selectAuthorityByMemId"  resultType="authority">
 		SELECT bm.mem_id, bm.pw, bm.address_no, bm.address_de, bm.pw_QNA_NO, bm.mem_name, bm.pw_answer, a.auth_name, a.auth_no  
 		FROM ban_mem bm, mem_auth ma, auth a
@@ -239,6 +236,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findPasswordCheck" resultType="int">
 		select count(*) from ban_mem where mem_Id=#{memId} and mem_Name=#{memName} and tel=#{tel}
 	</select>
+	<select id="findPasswordQnaCheck" resultType="int">
+		select count(*) from ban_mem where mem_Id=#{memId} and pw_qna_no=#{pwQnaNo} and pw_answer=#{pwAnswer} and mem_name=#{memName}
+	</select>
+	<update id="resetPassword" parameterType="memberVO" >
+		update ban_mem set pw=#{pw} where id=#{memId}
+	</update>
 <!-- End 향걸 -->
 
 <!-- Start 지원 -->

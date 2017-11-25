@@ -54,6 +54,14 @@ public class MemberServiceImpl implements MemberService {
    public int findPasswordCheck(MemberVO mvo) {
 		return memberDAO.findPasswordCheck(mvo);
    } 
+   @Override
+   public int findPasswordQnaCheck(MemberVO mvo) {
+	   return memberDAO.findPasswordQnaCheck(mvo);
+   }
+   @Override
+   public void resetPassword(MemberVO mvo) {
+	   memberDAO.resetPassword(mvo);
+   }
    /////////////////////// start  광태 메서드   ///////////////////////////////
 	 //광태  회원가입 ajax id check
 	   @Override

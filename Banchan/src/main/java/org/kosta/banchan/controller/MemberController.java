@@ -60,29 +60,49 @@ public class MemberController {
    public String loginFail() {
       return "member/login_fail";
    }
-   
+   //회원탈퇴
    @RequestMapping(value="deleteMember.do",method = RequestMethod.POST)
 	public String deleteMember(String memId) {
 	   memberService.deleteMember(memId);
 	   return "redirect:member/deleteMember_result.do";
    }
-   @RequestMapping("findPasswordCheck.do")
-   public String findPasswordCheck(String id,String name,String telNo) {  
-	   System.out.println("id"+id+"name"+name+"tel"+telNo);
+   //비밀번호 찾기 아이디확인
+   @RequestMapping(value="findPasswordCheck.do",method=RequestMethod.POST)//
+   public String findPasswordCheck(String id,String name,String telNo,Model model) {  
 	   MemberVO mvo = new MemberVO(id,name,telNo);
-	  int idCheck = memberService.findPasswordCheck(mvo);
+	  int idCheck = memberService.findPasswordCheck(mvo);//아이디 체크
+	  List<PwQnaVO> list = memberService.getAllPwQnAList();//질문 목록 가져오기
 	  if(idCheck!=0) {
-		  return "redirect:member/findPassword_ok.do?id="+id ;
+		  model.addAttribute("mvo",mvo);
+		  model.addAttribute("qnalist",list);
+		  return "member/findPassword_ok.tiles";
 	  }else {
 		  return "member/findPassword_fail"; 	  
-	  }
-		  
-	  }
-   @RequestMapping("findPassword_ok.do")
-   public String findPasswordQna(String id){
-	   
-	return "member/findPassword_result";	   
+	  }  
    }
+   //비밀번호 찾기 질문답변
+   @RequestMapping("findPasswordQna.do")
+   	public String findPasswordQna(String id,String name, String question,String answer,Model model) {
+	   MemberVO mvo = new MemberVO(id,name,question, answer);
+	   int qnaCheck =  memberService.findPasswordQnaCheck(mvo);
+	   if(qnaCheck!=0) {
+		   	model.addAttribute("qnamvo",mvo);
+   			return "redirect:member/findPasswordResult_ok.do";
+	   }else {
+		    return "member/findPasswordResult_fail";
+	   }
+   	}
+   @RequestMapping(value="resetPassword.do",method=RequestMethod.POST)
+   @ResponseBody
+   public String resetPassword(String id,String password) {
+	   System.out.println("id: "+id+"password: "+password);
+	   MemberVO mvo = new MemberVO();
+	   mvo.setMemId(id);
+	   mvo.setPwAnswer(password);
+	   memberService.resetPassword(mvo);
+	   return "ok";
+   }
+ 
    //////////////////////// END 향걸 /////////////////////////////////////
    /////////////////////// start  광태 메서드   ///////////////////////////////
       // 광태 Ajax id check 

@@ -16,8 +16,8 @@
 					<div class="col-sm-4">
 						<div class="blog-list blog-detail">
 		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px; font-weight: bold;"></i>비밀번호 찾기</h3>
-							<form class="form-large grey-color" id="findPassForm" name="findPassForm" action="${pageContext.request.contextPath }/findPasswordCheck.do" method="get">
-										
+							<form class="form-large grey-color" id="findPassForm" name="findPassForm" action="${pageContext.request.contextPath }/findPasswordCheck.do" method="post">
+										<sec:csrfInput/><%-- csrf 토큰 --%>
 										<label for="id" style="font-weight: bold;"> <i class="fa fa-user user" style="margin-right: 5px"></i>아이디</label>
 										<input type="text" placeholder="아이디" name="id" id="id" class="margin-bottom form-control">
 								
@@ -25,7 +25,7 @@
 										<input type="text" placeholder="이름" name="name" id="name" class="margin-bottom form-control">
 										
 										<label for="password" style="font-weight: bold;"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>전화번호</label>
-										<input type="number" placeholder="전화번호" name="telNo" id="telNo" class="margin-bottom form-control">
+										<input type="tel" placeholder="전화번호" required pattern="[0-9]{3}-[0-9]{3-4}-[0-9]{4}" title="###-####-####" name="telNo" id="telNo" class="margin-bottom form-control">
 								<br>
 								<div align="center"> 
 								<button type="submit" class="btn btn-reverse button-form"  id="findPassBtn" >확인</button>
