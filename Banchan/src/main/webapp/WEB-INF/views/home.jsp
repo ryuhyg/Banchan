@@ -107,7 +107,7 @@
 				<h2>주부님들의 반찬으로 인스턴스 식품에 찌든 여러분을 정화 시키는 맛</h2>		
 			</div>
 			
-<c:if test="${fn.length(list)!=0}">
+<c:if test="${fn:length(list)!=0}">
 <!-- 인기 주부님 목록 -->
 			<div class="container">
 				<div class="list-box-title">
@@ -116,9 +116,9 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="box-ads box-home" style="height: 425px">
-							<a class="hover-effect image image-fill" href="selectSellerTop3Detail.do?memId=${list.get(0).getMemId()}">
+							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${list.get(0).getMemId()}">
 								<span class="cover"></span>
-								<img alt="Sample images" src="/banchan/resources/images/김래원.jpg">
+								<img alt="Sample images" style="width:380px;height:270px" src="${pageContext.request.contextPath}/resources/images/${list.get(0).getSellerImg()}">
 								<h3 class="title">${list.get(0).getMemName()} &nbsp;주부님</h3>
 							</a><!-- /.hover-effect -->
 							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.get(0).getAddressVO().getAddressAPI()}</span>
@@ -142,9 +142,9 @@
 					</div><!-- ./col-md-4 -->
 					<div class="col-md-4">
 						<div class="box-ads box-home" style="height: 425px">
-							<a class="hover-effect image image-fill" href="selectSellerTop3Detail.do?memId=${list.get(1).getMemId()}">
+							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${list.get(1).getMemId()}">
 								<span class="cover"></span>
-								<img alt="Sample images" src="/banchan/resources/images/김래원.jpg">
+								<img alt="Sample images" style="width:380px;height:270px" src="${pageContext.request.contextPath}/resources/images/${list.get(1).getSellerImg()}">
 								<h3 class="title">${list.get(1).getMemName()} &nbsp;주부님</h3>
 							</a><!-- /.hover-effect -->
 							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.get(1).getAddressVO().getAddressAPI()}</span>
@@ -168,9 +168,9 @@
 					</div><!-- ./col-md-4 -->
 					<div class="col-md-4">
 						<div class="box-ads box-home" style="height: 425px">
-							<a class="hover-effect image image-fill" href="selectSellerTop3Detail.do?memId=${list.get(2).getMemId()}">
+							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${list.get(2).getMemId()}">
 								<span class="cover"></span>
-								<img alt="Sample images" src="/banchan/resources/images/김래원.jpg">
+								<img alt="Sample images" style="width:380px;height:270px" src="${pageContext.request.contextPath}/resources/images/${list.get(2).getSellerImg()}">
 								<h3 class="title">${list.get(2).getMemName()} &nbsp;주부님</h3>
 							</a><!-- /.hover-effect -->
 							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.get(2).getAddressVO().getAddressAPI()}</span>
