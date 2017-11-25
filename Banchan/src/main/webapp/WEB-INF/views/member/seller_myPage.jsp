@@ -148,7 +148,7 @@ $(document).ready(function() {
 									<div class="image-content">
 										<div class="image image-fill">
 											<!-- <img alt="Image Sample" src="resources/images/${svo.sellerImg }"> -->
-											<img alt="Image Sample"  width="300px" height="250px"  src="resources/images/${svo.sellerImg }">
+											<img alt="Image Sample" style="size: inherit;" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
 										</div>						
 									</div>
 									<div class="info-agent">
