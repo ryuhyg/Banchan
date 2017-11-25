@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.TradeVO;
 
 public interface FoodService {
@@ -27,8 +28,6 @@ public interface FoodService {
 	List<Map<String, String>> allCategorySelect();
 	////////영민 end /////////
 
-	List<FoodSellVO> getFoodSellInfoByMemId(String memId);
-
 	FoodVO getFoodMemInfo(String foodNo);
 
 	List<FoodVO> selectRegFoodByNo(String foodNo);
@@ -36,5 +35,7 @@ public interface FoodService {
 	void deleteRegFood(String foodNo);
 
 	void updateRegFood(FoodVO fvo);
+
+	ListVO<FoodSellVO> getFoodSellInfoByMemId(String memId, String pageNo);
 
 }

@@ -1,5 +1,6 @@
 package org.kosta.banchan.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +45,13 @@ public class FoodDAOImpl implements FoodDAO {
 	}
 	
 	@Override
-	public List<FoodSellVO> getFoodSellInfoByMemId(String memId){
-		return template.selectList("getFoodSellInfoByMemId",memId);
+	public List<FoodSellVO> getFoodSellInfoByMemId(HashMap<String, String> map){
+		return template.selectList("getFoodSellInfoByMemId",map);
+	}
+	
+	@Override
+	public int getAllFoodSellCountByMemId(String memId) {
+		return template.selectOne("getAllFoodSellCountByMemId",memId);
 	}
 ///////////////////end 우정//////////////////////////////
 
