@@ -2,6 +2,24 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- 별점 style부분 ************************* -->
+ <style type="text/css"> /* 별점 css */
+.star_rating {font-size:0; letter-spacing:-4px;}
+.star_rating a {
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+}
+.star_rating a:first-child {margin-left:0;}
+.star_rating a.on {color:#ffcc00;}
+.home-top{
+	margin-top: 100px;
+}
+</style>     
+    
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("#trQuantity").change(function () {
@@ -32,7 +50,7 @@
 </script>
 
 <sec:authentication var="mvo" property="principal" />
-<section id="recent-list" class="agency" style="margin-top: 350px">
+<section id="recent-list" class="agency" style="margin-top: 150px">
 <div id="page-container">
 	<div class="container">
 		<div class="row">
@@ -117,4 +135,39 @@
 		
 	</div> <!-- container  -->
 </div> <!-- page-container -->
+<br><br>
+<hr>
+	<div class="container">
+		<div class="row">
+			<table class="table table-hover"  style="text-align: center;font-size: 12px;">
+					<thead>
+					<tr class="tr_visible">
+						<td>NO</td>
+						<td>별점</td>
+						<td>내용</td>
+						<td>작성자</td>
+						<td>날짜</td> 
+					</tr>
+					</thead>
+					<tbody>
+				<c:forEach items="${rlist }" var="r">
+					<tr>
+						<td>${r.revNo }</td>
+						<td align="left">
+								<span class="star_rating">  <!-- 별점 표현 -->
+      							<c:forEach begin="1" end="${r.score}">
+    							<a class="on">★</a>
+								</c:forEach>
+       							</span>
+						${r.score }
+						</td>
+						<td>${r.revContent }</td>
+						<td>작성자 넣어야댐</td>
+						<td>${r.revPostdate }</td>
+					</tr>
+				</c:forEach>
+					</tbody>
+			</table>
+		</div>
+	</div>
 </section>	<!-- recent-list -->			

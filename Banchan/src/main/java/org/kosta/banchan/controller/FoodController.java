@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.kosta.banchan.model.service.FeedbackService;
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.vo.FoodSellVO;
@@ -27,6 +28,8 @@ public class FoodController {
     private FoodService foodService;
    @Resource
    	private MemberService memberService;
+   @Resource
+   private FeedbackService feedbackService;
    
    // 파일 업로드를 FoodController에서 하실지 FileUploadController에서 하실지..
     private String uploadPath;
@@ -88,8 +91,8 @@ public class FoodController {
      */
     @RequestMapping("getFoodSellDetail.do")
     public String getFoodSellDetail(String foodSellNo,Model model) {
-    	//System.out.println("foodSellNo : "+ foodSellNo);
-    	//System.out.println(foodService.getFoodSellDetailByNo(foodSellNo));
+    	//윤주
+    	model.addAttribute("rlist",feedbackService.getReviewListByFoodSellNo(foodSellNo));
     	model.addAttribute("leftQuantity",foodService.getLeftQuantityByFoodSellNo(foodSellNo));
     	model.addAttribute("sellfood", foodService.getFoodSellDetailByNo(foodSellNo));
     	return "food/foodsell_detail.tiles";

@@ -17,7 +17,7 @@ function getimagereview(html, $target) {
     }
 }
 </script>
-<section id="recent-list" style="margin-top: 350px;">
+<section id="recent-list" style="margin-top: 150px;">
 <c:choose>
 <c:when test="${message!='ok'}">
 	<div class="container">

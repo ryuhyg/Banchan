@@ -113,7 +113,7 @@
 				<div class="list-box-title">
 					<span><i class=""></i>인기 주부님</span>
 				</div>
-				<div class="row">
+				<div class="row"> 
 					<div class="col-md-4">
 						<div class="box-ads box-home" style="height: 425px">
 							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${list.get(0).getMemId()}">

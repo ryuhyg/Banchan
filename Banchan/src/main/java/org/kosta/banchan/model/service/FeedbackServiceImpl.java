@@ -1,5 +1,7 @@
 package org.kosta.banchan.model.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.dao.AnswerDAO;
@@ -26,6 +28,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 	public void reviewRegister(ReviewVO rvo,String memId) {
 		reviewDAO.reviewRegister(rvo);
 		reviewDAO.updateSellerScore(memId);
+	}
+	@Override
+	public List<ReviewVO> getReviewListByFoodSellNo(String foodSellNo) {
+		return reviewDAO.getReviewListByFoodSellNo(foodSellNo);
 	}
 //////////////////end윤주///////////////////////////
 }

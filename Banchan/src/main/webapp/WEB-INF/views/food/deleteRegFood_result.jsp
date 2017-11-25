@@ -26,7 +26,8 @@
 		}
 	});
 </script>
-<section id="recent-list" style="margin-top: 350px;">
+<section id="recent-list" style="margin-top: 150px;">
 <input type="hidden" id="memId" value="${memId}">
 <input type="hidden" id="foodNo" value="${foodNo}">
+
 </section>
