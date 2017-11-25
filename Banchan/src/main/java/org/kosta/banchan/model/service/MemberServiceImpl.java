@@ -50,6 +50,10 @@ public class MemberServiceImpl implements MemberService {
 	   memberDAO.deleteMember(memId);
 	   memberDAO.deleteMemberAuth(memId);
    }
+   @Override
+   public int findPasswordCheck(MemberVO mvo) {
+		return memberDAO.findPasswordCheck(mvo);
+   } 
    /////////////////////// start  광태 메서드   ///////////////////////////////
 	 //광태  회원가입 ajax id check
 	   @Override
@@ -71,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
 		   
 		   		// 비밀번호를 bcrypt 알고리즘으로 암호화
 				String encodedPwd = passwordEncoder.encode(memberVO.getPw());
-				memberVO.setPw(encodedPwd);
+				memberVO.setPw(encodedPwd); 
 				
 				// 주소 타입이 존재하는지 확인
 				String addressNO= memberDAO.checkAddressNoByAddressAPI(memberVO);
@@ -108,11 +112,6 @@ public class MemberServiceImpl implements MemberService {
 		   return memberDAO.getAllSameAddressSellerListByAddress(addressNo);
 	   }
 	   
-	   @Override
-	   public List<SellerVO> getSameDongSellerListByAddress(String addressAPI){
- 
-		   return memberDAO.getSameDongSellerListByAddress(cutAddressAPI(addressAPI));
-	   }
 	   private String cutAddressAPI(String addressAPI) {
 		   int first = addressAPI.indexOf(" ");
 			String temp = addressAPI.substring(addressAPI.indexOf(" ")+1, addressAPI.length());
@@ -125,13 +124,16 @@ public class MemberServiceImpl implements MemberService {
 	   public AddressVO getAddressAPIById(MemberVO memberVO) {
 		   return memberDAO.getAddressAPIById(memberVO);
 	   }
+	   @Override
+	   public List<AddressVO> getNearSellerAddressByAddressAPI(String addressAPI) {
+		   return memberDAO.getNearSellerAddressByAddressAPI(cutAddressAPI(addressAPI));
+	   }
 	   /////////// end 위치기반 추천 메서드 ////////////////////   
    /////////////////////// end  광태 메서드   ///////////////////////////////
 	   
 ////////////////////start 우정 메서드 ////////////////////////////
 	   @Override
 	  public SellerVO selectSellerInfo(String id) {
-		  System.out.println("selectSellerInfo Service");
 		  return sellerDAO.selectSellerInfo(id);
 	  }
 	  @Override
@@ -261,6 +263,13 @@ public String getSellerNameByMemId(String memId) {
 }
 /////////////////////// end  윤주 메서드   ///////////////////////////////
 
+
 	
+/////////////////////// start 지원   ///////////////////////////////
+	@Override
+	public MemberVO getBuyerInfo(String buyerId) {
+		return memberDAO.getBuyerInfo(buyerId);
+	}
+/////////////////////// end 지원   ///////////////////////////////
 
 }

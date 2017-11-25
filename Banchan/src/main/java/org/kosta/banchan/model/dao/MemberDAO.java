@@ -24,6 +24,8 @@ public interface MemberDAO {
 			void deleteMember(String memId);
 	//권한 삭제		
 			void deleteMemberAuth(String memId);
+	//회원확인		
+			int findPasswordCheck(MemberVO mvo);
 ///////////////////////End 향걸 //////////////////////////////////
 
 /////////////////////// start  광태 메서드   ///////////////////////////////
@@ -41,10 +43,9 @@ public interface MemberDAO {
 		void registerMemberBasicAuth(MemberVO memberVO);
 		// 같은 번지 주소 판매자 리스트
 		List<SellerVO> getAllSameAddressSellerListByAddress(String addressNo);
-		// 동 주소 판매자 리스틑
-		List<SellerVO> getSameDongSellerListByAddress(String addressAPI);
 		// addressAPI만 get
 		AddressVO getAddressAPIById(MemberVO memberVO);
+		List<AddressVO> getNearSellerAddressByAddressAPI(String addressAPI);
 /////////////////////// end  광태 메서드   ///////////////////////////////	
 /////////////////////// start  윤주 메서드   ///////////////////////////////
 int isSeller(String memId);
@@ -89,19 +90,9 @@ String getSellerNameByMemId(String memId);
 	
 //주소정보 들고오기(정훈)
 		AddressVO findMemberAddressAPIById(String memId);
-
-
-	
-
-
-
-		
-
-
-
-
-		
-
+/////////////////////// start  지원 메서드   ///////////////////////////////
+		MemberVO getBuyerInfo(String buyerId);
+/////////////////////// end  지원 메서드   ///////////////////////////////
 
 	
 }

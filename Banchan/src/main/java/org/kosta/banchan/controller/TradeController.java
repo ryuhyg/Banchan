@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.kosta.banchan.model.service.FeedbackService;
 import org.kosta.banchan.model.service.FoodService;
+import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.service.TradeService;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.TradeVO;
@@ -14,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -25,7 +27,11 @@ public class TradeController {
 	private TradeService tradeService;
 	@Resource
 	private FeedbackService feedbackService;
+	@Resource
+	private MemberService memberService;
 
+	
+	////////////////////////////start 지원////////////////////////////////
 	/**
 	 * [지원] 판매자-해당 판매상품에 관한 거래요청리스트 조회
 	 * 
@@ -33,12 +39,13 @@ public class TradeController {
 	 * @param model
 	 * @return
 	 */
-	@Secured("ROLE_SELLER")
+	//@Secured("ROLE_SELLER")
 	@RequestMapping("getSellerTradeListByFoodSellNo.do")
-	public String getSellerTradeListByFoodSellNo(String foodSellNo, Model model) {
-		System.out.println(tradeService.getSellerTradeListByFoodSellNo(foodSellNo));
+	public String getSellerTradeListByFoodSellNo(String foodSellNo,String pageNo, Model model) {
+		//System.out.println(tradeService.getSellerTradeListByFoodSellNo(foodSellNo));
+		System.out.println(tradeService.getSellerTradeListByFoodSellNo(foodSellNo,pageNo));
 		model.addAttribute("foodSell", foodService.getFoodSellDetailByNo(foodSellNo));
-		model.addAttribute("tradeList", tradeService.getSellerTradeListByFoodSellNo(foodSellNo));
+		model.addAttribute("tradeList", tradeService.getSellerTradeListByFoodSellNo(foodSellNo,pageNo));
 		return "food/seller_foodTradeList.tiles";
 	}
 
@@ -76,6 +83,21 @@ public class TradeController {
 			return "redirect:getAllSellerTradeList.do?sellerId="+mvo.getMemId();
 		}
 	}
+	
+	/**
+	 * [지원] 구매자 상세정보 확인
+	 * 판매자가 거래내역을 확인할 때 해당 거래내역을 클릭하면 토글로 구매자의 상세정보를 확인할 수 있다. 
+	 * @param buyerId
+	 * @param model
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("getBuyerInfoOnAjax.do")
+	public MemberVO getBuyerInfo(String id) {
+		return memberService.getBuyerInfo(id);
+	}
+	////////////////////////////end 지원////////////////////////////////
+	
 
 	//////////////////////////// start윤주////////////////////////////////
 	// 나의 거래 내역 리스트 가져오기
