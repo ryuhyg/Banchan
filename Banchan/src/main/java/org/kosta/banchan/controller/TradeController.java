@@ -8,7 +8,6 @@ import org.kosta.banchan.model.service.FeedbackService;
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.TradeService;
 import org.kosta.banchan.model.vo.MemberVO;
-import org.kosta.banchan.model.vo.SellerVO;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
