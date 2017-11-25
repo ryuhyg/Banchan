@@ -26,7 +26,7 @@
 </style>  
   
     
-<section id="recent-list" class="agency" style="margin-top: 350px">
+<section id="recent-list" class="agency" style="margin-top: 150px">
 <sec:authorize access="hasRole('ROLE_SELLER')"><!-- 오직 판매자 권한 설정 -->
 <sec:authentication var="mvo" property="principal" />
 <div id="page-container">

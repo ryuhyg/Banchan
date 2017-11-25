@@ -195,7 +195,7 @@ values(answer_seq.nextval, '많이 짜진 않습니다!', sysdate, 'java2',3);
  
 drop sequence address_seq;
 drop sequence mem_auth_seq;
-drop sequence category_seq start;
+drop sequence category_seq;
 drop sequence food_seq;
 drop sequence food_sell_seq; 
 drop sequence trade_seq;

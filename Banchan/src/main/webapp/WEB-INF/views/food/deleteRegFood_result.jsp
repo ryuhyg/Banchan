@@ -16,7 +16,7 @@
 		}
 	});
 </script>
-<section id="recent-list" style="margin-top: 350px;">
+<section id="recent-list" style="margin-top: 150px;">
 <input type="hidden" id="memId" value="${mvo.memId}">
 
 </section>

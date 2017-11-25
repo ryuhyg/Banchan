@@ -9,7 +9,7 @@ table, th, td{
 
 </style>
 
-<section id="recent-list" style="margin-top: 350px;">
+<section id="recent-list" style="margin-top: 150px;">
 <div id="page-container">
 	<div class="container">
 		<div class="row">

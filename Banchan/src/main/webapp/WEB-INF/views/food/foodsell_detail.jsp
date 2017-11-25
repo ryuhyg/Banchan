@@ -50,7 +50,7 @@
 </script>
 
 <sec:authentication var="mvo" property="principal" />
-<section id="recent-list" class="agency" style="margin-top: 350px">
+<section id="recent-list" class="agency" style="margin-top: 150px">
 <div id="page-container">
 	<div class="container">
 		<div class="row">
