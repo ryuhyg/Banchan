@@ -71,7 +71,6 @@
 			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
 				<h3><a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}"  >
 								판매자 페이지</a></h3>			
-
 			<a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId }">나의구매내역테스트_윤주//</a>
 
 			</sec:authorize>

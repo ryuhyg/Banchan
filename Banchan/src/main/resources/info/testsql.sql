@@ -16,5 +16,10 @@ update food set 	food_name='김치', food_de='김치', food_main_img='김치.jpg
 where mem_id='aaaa1' and food_no='1054'
 
 select * from category
+
+select * from ban_mem
+select * from seller
+select * from address
+
 	
 	

@@ -20,7 +20,8 @@
  						var checkResultId = "";
  						var checkPassword = "";
  						var checkPasswordRe = "";
- 						var checkPwAnswer = "";
+ 						var checkPwAnswer = "pwAnswerOK";
+ 						var check = "${pvo.pwQnaNo}";
  						$("#regForm").submit(
  								function() {
  									if ($("#regForm :input[name=pw]").val()
@@ -285,12 +286,14 @@
  
  						//비밀번호 찾기 질문 답변 입력시 
  						$("#pwAnswer").keyup(function() {
+ 							
  							if ($(this).val() != "") {
  								checkPwAnswer = "pwAnswerOK";
  							} else {
- 								checkPwAnswer = "";
+ 								checkPwAnswer ="";
  							}
  						});//$("#pwAnswerId").keyup
+ 						
  						
  					
  					});//ready
@@ -321,9 +324,7 @@
  			            }
  			        }
 
-
- 			
- 				
+	
  				
  				
  </script>
@@ -446,7 +447,7 @@
  									name="addressDe" id="detailAddress"
  									value="<sec:authentication property="principal.addressDe"/>"
  									class="margin-bottom form-control" placeholder="상세주소 입력">
- 							</div>
+ 							</div> 
  						</div>
  						<div class="row">
  							<div class="col-xs-8" style="margin-bottom: 10px">
@@ -458,7 +459,7 @@
  									<c:forEach items="${pwQnaList}" var="p">
  										<option value="${p.pwQnaNo}">${p.pwQuest}</option>
  									</c:forEach>
- 								</select> <input type="hidden" id="pwQnaNo" name="pwQnaNo" value="">
+ 								</select> <input type="hidden" id="pwQnaNo" name="pwQnaNo" value="${pvo.pwQnaNo}">
  							</div>
  						</div>
  						<div class="row">

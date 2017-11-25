@@ -30,9 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 <update id="updateSellerScore" parameterType="string">
 	update seller set seller_score=
-	(select sum(score)/count(*)
+	(select round(sum(score)/count(*),2)
 	 from review r,food f
-	 where f.mem_id=#{value} and r.food_no=f.food_no)
+	 where f.mem_id='java2' and r.food_no=f.food_no	 
+	)
 	where mem_id=#{value}
 </update>
 <!-- End 윤주 -->

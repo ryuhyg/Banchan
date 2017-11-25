@@ -13,6 +13,7 @@ import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.vo.AddressVO;
 import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
@@ -191,7 +192,6 @@ public class MemberController {
        public String editMemberView(Model model, String pwQnaNo, String memId) {
           List<PwQnaVO> pwQnaList = memberService.getAllPwQnAList(); //질문리스트
           AddressVO avo=memberService.findMemberAddressAPIById(memId); //주소찾기
-          System.out.println("address:" +avo.getAddressAPI());
           PwQnaVO pvo=memberService.findPwQnaNo(pwQnaNo); //질문찾기
           SellerVO svo=memberService.findMemberTypeById(memId); //회원타입 검색
           //회원 타입 검색해서 판매자와 구매자로 분기
@@ -246,10 +246,10 @@ public class MemberController {
                 e.printStackTrace();
              }
           }
+          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
           String imageName=(String)file.getOriginalFilename();
           System.out.println("updateImage:" + imageName);
           if(imageName.equals("null")||imageName.equals("")) {
-          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	         
     	  memberService.editSellerMemberNoImageService(svo); // 업데이트
     	  mvoSellerMember.setMemName(svo.getPw());
@@ -259,9 +259,8 @@ public class MemberController {
     	  mvoSellerMember.setAddressDe(svo.getAddressDe());
     	  mvoSellerMember.setPwAnswer(svo.getPwAnswer());
     	  mvoSellerMember.setPwQnaNo(svo.getPwQnaNo());
-    	   }else {
-          MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-          
+    	  }else {
+                    
           svo.setSellerImg(file.getOriginalFilename()); //이미지 업데이트 
           memberService.editSellerMemberService(svo); // 업데이트
           mvoSellerMember.setMemName(svo.getPw());
@@ -273,6 +272,7 @@ public class MemberController {
           mvoSellerMember.setPwQnaNo(svo.getPwQnaNo());
           
       }
+          model.addAttribute("mvoSellerMember", mvoSellerMember);
           return "redirect:member/editMember_ok.do";
        }
 
@@ -307,13 +307,13 @@ public class MemberController {
 ////////////////////start 우정 메서드 ////////////////////////////
    
        @RequestMapping("sellerPageInfo.do")
-       public String seller_myPage(Model model, String memId) {
+       public String seller_myPage(Model model, String memId,String pageNo) {
     	  SellerVO svo = memberService.selectSellerInfo(memId);
           List<FoodVO> flist = foodeService.getFoodListByMemId(memId);
-          List<FoodSellVO> fslist = foodeService.getFoodSellInfoByMemId(memId);
+          ListVO<FoodSellVO> fslist = foodeService.getFoodSellInfoByMemId(memId,pageNo);
           model.addAttribute("svo", svo);
           model.addAttribute("flist", flist);
-          model.addAttribute("fslist", fslist);
+          model.addAttribute("lvo", fslist);
           return "member/seller_myPage.tiles";
        }
 ////////////////////end 우정 메서드 ////////////////////////////

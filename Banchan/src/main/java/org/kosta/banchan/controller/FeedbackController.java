@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.kosta.banchan.model.service.FeedbackService;
 import org.kosta.banchan.model.vo.ReviewVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -37,7 +38,8 @@ public class FeedbackController {
 		
 	}
 	@RequestMapping("reviewRegister_ok.do")
-	public String reviewRegisterOk() {
+	public String reviewRegisterOk(String foodSellNo,Model model) {
+		model.addAttribute("foodSellNo",foodSellNo);
 		return "food/reviewRegister_ok.tiles";
 	}
 	///////////////end윤주//////////////////////

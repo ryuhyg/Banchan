@@ -2,6 +2,7 @@ package org.kosta.banchan.model.service;
 
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import org.kosta.banchan.model.dao.FoodDAO;
 import org.kosta.banchan.model.dao.SellDAO;
 import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.ListVO;
+import org.kosta.banchan.model.vo.PagingBean;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.stereotype.Service;
 
@@ -73,14 +76,27 @@ public class FoodServiceImpl implements FoodService {
 	@Override
 	public List<FoodVO> getFoodListByMemId(String memId) {
 		//int TotalFoodCount= foodDAO.getTotalFoodCountByMemId(memId);
-		return foodDAO.getFoodListByMemId(memId);
+		 return foodDAO.getFoodListByMemId(memId);
 	}
 	/**[우정] 판매자페이지에서 판매음식리스트 조회
 	 * 판매가페이지에서 판매자가 등록한 판매 음식을 조회한다.
 	 */
 	@Override
-	public List<FoodSellVO> getFoodSellInfoByMemId(String memId){
-		return foodDAO.getFoodSellInfoByMemId(memId);
+	public ListVO<FoodSellVO> getFoodSellInfoByMemId(String memId,String pageNo){
+		int totalCount=foodDAO.getAllFoodSellCountByMemId(memId);
+		PagingBean pagingBean=null;
+		HashMap<String,String> paramMap=new HashMap<String,String>();
+		if(pageNo==null)
+			pagingBean=new PagingBean(totalCount);
+		else
+			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
+		paramMap.put("startRowNumber",Integer.toString(pagingBean.getStartRowNumber()));
+		paramMap.put("endRowNumber",Integer.toString(pagingBean.getEndRowNumber()));
+		paramMap.put("memId", memId);
+		
+		System.out.println(foodDAO.getFoodSellInfoByMemId(paramMap));
+		
+		return new ListVO<FoodSellVO>(foodDAO.getFoodSellInfoByMemId(paramMap),pagingBean);
 	}
 	
 	/*
@@ -105,8 +121,11 @@ public class FoodServiceImpl implements FoodService {
 	public void deleteRegFood(String foodNo) {
 		foodDAO.deleteRegFood(foodNo);
 	}
-	public void updateRegFood(FoodVO fvo) {
-		foodDAO.updateRegFood(fvo);
+	public void imgUpdateRegFood(FoodVO fvo) {
+		foodDAO.imgUpdateRegFood(fvo);
+	}
+	public void noimgUpdateRegFood(FoodVO fvo) {
+		foodDAO.noimgUpdateRegFood(fvo);
 	}
 	
 }

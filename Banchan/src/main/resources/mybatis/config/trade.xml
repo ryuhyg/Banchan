@@ -32,7 +32,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from trade where food_sell_no=#{foodSellNo}) t,tr_status s
 		where t.tr_status_no=s.tr_status_no and t.rnum between #{startRowNumber} and #{endRowNumber}
 		order by t.tr_no desc
-
 	</select>
 	<!-- [판매자] 실제 거래완료 후 거래완료확인 하여 거래상태를 바꿔줌  -->
 	<update id="completeTrade" parameterType="string">
@@ -71,7 +70,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		<result column="tr_req_date" property="trReqDate"/>
   		<result column="tr_fin_date" property="trFinDate"/>
   		<result column="food_sell_no" property="foodSellVO.foodSellNo"/>
- 		<result column="tr_status" property="trStatus"/>
+  		<result column="tr_status_no" property="trStatusNo"/>
+  		<result column="tr_status" property="trStatus"/>
  		<result column="tr_date" property="foodSellVO.trDate"/>
  		<result column="close_date" property="foodSellVO.closeDate"/>
  		<result column="loc" property="foodSellVO.loc"/>
