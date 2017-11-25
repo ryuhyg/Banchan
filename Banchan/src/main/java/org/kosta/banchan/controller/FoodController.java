@@ -47,6 +47,10 @@ public class FoodController {
     	tvo.setFoodSellVO(new FoodSellVO());
     	tvo.getFoodSellVO().setFoodSellNo(foodSellNo);
     	foodService.orderFood(tvo);
+    	return "redirect:orderFood_ok.do";
+    }
+    @RequestMapping("orderFood_ok.do")
+    public String orderFoodOk() {
     	return "food/orderFood_ok.tiles";
     }
     /////////////////////////end 윤주///////////////////////////////////

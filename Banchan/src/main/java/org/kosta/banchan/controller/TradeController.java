@@ -103,7 +103,6 @@ public class TradeController {
 	// 나의 거래 내역 리스트 가져오기
 	@RequestMapping("myTradeList.do")
 	public ModelAndView getTradeListByMemId(String memId) {
-
 	ModelAndView mv = new ModelAndView();
 	List<TradeVO> tlist = tradeService.getTradeListByMemId(memId);
 	mv.addObject("tlist",tlist);

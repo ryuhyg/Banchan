@@ -71,7 +71,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		<result column="tr_req_date" property="trReqDate"/>
   		<result column="tr_fin_date" property="trFinDate"/>
   		<result column="food_sell_no" property="foodSellVO.foodSellNo"/>
- 		<result column="tr_status" property="trStatus"/>
+  		<result column="tr_status_no" property="trStatusNo"/>
+  		<result column="tr_status" property="trStatus"/>
  		<result column="tr_date" property="foodSellVO.trDate"/>
  		<result column="close_date" property="foodSellVO.closeDate"/>
  		<result column="loc" property="foodSellVO.loc"/>
