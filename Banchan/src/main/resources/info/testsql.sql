@@ -1,25 +1,28 @@
-SELECT f.food_no, f.food_de, f.food_score, f.food_main_img, f.food_postdate
-FROM food f, food_sell fs
-WHERE f.food_no=fs.food_no and f.food_no='1045'
+--table 삭제
+drop table review;
+--table 생성
+CREATE TABLE REVIEW
+(
+   REV_NO NUMBER  PRIMARY KEY,
+   SCORE NUMBER  NULL ,
+   REV_CONTENT CLOB  NOT NULL ,
+   REV_POSTDATE DATE  NOT NULL ,
+   FOOD_NO NUMBER  NOT NULL,
+    constraint REVIEW_FK foreign key(FOOD_NO) references FOOD(FOOD_NO)
+);
+--sequence 삭제
+drop sequence review_seq;
+--sequence 생성
+create sequence review_seq nocache;
+--insert review data   (food_no는 각자 사용하는  음식 번호를 집어 넣으세요)
+insert into review(rev_no, score, rev_postdate, rev_content, food_no) 
+values(review_seq.nextval, 5 ,sysdate, '진짜 맛있었어요 주부님짱짱 또 구매하고 싶네요~~!^^', 1001);
 
-delete from food where food_no='1047'
+insert into review(rev_no, score, rev_postdate, rev_content, food_no) 
+values(review_seq.nextval, 2, sysdate, '별로 제 입맛에는 맞지 않았지만 다른분들은 좋아하실수도 있겠네요', 1001);
 
-delete from food_sell where food_no='1045'
-
-select * from food;
-select * from food_sell;
-
-insert into food(food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id)
-values(food_seq.nextval, #{foodName}, #{foodDe}, 0, #{foodMainImg}, sysdate, #{categoryNo}, #{memId})
-	
-update food set 	food_name='김치', food_de='김치', food_main_img='김치.jpg', category_no='10102'
-where mem_id='aaaa1' and food_no='1054'
-
-select * from category
-
-select * from ban_mem
-select * from seller
-select * from address
+insert into review(rev_no, score, rev_postdate, rev_content, food_no) 
+values(review_seq.nextval, 4, sysdate, '다시 구매하고 싶어요!ㅇㅇ주부님 감사해요~~', 1001);
 
 	
 	
