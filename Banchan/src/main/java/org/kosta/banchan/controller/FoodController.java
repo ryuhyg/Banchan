@@ -86,6 +86,7 @@ public class FoodController {
     public String getFoodSellDetail(String foodSellNo,Model model) {
     	//System.out.println("foodSellNo : "+ foodSellNo);
     	//System.out.println(foodService.getFoodSellDetailByNo(foodSellNo));
+    	System.out.println("foodController foodSellNo:"+foodSellNo);
     	model.addAttribute("leftQuantity",foodService.getLeftQuantityByFoodSellNo(foodSellNo));
     	model.addAttribute("sellfood", foodService.getFoodSellDetailByNo(foodSellNo));
     	return "food/foodsell_detail.tiles";
