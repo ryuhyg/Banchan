@@ -79,6 +79,26 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
     margin: 0; 
 }
 
+.pagination {
+    display: inline-block;
+    text-align: center;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    font-size: 13px;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
 </style>
 
 <script type="text/javascript">
@@ -93,6 +113,10 @@ $(document).ready(function() {
         var activeTab = $(this).find("a").attr("href");
         $(activeTab).fadeIn();
         return false;
+    });
+    
+    $(".pagination a").click(function(){
+    	alert($(this).attr('id'));
     });
 });
 </script>
@@ -219,9 +243,9 @@ $(document).ready(function() {
 				<div id="tab2" class="tab_content" style="display: none;">
 						<!-- 받아온 음식 반복 구간 -->
 			
-				<c:forEach items="${fslist}" var="foodSell">
-					<div class="tab2Container">
-					<div class="col-md-9">
+				<div class="tab2Container">
+				<div class="col-md-9">
+				<c:forEach items="${lvo.list}" var="foodSell">
 						<div class="row" style="vertical-align: middle">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
 								<div class="bs-callout callout-success" style="width: 800px">
@@ -232,7 +256,7 @@ $(document).ready(function() {
 									  <i class="fa fa-close" aria-hidden="true" style="font-weight: bold"> 판매 종료 날짜:</i>  ${foodSell.closeDate}
 									<sec:authorize access="isAuthenticated()">
 										<c:if test="${mvo.memId==svo.memId}">
-									 	 <a  style="display:inline-block;float: right;" class="btn btn-default" href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=${foodSell.foodSellNo}">거래 내역 보기</a>
+									 	 <a  style="display:inline-block;float: right;" class="btn btn-default" href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=${foodSell.foodSellNo}&pageNo=1">거래 내역 보기</a>
 										</c:if>
 									</sec:authorize>		
 								  </span>
@@ -247,37 +271,37 @@ $(document).ready(function() {
 						
 						</div><!-- /.row -->
 
+					
+					<div class="paginationContainer" style="text-align: center;">
+						 <div class="pagination" >
+										<c:set var="pb" value="${lvo.pb}"></c:set>
+										<c:if test="${pb.previousPageGroup}">	
+										<a  id="${pb.startPageOfPageGroup-1}" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${svo.memId}
+										&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
+										</c:if>
+										<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
+										<c:choose>
+										<c:when test="${pb.nowPage!=i}">
+										<a id="${i}" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${svo.memId}
+										&pageNo=${i}">${i}</a>
+										</c:when>
+										<c:otherwise>
+										<a id="-1" href="#" >${i}</a>
+										</c:otherwise>
+										</c:choose>
+										&nbsp;
+										</c:forEach>
+										<c:if test="${pb.nextPageGroup}">	
+										<a id="${pb.endPageOfPageGroup+1}" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${svo.memId}
+										&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
+										</c:if>
+											 		
+						</div> 
+					</div><!-- paginationContainer -->
+					</c:forEach>
 					</div>
 					</div>
-						</c:forEach>
-						<!-- paging 처리
-							 <div class="pagingInfo">
-								<c:set var="pb" value="${requestScope.lvo.pagingBean}"></c:set>
-								
-								<ul class="pagination">
-								<c:if test="${pb.previousPageGroup}">	
-								<li><a href="${pageContext.request.contextPath}/list.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
-								</c:if>
-								<c:forEach var="i" begin="${pb.startPageOfPageGroup}" 
-								end="${pb.endPageOfPageGroup}">
-								<c:choose>
-								<c:when test="${pb.nowPage!=i}">
-								<li><a href="${pageContext.request.contextPath}/list.do?pageNo=${i}">${i}</a></li> 
-								</c:when>
-								<c:otherwise>
-								<li class="active"><a href="#" >${i}</a></li>
-								</c:otherwise>
-								</c:choose>
-								&nbsp;
-								</c:forEach>
-								<c:if test="${pb.nextPageGroup}">	
-								<li><a href="${pageContext.request.contextPath}/list.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
-								</c:if>
-								</ul>	 		
-							</div> 	 -->	
-							
 						
-				
 				</div>
 				
 			</div><!-- tab_container -->

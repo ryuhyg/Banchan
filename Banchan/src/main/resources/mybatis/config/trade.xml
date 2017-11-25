@@ -32,7 +32,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from trade where food_sell_no=#{foodSellNo}) t,tr_status s
 		where t.tr_status_no=s.tr_status_no and t.rnum between #{startRowNumber} and #{endRowNumber}
 		order by t.tr_no desc
-
 	</select>
 	<!-- [판매자] 실제 거래완료 후 거래완료확인 하여 거래상태를 바꿔줌  -->
 	<update id="completeTrade" parameterType="string">

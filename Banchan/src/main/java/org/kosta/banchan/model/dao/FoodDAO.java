@@ -1,5 +1,6 @@
 package org.kosta.banchan.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +17,7 @@ public interface FoodDAO {
 	FoodVO getFoodByNo(String foodNo);
 
 	List<FoodVO> getFoodListByMemId(String memId);
-
-	List<FoodSellVO> getFoodSellInfoByMemId(String memId);
-
+	
 	/*int getTotalFoodCountByMemId(String memId);*/
 
 	void foodRegister(FoodVO fvo);
@@ -34,4 +33,9 @@ public interface FoodDAO {
 	void imgUpdateRegFood(FoodVO fvo);
 	
 	void noimgUpdateRegFood(FoodVO fvo);
+
+	List<FoodSellVO> getFoodSellInfoByMemId(HashMap<String, String> map);
+
+	int getAllFoodSellCountByMemId(String memId);
+
 }
