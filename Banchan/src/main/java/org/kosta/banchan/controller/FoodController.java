@@ -221,7 +221,7 @@ public class FoodController {
         	}
         }
        // String memId=""; // 로그인기능 구현되면 세션정보 가져올 예정
-       
+        
         fvo.setMemId(id);
         //fvo.setFoodScore(score);
         fvo.setFoodNo(request.getParameter("foodNo"));
