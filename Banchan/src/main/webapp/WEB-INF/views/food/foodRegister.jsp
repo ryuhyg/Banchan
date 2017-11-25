@@ -5,12 +5,13 @@
 <sec:authentication var="mvo" property="principal" />
 
 <script>
+
 function getimagereview(html, $target) {
     if (html.files && html.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $target.css('display', '');
-            $target.html('<img src="' + e.target.result + '" alt="" style="width:350px; height:200px;"/>');
+       		//$target.css('display', '');
+	        $target.html('<img src="' + e.target.result + '" alt="" style="width:350px; height:200px;"/>');
         }
         reader.readAsDataURL(html.files[0]);
     }
@@ -44,7 +45,7 @@ function getimagereview(html, $target) {
 						</select>
 						<div style="margin-top: 10px;">
 							<input type="file" name="uploadImage"  id="cma_file" accept="image/*" onchange="getimagereview(this,$('#cma_image'))" />
-							 <div id="cma_image" style="display:none;"></div>
+							 <div id="cma_image"></div>
 						</div>
 						</div>
 						<div class="col-xs-7" style="float: right" class="row">
@@ -90,7 +91,9 @@ function getimagereview(html, $target) {
 						</select>
 						<div style="margin-top: 10px;">
 							<input type="file" name="uploadImage" id="cma_file" accept="image/*" onchange="getimagereview(this,$('#cma_image'))" />
-							 <div id="cma_image" style="display:none;"></div>
+							 <div id="cma_image">
+								 <img src="${pageContext.request.contextPath }/resources/images/${beFood.foodMainImg}" alt="" style="width:350px; height:200px;"/>
+							 </div>
 						</div>
 						</div>
 						<div class="col-xs-7" style="float: right" class="row">

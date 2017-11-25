@@ -13,6 +13,7 @@ import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.vo.AddressVO;
 import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.PwQnaVO;
 import org.kosta.banchan.model.vo.SellerVO;
@@ -286,13 +287,13 @@ public class MemberController {
 ////////////////////start 우정 메서드 ////////////////////////////
    
        @RequestMapping("sellerPageInfo.do")
-       public String seller_myPage(Model model, String memId) {
+       public String seller_myPage(Model model, String memId,String pageNo) {
     	  SellerVO svo = memberService.selectSellerInfo(memId);
           List<FoodVO> flist = foodeService.getFoodListByMemId(memId);
-          List<FoodSellVO> fslist = foodeService.getFoodSellInfoByMemId(memId);
+          ListVO<FoodSellVO> fslist = foodeService.getFoodSellInfoByMemId(memId,pageNo);
           model.addAttribute("svo", svo);
           model.addAttribute("flist", flist);
-          model.addAttribute("fslist", fslist);
+          model.addAttribute("lvo", fslist);
           return "member/seller_myPage.tiles";
        }
 ////////////////////end 우정 메서드 ////////////////////////////

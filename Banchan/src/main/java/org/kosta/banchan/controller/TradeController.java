@@ -8,6 +8,7 @@ import org.kosta.banchan.model.service.FeedbackService;
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.service.TradeService;
+import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.MemberVO;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.security.access.annotation.Secured;
@@ -42,10 +43,10 @@ public class TradeController {
 	//@Secured("ROLE_SELLER")
 	@RequestMapping("getSellerTradeListByFoodSellNo.do")
 	public String getSellerTradeListByFoodSellNo(String foodSellNo,String pageNo, Model model) {
-		//System.out.println(tradeService.getSellerTradeListByFoodSellNo(foodSellNo));
-		System.out.println(tradeService.getSellerTradeListByFoodSellNo(foodSellNo,pageNo));
+		ListVO<TradeVO> tradeList=tradeService.getSellerTradeListByFoodSellNo(foodSellNo,pageNo);
+		System.out.println(tradeList);
 		model.addAttribute("foodSell", foodService.getFoodSellDetailByNo(foodSellNo));
-		model.addAttribute("tradeList", tradeService.getSellerTradeListByFoodSellNo(foodSellNo,pageNo));
+		model.addAttribute("lvo", tradeList);
 		return "food/seller_foodTradeList.tiles";
 	}
 
@@ -103,7 +104,6 @@ public class TradeController {
 	// 나의 거래 내역 리스트 가져오기
 	@RequestMapping("myTradeList.do")
 	public ModelAndView getTradeListByMemId(String memId) {
-
 	ModelAndView mv = new ModelAndView();
 	List<TradeVO> tlist = tradeService.getTradeListByMemId(memId);
 	mv.addObject("tlist",tlist);

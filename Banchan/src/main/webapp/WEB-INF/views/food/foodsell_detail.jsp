@@ -9,7 +9,7 @@
 			var preQuantity=$("#preQuantity").text();
 			if(parseInt($(this).val()) > parseInt(preQuantity)){
 				alert("준비수량이 부족합니다!");
-				$("#trQuantity").val(1);
+				$("#trQuantity").val(1); 
 			}
 			var orderPrice=$(this).val()*$("#price").text();
 			$("#orderPrice").text(orderPrice);
@@ -73,7 +73,7 @@
 						<th>준비수량</th>
 						<td><span id="preQuantity">${sellfood.preQuantity}</span>&nbsp;(${sellfood.unit })</td>
 						<th>남은수량</th>
-						<td><span id="leftQuantity">${sellfood.preQuantity-leftQuantity}</span>&nbsp;(${sellfood.unit })</td>
+						<td><span id="leftQuantity">${leftQuantity}</span>&nbsp;(${sellfood.unit })</td>
 					</tr>
 					<tr>
 						<th>거래장소</th>
