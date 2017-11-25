@@ -88,7 +88,7 @@ public class TestUnit {
 		System.out.println(temp2);*/
 		
 		
-		int totalCount=tradeDAO.getTradeCountByFoodSellNo("101019");
+		/*int totalCount=tradeDAO.getTradeCountByFoodSellNo("101020");
 		System.out.println("totalCount:"+totalCount);
 		PagingBean pagingBean=null;
 		HashMap<String,Integer> paramMap=new HashMap<String,Integer>();
@@ -97,9 +97,14 @@ public class TestUnit {
 		System.out.println("PagingBean st:"+pagingBean.getStartRowNumber()+"PagingBean end:"+pagingBean.getEndRowNumber());
 		paramMap.put("startRowNumber",pagingBean.getStartRowNumber());
 		paramMap.put("endRowNumber", pagingBean.getEndRowNumber());
-		paramMap.put("foodSellNo", Integer.parseInt("101019"));
+		paramMap.put("foodSellNo", Integer.parseInt("101020"));
 		
-		System.out.println(tradeDAO.getSellerTradeListByFoodSellNo(paramMap));
+		System.out.println(tradeDAO.getSellerTradeListByFoodSellNo(paramMap));*/
+		HashMap<String,String> paramMap=new HashMap<String,String>();
+		paramMap.put("startRowNumber","1");
+		paramMap.put("endRowNumber","3");
+		paramMap.put("memId", "aaaa");
+		System.out.println(foodDAO.getFoodSellInfoByMemId(paramMap));
 		
 	}
 }

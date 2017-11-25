@@ -19,13 +19,18 @@ tr{
 	$(document).ready(function () {
 		/* 해당 거래내역 클릭시 구매자 상세정보 확인가능 */
 		$("#tardeList .tr_visible").click(function() {
-			var buyerId=$(this).children().eq(2).text();
-			$(this).next().toggle();
+			var trade=$(this);
+			var buyerId=trade.children().eq(2).text();
 			$.ajax({
                type:"get",
                url:"${pageContext.request.contextPath}/getBuyerInfoOnAjax.do",
                data: "id="+buyerId,
                success:function(data){ //data로 서버의 응답정보가 할당 
+      			   trade.next().find("#buyerId").text(data.memId);	
+      			   trade.next().find("#buyerName").text(data.memName);	
+      			   trade.next().find("#buyerTel").text(data.tel);	
+      			   trade.next().find("#buyerAddress").text(data.addressVO.addressAPI);	
+            	   trade.next().toggle();
                }
             }); //success 
 		});
@@ -48,7 +53,7 @@ tr{
 <div class="container">
 	<div class="row">
 	<h3>전체거래내역</h3>
-	<table class="table table-hover" id="tardeList" style="text-align: center;font-size: 12px" >
+	<table class="table table-hover" id="tardeList" style="text-align: center;font-size: 12px;" >
 		<thead>
 			<tr class="tr_visible"> 
 				<th>거래번호</th>
@@ -88,10 +93,10 @@ tr{
 				</c:choose>
 			</tr>
 			<tr>
-				<td colspan="2">구매자 아이디</td>
-				<td colspan="2">구매자 이름</td>
-				<td colspan="3">구매자 연락처</td>
-				<td colspan="5">구매자 주소</td>
+				<td colspan="2">구매자 아이디: <span id="buyerId"></span> </td>
+				<td colspan="2" >구매자 이름: <span id="buyerName"></span></td>
+				<td colspan="3">구매자 연락처: <span id="buyerTel"></span></td>
+				<td colspan="4">구매자 주소: <span id="buyerAddress"></span></td>
 			</tr>
 			</c:forEach>
 		</tbody>

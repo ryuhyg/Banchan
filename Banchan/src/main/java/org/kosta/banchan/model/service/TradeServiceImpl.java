@@ -24,6 +24,8 @@ public class TradeServiceImpl implements TradeService {
 
     /** [지원] 판매자 구매요청리스트 
 	 * 해당 판매음식에 대한 구매요청 리스트 조회 
+	 * [우정]
+	 * pagingBean 추가 
      */
     @Override
     public ListVO<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo,String pageNo){
@@ -34,13 +36,13 @@ public class TradeServiceImpl implements TradeService {
 			pagingBean=new PagingBean(totalCount);
 		else
 			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
+		
 		paramMap.put("startRowNumber",pagingBean.getStartRowNumber());
 		paramMap.put("endRowNumber", pagingBean.getEndRowNumber());
 		paramMap.put("foodSellNo", Integer.parseInt(foodSellNo));
 		
 		//start,end,foodSell no를 저장한 map를 param으로 
 		return new ListVO<TradeVO>(tradeDAO.getSellerTradeListByFoodSellNo(paramMap),pagingBean);
-    	//return tradeDAO.getSellerTradeListByFoodSellNo(foodSellNo);
     }
     
     

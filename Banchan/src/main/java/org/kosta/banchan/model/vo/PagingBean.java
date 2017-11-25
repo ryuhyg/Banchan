@@ -212,6 +212,20 @@ public class PagingBean {
 		return flag;
 	}
 
+	
+	
+	@Override
+	public String toString() {
+		return "PagingBean [nowPage=" + nowPage + ", postCountPerPage=" + postCountPerPage + ", pageCountPerPageGroup="
+				+ pageCountPerPageGroup + ", totalPostCount=" + totalPostCount + ", getNowPage()=" + getNowPage()
+				+ ", getStartRowNumber()=" + getStartRowNumber() + ", getEndRowNumber()=" + getEndRowNumber()
+				+ ", getTotalPage()=" + getTotalPage() + ", getTotalPageGroup()=" + getTotalPageGroup()
+				+ ", getNowPageGroup()=" + getNowPageGroup() + ", getStartPageOfPageGroup()="
+				+ getStartPageOfPageGroup() + ", getEndPageOfPageGroup()=" + getEndPageOfPageGroup()
+				+ ", isPreviousPageGroup()=" + isPreviousPageGroup() + ", isNextPageGroup()=" + isNextPageGroup() + "]";
+	}
+
+
 	public static void main(String args[]) {
 		PagingBean p = new PagingBean(47, 10);
 		// 현페이지의 시작 row number 를 조회 46
