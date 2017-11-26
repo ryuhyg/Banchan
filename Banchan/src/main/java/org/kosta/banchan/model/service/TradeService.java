@@ -10,7 +10,7 @@ public interface TradeService {
 	////////////////start 지원///////////////////
 	             //List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo);
 	void completeTrade(String tradeNo);
-	List<TradeVO> getAllSellerTradeList(String sellerId);
+	ListVO<TradeVO> getAllSellerTradeList(String sellerId, String pageNo);
 	////////////////end 지원///////////////////
 
 	
@@ -21,7 +21,9 @@ public interface TradeService {
 	
 	//우정
 	int getTradeCountByFoodSellNo(String foodSellNo);
+	
 	ListVO<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo, String foodNo);
+	int getAllSellerTradeCount(String sellerId);
 
 
 }

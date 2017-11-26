@@ -190,7 +190,7 @@ $(document).ready(function() {
 					<sec:authorize access="isAuthenticated()">
 				<c:if test="${mvo.memId==svo.memId}">
 						<div style="margin-bottom: 2px"> 
-					 	<a href="getAllSellerTradeList.do?sellerId=${mvo.memId }" class="btn btn-default" style="width: 70%;" >판매내역보기</a>
+					 	<a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="width: 70%;" >판매내역보기</a>
 						</div>
 						<a  href="${pageContext.request.contextPath}/foodRegisterForm.do" class="btn btn-default" style="width: 70%" >음식 등록</a>
 					</c:if> 

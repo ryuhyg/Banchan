@@ -65,8 +65,25 @@ public class TradeServiceImpl implements TradeService {
      * @return
      */
     @Override
-    public List<TradeVO> getAllSellerTradeList(String sellerId){
-    	return tradeDAO.getAllSellerTradeList(sellerId);
+    public ListVO<TradeVO> getAllSellerTradeList(String sellerId, String pageNo){
+    	System.out.println("sellerId: "+sellerId);
+    	System.out.println("pageNo: "+pageNo);
+    	int totalPostCount=tradeDAO.getAllSellerTradeCount(sellerId); //판매자 아이디에 해당하는 총 거래내역 수
+    	int nowPage=Integer.parseInt(pageNo); //현재 페이지 
+    	PagingBean pb=new PagingBean(totalPostCount, nowPage);
+    	
+    	// 해당 jsp 페이지의 페이지당 게시물 개수와 페이지그룹 개수 설정
+    	/*pb.setPostCountPerPage(10);
+    	pb.setPageCountPerPageGroup(5);*/
+    	
+    	HashMap<String,String> paramMap=new HashMap<String,String>();
+    	paramMap.put("sellerId", sellerId);
+    	paramMap.put("startRowNumber",String.valueOf(pb.getStartRowNumber()));
+		paramMap.put("endRowNumber", String.valueOf(pb.getEndRowNumber()));
+    	
+		// db에서 가져온 리스트와  PagingBean으로 ListVO생성
+    	ListVO<TradeVO> lvo=new ListVO<TradeVO>(tradeDAO.getAllSellerTradeList(paramMap),pb); 
+    	return lvo;
     }
     
     
@@ -85,5 +102,18 @@ public class TradeServiceImpl implements TradeService {
 	public int getTradeCountByFoodSellNo(String foodSellNo) {
 		return tradeDAO.getTradeCountByFoodSellNo(foodSellNo);
 	}
+	
+	/** [지원] 판매자 전체거내애겨 개수 조회 
+	 * 
+	 * @param sellerId
+	 * @return
+	 */
+	@Override
+	public int getAllSellerTradeCount(String sellerId) {
+		return tradeDAO.getAllSellerTradeCount(sellerId);
+	}
+
+
+	
 	
 }

@@ -44,7 +44,6 @@ public class TradeController {
 	@RequestMapping("getSellerTradeListByFoodSellNo.do")
 	public String getSellerTradeListByFoodSellNo(String foodSellNo,String pageNo, Model model) {
 		ListVO<TradeVO> tradeList=tradeService.getSellerTradeListByFoodSellNo(foodSellNo,pageNo);
-		System.out.println(tradeList);
 		model.addAttribute("foodSell", foodService.getFoodSellDetailByNo(foodSellNo));
 		model.addAttribute("lvo", tradeList);
 		return "food/seller_foodTradeList.tiles";
@@ -59,8 +58,8 @@ public class TradeController {
 	 */
 	@Secured("ROLE_SELLER")
 	@RequestMapping("getAllSellerTradeList.do")
-	public String getAllSellerTradeList(String sellerId, Model model) {
-		model.addAttribute("tradeList", tradeService.getAllSellerTradeList(sellerId));
+	public String getAllSellerTradeList(String sellerId, String pageNo, Model model) {
+		model.addAttribute("lvo", tradeService.getAllSellerTradeList(sellerId, pageNo));
 		return "food/seller_allTradeList.tiles";
 	}
 

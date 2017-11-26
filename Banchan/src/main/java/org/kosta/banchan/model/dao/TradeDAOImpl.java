@@ -45,8 +45,8 @@ public class TradeDAOImpl implements TradeDAO {
 	 * @return
 	 */
 	@Override
-	public List<TradeVO> getAllSellerTradeList(String sellerId){
-		return template.selectList("trade.getAllSellerTradeList", sellerId);
+	public List<TradeVO> getAllSellerTradeList(HashMap<String, String> paramMap){
+		return template.selectList("trade.getAllSellerTradeList", paramMap);
 	}
 	//////////////////////start 윤주//////////////////////////
 	@Override
@@ -60,6 +60,14 @@ public class TradeDAOImpl implements TradeDAO {
 	public int getTradeCountByFoodSellNo(String foodSellNo) {
 	return template.selectOne("trade.getTradeCountByFoodSellNo",foodSellNo);
 	
+	}
+
+	/** [지원] 판매자 전체거래내역 개수 조회 
+	 * 
+	 */
+	@Override
+	public int getAllSellerTradeCount(String sellerId) {
+		return template.selectOne("trade.getAllSellerTradeCount", sellerId);
 	}
 
 }

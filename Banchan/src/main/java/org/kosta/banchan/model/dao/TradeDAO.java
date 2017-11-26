@@ -11,11 +11,13 @@ public interface TradeDAO {
 
 	void completeTrade(String tradeNo);
 
-	List<TradeVO> getAllSellerTradeList(String sellerId);
+	List<TradeVO> getAllSellerTradeList(HashMap<String, String> paramMap);
 	////////////////////Start 윤주 //////////////////////////
 	List<TradeVO> getTradeListByMemId(String memId);
 	////////////////////END 윤주 //////////////////////////
 
 	int getTradeCountByFoodSellNo(String foodSellNo);
+
+	int getAllSellerTradeCount(String sellerId);
 
 }
