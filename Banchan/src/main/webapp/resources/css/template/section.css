@@ -1,7 +1,7 @@
 /* 1.4 SECTION
 ================================== */
 .section-color {
-  background-color: #1a1a1a;
+  background-color: #333	;
   position: relative;
 }
 .section-color:after,
