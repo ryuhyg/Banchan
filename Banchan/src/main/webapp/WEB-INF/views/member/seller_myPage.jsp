@@ -115,6 +115,45 @@ $(document).ready(function() {
         return false;
     });
     
+	//동적으로 생성되는 페이징 번호에 대한 event
+	$(".pagination").on("click","a",function(){
+		//if($(this).attr('id')!="-1"){
+		$.ajax({
+		type:"get",
+    	url:"${pageContext.request.contextPath}/sellerPagePagingAjax.do",
+    	data:"memId="+$("#sellerId").val()+"pageNo="+$(this).attr('id'),
+    	dataType:"json",
+    	success:function(data){		
+    		
+    		alert(data.pb.previousPageGroup);
+    		/* var startPageOfPageGroupMinus=data.pb.startPageOfPageGroup-1;
+    		var endPageOfPageGroupPlus=data.pb.endPageOfPageGroup+1;
+    		var startPageOfPageGroup=data.pb.startPageOfPageGroup;
+    		var endPageOfPageGroup=data.pb.endPageOfPageGroup;
+    		var nowPage=data.pb.nowPage;
+    		var info=" <div class='pagination'>";
+			if(data.pb.previousPageGroup){
+				info+="<a  id="+startPageOfPageGroupMinus+"href='#'>&laquo;</a>";
+			}
+			for(var i=startPageOfPageGroup;i<endPageOfPageGroup+1;i++){
+				if(nowPage!=i){
+					info+="<a id="+i+"href='#'"+">"+i+"</a>";
+				}
+				else{
+					info+="<a id='-1' href='#'"+">"+i+"</a> &nbsp;";
+				}
+			}
+			if(data.pb.nextPageGroup){
+				info+="<a  id="+endPageOfPageGroupPlus+"href='#'>&raquo;</a>";
+			}		
+			info+="</div>";
+			
+			$("#paginationAjax").html(info);	*/			
+	} 
+		
+	});//ajax
+	//}
+	});//click function
     
    /**paging ajax 부분 **/
     /* $(".pagination a").click(function(){
@@ -317,6 +356,7 @@ $(document).ready(function() {
 										</c:if>
 											 		
 						</div> 
+						<span id="paginationAjax"></span>
 					</div><!-- paginationContainer -->
 					<!-- 여기가 ajax 끝 -->
 					</div>

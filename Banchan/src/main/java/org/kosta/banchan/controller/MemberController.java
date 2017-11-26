@@ -326,6 +326,11 @@ public class MemberController {
           model.addAttribute("lvo", fslist);
           return "member/seller_myPage.tiles";
        }
+       @RequestMapping("sellerPagePagingAjax.do")
+       @ResponseBody
+       public ListVO<FoodSellVO> sellerPagePagingAjax(Model model, String memId,String pageNo) {
+     	   return foodeService.getFoodSellInfoByMemId(memId,pageNo);
+        }
 ////////////////////end 우정 메서드 ////////////////////////////
        
 /////////////////////// start  윤주 메서드   ///////////////////////////////
