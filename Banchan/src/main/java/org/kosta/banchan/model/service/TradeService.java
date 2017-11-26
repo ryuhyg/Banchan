@@ -7,23 +7,22 @@ import org.kosta.banchan.model.vo.TradeVO;
 
 public interface TradeService {
 
-	////////////////start 지원///////////////////
-	             //List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo);
+	//////////////// start 지원///////////////////
+	// List<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo);
 	void completeTrade(String tradeNo);
+
 	ListVO<TradeVO> getAllSellerTradeList(String sellerId, String pageNo);
-	////////////////end 지원///////////////////
+	//////////////// end 지원///////////////////
 
-	
-	
-	////////////////start윤주///////////////////
+	//////////////// start윤주///////////////////
 	List<TradeVO> getTradeListByMemId(String memId);
-	////////////////end윤주////////////////////
-	
-	//우정
-	int getTradeCountByFoodSellNo(String foodSellNo);
-	
-	ListVO<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo, String foodNo);
-	int getAllSellerTradeCount(String sellerId);
+	//////////////// end윤주////////////////////
 
+	// 우정
+	int getTradeCountByFoodSellNo(String foodSellNo);
+
+	ListVO<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo, String foodNo);
+
+	int getAllSellerTradeCount(String sellerId);
 
 }

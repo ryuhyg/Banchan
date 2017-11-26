@@ -25,4 +25,5 @@ insert into review(rev_no, score, rev_postdate, rev_content, food_no)
 values(review_seq.nextval, 4, sysdate, '다시 구매하고 싶어요!ㅇㅇ주부님 감사해요~~', 1001);
 
 	
+select * from seller
 	

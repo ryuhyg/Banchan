@@ -1,7 +1,5 @@
 package org.kosta.banchan.model.service;
 
-
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +18,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class FoodServiceImpl implements FoodService {
 
-   @Resource
-    private FoodDAO foodDAO;
-   @Resource
-    private SellDAO sellDAO;
-  
-///////////////////start윤주/////////////////////////
+	@Resource
+	private FoodDAO foodDAO;
+	@Resource
+	private SellDAO sellDAO;
+
+	/////////////////// start윤주/////////////////////////
 	@Override
 	public void orderFood(TradeVO tvo) {
 		foodDAO.orderFood(tvo);
@@ -35,10 +33,10 @@ public class FoodServiceImpl implements FoodService {
 	public int getLeftQuantityByFoodSellNo(String foodSellNo) {
 		return sellDAO.getLeftQuantityByFoodSellNo(foodSellNo);
 	}
-///////////////////end윤주////////////////////////
+	/////////////////// end윤주////////////////////////
 
-   
-   /** [지원] 등록음식 상세정보 조회
+	/**
+	 * [지원] 등록음식 상세정보 조회 
 	 * 선택한 등록음식의 상세정보를 등록음식번호로 조회한다.
 	 * 
 	 */
@@ -46,22 +44,22 @@ public class FoodServiceImpl implements FoodService {
 	public FoodVO getFoodByNo(String foodNo) {
 		return foodDAO.getFoodByNo(foodNo);
 	}
-	
-	
-	/** [지원] 판매음식상세정보 조회
-	 * 판매등록한 판매음식의 상세정보를 조회한다.
-	 * 판매음식상세정보 뿐 아니라 등록음식의 정보도 함께 조회한다. 
+
+	/**
+	 * [지원] 판매음식상세정보 조회 
+	 * 판매등록한 판매음식의 상세정보를 조회한다. 
+	 * 판매음식상세정보 뿐 아니라 등록음식의 정보도 함께 조회한다.
 	 * 
 	 */
 	@Override
 	public FoodSellVO getFoodSellDetailByNo(String foodSellNo) {
-		FoodSellVO foodSellVO=sellDAO.getFoodSellDetailByNo(foodSellNo);
+		FoodSellVO foodSellVO = sellDAO.getFoodSellDetailByNo(foodSellNo);
 		return foodSellVO;
 	}
 
-
-	/** [지원] 판매음식등록
-	 * 선택한 등록음식을 판매하기 위해 판매음식등록한다. 
+	/**
+	 * [지원] 판매음식등록 
+	 * 선택한 등록음식을 판매하기 위해 판매음식등록한다.
 	 * 
 	 */
 	@Override
@@ -69,63 +67,70 @@ public class FoodServiceImpl implements FoodService {
 		sellDAO.registerFoodSell(foodSellVO);
 	}
 
-
-	/**[우정] 판매자페이지에서 음식리스트 조회
+	/**
+	 * [우정] 판매자페이지에서 음식리스트 조회 
 	 * 판매가페이지에서 판매자가 등록한 음식을 조회한다.
 	 */
 	@Override
 	public List<FoodVO> getFoodListByMemId(String memId) {
-		//int TotalFoodCount= foodDAO.getTotalFoodCountByMemId(memId);
-		 return foodDAO.getFoodListByMemId(memId);
+		// int TotalFoodCount= foodDAO.getTotalFoodCountByMemId(memId);
+		return foodDAO.getFoodListByMemId(memId);
 	}
-	/**[우정] 판매자페이지에서 판매음식리스트 조회
+
+	/**
+	 * [우정] 판매자페이지에서 판매음식리스트 조회 
 	 * 판매가페이지에서 판매자가 등록한 판매 음식을 조회한다.
 	 */
 	@Override
-	public ListVO<FoodSellVO> getFoodSellInfoByMemId(String memId,String pageNo){
-		int totalCount=foodDAO.getAllFoodSellCountByMemId(memId);
-		PagingBean pagingBean=null;
-		HashMap<String,String> paramMap=new HashMap<String,String>();
-		if(pageNo==null)
-			pagingBean=new PagingBean(totalCount);
+	public ListVO<FoodSellVO> getFoodSellInfoByMemId(String memId, String pageNo) {
+		int totalCount = foodDAO.getAllFoodSellCountByMemId(memId);
+		PagingBean pagingBean = null;
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		if (pageNo == null)
+			pagingBean = new PagingBean(totalCount);
 		else
-			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));		
-		paramMap.put("startRowNumber",Integer.toString(pagingBean.getStartRowNumber()));
-		paramMap.put("endRowNumber",Integer.toString(pagingBean.getEndRowNumber()));
+			pagingBean = new PagingBean(totalCount, Integer.parseInt(pageNo));
+		paramMap.put("startRowNumber", Integer.toString(pagingBean.getStartRowNumber()));
+		paramMap.put("endRowNumber", Integer.toString(pagingBean.getEndRowNumber()));
 		paramMap.put("memId", memId);
-		
+
 		System.out.println(foodDAO.getFoodSellInfoByMemId(paramMap));
-		
-		return new ListVO<FoodSellVO>(foodDAO.getFoodSellInfoByMemId(paramMap),pagingBean);
+
+		return new ListVO<FoodSellVO>(foodDAO.getFoodSellInfoByMemId(paramMap), pagingBean);
 	}
-	
+
 	/*
-	 * 		[영민] 카테고리 받아와서 음식등록
+	 * [영민] 카테고리 받아와서 음식등록
 	 */
-	
-	   @Override
-		public void foodRegister(FoodVO fvo) {
-			foodDAO.foodRegister(fvo);
-		}
+
+	@Override
+	public void foodRegister(FoodVO fvo) {
+		foodDAO.foodRegister(fvo);
+	}
 
 	@Override
 	public List<Map<String, String>> allCategorySelect() {
 		return foodDAO.allCategorySelect();
 	}
+
 	public FoodVO getFoodMemInfo(String foodNo) {
 		return foodDAO.getFoodMemInfo(foodNo);
 	}
+
 	public List<FoodVO> selectRegFoodByNo(String foodNo) {
 		return foodDAO.selectRegFoodByNo(foodNo);
 	}
+
 	public void deleteRegFood(String foodNo) {
 		foodDAO.deleteRegFood(foodNo);
 	}
+
 	public void imgUpdateRegFood(FoodVO fvo) {
 		foodDAO.imgUpdateRegFood(fvo);
 	}
+
 	public void noimgUpdateRegFood(FoodVO fvo) {
 		foodDAO.noimgUpdateRegFood(fvo);
 	}
-	
+
 }

@@ -9,34 +9,34 @@ import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.TradeVO;
 
 public interface FoodService {
-///////////////////start윤주/////////////////////////
+	/////////////////// start윤주/////////////////////////
 	void orderFood(TradeVO tvo);
+
 	int getLeftQuantityByFoodSellNo(String foodSellNo);
-///////////////////end윤주//////////////////////////
+	/////////////////// end윤주//////////////////////////
 
 	FoodVO getFoodByNo(String foodNo);
 
 	FoodSellVO getFoodSellDetailByNo(String foodSellNo);
 
-
 	List<FoodVO> getFoodListByMemId(String memId);
 
 	void registerFoodSell(FoodSellVO foodSellVO);
-	
+
 	//////// 영민 start /////////
 	void foodRegister(FoodVO fvo);
 
 	List<Map<String, String>> allCategorySelect();
-	////////영민 end /////////
+	//////// 영민 end /////////
 
 	FoodVO getFoodMemInfo(String foodNo);
 
 	List<FoodVO> selectRegFoodByNo(String foodNo);
-	
+
 	void deleteRegFood(String foodNo);
 
 	void imgUpdateRegFood(FoodVO fvo);
-	
+
 	void noimgUpdateRegFood(FoodVO fvo);
 
 	ListVO<FoodSellVO> getFoodSellInfoByMemId(String memId, String pageNo);

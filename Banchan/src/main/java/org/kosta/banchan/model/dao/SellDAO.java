@@ -7,9 +7,10 @@ import org.kosta.banchan.model.vo.FoodSellVO;
 public interface SellDAO {
 
 	FoodSellVO getFoodSellDetailByNo(String foodSellNo);
-	////////////start윤주////////////
+
+	//////////// start윤주////////////
 	int getLeftQuantityByFoodSellNo(String foodSellNo);
-	////////////end윤주///////////////
+	//////////// end윤주///////////////
 
 	void registerFoodSell(FoodSellVO foodSellVO);
 

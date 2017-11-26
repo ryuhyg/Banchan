@@ -10,28 +10,28 @@ import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.TradeVO;
 
 public interface FoodDAO {
-///////////////////start윤주/////////////////////////
+	/////////////////// start윤주/////////////////////////
 	void orderFood(TradeVO tvo);
-///////////////////end윤주//////////////////////////
+	/////////////////// end윤주//////////////////////////
 
 	FoodVO getFoodByNo(String foodNo);
 
 	List<FoodVO> getFoodListByMemId(String memId);
-	
-	/*int getTotalFoodCountByMemId(String memId);*/
+
+	/* int getTotalFoodCountByMemId(String memId); */
 
 	void foodRegister(FoodVO fvo);
 
 	List<Map<String, String>> allCategorySelect();
-	
+
 	FoodVO getFoodMemInfo(String foodNo);
 
 	List<FoodVO> selectRegFoodByNo(String foodNo);
-	
+
 	void deleteRegFood(String foodNo);
-	
+
 	void imgUpdateRegFood(FoodVO fvo);
-	
+
 	void noimgUpdateRegFood(FoodVO fvo);
 
 	List<FoodSellVO> getFoodSellInfoByMemId(HashMap<String, String> map);

@@ -31,8 +31,7 @@ public class TradeController {
 	@Resource
 	private MemberService memberService;
 
-	
-	////////////////////////////start 지원////////////////////////////////
+	//////////////////////////// start 지원////////////////////////////////
 	/**
 	 * [지원] 판매자-해당 판매상품에 관한 거래요청리스트 조회
 	 * 
@@ -40,10 +39,10 @@ public class TradeController {
 	 * @param model
 	 * @return
 	 */
-	//@Secured("ROLE_SELLER")
+	// @Secured("ROLE_SELLER")
 	@RequestMapping("getSellerTradeListByFoodSellNo.do")
-	public String getSellerTradeListByFoodSellNo(String foodSellNo,String pageNo, Model model) {
-		ListVO<TradeVO> tradeList=tradeService.getSellerTradeListByFoodSellNo(foodSellNo,pageNo);
+	public String getSellerTradeListByFoodSellNo(String foodSellNo, String pageNo, Model model) {
+		ListVO<TradeVO> tradeList = tradeService.getSellerTradeListByFoodSellNo(foodSellNo, pageNo);
 		model.addAttribute("foodSell", foodService.getFoodSellDetailByNo(foodSellNo));
 		model.addAttribute("lvo", tradeList);
 		return "food/seller_foodTradeList.tiles";
@@ -63,11 +62,12 @@ public class TradeController {
 		return "food/seller_allTradeList.tiles";
 	}
 
-	/** 
-	 * [지원] 거래완료확인
-	 * 거래완료버튼을 누르면 거래상태를 '거래완료'로 변경
-	 * 로그인 되어있을 경우 redirect로 다시 전체거래내역 보기로 이동
-	 * 
+	/**
+	 * [지원] 거래완료확인 
+	 * 거래완료버튼을 누르면 거래상태를 '거래완료'로 변경 
+	 * 로그인 되어있을 경우 redirect로 
+	 * 다시 전체거래내역 보기로 이동
+	 *  
 	 * @param tradeNo
 	 * @return
 	 */
@@ -75,18 +75,21 @@ public class TradeController {
 	@RequestMapping("completeTrade.do")
 	public String completeTrade(String tradeNo) {
 		tradeService.completeTrade(tradeNo);
-		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
 			return "redirect:loginView.do";
 		} else {
-			MemberVO mvo= (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			System.out.println("mvo Id: "+mvo.getMemId());
-			return "redirect:getAllSellerTradeList.do?sellerId="+mvo.getMemId();
+			MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			System.out.println("mvo Id: " + mvo.getMemId());
+			return "redirect:getAllSellerTradeList.do?sellerId=" + mvo.getMemId();
 		}
 	}
-	
+
 	/**
-	 * [지원] 구매자 상세정보 확인
-	 * 판매자가 거래내역을 확인할 때 해당 거래내역을 클릭하면 토글로 구매자의 상세정보를 확인할 수 있다. 
+	 * [지원] 구매자 상세정보 확인 
+	 * 판매자가 거래내역을 확인할 때 
+	 * 해당 거래내역을 클릭하면 토글로 
+	 * 구매자의 상세정보를 확인할 수 있다.
+	 * 
 	 * @param buyerId
 	 * @param model
 	 * @return
@@ -96,18 +99,17 @@ public class TradeController {
 	public MemberVO getBuyerInfo(String id) {
 		return memberService.getBuyerInfo(id);
 	}
-	////////////////////////////end 지원////////////////////////////////
-	
+	//////////////////////////// end 지원////////////////////////////////
 
 	//////////////////////////// start윤주////////////////////////////////
 	// 나의 거래 내역 리스트 가져오기
 	@RequestMapping("myTradeList.do")
 	public ModelAndView getTradeListByMemId(String memId) {
-	ModelAndView mv = new ModelAndView();
-	List<TradeVO> tlist = tradeService.getTradeListByMemId(memId);
-	mv.addObject("tlist",tlist);
-	mv.setViewName("member/myTradeList.tiles");
-	return mv;
+		ModelAndView mv = new ModelAndView();
+		List<TradeVO> tlist = tradeService.getTradeListByMemId(memId);
+		mv.addObject("tlist", tlist);
+		mv.setViewName("member/myTradeList.tiles");
+		return mv;
 	}
 	//////////////////////////// end윤주//////////////////////////////////
 }
