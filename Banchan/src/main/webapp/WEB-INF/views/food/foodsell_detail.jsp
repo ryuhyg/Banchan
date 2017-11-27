@@ -35,9 +35,12 @@
 		}); //change
 		
 	/*판매 음식 삭제하기*/
-	$("button[name='deleteFood']").click(function() {
-		alert("1");
-	});
+	$("#deleteFood").click(function() {
+		alert(1);
+	}); 
+	/* $("button[name='deleteF']").click(function() {
+		alert(1);
+	}) */
 		
 	}); //ready
 	
@@ -141,7 +144,7 @@
  						</c:when>
 						<c:otherwise>
 							<input type="button"  class="btn btn-default" style="margin-top: 20px;"  value="수정하기">
-							<input type="button"  class="btn btn-default" name="deleteFood" style="margin-top: 20px;"  value="삭제하기">
+							<input type="button"  class="btn btn-default" name="deleteF" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
 						</c:otherwise> 						
  						</c:choose>
 						</div>
