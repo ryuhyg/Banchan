@@ -62,49 +62,49 @@
 				<div class="agent-box-card grey">
 					<div class="image-content">
 						<div class="image image-fill">
-							<img alt="Image Sample" src="${sellfood.foodMainImg}">
+							<img alt="Image Sample" src="${foodSell.foodMainImg}">
 						</div>						
 					</div>
 				</div>
 			</div>
 			<div class="col-md-9">
-				<h1 class="name">${sellfood.foodName}</h1>
+				<h1 class="name">${foodSell.foodName}</h1>
 				<div class="row">
 				<div class="col-md-11">
 				<table class="table">
 					<tr>
 						<th>음식평점</th>
-						<td colspan="3">${sellfood.foodScore}</td>
+						<td colspan="3">${foodSell.foodScore}</td>
 					</tr>
 					<tr>
 						<th>예약마감일</th>
-						<td>${sellfood.closeDate}</td>
+						<td>${foodSell.closeDate}</td>
 						<th>거래일</th>
-						<td>${sellfood.trDate}</td>
+						<td>${foodSell.trDate}</td>
 					</tr>
 					<tr>
 						<th>가격</th>
-						<td><span id="price">${sellfood.price}</span> 원</td>
+						<td><span id="price">${foodSell.price}</span> 원</td>
 						<th>양(개당)</th>
-						<td>${sellfood.unit}</td>
+						<td>${foodSell.unit}</td>
 					</tr>
 					<tr>
 						<th>준비수량</th>
-						<td><span id="preQuantity">${sellfood.preQuantity}</span>&nbsp;(${sellfood.unit })</td>
+						<td><span id="preQuantity">${foodSell.preQuantity}</span>&nbsp;(${foodSell.unit })</td>
 						<th>남은수량</th>
-						<td><span id="leftQuantity">${leftQuantity}</span>&nbsp;(${sellfood.unit })</td>
+						<td><span id="leftQuantity">${leftQuantity}</span>&nbsp;(${foodSell.unit })</td>
 					</tr>
 					<tr>
 						<th>거래장소</th>
-						<td colspan="3">${sellfood.loc}</td>
+						<td colspan="3">${foodSell.loc}</td>
 					</tr>
 					<tr>
 						<th>음식소개</th>
-						<td colspan="3">${sellfood.foodDe}</td>
+						<td colspan="3">${foodSell.foodDe}</td>
 					</tr>
 					<tr>
 						<th>판매추가정보</th>
-						<td colspan="3">${sellfood.sellDetail}</td>
+						<td colspan="3">${foodSell.sellDetail}</td>
 					</tr>						
 				</table>
 				</div> <!-- col-md-10 --> 
@@ -117,7 +117,7 @@
 					  <div class="col-sm-2">
 				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
 				      </div>
-						<input type="hidden" name="foodSellVO.foodSellNo" value="${sellfood.foodSellNo}" id="foodSellNo"/>
+						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
  						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
  						<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
  						</sec:authorize>
@@ -127,7 +127,15 @@
 				  
 					</div> <!-- row -->
  						<div class="row" align="center">
-						<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+ 						<c:choose>
+ 						<c:when test="${foodSell.memId!=mvo.memId }">
+							<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+ 						</c:when>
+						<c:otherwise>
+							<input type="button"  class="btn btn-default" style="margin-top: 20px;"  value="수정하기">
+							<input type="button"  class="btn btn-default" style="margin-top: 20px;"  value="삭제하기">
+						</c:otherwise> 						
+ 						</c:choose>
 						</div>
 					</form>
 				</div>
