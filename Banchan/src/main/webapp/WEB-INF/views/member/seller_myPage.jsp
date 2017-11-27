@@ -88,7 +88,7 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
     float: left;
     padding: 8px 16px;
     text-decoration: none;
-    transition: background-color .3s;
+    transition: background-color .3s; 
     font-size: 13px;
 }
 
