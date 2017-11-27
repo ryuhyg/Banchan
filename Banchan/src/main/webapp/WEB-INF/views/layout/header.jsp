@@ -29,22 +29,19 @@
 							<button class="btn btn-default send" type="submit">
 								<i class="fa fa-envelope-o"></i>
 							</button>
-						</div>
-						<!-- /input-group -->
+						</div><!-- /input-group -->
 					</form>
 				</div>
 				<div id="login-pan" class="col-md-4">
 					<sec:authorize access="!isAuthenticated()">
 						<!-- 비회원 권한 설정 -->
-						<a
-							href="${pageContext.request.contextPath}/member/registerView.do"><i
+						<a href="${pageContext.request.contextPath}/member/registerView.do"><i
 							class="icon fa fa-pencil-square-o"></i> 회원가입</a>
 						<a href="${pageContext.request.contextPath}/member/loginView.do"><i
 							class="icon fa fa-user user"></i> 로그인</a>
 					</sec:authorize>
 
-					<sec:authorize
-						access="hasRole('ROLE_BUYER') and !hasRole('ROLE_SELLER')">
+					<sec:authorize access="hasRole('ROLE_BUYER') and !hasRole('ROLE_SELLER')">
 						<!-- 오직 구매자 권한 설정 -->
 						<a href="#" id="logoutAction"><i class="icon fa fa-user user"></i>로그아웃</a>
 						<form id="logoutForm"
@@ -52,8 +49,7 @@
 							method="post" style="display: none">
 							<sec:csrfInput />
 						</form>
-						<a
-							href="${pageContext.request.contextPath}/sellerRegisterForm.do?id=${mvo.memId}"><i
+						<a href="${pageContext.request.contextPath}/sellerRegisterForm.do?id=${mvo.memId}"><i
 							class="icon fa fa-pencil-square-o"></i> 판매자 등록</a>
 						<button class="btn btn-primary dropdown-toggle" type="button"
 							data-toggle="dropdown"
@@ -62,11 +58,9 @@
 								class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a
-								href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />">회원정보수정</a></li>
+							<li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />">회원정보수정</a></li>
 							<li><a href="#">내거래내역</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/member/deleteMemberView.do">회원탈퇴</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do">회원탈퇴</a></li>
 						</ul>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_SELLER')">
@@ -77,8 +71,7 @@
 							method="post" style="display: none">
 							<sec:csrfInput />
 						</form>
-						<a
-							href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}"><i
+						<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}"><i
 							class="icon fa fa-user user"></i> 판매자 마이페이지</a>
 						<button class="btn btn-primary dropdown-toggle" type="button"
 							data-toggle="dropdown"
@@ -87,11 +80,9 @@
 								class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a
-								href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />">회원정보수정</a></li>
+							<li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />">회원정보수정</a></li>
 							<li><a href="#">내거래내역</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/member/deleteMemberView.do">회원탈퇴</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do">회원탈퇴</a></li>
 						</ul>
 					</sec:authorize>
 				</div>
