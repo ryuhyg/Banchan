@@ -47,10 +47,47 @@ public class PagingBean {
 		this.pageCountPerPageGroup = pageCountPerPageGroup;
 		this.totalPostCount = totalPostCount;
 	}
+	
+	
+
+	public int getPostCountPerPage() {
+		return postCountPerPage;
+	}
+
+
+	public void setPostCountPerPage(int postCountPerPage) {
+		this.postCountPerPage = postCountPerPage;
+	}
+
+
+	public int getPageCountPerPageGroup() {
+		return pageCountPerPageGroup;
+	}
+
+
+	public void setPageCountPerPageGroup(int pageCountPerPageGroup) {
+		this.pageCountPerPageGroup = pageCountPerPageGroup;
+	}
+
+
+	public int getTotalPostCount() {
+		return totalPostCount;
+	}
+
+
+	public void setTotalPostCount(int totalPostCount) {
+		this.totalPostCount = totalPostCount;
+	}
 
 	public int getNowPage() {
 		return nowPage;
 	}
+
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
+
+
 
 	/**
 	 * 현재 페이지번호에 해당하는 시작 게시물의 row number를 반환 hint : 이전페이지의 마지막 번호 + 1 ((현재페이지-1)
