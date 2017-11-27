@@ -23,14 +23,6 @@
 		var checkPasswordRe="";
 		var checkPwAnswer="";
 		$("#regForm").submit(function(){			
-			if($("#regForm :input[name=memId]").val().trim()==""){
-				alert("아이디를 입력하세요");				
-				return false;
-			}
-			if($("#regForm :input[name=pw]").val().trim()==""){
-				alert("패스워드를 입력하세요");				
-				return false;
-			}
 			if(checkPassword==""){
 				alert("적정 패스워드가 아닙니다! ");
 				return false;
@@ -39,16 +31,12 @@
 				alert("패스워드 불일치! ");
 				return false;
 			}
-			if($("#regForm :input[name=memName]").val().trim()==""){
-				alert("이름을 입력하세요");				
-				return false;
-			}
 			if($("#birth").val().length>10){
 				alert("생년월일을 정확하게 입력해주세요!");
 				return false;
 			}
-			if($("#regForm :input[name=addressDe]").val().trim()==""){
-				alert("주소를 입력하세요");				
+			if($("#regForm :input[id=roadAddress]").val().trim()==""){
+				alert("주소를 검색하세요");				
 				return false;
 			}	
 			if(checkResultId==""){
@@ -280,90 +268,118 @@
 <section id="recent-list" style="margin-top: 150px;">
 	<div class="container">
 				<div class="row">
-				<div class="col-sm-2"><!-- left -->
+				<div class="col-sm-3"><!-- left -->
 				
 				</div>
-					<div class="col-sm-8">
+					<div class="col-sm-6" >
 						<div class="blog-list blog-detail">
-		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>회원가입</h3>
+		<h3 class="title-form" style="text-align: center;"><i class="icon fa fa-comment" style="margin-right: 5px;"></i>회원가입</h3>
 		
-							<form class="form-large grey-color" action="${pageContext.request.contextPath}/registerMember.do" method="post" id="regForm">
+							<form class="form-large grey-color" action="${pageContext.request.contextPath}/registerMember.do" method="post" id="regForm" >
 							<sec:csrfInput/><%-- csrf 토큰 --%>
-							<div class="row">
-								<div  class="col-xs-6" >
-										<label for="id"> <i class="fa fa-user user" style="margin-right: 5px"></i>아이디</label>
-										<input type="text" name="memId" id="id"  class="margin-bottom form-control" placeholder="아이디" >											
+							<div class="row" >
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
-								<div  class="col-xs-6" style="margin-top: 32px;">
+								<div class="col-xs-8" > 
+										<label for="id"> <i class="fa fa-user user" style="margin-right: 5px"></i>아이디</label>
+										<input type="text" name="memId" id="id"  class="margin-bottom form-control" placeholder="아이디" required="required">											
+								</div>
+								<div  class="col-xs-2" style="margin-top: 32px;"> 
 										<span id="idCheckView"></span>					
 								</div>
 							</div>		
 							<div class="row">
-								<div  class="col-xs-6">
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
+								</div>
+								<div  class="col-xs-8">
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호</label>
-										<input type="password" name="pw" id="password" class="margin-bottom form-control" placeholder="비밀번호">
-									</div>
-									<div  class="col-xs-6" style="margin-top: 32px;">
+										<input type="password" name="pw" id="password" class="margin-bottom form-control" placeholder="비밀번호" required="required">
+								</div>
+								<div  class="col-xs-2" style="margin-top: 32px;">
 										<span id="passwordCheckView"></span>					
 								</div>									
+							</div>
+							<div class="row">
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
-								<div class="row">
-									<div  class="col-xs-6">										
+								<div  class="col-xs-8">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호 확인</label>
-										<input type="password"  id="passwordRe" class="margin-bottom form-control" placeholder="비밀번호확인">
-									</div>
-									<div  class="col-xs-6" style="margin-top: 32px;">
+										<input type="password"  id="passwordRe" class="margin-bottom form-control" placeholder="비밀번호확인" required="required">
+								</div>
+								<div  class="col-xs-2" style="margin-top: 32px;">
 										<span id="passwordReCheckView"></span>					
 								</div>
+							</div>
+							<div class="row">
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
-								<div class="row">
-									<div  class="col-xs-6">										
+								<div  class="col-xs-8">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>이름</label>
-										<input type="text"  name="memName" id="name" class="margin-bottom form-control" placeholder="이름">
-									</div>
+										<input type="text"  name="memName" id="name" class="margin-bottom form-control" placeholder="이름" required="required">
 								</div>
-								<div class="row">
-									<div  class="col-xs-6">										
-										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>생년월일</label>
-										<input type="date" id="birth" name="birth" class="margin-bottom form-control">
-									</div>
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
-								<div class="row">
-									<div  class="col-xs-6">										
+							</div>
+							<div class="row">
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
+								</div>
+								<div  class="col-xs-8">										
+									<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>생년월일</label>
+									<input type="date" id="birth" name="birth" class="margin-bottom form-control" required="required" min="1900-01-01" max="2007-12-31">
+								</div>
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
+								</div>
+							</div>
+							<div class="row">
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
+								</div>
+								<div  class="col-xs-8">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>전화번호  (   -   포함하여 입력해주세요! )</label>
 										<!-- <input type="text" name="tel"  class="margin-bottom form-control" placeholder="전화번호"> -->
 										<input  class="margin-bottom form-control"  type="tel" name="tel" id="telno" title=" -  포함하여 입력해주세요!" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" maxlength="13" required="required">
-									</div>
-									<div  class="col-xs-6" style="margin-top: 32px;">
-											<span id="telCheckView"></span>	
-									</div>
 								</div>
-								<div class="row">
-									<div  class="col-xs-8">															
+								<div  class="col-xs-2" style="margin-top: 32px;">
+										<span id="telCheckView"></span>	
+								</div>
+							</div>
+							<div class="row">
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
+								</div>
+								<div  class="col-xs-8">															
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>주소</label>
-										<div id="map" style="width:450px;height:170px;"></div><input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
-										<input type="text" name="addressVO.addressAPI"  id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly">		
-										<input type="text" name="addressDe"  id="detailAddress" class="margin-bottom form-control" placeholder="상세주소 입력">							
-									</div>
+										<div id="map" style="width:auto;height:200px;"></div><input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
+										<input type="text" name="addressVO.addressAPI"  id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly" >		
+										<input type="text" name="addressDe"  id="detailAddress" class="margin-bottom form-control" placeholder="상세주소 입력" required="required">							
 								</div>
-								<div class="row">
-									<div  class="col-xs-8" style="margin-bottom: 10px">										
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
+								</div>
+							</div>
+							<div class="row">
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
+								</div>
+								<div  class="col-xs-8" style="margin-bottom: 10px">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호 찾기 질문</label>
 										<select id="pwQnaSelect">
 											<option value="100" selected="selected">질문을 선택하세요</option>
 											<c:forEach items="${pwQnaList}" var="p">
-															<option value="${p.pwQnaNo}">${p.pwQuest}</option>
+														<option value="${p.pwQnaNo}">${p.pwQuest}</option>
 											</c:forEach>
 										</select>
 										<input type="hidden" id="pwQnaNo" name="pwQnaNo"  value="">
-									</div>
 								</div>
-								<div class="row">
-							 		<div  class="col-xs-8">										
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
+								</div>
+							</div>
+							<div class="row">
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
+								</div>
+							 	<div  class="col-xs-8">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호 찾기 답변</label>
-										<input type="text"	 name="pwAnswer"  id="pwAnswer" class="margin-bottom form-control" >
-									</div>
+										<input type="text"	 name="pwAnswer"  id="pwAnswer" class="margin-bottom form-control" required="required" >
 								</div>
+								<div  class="col-xs-2" style="margin-top: 32px;"> 				
+								</div>
+							</div>
 									<br>
 									<br>
 								<div class="row">
@@ -380,7 +396,7 @@
 							</div>	
 							
 							
-							<div class="col-sm-2"><!-- right -->
+							<div class="col-sm-3"><!-- right -->
 
 							</div>
 							</div>
