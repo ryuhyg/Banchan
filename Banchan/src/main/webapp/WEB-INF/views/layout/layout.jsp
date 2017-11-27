@@ -42,6 +42,7 @@
 	<script src="${pageContext.request.contextPath}/resources/script/modernizr.min.js"></script>	
 
 
+	
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 <script src="//code.jquery.com/jquery.min.js"></script>
 
