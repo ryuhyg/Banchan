@@ -109,6 +109,8 @@ $(document).ready(function() {
 	$("#addressAPIDongForm").submit(function() {
 		
 	}); 
+	
+	
 });//$(document).ready
 </script>
 
@@ -280,7 +282,7 @@ $(document).ready(function() {
 	    			 
 	    			 for (var i = data.pb.startPageOfPageGroup; i < data.pb.endPageOfPageGroup; i++) {
 						if(data.pb.nowPage!=i){
-							strTempPaging+='<li><a id="'+i+'">'+i+'</a></li>';
+							strTempPaging+='<li><a>'+i+'</a></li>';
 						}else{
 							strTempPaging+='<li class="active"><a href="#" >'+i+'</a></li>'; 
 						}					

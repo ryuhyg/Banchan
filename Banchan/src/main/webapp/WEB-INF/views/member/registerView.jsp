@@ -23,14 +23,6 @@
 		var checkPasswordRe="";
 		var checkPwAnswer="";
 		$("#regForm").submit(function(){			
-			if($("#regForm :input[name=memId]").val().trim()==""){
-				alert("아이디를 입력하세요");				
-				return false;
-			}
-			if($("#regForm :input[name=pw]").val().trim()==""){
-				alert("패스워드를 입력하세요");				
-				return false;
-			}
 			if(checkPassword==""){
 				alert("적정 패스워드가 아닙니다! ");
 				return false;
@@ -39,16 +31,12 @@
 				alert("패스워드 불일치! ");
 				return false;
 			}
-			if($("#regForm :input[name=memName]").val().trim()==""){
-				alert("이름을 입력하세요");				
-				return false;
-			}
 			if($("#birth").val().length>10){
 				alert("생년월일을 정확하게 입력해주세요!");
 				return false;
 			}
-			if($("#regForm :input[name=addressDe]").val().trim()==""){
-				alert("주소를 입력하세요");				
+			if($("#regForm :input[id=roadAddress]").val().trim()==""){
+				alert("주소를 검색하세요");				
 				return false;
 			}	
 			if(checkResultId==""){
@@ -292,7 +280,7 @@
 							<div class="row">
 								<div  class="col-xs-6" >
 										<label for="id"> <i class="fa fa-user user" style="margin-right: 5px"></i>아이디</label>
-										<input type="text" name="memId" id="id"  class="margin-bottom form-control" placeholder="아이디" >											
+										<input type="text" name="memId" id="id"  class="margin-bottom form-control" placeholder="아이디" required="required">											
 								</div>
 								<div  class="col-xs-6" style="margin-top: 32px;">
 										<span id="idCheckView"></span>					
@@ -301,7 +289,7 @@
 							<div class="row">
 								<div  class="col-xs-6">
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호</label>
-										<input type="password" name="pw" id="password" class="margin-bottom form-control" placeholder="비밀번호">
+										<input type="password" name="pw" id="password" class="margin-bottom form-control" placeholder="비밀번호" required="required">
 									</div>
 									<div  class="col-xs-6" style="margin-top: 32px;">
 										<span id="passwordCheckView"></span>					
@@ -310,7 +298,7 @@
 								<div class="row">
 									<div  class="col-xs-6">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호 확인</label>
-										<input type="password"  id="passwordRe" class="margin-bottom form-control" placeholder="비밀번호확인">
+										<input type="password"  id="passwordRe" class="margin-bottom form-control" placeholder="비밀번호확인" required="required">
 									</div>
 									<div  class="col-xs-6" style="margin-top: 32px;">
 										<span id="passwordReCheckView"></span>					
@@ -319,13 +307,13 @@
 								<div class="row">
 									<div  class="col-xs-6">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>이름</label>
-										<input type="text"  name="memName" id="name" class="margin-bottom form-control" placeholder="이름">
+										<input type="text"  name="memName" id="name" class="margin-bottom form-control" placeholder="이름" required="required">
 									</div>
 								</div>
 								<div class="row">
 									<div  class="col-xs-6">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>생년월일</label>
-										<input type="date" id="birth" name="birth" class="margin-bottom form-control">
+										<input type="date" id="birth" name="birth" class="margin-bottom form-control" required="required" min="1900-01-01" max="2007-12-31">
 									</div>
 								</div>
 								<div class="row">
@@ -342,8 +330,8 @@
 									<div  class="col-xs-8">															
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>주소</label>
 										<div id="map" style="width:450px;height:170px;"></div><input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
-										<input type="text" name="addressVO.addressAPI"  id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly">		
-										<input type="text" name="addressDe"  id="detailAddress" class="margin-bottom form-control" placeholder="상세주소 입력">							
+										<input type="text" name="addressVO.addressAPI"  id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly" >		
+										<input type="text" name="addressDe"  id="detailAddress" class="margin-bottom form-control" placeholder="상세주소 입력" required="required">							
 									</div>
 								</div>
 								<div class="row">
@@ -361,7 +349,7 @@
 								<div class="row">
 							 		<div  class="col-xs-8">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호 찾기 답변</label>
-										<input type="text"	 name="pwAnswer"  id="pwAnswer" class="margin-bottom form-control" >
+										<input type="text"	 name="pwAnswer"  id="pwAnswer" class="margin-bottom form-control" required="required" >
 									</div>
 								</div>
 									<br>
