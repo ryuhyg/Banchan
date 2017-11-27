@@ -18,7 +18,7 @@ tr{
 <script type="text/javascript">
 	$(document).ready(function () {
 		/* 해당 거래내역 클릭시 구매자 상세정보 확인가능 */
-		$("#tardeList .tr_visible").click(function() {
+		$("#tradeList .tr_visible").click(function() {
 			var trade=$(this);
 			var buyerId=trade.children().eq(2).text();
 			$.ajax({
@@ -55,7 +55,7 @@ tr{
 	<h3>전체거래내역</h3>
 	<c:choose>
 	<c:when test="${!empty lvo.list}">
-	<table class="table table-hover" id="tardeList" style="text-align: center;font-size: 12px;" >
+	<table class="table table-hover" id="tradeList" style="text-align: center;font-size: 12px;" >
 		<thead>
 			<tr class="tr_visible"> 
 				<th>거래번호</th>
