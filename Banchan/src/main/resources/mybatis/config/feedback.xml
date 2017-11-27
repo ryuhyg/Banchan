@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where mem_id=#{value}
 	</update>
 	<select id="getReviewListByFoodSellNo" parameterType="map"
-		resultType="reviewVO">
+		resultType="reviewVO" >
 		select r.rev_no,r.score,r.rev_postdate,r.rev_content,r.mem_id
 		from(
 			select row_number() over(order by rev_no desc) as
