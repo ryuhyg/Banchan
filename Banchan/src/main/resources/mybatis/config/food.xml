@@ -14,7 +14,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- End 광태 -->
 
 	<!-- Start 우정 -->
-
+	<select id="deleteConfirmAjax" parameterType="string" resultType="int">
+		select count(*) from TRADE where food_sell_no=#{value}
+	</select>
 	<select id="getFoodListByMemId" parameterType="string"
 		resultType="foodVO">
 		<include refid="selectFood"></include>
@@ -45,12 +47,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where fs.rnum
 		between #{startRowNumber} and #{endRowNumber}
 	</select>
-	<select id="getAllFoodSellCountByMemId" parameterType="string"
-		resultType="int">
+	<select id="getAllFoodSellCountByMemId" parameterType="string" resultType="int">
 		select count(*)
 		from (select food_no from food where
 		mem_id=#{value}) f, food_sell s
 		where f.food_no=s.food_no and s.close_date>sysdate
+	</select>
+	<select id="deleteFoodSell" parameterType="string" >
+		delete from FOOD_SELL where food_sell_no=#{value}
 	</select>
 	<!-- End 우정 -->
 

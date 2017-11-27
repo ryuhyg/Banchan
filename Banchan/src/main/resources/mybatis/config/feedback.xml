@@ -25,8 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- Start 윤주 -->
 	<insert id="reviewRegister" parameterType="reviewVO">
-		insert into review(rev_no,score,rev_postdate,rev_content,food_no)
-		values(review_seq.nextval,#{score},sysdate,#{revContent},#{foodNo})
+		insert into review(rev_no,score,rev_postdate,rev_content,food_no,mem_id)
+		values(review_seq.nextval,#{score},sysdate,#{revContent},#{foodNo},#{memId})
 	</insert>
 	<update id="updateSellerScore" parameterType="string">
 		update seller set seller_score=
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<select id="getReviewListByFoodSellNo" parameterType="string"
 		resultType="reviewVO">
-		select r.rev_no,r.score,r.rev_postdate,r.rev_content
+		select r.rev_no,r.score,r.rev_postdate,r.rev_content,r.mem_id
 		from review r,food_sell fs
 		where fs.food_sell_no=#{value} and fs.food_no=r.food_no
 	</select>
