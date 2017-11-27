@@ -18,7 +18,7 @@ nav a:hover {
   color: #0066ff;
 }
 nav > ul {
-  text-align: center;
+  /* text-align: center; */
  
 }
 nav > ul ul {
