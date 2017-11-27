@@ -92,7 +92,7 @@ public class FoodController {
 		// 윤주
 		model.addAttribute("rlist", feedbackService.getReviewListByFoodSellNo(foodSellNo));
 		model.addAttribute("leftQuantity", foodService.getLeftQuantityByFoodSellNo(foodSellNo));
-		model.addAttribute("sellfood", foodService.getFoodSellDetailByNo(foodSellNo));
+		model.addAttribute("foodSell", foodService.getFoodSellDetailByNo(foodSellNo));
 		return "food/foodsell_detail.tiles";
 	}
 

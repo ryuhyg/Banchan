@@ -27,3 +27,24 @@ values(review_seq.nextval, 4, sysdate, '다시 구매하고 싶어요!ㅇㅇ주�
 	
 select * from seller
 	
+
+
+select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score 
+from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
+s, ban_mem m, address a 
+where m.mem_id=s.mem_id and m.address_no=a.address_no and rownum<=3
+
+
+
+select * from (
+			 select  m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score, 
+			 		  rank() over (order by seller_score desc) as rank,
+			 from seller s, ban_mem m, address a
+			 )
+where rownum <= 5
+					
+					
+					
+					
+					
+					
