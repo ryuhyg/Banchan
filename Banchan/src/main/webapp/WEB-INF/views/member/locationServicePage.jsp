@@ -123,7 +123,7 @@ $(document).ready(function() {
 	    			 //alert(data.pb.previousPageGroup);
 	    			 for (var i = 0; i < data.list.length; i++) {
 	    				 strTemp +="<tr><td rowspan='3'>"+
-	    	 				"<a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId='"+data.list[i].memId+'>'+
+	    	 				"<a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId="+data.list[i].memId+"'>"+
 	    	 				"<img src='/banchan/resources/images/IU.jpg' style='width: 100px;height:100px;'>"+
 	    	 				"</a>"+
 	    	 				"</td>"+
@@ -175,6 +175,8 @@ $(document).ready(function() {
 							<input type="text" id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly" value="${addressVO.addressAPI}">
 							<br>	
 							<div id="map" style="width:100%;height:270px;"></div>
+							<span>* 지도를 클릭하시면 거리 계산을 할 수 있어요.!</span><br> 
+							<span>* 마우스( 좌클릭: 위치 지정, 우클릭: 소요시간)</span>
 						</div><!-- end주소 검색 div  -->
 						<div id="sellerTable" class="col-sm-6">
 							<h4>판매자 정보</h4> 
@@ -310,7 +312,7 @@ $(document).ready(function() {
 	    			 //alert(data.pb.previousPageGroup);
 	    			 for (var i = 0; i < data.list.length; i++) {
 	    				 strTemp +="<tr><td rowspan='3'>"+
-	    	 				"<a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId='"+data.list[i].memId+'>'+
+	    	 				"<a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId="+data.list[i].memId+"'>"+
 	    	 				"<img src='/banchan/resources/images/IU.jpg' style='width: 100px;height:100px;'>"+
 	    	 				"</a>"+
 	    	 				"</td>"+
