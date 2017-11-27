@@ -81,8 +81,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<![CDATA[
 		select f.food_no, f.food_name, f.food_de, f.food_score,
 		f.food_main_img, f.food_postdate, f.category_no, f.mem_id,
-		fs.food_sell_no, to_char(fs.tr_date,'yyyy-mm-dd'), 
-		to_char(fs.close_date,'yyyy-mm-dd'), fs.loc, fs.price,
+		fs.food_sell_no, to_char(fs.tr_date,'YYYY-MM-DD') as tr_date, 
+		to_char(fs.close_date,'YYYY-MM-DD') as close_date, fs.loc, fs.price,
 		fs.pre_quantity, fs.sell_postdate, fs.unit, fs.sell_detail
 		from food f, food_sell fs
 		where food_sell_no=#{value} and f.food_no=fs.food_no
