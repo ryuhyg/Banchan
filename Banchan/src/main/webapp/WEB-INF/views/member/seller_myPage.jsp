@@ -292,7 +292,9 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 						<div class="row">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
 									<input type="hidden" id="sellerId" value="${svo.memId }">
-									<input type="hidden" id="loginId" value="${mvo.memId }">
+										<sec:authorize access="isAuthenticated()">
+											<input type="hidden" id="loginId" value="${mvo.memId }">
+										</sec:authorize>
 									<h1 class="name" >${svo.memName } </h1>
 								<span id="pagingScroll"class="text">
 								주부님 소개
