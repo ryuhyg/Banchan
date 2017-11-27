@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
@@ -382,11 +383,11 @@ public class MemberController {
 		// System.out.println(file+"<==");
 		// System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인
 		if (file != null && file.isEmpty() == false) {
-			System.out.println("파일명:" + file.getOriginalFilename());
+			//System.out.println("파일명:" + file.getOriginalFilename());
 			File uploadFile = new File(uploadPath + file.getOriginalFilename());
 			try {
 				file.transferTo(uploadFile);// 실제 디렉토리로 파일을 저장한다
-				System.out.println(uploadPath + file.getOriginalFilename() + " 파일업로드");
+				//System.out.println(uploadPath + file.getOriginalFilename() + " 파일업로드");
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
@@ -408,6 +409,19 @@ public class MemberController {
 				updatedAuthorities);
 		SecurityContextHolder.getContext().setAuthentication(newAuth);
 		return "member/sellerRegister_ok.tiles";
+	}
+	/*
+	 * 통합검색이라 경계가 명확하지 않아 MemberController에서 구현함
+	 */
+	@RequestMapping("searchByKeyword.do")
+	public ModelAndView SearchByKeyword(String kw) {
+		ModelAndView mv = new ModelAndView();
+		List<SellerVO> slist = memberService.findSellerList(kw);
+		List<FoodSellVO> fslist = foodeService.findFoodSellList(kw);
+		mv.addObject("slist",slist);
+		mv.addObject("fslist",fslist);
+		mv.setViewName("search/search_result.tiles");
+		return mv;
 	}
 	/////////////////////// end 윤주 메서드 ///////////////////////////////
 }

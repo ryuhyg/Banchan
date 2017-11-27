@@ -109,6 +109,3 @@ values(answer_seq.nextval, '많이 짜진 않습니다!', sysdate, 'java2',3);
 
 
 
-
-
-

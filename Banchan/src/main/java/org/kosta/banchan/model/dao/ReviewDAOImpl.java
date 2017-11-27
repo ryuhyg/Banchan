@@ -1,5 +1,6 @@
 package org.kosta.banchan.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,10 +24,15 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public void updateSellerScore(String memId) {
 		template.update("feedback.updateSellerScore", memId);
 	}
-
 	@Override
-	public List<ReviewVO> getReviewListByFoodSellNo(String foodSellNo) {
-		return template.selectList("feedback.getReviewListByFoodSellNo", foodSellNo);
+	public List<ReviewVO> getReviewListByFoodSellNo(HashMap<String, Integer> paramMap) {
+		return template.selectList("feedback.getReviewListByFoodSellNo", paramMap);
+
+	}
+	@Override
+	public int getAllReviewCountByFoodSellNo(String foodSellNo) {
+		return template.selectOne("feedback.getAllReviewCountByFoodSellNo",foodSellNo);
 	}
 	//////////////// end윤주///////////////////////////
+
 }

@@ -308,6 +308,10 @@ public class MemberServiceImpl implements MemberService {
 	public String getSellerNameByMemId(String memId) {
 		return memberDAO.getSellerNameByMemId(memId);
 	}
+	@Override
+	public List<SellerVO> findSellerList(String kw) {
+		return sellerDAO.findSellerList(kw);
+	}
 	/////////////////////// end 윤주 메서드 ///////////////////////////////
 
 	/////////////////////// start 지원 ///////////////////////////////

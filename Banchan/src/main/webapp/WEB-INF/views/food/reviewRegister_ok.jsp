@@ -4,6 +4,6 @@
 <div class="container">
 <h3>리뷰작성이 완료되었습니다</h3>
 <a href="home.do">홈으로</a>
-<a href="getFoodSellDetail.do?foodSellNo=${foodSellNo }">작성후기보기</a>
+<a href="getFoodSellDetail.do?foodSellNo=${foodSellNo }&pageNo=1">작성후기보기</a>
 </div>
 </section>

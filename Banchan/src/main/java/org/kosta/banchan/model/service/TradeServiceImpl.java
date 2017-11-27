@@ -1,7 +1,6 @@
 package org.kosta.banchan.model.service;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -89,9 +88,22 @@ public class TradeServiceImpl implements TradeService {
 
 	/////////////////////// start윤주////////////////////////////////
 	@Override
-	public List<TradeVO> getTradeListByMemId(String memId) {
-		return tradeDAO.getTradeListByMemId(memId);
+	public ListVO<TradeVO> getTradeListByMemId(String memId, String pageNo) {
+		int totalCount = tradeDAO.getAllTradeCountByMemId(memId);
+		PagingBean pagingBean = null;
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		if (pageNo == null)
+			pagingBean = new PagingBean(totalCount);
+		else
+			pagingBean = new PagingBean(totalCount, Integer.parseInt(pageNo));
+
+		paramMap.put("startRowNumber",String.valueOf(pagingBean.getStartRowNumber()));
+		paramMap.put("endRowNumber",String.valueOf(pagingBean.getEndRowNumber()));
+		paramMap.put("memId", memId);
+		// start,end,foodSell no를 저장한 map를 param으로
+		return new ListVO<TradeVO>(tradeDAO.getTradeListByMemId(paramMap),pagingBean);
 	}
+	
 	/////////////////////// end윤주///////////////////////////////////
 
 	// 우정
@@ -110,5 +122,7 @@ public class TradeServiceImpl implements TradeService {
 	public int getAllSellerTradeCount(String sellerId) {
 		return tradeDAO.getAllSellerTradeCount(sellerId);
 	}
+
+	
 
 }

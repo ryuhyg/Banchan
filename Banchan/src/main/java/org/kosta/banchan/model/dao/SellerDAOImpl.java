@@ -32,5 +32,10 @@ public class SellerDAOImpl implements SellerDAO {
 	public List<FoodVO> selectFoodInfo(String id) {
 		return template.selectList("member.selectFoodInfo", id);
 	}
-
+/////////////////////start윤주///////////////////////////
+	@Override
+	public List<SellerVO> findSellerList(String kw) {
+		return template.selectList("member.findSellerList",kw);
+	}
+///////////////////////end윤주///////////////////////////
 }

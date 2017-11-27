@@ -1,7 +1,5 @@
 package org.kosta.banchan.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.service.FeedbackService;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class TradeController {
@@ -104,12 +101,9 @@ public class TradeController {
 	//////////////////////////// start윤주////////////////////////////////
 	// 나의 거래 내역 리스트 가져오기
 	@RequestMapping("myTradeList.do")
-	public ModelAndView getTradeListByMemId(String memId) {
-		ModelAndView mv = new ModelAndView();
-		List<TradeVO> tlist = tradeService.getTradeListByMemId(memId);
-		mv.addObject("tlist", tlist);
-		mv.setViewName("member/myTradeList.tiles");
-		return mv;
+	public String getTradeListByMemId(String memId,String pageNo,Model model) {
+		model.addAttribute("tlist", tradeService.getTradeListByMemId(memId,pageNo));
+		return "member/myTradeList.tiles";
 	}
 	//////////////////////////// end윤주//////////////////////////////////
 }
