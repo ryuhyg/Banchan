@@ -116,58 +116,49 @@
  
  										});//keyup
  
- 						$("#searchaddress")
- 								.click(
- 										function() {
- 											new daum.Postcode(
- 													{
- 														oncomplete : function(
- 																data) {
- 															// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
- 
- 															// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
- 															// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
- 															var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
- 															var extraRoadAddr = ''; // 도로명 조합형 주소 변수
- 
- 															// 법정동명이 있을 경우 추가한다. (법정리는 제외)
- 															// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
- 															if (data.bname !== ''
- 																	&& /[동|로|가]$/g
- 																			.test(data.bname)) {
- 																extraRoadAddr += data.bname;
- 															}
- 															// 건물명이 있고, 공동주택일 경우 추가한다.
- 															if (data.buildingName !== ''
- 																	&& data.apartment === 'Y') {
- 																extraRoadAddr += (extraRoadAddr !== '' ? ', '
- 																		+ data.buildingName
- 																		: data.buildingName);
- 															}
- 															// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
- 															if (extraRoadAddr !== '') {
- 																extraRoadAddr = ' ('
- 																		+ extraRoadAddr
- 																		+ ')';
- 															}
- 															// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
- 															if (fullRoadAddr !== '') {
- 																fullRoadAddr += extraRoadAddr;
- 															}
- 
- 															// 우편번호와 주소 정보를 해당 필드에 넣는다.
- 															// document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
- 															//  document.getElementById('sample4_roadAddress').value = fullRoadAddr;
- 															// document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
- 															$("#jibunAddress")
- 																	.val(
- 																			data.jibunAddress);
- 															$("#jibunAddress")
- 																	.trigger(
- 																			"change");
- 
- 														}
- 													}).open();
+ 										$("#searchaddress")
+ 		 								.click(
+ 		 										function() {
+ 		 											new daum.Postcode(
+ 		 													{
+ 		 														oncomplete : function(
+ 		 																data) {
+ 		 														// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+ 		 											            	// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+ 		 											                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+ 		 											                var fullAddr = ''; // 최종 주소 변수
+ 		 											                var extraAddr = ''; // 조합형 주소 변수
+
+ 		 											                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+ 		 											                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+ 		 											                    fullAddr = data.roadAddress;
+ 		 											                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+ 		 											                    fullAddr = data.roadAddress;
+ 		 											                }
+
+ 		 															   // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+ 		 											                if(data.userSelectedType === 'R'){
+ 		 											                    //법정동명이 있을 경우 추가한다.
+ 		 											                    if(data.bname !== ''){
+ 		 											                        extraAddr += data.bname;
+ 		 											                    }
+ 		 											                    // 건물명이 있을 경우 추가한다.
+ 		 											                    if(data.buildingName !== ''){
+ 		 											                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+ 		 											                    }
+ 		 											                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+ 		 											                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+ 		 											                }
+ 		 															// 우편번호와 주소 정보를 해당 필드에 넣는다.
+ 		 															// document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+ 		 															//  document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+ 		 															// document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+ 		 															$("#jibunAddress").val(fullAddr);
+ 		 															$("#jibunAddress").trigger("change");
+ 		 
+ 		 														}
+ 		 													}).open();
  
  										});//$("#searchaddress").click
  
@@ -336,7 +327,7 @@
  
  
  
- <section id="recent-list" style="margin-top: 150px;">
+ <section id="recent-list" style="margin-top: 350px;">
  	<div class="container">
  		<div class="row">
  			<div class="col-sm-2">
@@ -377,7 +368,7 @@
  						<div class="row">
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px"></i>비밀번호</label> <input type="password"
+ 									style="margin-right: 5px"></i>비밀번호</label> <input type="password" required="required"
  									name="pw" id="password" class="margin-bottom form-control"
  									placeholder="비밀번호">
  							</div>
@@ -388,7 +379,7 @@
  						<div class="row">
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px"></i>비밀번호 확인</label> <input type="password"
+ 									style="margin-right: 5px"></i>비밀번호 확인</label> <input type="password" required="required"
  									id="passwordRe" class="margin-bottom form-control"
  									placeholder="비밀번호확인">
  							</div>
@@ -399,7 +390,7 @@
  						<div class="row">
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px"></i>이름</label> <input type="text"
+ 									style="margin-right: 5px"></i>이름</label> <input type="text" required="required"
  									name="memName" id="name" class="margin-bottom form-control"
  									placeholder="이름"
  									value="<sec:authentication property="principal.memName"/>">
@@ -408,7 +399,7 @@
  						<div class="row">
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px"></i>생년월일</label> <input type="date"
+ 									style="margin-right: 5px"></i>생년월일</label> <input type="date" required="required"
  									name="birth" class="margin-bottom form-control"
  									value="<sec:authentication property="principal.birth"/>">
  							</div>
@@ -419,7 +410,7 @@
  									style="margin-right: 5px"></i>전화번호 ( - 포함하여 입력해주세요! )</label>
  								<!-- <input type="text" name="tel"  class="margin-bottom form-control" placeholder="전화번호"> -->
  								<input class="margin-bottom form-control" type="tel" name="tel"
- 									id="telno" title=" -  포함하여 입력해주세요!" placeholder="00*-000*-0000"
+ 									id="telno" title=" -  포함하여 입력해주세요!" placeholder="00*-000*-0000" required="required"
  									pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" maxlength="13"
  									value="<sec:authentication property="principal.tel"/>">
  							</div>
@@ -431,7 +422,7 @@
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>판매자 소개</label><br>
- 						<textarea rows="8" cols="40" name="sellerInfo">${svo.sellerInfo}</textarea><br>
+ 						<textarea rows="8" cols="40" name="sellerInfo" required="required">${svo.sellerInfo}</textarea><br>
  		</div>
  		</div>
  						<div class="row">
@@ -444,7 +435,7 @@
  									name="addressVO.addressAPI" id="jibunAddress"
  									class="margin-bottom form-control" placeholder="검색 주소"
  									readonly="readonly" value="${avo.addressAPI}"> <input type="text"
- 									name="addressDe" id="detailAddress"
+ 									name="addressDe" id="detailAddress" required="required"
  									value="<sec:authentication property="principal.addressDe"/>"
  									class="margin-bottom form-control" placeholder="상세주소 입력">
  							</div> 
@@ -466,7 +457,7 @@
  							<div class="col-xs-8">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>비밀번호 찾기 답변</label> <input type="text"
- 									name="pwAnswer" id="pwAnswer"
+ 									name="pwAnswer" id="pwAnswer" required="required"
  									class="margin-bottom form-control"
  									value="<sec:authentication property="principal.pwAnswer"/>">
  							</div>

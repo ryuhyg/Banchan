@@ -232,15 +232,6 @@ public class MemberDAOImpl implements MemberDAO {
 		return template.selectOne("member.getSellerNameByMemId", memId);
 	}
 	/////////////////////// end 윤주 메서드 ///////////////////////////////
-
-	@Override
-	public void getEditMembers(SellerVO vo) {
-		// TODO Auto-generated method stub
-		/*
-		 * ?? 삭제예정
-		 */
-	}
-
 	/////////////////////// start 지원 메서드 ///////////////////////////////
 	@Override
 	public MemberVO getBuyerInfo(String buyerId) {

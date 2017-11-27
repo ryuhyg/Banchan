@@ -49,7 +49,8 @@ $(document).ready(function(){
                 xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
             },
 			success:function(data){						
-				alert(data);
+				alert("비밀번호가 변경되었습니다. 로그인 해주세요.");
+				location.href="${pageContext.request.contextPath}/member/loginView.do" 
 			}//callback			
 		});//ajax
 	})
@@ -70,16 +71,16 @@ $(document).ready(function(){
 							<form class="form-large grey-color" id="resetPassForm" name="resetPassForm">
 										<sec:csrfInput/><%-- csrf 토큰 --%>
 										<%-- <input type="hidden" name="id" id="id" value="${qnamvo.memId}"> --%>
-										<input type="hidden" name="id" id="id" value="${qnamvo.memId}">
+										<input type="hidden" name="id" id="id" value="${memId}">
 										<label for="password" style="font-weight: bold;"> <i class="fa fa-user user" style="margin-right: 5px"></i>비밀번호</label>
 										<input type="text" placeholder="비밀번호" name="password" id="password" class="margin-bottom form-control">
-											<span id="passwordCheckView"></span>					
+											<span id="passwordCheckView"></span>	<br>		
 										<label for="passwordRe" style="font-weight: bold;"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호 확인</label>
 										<input type="text" placeholder="비밀번호 확인" name="passwordRe" id="passwordRe" class="margin-bottom form-control">
-											<span id="passwordReCheckView"></span>					
+											<span id="passwordReCheckView"></span>		<br>			
 								<br>
 								<div align="center"> 
-								<button type="button" class="btn btn-reverse button-form"  id="resetPassBtn" >확인</button>
+								<button type="button" class="btn btn-reverse button-form"  id="resetPassBtn" >재설정</button>
 								</div>
 							</form>		
 							</div>
@@ -89,5 +90,4 @@ $(document).ready(function(){
 							</div>
 							</div>
 							</div>
-							${qnamvo }
 		</section>
