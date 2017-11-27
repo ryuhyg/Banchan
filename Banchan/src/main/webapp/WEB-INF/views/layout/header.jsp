@@ -100,23 +100,6 @@
 				
 			</div><!-- /.menu -->
 
-			<div class="fixed-top">
-				<div>
-					<a href="#" class="fixed-button top"><i class="fa fa-chevron-up"></i></a>
-				</div><br>
-				<div class="list-group hidden-xs fixed-button " style="width: 50px; height: 50px;">
-					<div style="width: inherit; " >
-						<a href="#" class="list-group-item list-group-item-success" style="width: inherit;"><img alt="" src="${pageContext.request.contextPath}/resources/images/진세연.jpg" style="width: inherit;" ></a>
-					</div>
-					<div>
-						<a href="#" class="list-group-item list-group-item-success" style="width: inherit;"><img alt="" src="${pageContext.request.contextPath}/resources/images/진세연.jpg" style="width: inherit;" ></a>
-					</div>
-					<div>
-						<a href="#" class="list-group-item list-group-item-success" style="width: inherit;"><img alt="" src="${pageContext.request.contextPath}/resources/images/진세연.jpg" style="width: inherit;" ></a>
-					</div>
-				</div>
-			</div>
-				
 				<a href="#" class="fixed-button top"><i class="fa fa-chevron-up"></i></a><!-- 탑버튼 -->
 </header>
 		
