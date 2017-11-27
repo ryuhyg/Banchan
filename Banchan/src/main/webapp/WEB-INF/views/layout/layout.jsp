@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="tiles"  uri="http://tiles.apache.org/tags-tiles" %>    
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 <head>
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,6 +42,7 @@
 	<script src="${pageContext.request.contextPath}/resources/script/modernizr.min.js"></script>	
 
 
+	
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 <script src="//code.jquery.com/jquery.min.js"></script>
 
