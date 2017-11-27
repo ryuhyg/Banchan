@@ -325,7 +325,7 @@
 								<div class="row">
 									<div  class="col-xs-6">										
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>생년월일</label>
-										<input type="date" id="birth" name="birth" class="margin-bottom form-control">
+										<input type="date" id="birth" name="birth" class="margin-bottom form-control" min="1900-01-01" max="2007-12-31">
 									</div>
 								</div>
 								<div class="row">

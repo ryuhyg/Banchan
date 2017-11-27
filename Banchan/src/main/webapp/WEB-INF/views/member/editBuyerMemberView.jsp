@@ -59,63 +59,41 @@
  								});
  
  						//비밀번호 체크
- 						$("#regForm :input[id=password]").keyup(
- 								function() {
- 									var id = $(this).val().trim();
- 									if (id.length<4 || id.length>10) {
- 										$("#passwordCheckView").html(
- 												"비밀번호는 4자이상 10자 이하여야 함!").css(
- 												"color", "pink");
- 										checkPassword = "";
- 									} else {
- 										$("#passwordCheckView").html(
- 												"비밀번호 사용가능!").css("background",
- 												"white");
- 										checkPassword = "passwordOK";
- 									}
- 
- 								});//keyup
+ 						$("#regForm :input[id=password]").keyup(function() {
+ 							var id=$(this).val().trim();
+ 							if(id.length<4 || id.length>10){
+ 								$("#passwordCheckView").html("비밀번호는 4자이상 10자 이하여야 함!").css(
+ 										"color","pink");
+ 								checkPassword="";
+ 							}else{
+ 								$("#passwordCheckView").html("비밀번호 사용가능!").css(
+ 										"background","white");
+ 								checkPassword="passwordOK";
+ 							}
+ 							$("#regForm :input[id=passwordRe]").trigger("keyup");
+ 							
+ 						});//keyup
  
  						//비밀번호 일치 체크
- 						$("#regForm :input[id=passwordRe]")
- 								.keyup(
- 										function() {
- 											if ($(
- 													"#regForm :input[id=password]")
- 													.val().trim() == "") {
- 
- 												$(
- 														"#regForm :input[id=passwordRe]")
- 														.val("");
- 												$(
- 														"#regForm :input[id=password]")
- 														.focus();
- 												alert("적정 비밀번호를 먼저 입력하세요!");
- 											} else {
- 												if ($(
- 														"#regForm :input[id=password]")
- 														.val().trim() != $(
- 														"#regForm :input[id=passwordRe]")
- 														.val().trim()) {
- 													checkPasswordRe = "";
- 													$("#passwordReCheckView")
- 															.text("불일치!!")
- 															.css("background",
- 																	"red");
- 												} else if ($(
- 														"#regForm :input[id=password]")
- 														.val().trim() == $(
- 														"#regForm :input[id=passwordRe]")
- 														.val().trim()) {
- 													checkPasswordRe = "passwordOK";
- 													$("#passwordReCheckView")
- 															.text("비밀번호 일치")
- 															.css("background",
- 																	"white");
- 												}
- 											}
- 
- 										});//keyup
+ 						$("#regForm :input[id=passwordRe]").keyup(function() {
+ 							if($("#regForm :input[id=password]").val().trim()==""&& !checkPassword==""){
+ 								
+ 								$("#regForm :input[id=passwordRe]").val("");
+ 								$("#regForm :input[id=password]").focus();
+ 								alert("적정 비밀번호를 먼저 입력하세요!");
+ 							}
+ 							else{
+ 								if($("#regForm :input[id=password]").val().trim()!=$("#regForm :input[id=passwordRe]").val().trim()){
+ 									checkPasswordRe="";
+ 									$("#passwordReCheckView").text("불일치!!").css("background","red");
+ 								}
+ 								else if($("#regForm :input[id=password]").val().trim()==$("#regForm :input[id=passwordRe]").val().trim()){
+ 									checkPasswordRe="passwordOK";
+ 									$("#passwordReCheckView").text("비밀번호 일치").css("background","white");
+ 								}
+ 							}
+ 							
+ 						});//keyup
  
  										$("#searchaddress")
  		 								.click(
@@ -307,9 +285,9 @@
  						<div class="row">
  							<div class="col-xs-6">
  								<label for="id"> 
- 								<i class="fa fa-user user" style="margin-right: 5px"></i>아이디</label> 
+ 								<i class="fa fa-user user"></i>아이디</label> 
  								<input type="text" name="memId" id="id" class="margin-bottom form-control" placeholder="아이디" 	
- 								value="<sec:authentication property="principal.memId"/>"
+ 								value="<sec:authentication property="principal.memId"/>" 
  								readonly="readonly">
  							</div>
  							<div class="col-xs-6" style="margin-top: 32px;">
@@ -351,7 +329,7 @@
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>생년월일</label> <input type="date"
- 									name="birth" class="margin-bottom form-control" required="required"
+ 									name="birth" class="margin-bottom form-control" required="required" min="1900-01-01" max="2007-12-31"
  									value="<sec:authentication property="principal.birth"/>">
  							</div>
  						</div>
