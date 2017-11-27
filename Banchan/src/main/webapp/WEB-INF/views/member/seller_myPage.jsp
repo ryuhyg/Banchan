@@ -298,7 +298,7 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 									<h1 class="name" >${svo.memName } </h1>
 								<span id="pagingScroll"class="text">
 								주부님 소개
-								</span>
+								</span> 
 								<div class="bs-callout callout-success">
 								  <h4 class="title">믿고먹는 주부님</h4>
 								  <span class="address"><i class="fa fa-map-marker"></i>&nbsp;${svo.addressVO.addressAPI}</span>
