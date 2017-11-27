@@ -9,7 +9,6 @@
 <script> 
 	$(document).ready(function(){
 		$("button[name='update']").click(function(){
-			//alert($(this).val());
 			location.href="${pageContext.request.contextPath}/updateRegViewFood.do?foodNo="+$(this).val();
 		});
 		$("button[name='delete']").click(function(){
@@ -94,11 +93,15 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 }
 
 .pagination a.active {
-    background-color: #4CAF50;
+    background-color: #000 ;
     color: white;
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+#paginationContainer{
+	text-align: center;
+}
 </style>
 
 <script type="text/javascript">
@@ -114,65 +117,152 @@ $(document).ready(function() {
         $(activeTab).fadeIn();
         return false;
     });
+    $("#sellFood").click(function(){
+    	//처음 판매중 음식 탭을 눌렀을 떄의 ajax
+    	$.ajax({
+    		type:"get",
+        	url:"${pageContext.request.contextPath}/sellerPagePagingAjax.do",
+        	data:"memId="+$("#sellerId").val(),
+        	dataType:"json",
+        	success:function(data){	
+        		var sellInfo="";
+        		for(var i=0;i<data.list.length;i++){
+        			var foodSellNo=data.list[i].foodSellNo;
+        			sellInfo+="<div class='row' style='vertical-align: middle'>";
+        			sellInfo+="<div class='col-sm-8 col-md-8 col-sm-push-4'>";
+        			sellInfo+="<div class='bs-callout callout-success' style='width: 800px'>";
+        			sellInfo+="<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo='";
+        			sellInfo+=data.list[i].foodSellNo+">";
+    				sellInfo+="<h4 class='title'>"+data.list[i].foodName+"</h4></a>";
+    				sellInfo+="<span class='description' style='color:black;font-size:12px;'>";
+    				sellInfo+="<i class='fa fa-ticket' style='font-weight: bold'> 남은 수량:</i>"+ data.list[i].price+"<br>";
+        			sellInfo+="<i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜:</i>"+data.list[i].trDate+"<br>";	
+        			sellInfo+=" <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 판매 종료 날짜:</i>"+ data.list[i].closeDate;
+        			sellInfo+="<sec:authorize access='isAuthenticated()'>";
+        			if($("#sellerId").val()==$("#loginId").val()){
+        				sellInfo+=" <a  style='display:inline-block;float: right;'";
+        				sellInfo+="class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo='"+data.list[i].foodSellNo+"&pageNo='1'>거래 내역 보기</a>";
+        			}
+        			sellInfo+="</sec:authorize>";
+        			sellInfo+="</span>";
+        			sellInfo+="</div>";
+        			sellInfo+="</div>";
+        			sellInfo+="<div class='col-sm-4 col-md-4 col-sm-pull-8' style='padding-top: 15px;' >";
+        			sellInfo+="<div class='tab2img' >";
+        			sellInfo+="<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="+data.list[i].foodSellNo+"'><img alt='Sample images' width='250px' height='150px' src='${pageContext.request.contextPath}/resources/images/"+data.list[i].foodMainImg+"'></a>";  
+        			sellInfo+="</div>";
+        			sellInfo+="</div>";
+        			sellInfo+="</div>";
+        			}
+        			
+        		$("#foodSellInfo").html(sellInfo);
+        		
+        		//alert(data.pb.previousPageGroup);
+        		var startPageOfPageGroupMinus=data.pb.startPageOfPageGroup-1;
+        		var endPageOfPageGroupPlus=data.pb.endPageOfPageGroup+1;
+        		var startPageOfPageGroup=data.pb.startPageOfPageGroup;
+        		var endPageOfPageGroup=data.pb.endPageOfPageGroup;
+        		var nowPage=data.pb.nowPage;
+        		var info=" <div class='pagination'>";
+    			if(data.pb.previousPageGroup){
+    				info+="<a id="+startPageOfPageGroupMinus+">&laquo;</a>";
+    			}
+    			for(var i=startPageOfPageGroup;i<endPageOfPageGroup+1;i++){
+    				if(nowPage!=i){
+    					info+="<a id="+i+">"+i+"</a>";
+    					
+    				}
+    				else{
+    					info+="<a id='-1' class='active'>"+i+"</a> &nbsp;";
+    				}
+    			}
+    			if(data.pb.nextPageGroup){
+    				info+="<a id="+endPageOfPageGroupPlus+">&raquo;</a>";
+    			}		
+    			info+="</div>";
+    			
+    			$("#paginationAjax").html(info);			
+    	} 
+    		
+    	});//ajax
+    	var offset=$("")
+    	
+    });//sellfood click
     
 	//동적으로 생성되는 페이징 번호에 대한 event
-	$(".pagination").on("click","a",function(){
-		//if($(this).attr('id')!="-1"){
-		$.ajax({
+	//페이징 숫자를 눌렀을 때의 ajax
+$("#paginationAjax").on("click",".pagination a",function(){
+		if($(this).attr('id')!="-1"){
+		 $.ajax({
 		type:"get",
     	url:"${pageContext.request.contextPath}/sellerPagePagingAjax.do",
-    	data:"memId="+$("#sellerId").val()+"pageNo="+$(this).attr('id'),
+    	data:"memId="+$("#sellerId").val()+"&pageNo="+$(this).attr('id'),
     	dataType:"json",
-    	success:function(data){		
-    		
-    		alert(data.pb.previousPageGroup);
-    		/* var startPageOfPageGroupMinus=data.pb.startPageOfPageGroup-1;
+    	success:function(data){
+    		var sellInfo="";
+    		for(var i=0;i<data.list.length;i++){
+    			sellInfo+="<div class='row' style='vertical-align: middle'>";
+    			sellInfo+="<div class='col-sm-8 col-md-8 col-sm-push-4'>";
+    			sellInfo+="<div class='bs-callout callout-success' style='width: 800px'>";
+    			sellInfo+="<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="+data.list[i].foodSellNo+"'>";
+				sellInfo+="<h4 class='title'>"+data.list[i].foodName+"</h4></a>";
+				sellInfo+="<span class='description' style='color:black;font-size:12px;'>";
+				sellInfo+="<i class='fa fa-ticket' style='font-weight: bold'> 남은 수량:</i>"+ data.list[i].price+"<br>";
+    			sellInfo+="<i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜:</i>"+data.list[i].trDate+"<br>";	
+    			sellInfo+=" <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 판매 종료 날짜:</i>"+ data.list[i].closeDate;
+    			sellInfo+="<sec:authorize access='isAuthenticated()'>";
+    			if($("#sellerId").val()==$("#loginId").val()){
+    				sellInfo+=" <a  style='display:inline-block;float: right;'";
+    				sellInfo+="class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="+data.list[i].foodSellNo+"&pageNo='1''>거래 내역 보기</a>";
+    			}
+    			sellInfo+="</sec:authorize>";
+    			sellInfo+="</span>";
+    			sellInfo+="</div>";
+    			sellInfo+="</div>";
+    			sellInfo+="<div class='col-sm-4 col-md-4 col-sm-pull-8' style='padding-top: 15px;' >";
+    			sellInfo+="<div class='tab2img' >";
+    			sellInfo+="<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="+data.list[i].foodSellNo+"'><img alt='Sample images'  width='250px' height='150px' src='${pageContext.request.contextPath}/resources/images/"+data.list[i].foodMainImg+"'></a>";
+    			sellInfo+="</div>";
+    			sellInfo+="</div>";
+    			sellInfo+="</div>";
+    			}
+    			
+    		$("#foodSellInfo").html(sellInfo);
+    		var startPageOfPageGroupMinus=data.pb.startPageOfPageGroup-1;
     		var endPageOfPageGroupPlus=data.pb.endPageOfPageGroup+1;
     		var startPageOfPageGroup=data.pb.startPageOfPageGroup;
     		var endPageOfPageGroup=data.pb.endPageOfPageGroup;
     		var nowPage=data.pb.nowPage;
-    		var info=" <div class='pagination'>";
+    		var info=" <div class='pagination' style='text-align:center'>";
 			if(data.pb.previousPageGroup){
-				info+="<a  id="+startPageOfPageGroupMinus+"href='#'>&laquo;</a>";
+				info+="<a  id="+startPageOfPageGroupMinus+">&laquo;</a>";
 			}
 			for(var i=startPageOfPageGroup;i<endPageOfPageGroup+1;i++){
 				if(nowPage!=i){
-					info+="<a id="+i+"href='#'"+">"+i+"</a>";
+					info+="<a id="+i+">"+i+"</a>";
 				}
 				else{
-					info+="<a id='-1' href='#'"+">"+i+"</a> &nbsp;";
+					info+="<a id='-1' class='active'>"+i+"</a> &nbsp;";
 				}
 			}
 			if(data.pb.nextPageGroup){
-				info+="<a  id="+endPageOfPageGroupPlus+"href='#'>&raquo;</a>";
+				info+="<a  id="+endPageOfPageGroupPlus+">&raquo;</a>";
 			}		
 			info+="</div>";
 			
-			$("#paginationAjax").html(info);	*/			
+			$("#paginationAjax").html(info);			
 	} 
 		
-	});//ajax
-	//}
-	});//click function
-    
-   /**paging ajax 부분 **/
-    /* $(".pagination a").click(function(){
-    	type:"get",
-    	url:"${pageContext.request.contextPath}/sellerPageInfo.do"
-    	data:"memId="+$("#sellerId").val()+"pageNo="+$(this).attr('id'),
-    	dataType:"json",
-    	success:function(json){					
-			var data="<table border='1' cellpadding='5'>";
-			for(var i=0;i<json.length;i++){
-				data+="<tr>";
-				data+="<td>"+json[i].id+"</td>";
-				data+="<td>"+json[i].name+"</td>";
-				data+="</tr>";
-			}
-			data+="</table>";
-			$("#memberListView").html(data);				
+	});//ajax 
+
+	//ajax실행시 스크롤 위치 올리기
+	 var offset = $("#pagingScroll").offset();
+	 $('html, body').animate({scrollTop : offset.top}, 1000);
+	
+	
 	}
-    }); */
+	});//click function
+   
 });
 </script>
 
@@ -188,8 +278,9 @@ $(document).ready(function() {
 						<div class="row">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
 									<input type="hidden" id="sellerId" value="${svo.memId }">
+									<input type="hidden" id="loginId" value="${mvo.memId }">
 									<h1 class="name" >${svo.memName } </h1>
-								<span class="text">
+								<span id="pagingScroll"class="text">
 								주부님 소개
 								</span>
 								<div class="bs-callout callout-success">
@@ -242,11 +333,9 @@ $(document).ready(function() {
 		<div id="tabcontainer">		
 				<ul class="tab">
 			        <li class="active"><a href="#tab1">내음식</a></li>
-			        <li><a href="#tab2">판매중 음식</a></li>
+			        <li><a href="#tab2" id="sellFood">판매중 음식</a></li>
 			    </ul>
-
-				
-			<div class="tab_container">
+		<div class="tab_container">
 				
 			<!-- tab1 -->
 				<div id="tab1" class="tab_content" style="display: block;">
@@ -274,7 +363,7 @@ $(document).ready(function() {
 										<!-- <a class="btn btn-default" href="#"></a>
 										<a class="btn btn-default" href="#"></a> -->
 										
-										<%-- <a  style="display:inline-block" class="btn btn-default" href="${pageContext.request.contextPath}/registerFoodView.do?foodNo=${food.foodNo}">판매등록</a> --%>
+										<%-- <a  style="display:inline-block" class="btn btn-default" hre	f="${pageContext.request.contextPath}/registerFoodView.do?foodNo=${food.foodNo}">판매등록</a> --%>
 										<button type="button" name="update" value="${food.foodNo }" style="margin-top:60px; margin-left: 5px" class="btn btn-default btn-xs">수정</button>
 										<button type="button" name="delete" value="${food.foodNo }" style="margin-top:60px" class="btn btn-default btn-xs">삭제</button> 
 										<button type="button" name="seller" value="${food.foodNo }" style="margin-top:60px; margin-left: 50px" class="btn btn-default btn-xs">판매등록</button>
@@ -300,66 +389,23 @@ $(document).ready(function() {
 						<!-- 받아온 음식 반복 구간 -->
 			
 				<div class="tab2Container">
+				
 				<div class="col-md-9">
-				<span id="foodSellInfo"></span>
-				<!-- 여기서 부터 ajax 시작 -->
-				<c:forEach items="${lvo.list}" var="foodSell">
-						<div class="row" style="vertical-align: middle">
-							<div class="col-sm-8 col-md-8 col-sm-push-4">
-								<div class="bs-callout callout-success" style="width: 800px">
-								  <h4 class="title">${foodSell.foodName}</h4>
-								  <span class="description" style="color:black;font-size:13px">
-									  <i class="fa fa-ticket" style="font-weight: bold"> 남은 수량:</i>  ${foodSell.price}<br>
-									  <i class="fa fa-calendar" style="font-weight: bold"> 거래 날짜:</i>  ${foodSell.trDate}<br>
-									  <i class="fa fa-close" aria-hidden="true" style="font-weight: bold"> 판매 종료 날짜:</i>  ${foodSell.closeDate}
-									<sec:authorize access="isAuthenticated()">
-										<c:if test="${mvo.memId==svo.memId}">
-									 	 <a  style="display:inline-block;float: right;" class="btn btn-default" href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=${foodSell.foodSellNo}&pageNo=1">거래 내역 보기</a>
-										</c:if>
-									</sec:authorize>		
-								  </span>
-								</div><!-- bs-callout callout-success -->
-							</div><!-- /.col-md-8 -->
-							<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
-								<!-- . Agent Box -->
-								<div class="tab2img" >
-									<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo}"><img alt="Sample images"  width="250px" height="150px" src="resources/images/${foodSell.foodMainImg}"></a>
-								</div>
-							</div><!-- /.col-md-4 -->
-						
-						</div><!-- /.row -->
-
+					<div id="foodSellInfo">
 					
-					</c:forEach>
-					<div class="paginationContainer" style="text-align: center;">
-						 <div class="pagination" >
-										<c:set var="pb" value="${lvo.pb}"></c:set>
-										<c:if test="${pb.previousPageGroup}">	
-										<a  id="${pb.startPageOfPageGroup-1}" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${svo.memId}
-										&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
-										</c:if>
-										<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
-										<c:choose>
-										<c:when test="${pb.nowPage!=i}">
-										<a id="${i}" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${svo.memId}
-										&pageNo=${i}">${i}</a>
-										</c:when>
-										<c:otherwise>
-										<a id="-1" href="#" >${i}</a>
-										</c:otherwise>
-										</c:choose>
-										&nbsp;
-										</c:forEach>
-										<c:if test="${pb.nextPageGroup}">	
-										<a id="${pb.endPageOfPageGroup+1}" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${svo.memId}
-										&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
-										</c:if>
-											 		
-						</div> 
-						<span id="paginationAjax"></span>
-					</div><!-- paginationContainer -->
-					<!-- 여기가 ajax 끝 -->
 					</div>
+				<!-- 여기서 부터 ajax 시작 -->
+				
+					
+					<!-- 여기가 ajax 끝 -->
+				</div>
+				<div class="col-md-12">
+					<div class="paginationContainer" >
+						<div id="paginationAjax" style="text-align: center ;">  
+						
+						</div>
+					</div><!-- paginationContainer -->
+				</div>
 					</div>
 						
 				</div>
