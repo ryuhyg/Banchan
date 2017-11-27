@@ -100,4 +100,6 @@ public class FoodDAOImpl implements FoodDAO {
 		template.update("food.noimgUpdateRegFood", fvo);
 	}
 
+	
+
 }

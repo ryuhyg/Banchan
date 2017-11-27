@@ -97,7 +97,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{foodSellNo}, to_date(#{trDate},'YYYY-MM-DD'), to_date(#{closeDate},'YYYY-MM-DD'),
 		#{loc}, #{price}, #{preQuantity}, sysdate, #{unit}, #{sellDetail}, #{foodNo})
 	</insert>
-
+	<!-- 판매음식정보 수정 -->
+	<update id="editFoodSell" parameterType="foodSellVO">
+		update food_sell set tr_date=to_date(#{trDate},'YYYY-MM-DD'), close_date=to_date(#{closeDate},'YYYY-MM-DD'),
+		loc=#{loc}, price=#{price}, pre_quantity=#{preQuantity}, unit=#{unit}, sell_detail=#{sellDetail}
+		where food_sell_no=#{foodSellNo}
+	</update>
 
 	<!-- End 지원 -->
 

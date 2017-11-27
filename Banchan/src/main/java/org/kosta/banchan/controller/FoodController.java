@@ -85,6 +85,8 @@ public class FoodController {
 	}
 	///////////////////////// end 우정///////////////////////////////////
 
+	///////////////////////// start 지원///////////////////////////////////
+
 	/**
 	 * [지원] 판매음식등록 등록음식 중 판매할 음식을 등록한다.
 	 * 
@@ -145,7 +147,31 @@ public class FoodController {
 		///// End최근 클릭 리스트 코드 추가 광태
 		return "food/foodsell_detail.tiles";
 	}
-
+	
+	@RequestMapping("editFoodSellView.do")
+	public String editFoodSellView(String foodSellNo,Model model) {
+		model.addAttribute("foodSell",foodService.getFoodSellDetailByNo(foodSellNo));
+		return "food/editFoodSellView.tiles";
+	}
+	
+	@RequestMapping(value="editFoodSell.do", method=RequestMethod.POST)
+	public String editFoodSell(FoodSellVO foodSellVO) {
+		foodService.editFoodSell(foodSellVO);
+		return "redirect:editFoodSellOk.do?foodSellNo=" + foodSellVO.getFoodSellNo();
+	}
+	
+	@RequestMapping("editFoodSellOk.do")
+	public String editFoodSellOk(String foodSellNo,Model model) {
+		model.addAttribute("foodSellNo", foodSellNo);
+		return "food/editFoodSell_ok.tiles";
+	}
+	
+	
+	
+	
+	///////////////////// end 지원 ///////////////////////////////////
+	
+	
 	///////////////////// 영민 start ///////////////////////////////////
 	@RequestMapping("foodRegisterForm.do")
 	public String foodRegisterForm(Model model) {

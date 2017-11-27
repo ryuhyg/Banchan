@@ -42,6 +42,14 @@ public class SellDAOImpl implements SellDAO {
 	public List<FoodSellVO> getFoodSellInfoByMemId(String memId) {
 		return template.selectOne("food.getFoodSellInfoByMemId", memId);
 	}
+	
+	/** [지원] 판매음식정보 수정
+	 * 
+	 */
+	@Override
+	public void editFoodSell(FoodSellVO foodSellVO) {
+		template.update("food.editFoodSell", foodSellVO);
+	}
 
 	///////////////// start윤주//////////////////////////
 	@Override

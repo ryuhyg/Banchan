@@ -54,6 +54,24 @@
 		}
 	}); //delFood click
 	
+	$("#editFoodSell").click(function() {
+			if(deleteFlag=confirm("수정하시겠습니까?")){
+				$.ajax({
+		    		type:"get",
+		        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+		        	data:"foodSellNo="+$("#foodSellNo").val(),
+		        	success:function(data){
+		        		if(data>1){
+		        			alert("판매중인 상품이 있어 수정할 수 없습니다.");
+		        		}
+		        		else{
+							location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val();
+		        		}
+		        	} 
+				}); //ajax	
+			}
+		}); //click
+	
 	}); //ready
 	
 	
@@ -85,7 +103,7 @@
 				<div class="agent-box-card grey">
 					<div class="image-content">
 						<div class="image image-fill">
-							<img alt="Image Sample" src="${foodSell.foodMainImg}">
+							<img alt="Image Sample" src="${pageContext.request.contextPath}/resources/images/${foodSell.foodMainImg}">
 						</div>						
 					</div>
 				</div>
@@ -160,7 +178,7 @@
 								<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
 	 						</c:when>
 							<c:otherwise>
-								<input type="button"  class="btn btn-default" style="margin-top: 20px;"  value="수정하기">
+								<input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
 								<input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
 								
 							</c:otherwise> 						

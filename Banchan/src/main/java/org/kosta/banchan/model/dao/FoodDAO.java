@@ -40,4 +40,6 @@ public interface FoodDAO {
 
 	void deleteFoodSell(String foodSellNo);
 
+	
+
 }

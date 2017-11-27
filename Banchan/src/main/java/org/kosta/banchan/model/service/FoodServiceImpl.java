@@ -151,4 +151,12 @@ public class FoodServiceImpl implements FoodService {
 		foodDAO.noimgUpdateRegFood(fvo);
 	}
 
+	/** [지원] 판매음식 수정
+	 * 
+	 */
+	@Override
+	public void editFoodSell(FoodSellVO foodSellVO) {
+		sellDAO.editFoodSell(foodSellVO);
+	}
+
 }

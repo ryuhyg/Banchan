@@ -51,4 +51,6 @@ public interface FoodService {
 	void deleteFoodSell(String foodSellNo);
 	////////우정 end /////////
 
+	void editFoodSell(FoodSellVO foodSellVO);
+
 }
