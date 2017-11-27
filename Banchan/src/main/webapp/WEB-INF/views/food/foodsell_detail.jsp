@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!-- 별점 style부분 ************************* -->
  <style type="text/css"> /* 별점 css */
 .star_rating {font-size:0; letter-spacing:-4px;}
@@ -139,6 +140,11 @@
 <hr>
 	<div class="container">
 		<div class="row">
+				<c:choose>
+				<c:when test="${fn:length(rlist)==0}">
+				<h4>작성된 후기가 없습니다</h4>
+				</c:when>
+				<c:otherwise>
 			<table class="table table-hover"  style="text-align: center;font-size: 12px;">
 					<thead>
 					<tr class="tr_visible">
@@ -168,6 +174,8 @@
 				</c:forEach>
 					</tbody>
 			</table>
+				</c:otherwise>
+				</c:choose>
 		</div>
 	</div>
 </section>	<!-- recent-list -->			
