@@ -67,9 +67,10 @@ $(document).ready(function(){
 					<div class="col-sm-4">
 						<div class="blog-list blog-detail">
 		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px; font-weight: bold;"></i>비밀번호 재설정</h3>
-							<form class="form-large grey-color" id="resetPassForm" name="resetPassForm" action="">
-										<input type="hidden" name="id" id="id" value="${mvo.memId}">
+							<form class="form-large grey-color" id="resetPassForm" name="resetPassForm">
 										<sec:csrfInput/><%-- csrf 토큰 --%>
+										<%-- <input type="hidden" name="id" id="id" value="${qnamvo.memId}"> --%>
+										<input type="hidden" name="id" id="id" value="${qnamvo.memId}">
 										<label for="password" style="font-weight: bold;"> <i class="fa fa-user user" style="margin-right: 5px"></i>비밀번호</label>
 										<input type="text" placeholder="비밀번호" name="password" id="password" class="margin-bottom form-control">
 											<span id="passwordCheckView"></span>					
@@ -88,4 +89,5 @@ $(document).ready(function(){
 							</div>
 							</div>
 							</div>
+							${qnamvo }
 		</section>

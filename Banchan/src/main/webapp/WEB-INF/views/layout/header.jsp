@@ -21,6 +21,12 @@
 						<div class="col-md-4">							
 						</div>
 						<div class="col-md-4">
+						<form action="" method="">
+						<div class="newsletter-box" style="margin-top: 10px; ">
+						  <input type="text" class="form-control" placeholder="검색">
+						  <!-- <button class="btn btn-default send" type="button"><i class="fa fa-envelope-o"></i></button> -->
+						</div><!-- /input-group -->
+						</form>
 						</div>
 						<div id="login-pan" class="col-md-4">
 						<sec:authorize access="!isAuthenticated()"><!-- 비회원 권한 설정 -->
@@ -61,11 +67,11 @@
 					</div>
 				</div>			
 			</div><!-- /.info -->
-	<%-- 		<div class="logo hidden-xs">
+	<%-- 	<div class="logo hidden-xs">
 				<a href="${pageContext.request.contextPath}/home.do"><img id="logo-header" src="${pageContext.request.contextPath}/resources/images/logo/반창고.png" alt="Logo" /></a>
 			</div><!-- /.logo --> --%>
 			<div class="menu-navbar">
-				<div class="container" id="menu-nav">
+				<div class="container" id="menu-nav" style="padding-left: 50px">
 					<nav id="navigation">
 						<ul>
 							<li class="has_submenu">
@@ -95,6 +101,7 @@
 				
 			</div><!-- /.menu -->
 				<a href="#" class="fixed-button top"><i class="fa fa-chevron-up"></i></a>
+				<a href="#" class="hidden-xs fixed-button email" data-toggle="modal" data-target="#modal-contact" data-section="modal-contact"><i class="fa fa-envelope-o"></i></a>
 		</header>
 		
 

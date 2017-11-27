@@ -116,7 +116,7 @@ $(document).ready(function() {
 
 
 
-<section id="recent-list" style="margin-top: 100px;">
+<section id="recent-list" style="margin-top: 150px;">
 	<div class="container">
 			<div class="row">
 				<div class="col-sm-2"><!-- left -->

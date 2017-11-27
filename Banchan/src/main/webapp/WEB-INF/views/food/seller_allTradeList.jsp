@@ -46,13 +46,15 @@ tr{
 	}); //ready
 </script>
     
-<section id="recent-list" class="agency" style="margin-top: 350px">
+<section id="recent-list" class="agency" style="margin-top: 150px">
 <sec:authorize access="hasRole('ROLE_SELLER')"><!-- 오직 판매자 권한 설정 -->
 <sec:authentication var="mvo" property="principal" />
 <div id="page-container">
 <div class="container">
 	<div class="row">
 	<h3>전체거래내역</h3>
+	<c:choose>
+	<c:when test="${!empty lvo.list}">
 	<table class="table table-hover" id="tardeList" style="text-align: center;font-size: 12px;" >
 		<thead>
 			<tr class="tr_visible"> 
@@ -69,7 +71,7 @@ tr{
 			</tr>
 		</thead>
 		<tbody >
-			<c:forEach items="${tradeList }" var="trade">
+			<c:forEach items="${lvo.list }" var="trade">
 			<tr class="tr_visible" >
 				<td>${trade.trNo }</td>
 				<td>${trade.foodSellVO.foodName}</td>
@@ -101,7 +103,39 @@ tr{
 			</c:forEach>
 		</tbody>
 	</table>
+	</c:when>
+	<c:otherwise>
+		<div style="font-weight: bold;text-align: center;">거래 내역이 존재하지 않습니다</div>
+	</c:otherwise>
+	</c:choose>
 	</div> <!-- row -->
+	
+	<c:set value="${lvo.pb }" var="pb"/>
+	<div class="row center-block pagination"  align="center">
+	  <ul class="pagination">
+		<c:if test="${pb.previousPageGroup}">
+		    <li><a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+		</c:if>
+
+	  	<c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
+	  		<c:choose>
+	  			<c:when test="${pageNum==pb.nowPage}">
+			    	<li class="active"><a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pageNum}">${pageNum}</a></li>
+	  			</c:when>
+	  			<c:otherwise>
+			    	<li><a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pageNum}">${pageNum}</a></li>
+	  			</c:otherwise>
+	  		</c:choose>
+	  	</c:forEach>
+
+		<c:if test="${pb.nextPageGroup}">
+		    <li><a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a></li>
+		</c:if>
+	  </ul>
+	</div>
+	
+	
+	
 </div><!-- container -->
 </div> <!-- page-container -->
 </sec:authorize> <!-- sec -->

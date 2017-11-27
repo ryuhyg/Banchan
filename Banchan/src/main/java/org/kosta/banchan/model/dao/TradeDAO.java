@@ -7,15 +7,18 @@ import org.kosta.banchan.model.vo.TradeVO;
 
 public interface TradeDAO {
 
-	List<TradeVO> getSellerTradeListByFoodSellNo(HashMap<String,Integer> paramMap);
+	List<TradeVO> getSellerTradeListByFoodSellNo(HashMap<String, Integer> paramMap);
 
 	void completeTrade(String tradeNo);
 
-	List<TradeVO> getAllSellerTradeList(String sellerId);
-	////////////////////Start 윤주 //////////////////////////
+	List<TradeVO> getAllSellerTradeList(HashMap<String, String> paramMap);
+
+	//////////////////// Start 윤주 //////////////////////////
 	List<TradeVO> getTradeListByMemId(String memId);
-	////////////////////END 윤주 //////////////////////////
+	//////////////////// END 윤주 //////////////////////////
 
 	int getTradeCountByFoodSellNo(String foodSellNo);
+
+	int getAllSellerTradeCount(String sellerId);
 
 }

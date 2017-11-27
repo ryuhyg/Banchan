@@ -2,17 +2,17 @@ package org.kosta.banchan.model.vo;
 
 import java.util.ArrayList;
 
-public class FoodSellVO extends FoodVO{
+public class FoodSellVO extends FoodVO {
 	private ArrayList<QuestionVO> questionList;
-    private String foodSellNo; 
-    private String trDate;
-    private String closeDate;
-    private String loc;
-    private int price;
-    private int preQuantity;
-    private String sellPostdate;
-    private String unit;
-    private String sellDetail;
+	private String foodSellNo;
+	private String trDate;
+	private String closeDate;
+	private String loc;
+	private int price;
+	private int preQuantity;
+	private String sellPostdate;
+	private String unit;
+	private String sellDetail;
 
 	public FoodSellVO() {
 		super();
@@ -98,6 +98,4 @@ public class FoodSellVO extends FoodVO{
 		this.sellDetail = sellDetail;
 	}
 
-    
-    
 }

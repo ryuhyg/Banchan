@@ -1,5 +1,7 @@
 package org.kosta.banchan.model.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.dao.AnswerDAO;
@@ -13,19 +15,25 @@ import org.springframework.transaction.annotation.Transactional;
 public class FeedbackServiceImpl implements FeedbackService {
 
 	@Resource
-    private ReviewDAO reviewDAO;
+	private ReviewDAO reviewDAO;
 
 	@Resource
-    private QuestionDAO questionDAO;
+	private QuestionDAO questionDAO;
 
 	@Resource
-    private AnswerDAO answerDAO;
-////////////////start윤주/////////////////////////
+	private AnswerDAO answerDAO;
+
+	//////////////// start윤주/////////////////////////
 	@Transactional
 	@Override
-	public void reviewRegister(ReviewVO rvo,String memId) {
+	public void reviewRegister(ReviewVO rvo, String memId) {
 		reviewDAO.reviewRegister(rvo);
 		reviewDAO.updateSellerScore(memId);
 	}
-//////////////////end윤주///////////////////////////
+
+	@Override
+	public List<ReviewVO> getReviewListByFoodSellNo(String foodSellNo) {
+		return reviewDAO.getReviewListByFoodSellNo(foodSellNo);
+	}
+	////////////////// end윤주///////////////////////////
 }

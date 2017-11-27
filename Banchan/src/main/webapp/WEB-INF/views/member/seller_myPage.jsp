@@ -13,7 +13,7 @@
 			location.href="${pageContext.request.contextPath}/updateRegViewFood.do?foodNo="+$(this).val();
 		});
 		$("button[name='delete']").click(function(){
-			location.href="${pageContext.request.contextPath}/deleteRegFood.do?foodNo="+$(this).val();
+			location.href="${pageContext.request.contextPath}/deleteRegFood.do?foodNo="+$(this).val()+"&memId="+$("#sellerId").val();
 			});
 		$("button[name='seller']").click(function(){
 			location.href="${pageContext.request.contextPath}/registerFoodView.do?foodNo="+$(this).val();	
@@ -115,24 +115,80 @@ $(document).ready(function() {
         return false;
     });
     
-    $(".pagination a").click(function(){
-    	alert($(this).attr('id'));
-    });
+	//동적으로 생성되는 페이징 번호에 대한 event
+	$(".pagination").on("click","a",function(){
+		//if($(this).attr('id')!="-1"){
+		$.ajax({
+		type:"get",
+    	url:"${pageContext.request.contextPath}/sellerPagePagingAjax.do",
+    	data:"memId="+$("#sellerId").val()+"pageNo="+$(this).attr('id'),
+    	dataType:"json",
+    	success:function(data){		
+    		
+    		alert(data.pb.previousPageGroup);
+    		/* var startPageOfPageGroupMinus=data.pb.startPageOfPageGroup-1;
+    		var endPageOfPageGroupPlus=data.pb.endPageOfPageGroup+1;
+    		var startPageOfPageGroup=data.pb.startPageOfPageGroup;
+    		var endPageOfPageGroup=data.pb.endPageOfPageGroup;
+    		var nowPage=data.pb.nowPage;
+    		var info=" <div class='pagination'>";
+			if(data.pb.previousPageGroup){
+				info+="<a  id="+startPageOfPageGroupMinus+"href='#'>&laquo;</a>";
+			}
+			for(var i=startPageOfPageGroup;i<endPageOfPageGroup+1;i++){
+				if(nowPage!=i){
+					info+="<a id="+i+"href='#'"+">"+i+"</a>";
+				}
+				else{
+					info+="<a id='-1' href='#'"+">"+i+"</a> &nbsp;";
+				}
+			}
+			if(data.pb.nextPageGroup){
+				info+="<a  id="+endPageOfPageGroupPlus+"href='#'>&raquo;</a>";
+			}		
+			info+="</div>";
+			
+			$("#paginationAjax").html(info);	*/			
+	} 
+		
+	});//ajax
+	//}
+	});//click function
+    
+   /**paging ajax 부분 **/
+    /* $(".pagination a").click(function(){
+    	type:"get",
+    	url:"${pageContext.request.contextPath}/sellerPageInfo.do"
+    	data:"memId="+$("#sellerId").val()+"pageNo="+$(this).attr('id'),
+    	dataType:"json",
+    	success:function(json){					
+			var data="<table border='1' cellpadding='5'>";
+			for(var i=0;i<json.length;i++){
+				data+="<tr>";
+				data+="<td>"+json[i].id+"</td>";
+				data+="<td>"+json[i].name+"</td>";
+				data+="</tr>";
+			}
+			data+="</table>";
+			$("#memberListView").html(data);				
+	}
+    }); */
 });
 </script>
 
 
 
-<section id="agent-page" style="margin-top: 350px;">
+<section id="agent-page" style="margin-top: 150px;">
 <br>
 
 			<div class="container">
 				<div class="row">
-				<div class="col-md-1"></div>
+				<div class="col-md-1" ></div>
 					<div class="col-md-9">
 						<div class="row">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
-									<h1 class="name">${svo.memName } </h1>
+									<input type="hidden" id="sellerId" value="${svo.memId }">
+									<h1 class="name" >${svo.memName } </h1>
 								<span class="text">
 								주부님 소개
 								</span>
@@ -173,7 +229,7 @@ $(document).ready(function() {
 					<sec:authorize access="isAuthenticated()">
 				<c:if test="${mvo.memId==svo.memId}">
 						<div style="margin-bottom: 2px"> 
-					 	<a href="getAllSellerTradeList.do?sellerId=${mvo.memId }" class="btn btn-default" style="width: 70%;" >판매내역보기</a>
+					 	<a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="width: 70%;" >판매내역보기</a>
 						</div>
 						<a  href="${pageContext.request.contextPath}/foodRegisterForm.do" class="btn btn-default" style="width: 70%" >음식 등록</a>
 					</c:if> 
@@ -204,7 +260,7 @@ $(document).ready(function() {
 									<%-- 	<input type="hidden" id="foodNo" value="${food.foodNo }"> --%>
 										
 										<span class="cover"></span>
-										<img alt="Sample images"  width="300px" height="200px" src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}"> 
+										<img alt="Sample images"  style="size: inherit;" src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}"> 
 										<h3 class="title">${food.foodName}</h3>
 									</a>								
 									<span class="description" >${food.foodDe}</span>
@@ -245,6 +301,8 @@ $(document).ready(function() {
 			
 				<div class="tab2Container">
 				<div class="col-md-9">
+				<span id="foodSellInfo"></span>
+				<!-- 여기서 부터 ajax 시작 -->
 				<c:forEach items="${lvo.list}" var="foodSell">
 						<div class="row" style="vertical-align: middle">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
@@ -272,6 +330,7 @@ $(document).ready(function() {
 						</div><!-- /.row -->
 
 					
+					</c:forEach>
 					<div class="paginationContainer" style="text-align: center;">
 						 <div class="pagination" >
 										<c:set var="pb" value="${lvo.pb}"></c:set>
@@ -297,8 +356,9 @@ $(document).ready(function() {
 										</c:if>
 											 		
 						</div> 
+						<span id="paginationAjax"></span>
 					</div><!-- paginationContainer -->
-					</c:forEach>
+					<!-- 여기가 ajax 끝 -->
 					</div>
 					</div>
 						

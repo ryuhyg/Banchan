@@ -107,91 +107,43 @@
 				<h2>주부님들의 반찬으로 인스턴스 식품에 찌든 여러분을 정화 시키는 맛</h2>		
 			</div>
 			
-<c:if test="${fn.length(list)!=0}">
+<c:if test="${fn:length(list)!=0}">
 <!-- 인기 주부님 목록 -->
 			<div class="container">
 				<div class="list-box-title">
 					<span><i class=""></i>인기 주부님</span>
 				</div>
-				<div class="row">
+				<div class="row"> 
+				<!-- 주부님 리스트 -->
+				<c:forEach items="${list}" var="list">
 					<div class="col-md-4">
 						<div class="box-ads box-home" style="height: 425px">
-							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${list.get(0).getMemId()}">
+							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${list.getMemId()}">
 								<span class="cover"></span>
-								<img alt="Sample images" style="width:380px;height:270px" src="${pageContext.request.contextPath}/resources/images/${list.get(0).getSellerImg()}">
-								<h3 class="title">${list.get(0).getMemName()} &nbsp;주부님</h3>
+								<img alt="Sample images" style="width:380px;height:270px" src="${pageContext.request.contextPath}/resources/images/${list.getSellerImg()}">
+								<h3 class="title">${list.getMemName()} &nbsp;주부님</h3>
 							</a><!-- /.hover-effect -->
-							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.get(0).getAddressVO().getAddressAPI()}</span>
-							<span class="description">${list.get(0).getSellerInfo()}</span>
+							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.getAddressVO().getAddressAPI()}</span>
+							<span class="description">${list.getSellerInfo()}</span>
 							
 							<dl class="detail">
 							<div>
 								<dt class="">판매자평점</dt><br><br>
 								<span class="star_rating">  <!-- 별점 표현 -->
-      							<c:forEach begin="1" end="${list.get(0).getSellerScore()}">
+      							<c:forEach begin="1" end="${list.getSellerScore()}">
     							<a class="on">★</a>
 								</c:forEach>
-								<c:forEach begin="1" end="${5-list.get(0).getSellerScore()}">
+								<c:forEach begin="1" end="${5-list.getSellerScore()}">
     							<a>★</a>
    								</c:forEach>
        							</span>
-       							 &nbsp;${list.get(0).getSellerScore()}
+       							 &nbsp;${list.getSellerScore()}
        						</div>
        						</dl><!-- /.detail -->
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
-					<div class="col-md-4">
-						<div class="box-ads box-home" style="height: 425px">
-							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${list.get(1).getMemId()}">
-								<span class="cover"></span>
-								<img alt="Sample images" style="width:380px;height:270px" src="${pageContext.request.contextPath}/resources/images/${list.get(1).getSellerImg()}">
-								<h3 class="title">${list.get(1).getMemName()} &nbsp;주부님</h3>
-							</a><!-- /.hover-effect -->
-							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.get(1).getAddressVO().getAddressAPI()}</span>
-							<span class="description">${list.get(1).getSellerInfo()}</span>
-							
-							<dl class="detail">
-							<div>
-								<dt class="">판매자평점</dt><br><br>
-								<span class="star_rating">  <!-- 별점 표현 -->
-      							<c:forEach begin="1" end="${list.get(1).getSellerScore()}">
-    							<a class="on">★</a>
-								</c:forEach>
-								<c:forEach begin="1" end="${5-list.get(1).getSellerScore()}">
-    							<a>★</a>
-   								</c:forEach>
-       							</span>
-       							 &nbsp;${list.get(1).getSellerScore()}
-       						</div>
-       						</dl><!-- /.detail -->
-						</div><!-- /.box-home .box-ads -->
-					</div><!-- ./col-md-4 -->
-					<div class="col-md-4">
-						<div class="box-ads box-home" style="height: 425px">
-							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${list.get(2).getMemId()}">
-								<span class="cover"></span>
-								<img alt="Sample images" style="width:380px;height:270px" src="${pageContext.request.contextPath}/resources/images/${list.get(2).getSellerImg()}">
-								<h3 class="title">${list.get(2).getMemName()} &nbsp;주부님</h3>
-							</a><!-- /.hover-effect -->
-							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.get(2).getAddressVO().getAddressAPI()}</span>
-							<span class="description">${list.get(2).getSellerInfo()}</span>
-							
-							<dl class="detail">
-							<div>
-								<dt class="">판매자평점</dt><br><br>
-								<span class="star_rating">  <!-- 별점 표현 -->
-      							<c:forEach begin="1" end="${list.get(2).getSellerScore()}">
-    							<a class="on">★</a>
-								</c:forEach>
-								<c:forEach begin="1" end="${5-list.get(2).getSellerScore()}">
-    							<a>★</a>
-   								</c:forEach>
-       							</span>
-       							 &nbsp;${list.get(2).getSellerScore()}
-       						</div>
-       						</dl><!-- /.detail -->
-						</div><!-- /.box-home .box-ads -->
-					</div><!-- ./col-md-4 -->
+				</c:forEach>
+					
 				</div>
 	<!-- 인기 음식 -->			
 				<div class="list-box-title">
