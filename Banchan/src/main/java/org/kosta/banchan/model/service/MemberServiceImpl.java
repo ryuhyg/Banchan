@@ -66,9 +66,14 @@ public class MemberServiceImpl implements MemberService {
 	public int findPasswordQnaCheck(MemberVO mvo) {
 		return memberDAO.findPasswordQnaCheck(mvo);
 	}
-
+	/**
+	 * 비밀번호 재설정
+	 * 암호화 처리 해준다.
+	 */
 	@Override
 	public void resetPassword(MemberVO mvo) {
+		String encodePassword = passwordEncoder.encode(mvo.getPw());
+		mvo.setPw(encodePassword);
 		memberDAO.resetPassword(mvo);
 	}
 

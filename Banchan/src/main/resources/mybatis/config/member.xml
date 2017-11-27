@@ -184,9 +184,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<select id="selectSellerTop3" resultMap="sellerRM">
 	 	<![CDATA[select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score 
-					from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
-					s, ban_mem m, address a 
-					where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3]]>
+			from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
+			s, ban_mem m, address a 
+			where m.mem_id=s.mem_id and m.address_no=a.address_no and rownum<=3]]>
 	</select>
 	<update id="getEditMembers" parameterType="sellerVO">
 		<!-- 
@@ -230,7 +230,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM ADDRESS
 		WHERE ADDRESS_API= #{addressVO.addressAPI}
 	</select>
-
+ 
 	<!-- ADDRESS 테이블에 새로운 주소지 등록 --><!-- address_API가 시스템상 유일값인데 pk처럼 중복방지 방법이 없을까요.. 현재 pk는 시퀀스인 상태고 -->
 	<insert id="registerNewAddressInfoByUpdate" parameterType="addressVO">
 		<selectKey keyProperty="addressNo" resultType="string"
@@ -308,7 +308,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="resetPassword" parameterType="memberVO">
 		update
-		ban_mem set pw=#{pw} where id=#{memId}
+		ban_mem set pw=#{pw} where mem_id=#{memId}
 	</update>
 	<!-- End 향걸 -->
 
