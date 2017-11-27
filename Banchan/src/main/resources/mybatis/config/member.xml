@@ -188,12 +188,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			s, ban_mem m, address a 
 			where m.mem_id=s.mem_id and m.address_no=a.address_no and rownum<=3]]>
 	</select>
-	<update id="getEditMembers" parameterType="sellerVO">
-		<!-- 
-		??
-		삭제 예정			
-		 -->
-	</update>
 	<select id="findPwQnaNo" parameterType="pwQnaVO" resultType="PwQnaVO">
 		select pw_qna_no, pw_Quest from pw_qna where pw_qna_no=#{value}
 	</select>

@@ -15,20 +15,18 @@
 	</script>
 		<header class="menu-base" id="header-container-box" style="top: 0px !important; ">	
 			<div class="info" style="height: 50px;"><!-- info -->
-				<div class="container">
+				<div class="container" >
 					<div class="row">
 						<div class="col-md-4">			
-						<div>
-						<img src="${pageContext.request.contextPath}/resources/images/logo/header_logo3.png" style="margin-top:10px; z-index: 1000;">				
-						</div>
+						<a href="home.do"><img src="${pageContext.request.contextPath}/resources/images/logo/header_logo3.png" style="margin-top:-5px; z-index: 1000;"></a>			
 						</div>
 						<div class="col-md-4">
-					<!-- 	<form action="" method="">
+						<form action="" method="">
 						<div class="newsletter-box" style="margin-top: 10px; ">
-						  <input type="text" class="form-control" placeholder="검색">
+						  <input type="text"   style="border-radius: 1px" placeholder="검색">
 						  <button class="btn btn-default send" type="button"><i class="fa fa-envelope-o"></i></button>
-						</div>/input-group
-						</form> -->
+						</div><!-- /input-group -->
+						</form>
 						</div>
 						<div id="login-pan" class="col-md-4">
 						<sec:authorize access="!isAuthenticated()"><!-- 비회원 권한 설정 -->
@@ -71,7 +69,7 @@
 			</div><!-- /.info -->
 			<div class="menu-navbar" style="z-index: -1;">
 				<div class="container" id="menu-nav" >
-					<nav id="navigation">
+					<nav id="navigation"  style=" margin-left: 30px">
 						<ul>
 							<li class="has_submenu">
 								<a href="">Home</a>
@@ -102,10 +100,3 @@
 				<a href="#" class="fixed-button top"><i class="fa fa-chevron-up"></i></a><!-- 탑버튼 -->
 				<!-- <a href="#" class="hidden-xs fixed-button email" data-toggle="modal" data-target="#modal-contact" data-section="modal-contact"><i class="fa fa-envelope-o"></i></a> -->
 		</header>
-		
-
-		
-	
-	
-	
-

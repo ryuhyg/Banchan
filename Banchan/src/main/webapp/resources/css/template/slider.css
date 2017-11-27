@@ -2,6 +2,8 @@
 ================================== */
 .home-slider {
   border-bottom: 4px solid #1a1a1a;
+  border-left: 1px solid #1a1a1a;
+  border-right: 1px solid #1a1a1a;
   position: relative;
   /* .content */
   /* .home-slider-nav */
