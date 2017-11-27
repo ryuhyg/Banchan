@@ -62,7 +62,7 @@ $(document).ready(function() {
         			sellInfo+="</div>";
         			sellInfo+="<div class='col-sm-4 col-md-4 col-sm-pull-8' style='padding-top: 15px;' >";
         			sellInfo+="<div class='tab2img' >";
-        			sellInfo+="<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="+data.list[i].foodSellNo+"'><img alt='Sample images' width='250px' height='150px' src='${pageContext.request.contextPath}/resources/images/"+data.list[i].foodMainImg+"'></a>";  
+        			sellInfo+="<a style='size: inherit;' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="+data.list[i].foodSellNo+"'><img alt='Sample images' width='250px' height='150px' src='${pageContext.request.contextPath}/resources/images/"+data.list[i].foodMainImg+"'></a>";  
         			sellInfo+="</div>";
         			sellInfo+="</div>";
         			sellInfo+="</div>";
@@ -134,7 +134,7 @@ $("#paginationAjax").on("click",".pagination a",function(){
     			sellInfo+="</div>";
     			sellInfo+="<div class='col-sm-4 col-md-4 col-sm-pull-8' style='padding-top: 15px;' >";
     			sellInfo+="<div class='tab2img' >";
-    			sellInfo+="<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="+data.list[i].foodSellNo+"'><img alt='Sample images'  width='250px' height='150px' src='${pageContext.request.contextPath}/resources/images/"+data.list[i].foodMainImg+"'></a>";
+    			sellInfo+="<a style='size: inherit;' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="+data.list[i].foodSellNo+"'><img alt='Sample images'  width='250px' height='150px' src='${pageContext.request.contextPath}/resources/images/"+data.list[i].foodMainImg+"'></a>";
     			sellInfo+="</div>";
     			sellInfo+="</div>";
     			sellInfo+="</div>";
