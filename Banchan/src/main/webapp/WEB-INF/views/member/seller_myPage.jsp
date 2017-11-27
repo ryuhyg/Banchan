@@ -6,106 +6,19 @@
 <sec:authentication var="mvo" property="principal" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<script> 
-	$(document).ready(function(){
-		$("button[name='update']").click(function(){
-			location.href="${pageContext.request.contextPath}/updateRegViewFood.do?foodNo="+$(this).val();
-		});
-		$("button[name='delete']").click(function(){
-			location.href="${pageContext.request.contextPath}/deleteRegFood.do?foodNo="+$(this).val()+"&memId="+$("#sellerId").val();
-			});
-		$("button[name='seller']").click(function(){
-			location.href="${pageContext.request.contextPath}/registerFoodView.do?foodNo="+$(this).val();	
-		});
-	});
-</script>
-<style type="text/css">
-ul.tab {
-    margin: 0;
-    padding: 0;
-    float: left;
-    list-style: none;
-    height:  32px;
-    border-bottom: 1px solid #999;
-    border-left: 1px solid #999;
-    width: 100%;
-}
-ul.tab li {
-    float: left;
-    margin: 0;
-    padding: 0;
-    height: 31px;
-    line-height: 31px;
-    border: 1px solid #999;
-    border-left: none;
-    margin-bottom: -1px;
-    overflow: hidden;
-    position: relative;
-    background:#000;
-}
-ul.tab li a {
-    /* text-decoration: none; */
-    color: #e0e0e0;
-    display: block;
-    font-size: 1.0em;
-    padding: 0 20px;
-    border: 1px solid #fff;
-    outline: none;
-}
-ul.tab li a:hover {
-    background: #ccc;
-}
-html ul.tab li.active, html ul.tab li.active a:hover  {
-    background: #000;
-    border-bottom: 1px solid #000;
-}
-#tabcontainer {
-    border: 1px solid #999;
-    border-top: none;
-    overflow: hidden;
-    clear: both;
-    float: left; width: 100%;
-    background: #fff;
-}
-.tab_content {
-    padding: 20px;
-    font-size: 1.2em;
-} 
-#tab2Container{
-
-    padding: 10px;
-    border: 5px solid gray;
-    margin: 0; 
-}
-
-.pagination {
-    display: inline-block;
-    text-align: center;
-}
-
-.pagination a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    transition: background-color .3s; 
-    font-size: 13px;
-}
-
-.pagination a.active {
-    background-color: #000 ;
-    color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
-
-#paginationContainer{
-	text-align: center;
-}
-</style>
-
 <script type="text/javascript">
 $(document).ready(function() {
+	//음식 삭제, 수정
+	$("button[name='update']").click(function(){
+		location.href="${pageContext.request.contextPath}/updateRegViewFood.do?foodNo="+$(this).val();
+	});
+	$("button[name='delete']").click(function(){
+		location.href="${pageContext.request.contextPath}/deleteRegFood.do?foodNo="+$(this).val()+"&memId="+$("#sellerId").val();
+		});
+	$("button[name='seller']").click(function(){
+		location.href="${pageContext.request.contextPath}/registerFoodView.do?foodNo="+$(this).val();	
+	});
+	
     $(".tab_content").hide();
     $("ul.tab li:first").addClass("active").show();
     $(".tab_content:first").show();
@@ -131,8 +44,8 @@ $(document).ready(function() {
         			sellInfo+="<div class='row' style='vertical-align: middle'>";
         			sellInfo+="<div class='col-sm-8 col-md-8 col-sm-push-4'>";
         			sellInfo+="<div class='bs-callout callout-success' style='width: 800px'>";
-        			sellInfo+="<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo='";
-        			sellInfo+=data.list[i].foodSellNo+">";
+        			sellInfo+="<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=";
+        			sellInfo+=data.list[i].foodSellNo+"'>";
     				sellInfo+="<h4 class='title'>"+data.list[i].foodName+"</h4></a>";
     				sellInfo+="<span class='description' style='color:black;font-size:12px;'>";
     				sellInfo+="<i class='fa fa-ticket' style='font-weight: bold'> 남은 수량:</i>"+ data.list[i].price+"<br>";
@@ -141,7 +54,7 @@ $(document).ready(function() {
         			sellInfo+="<sec:authorize access='isAuthenticated()'>";
         			if($("#sellerId").val()==$("#loginId").val()){
         				sellInfo+=" <a  style='display:inline-block;float: right;'";
-        				sellInfo+="class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo='"+data.list[i].foodSellNo+"&pageNo='1'>거래 내역 보기</a>";
+        				sellInfo+="class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="+data.list[i].foodSellNo+"&pageNo=1'>거래 내역 보기</a>";
         			}
         			sellInfo+="</sec:authorize>";
         			sellInfo+="</span>";
@@ -213,7 +126,7 @@ $("#paginationAjax").on("click",".pagination a",function(){
     			sellInfo+="<sec:authorize access='isAuthenticated()'>";
     			if($("#sellerId").val()==$("#loginId").val()){
     				sellInfo+=" <a  style='display:inline-block;float: right;'";
-    				sellInfo+="class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="+data.list[i].foodSellNo+"&pageNo='1''>거래 내역 보기</a>";
+    				sellInfo+="class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="+data.list[i].foodSellNo+"&pageNo=1'>거래 내역 보기</a>";
     			}
     			sellInfo+="</sec:authorize>";
     			sellInfo+="</span>";
@@ -264,7 +177,108 @@ $("#paginationAjax").on("click",".pagination a",function(){
 	});//click function
    
 });
-</script>
+</script> 
+<style type="text/css">
+/*tab*/
+ul.tab {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height:  32px;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+    width: 100%;
+}
+ul.tab li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #999;
+    border-left: none;
+    margin-bottom: -1px;
+    overflow: hidden;
+    position: relative;
+    background:#000;
+}
+ul.tab li a {
+    /* text-decoration: none; */
+    color: #e0e0e0;
+    display: block;
+    font-size: 1.0em;
+    padding: 0 20px;
+    border: 1px solid #fff;
+    outline: none;
+}
+ul.tab li a:hover {
+    background: #ccc;
+}
+html ul.tab li.active, html ul.tab li.active a:hover  {
+    background: #000;
+    border-bottom: 1px solid #000;
+}
+#tabcontainer {
+    border: 1px solid #999;
+    border-top: none;
+    overflow: hidden;
+    clear: both;
+    float: left; width: 100%;
+    background: #fff;
+}
+.tab_content {
+    padding: 20px;
+    font-size: 1.2em;
+} 
+#tab2Container{
+
+    padding: 10px;
+    border: 5px solid gray;
+    margin: 0; 
+}
+/*페이징*/
+.pagination {
+    display: inline-block;
+    text-align: center;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s; 
+    font-size: 13px;
+}
+
+.pagination a.active {
+    background-color: #000 ;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+#paginationContainer{
+	text-align: center;
+}
+
+/*별점*/
+.star_rating {font-size:0; letter-spacing:-4px;}
+.star_rating a {
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+}
+.star_rating a:first-child {margin-left:0;}
+.star_rating a.on {color:#ffcc00;}
+.home-top{
+	margin-top: 100px;
+}
+</style>
 
 
 
@@ -300,7 +314,13 @@ $("#paginationAjax").on("click",".pagination a",function(){
 									</div>
 									<div class="info-agent">
 										<div class="text" style="text-align:center">
-											<b>주부님별점:${svo.sellerScore}</b>
+												<b>주부님 별점:</b>
+												<span class="star_rating">  <!-- 별점 표현 -->
+					      							<c:forEach begin="1" end="${svo.sellerScore}">
+					    								 <a class="on">★</a>
+													</c:forEach>
+				       							</span>
+											<%-- <b>별점:${svo.sellerScore}</b> --%>
 										</div>
 										<ul class="contact">
 											<li><a class="icon" href="#"><i class="fa fa-facebook"></i></a></li>
@@ -412,6 +432,6 @@ $("#paginationAjax").on("click",".pagination a",function(){
 				
 			</div><!-- tab_container -->
 		</div><!-- tabcontainer -->
-					
+					 
 			</div><!-- ./container -->
 		</section><!-- /#about-us -->

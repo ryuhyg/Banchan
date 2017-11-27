@@ -186,7 +186,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	<![CDATA[select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score 
 			from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
 			s, ban_mem m, address a 
-			where m.mem_id=s.mem_id and m.address_no=a.address_no and rownum<=3]]>
+			where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3]]>
 	</select>
 	<update id="getEditMembers" parameterType="sellerVO">
 		<!-- 
