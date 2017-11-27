@@ -98,8 +98,8 @@
 					</nav>
 				</div>
 				
-			</div><!-- /.menu -->
-
+			</div><!-- /.menu -->	
+	
 				<a href="#" class="fixed-button top"><i class="fa fa-chevron-up"></i></a><!-- 탑버튼 -->
 </header>
 		
