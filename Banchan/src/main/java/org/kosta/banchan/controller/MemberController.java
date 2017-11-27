@@ -203,12 +203,21 @@ public class MemberController {
 
 	@ResponseBody
 	@RequestMapping("getMarkerSellerListOnAjax.do")
-	public ListVO<SellerVO> getMarkerSellerListOnAjax(String addressNo) {
+	public ListVO<SellerVO> getMarkerSellerListOnAjax(String addressNo,String pageNo) {
 		System.out.println("*ajax**********getMarkerSellerListOnAjax********************");
 		System.out.println(addressNo); // 들어옴
+		System.out.println(pageNo); // 들어옴
+		if(addressNo!=null && pageNo==null) {
+			System.out.println("addressNo!=null && pageNo==null");
+			return memberService.getMarkerSellerListByAddressNo(addressNo, "1");
+		}else {
+			System.out.println("addressNo!=null && pageNo!=null");
+			System.out.println(memberService.getMarkerSellerListByAddressNo(addressNo, pageNo));
+			return memberService.getMarkerSellerListByAddressNo(addressNo, pageNo);
+		}
 
-		return memberService.getMarkerSellerListByAddressNo(addressNo, "1");
 	}
+	
 
 	////////////// end 위치기반 ///////////
 	/////////////////////// end 광태 메서드 ///////////////////////////////

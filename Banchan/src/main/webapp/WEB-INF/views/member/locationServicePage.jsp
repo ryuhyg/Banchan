@@ -110,6 +110,50 @@ $(document).ready(function() {
 		
 	}); 
 	
+	$("#pagingDivId").on("click","a",function(){
+		//alert($(this).attr('id'));
+		$.ajax({
+	    		type:"get",
+	    		url:"${pageContext.request.contextPath}/getMarkerSellerListOnAjax.do",
+	    		data:"addressNo="+$("#addressNoId").val()+"&pageNo="+$(this).attr('id'),  
+	    		success:function(data){
+	    			//alert(data.list[0].memId);
+	    			 //alert(data.list.length);
+	    			 var strTemp="";
+	    			 //alert(data.pb.previousPageGroup);
+	    			 for (var i = 0; i < data.list.length; i++) {
+	    				 strTemp +="<tr><td rowspan='3'>"+
+	    	 				"<a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId='"+data.list[i].memId+'>'+
+	    	 				"<img src='/banchan/resources/images/IU.jpg' style='width: 100px;height:100px;'>"+
+	    	 				"</a>"+
+	    	 				"</td>"+
+	    	 				"<td> <a href='#'>"+data.list[i].memId+"</a> </td>"+
+	    	 				"</tr>"+			
+	    	 				"<tr><td>"+"별점 :"+data.list[i].sellerScore+"</td></tr>"+
+	    	  				"<tr><td>"+"판매자 소개:"+ data.list[i].sellerInfo+'</td></tr>';
+						
+					}
+	    			 var strTempPaging="";
+	    			 strTempPaging+='<ul class="pagination">';
+	    			 if(data.pb.previousPageGroup){
+	    				 strTempPaging+='<li><a id="'+(data.pb.startPageOfPageGroup-1)+'">이전</a></li>';
+	    			 }
+	    			 
+	    			 for (var i = data.pb.startPageOfPageGroup; i <(data.pb.endPageOfPageGroup+1); i++) {
+	    				if(data.pb.nowPage!=i){
+							strTempPaging+='<li><a id="'+i+'">'+i+'</a></li>';
+						}else{
+							strTempPaging+='<li class="active"><a id="'+i+'">'+i+'</a></li>';  
+						}					
+					}  
+	    			 if(data.pb.nextPageGroup){
+	    				 strTempPaging+='<li><a id="'+(data.pb.endPageOfPageGroup+1)+'">다음</a></li></ul>';
+	    			 }
+	    			 $("#tbodyList").html(strTemp); 
+	    			 $("#pagingDivId").html(strTempPaging);
+	    		}//callback	
+	    	});	//ajax 
+	});
 	
 });//$(document).ready
 </script>
@@ -141,7 +185,7 @@ $(document).ready(function() {
 								</tr>				
 							</tbody>					
 							</table>
-							<div class="pagingInfo" id="pagingDivId">
+							<div class="pagingInfo" id="pagingDivId" style="text-align: center;">
 							
 							</div>
 						</div><!-- end 판매자 리스트  -->						
@@ -155,6 +199,7 @@ $(document).ready(function() {
 							<input type="hidden" id="latitudeId" name="latitude" value="">
 							<input type="hidden" id="longitudeId" name="longitude" value="">
 						</form>
+						<input type="hidden" id="addressNoId" value="">
 					</div>
 				</div>
 	</div>
@@ -249,10 +294,11 @@ $(document).ready(function() {
 	        infowindow.close();
 	    };
 	}
+	
 	// 마커 클릭시 이벤트 입니다
 	function makeClickListener(title) {
 	    return function() {
-	    	
+	    	$("#addressNoId").val(title);
 	    	$.ajax({
 	    		type:"get",
 	    		url:"${pageContext.request.contextPath}/getMarkerSellerListOnAjax.do",
@@ -270,25 +316,25 @@ $(document).ready(function() {
 	    	 				"</td>"+
 	    	 				"<td> <a href='#'>"+data.list[i].memId+"</a> </td>"+
 	    	 				"</tr>"+			
-	    	 				"<tr><td>"+"별점 :  "+"</td></tr>"+
+	    	 				"<tr><td>"+"별점 : "+data.list[i].sellerScore+"</td></tr>"+
 	    	  				"<tr><td>"+"판매자 소개:"+ data.list[i].sellerInfo+'</td></tr>';
 						
 					}
 	    			 var strTempPaging="";
 	    			 strTempPaging+='<ul class="pagination">';
 	    			 if(data.pb.previousPageGroup){
-	    				 strTempPaging+='<li><a href="home.do?pageNo=${pb.startPageOfPageGroup-1}">이전페이지</a></li>';
+	    				 strTempPaging+='<li><a id="'+(data.pb.startPageOfPageGroup-1)+'">이전</a></li>';
 	    			 }
 	    			 
-	    			 for (var i = data.pb.startPageOfPageGroup; i < data.pb.endPageOfPageGroup; i++) {
+	    			 for (var i = data.pb.startPageOfPageGroup; i <(data.pb.endPageOfPageGroup+1); i++) {
 						if(data.pb.nowPage!=i){
-							strTempPaging+='<li><a>'+i+'</a></li>';
+							strTempPaging+='<li><a id="'+i+'">'+i+'</a></li>';
 						}else{
-							strTempPaging+='<li class="active"><a href="#" >'+i+'</a></li>'; 
+							strTempPaging+='<li class="active"><a id="'+i+'">'+i+'</a></li>';  
 						}					
 					}  
 	    			 if(data.pb.nextPageGroup){
-	    				 strTempPaging+='<li><a href="home.do?pageNo='+data.pb.endPageOfPageGroup+1+'">다음</a></li></ul>';
+	    				 strTempPaging+='<li><a id="'+(data.pb.endPageOfPageGroup+1)+'">다음</a></li></ul>';
 	    			 }
 	    			 $("#tbodyList").html(strTemp); 
 	    			 $("#pagingDivId").html(strTempPaging);

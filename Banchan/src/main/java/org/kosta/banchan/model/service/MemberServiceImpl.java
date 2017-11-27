@@ -162,7 +162,7 @@ public class MemberServiceImpl implements MemberService {
 		ListVO<SellerVO> markerSellerList = new ListVO<SellerVO>();
 		HashMap<String, Integer> paramMap = new HashMap<String, Integer>();
 
-		PagingBean pagingBean = new PagingBean(Integer.parseInt(pageNo), 2, 3,
+		PagingBean pagingBean = new PagingBean(Integer.parseInt(pageNo), 3, 3,
 				memberDAO.getTotCountMarkerSellerList(addressNo));
 		paramMap.put("startRowNumber", pagingBean.getStartRowNumber());
 		paramMap.put("endRowNumber", pagingBean.getEndRowNumber());
