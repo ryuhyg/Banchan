@@ -179,7 +179,7 @@
 	<div class="container">
 		<div class="row">
 				<c:choose>
-				<c:when test="${fn:length(rlist)==0}">
+				<c:when test="${fn:length(rlist.list)==0}">
 				<h4>작성된 후기가 없습니다</h4>
 				</c:when>
 				<c:otherwise>
@@ -194,7 +194,7 @@
 					</tr>
 					</thead>
 					<tbody>
-				<c:forEach items="${rlist}" var="r">
+				<c:forEach items="${rlist.list }" var="r">
 					<tr>
 						<td>${r.revNo }</td>
 						<td align="left">
@@ -215,5 +215,28 @@
 				</c:otherwise>
 				</c:choose>
 		</div>
+		<c:set value="${rlist.pb }" var="pb"/>
+	<div class="row center-block pagination"  align="center">
+	  <ul class="pagination">
+		<c:if test="${pb.previousPageGroup}">
+		    <li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${sellfood.foodSellNo }&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+		</c:if>
+
+	  	<c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
+	  		<c:choose>
+	  			<c:when test="${pageNum==pb.nowPage}">
+			    	<li class="active"><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${sellfood.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
+	  			</c:when>
+	  			<c:otherwise>
+			    	<li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${sellfood.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
+	  			</c:otherwise>
+	  		</c:choose>
+	  	</c:forEach>
+
+		<c:if test="${pb.nextPageGroup}">
+		    <li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${sellfood.foodSellNo }&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a></li>
+		</c:if>
+	  </ul>
+	</div>
 	</div>
 </section>	<!-- recent-list -->			

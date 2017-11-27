@@ -13,6 +13,9 @@ public interface FoodService {
 	void orderFood(TradeVO tvo);
 
 	int getLeftQuantityByFoodSellNo(String foodSellNo);
+	
+	List<FoodSellVO> findFoodSellList(String kw);
+
 	/////////////////// end윤주//////////////////////////
 
 	FoodVO getFoodByNo(String foodNo);

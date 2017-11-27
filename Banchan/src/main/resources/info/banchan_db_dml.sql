@@ -114,6 +114,3 @@ update REVIEW set mem_id='본인 db에 있는 아이디';
 alter table REVIEW modify (mem_id not null);
 alter table REVIEW add constraint fk_review_writer_id foreign key(mem_id) references ban_mem(mem_id) ON DELETE CASCADE;
 
-
-
-

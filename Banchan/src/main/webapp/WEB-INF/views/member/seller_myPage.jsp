@@ -390,68 +390,61 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-1"></div>
-			<div class="col-md-9">
-				<div class="row">
-					<div class="col-sm-8 col-md-8 col-sm-push-4">
-						<input type="hidden" id="sellerId" value="${svo.memId }">
-						<sec:authorize access="isAuthenticated()">
-							<input type="hidden" id="loginId" value="${mvo.memId }">
-						</sec:authorize>
-						<h1 class="name">${svo.memName }</h1>
-						<span id="pagingScroll" class="text"> 주부님 소개 </span>
-						<div class="bs-callout callout-success">
-							<h4 class="title">믿고먹는 주부님</h4>
-							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${svo.addressVO.addressAPI}</span>
-							<p class="text">${svo.sellerInfo }</p>
-						</div>
-					</div>
-					<!-- /.col-md-8 -->
-					<div class="col-sm-4 col-md-4 col-sm-pull-8">
-						<!-- . Agent Box -->
-						<div class="agent-box-card grey">
-							<div class="image-content">
-								<div class="image image-fill">
-									<!-- <img alt="Image Sample" src="resources/images/${svo.sellerImg }"> -->
-									<img alt="Image Sample" style="size: inherit;"
-										src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
-								</div>
-							</div>
-							<div class="info-agent">
-								<div class="text" style="text-align: center">
-									<b>주부님 별점:</b> <span class="star_rating"> <!-- 별점 표현 -->
-										<c:forEach begin="1" end="${svo.sellerScore}">
-											<a class="on">★</a>
-										</c:forEach>
-									</span>
-									<%-- <b>별점:${svo.sellerScore}</b> --%>
-								</div>
-								<ul class="contact">
-									<li><a class="icon" href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a class="icon" href="#"><i
-											class="fa fa-google-plus"></i></a></li>
-									<li><a class="icon" href="#"><i class="fa fa-twitter"></i></a></li>
-									<li><a class="icon" href="#"><i
-											class="fa fa-envelope-o"></i></a></li>
-									<li><a class="icon" href="agent-detail.html"><i
-											class="fa fa-info-circle"></i></a></li>
-								</ul>
-							</div>
-						</div>
-
-					</div>
-					<!-- /.col-md-4 -->
-				</div>
-				<!-- /.row -->
-			</div>
-			<!-- col-md-9 -->
-			<div class="col-md-2">
-
-				<sec:authorize access="isAuthenticated()">
-					<c:if test="${mvo.memId==svo.memId}">
-						<div style="margin-bottom: 2px">
-							<a
-								href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1"
-								class="btn btn-default" style="width: 70%;">판매내역보기</a>
+		   <div class="col-md-9">
+			         <div class="row">
+			             <div class="col-sm-8 col-md-8 col-sm-push-4">
+			                     <input type="hidden" id="sellerId" value="${svo.memId }">
+			                         <sec:authorize access="isAuthenticated()">
+			                             <input type="hidden" id="loginId" value="${mvo.memId }">
+			                         </sec:authorize>
+			                     <h1 class="name" >${svo.memName } </h1>
+			                 <span id="pagingScroll"class="text">
+			        			         주부님 소개
+			                 </span> 
+			                 <div class="bs-callout callout-success">
+			                   <h4 class="title">믿고먹는 주부님</h4>
+			                   <span class="address"><i class="fa fa-map-marker"></i>&nbsp;${svo.addressVO.addressAPI}</span>
+			                   <p class="text">${svo.sellerInfo }</p>
+			                 </div>
+			             </div><!-- /.col-md-8 -->
+			             <div class="col-sm-4 col-md-4 col-sm-pull-8">
+			                 <!-- . Agent Box -->
+			                 <div class="agent-box-card grey">
+			                     <div class="image-content">
+			                         <div class="image image-fill">
+			                             <!-- <img alt="Image Sample" src="resources/images/${svo.sellerImg }"> -->
+			                             <img alt="Image Sample" style="size: inherit;" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
+			                         </div>						
+			                     </div>
+			                     <div class="info-agent">
+			                         <div class="text" style="text-align:center">
+			                                 <b>주부님 별점:</b>
+			                                 <span class="star_rating">  <!-- 별점 표현 -->
+			                                       <c:forEach begin="1" end="${svo.sellerScore}">
+			                                          <a class="on">★</a>
+			                                     </c:forEach>
+			                                    </span>
+			                             <%-- <b>별점:${svo.sellerScore}</b> --%>
+			                         </div>
+			                         <ul class="contact">
+			                             <li><a class="icon" href="#"><i class="fa fa-facebook"></i></a></li>
+			                             <li><a class="icon" href="#"><i class="fa fa-google-plus"></i></a></li>
+			                             <li><a class="icon" href="#"><i class="fa fa-twitter"></i></a></li>
+			                             <li><a class="icon" href="#"><i class="fa fa-envelope-o"></i></a></li>
+			                             <li><a class="icon" href="agent-detail.html"><i class="fa fa-info-circle"></i></a></li>
+			                         </ul>
+			                     </div>
+			                 </div>
+			
+			             </div><!-- /.col-md-4 -->
+			         </div><!-- /.row -->
+			     </div><!-- col-md-9 -->
+			     <div class="col-md-2">  
+			
+			     <sec:authorize access="isAuthenticated()">
+			 <c:if test="${mvo.memId==svo.memId}">
+			         <div style="margin-bottom: 2px"> 
+			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="width: 70%;" >판매내역보기</a>
 						</div>
 						<a href="${pageContext.request.contextPath}/foodRegisterForm.do"
 							class="btn btn-default" style="width: 70%">음식 등록</a>

@@ -33,6 +33,11 @@ public class FoodServiceImpl implements FoodService {
 	public int getLeftQuantityByFoodSellNo(String foodSellNo) {
 		return sellDAO.getLeftQuantityByFoodSellNo(foodSellNo);
 	}
+
+	@Override
+	public List<FoodSellVO> findFoodSellList(String kw) {
+		return sellDAO.findFoodSellList(kw);
+	}
 	/////////////////// end윤주////////////////////////
 
 	/**

@@ -58,6 +58,11 @@ public class SellDAOImpl implements SellDAO {
 			return preQuantity - sumQuantity;
 		}
 	}
+
+	@Override
+	public List<FoodSellVO> findFoodSellList(String kw) {
+		return template.selectList("food.findFoodSellList", kw);
+	}
 	////////////////// end윤주//////////////////////////////
 
 }

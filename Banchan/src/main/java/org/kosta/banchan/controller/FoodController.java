@@ -107,9 +107,9 @@ public class FoodController {
 	 * @return
 	 */
 	@RequestMapping("getFoodSellDetail.do")
-	public String getFoodSellDetail(String foodSellNo, Model model) {
+	public String getFoodSellDetail(String foodSellNo,String pageNo, Model model) {
 		// 윤주
-		model.addAttribute("rlist", feedbackService.getReviewListByFoodSellNo(foodSellNo));
+		model.addAttribute("rlist", feedbackService.getReviewListByFoodSellNo(foodSellNo,pageNo));
 		model.addAttribute("leftQuantity", foodService.getLeftQuantityByFoodSellNo(foodSellNo));
 		model.addAttribute("foodSell", foodService.getFoodSellDetailByNo(foodSellNo));
 		
