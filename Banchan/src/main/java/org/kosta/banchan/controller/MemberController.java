@@ -428,8 +428,14 @@ public class MemberController {
 	@RequestMapping("searchByKeyword.do")
 	public ModelAndView SearchByKeyword(String kw) {
 		ModelAndView mv = new ModelAndView();
-		List<SellerVO> slist = memberService.findSellerList(kw);
-		List<FoodSellVO> fslist = foodeService.findFoodSellList(kw);
+		List<SellerVO> slist=null;
+		List<FoodSellVO> fslist = null;
+		if(kw=="" || kw=="null") {
+			
+		}else {
+			slist = memberService.findSellerList(kw);
+			fslist = foodeService.findFoodSellList(kw);
+		}
 		mv.addObject("slist",slist);
 		mv.addObject("fslist",fslist);
 		mv.setViewName("search/search_result.tiles");
