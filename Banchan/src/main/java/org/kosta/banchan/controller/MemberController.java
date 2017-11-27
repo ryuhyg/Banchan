@@ -107,11 +107,15 @@ public class MemberController {
 		MemberVO mvo = new MemberVO(id, name, question, answer);
 		int qnaCheck = memberService.findPasswordQnaCheck(mvo);
 		if (qnaCheck != 0) {
-			model.addAttribute("qnamvo", mvo);
-			return "redirect:member/findPasswordResult_ok.do";
+			return "redirect:findPasswordResult.do?id="+id;
 		} else {
 			return "member/findPasswordResult_fail";
 		}
+	}
+	@RequestMapping("findPasswordResult.do")
+	public String findPasswordResult(String id,Model model) {
+		model.addAttribute("memId", id);
+		return "member/findPasswordResult_ok.tiles";
 	}
 
 	/**
@@ -124,10 +128,9 @@ public class MemberController {
 	@RequestMapping(value = "resetPassword.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String resetPassword(String id, String password) {
-		System.out.println("id: " + id + "password: " + password);
 		MemberVO mvo = new MemberVO();
 		mvo.setMemId(id);
-		mvo.setPwAnswer(password);
+		mvo.setPw(password);
 		memberService.resetPassword(mvo);
 		return "ok";
 	}

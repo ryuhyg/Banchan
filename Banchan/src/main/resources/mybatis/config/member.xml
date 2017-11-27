@@ -308,7 +308,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="resetPassword" parameterType="memberVO">
 		update
-		ban_mem set pw=#{pw} where id=#{memId}
+		ban_mem set pw=#{pw} where mem_id=#{memId}
 	</update>
 	<!-- End 향걸 -->
 
