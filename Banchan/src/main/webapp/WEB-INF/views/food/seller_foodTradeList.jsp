@@ -18,11 +18,12 @@
 }
 
 .pagination a.active {
-    background-color: #4CAF50;
+    background-color: #000;
     color: white;
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
 
 table, th, td{
 	text-align: center;
@@ -156,7 +157,7 @@ tr{
 								&pageNo=${i}">${i}</a>
 								</c:when>
 								<c:otherwise>
-								<a href="#" >${i}</a>
+								<a href="#" class='active' >${i}</a>
 								</c:otherwise>
 								</c:choose>
 								&nbsp;
