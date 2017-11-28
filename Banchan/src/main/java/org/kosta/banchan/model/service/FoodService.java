@@ -41,4 +41,6 @@ public interface FoodService {
 
 	ListVO<FoodSellVO> getFoodSellInfoByMemId(String memId, String pageNo);
 
+	List<FoodVO> selectFoodTop3();
+
 }

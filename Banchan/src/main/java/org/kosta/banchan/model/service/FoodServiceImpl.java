@@ -132,5 +132,7 @@ public class FoodServiceImpl implements FoodService {
 	public void noimgUpdateRegFood(FoodVO fvo) {
 		foodDAO.noimgUpdateRegFood(fvo);
 	}
-
+	public List<FoodVO> selectFoodTop3(){
+		return foodDAO.selectFoodTop3();
+	}
 }

@@ -191,7 +191,7 @@ public class FoodController {
 	}
 
 	@RequestMapping("updateRegViewFood.do")
-	public String updateRegViewFood(String foodNo, Model model) {
+	public String updateRegViewFood(String foodNo, Model model, String memId) {
 		System.out.println("수정하기 전 foodNo:" + foodNo);
 		String message = "";
 		List<FoodVO> foodlist = foodService.selectRegFoodByNo(foodNo);
@@ -203,6 +203,7 @@ public class FoodController {
 			System.out.println("수정하기 전 food :" + beforeFood);
 
 			model.addAttribute("foodNo", foodNo);
+			model.addAttribute("memId", memId);
 			model.addAttribute("beFood", beforeFood);
 
 			model.addAttribute("message", "ok");
@@ -210,14 +211,15 @@ public class FoodController {
 
 		} else {
 			model.addAttribute("message", "fail");
+			model.addAttribute("memId", memId);
 			return "food/deleteRegFood_result.tiles";
 		}
 	}
 
 	@RequestMapping(value = "updateRegFood.do", method = RequestMethod.POST)
-	public String updateRegFood(String id, FoodVO fvo, HttpServletRequest request) {
+	public String updateRegFood(String memId, FoodVO fvo, HttpServletRequest request, Model model) {
 		System.out.println("수정하려는 fvo 값:" + fvo);
-		System.out.println("받은 아이디 값 : " + id);
+		System.out.println("받은 아이디 값 : " + memId);
 
 		System.out.println("이미지정보 확인하자" + request.getParameter("beforeFoodImg"));
 		/* 테스트 경로 */
@@ -246,7 +248,7 @@ public class FoodController {
 		System.out.println("updateImage:" + foodImage);
 		if (foodImage.equals("null") || foodImage.equals("")) {
 			System.out.println("이미지를 안줬을 경우 처리하는 부분");
-			fvo.setMemId(id);
+			fvo.setMemId(memId);
 			// fvo.setFoodScore(score);
 			fvo.setFoodNo(request.getParameter("foodNo"));
 			fvo.setFoodName(request.getParameter("foodname"));
@@ -254,9 +256,11 @@ public class FoodController {
 			fvo.setCategoryNo(request.getParameter("category"));
 			System.out.println("fvo2:" + fvo);
 			foodService.noimgUpdateRegFood(fvo);
-			return "redirect:updateRegFoodOk.do";
+			System.out.println("아이디 멀로 들어오니?"+memId);
+			
+			return "redirect:updateRegFoodOk.do?memId="+ memId;
 		} else {
-			fvo.setMemId(id);
+			fvo.setMemId(memId);
 			// fvo.setFoodScore(score);
 			fvo.setFoodNo(request.getParameter("foodNo"));
 			fvo.setFoodName(request.getParameter("foodname"));
@@ -265,13 +269,17 @@ public class FoodController {
 			fvo.setCategoryNo(request.getParameter("category"));
 			System.out.println("fvo2:" + fvo);
 			foodService.imgUpdateRegFood(fvo);
-
-			return "redirect:updateRegFoodOk.do";
+			
+			System.out.println("아이디 멀로 들어오니?"+memId);
+			return "redirect:updateRegFoodOk.do?memId="+memId;
 		}
 	}
 
 	@RequestMapping("updateRegFoodOk.do")
-	public String updateRegFoodOk() {
+	public String updateRegFoodOk(String memId, Model model) {
+		System.out.println("여긴 아이디가 뭐니? :"+memId);
+		model.addAttribute("memId", memId);
+		
 		return "food/updateRegFood_ok.tiles";
 	}
 	////////////////////////// 영민 end//////////////////////////////////////

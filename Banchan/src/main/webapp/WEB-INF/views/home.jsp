@@ -145,7 +145,7 @@
 				</c:forEach>
 					
 				</div>
-	<!-- 인기 음식 -->			
+	<!-- 인기 음식 -->
 				<div class="list-box-title">
 					<span><i class=""></i>인기 음식</span>
 				</div>

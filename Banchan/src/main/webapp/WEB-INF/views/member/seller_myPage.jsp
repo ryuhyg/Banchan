@@ -10,7 +10,7 @@
 	$(document).ready(function(){
 		$("button[name='update']").click(function(){
 			//alert($(this).val());
-			location.href="${pageContext.request.contextPath}/updateRegViewFood.do?foodNo="+$(this).val();
+			location.href="${pageContext.request.contextPath}/updateRegViewFood.do?foodNo="+$(this).val()+"&memId="+$("#sellerId").val();
 		});
 		$("button[name='delete']").click(function(){
 			location.href="${pageContext.request.contextPath}/deleteRegFood.do?foodNo="+$(this).val()+"&memId="+$("#sellerId").val();

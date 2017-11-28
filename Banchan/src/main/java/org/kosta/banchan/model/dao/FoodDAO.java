@@ -38,4 +38,6 @@ public interface FoodDAO {
 
 	int getAllFoodSellCountByMemId(String memId);
 
+	List<FoodVO> selectFoodTop3();
+
 }

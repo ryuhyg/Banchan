@@ -90,5 +90,8 @@ public class FoodDAOImpl implements FoodDAO {
 	public void noimgUpdateRegFood(FoodVO fvo) {
 		template.update("food.noimgUpdateRegFood", fvo);
 	}
+	public List<FoodVO> selectFoodTop3() {
+		return template.selectList("food.selectFoodTop3");
+	}
 
 }
