@@ -44,6 +44,8 @@ public interface FoodService {
 	////////우정 start /////////
 	ListVO<FoodSellVO> getFoodSellInfoByMemId(String memId, String pageNo);
 
+	List<FoodVO> selectFoodTop3();
+	
 	int deleteConfirmAjax(String foodSellNo);
 
 	List<FoodVO> getFoodListByMemId(String memId);
@@ -52,5 +54,6 @@ public interface FoodService {
 	////////우정 end /////////
 
 	void editFoodSell(FoodSellVO foodSellVO);
+
 
 }

@@ -21,7 +21,6 @@ public class HomeController {
 		System.out.println("home "+SecurityContextHolder.getContext().getAuthentication().getPrincipal());		
 		return "redirect:selectSellerTop3.do";
 	}
-	
 	@RequestMapping("{viewName}.do")
 	public String showView(@PathVariable String viewName){
 		//System.out.println("1.@PathVariable:"+viewName);

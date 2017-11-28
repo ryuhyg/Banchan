@@ -36,6 +36,8 @@ public interface FoodDAO {
 
 	int getAllFoodSellCountByMemId(String memId);
 
+	List<FoodVO> selectFoodTop3();
+
 	int deleteConfirmAjax(String foodSellNo);
 
 	void deleteFoodSell(String foodSellNo);

@@ -33,11 +33,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MemberController {
+public class MemberController { 
 	@Resource
 	private MemberService memberService;
 	@Resource
-	private FoodService foodeService;
+	private FoodService foodService;
 	@Resource
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -231,7 +231,10 @@ public class MemberController {
 	@RequestMapping("selectSellerTop3.do")
 	public String selectSellerTop3(Model model) {
 		List<SellerVO> list = memberService.selectSellerTop3();
+		/* [영민] 인기 Top3 음식  메서드*/
+		List<FoodVO> flist=foodService.selectFoodTop3();
 		model.addAttribute("list", list);
+		model.addAttribute("flist", flist);
 		return "home.tiles";
 	}
 
@@ -353,8 +356,8 @@ public class MemberController {
 	@RequestMapping("sellerPageInfo.do")
 	public String seller_myPage(Model model, String memId, String pageNo) {
 		SellerVO svo = memberService.selectSellerInfo(memId);
-		List<FoodVO> flist = foodeService.getFoodListByMemId(memId);
-		ListVO<FoodSellVO> fslist = foodeService.getFoodSellInfoByMemId(memId, pageNo);
+		List<FoodVO> flist = foodService.getFoodListByMemId(memId);
+		ListVO<FoodSellVO> fslist = foodService.getFoodSellInfoByMemId(memId, pageNo);
 		model.addAttribute("svo", svo);
 		model.addAttribute("flist", flist);
 		model.addAttribute("lvo", fslist);
@@ -364,7 +367,7 @@ public class MemberController {
 	@RequestMapping("sellerPagePagingAjax.do")
 	@ResponseBody
 	public ListVO<FoodSellVO> sellerPagePagingAjax(Model model, String memId, String pageNo) {
-		return foodeService.getFoodSellInfoByMemId(memId, pageNo);
+		return foodService.getFoodSellInfoByMemId(memId, pageNo);
 	}
 	//////////////////// end 우정 메서드 ////////////////////////////
 
@@ -434,7 +437,7 @@ public class MemberController {
 			
 		}else {
 			slist = memberService.findSellerList(kw);
-			fslist = foodeService.findFoodSellList(kw);
+			fslist = foodService.findFoodSellList(kw);
 		}
 		mv.addObject("keyword",kw);
 		mv.addObject("slist",slist);

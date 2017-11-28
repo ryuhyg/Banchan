@@ -150,7 +150,9 @@ public class FoodServiceImpl implements FoodService {
 	public void noimgUpdateRegFood(FoodVO fvo) {
 		foodDAO.noimgUpdateRegFood(fvo);
 	}
-
+	public List<FoodVO> selectFoodTop3(){
+		return foodDAO.selectFoodTop3();
+	}
 	/** [지원] 판매음식 수정
 	 * 
 	 */
@@ -158,5 +160,4 @@ public class FoodServiceImpl implements FoodService {
 	public void editFoodSell(FoodSellVO foodSellVO) {
 		sellDAO.editFoodSell(foodSellVO);
 	}
-
 }

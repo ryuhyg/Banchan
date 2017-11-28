@@ -3,7 +3,6 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sec:authentication var="mvo" property="principal" />
-
 <script>
 
 function getimagereview(html, $target) {
@@ -17,6 +16,32 @@ function getimagereview(html, $target) {
     }
 }
 </script>
+<style>
+.btn btn-default
+{
+width: 100px;
+position: absolute;
+top: 0px;
+background-color: #33BB00;
+color: #FFFFFF;
+border-style: solid;
+}
+ 
+.file_input_hidden
+{
+font-size: 45px;
+position: absolute;
+right: 0px;
+top: 0px;
+opacity: 0;
+ 
+filter: alpha(opacity=0);
+-ms-filter: "alpha(opacity=0)";
+-khtml-opacity: 0;
+-moz-opacity: 0;
+}
+
+</style>
 <section id="recent-list" style="margin-top: 150px;">
 <c:choose>
 <c:when test="${message!='ok'}">
@@ -27,11 +52,12 @@ function getimagereview(html, $target) {
 			</div>
 			<!--  음식 등록 페이지 -->
 			<div class="col-sm-10">
+			<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>음식등록페이지</h3>
 				<div class="blog-list blog-detail">
 					<form class="form-large grey-color" action="foodRegister.do" method="post" enctype="multipart/form-data">
+					<h2 class="title-form">
+						<!-- <i class="icon fa fa-cutlery" style="margin-right: 5px"></i> --><input type="text" name="foodname" placeholder="음식명"  required="required"></h2>
 					
-					<h3 class="title-form">
-						<i class="icon fa fa-comment" style="margin-right: 5px"></i><input type="text" name="foodname"></h3>
 						<input type="hidden" name="id" value="${mvo.memId}">
 						<sec:csrfInput/>
 						<%-- csrf 토큰 --%>
@@ -43,14 +69,15 @@ function getimagereview(html, $target) {
 								<option value="${categorylist.CATEGORY_NO }">${categorylist.CATEGORY_NAME}</option>
 								</c:forEach>
 						</select>
-						<div style="margin-top: 10px;">
-							<input type="file" name="uploadImage"  id="cma_file" accept="image/*" onchange="getimagereview(this,$('#cma_image'))" />
-							 <div id="cma_image"></div>
-						</div>
+						<input type="button" value="파일 선택" class="btn btn-default" style="margin-top: 8px" />
+						<div style="margin-top: 10px;" class="file_input_div">
+							<input type ="file"  class="file_input_hidden" value="파일 업로드" name="uploadImage"  id="cma_file" accept="image/*" onchange="getimagereview(this,$('#cma_image'))"/>
+							<div id="cma_image" style="margin-top: 10px;"></div>
+							 </div>
 						</div>
 						<div class="col-xs-7" style="float: right" class="row">
 							<textarea rows="10" cols="52" name="foodInfo" style="width: 100%; height: 100%;"  placeholder="내용을 입력하세요"></textarea>
-							<input type="submit" value="등록" >	
+							<input type="submit" class="btn btn-default" value="등록" >	
 						</div>
 						</div>
 						</form>
@@ -66,11 +93,11 @@ function getimagereview(html, $target) {
 			</div>
 			<!--  등록 음식 수정 페이지 -->
 				<div class="col-sm-10">
+				<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>음식수정페이지</h3>
 				<div class="blog-list blog-detail">
 					<form class="form-large grey-color" action="updateRegFood.do" method="post" enctype="multipart/form-data">
-					<h3 class="title-form">
-						<i class="icon fa fa-comment" style="margin-right: 5px"></i><input type="text" name="foodname" value="${beFood.foodName}"></h3>
-						<input type="hidden" name="id" value="${mvo.memId}">
+					<h2 class="title-form"><input type="text" name="foodname" value="${beFood.foodName}"></h2>
+						<input type="hidden" name="memId" value="${memId}">
 						<input type="hidden" name="foodNo" value="${foodNo}">
 						<sec:csrfInput/>
 						<%-- csrf 토큰 --%>
@@ -89,16 +116,17 @@ function getimagereview(html, $target) {
 									</c:choose>
 								</c:forEach>
 						</select>
-						<div style="margin-top: 10px;">
-							<input type="file" name="uploadImage" id="cma_file" accept="image/*" onchange="getimagereview(this,$('#cma_image'))" />
-							 <div id="cma_image">
-								 <img src="${pageContext.request.contextPath }/resources/images/${beFood.foodMainImg}" alt="" style="width:350px; height:200px;"/>
+						<input type="button" value="파일 선택" class="btn btn-default" style="margin-top: 8px" />
+						<div style="margin-top: 10px;" class="file_input_div">
+							<input type ="file"  class="file_input_hidden" value="파일 업로드" name="uploadImage"  id="cma_file" accept="image/*" onchange="getimagereview(this,$('#cma_image'))"/>
+							<div id="cma_image" style="margin-top: 10px;">
+								<img src="${pageContext.request.contextPath }/resources/images/${beFood.foodMainImg}" alt="" style="width:350px; height:200px;"/>
+							</div>
 							 </div>
 						</div>
-						</div>
-						<div class="col-xs-7" style="float: right" class="row">
+							<div class="col-xs-7" style="float: right" class="row">
 							<textarea rows="10" cols="52" name="foodInfo" style="width: 100%; height: 100%;">${beFood.foodDe}</textarea>
-							<input type="submit" value="수정" >	
+							<input type="submit" class="btn btn-default" value="수정" >	
 						</div>
 						</div>
 						</form>
