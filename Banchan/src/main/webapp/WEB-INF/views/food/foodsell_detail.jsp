@@ -225,7 +225,7 @@
 						${r.score }
 						</td>
 						<td>${r.revContent }</td>
-						<td>작성자 넣어야댐</td>
+						<td>${r.memId }</td>
 						<td>${r.revPostdate }</td>
 					</tr>
 				</c:forEach>

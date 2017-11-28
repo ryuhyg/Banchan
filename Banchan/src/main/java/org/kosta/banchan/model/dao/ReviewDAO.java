@@ -15,4 +15,9 @@ public interface ReviewDAO {
 	int getAllReviewCountByFoodSellNo(String foodSellNo);
 	//////////// end윤주/////////////////////
 
+	
+	///////////// start 우정//////////////
+	void updateFoodScore(String foodNo);
+	///////////// end 우정 //////////////
+
 }
