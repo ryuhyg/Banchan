@@ -33,7 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MemberController {
+public class MemberController { 
 	@Resource
 	private MemberService memberService;
 	@Resource
