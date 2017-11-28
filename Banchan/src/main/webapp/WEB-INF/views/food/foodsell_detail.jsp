@@ -36,12 +36,42 @@
 		
 	/*판매 음식 삭제하기*/
 	$("#deleteFood").click(function() {
-		alert(1);
-	}); 
-	/* $("button[name='deleteF']").click(function() {
-		alert(1);
-	}) */
-		
+		if(deleteFlag=confirm("삭제하시겠습니까?")){
+			$.ajax({
+	    		type:"get",
+	        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+	        	data:"foodSellNo="+$("#foodSellNo").val(),
+	        	success:function(data){
+	        		if(data>1)
+	        			alert("판매중인 상품이 있어 삭제할 수 없습니다.");
+	        		else{
+	        			alert("상품이 삭제되었습니다.");
+	        			location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+$("#foodSellNo").val()+"&sellerId="+$("#sellerId").val();
+	        		}
+	        	} 
+	    		
+			}); //ajax	
+		}
+	}); //delFood click
+	
+	$("#editFoodSell").click(function() {
+			if(deleteFlag=confirm("수정하시겠습니까?")){
+				$.ajax({
+		    		type:"get",
+		        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+		        	data:"foodSellNo="+$("#foodSellNo").val(),
+		        	success:function(data){
+		        		if(data>1){
+		        			alert("판매중인 상품이 있어 수정할 수 없습니다.");
+		        		}
+		        		else{
+							location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val();
+		        		}
+		        	} 
+				}); //ajax	
+			}
+		}); //click
+	
 	}); //ready
 	
 	
@@ -73,7 +103,7 @@
 				<div class="agent-box-card grey">
 					<div class="image-content">
 						<div class="image image-fill">
-							<img alt="Image Sample" src="${foodSell.foodMainImg}">
+							<img alt="Image Sample" src="${pageContext.request.contextPath}/resources/images/${foodSell.foodMainImg}">
 						</div>						
 					</div>
 				</div>
@@ -129,9 +159,13 @@
 				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
 				      </div>
 						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
- 						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
- 						<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
+						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
+					
+						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
+ 							<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
  						</sec:authorize>
+				
+ 						
 				      	<label class="control-label" for="거래가격">거래가격:
 						<span id="orderPrice"></span>
 						</label>
@@ -139,15 +173,18 @@
 					</div> <!-- row -->
  						
  						<div class="row" align="center">
- 						<c:choose>
- 						<c:when test="${foodSell.memId!=mvo.memId }">
-							<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
- 						</c:when>
-						<c:otherwise>
-							<input type="button"  class="btn btn-default" style="margin-top: 20px;"  value="수정하기">
-							<input type="button"  class="btn btn-default" name="deleteF" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
-						</c:otherwise> 						
- 						</c:choose>
+ 						<sec:authorize access="isAuthenticated()">
+	 						<c:choose>
+	 						<c:when test="${foodSell.memId!=mvo.memId }">
+								<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+	 						</c:when>
+							<c:otherwise>
+								<input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
+								<input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
+								
+							</c:otherwise> 						
+	 						</c:choose>
+ 						</sec:authorize>
 						</div>
 					</form>
 				</div>

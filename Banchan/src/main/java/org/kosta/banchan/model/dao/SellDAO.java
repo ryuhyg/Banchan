@@ -16,5 +16,7 @@ public interface SellDAO {
 	void registerFoodSell(FoodSellVO foodSellVO);
 
 	List<FoodSellVO> getFoodSellInfoByMemId(String memId);
+	
+	void editFoodSell(FoodSellVO foodSellVO);
 
 }

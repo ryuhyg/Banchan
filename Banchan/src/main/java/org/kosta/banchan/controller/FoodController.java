@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -64,13 +65,27 @@ public class FoodController {
 	}
 	///////////////////////// end 윤주///////////////////////////////////
 
+	///////////////////////// start 우정///////////////////////////////////
 	@RequestMapping("registerFoodView.do")
 	public String registerFoodView(String foodNo, Model model) {
 		FoodVO fvo = foodService.getFoodByNo(foodNo);
-		System.out.println("이거야!!" + fvo.getFoodMainImg());
 		model.addAttribute("fvo", fvo);
 		return "food/register_foodsell_view.tiles";
 	}
+	@RequestMapping("deleteConfirmAjax.do")
+	@ResponseBody
+	public int deleteConfirmAjax(String foodSellNo) {
+		return foodService.deleteConfirmAjax(foodSellNo);
+	}
+
+	@RequestMapping("deleteFoodSell.do")
+	public String deleteFoodSell(String foodSellNo,String sellerId, Model model) {
+		foodService.deleteFoodSell(foodSellNo);
+		return "redirect:sellerPageInfo.do?memId="+sellerId+"&pageNo=1";
+	}
+	///////////////////////// end 우정///////////////////////////////////
+
+	///////////////////////// start 지원///////////////////////////////////
 
 	/**
 	 * [지원] 판매음식등록 등록음식 중 판매할 음식을 등록한다.
@@ -131,7 +146,31 @@ public class FoodController {
 		///// End최근 클릭 리스트 코드 추가 광태
 		return "food/foodsell_detail.tiles";
 	}
-
+	
+	@RequestMapping("editFoodSellView.do")
+	public String editFoodSellView(String foodSellNo,Model model) {
+		model.addAttribute("foodSell",foodService.getFoodSellDetailByNo(foodSellNo));
+		return "food/editFoodSellView.tiles";
+	}
+	
+	@RequestMapping(value="editFoodSell.do", method=RequestMethod.POST)
+	public String editFoodSell(FoodSellVO foodSellVO) {
+		foodService.editFoodSell(foodSellVO);
+		return "redirect:editFoodSellOk.do?foodSellNo=" + foodSellVO.getFoodSellNo();
+	}
+	
+	@RequestMapping("editFoodSellOk.do")
+	public String editFoodSellOk(String foodSellNo,Model model) {
+		model.addAttribute("foodSellNo", foodSellNo);
+		return "food/editFoodSell_ok.tiles";
+	}
+	
+	
+	
+	
+	///////////////////// end 지원 ///////////////////////////////////
+	
+	
 	///////////////////// 영민 start ///////////////////////////////////
 	@RequestMapping("foodRegisterForm.do")
 	public String foodRegisterForm(Model model) {

@@ -14,7 +14,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- End 광태 -->
 
 	<!-- Start 우정 -->
-
+	<select id="deleteConfirmAjax" parameterType="string" resultType="int">
+		select count(*) from TRADE where food_sell_no=#{value}
+	</select>
 	<select id="getFoodListByMemId" parameterType="string"
 		resultType="foodVO">
 		<include refid="selectFood"></include>
@@ -45,12 +47,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where fs.rnum
 		between #{startRowNumber} and #{endRowNumber}
 	</select>
-	<select id="getAllFoodSellCountByMemId" parameterType="string"
-		resultType="int">
+	<select id="getAllFoodSellCountByMemId" parameterType="string" resultType="int">
 		select count(*)
 		from (select food_no from food where
 		mem_id=#{value}) f, food_sell s
 		where f.food_no=s.food_no and s.close_date>sysdate
+	</select>
+	<select id="deleteFoodSell" parameterType="string" >
+		delete from FOOD_SELL where food_sell_no=#{value}
 	</select>
 	<!-- End 우정 -->
 
@@ -77,8 +81,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<![CDATA[
 		select f.food_no, f.food_name, f.food_de, f.food_score,
 		f.food_main_img, f.food_postdate, f.category_no, f.mem_id,
-		fs.food_sell_no, to_char(fs.tr_date,'yyyy-mm-dd'), 
-		to_char(fs.close_date,'yyyy-mm-dd'), fs.loc, fs.price,
+		fs.food_sell_no, to_char(fs.tr_date,'YYYY-MM-DD') as tr_date, 
+		to_char(fs.close_date,'YYYY-MM-DD') as close_date, fs.loc, fs.price,
 		fs.pre_quantity, fs.sell_postdate, fs.unit, fs.sell_detail
 		from food f, food_sell fs
 		where food_sell_no=#{value} and f.food_no=fs.food_no
@@ -93,7 +97,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{foodSellNo}, to_date(#{trDate},'YYYY-MM-DD'), to_date(#{closeDate},'YYYY-MM-DD'),
 		#{loc}, #{price}, #{preQuantity}, sysdate, #{unit}, #{sellDetail}, #{foodNo})
 	</insert>
-
+	<!-- 판매음식정보 수정 -->
+	<update id="editFoodSell" parameterType="foodSellVO">
+		update food_sell set tr_date=to_date(#{trDate},'YYYY-MM-DD'), close_date=to_date(#{closeDate},'YYYY-MM-DD'),
+		loc=#{loc}, price=#{price}, pre_quantity=#{preQuantity}, unit=#{unit}, sell_detail=#{sellDetail}
+		where food_sell_no=#{foodSellNo}
+	</update>
 
 	<!-- End 지원 -->
 

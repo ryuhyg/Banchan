@@ -78,10 +78,15 @@ public class FoodServiceImpl implements FoodService {
 	 */
 	@Override
 	public List<FoodVO> getFoodListByMemId(String memId) {
-		// int TotalFoodCount= foodDAO.getTotalFoodCountByMemId(memId);
 		return foodDAO.getFoodListByMemId(memId);
 	}
-
+	/**
+	 * [우정] 판매음식있는지 check
+	 */
+	@Override
+	public int deleteConfirmAjax(String foodSellNo) {
+		return foodDAO.deleteConfirmAjax(foodSellNo);
+	}
 	/**
 	 * [우정] 판매자페이지에서 판매음식리스트 조회 
 	 * 판매가페이지에서 판매자가 등록한 판매 음식을 조회한다.
@@ -102,6 +107,14 @@ public class FoodServiceImpl implements FoodService {
 		System.out.println(foodDAO.getFoodSellInfoByMemId(paramMap));
 
 		return new ListVO<FoodSellVO>(foodDAO.getFoodSellInfoByMemId(paramMap), pagingBean);
+	}
+	/**
+	 * [우정] 판매자페이지에서 판매음식리스트 조회 
+	 * 판매가페이지에서 판매자가 등록한 판매 음식을 조회한다.
+	 */
+	@Override
+	public void deleteFoodSell(String foodSellNo) {
+			foodDAO.deleteFoodSell(foodSellNo);
 	}
 
 	/*
@@ -136,6 +149,14 @@ public class FoodServiceImpl implements FoodService {
 
 	public void noimgUpdateRegFood(FoodVO fvo) {
 		foodDAO.noimgUpdateRegFood(fvo);
+	}
+
+	/** [지원] 판매음식 수정
+	 * 
+	 */
+	@Override
+	public void editFoodSell(FoodSellVO foodSellVO) {
+		sellDAO.editFoodSell(foodSellVO);
 	}
 
 }
