@@ -452,7 +452,7 @@ public class MemberController {
 		if(kw=="" || kw=="null") {
 			
 		}else {
-			fslist = foodeService.findFoodSellList(kw);
+			fslist = foodService.findFoodSellList(kw);
 		}
 		mv.addObject("keyword",kw);
 		mv.addObject("fslist",fslist);
