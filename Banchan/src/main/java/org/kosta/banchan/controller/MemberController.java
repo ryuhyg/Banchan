@@ -358,9 +358,11 @@ public class MemberController {
 		SellerVO svo = memberService.selectSellerInfo(memId);
 		List<FoodVO> flist = foodService.getFoodListByMemId(memId);
 		ListVO<FoodSellVO> fslist = foodService.getFoodSellInfoByMemId(memId, pageNo);
+		int totalFoodSellCount=foodService.totalFoodSellCountByMemId(memId);
 		model.addAttribute("svo", svo);
 		model.addAttribute("flist", flist);
 		model.addAttribute("lvo", fslist);
+		model.addAttribute("foodSellCount",totalFoodSellCount);
 		return "member/seller_myPage.tiles";
 	}
 

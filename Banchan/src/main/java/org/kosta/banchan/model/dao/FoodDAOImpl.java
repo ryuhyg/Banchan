@@ -64,6 +64,10 @@ public class FoodDAOImpl implements FoodDAO {
 		template.delete("deleteFoodSell",foodSellNo);
 	}
 
+	@Override
+	public int totalFoodSellCountByMemId(String memId) {
+		return template.selectOne("totalFoodSellCountByMemId",memId);
+	}
 
 	/////////////////// end 우정//////////////////////////////
 

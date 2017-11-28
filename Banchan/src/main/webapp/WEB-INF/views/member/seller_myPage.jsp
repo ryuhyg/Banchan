@@ -68,8 +68,8 @@
 																		+ data.list[i].foodName
 																		+ "</h4></a>";
 																sellInfo += "<span class='description' style='color:black;font-size:12px;'>";
-																sellInfo += "<i class='fa fa-ticket' style='font-weight: bold'> 남은 수량:</i>"
-																		+ data.list[i].price
+																sellInfo += "<i class='fa fa-krw' style='font-weight: bold'> 가격:&nbsp;</i>"
+																		+ data.list[i].price+" &nbsp; &nbsp;(단위:"+data.list[i].unit+")"
 																		+ "<br>";
 																sellInfo += "<i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜:</i>"
 																		+ data.list[i].trDate
@@ -93,7 +93,7 @@
 																sellInfo += "</div>";
 																sellInfo += "<div class='col-sm-4 col-md-4 col-sm-pull-8' style='padding-top: 15px;' >";
 																sellInfo += "<div class='tab2img' >";
-																sellInfo += "<a style='size: inherit;' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
+																sellInfo += "<a style='width:100%;height:100%;' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
 																		+ data.list[i].foodSellNo
 																		+ "'><img alt='Sample images' width='250px' height='150px' src='${pageContext.request.contextPath}/resources/images/"+data.list[i].foodMainImg+"'></a>";
 																sellInfo += "</div>";
@@ -131,7 +131,6 @@
 																info += "<a id="+endPageOfPageGroupPlus+">&raquo;</a>";
 															}
 															info += "</div>";
-
 															$("#paginationAjax")
 																	.html(info);
 														}
@@ -176,8 +175,8 @@
 																			+ data.list[i].foodName
 																			+ "</h4></a>";
 																	sellInfo += "<span class='description' style='color:black;font-size:12px;'>";
-																	sellInfo += "<i class='fa fa-ticket' style='font-weight: bold'> 남은 수량:</i>"
-																			+ data.list[i].price
+																	sellInfo += "<i class='fa fa-krw' style='font-weight: bold'> 가격: </i>"
+																			+ data.list[i].price+"  (단위:"+data.list[i].unit+")"
 																			+ "<br>";
 																	sellInfo += "<i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜:</i>"
 																			+ data.list[i].trDate
@@ -201,7 +200,7 @@
 																	sellInfo += "</div>";
 																	sellInfo += "<div class='col-sm-4 col-md-4 col-sm-pull-8' style='padding-top: 15px;' >";
 																	sellInfo += "<div class='tab2img' >";
-																	sellInfo += "<a style='size: inherit;' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
+																	sellInfo += "<a style='width:100%;height:100%;' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
 																			+ data.list[i].foodSellNo
 																			+ "'><img alt='Sample images'  width='250px' height='150px' src='${pageContext.request.contextPath}/resources/images/"+data.list[i].foodMainImg+"'></a>";
 																	sellInfo += "</div>";
@@ -411,12 +410,12 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			                     <div class="image-content">
 			                         <div class="image image-fill">
 			                             <!-- <img alt="Image Sample" src="resources/images/${svo.sellerImg }"> -->
-			                             <img alt="Image Sample" style="size: inherit;" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
+			                             <img alt="Image Sample" style="width:270px;height:250px" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
 			                         </div>						
 			                     </div>
 			                     <div class="info-agent">
 			                         <div class="text" style="text-align:center">
-			                                 <b>주부님 별점:</b>
+			                               		 판매자 별점:<b>   ${svo.sellerScore}</b><br>
 			                                 <span class="star_rating">  <!-- 별점 표현 -->
 			                                       <c:forEach begin="1" end="${svo.sellerScore}">
 			                                          <a class="on">★</a>
@@ -456,8 +455,8 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 
 		<div id="tabcontainer">
 			<ul class="tab">
-				<li class="active"><a href="#tab1">내음식</a></li>
-				<li><a href="#tab2" id="sellFood">판매중 음식</a></li>
+				<li class="active"><a href="#tab1">등록 음식</a></li>
+				<li><a href="#tab2" id="sellFood">판매중 음식 <b>(</b>${foodSellCount}<b>)</b></a></li>
 			</ul>
 			<div class="tab_container">
 
@@ -474,7 +473,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 											<%-- 	<input type="hidden" id="foodNo" value="${food.foodNo }"> --%>
 
 											<span class="cover"></span> <img alt="Sample images"
-											style="size: inherit;"
+											style="width:100%;height:100%;"
 											src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}">
 											<h3 class="title">${food.foodName}</h3>
 										</a> <span class="description">${food.foodDe}</span>
@@ -527,8 +526,6 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 						<div class="col-md-9">
 							<div id="foodSellInfo"></div>
 							<!-- 여기서 부터 ajax 시작 -->
-
-
 							<!-- 여기가 ajax 끝 -->
 						</div>
 						<div class="col-md-12">
@@ -545,7 +542,6 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			<!-- tab_container -->
 		</div>
 		<!-- tabcontainer -->
-
 	</div>
 	<!-- ./container -->
 </section>

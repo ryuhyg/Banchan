@@ -114,6 +114,14 @@ public class FoodServiceImpl implements FoodService {
 	public void deleteFoodSell(String foodSellNo) {
 			foodDAO.deleteFoodSell(foodSellNo);
 	}
+	
+	/**
+	 * [우정] 판매자의 판매중 음식 숫자를 보여준다
+	 */
+	@Override
+	public int totalFoodSellCountByMemId(String memId) {
+		return foodDAO.totalFoodSellCountByMemId(memId);
+	}
 
 	/*
 	 * [영민] 카테고리 받아와서 음식등록
