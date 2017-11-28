@@ -231,7 +231,9 @@ public class MemberController {
 	@RequestMapping("selectSellerTop3.do")
 	public String selectSellerTop3(Model model) {
 		List<SellerVO> list = memberService.selectSellerTop3();
+		/* [영민] 인기 Top3 음식  메서드*/
 		List<FoodVO> flist=foodService.selectFoodTop3();
+		System.out.println("인기 top3 음식이 뭐니? :"+flist);
 		model.addAttribute("list", list);
 		model.addAttribute("flist", flist);
 		return "home.tiles";
@@ -436,7 +438,7 @@ public class MemberController {
 			
 		}else {
 			slist = memberService.findSellerList(kw);
-			fslist = foodeService.findFoodSellList(kw);
+			fslist = foodService.findFoodSellList(kw);
 		}
 		mv.addObject("slist",slist);
 		mv.addObject("fslist",fslist);

@@ -149,10 +149,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap type="foodVO" id="memberNameRM">
 		<result property="sellerVO.memName" column="mem_name" />
+		<result property="sellerVO.memId" column="mem_id"/>
 	</resultMap>
 	<select id="selectFoodTop3" resultMap="memberNameRM" parameterType="string">
 		<![CDATA[
-		SELECT bm.mem_name, f.food_no, f.food_name, f.food_de, f.food_score, f.food_main_img, f.rank from
+		SELECT bm.mem_name, bm.mem_id, f.food_no, f.food_name, f.food_de, f.food_score, f.food_main_img, f.rank from
 		(select food_no, food_name, mem_id, food_de, food_score, food_main_img, rank() over (order by food_score desc) as rank 
 		FROM food) f, ban_mem bm, seller s
 		WHERE bm.mem_id=s.mem_id and s.mem_id=f.mem_id and rank<=3]]>

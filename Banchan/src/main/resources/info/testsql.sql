@@ -34,16 +34,16 @@ select * from food where mem_id='aaaa1'
 
 update food set food_score='2' where food_no='1081' and mem_id='uuuu1'
 update food set food_score='3' where food_no='1082' and mem_id='uuuu1'
-update food set food_score='18' where food_no='1084' and mem_id='uuuu1'
-update food set food_score='10' where food_no='1091' and mem_id='uuuu1'
+update food set food_score='4' where food_no='1084' and mem_id='uuuu1'
+update food set food_score='1' where food_no='1091' and mem_id='uuuu1'
 
-update food set food_score='20' where food_no='1079' and mem_id='aaaa1'
+update food set food_score='5' where food_no='1079' and mem_id='aaaa1'
+
+select * from ban_mem;
 
 		SELECT bm.mem_name, f.food_name, f.food_de, f.food_score, f.food_main_img
 		FROM ban_mem bm, seller s, food f, food_sell fs
 		WHERE bm.mem_id=s.mem_id and s.mem_id=f.mem_id and f.food_no=fs.food_no and bm.mem_id='uuuu1' order by food_score desc;
-		
-		
 		
 		
 		select bm.mem_name, f.food_no, f.food_name, f.food_de, f.food_score, f.food_main_img, f.rank from
