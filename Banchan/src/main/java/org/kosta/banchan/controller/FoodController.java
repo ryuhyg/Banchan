@@ -149,7 +149,7 @@ public class FoodController {
 		return "food/foodsell_detail.tiles";
 	}
 	
-	@RequestMapping("editFoodSellView.do")
+	@RequestMapping("editFoodSellView.do") 
 	public String editFoodSellView(String foodSellNo,Model model) {
 		model.addAttribute("foodSell",foodService.getFoodSellDetailByNo(foodSellNo));
 		return "food/editFoodSellView.tiles";
