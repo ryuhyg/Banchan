@@ -25,7 +25,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 		template.update("feedback.updateSellerScore", memId);
 	}
 	@Override
-	public List<ReviewVO> getReviewListByFoodSellNo(HashMap<String, Integer> paramMap) {
+	public List<ReviewVO> getReviewListByFoodSellNo(HashMap<String, String> paramMap) {
 		return template.selectList("feedback.getReviewListByFoodSellNo", paramMap);
 
 	}

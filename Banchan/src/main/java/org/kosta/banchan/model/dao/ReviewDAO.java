@@ -11,7 +11,7 @@ public interface ReviewDAO {
 
 	void updateSellerScore(String memId);
 
-	List<ReviewVO> getReviewListByFoodSellNo(HashMap<String, Integer> paramMap);
+	List<ReviewVO> getReviewListByFoodSellNo(HashMap<String, String> paramMap);
 	int getAllReviewCountByFoodSellNo(String foodSellNo);
 	//////////// end윤주/////////////////////
 

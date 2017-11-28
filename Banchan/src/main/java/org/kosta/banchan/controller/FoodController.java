@@ -100,7 +100,6 @@ public class FoodController {
 		model.addAttribute("leftQuantity", foodService.getLeftQuantityByFoodSellNo(foodSellNo));
 		model.addAttribute("foodSell", foodService.getFoodSellDetailByNo(foodSellNo));
 		
-		
 		///// Start 최근 클릭 리스트 코드 추가 광태
 		System.out.println("servletContext.getAttribut");
 		System.out.println(servletContext.getAttribute("clickList"));

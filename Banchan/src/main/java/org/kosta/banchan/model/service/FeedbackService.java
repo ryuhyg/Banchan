@@ -7,6 +7,6 @@ public interface FeedbackService {
 	///////////// start윤주////////////////
 	void reviewRegister(ReviewVO rvo, String memId);
 
-	ListVO<ReviewVO> getReviewListByFoodSellNo(String foodSellNo,String nowPage);
+	ListVO<ReviewVO> getReviewListByFoodSellNo(String foodSellNo,String pageNo);
 	/////////////// end윤주/////////////////
 }

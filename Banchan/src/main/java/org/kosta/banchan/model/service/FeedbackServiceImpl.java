@@ -36,15 +36,15 @@ public class FeedbackServiceImpl implements FeedbackService {
 	public ListVO<ReviewVO> getReviewListByFoodSellNo(String foodSellNo, String pageNo) {
 		int totalCount = reviewDAO.getAllReviewCountByFoodSellNo(foodSellNo);
 		PagingBean pagingBean = null;
-		HashMap<String, Integer> paramMap = new HashMap<String, Integer>();
+		HashMap<String, String> paramMap = new HashMap<String, String>();
 		if (pageNo == null)
 			pagingBean = new PagingBean(totalCount);
 		else
 			pagingBean = new PagingBean(totalCount, Integer.parseInt(pageNo));
 
-		paramMap.put("startRowNumber", pagingBean.getStartRowNumber());
-		paramMap.put("endRowNumber", pagingBean.getEndRowNumber());
-		paramMap.put("foodSellNo", Integer.parseInt(foodSellNo));
+		paramMap.put("startRowNumber",String.valueOf(pagingBean.getStartRowNumber()));
+		paramMap.put("endRowNumber", String.valueOf(pagingBean.getEndRowNumber()));
+		paramMap.put("foodSellNo", foodSellNo);
 
 		// start,end,foodSell no를 저장한 map를 param으로
 		ListVO<ReviewVO> lvo = new ListVO<ReviewVO>(reviewDAO.getReviewListByFoodSellNo(paramMap), pagingBean);
