@@ -111,7 +111,7 @@
 <!-- 인기 주부님 목록 -->
 			<div class="container">
 				<div class="list-box-title">
-					<span><i class=""></i>인기 주부님</span>
+					<span><i class=""></i>인기 주부님 TOP 3</span>
 				</div>
 				<div class="row"> 
 				<!-- 주부님 리스트 -->
@@ -145,7 +145,7 @@
 				</c:forEach>
 					
 				</div>
-	<!-- 인기 음식 -->			
+	<!-- 인기 음식 -->
 				<div class="list-box-title">
 					<span><i class=""></i>인기 음식</span>
 				</div>

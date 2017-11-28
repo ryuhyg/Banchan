@@ -10,10 +10,13 @@ public interface SellDAO {
 
 	//////////// start윤주////////////
 	int getLeftQuantityByFoodSellNo(String foodSellNo);
+	List<FoodSellVO> findFoodSellList(String kw);
 	//////////// end윤주///////////////
 
 	void registerFoodSell(FoodSellVO foodSellVO);
 
 	List<FoodSellVO> getFoodSellInfoByMemId(String memId);
+	
+	void editFoodSell(FoodSellVO foodSellVO);
 
 }

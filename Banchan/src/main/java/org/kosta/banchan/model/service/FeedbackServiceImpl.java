@@ -1,12 +1,14 @@
 package org.kosta.banchan.model.service;
 
-import java.util.List;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.dao.AnswerDAO;
 import org.kosta.banchan.model.dao.QuestionDAO;
 import org.kosta.banchan.model.dao.ReviewDAO;
+import org.kosta.banchan.model.vo.ListVO;
+import org.kosta.banchan.model.vo.PagingBean;
 import org.kosta.banchan.model.vo.ReviewVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,10 +32,23 @@ public class FeedbackServiceImpl implements FeedbackService {
 		reviewDAO.reviewRegister(rvo);
 		reviewDAO.updateSellerScore(memId);
 	}
-
 	@Override
-	public List<ReviewVO> getReviewListByFoodSellNo(String foodSellNo) {
-		return reviewDAO.getReviewListByFoodSellNo(foodSellNo);
+	public ListVO<ReviewVO> getReviewListByFoodSellNo(String foodSellNo, String pageNo) {
+		int totalCount = reviewDAO.getAllReviewCountByFoodSellNo(foodSellNo);
+		PagingBean pagingBean = null;
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		if (pageNo == null)
+			pagingBean = new PagingBean(totalCount);
+		else
+			pagingBean = new PagingBean(totalCount, Integer.parseInt(pageNo));
+
+		paramMap.put("startRowNumber",String.valueOf(pagingBean.getStartRowNumber()));
+		paramMap.put("endRowNumber", String.valueOf(pagingBean.getEndRowNumber()));
+		paramMap.put("foodSellNo", foodSellNo);
+
+		// start,end,foodSell no를 저장한 map를 param으로
+		ListVO<ReviewVO> lvo = new ListVO<ReviewVO>(reviewDAO.getReviewListByFoodSellNo(paramMap), pagingBean);
+		return lvo;
 	}
 	////////////////// end윤주///////////////////////////
 	

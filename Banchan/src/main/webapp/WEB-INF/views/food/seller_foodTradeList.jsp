@@ -23,7 +23,48 @@
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+table, th, td{
+	text-align: center;
+}
+tr{
+	display: none;
+}
+.tr_visible {
+	display: table-row;
+}
 </style>  
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		/* 해당 거래내역 클릭시 구매자 상세정보 확인가능 */
+		$("#tradeList .tr_visible").click(function() {
+			var trade=$(this);
+			var buyerId=trade.children().eq(1).text();
+			$.ajax({
+               type:"get",
+               url:"${pageContext.request.contextPath}/getBuyerInfoOnAjax.do",
+               data: "id="+buyerId,
+               success:function(data){ //data로 서버의 응답정보가 할당 
+      			   trade.next().find("#buyerId").text(data.memId);	
+      			   trade.next().find("#buyerName").text(data.memName);	
+      			   trade.next().find("#buyerTel").text(data.tel);	
+      			   trade.next().find("#buyerAddress").text(data.addressVO.addressAPI);	
+            	   trade.next().toggle();
+               }
+            }); //success 
+		});
+		
+		/* /* 거래완료확인 */
+		$("button[name = 'completeTrade']").click(function() {
+			if(confirm("거래완료 확인을 하시겠습니까?")==true){
+				location.href="${pageContext.request.contextPath}/completeTrade.do?tradeNo="+$(this).val();
+			} else{
+				return false;
+			}
+		}); //click */
+	}); //ready
+</script>
   
     
 <section id="recent-list" class="agency" style="margin-top: 150px">
@@ -68,10 +109,10 @@
 			
 		</div> <!-- row -->
 		<div class="row">
-				<table class="table table-hover">
+				<table class="table table-hover" id="tradeList" style="text-align: center;font-size: 12px;">
 					<c:choose>
 					<c:when test="${!empty lvo.list}">
-					<tr>
+					<tr class="tr_visible">
 						<th>거래번호</th>
 						<th>구매자명</th>
 						<th>거래수량</th>
@@ -79,12 +120,18 @@
 						<th>거래상태</th>
 					</tr>
 					<c:forEach items="${lvo.list}" var="trade">
-					<tr>
+					<tr class="tr_visible">
 						<td>${trade.trNo}</td>
 						<td>${trade.memId}</td>
 						<td>${trade.trQuantity}</td>
 						<td>${trade.trReqDate}</td>
 						<td>${trade.trStatus}</td>
+					</tr>
+					<tr>
+						<td colspan="1">구매자 아이디: <span id="buyerId"></span> </td>
+						<td colspan="1" >구매자 이름: <span id="buyerName"></span></td>
+						<td colspan="1">구매자 연락처: <span id="buyerTel"></span></td>
+						<td colspan="2">구매자 주소: <span id="buyerAddress"></span></td>
 					</tr>
 					</c:forEach>
 					</c:when>

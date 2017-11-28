@@ -14,23 +14,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- End 광태 -->
 
 	<!-- Start 우정 -->
-
+	<select id="deleteConfirmAjax" parameterType="string" resultType="int">
+		select count(*) from TRADE where food_sell_no=#{value}
+	</select>
 	<select id="getFoodListByMemId" parameterType="string"
 		resultType="foodVO">
 		<include refid="selectFood"></include>
-		where mem_id=#{value}
+		where mem_id=#{value} order by food_postdate desc
 	</select>
 	<select id="getTotalFoodCountByMemId" parameterType="string"
 		resultType="int">
 		select count(*) from food where mem_id=#{value}
 	</select>
 	<!-- 판매자의 판매목록 -->
-	<select id="getFoodSellInfoByMemId" parameterType="map"
-		resultType="foodSellVO">
+	<select id="getFoodSellInfoByMemId" parameterType="map" 
+		resultType= "foodSellVO">
 		select
 		fs.rnum,fs.food_sell_no,fs.tr_date,fs.close_date,fs.price,fs.pre_quantity,
 		fs.sell_postdate,fs.food_no,fs.food_name,fs.food_main_img,fs.category_no
-		from(select row_number() over(order by s.food_sell_no desc) as
+		from(select row_number() over(order by s.tr_date desc) as
 		rnum,s.food_sell_no,s.tr_date,s.close_date,
 		s.price,s.pre_quantity,s.sell_postdate,
 		f.food_no,f.food_name,f.food_main_img,f.category_no
@@ -45,12 +47,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where fs.rnum
 		between #{startRowNumber} and #{endRowNumber}
 	</select>
-	<select id="getAllFoodSellCountByMemId" parameterType="string"
-		resultType="int">
+	<select id="getAllFoodSellCountByMemId" parameterType="string" resultType="int">
 		select count(*)
 		from (select food_no from food where
 		mem_id=#{value}) f, food_sell s
 		where f.food_no=s.food_no and s.close_date>sysdate
+	</select>
+	<select id="deleteFoodSell" parameterType="string" >
+		delete from FOOD_SELL where food_sell_no=#{value}
 	</select>
 	<!-- End 우정 -->
 
@@ -73,29 +77,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where food_no=#{value}
 	</select>
 	<!-- 판매음식번호로 판매음식정보 상세조회 -->
-	<select id="getFoodSellDetailByNo" parameterType="string"
-		resultType="foodSellVO">
+	<select id="getFoodSellDetailByNo" parameterType="string" resultType="foodSellVO">
+	<![CDATA[
 		select f.food_no, f.food_name, f.food_de, f.food_score,
-		f.food_main_img, f.food_postdate, f.category_no, f.mem_id
-		,
-		fs.food_sell_no, fs.tr_date, fs.close_date, fs.loc, fs.price,
+		f.food_main_img, f.food_postdate, f.category_no, f.mem_id,
+		fs.food_sell_no, to_char(fs.tr_date,'YYYY-MM-DD') as tr_date, 
+		to_char(fs.close_date,'YYYY-MM-DD') as close_date, fs.loc, fs.price,
 		fs.pre_quantity, fs.sell_postdate, fs.unit, fs.sell_detail
-		from food f,
-		food_sell fs
+		from food f, food_sell fs
 		where food_sell_no=#{value} and f.food_no=fs.food_no
-	</select>
+	]]></select>
 	<!-- 판매음식등록 -->
 	<insert id="registerFoodSell" parameterType="foodSellVO">
-		<selectKey keyProperty="foodSellNo" resultType="string"
-			order="BEFORE">
+		<selectKey keyProperty="foodSellNo" resultType="string" order="BEFORE">
 			select food_sell_seq.nextval from dual
 		</selectKey>
 		insert into food_sell(food_sell_no, tr_date, close_date, loc, price,
 		pre_quantity, sell_postdate, unit, sell_detail, food_no)
-		values(#{foodSellNo}, #{trDate}, #{closeDate},
+		values(#{foodSellNo}, to_date(#{trDate},'YYYY-MM-DD'), to_date(#{closeDate},'YYYY-MM-DD'),
 		#{loc}, #{price}, #{preQuantity}, sysdate, #{unit}, #{sellDetail}, #{foodNo})
 	</insert>
-
+	<!-- 판매음식정보 수정 -->
+	<update id="editFoodSell" parameterType="foodSellVO">
+		update food_sell set tr_date=to_date(#{trDate},'YYYY-MM-DD'), close_date=to_date(#{closeDate},'YYYY-MM-DD'),
+		loc=#{loc}, price=#{price}, pre_quantity=#{preQuantity}, unit=#{unit}, sell_detail=#{sellDetail}
+		where food_sell_no=#{foodSellNo}
+	</update>
 
 	<!-- End 지원 -->
 
@@ -139,6 +146,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		category_no=#{categoryNo}
 		where mem_id=#{memId} and food_no=#{foodNo}
 	</update>
+
+	<resultMap type="foodVO" id="memberNameRM">
+		<result property="sellerVO.memName" column="mem_name" />
+	</resultMap>
+	<select id="selectFoodTop3" resultMap="memberNameRM" parameterType="string">
+		<![CDATA[
+		SELECT bm.mem_name, f.food_no, f.food_name, f.food_de, f.food_score, f.food_main_img, f.rank from
+		(select food_no, food_name, mem_id, food_de, food_score, food_main_img, rank() over (order by food_score desc) as rank 
+		FROM food) f, ban_mem bm, seller s
+		WHERE bm.mem_id=s.mem_id and s.mem_id=f.mem_id and rank<=3]]>
+	</select>
 	<!-- End 영민 -->
 
 	<!-- Start 윤주 -->
@@ -165,6 +183,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		food_sell_no=#{value}
 	</select>
+	<!-- 검색어기능부분start -->
+			<select id="findFoodSellList" parameterType="string" resultType="foodSellVO">
+ 				select f.food_name,f.food_de,f.food_score,f.food_main_img,f.food_postdate,f.category_no,f.mem_id,
+        			fs.food_sell_no,fs.tr_date,fs.close_date,fs.loc,fs.price,fs.pre_quantity,fs.unit,fs.sell_detail
+ 				from(
+ 					select food_no,food_name,food_de,food_score,food_main_img,food_postdate,category_no,mem_id
+ 					from food
+ 					)f,food_sell fs
+ 				where f.food_name like '%'||#{value}||'%'
+ 			</select>
+		<!-- 검색어기능부분start -->
 	<!-- End 윤주 -->
 </mapper>
 

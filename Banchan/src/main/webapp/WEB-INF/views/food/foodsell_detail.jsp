@@ -13,7 +13,7 @@
     letter-spacing:0;
     display:inline-block;
     margin-left:5px;
-    color:#ccc;
+    color:#ccc; 
     text-decoration:none;
 }
 .star_rating a:first-child {margin-left:0;}
@@ -72,15 +72,47 @@
 		     });//댓글달기click  */
 		
 		     
-	}); //ready
-	
-	$(document).ready(function() {
 
-	     $("#commentSubmit").click(function() {
-	     	alert("1");
-	     });
-	});
+	/*판매 음식 삭제하기*/
+	$("#deleteFood").click(function() {
+		if(deleteFlag=confirm("삭제하시겠습니까?")){
+			$.ajax({
+	    		type:"get",
+	        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+	        	data:"foodSellNo="+$("#foodSellNo").val(),
+	        	success:function(data){
+	        		if(data>1)
+	        			alert("판매중인 상품이 있어 삭제할 수 없습니다.");
+	        		else{
+	        			alert("상품이 삭제되었습니다.");
+	        			location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+$("#foodSellNo").val()+"&sellerId="+$("#sellerId").val();
+	        		}
+	        	} 
+	    		
+			}); //ajax	
+		}
+	}); //delFood click
 	
+	$("#editFoodSell").click(function() {
+			if(deleteFlag=confirm("수정하시겠습니까?")){
+				$.ajax({
+		    		type:"get",
+		        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+		        	data:"foodSellNo="+$("#foodSellNo").val(),
+		        	success:function(data){
+		        		if(data>1){
+		        			alert("판매중인 상품이 있어 수정할 수 없습니다.");
+		        		}
+		        		else{
+							location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val();
+		        		}
+		        	} 
+				}); //ajax	
+			}
+		}); //click
+	
+	}); //ready
+
 	function orderFoodConfirm(){
 		var isLogin = $("#checkId").val();
 		if(isLogin==null || isLogin==""){
@@ -108,7 +140,7 @@
 				<div class="agent-box-card grey">
 					<div class="image-content">
 						<div class="image image-fill">
-							<img alt="Image Sample" src="${foodSell.foodMainImg}">
+							<img alt="Image Sample" src="${pageContext.request.contextPath}/resources/images/${foodSell.foodMainImg}">
 						</div>						
 					</div>
 				</div>
@@ -164,24 +196,32 @@
 				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
 				      </div>
 						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
- 						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
- 						<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
+						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
+					
+						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
+ 							<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
  						</sec:authorize>
+				
+ 						
 				      	<label class="control-label" for="거래가격">거래가격:
 						<span id="orderPrice"></span>
 						</label>
 				  
 					</div> <!-- row -->
+ 						
  						<div class="row" align="center">
- 						<c:choose>
- 						<c:when test="${foodSell.memId!=mvo.memId }">
-							<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
- 						</c:when>
-						<c:otherwise>
-							<input type="button"  class="btn btn-default" style="margin-top: 20px;"  value="수정하기">
-							<input type="button"  class="btn btn-default" style="margin-top: 20px;"  value="삭제하기">
-						</c:otherwise> 						
- 						</c:choose>
+ 						<sec:authorize access="isAuthenticated()">
+	 						<c:choose>
+	 						<c:when test="${foodSell.memId!=mvo.memId }">
+								<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+	 						</c:when>
+							<c:otherwise>
+								<input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
+								<input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
+								
+							</c:otherwise> 						
+	 						</c:choose>
+ 						</sec:authorize>
 						</div>
 					</form>
 				</div>
@@ -195,7 +235,7 @@
 	<div class="container">
 		<div class="row">
 				<c:choose>
-				<c:when test="${fn:length(rlist)==0}">
+				<c:when test="${fn:length(rlist.list)==0}">
 				<h4>작성된 후기가 없습니다</h4>
 				</c:when>
 				<c:otherwise>
@@ -210,7 +250,7 @@
 					</tr>
 					</thead>
 					<tbody>
-				<c:forEach items="${rlist }" var="r">
+				<c:forEach items="${rlist.list }" var="r">
 					<tr>
 						<td>${r.revNo }</td>
 						<td align="left">
@@ -231,6 +271,29 @@
 				</c:otherwise>
 				</c:choose>
 		</div>
+		<c:set value="${rlist.pb }" var="pb"/>
+	<div class="row center-block pagination"  align="center">
+	  <ul class="pagination">
+		<c:if test="${pb.previousPageGroup}">
+		    <li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${sellfood.foodSellNo }&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+		</c:if>
+
+	  	<c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
+	  		<c:choose>
+	  			<c:when test="${pageNum==pb.nowPage}">
+			    	<li class="active"><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
+	  			</c:when>
+	  			<c:otherwise>
+			    	<li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
+	  			</c:otherwise>
+	  		</c:choose>
+	  	</c:forEach>
+
+		<c:if test="${pb.nextPageGroup}">
+		    <li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a></li>
+		</c:if>
+	  </ul>
+	</div>
 	</div>
 	
 

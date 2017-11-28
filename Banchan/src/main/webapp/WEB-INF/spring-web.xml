@@ -46,7 +46,7 @@ class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 class="org.springframework.web.servlet.view.BeanNameViewResolver">
 	<property name="order" value="1"/>
 </bean>
-		
+<aop:aspectj-autoproxy/>
 </beans>
 
 

@@ -67,6 +67,8 @@ public interface MemberService {
 	void sellerRegister(SellerVO svo);
 
 	String getSellerNameByMemId(String memId);
+	
+	List<SellerVO> findSellerList(String kw);
 
 	/////////////////////// end 윤주 메서드 ///////////////////////////////
 
