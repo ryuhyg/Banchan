@@ -111,7 +111,7 @@
 <!-- 인기 주부님 목록 -->
 			<div class="container">
 				<div class="list-box-title">
-					<span><i class=""></i>인기 주부님 TOP 3</span>
+					<span><i class=""></i>인기 주부님</span>
 				</div>
 				<div class="row"> 
 				<!-- 주부님 리스트 -->
@@ -145,61 +145,43 @@
 				</c:forEach>
 					
 				</div>
-	<!-- 인기 음식 -->			
+	</c:if>
+	<c:if test="${fn:length(flist)!=0}">
+	<!-- 인기 음식 -->
 				<div class="list-box-title">
 					<span><i class=""></i>인기 음식</span>
 				</div>
 				<div class="row">
+				<!--  인기 음식 -->
+				<c:forEach items="${flist}" var="flist">
 					<div class="col-md-4">
 						<div class="box-ads box-home">
-							<a class="hover-effect image image-fill" href="property-detail.html">
+							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${flist.sellerVO.memId}">
 								<span class="cover"></span>
-								<img alt="Sample images" src="">
-								<h3 class="title">음식이름</h3>
+								<img alt="Sample images" style="width:380px;height:270px" src="${pageContext.request.contextPath}/resources/images/${flist.foodMainImg}">
+								<h3 class="title">${flist.foodName}</h3>
 							</a><!-- /.hover-effect -->
 							
-							<span class="address"><i class="fa fa-map-marker"></i> 해당 주부님 </span>
-							<span class="description">음식 소개</span>
-							<dl class="detail">
-								<dt class="">별점</dt>
-							</dl><!-- /.detail -->
-								
+							<span class="address"><i class="fa fa-map-marker"></i> ${flist.sellerVO.memName} &nbsp; 주부님</span>
+							<span class="description">${flist.foodDe}</span>
+								<dl class="detail">
+							<div>
+								<dt class="">별점</dt><br><br>
+								<span class="star_rating">  <!-- 별점 표현 -->
+      							<c:forEach begin="1" end="${flist.foodScore}">
+    							<a class="on">★</a>
+								</c:forEach>
+								<c:forEach begin="1" end="${5-flist.foodScore}">
+    							<a>★</a>
+   								</c:forEach>
+       							</span>
+       							 &nbsp;${flist.foodScore}
+       						</div>
+       						</dl><!-- /.detail -->
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
-					<div class="col-md-4">
-						<div class="box-ads box-home">
-							<a class="hover-effect image image-fill" href="property-detail.html">
-								<span class="cover"></span>
-								<img alt="Sample images" src="">
-								<h3 class="title">음식이름</h3>
-							</a><!-- /.hover-effect -->
-							
-							<span class="address"><i class="fa fa-map-marker"></i> 해당 주부님 </span>
-							<span class="description">음식 소개</span>
-							<dl class="detail">
-								<dt class="">별점</dt>
-							</dl><!-- /.detail -->
-							
-						</div><!-- /.box-home .box-ads -->
-					</div><!-- ./col-md-4 -->
-					<div class="col-md-4">
-						<div class="box-ads box-home">
-							<a class="hover-effect image image-fill" href="property-detail.html">
-								<span class="cover"></span>
-								<img alt="Sample images" src="">
-								<h3 class="title">음식이름</h3>
-							</a><!-- /.hover-effect -->
-							
-							<span class="address"><i class="fa fa-map-marker"></i> 해당 주부님 </span>
-							<span class="description">음식 소개</span>
-							<dl class="detail">
-								<dt class="">별점</dt>
-							</dl><!-- /.detail -->
-							
-						</div><!-- /.box-home .box-ads -->
-					</div><!-- ./col-md-4 -->
+					</c:forEach>
 				</div>
-			</div>
 </c:if>	 
 		</section>
 		

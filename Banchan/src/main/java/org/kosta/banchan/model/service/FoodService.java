@@ -13,13 +13,15 @@ public interface FoodService {
 	void orderFood(TradeVO tvo);
 
 	int getLeftQuantityByFoodSellNo(String foodSellNo);
+	
+	List<FoodSellVO> findFoodSellList(String kw);
+
 	/////////////////// end윤주//////////////////////////
 
 	FoodVO getFoodByNo(String foodNo);
 
 	FoodSellVO getFoodSellDetailByNo(String foodSellNo);
 
-	List<FoodVO> getFoodListByMemId(String memId);
 
 	void registerFoodSell(FoodSellVO foodSellVO);
 
@@ -39,6 +41,19 @@ public interface FoodService {
 
 	void noimgUpdateRegFood(FoodVO fvo);
 
+	////////우정 start /////////
 	ListVO<FoodSellVO> getFoodSellInfoByMemId(String memId, String pageNo);
+
+	List<FoodVO> selectFoodTop3();
+	
+	int deleteConfirmAjax(String foodSellNo);
+
+	List<FoodVO> getFoodListByMemId(String memId);
+
+	void deleteFoodSell(String foodSellNo);
+	////////우정 end /////////
+
+	void editFoodSell(FoodSellVO foodSellVO);
+
 
 }

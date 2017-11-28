@@ -51,7 +51,7 @@
   <!-- Tiles 적용 부분 -->
   <body class="fixed-header">
 <div id="container">
-	<div class="row">
+	 <div class="row">
 			<div id="header">
 				<tiles:insertAttribute name="header" />
 			</div><!-- 헤더 -->
@@ -64,17 +64,17 @@
 				<tiles:insertAttribute name="main" />
 			</div><!-- 메인 -->	
 		</div>
-		<div class="col-sm-1">
+		<div class="col-sm-1"	>
 			<div id="right">
 				<tiles:insertAttribute name="right"/>
 			</div><!-- 오른쪽  -->
 		</div>
-	</div>
-	<div class="row">
+ 	</div>
+	<div class="row"> 
 			<div id="footer">
 				<tiles:insertAttribute name="footer" />
 			</div><!-- 푸터 -->
-	</div>	
+	 </div>
 </div>
 
 

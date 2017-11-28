@@ -3,6 +3,8 @@
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<sec:authentication var="mvo" property="principal" />
+
 <!-- 별점 style부분 ************************* -->
  <style type="text/css"> /* 별점 css */
 .star_rating {font-size:0; letter-spacing:-4px;}
@@ -11,7 +13,7 @@
     letter-spacing:0;
     display:inline-block;
     margin-left:5px;
-    color:#ccc;
+    color:#ccc; 
     text-decoration:none;
 }
 .star_rating a:first-child {margin-left:0;}
@@ -22,6 +24,7 @@
 </style>     
     
 <script type="text/javascript">
+
 	$(document).ready(function () {
 		$("#trQuantity").change(function () {
 			//구매수량이 준비수량보다 적은지 확인
@@ -34,15 +37,82 @@
 			$("#orderPrice").text(orderPrice);
 		}); //change
 		
-	/*판매 음식 삭제하기*/
-	$("button[name='deleteFood']").click(function() {
-		alert("1");
-	});
+		 //댓글달기
+		/*  $("#commentSubmit").click(function() {	
+			
+		   	 /*  if($("#questContent").val().trim()==""){ 
+		    		alert("내용을 입력하세요");
+		     		 $("#questContent").focus();
+			            //return;
+		   	  }else
+		   		  alert("1");
+		    /* 	}else{
+		    		$.ajax({
+					type:"get",
+					url:"${pageContext.request.contextPath}/commentBoardUpdate.do",
+					data: "questContent="+$("#questContent").val()+"&memId=${mvo.memId}"+"&foodSellNo=${foodSell.foodSellNo}",
+					dataType:"json",
+					success:function(data){
+						var info="<tr>";
+						info+="<td>"+${list.memId}+"</td>";
+						info+="<td>"+${list.questContent}+"</td>";
+						info+="<td>"+${list.questPostdate}+"</td>";
+						info+="</tr>";
+					
+					//테이블의 tr자식이 있으면 tr 뒤에 붙인다. 없으면 테이블 안에 tr을 붙인다.
+						if($("#commentTable tr").contents().size()==0){
+					            $("#commentTable").append(info);
+					        }else{
+					            $("#commentTable tr:last").after(info);
+					        }
+					   $("#commentParentText").val("");
+					} */
+				});//ajax	
+				}//else */ */
+		     });//댓글달기click  */
 		
+		     
+
+	/*판매 음식 삭제하기*/
+	$("#deleteFood").click(function() {
+		if(deleteFlag=confirm("삭제하시겠습니까?")){
+			$.ajax({
+	    		type:"get",
+	        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+	        	data:"foodSellNo="+$("#foodSellNo").val(),
+	        	success:function(data){
+	        		if(data>1)
+	        			alert("판매중인 상품이 있어 삭제할 수 없습니다.");
+	        		else{
+	        			alert("상품이 삭제되었습니다.");
+	        			location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+$("#foodSellNo").val()+"&sellerId="+$("#sellerId").val();
+	        		}
+	        	} 
+	    		
+			}); //ajax	
+		}
+	}); //delFood click
+	
+	$("#editFoodSell").click(function() {
+			if(deleteFlag=confirm("수정하시겠습니까?")){
+				$.ajax({
+		    		type:"get",
+		        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+		        	data:"foodSellNo="+$("#foodSellNo").val(),
+		        	success:function(data){
+		        		if(data>1){
+		        			alert("판매중인 상품이 있어 수정할 수 없습니다.");
+		        		}
+		        		else{
+							location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val();
+		        		}
+		        	} 
+				}); //ajax	
+			}
+		}); //click
+	
 	}); //ready
-	
-	
-	
+
 	function orderFoodConfirm(){
 		var isLogin = $("#checkId").val();
 		if(isLogin==null || isLogin==""){
@@ -58,7 +128,7 @@
 	}
 </script>
 
-<sec:authentication var="mvo" property="principal" />
+
 <section id="recent-list" class="agency" style="margin-top: 150px">
 <div id="page-container">
 	<div class="container">
@@ -70,7 +140,7 @@
 				<div class="agent-box-card grey">
 					<div class="image-content">
 						<div class="image image-fill">
-							<img alt="Image Sample" src="${foodSell.foodMainImg}">
+							<img alt="Image Sample" src="${pageContext.request.contextPath}/resources/images/${foodSell.foodMainImg}">
 						</div>						
 					</div>
 				</div>
@@ -126,24 +196,32 @@
 				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
 				      </div>
 						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
- 						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
- 						<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
+						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
+					
+						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
+ 							<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
  						</sec:authorize>
+				
+ 						
 				      	<label class="control-label" for="거래가격">거래가격:
 						<span id="orderPrice"></span>
 						</label>
 				  
 					</div> <!-- row -->
+ 						
  						<div class="row" align="center">
- 						<c:choose>
- 						<c:when test="${foodSell.memId!=mvo.memId }">
-							<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
- 						</c:when>
-						<c:otherwise>
-							<input type="button"  class="btn btn-default" style="margin-top: 20px;"  value="수정하기">
-							<input type="button"  class="btn btn-default" name="deleteFood" style="margin-top: 20px;"  value="삭제하기">
-						</c:otherwise> 						
- 						</c:choose>
+ 						<sec:authorize access="isAuthenticated()">
+	 						<c:choose>
+	 						<c:when test="${foodSell.memId!=mvo.memId }">
+								<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+	 						</c:when>
+							<c:otherwise>
+								<input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
+								<input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
+								
+							</c:otherwise> 						
+	 						</c:choose>
+ 						</sec:authorize>
 						</div>
 					</form>
 				</div>
@@ -157,7 +235,7 @@
 	<div class="container">
 		<div class="row">
 				<c:choose>
-				<c:when test="${fn:length(rlist)==0}">
+				<c:when test="${fn:length(rlist.list)==0}">
 				<h4>작성된 후기가 없습니다</h4>
 				</c:when>
 				<c:otherwise>
@@ -172,7 +250,7 @@
 					</tr>
 					</thead>
 					<tbody>
-				<c:forEach items="${rlist}" var="r">
+				<c:forEach items="${rlist.list }" var="r">
 					<tr>
 						<td>${r.revNo }</td>
 						<td align="left">
@@ -193,5 +271,47 @@
 				</c:otherwise>
 				</c:choose>
 		</div>
+		<c:set value="${rlist.pb }" var="pb"/>
+	<div class="row center-block pagination"  align="center">
+	  <ul class="pagination">
+		<c:if test="${pb.previousPageGroup}">
+		    <li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${sellfood.foodSellNo }&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+		</c:if>
+
+	  	<c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
+	  		<c:choose>
+	  			<c:when test="${pageNum==pb.nowPage}">
+			    	<li class="active"><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
+	  			</c:when>
+	  			<c:otherwise>
+			    	<li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
+	  			</c:otherwise>
+	  		</c:choose>
+	  	</c:forEach>
+
+		<c:if test="${pb.nextPageGroup}">
+		    <li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a></li>
+		</c:if>
+	  </ul>
 	</div>
+	</div>
+	
+
+<hr>
+<div class="container">
+		<div class="row">
+		<h4>QnA</h4>		
+
+<!-- 댓글달기 -->
+
+		<form>
+			 <textarea id="questContent" name="questContent" class="form-control col-lg-12" rows="4" style="resize: none; width:80%;height:35px;"></textarea>&nbsp;
+			 <input type="hidden" id="memId" name="memId" value=<sec:authentication property="principal.memId"/>>
+			 <input type="button" id="commentSubmit" name="commentSubmit" class="btn btn-default" value="댓글달기">
+		</form>
+		</div>
+</div>
+
 </section>	<!-- recent-list -->			
+
+

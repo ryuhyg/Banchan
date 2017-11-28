@@ -42,12 +42,20 @@ public class SellDAOImpl implements SellDAO {
 	public List<FoodSellVO> getFoodSellInfoByMemId(String memId) {
 		return template.selectOne("food.getFoodSellInfoByMemId", memId);
 	}
+	
+	/** [지원] 판매음식정보 수정
+	 * 
+	 */
+	@Override
+	public void editFoodSell(FoodSellVO foodSellVO) {
+		template.update("food.editFoodSell", foodSellVO);
+	}
 
 	///////////////// start윤주//////////////////////////
 	@Override
 	public int getLeftQuantityByFoodSellNo(String foodSellNo) {
-		int sumQuantity = -2;
-		int preQuantity = -2;
+		int sumQuantity = 0;
+		int preQuantity = 0;
 		try {
 			sumQuantity = template.selectOne("food.getsumQuantityByFoodSellNo", foodSellNo);
 			preQuantity = template.selectOne("food.getPreQuantityByFoodSellNo", foodSellNo);
@@ -55,8 +63,17 @@ public class SellDAOImpl implements SellDAO {
 		} catch (NullPointerException e) {
 			sumQuantity = 0;
 			preQuantity = template.selectOne("food.getPreQuantityByFoodSellNo", foodSellNo);
+			if(String.valueOf(preQuantity) == null) {
+				System.out.println("preq:"+preQuantity);
+				
+			}
 			return preQuantity - sumQuantity;
 		}
+	}
+
+	@Override
+	public List<FoodSellVO> findFoodSellList(String kw) {
+		return template.selectList("food.findFoodSellList", kw);
 	}
 	////////////////// end윤주//////////////////////////////
 

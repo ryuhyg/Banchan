@@ -106,19 +106,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="mem_name" property="foodSellVO.sellerVO.memName" />
 		<result column="tel" property="foodSellVO.sellerVO.tel" />
 	</resultMap>
-	<select id="getTradeListByMemId" parameterType="string"
+	<select id="getTradeListByMemId" parameterType="map"
 		resultMap="tradeRM2">
 		SELECT t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,t.food_sell_no,
 		trs.tr_status_no,trs.tr_status,
 		fs.tr_date, fs.close_date, fs.loc, fs.price, fs.unit,
 		f.food_no,f.food_name,
 		m.mem_id,m.mem_name,m.tel
-		FROM trade t, food_sell fs, food f,tr_status trs,ban_mem m
-		WHERE t.mem_id=#{value} and t.food_sell_no=fs.food_sell_no and
-		fs.food_no=f.food_no
+		FROM (
+			select row_number() over(order by tr_no desc) as
+			rnum,tr_no,tr_quantity,tr_req_date,tr_fin_date,food_sell_no,tr_status_no,mem_id
+			from trade) t,
+			(
+			select tr_date,close_date,loc,price,unit,food_no,food_sell_no
+			 from food_sell) fs,
+			 (
+			 select food_no,food_name,mem_id
+			  from food) f,
+			 (
+			 select tr_status_no,tr_status
+			 from tr_status
+			 )trs,
+			 (
+			 select mem_id,mem_name,tel
+			 from ban_mem
+			 )m
+		WHERE t.mem_id=#{memId} and t.food_sell_no=fs.food_sell_no and
+		fs.food_no=f.food_no and t.rnum between #{startRowNumber} and #{endRowNumber}
 		and t.tr_status_no=trs.tr_status_no and f.mem_id=m.mem_id
 	</select>
-
+	<select id="getAllTradeCountByMemId" parameterType="string" resultType="int">
+		select count(*) from trade where mem_id=#{value}
+	</select>
 	<!-- End 윤주 -->
 </mapper>
 

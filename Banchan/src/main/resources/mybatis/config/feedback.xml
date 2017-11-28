@@ -12,6 +12,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- End 우정 -->
 
 	<!-- Start 정훈 -->
+			<!-- 댓글저장 -->
+	<insert id="commentBoardUpdate" parameterType="questionVO">
+		insert into question(quest_no, quest_content, food_sell_no, quest_postdate, mem_id) 
+		values(question_seq.nextval, #{questContent}, #{foodSellNo}, sysdate, #{memId}) 
+	</insert>
+			<!-- 댓글가져오기 -->
+	<select id="getCommentBoardList" parameterType="string" resultType="questionVO">
+		select quest_no, quest_content, food_sell_no, to_char(to_date(quest_postdate), 'yyyy-mm-dd')as quest_postdate, mem_id
+		FROM question
+		WHERE mem_id=#{value} ORDER BY quest_postdate ASC
+	</select>
 	<!-- End 정훈 -->
 
 	<!-- Start 향걸 -->
@@ -25,8 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- Start 윤주 -->
 	<insert id="reviewRegister" parameterType="reviewVO">
-		insert into review(rev_no,score,rev_postdate,rev_content,food_no)
-		values(review_seq.nextval,#{score},sysdate,#{revContent},#{foodNo})
+		insert into review(rev_no,score,rev_postdate,rev_content,food_no,mem_id)
+		values(review_seq.nextval,#{score},sysdate,#{revContent},#{foodNo},#{memId})
 	</insert>
 	<update id="updateSellerScore" parameterType="string">
 		update seller set seller_score=
@@ -36,11 +47,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		where mem_id=#{value}
 	</update>
-	<select id="getReviewListByFoodSellNo" parameterType="string"
-		resultType="reviewVO">
-		select r.rev_no,r.score,r.rev_postdate,r.rev_content
-		from review r,food_sell fs
-		where fs.food_sell_no=#{value} and fs.food_no=r.food_no
+	<select id="getReviewListByFoodSellNo" parameterType="map"
+		resultType="reviewVO" >
+		select r.rev_no,r.score,r.rev_postdate,r.rev_content,r.mem_id
+		from(
+			select row_number() over(order by rev_no desc) as
+			rnum,rev_no,score,rev_postdate,rev_content,food_no,mem_id
+			from review
+			)r,food_sell fs
+		where fs.food_sell_no=#{foodSellNo} and fs.food_no=r.food_no and
+				r.rnum between #{startRowNumber} and #{endRowNumber}
+		order by r.rev_postdate desc
+	</select>
+	<select id="getAllReviewCountByFoodSellNo" parameterType="string" resultType="int">
+		select count(*)
+		from review r, food_sell fs
+		where fs.food_sell_no=#{value} and r.food_no=fs.food_no
+
 	</select>
 	<!-- End 윤주 -->
 </mapper>
