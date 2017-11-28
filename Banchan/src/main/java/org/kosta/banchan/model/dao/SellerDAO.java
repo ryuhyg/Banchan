@@ -13,5 +13,9 @@ public interface SellerDAO {
 
 	//// 우정 end//////
 	List<SellerVO> selectSellerTop3();
+	
+	/////////////start윤주/////////////////
+	List<SellerVO> findSellerList(String kw);
+	///////////////end윤주////////////////
 
 }

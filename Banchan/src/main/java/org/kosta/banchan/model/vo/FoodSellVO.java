@@ -98,4 +98,17 @@ public class FoodSellVO extends FoodVO {
 		this.sellDetail = sellDetail;
 	}
 
+	@Override
+	public String toString() {
+		return "FoodSellVO [questionList=" + questionList + ", foodSellNo=" + foodSellNo + ", trDate=" + trDate
+				+ ", closeDate=" + closeDate + ", loc=" + loc + ", price=" + price + ", preQuantity=" + preQuantity
+				+ ", sellPostdate=" + sellPostdate + ", unit=" + unit + ", sellDetail=" + sellDetail + ", toString()="
+				+ super.toString() + ", getMemId()=" + getMemId() + ", getUploadImage()=" + getUploadImage()
+				+ ", getReviewList()=" + getReviewList() + ", getFoodNo()=" + getFoodNo() + ", getFoodName()="
+				+ getFoodName() + ", getFoodDe()=" + getFoodDe() + ", getFoodScore()=" + getFoodScore()
+				+ ", getFoodMainImg()=" + getFoodMainImg() + ", getFoodPostdate()=" + getFoodPostdate()
+				+ ", getCategoryNo()=" + getCategoryNo() + ", getSellerVO()=" + getSellerVO() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + "]";
+	}
+	
 }

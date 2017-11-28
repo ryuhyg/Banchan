@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
@@ -107,11 +108,15 @@ public class MemberController {
 		MemberVO mvo = new MemberVO(id, name, question, answer);
 		int qnaCheck = memberService.findPasswordQnaCheck(mvo);
 		if (qnaCheck != 0) {
-			model.addAttribute("qnamvo", mvo);
-			return "redirect:member/findPasswordResult_ok.do";
+			return "redirect:findPasswordResult.do?id="+id;
 		} else {
 			return "member/findPasswordResult_fail";
 		}
+	}
+	@RequestMapping("findPasswordResult.do")
+	public String findPasswordResult(String id,Model model) {
+		model.addAttribute("memId", id);
+		return "member/findPasswordResult_ok.tiles";
 	}
 
 	/**
@@ -124,10 +129,9 @@ public class MemberController {
 	@RequestMapping(value = "resetPassword.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String resetPassword(String id, String password) {
-		System.out.println("id: " + id + "password: " + password);
 		MemberVO mvo = new MemberVO();
 		mvo.setMemId(id);
-		mvo.setPwAnswer(password);
+		mvo.setPw(password);
 		memberService.resetPassword(mvo);
 		return "ok";
 	}
@@ -203,12 +207,21 @@ public class MemberController {
 
 	@ResponseBody
 	@RequestMapping("getMarkerSellerListOnAjax.do")
-	public ListVO<SellerVO> getMarkerSellerListOnAjax(String addressNo) {
+	public ListVO<SellerVO> getMarkerSellerListOnAjax(String addressNo,String pageNo) {
 		System.out.println("*ajax**********getMarkerSellerListOnAjax********************");
 		System.out.println(addressNo); // 들어옴
+		System.out.println(pageNo); // 들어옴
+		if(addressNo!=null && pageNo==null) {
+			System.out.println("addressNo!=null && pageNo==null");
+			return memberService.getMarkerSellerListByAddressNo(addressNo, "1");
+		}else {
+			System.out.println("addressNo!=null && pageNo!=null");
+			System.out.println(memberService.getMarkerSellerListByAddressNo(addressNo, pageNo));
+			return memberService.getMarkerSellerListByAddressNo(addressNo, pageNo);
+		}
 
-		return memberService.getMarkerSellerListByAddressNo(addressNo, "1");
 	}
+	
 
 	////////////// end 위치기반 ///////////
 	/////////////////////// end 광태 메서드 ///////////////////////////////
@@ -384,11 +397,11 @@ public class MemberController {
 		// System.out.println(file+"<==");
 		// System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인
 		if (file != null && file.isEmpty() == false) {
-			System.out.println("파일명:" + file.getOriginalFilename());
+			//System.out.println("파일명:" + file.getOriginalFilename());
 			File uploadFile = new File(uploadPath + file.getOriginalFilename());
 			try {
 				file.transferTo(uploadFile);// 실제 디렉토리로 파일을 저장한다
-				System.out.println(uploadPath + file.getOriginalFilename() + " 파일업로드");
+				//System.out.println(uploadPath + file.getOriginalFilename() + " 파일업로드");
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
@@ -410,6 +423,25 @@ public class MemberController {
 				updatedAuthorities);
 		SecurityContextHolder.getContext().setAuthentication(newAuth);
 		return "member/sellerRegister_ok.tiles";
+	}
+	/*
+	 * 통합검색이라 경계가 명확하지 않아 MemberController에서 구현함
+	 */
+	@RequestMapping("searchByKeyword.do")
+	public ModelAndView SearchByKeyword(String kw) {
+		ModelAndView mv = new ModelAndView();
+		List<SellerVO> slist=null;
+		List<FoodSellVO> fslist = null;
+		if(kw=="" || kw=="null") {
+			
+		}else {
+			slist = memberService.findSellerList(kw);
+			fslist = foodeService.findFoodSellList(kw);
+		}
+		mv.addObject("slist",slist);
+		mv.addObject("fslist",fslist);
+		mv.setViewName("search/search_result.tiles");
+		return mv;
 	}
 	/////////////////////// end 윤주 메서드 ///////////////////////////////
 }

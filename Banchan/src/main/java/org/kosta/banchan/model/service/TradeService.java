@@ -1,7 +1,5 @@
 package org.kosta.banchan.model.service;
 
-import java.util.List;
-
 import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.TradeVO;
 
@@ -15,7 +13,7 @@ public interface TradeService {
 	//////////////// end 지원///////////////////
 
 	//////////////// start윤주///////////////////
-	List<TradeVO> getTradeListByMemId(String memId);
+	ListVO<TradeVO> getTradeListByMemId(String memId,String pageNo);
 	//////////////// end윤주////////////////////
 
 	// 우정
@@ -24,5 +22,6 @@ public interface TradeService {
 	ListVO<TradeVO> getSellerTradeListByFoodSellNo(String foodSellNo, String foodNo);
 
 	int getAllSellerTradeCount(String sellerId);
+
 
 }

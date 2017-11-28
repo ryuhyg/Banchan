@@ -53,12 +53,21 @@ public class FoodDAOImpl implements FoodDAO {
 	public int getAllFoodSellCountByMemId(String memId) {
 		return template.selectOne("getAllFoodSellCountByMemId", memId);
 	}
+	
+	@Override
+	public int deleteConfirmAjax(String foodSellNo) {
+		return template.selectOne("deleteConfirmAjax",foodSellNo);
+	}
+	
+	@Override
+	public void deleteFoodSell(String foodSellNo) {
+		template.delete("deleteFoodSell",foodSellNo);
+	}
+
+
 	/////////////////// end 우정//////////////////////////////
 
-	/*
-	 * @Override public int getTotalFoodCountByMemId(String memId) { return
-	 * template.selectOne("getTotalFoodCountByMemId",memId); }
-	 */
+	
 	/**
 	 * [영민] 카테고리 받아와서 음식등록 하는 페이지
 	 */
@@ -93,5 +102,7 @@ public class FoodDAOImpl implements FoodDAO {
 	public List<FoodVO> selectFoodTop3() {
 		return template.selectList("food.selectFoodTop3");
 	}
+
+	
 
 }

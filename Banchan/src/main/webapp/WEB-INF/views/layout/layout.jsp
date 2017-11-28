@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="tiles"  uri="http://tiles.apache.org/tags-tiles" %>    
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 <head>
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,6 +42,7 @@
 	<script src="${pageContext.request.contextPath}/resources/script/modernizr.min.js"></script>	
 
 
+	
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 <script src="//code.jquery.com/jquery.min.js"></script>
 
@@ -50,18 +51,30 @@
   <!-- Tiles 적용 부분 -->
   <body class="fixed-header">
 <div id="container">
-
-	<div id="header">
-		<tiles:insertAttribute name="header" />
-	</div><!-- 헤더 -->
-	
-	<div id="main">
-		<tiles:insertAttribute name="main" />
-	</div><!-- 메인 -->
-	<div id="footer">
-		<tiles:insertAttribute name="footer" />
-	</div><!-- 푸터 -->
-	
+	 <div class="row">
+			<div id="header">
+				<tiles:insertAttribute name="header" />
+			</div><!-- 헤더 -->
+	</div>
+	<div class="row">
+		<div class="col-sm-1">
+		</div>
+		<div class="col-sm-10">
+			<div id="main">
+				<tiles:insertAttribute name="main" />
+			</div><!-- 메인 -->	
+		</div>
+		<div class="col-sm-1"	>
+			<div id="right">
+				<tiles:insertAttribute name="right"/>
+			</div><!-- 오른쪽  -->
+		</div>
+ 	</div>
+	<div class="row"> 
+			<div id="footer">
+				<tiles:insertAttribute name="footer" />
+			</div><!-- 푸터 -->
+	 </div>
 </div>
 
 

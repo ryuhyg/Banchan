@@ -18,8 +18,6 @@ public interface FoodDAO {
 
 	List<FoodVO> getFoodListByMemId(String memId);
 
-	/* int getTotalFoodCountByMemId(String memId); */
-
 	void foodRegister(FoodVO fvo);
 
 	List<Map<String, String>> allCategorySelect();
@@ -39,5 +37,11 @@ public interface FoodDAO {
 	int getAllFoodSellCountByMemId(String memId);
 
 	List<FoodVO> selectFoodTop3();
+
+	int deleteConfirmAjax(String foodSellNo);
+
+	void deleteFoodSell(String foodSellNo);
+
+	
 
 }

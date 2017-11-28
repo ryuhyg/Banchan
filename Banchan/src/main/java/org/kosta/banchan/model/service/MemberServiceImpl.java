@@ -66,9 +66,14 @@ public class MemberServiceImpl implements MemberService {
 	public int findPasswordQnaCheck(MemberVO mvo) {
 		return memberDAO.findPasswordQnaCheck(mvo);
 	}
-
+	/**
+	 * 비밀번호 재설정
+	 * 암호화 처리 해준다.
+	 */
 	@Override
 	public void resetPassword(MemberVO mvo) {
+		String encodePassword = passwordEncoder.encode(mvo.getPw());
+		mvo.setPw(encodePassword);
 		memberDAO.resetPassword(mvo);
 	}
 
@@ -162,7 +167,7 @@ public class MemberServiceImpl implements MemberService {
 		ListVO<SellerVO> markerSellerList = new ListVO<SellerVO>();
 		HashMap<String, Integer> paramMap = new HashMap<String, Integer>();
 
-		PagingBean pagingBean = new PagingBean(Integer.parseInt(pageNo), 2, 3,
+		PagingBean pagingBean = new PagingBean(Integer.parseInt(pageNo), 3, 3,
 				memberDAO.getTotCountMarkerSellerList(addressNo));
 		paramMap.put("startRowNumber", pagingBean.getStartRowNumber());
 		paramMap.put("endRowNumber", pagingBean.getEndRowNumber());
@@ -307,6 +312,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String getSellerNameByMemId(String memId) {
 		return memberDAO.getSellerNameByMemId(memId);
+	}
+	@Override
+	public List<SellerVO> findSellerList(String kw) {
+		return sellerDAO.findSellerList(kw);
 	}
 	/////////////////////// end 윤주 메서드 ///////////////////////////////
 

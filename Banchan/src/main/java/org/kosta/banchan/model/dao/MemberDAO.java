@@ -81,9 +81,6 @@ public interface MemberDAO {
 	String getSellerNameByMemId(String memId);
 	/////////////////////// end 윤주 메서드 ///////////////////////////////
 
-	// 회원정보수정(정훈)
-	void getEditMembers(SellerVO vo);
-
 	// 질문찾아오기(정훈)
 	PwQnaVO findPwQnaNo(String pwQnaNo);
 

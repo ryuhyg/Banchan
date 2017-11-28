@@ -31,6 +31,7 @@ update trade set tr_status_no=2;
 select * from food where mem_id='uuuu1'
 select * from food where mem_id='aaaa1'
 
+
 update food set food_score='2' where food_no='1081' and mem_id='uuuu1'
 update food set food_score='3' where food_no='1082' and mem_id='uuuu1'
 update food set food_score='18' where food_no='1084' and mem_id='uuuu1'
@@ -55,3 +56,27 @@ update food set food_score='20' where food_no='1079' and mem_id='aaaa1'
 
 
 	
+
+	
+select * from seller
+	
+
+
+select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score 
+from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
+s, ban_mem m, address a 
+where m.mem_id=s.mem_id and m.address_no=a.address_no and rownum<=3
+
+
+
+select * from (
+			 select  m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score, 
+			 		  rank() over (order by seller_score desc) as rank,
+			 from seller s, ban_mem m, address a
+			 )
+where rownum <= 5
+					
+					
+					
+					
+					
