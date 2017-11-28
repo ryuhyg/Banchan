@@ -436,7 +436,7 @@ public class MemberController {
 			
 		}else {
 			slist = memberService.findSellerList(kw);
-			fslist = foodeService.findFoodSellList(kw);
+			fslist = foodService.findFoodSellList(kw);
 		}
 		mv.addObject("slist",slist);
 		mv.addObject("fslist",fslist);
