@@ -12,6 +12,10 @@
  <!-- 우편번호 api -->
  <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
  <!-- 스크립트 ajax 부분 -->
+ <!-- 입력폼 이쁘게 -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  
  <script type="text/javascript">
  	$(document)
@@ -59,63 +63,41 @@
  								});
  
  						//비밀번호 체크
- 						$("#regForm :input[id=password]").keyup(
- 								function() {
- 									var id = $(this).val().trim();
- 									if (id.length<4 || id.length>10) {
- 										$("#passwordCheckView").html(
- 												"비밀번호는 4자이상 10자 이하여야 함!").css(
- 												"color", "pink");
- 										checkPassword = "";
- 									} else {
- 										$("#passwordCheckView").html(
- 												"비밀번호 사용가능!").css("background",
- 												"white");
- 										checkPassword = "passwordOK";
- 									}
- 
- 								});//keyup
+ 						$("#regForm :input[id=password]").keyup(function() {
+ 							var id=$(this).val().trim();
+ 							if(id.length<4 || id.length>10){
+ 								$("#passwordCheckView").html("비밀번호는 4자이상 10자 이하여야 함!").css(
+ 										"color","pink");
+ 								checkPassword="";
+ 							}else{
+ 								$("#passwordCheckView").html("비밀번호 사용가능!").css(
+ 										"background","white");
+ 								checkPassword="passwordOK";
+ 							}
+ 							$("#regForm :input[id=passwordRe]").trigger("keyup");
+ 							
+ 						});//keyup
  
  						//비밀번호 일치 체크
- 						$("#regForm :input[id=passwordRe]")
- 								.keyup(
- 										function() {
- 											if ($(
- 													"#regForm :input[id=password]")
- 													.val().trim() == "") {
- 
- 												$(
- 														"#regForm :input[id=passwordRe]")
- 														.val("");
- 												$(
- 														"#regForm :input[id=password]")
- 														.focus();
- 												alert("적정 비밀번호를 먼저 입력하세요!");
- 											} else {
- 												if ($(
- 														"#regForm :input[id=password]")
- 														.val().trim() != $(
- 														"#regForm :input[id=passwordRe]")
- 														.val().trim()) {
- 													checkPasswordRe = "";
- 													$("#passwordReCheckView")
- 															.text("불일치!!")
- 															.css("background",
- 																	"red");
- 												} else if ($(
- 														"#regForm :input[id=password]")
- 														.val().trim() == $(
- 														"#regForm :input[id=passwordRe]")
- 														.val().trim()) {
- 													checkPasswordRe = "passwordOK";
- 													$("#passwordReCheckView")
- 															.text("비밀번호 일치")
- 															.css("background",
- 																	"white");
- 												}
- 											}
- 
- 										});//keyup
+ 						$("#regForm :input[id=passwordRe]").keyup(function() {
+ 							if($("#regForm :input[id=password]").val().trim()==""&& !checkPassword==""){
+ 								
+ 								$("#regForm :input[id=passwordRe]").val("");
+ 								$("#regForm :input[id=password]").focus();
+ 								alert("적정 비밀번호를 먼저 입력하세요!");
+ 							}
+ 							else{
+ 								if($("#regForm :input[id=password]").val().trim()!=$("#regForm :input[id=passwordRe]").val().trim()){
+ 									checkPasswordRe="";
+ 									$("#passwordReCheckView").text("불일치!!").css("background","red");
+ 								}
+ 								else if($("#regForm :input[id=password]").val().trim()==$("#regForm :input[id=passwordRe]").val().trim()){
+ 									checkPasswordRe="passwordOK";
+ 									$("#passwordReCheckView").text("비밀번호 일치").css("background","white");
+ 								}
+ 							}
+ 							
+ 						});//keyup
  
  										$("#searchaddress")
  		 								.click(
@@ -289,22 +271,24 @@
  					});//ready
  </script>
  
- <section id="recent-list" style="margin-top: 350px;">
+<section id="recent-list" style="margin-top: 150px;">
  	<div class="container">
  		<div class="row">
- 			<div class="col-sm-2">
- 				<!-- left -->
- 
+ 			<div class="col-sm-2"><!-- left -->
+ 			
  			</div>
- 			<div class="col-sm-8">
- 				<div class="blog-list blog-detail">
- 					<h3 class="title-form">
- 						<i class="icon fa fa-comment" style="margin-right: 5px"></i>회원정보수정
- 					</h3>
-  					<form class="form-large grey-color"	action="${pageContext.request.contextPath}/editBuyerMember.do" method="post" id="regForm">
+ 			<div class="col-sm-8" >
+						<div class="blog-list blog-detail">
+		<h3 class="title-form" style="text-align: center;"><i class="icon fa fa-comment" style="margin-right: 5px;"></i>회원정보수정</h3>
+ 
+ 					<form class="form-large grey-color"	action="${pageContext.request.contextPath}/editSellerMember.do" method="post" id="regForm" enctype="multipart/form-data">
  						<%-- csrf 토큰 --%>
  						<sec:csrfInput />
+ 						
+ 						
  						<div class="row">
+ 							<div  class="col-xs-3" style="margin-top: 32px;"> 				
+								</div>
  							<div class="col-xs-6">
  								<label for="id"> 
  								<i class="fa fa-user user" style="margin-right: 5px"></i>아이디</label> 
@@ -312,68 +296,82 @@
  								value="<sec:authentication property="principal.memId"/>"
  								readonly="readonly">
  							</div>
- 							<div class="col-xs-6" style="margin-top: 32px;">
+ 							<div class="col-xs-3" style="margin-top: 32px;">
  								<span id="idCheckView"></span>
  							</div>
  						</div>
  						<div class="row">
+ 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+								</div>
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px"></i>비밀번호</label> <input type="password"
- 									name="pw" id="password" class="margin-bottom form-control" required="required"
+ 									style="margin-right: 5px"></i>비밀번호</label> <input type="password" required="required"
+ 									name="pw" id="password" class="margin-bottom form-control"
  									placeholder="비밀번호">
  							</div>
- 							<div class="col-xs-6" style="margin-top: 32px;">
+ 							<div class="col-xs-3" style="margin-top: 32px;">
  								<span id="passwordCheckView"></span>
  							</div>
  						</div>
  						<div class="row">
+ 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+								</div>
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px"></i>비밀번호 확인</label> <input type="password"
- 									id="passwordRe" class="margin-bottom form-control" required="required"
+ 									style="margin-right: 5px"></i>비밀번호 확인</label> <input type="password" required="required"
+ 									id="passwordRe" class="margin-bottom form-control"
  									placeholder="비밀번호확인">
  							</div>
- 							<div class="col-xs-6" style="margin-top: 32px;">
+ 							<div class="col-xs-3" style="margin-top: 32px;">
  								<span id="passwordReCheckView"></span>
  							</div>
  						</div>
  						<div class="row">
+ 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+								</div>
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px"></i>이름</label> <input type="text"
+ 									style="margin-right: 5px"></i>이름</label> <input type="text" required="required"
  									name="memName" id="name" class="margin-bottom form-control"
- 									placeholder="이름" required="required"
+ 									placeholder="이름"
  									value="<sec:authentication property="principal.memName"/>">
  							</div>
  						</div>
  						<div class="row">
+ 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+								</div>
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px"></i>생년월일</label> <input type="date"
- 									name="birth" class="margin-bottom form-control" required="required"
+ 									style="margin-right: 5px"></i>생년월일</label> <input type="date" required="required"
+ 									name="birth" class="margin-bottom form-control" min="1900-01-01" max="2007-12-31"
  									value="<sec:authentication property="principal.birth"/>">
  							</div>
+ 							<div  class="col-xs-3" style="margin-top: 32px;"> 				
+								</div>
  						</div>
  						<div class="row">
+ 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+								</div>
  							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>전화번호 ( - 포함하여 입력해주세요! )</label>
  								<!-- <input type="text" name="tel"  class="margin-bottom form-control" placeholder="전화번호"> -->
- 								<input class="margin-bottom form-control" type="tel" name="tel" required="required"
- 									id="telno" title=" -  포함하여 입력해주세요!" placeholder="00*-000*-0000"
+ 								<input class="margin-bottom form-control" type="tel" name="tel"
+ 									id="telno" title=" -  포함하여 입력해주세요!" placeholder="00*-000*-0000" required="required"
  									pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" maxlength="13"
  									value="<sec:authentication property="principal.tel"/>">
  							</div>
- 							<div class="col-xs-6" style="margin-top: 32px;">
+ 							<div class="col-xs-3" style="margin-top: 5px;">
  								<span id="telCheckView"></span>
  							</div>
  						</div>
  						<div class="row">
- 							<div class="col-xs-8">
+ 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+								</div>
+ 							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>주소</label>
- 								<div id="map" style="width: 300px; height: 170px;"></div>
+ 								<div id="map" style="width:auto; height: 200px;"></div>
  								<input class="btn btn-default" type="button" id="searchaddress"
  									value="주소 찾기"> <input type="text"
  									name="addressVO.addressAPI" id="jibunAddress"
@@ -382,14 +380,16 @@
  									name="addressDe" id="detailAddress" required="required"
  									value="<sec:authentication property="principal.addressDe"/>"
  									class="margin-bottom form-control" placeholder="상세주소 입력">
- 							</div>
+ 							</div> 
  						</div>
  						<div class="row">
- 							<div class="col-xs-8" style="margin-bottom: 10px">
+ 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+								</div>
+ 							<div class="col-xs-6" style="margin-bottom: 10px">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>비밀번호 찾기 질문</label> <select
  									id="pwQnaSelect">
- 									<option value="100"
+ 									<option value="${pvo.pwQnaNo}"
  										selected="<sec:authentication property="principal.pwQnaNo"/>">${pvo.pwQuest}</option>
  									<c:forEach items="${pwQnaList}" var="p">
  										<option value="${p.pwQnaNo}">${p.pwQuest}</option>
@@ -398,18 +398,22 @@
  							</div>
  						</div>
  						<div class="row">
- 							<div class="col-xs-8">
+ 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+								</div>
+ 							<div class="col-xs-6">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>비밀번호 찾기 답변</label> <input type="text"
  									name="pwAnswer" id="pwAnswer" required="required"
  									class="margin-bottom form-control"
  									value="<sec:authentication property="principal.pwAnswer"/>">
  							</div>
+ 								<div  class="col-xs-3" style="margin-top: 32px;"> 				
+								</div>
  						</div>
- 						<br> <br>
+ 						<br>
  						<div class="row">
  							<div align="center">
- 								<input type="submit" id="btnSubmit" class="btn btn-reverse button-form"
+ 								<input type="submit" class="btn btn-reverse button-form"
  									value="수정하기">
  								<button type="button" class="btn btn-default button-form"
  									id="returnBtn">돌아가기</button>

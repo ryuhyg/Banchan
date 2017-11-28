@@ -9,4 +9,9 @@ public interface FeedbackService {
 
 	ListVO<ReviewVO> getReviewListByFoodSellNo(String foodSellNo,String pageNo);
 	/////////////// end윤주/////////////////
+	
+	///////////// start정훈////////////////
+	
+	///////////// end정훈////////////////
+
 }
