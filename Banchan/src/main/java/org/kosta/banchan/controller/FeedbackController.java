@@ -23,17 +23,19 @@ public class FeedbackController {
 	}
 	@RequestMapping("reviewRegister.do")
 	public String reviewRegister(HttpServletRequest request) {
-		
 		String foodSellNo = request.getParameter("foodSellNo");
 		String memId = request.getParameter("memId");//판매자
 		String rContent = request.getParameter("rContent");
 		int score = Integer.parseInt(request.getParameter("score"));
 		String foodNo = request.getParameter("foodNo");
+		String writerId = request.getParameter("writerId");//작성자
 		ReviewVO rvo = new ReviewVO();
 		rvo.setScore(score);
 		rvo.setRevContent(rContent);
 		rvo.setFoodNo(foodNo);
-		feedbackService.reviewRegister(rvo, memId);
+		rvo.setMemId(writerId);
+		System.out.println(foodNo);
+		feedbackService.reviewRegister(rvo, memId,foodNo);
 		return "redirect:reviewRegister_ok.do?foodSellNo="+foodSellNo;
 		
 	}
@@ -43,4 +45,11 @@ public class FeedbackController {
 		return "food/reviewRegister_ok.tiles";
 	}
 	///////////////end윤주//////////////////////
+	
+	///////////////start정훈//////////////////////
+	//댓글달기
+	
+
+	///////////////end정훈//////////////////////
+
 }

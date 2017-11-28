@@ -28,9 +28,11 @@ public class FeedbackServiceImpl implements FeedbackService {
 	//////////////// start윤주/////////////////////////
 	@Transactional
 	@Override
-	public void reviewRegister(ReviewVO rvo, String memId) {
+	public void reviewRegister(ReviewVO rvo, String memId,String foodNo) {
+		System.out.println(foodNo);
 		reviewDAO.reviewRegister(rvo);
 		reviewDAO.updateSellerScore(memId);
+		reviewDAO.updateFoodScore(foodNo);
 	}
 	@Override
 	public ListVO<ReviewVO> getReviewListByFoodSellNo(String foodSellNo, String pageNo) {
@@ -82,13 +84,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 	}
 	
 	////////////////// end 지원///////////////////////////
+
+	
+	//////////////////start정훈///////////////////////////
+	
+	//////////////////end정훈///////////////////////////
 }
-
-
-
-
-
-
-
-
 

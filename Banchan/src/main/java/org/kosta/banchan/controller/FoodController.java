@@ -2,13 +2,13 @@ package org.kosta.banchan.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.kosta.banchan.model.service.FeedbackService;
 import org.kosta.banchan.model.service.FoodService;
@@ -16,7 +16,6 @@ import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.TradeVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -36,9 +35,7 @@ public class FoodController {
 	private FeedbackService feedbackService;
 	// 파일 업로드를 FoodController에서 하실지 FileUploadController에서 하실지..
 	private String uploadPath;
-	
-	@Autowired
-    private ServletContext servletContext;
+
 
 	///////////////////////// start 윤주 ////////////////////////////
 
@@ -109,40 +106,39 @@ public class FoodController {
 	 * @return
 	 */
 	@RequestMapping("getFoodSellDetail.do")
-	public String getFoodSellDetail(String foodSellNo,String pageNo, Model model) {
+	public String getFoodSellDetail(String foodSellNo, Model model,String pageNo, HttpServletRequest req, HttpServletResponse resp) {
 		// 윤주
 		model.addAttribute("rlist", feedbackService.getReviewListByFoodSellNo(foodSellNo,pageNo));
 		model.addAttribute("leftQuantity", foodService.getLeftQuantityByFoodSellNo(foodSellNo));
 		model.addAttribute("foodSell", foodService.getFoodSellDetailByNo(foodSellNo));
 		
 		///// Start 최근 클릭 리스트 코드 추가 광태
-		System.out.println("servletContext.getAttribut");
-		System.out.println(servletContext.getAttribute("clickList"));
-		//if(servletContext.getAttribute("clickList"))
-		Object obj =servletContext.getAttribute("clickList");
-		ArrayList<FoodSellVO> list = null;
-		if(obj==null) {
-			list = new ArrayList<FoodSellVO>();
-			list.add(foodService.getFoodSellDetailByNo(foodSellNo));	
-		}else {
-			list =(ArrayList<FoodSellVO>)obj;
-			boolean checkDupl=false;
-			for (int i = 0; i < list.size(); i++) {
-				if(list.get(i).getFoodSellNo().equals(foodSellNo)) {
-					checkDupl=true;
-					break; // 클릭한 상품이 이미 있으면 탈출
-				}
+		System.out.println("cookie*********");
+		Cookie[] cookie= req.getCookies();
+		boolean checkDupl=false;
+		for (int i = 0; i < cookie.length; i++) {
+			System.out.println("--- "+cookie[i].getName()+" : "+cookie[i].getValue());
+			if(cookie[i].getName().equals(foodSellNo)) {
+				checkDupl=true;
+				break; // 클릭한 상품이 이미 있으면 탈출
 			}
-			if(checkDupl) {
-				System.out.println("이미 추가된 상품!");
-			}else {
-				if(list.size()==4) { // 최근클릭 4개 상품만 유지
-					list.remove(0);
-				}
-				list.add(foodService.getFoodSellDetailByNo(foodSellNo));
-			}	
 		}
-		servletContext.setAttribute("clickList",list);
+		if(checkDupl) {
+			System.out.println("이미 추가된 상품!");
+		}else {
+			if(cookie.length>4) { // 최근클릭 4개 상품만 유지
+				Cookie kc =  new Cookie(cookie[0].getName(),null);
+				kc.setMaxAge(0);
+				System.out.println("******222***ddd****");
+			    resp.addCookie(kc);
+			    System.out.println("*********ddd****");
+			}
+			FoodSellVO fvo =foodService.getFoodSellDetailByNo(foodSellNo);
+			Cookie c =  new Cookie(foodSellNo,fvo.getFoodMainImg());
+			c.setComment(foodSellNo);
+			c.setMaxAge(60*60*24);
+			resp.addCookie(c);
+		}	
 		///// End최근 클릭 리스트 코드 추가 광태
 		return "food/foodsell_detail.tiles";
 	}

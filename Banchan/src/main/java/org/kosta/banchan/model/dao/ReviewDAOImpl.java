@@ -13,7 +13,17 @@ import org.springframework.stereotype.Repository;
 public class ReviewDAOImpl implements ReviewDAO {
 	@Resource
 	private SqlSessionTemplate template;
-
+	
+	
+	/*
+	 * [우정]
+	 * Food 평정 update
+	 */
+	
+	@Override
+	public void updateFoodScore(String foodNo) {
+		template.update("feedback.updateFoodScore", foodNo);
+	}
 	/////////////// start윤주//////////////////////////
 	@Override
 	public void reviewRegister(ReviewVO rvo) {

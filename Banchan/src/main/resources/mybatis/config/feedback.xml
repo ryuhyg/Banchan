@@ -12,6 +12,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- End 우정 -->
 
 	<!-- Start 정훈 -->
+			<!-- 댓글저장 -->
+	<insert id="commentBoardUpdate" parameterType="questionVO">
+		insert into question(quest_no, quest_content, food_sell_no, quest_postdate, mem_id) 
+		values(question_seq.nextval, #{questContent}, #{foodSellNo}, sysdate, #{memId}) 
+	</insert>
+			<!-- 댓글가져오기 -->
+	<select id="getCommentBoardList" parameterType="string" resultType="questionVO">
+		select quest_no, quest_content, food_sell_no, to_char(to_date(quest_postdate), 'yyyy-mm-dd')as quest_postdate, mem_id
+		FROM question
+		WHERE mem_id=#{value} ORDER BY quest_postdate ASC
+	</select>
 	<!-- End 정훈 -->
 
 	<!-- Start 향걸 -->
@@ -56,6 +67,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		where mem_id=#{value}
 	</update>
+	<update id="updateFoodScore" parameterType="string">
+		update food set food_score=
+		(select round(sum(score)/count(*),1)
+		from review r,food f
+		where f.food_no=#{value} and r.food_no=f.food_no )
+		where food_no=#{value}
+	</update>
 	<select id="getReviewListByFoodSellNo" parameterType="map"
 		resultType="reviewVO" >
 		select r.rev_no,r.score,r.rev_postdate,r.rev_content,r.mem_id
@@ -72,7 +90,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*)
 		from review r, food_sell fs
 		where fs.food_sell_no=#{value} and r.food_no=fs.food_no
-
 	</select>
 	<!-- End 윤주 -->
 </mapper>
