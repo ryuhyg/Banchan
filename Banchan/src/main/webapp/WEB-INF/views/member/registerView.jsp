@@ -318,6 +318,7 @@
 										<input type="text"  name="memName" id="name" class="margin-bottom form-control" placeholder="이름" required="required">
 								</div>
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
+
 								</div>
 							</div>
 							<div class="row">

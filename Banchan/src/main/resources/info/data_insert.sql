@@ -71,6 +71,7 @@ insert into seller(mem_id, seller_img, seller_info, seller_score) values('spring
 insert into seller(mem_id, seller_img, seller_info, seller_score) values('ajax2','이미지경로','혜자스러운 반찬을 전해드립니다!',0 );
 
 
+
 -- CATEGORY
 create sequence category_seq start with 10101 nocache;
 -- 10101.반찬   10102.김치  10103.고기   10104.국,찌게   10105.도시락   10106.베이커리
@@ -178,7 +179,6 @@ insert into question(quest_no, quest_content, quest_postdate, food_sell_no, mem_
 values(question_seq.nextval, '택배배달은 안되나요? 집이 좀 멀어서요', sysdate, 101011, 'ajax');
 insert into question(quest_no, quest_content, quest_postdate, food_sell_no, mem_id)
 values(question_seq.nextval, '다음에도 또 판매예정인가요? 지금 말고 좀 나중에 사고 싶어요', sysdate, 101011, 'java');
-
 
 
 -- ANSWER
