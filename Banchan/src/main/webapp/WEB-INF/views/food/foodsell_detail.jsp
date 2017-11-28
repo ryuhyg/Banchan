@@ -35,7 +35,7 @@
 			}
 			var orderPrice=$(this).val()*$("#price").text();
 			$("#orderPrice").text(orderPrice);
-		}); //change
+		}); //change 
 		
 		 //댓글달기
 		/*  $("#commentSubmit").click(function() {	
