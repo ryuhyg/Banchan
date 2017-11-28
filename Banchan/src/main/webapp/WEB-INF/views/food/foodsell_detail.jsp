@@ -37,41 +37,6 @@
 			$("#orderPrice").text(orderPrice);
 		}); //change 
 		
-		 //댓글달기
-		/*  $("#commentSubmit").click(function() {	
-			
-		   	 /*  if($("#questContent").val().trim()==""){ 
-		    		alert("내용을 입력하세요");
-		     		 $("#questContent").focus();
-			            //return;
-		   	  }else
-		   		  alert("1");
-		    /* 	}else{
-		    		$.ajax({
-					type:"get",
-					url:"${pageContext.request.contextPath}/commentBoardUpdate.do",
-					data: "questContent="+$("#questContent").val()+"&memId=${mvo.memId}"+"&foodSellNo=${foodSell.foodSellNo}",
-					dataType:"json",
-					success:function(data){
-						var info="<tr>";
-						info+="<td>"+${list.memId}+"</td>";
-						info+="<td>"+${list.questContent}+"</td>";
-						info+="<td>"+${list.questPostdate}+"</td>";
-						info+="</tr>";
-					
-					//테이블의 tr자식이 있으면 tr 뒤에 붙인다. 없으면 테이블 안에 tr을 붙인다.
-						if($("#commentTable tr").contents().size()==0){
-					            $("#commentTable").append(info);
-					        }else{
-					            $("#commentTable tr:last").after(info);
-					        }
-					   $("#commentParentText").val("");
-					} */
-				});//ajax	
-				}//else */ */
-		     });//댓글달기click  */
-		
-		     
 
 	/*판매 음식 삭제하기*/
 	$("#deleteFood").click(function() {
@@ -304,11 +269,7 @@
 
 <!-- 댓글달기 -->
 
-		<form>
-			 <textarea id="questContent" name="questContent" class="form-control col-lg-12" rows="4" style="resize: none; width:80%;height:35px;"></textarea>&nbsp;
-			 <input type="hidden" id="memId" name="memId" value=<sec:authentication property="principal.memId"/>>
-			 <input type="button" id="commentSubmit" name="commentSubmit" class="btn btn-default" value="댓글달기">
-		</form>
+		
 		</div>
 </div>
 

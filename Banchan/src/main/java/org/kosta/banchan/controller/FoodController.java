@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.synth.SynthStyle;
 
 import org.kosta.banchan.model.service.FeedbackService;
 import org.kosta.banchan.model.service.FoodService;
@@ -117,15 +118,17 @@ public class FoodController {
 		Cookie[] cookie= req.getCookies();
 		boolean checkDupl=false;
 		for (int i = 0; i < cookie.length; i++) {
-			System.out.println("--- "+cookie[i].getName()+" : "+cookie[i].getValue());
+			//System.out.println("--- "+cookie[i].getName()+" : "+cookie[i].getValue());
 			if(cookie[i].getName().equals(foodSellNo)) {
 				checkDupl=true;
 				break; // 클릭한 상품이 이미 있으면 탈출
 			}
 		}
+		
 		if(checkDupl) {
 			System.out.println("이미 추가된 상품!");
 		}else {
+			System.out.println(cookie.length);
 			if(cookie.length>4) { // 최근클릭 4개 상품만 유지
 				Cookie kc =  new Cookie(cookie[0].getName(),null);
 				kc.setMaxAge(0);
@@ -139,6 +142,9 @@ public class FoodController {
 			c.setMaxAge(60*60*24);
 			resp.addCookie(c);
 		}	
+		for (int i = 0; i < cookie.length; i++) {
+			System.out.println("--- "+cookie[i].getName()+" : "+cookie[i].getValue());
+		}
 		///// End최근 클릭 리스트 코드 추가 광태
 		return "food/foodsell_detail.tiles";
 	}
