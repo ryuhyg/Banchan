@@ -32,19 +32,43 @@ select * from seller
 select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score 
 from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
 s, ban_mem m, address a 
-where m.mem_id=s.mem_id and m.address_no=a.address_no and rownum<=3
+where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3
 
 
-
+select * from QUESTION
 select * from (
 			 select  m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score, 
-			 		  rank() over (order by seller_score desc) as rank,
-			 from seller s, ban_mem m, address a
+			 		 ROW_NUMBER() over (order by seller_score desc) as rank
+			 from seller s, ban_mem m, address a 
 			 )
-where rownum <= 5
-					
-					
-					
-					
-					
-					
+where m.mem_id=s.mem_id and rownum <= 3 
+
+select * from ban_mem where mem_id='java2'
+update seller set seller_score='5' where mem_id='java2' 
+			
+
+
+insert into question(quest_no, quest_content, quest_postdate,food_sell_no, mem_id) 
+values(question_seq.nextval,'되라', sysdate, 101010, 'java')    
+
+
+insert into question(quest_no, quest_content, quest_postdate, food_sell_no, mem_id)
+values(question_seq.nextval, '많이 맵나요?', sysdate, 101010, 'java');
+select * from sequence question_seq nocache;
+
+select * from question_seq;
+
+select quest_no, quest_content, food_sell_no, to_char(to_date(quest_postdate), 'yyyy-mm-dd')as quest_postdate, mem_id
+from question
+where mem_id='java'
+		
+select * from question
+
+select quest_no, quest_content, food_sell_no, to_char(to_date(quest_postdate), 'yyyy-mm-dd')as quest_postdate, mem_id
+FROM question
+WHERE mem_id='java' ORDER BY quest_postdate ASC
+
+
+
+
+
