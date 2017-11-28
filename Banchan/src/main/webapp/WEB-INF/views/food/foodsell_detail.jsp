@@ -11,7 +11,7 @@
     letter-spacing:0;
     display:inline-block;
     margin-left:5px;
-    color:#ccc;
+    color:#ccc; 
     text-decoration:none;
 }
 .star_rating a:first-child {margin-left:0;}
