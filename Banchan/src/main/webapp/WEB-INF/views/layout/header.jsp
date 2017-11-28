@@ -18,8 +18,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<a href="home.do"><img
-						src="${pageContext.request.contextPath}/resources/images/logo/header_logo3.png"
+					<a href="${pageContext.request.contextPath}/home.do">
+					<img src="${pageContext.request.contextPath}/resources/images/logo/header_logo3.png"
 						style="margin-top: -5px; z-index: 1000;"></a>
 				</div>
 				<div class="col-md-4">

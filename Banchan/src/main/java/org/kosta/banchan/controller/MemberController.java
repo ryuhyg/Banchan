@@ -33,7 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MemberController {
+public class MemberController { 
 	@Resource
 	private MemberService memberService;
 	@Resource
@@ -231,6 +231,7 @@ public class MemberController {
 	@RequestMapping("selectSellerTop3.do")
 	public String selectSellerTop3(Model model) {
 		List<SellerVO> list = memberService.selectSellerTop3();
+		/* [영민] 인기 Top3 음식  메서드*/
 		List<FoodVO> flist=foodService.selectFoodTop3();
 		model.addAttribute("list", list);
 		model.addAttribute("flist", flist);
@@ -438,10 +439,39 @@ public class MemberController {
 			slist = memberService.findSellerList(kw);
 			fslist = foodService.findFoodSellList(kw);
 		}
+		mv.addObject("keyword",kw);
 		mv.addObject("slist",slist);
 		mv.addObject("fslist",fslist);
 		mv.setViewName("search/search_result.tiles");
 		return mv;
 	}
+	@RequestMapping("foodSearchMore.do")
+	public ModelAndView foodSearchMore(String kw) {
+		ModelAndView mv = new ModelAndView();
+		List<FoodSellVO> fslist = null;
+		if(kw=="" || kw=="null") {
+			
+		}else {
+			fslist = foodService.findFoodSellList(kw);
+		}
+		mv.addObject("keyword",kw);
+		mv.addObject("fslist",fslist);
+		mv.setViewName("search/foodSearchResult_more.tiles");
+		return mv;
+	} 
+	@RequestMapping("sellerSearchMore.do")
+	public ModelAndView sellerSearchMore(String kw) {
+		ModelAndView mv = new ModelAndView();
+		List<SellerVO> slist=null;
+		if(kw=="" || kw=="null") {
+			
+		}else {
+			slist = memberService.findSellerList(kw);
+		}
+		mv.addObject("keyword",kw);
+		mv.addObject("slist",slist);
+		mv.setViewName("search/sellerSearchResult_more.tiles");
+		return mv;
+	} 
 	/////////////////////// end 윤주 메서드 ///////////////////////////////
 }
