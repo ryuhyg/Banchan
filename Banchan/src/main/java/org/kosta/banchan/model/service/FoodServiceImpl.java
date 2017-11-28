@@ -104,8 +104,6 @@ public class FoodServiceImpl implements FoodService {
 		paramMap.put("endRowNumber", Integer.toString(pagingBean.getEndRowNumber()));
 		paramMap.put("memId", memId);
 
-		System.out.println(foodDAO.getFoodSellInfoByMemId(paramMap));
-
 		return new ListVO<FoodSellVO>(foodDAO.getFoodSellInfoByMemId(paramMap), pagingBean);
 	}
 	/**

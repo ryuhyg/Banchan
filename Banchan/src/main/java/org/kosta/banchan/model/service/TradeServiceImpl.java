@@ -65,16 +65,17 @@ public class TradeServiceImpl implements TradeService {
 	 */
 	@Override
 	public ListVO<TradeVO> getAllSellerTradeList(String sellerId, String pageNo) {
-		System.out.println("sellerId: " + sellerId);
-		System.out.println("pageNo: " + pageNo);
 		int totalPostCount = tradeDAO.getAllSellerTradeCount(sellerId); // 판매자 아이디에 해당하는 총 거래내역 수
-		int nowPage = Integer.parseInt(pageNo); // 현재 페이지
-		PagingBean pb = new PagingBean(totalPostCount, nowPage);
+		PagingBean pb = null;
+		
+		if (pageNo == null)
+			pb = new PagingBean(totalPostCount);
+		else
+			pb = new PagingBean(totalPostCount, Integer.parseInt(pageNo));
 
 		// 해당 jsp 페이지의 페이지당 게시물 개수와 페이지그룹 개수 설정
-		/*
-		 * pb.setPostCountPerPage(10); pb.setPageCountPerPageGroup(5);
-		 */
+		pb.setPostCountPerPage(10); 
+		pb.setPageCountPerPageGroup(5);
 
 		HashMap<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("sellerId", sellerId);
