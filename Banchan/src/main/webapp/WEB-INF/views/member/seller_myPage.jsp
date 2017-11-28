@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<sec:authentication var="mvo" property="principal" />
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication var="mvo" property="principal" />
+ </sec:authorize>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
@@ -378,34 +380,22 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 .home-top {
 	margin-top: 100px;
 }
+#agent-page{
+	margin-top: 150px;
+	align-items: center;
+}
 </style>
 
 
 
-<section id="agent-page" style="margin-top: 150px;">
+<section id="agent-page"  style="margin-top: 150px;">
 	<br>
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-1"></div>
-		   <div class="col-md-9">
-			         <div class="row">
-			             <div class="col-sm-8 col-md-8 col-sm-push-4">
-			                     <input type="hidden" id="sellerId" value="${svo.memId }">
-			                         <sec:authorize access="isAuthenticated()">
-			                             <input type="hidden" id="loginId" value="${mvo.memId }">
-			                         </sec:authorize>
-			                     <h1 class="name" >${svo.memName } </h1>
-			                 <span id="pagingScroll"class="text">
-			        			         주부님 소개
-			                 </span> 
-			                 <div class="bs-callout callout-success">
-			                   <h4 class="title">믿고먹는 주부님</h4>
-			                   <span class="address"><i class="fa fa-map-marker"></i>&nbsp;${svo.addressVO.addressAPI}</span>
-			                   <p class="text">${svo.sellerInfo }</p>
-			                 </div>
-			             </div><!-- /.col-md-8 -->
-			             <div class="col-sm-4 col-md-4 col-sm-pull-8">
+			<div class="col-md-3">
+				<div class="row">
+			   <div class="" style="margin-left: 14px">
 			                 <!-- . Agent Box -->
 			                 <div class="agent-box-card grey">
 			                     <div class="image-content">
@@ -414,7 +404,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			                             <img alt="Image Sample" style="size: inherit;" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
 			                         </div>						
 			                     </div>
-			                     <div class="info-agent">
+			                     <div class="info-agent" >
 			                         <div class="text" style="text-align:center">
 			                                 <b>주부님 별점:</b>
 			                                 <span class="star_rating">  <!-- 별점 표현 -->
@@ -435,17 +425,34 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			                 </div>
 			
 			             </div><!-- /.col-md-4 -->
+				</div>
+			</div>
+		   <div class="col-md-6">
+			         <div class="row">
+			             <div class="" style="margin-left: 20px">
+			                     <input type="hidden" id="sellerId" value="${svo.memId }">			                 
+			                             <input type="hidden" id="loginId" value="${mvo.memId }">		                        
+			                     <h1 class="name" >${svo.memName } </h1>
+			                 <span id="pagingScroll"class="text">
+			        			         주부님 소개
+			                 </span> 
+			                 <div class="bs-callout callout-success" style="width: 100%">
+			                   <h4 class="title">믿고먹는 주부님</h4>
+			                   <span class="address"><i class="fa fa-map-marker"></i>&nbsp;${svo.addressVO.addressAPI}</span>
+			                   <p class="text">${svo.sellerInfo }</p>
+			                 </div>
+			             </div><!-- /.col-md-8 -->
+			          
 			         </div><!-- /.row -->
 			     </div><!-- col-md-9 -->
-			     <div class="col-md-2">  
-			
-			     <sec:authorize access="isAuthenticated()">
+			     <div class="col-md-3">  
+			  <sec:authorize access="isAuthenticated()">
 			 <c:if test="${mvo.memId==svo.memId}">
 			         <div style="margin-bottom: 2px"> 
-			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="width: 70%;" >판매내역보기</a>
+			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="width: 50%;" >판매내역보기</a>
 						</div>
 						<a href="${pageContext.request.contextPath}/foodRegisterForm.do"
-							class="btn btn-default" style="width: 70%">음식 등록</a>
+							class="btn btn-default" style="width: 50%">음식 등록</a>
 					</c:if>
 				</sec:authorize>
 			</div>
