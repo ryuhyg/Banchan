@@ -35,4 +35,35 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 	//////////////// end윤주///////////////////////////
 
+	//////////////// start지원///////////////////////////
+	
+	/** [지원] 등록음식 후기 리스트
+	 * 등록음식 상세페이지에서 해당 음식에 관한 후기 리스트 조회 
+	 * 페이징빈 적용
+	 * 
+	 */
+	@Override
+	public List<ReviewVO> getReviewListByFoodNo(HashMap<String, String> paramMap){
+		return template.selectList("feedback.getReviewListByFoodNo", paramMap);
+	}
+	/** [지원] 등록음식에 해당하는 후기 개수 조회
+	 * 
+	 */
+	@Override
+	public int getAllReviewCountByFoodNo(String foodNo) {
+		return template.selectOne("feedback.getAllReviewCountByFoodNo",foodNo);
+	}
+	//////////////// end지원///////////////////////////
+
 }
+
+
+
+
+
+
+
+
+
+
+

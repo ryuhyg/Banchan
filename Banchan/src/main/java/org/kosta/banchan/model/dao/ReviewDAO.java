@@ -15,4 +15,11 @@ public interface ReviewDAO {
 	int getAllReviewCountByFoodSellNo(String foodSellNo);
 	//////////// end윤주/////////////////////
 
+	//////////// start 지원/////////////////////
+	List<ReviewVO> getReviewListByFoodNo(HashMap<String, String> paramMap);
+
+	int getAllReviewCountByFoodNo(String foodNo);
+	
+	//////////// end 지원/////////////////////
+
 }
