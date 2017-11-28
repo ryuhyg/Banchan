@@ -233,7 +233,6 @@ public class MemberController {
 		List<SellerVO> list = memberService.selectSellerTop3();
 		/* [영민] 인기 Top3 음식  메서드*/
 		List<FoodVO> flist=foodService.selectFoodTop3();
-		System.out.println("인기 top3 음식이 뭐니? :"+flist);
 		model.addAttribute("list", list);
 		model.addAttribute("flist", flist);
 		return "home.tiles";

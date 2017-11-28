@@ -110,7 +110,10 @@ WHERE mem_id='java' ORDER BY quest_postdate ASC
 where rownum <= 5
 					
 					
-					
+select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score , rnum
+from (select mem_id, seller_score, seller_info, seller_img, row_number() over(order by seller_score desc) as rnum from seller)
+s, ban_mem m, address a 
+where m.mem_id=s.mem_id and m.address_no=a.address_no and rnum<=3					
 					
 					
 
