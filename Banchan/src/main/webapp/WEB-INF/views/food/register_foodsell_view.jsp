@@ -122,11 +122,11 @@
 		</div>
 		<div  class="col-xs-11" ></div>
 		<div  class="col-xs-1" style="float: left ;margin-bottom: 100px;" ><input type="submit" class="btn btn-default"  style="float: left ;margin-bottom: 100px;" value="등록" ></div>
+		<div style="height:20px;"></div>
 		</form>
 		</div> 
 		</div>
 		</div>	
-	
 		<div class="col-sm-1"><!-- right --></div>
 		</div>
 	

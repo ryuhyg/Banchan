@@ -155,40 +155,11 @@ public class FoodController {
 		}
 		clickCoo.setValue(strTemp);
 		resp.addCookie(clickCoo);
-		
-		/*boolean checkDupl=false;
-		for (int i = 0; i < cookie.length; i++) {
-			//System.out.println("--- "+cookie[i].getName()+" : "+cookie[i].getValue());
-			if(cookie[i].getName().equals(foodSellNo)) {
-				checkDupl=true;
-				break; // 클릭한 상품이 이미 있으면 탈출
-			}
-		}
-		for (int i = 0; i < cookie.length; i++) {
-			System.out.println("--- "+cookie[i].getName()+" : "+cookie[i].getValue());
-		}
-		if(checkDupl) {
-			System.out.println("이미 추가된 상품!");
-		}else {
-			System.out.println("cookie.length"+cookie.length);
-		if(cookie.length>4) { // 최근클릭 4개 상품만 유지
-				Cookie kc =  new Cookie(cookie[0].getName(),null);
-				kc.setMaxAge(0);
-				System.out.println("******222***ddd****");
-			    resp.addCookie(kc);
-			    System.out.println("*********ddd****");
-			}
-			FoodSellVO fvo =foodService.getFoodSellDetailByNo(foodSellNo);
-			Cookie c =  new Cookie("34",fvo.getFoodMainImg());
-			c.setComment(foodSellNo);
-			c.setMaxAge(60*60*24);
-			resp.addCookie(c);
-		}	*/
-		///// End최근 클릭 리스트 코드 추가 광태
+
 		return "food/foodsell_detail.tiles";
 	}
 	
-	@RequestMapping("editFoodSellView.do")
+	@RequestMapping("editFoodSellView.do") 
 	public String editFoodSellView(String foodSellNo,Model model) {
 		model.addAttribute("foodSell",foodService.getFoodSellDetailByNo(foodSellNo));
 		return "food/editFoodSellView.tiles";
@@ -240,6 +211,7 @@ public class FoodController {
 		if (file != null && file.isEmpty() == false) {
 			// System.out.println("파일명:"+file.getOriginalFilename());
 			File uploadFile = new File(uploadPath + file.getOriginalFilename());
+			
 			try {
 				file.transferTo(uploadFile);// 실제 디렉토리로 파일을 저장한다
 				System.out.println("-------------------------------------------");
@@ -271,11 +243,12 @@ public class FoodController {
 	}
 
 	@RequestMapping("foodDetailView.do")
-	public String foodDetailView(String foodNo, Model model) {
-		System.out.println("음식번호 테스트:" + foodNo);
+	public String foodDetailView(String foodNo, String pageNo, Model model) {
 		FoodVO food = foodService.getFoodMemInfo(foodNo);
-		System.out.println("food결과 :" + food);
 		model.addAttribute("food", food);
+		
+		// 지원 후기 리스트 추가
+		model.addAttribute("rlist", feedbackService.getReviewListByFoodNo(foodNo, pageNo));
 		
 		return "food/foodDetailView.tiles";
 	}
@@ -309,6 +282,7 @@ public class FoodController {
 	@RequestMapping("updateRegViewFood.do")
 	public String updateRegViewFood(String foodNo, Model model, String memId) {
 		System.out.println("수정하기 전 foodNo:" + foodNo);
+		System.out.println("받아오는 ID 값이 뭐니? :"+memId);
 		String message = "";
 		List<FoodVO> foodlist = foodService.selectRegFoodByNo(foodNo);
 		if (foodlist.size() == 0) {

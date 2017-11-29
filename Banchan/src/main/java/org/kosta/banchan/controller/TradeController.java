@@ -70,14 +70,14 @@ public class TradeController {
 	 */
 	@Secured("ROLE_SELLER")
 	@RequestMapping("completeTrade.do")
-	public String completeTrade(String tradeNo) {
+	public String completeTrade(String tradeNo, String pageNo) {
 		tradeService.completeTrade(tradeNo);
 		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
 			return "redirect:loginView.do";
 		} else {
 			MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			System.out.println("mvo Id: " + mvo.getMemId());
-			return "redirect:getAllSellerTradeList.do?sellerId=" + mvo.getMemId();
+			return "redirect:getAllSellerTradeList.do?sellerId=" + mvo.getMemId()+"&pageNo="+pageNo;
 		}
 	}
 
