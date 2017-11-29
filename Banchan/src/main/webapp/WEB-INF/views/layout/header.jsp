@@ -24,7 +24,7 @@
 					<img src="${pageContext.request.contextPath}/resources/images/logo/header_logo4.png"
 						style="margin-top: -2px; z-index: 1000; width: 200px"></a>  
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3"> 
 				</div>
 				<div class="col-md-1">
 					  <span id="spinner-show2"  style="color: black; font-weight: bold; margin-top: 20px">
