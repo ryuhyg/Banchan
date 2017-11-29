@@ -36,6 +36,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- End 향걸 -->
 
 	<!-- Start 지원 -->
+	<!-- 등록음식 번호에 해당하는 후기 리스트 -->
+	<select id="getReviewListByFoodNo" parameterType="map" resultType="reviewVO" >
+		select r.rev_no,r.score,r.rev_postdate,r.rev_content,r.mem_id
+		from(
+			select row_number() over(order by rev_no desc) as
+			rnum,rev_no,score,rev_postdate,rev_content,food_no,mem_id
+			from review
+			)r,food f
+		where f.food_no=#{foodNo} and f.food_no=r.food_no and
+				r.rnum between #{startRowNumber} and #{endRowNumber}
+		order by r.rev_postdate desc
+	</select>
+	<!-- 등록음식 번호에 해당하는 후기 개수 -->
+	<select id="getAllReviewCountByFoodNo" parameterType="string" resultType="int">
+		select count(*)
+		from review r, food f
+		where f.food_no=#{value} and r.food_no=f.food_no
+	</select>
+	
+	
 	<!-- End 지원 -->
 
 	<!-- Start 영민 -->
@@ -54,6 +74,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		where mem_id=#{value}
 	</update>
+	<update id="updateFoodScore" parameterType="string">
+		update food set food_score=
+		(select round(sum(score)/count(*),1)
+		from review r,food f
+		where f.food_no=#{value} and r.food_no=f.food_no )
+		where food_no=#{value}
+	</update>
 	<select id="getReviewListByFoodSellNo" parameterType="map"
 		resultType="reviewVO" >
 		select r.rev_no,r.score,r.rev_postdate,r.rev_content,r.mem_id
@@ -70,7 +97,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*)
 		from review r, food_sell fs
 		where fs.food_sell_no=#{value} and r.food_no=fs.food_no
-
 	</select>
 	<!-- End 윤주 -->
 </mapper>

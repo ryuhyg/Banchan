@@ -195,6 +195,96 @@
   -webkit-transition: 0.3s all ease-in-out;
 }
 /* #spinner-show */
+
+/* 4.1.3 SPINNER HEADER
+================================== */
+#spinner-show2 {
+  color: #1fb7a6;
+  display: inline-block;
+  position: relative;
+  font-weight: 400;
+  -moz-transition: 0.6s width ease-out;
+  -ms-transition: 0.6s width ease-out;
+  -o-transition: 0.6s width ease-out;
+  transition: 0.6s width ease-out;
+  -webkit-transition: 0.6s width ease-out;
+}
+#spinner-show2 em {
+  font-style: normal;
+}
+#spinner-show2 .current2 {
+  white-space: nowrap;
+  -webkit-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+#spinner-show2 .next2 {
+  /*pointer-events: none;*/
+  width: 500px;
+  margin-left: -250px;
+  white-space: nowrap;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity-ie)";
+  opacity: 0;
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  -webkit-transform: translateY(15%);
+  -moz-transform: translateY(15%);
+  -ms-transform: translateY(15%);
+  -o-transform: translateY(15%);
+  transform: translateY(15%);
+  -webkit-transform-origin: 0 100%;
+  -moz-transform-origin: 0 100%;
+  -o-transform-origin: 0 100%;
+  -ms-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  position: absolute !important;
+  top: 0;
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  z-index: 1;
+}
+#spinner-show2.swap2 .current2{
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity-ie)";
+  opacity: 0;
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+  -moz-transition: 0.3s all ease-in-out;
+  -ms-transition: 0.3s all ease-in-out;
+  -o-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+  -webkit-transition: 0.3s all ease-in-out;
+}
+#spinner-show2.swap2 .next2 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity-ie)";
+  opacity: 1;
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+  -moz-transition: 0.3s all ease-in-out;
+  -ms-transition: 0.3s all ease-in-out;
+  -o-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+  -webkit-transition: 0.3s all ease-in-out;
+}
+/* #spinner-show2 */
+
 /* 4.1.4 SUBMIT SECTION
 ================================== */
 #submit-property {

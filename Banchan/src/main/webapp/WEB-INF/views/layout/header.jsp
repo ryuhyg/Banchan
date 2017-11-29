@@ -18,19 +18,30 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<a href="home.do"><img
-						src="${pageContext.request.contextPath}/resources/images/logo/header_logo3.png"
+					<a href="${pageContext.request.contextPath}/home.do">
+					<img src="${pageContext.request.contextPath}/resources/images/logo/header_logo3.png"
 						style="margin-top: -5px; z-index: 1000;"></a>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<form action="searchByKeyword.do">
 						<div class="newsletter-box" style="margin-top: 10px;">
-							<input type="text" style="border-radius: 1px" placeholder="검색" name="kw">
+							<input type="text" style="border-radius: 13px" placeholder="검색" name="kw">
 							<button class="btn btn-default send" type="submit">
 								<i class="fa fa-envelope-o"></i>
 							</button>
 						</div><!-- /input-group -->
 					</form>
+				</div>
+				<div class="col-md-1">
+					  <span id="spinner-show2"  style="color: black; font-weight: bold; margin-top: 20px">
+						  <em class="current2" style="color: black; font-weight: bold; margin-top: 20px"></em>
+						  <span class="next2"  style="margin-left: -25px"><span></span></span>
+					  </span>
+						<ul id="spinner2">
+						<c:forEach items="${rlist}" var="kw">
+							 <li>${pw.keyword}</li>
+						</c:forEach>
+						</ul>
 				</div>
 				<div id="login-pan" class="col-md-4">
 					<sec:authorize access="!isAuthenticated()">

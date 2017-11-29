@@ -104,8 +104,6 @@ public class FoodServiceImpl implements FoodService {
 		paramMap.put("endRowNumber", Integer.toString(pagingBean.getEndRowNumber()));
 		paramMap.put("memId", memId);
 
-		System.out.println(foodDAO.getFoodSellInfoByMemId(paramMap));
-
 		return new ListVO<FoodSellVO>(foodDAO.getFoodSellInfoByMemId(paramMap), pagingBean);
 	}
 	/**
@@ -115,6 +113,14 @@ public class FoodServiceImpl implements FoodService {
 	@Override
 	public void deleteFoodSell(String foodSellNo) {
 			foodDAO.deleteFoodSell(foodSellNo);
+	}
+	
+	/**
+	 * [우정] 판매자의 판매중 음식 숫자를 보여준다
+	 */
+	@Override
+	public int totalFoodSellCountByMemId(String memId) {
+		return foodDAO.totalFoodSellCountByMemId(memId);
 	}
 
 	/*
