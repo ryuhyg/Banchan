@@ -432,7 +432,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			                 </span> 
 			                 <div class="bs-callout callout-success" style="width: 100%">
 			                   <h4 class="title"><i class="fa fa-quote-left" aria-hidden="true" style="font-size: 30px; color: #5e5e5e; margin-right: 10px"></i>믿고먹는 주부님</h4>
-			                   <span class="address" style="color: #5e5e5e"><i class="fa fa-map-marker" style="padding-left: 43px"></i>&nbsp;${svo.addressVO.addressAPI}</span>
+			                   <span class="address" style="color: #5e5e5e"><i class="fa fa-map-marker" style="padding-left: 43px; padding-top: 10px"></i>&nbsp;${svo.addressVO.addressAPI}</span>
 			                   <p class="text" style="padding-left: 42px">${svo.sellerInfo }<i class="fa fa-quote-right" aria-hidden="true" style="font-size: 30px; color: #5e5e5e; margin-left: 10px"></i></p>
 			                 </div>
 			             </div><!-- /.col-md-8 -->
