@@ -735,7 +735,7 @@
 }
 .bs-callout.callout-success {
   color: #a6d272;
-  border-left-color: #94c853;
+  border-left-color: #94c853; 
 }
 .bs-callout.callout-info {
   color: #91c8cb;
