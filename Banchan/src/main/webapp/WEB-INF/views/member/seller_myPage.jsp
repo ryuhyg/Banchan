@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-	<sec:authorize access="isAuthenticated()">
+
+<sec:authorize access="isAuthenticated()">
 		<sec:authentication var="mvo" property="principal" />
  </sec:authorize>
 <script type="text/javascript"
@@ -260,6 +261,7 @@
 					});
 </script>
 <style type="text/css">
+
 /*tab*/
 ul.tab {
 	margin: 0;
@@ -325,34 +327,6 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 	border: 5px solid gray;
 	margin: 0;
 }
-/*페이징*/
-.pagination {
-	display: inline-block;
-	text-align: center;
-}
-
-.pagination a {
-	color: black;
-	float: left;
-	padding: 8px 16px;
-	text-decoration: none;
-	transition: background-color .3s;
-	font-size: 13px;
-}
-
-.pagination a.active {
-	background-color: #000;
-	color: white;
-}
-
-.pagination a:hover:not (.active ) {
-	background-color: #ddd;
-}
-
-#paginationContainer {
-	text-align: center;
-}
-
 /*별점*/
 .star_rating {
 	font-size: 0;
@@ -403,24 +377,29 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			                             <img alt="Image Sample" style="width:270px;height:250px" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
 			                         </div>						
 			                     </div>
-			                     <div class="info-agent" >
-			                         <div class="text" style="text-align:center">
+			                    <!--  <div class="info-agent" > -->
+			                     <%--별점 위치 변경 --%>
+			                         <%-- <div class="text" style="text-align:center">
 			                               		 판매자 별점:<b>   ${svo.sellerScore}</b><br>
 			                                 <span class="star_rating">  <!-- 별점 표현 -->
-			                                       <c:forEach begin="1" end="${svo.sellerScore}">
+			                                     <c:forEach begin="1" end="${svo.sellerScore}">
 			                                          <a class="on">★</a>
 			                                     </c:forEach>
-			                                    </span>
-			                             <%-- <b>별점:${svo.sellerScore}</b> --%>
-			                         </div>
-			                         <ul class="contact">
+			                                     <c:forEach begin="1" end="${5-list.getSellerScore()}">
+    													<a>★</a>
+   												</c:forEach>
+			                                  </span>
+			                             <b>별점:${svo.sellerScore}</b>
+			                         </div> --%>
+			                       <%--sns 연결 보류 --%>
+			                        <!--  <ul class="contact">
 			                             <li><a class="icon" href="#"><i class="fa fa-facebook"></i></a></li>
 			                             <li><a class="icon" href="#"><i class="fa fa-google-plus"></i></a></li>
 			                             <li><a class="icon" href="#"><i class="fa fa-twitter"></i></a></li>
 			                             <li><a class="icon" href="#"><i class="fa fa-envelope-o"></i></a></li>
 			                             <li><a class="icon" href="agent-detail.html"><i class="fa fa-info-circle"></i></a></li>
-			                         </ul>
-			                     </div>
+			                         </ul> 
+			                     </div>-->
 			                 </div>
 			
 			             </div><!-- /.col-md-4 -->
@@ -431,9 +410,18 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			             <div class="" style="margin-left: 20px">
 			                     <input type="hidden" id="sellerId" value="${svo.memId }">			                 
 			                             <input type="hidden" id="loginId" value="${mvo.memId }">		                        
-			                     <h1 class="name" >${svo.memName } </h1>
+			                     <b style="font-size: 30px;font-weight: bold" class="name">${svo.memName } </b> 
+			                      <span class="star_rating">  <!-- 별점 표현 -->
+			                               <c:forEach begin="1" end="${svo.sellerScore}">
+			                                     <a class="on">★</a>
+			                               </c:forEach>
+			                               <c:forEach begin="1" end="${6-svo.sellerScore}">
+    												<a>★</a>
+   											</c:forEach>
+			                       </span>
+   											&nbsp;&nbsp;&nbsp;&nbsp; 판매자 별점:<b>   ${svo.sellerScore}</b><br>
 			                 <span id="pagingScroll"class="text">
-			        			         주부님 소개
+			        			        <br><br> 주부님 소개
 			                 </span> 
 			                 <div class="bs-callout callout-success" style="width: 100%">
 			                   <h4 class="title">믿고먹는 주부님</h4>
@@ -479,17 +467,33 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 											href="${pageContext.request.contextPath}/foodDetailView.do?foodNo=${food.foodNo}">
 											<%-- 	<input type="hidden" id="foodNo" value="${food.foodNo }"> --%>
 
-											<span class="cover"></span> <img alt="Sample images"
+											<span class="cover" style="height: 10px"></span> <img alt="Sample images"
 											style="width:100%;height:100%;"
 											src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}">
 											<h3 class="title">${food.foodName}</h3>
-										</a> <span class="description">${food.foodDe}</span>
-										<!-- <dl style="display:inline-block; height:60px"  class="detail" > -->
-										<dl class="detail">
-											<dt class="status">별점:</dt>
-											<dd>
-												<span>${food.foodScore}</span>
-											</dd>
+										</a> 
+										<span class="description">${food.foodDe}</span>
+										 <dl style="display:inline-block;height:70px"  class="detail" > 
+										<!-- <dl class="detail"> -->
+										<table style="font-size=12px;">
+											<tr>
+											<td >
+											<!-- <small><i class="fa fa-star fa-fw" ></i></small> -->
+											         <a class="star_rating.on" style="color: #ffcc00">★</a>
+			                                    <b style="font-size: 12px">별점 :&nbsp;&nbsp;${food.foodScore}</b> </td>
+											</tr>
+											<tr>
+											<c:choose>
+											<c:when test="${food.sellCheck==1}">
+											<td><b style="font-size: 12px">판매중 상품이</b><b style="color:blue;font-size: 12px"> 있습니다.</b></td>
+											</c:when>
+											<c:otherwise>
+											<td><b style="font-size: 12px">판매중 상품이 </b><b style="color:red;font-size: 12px"> 없습니다.</b></td>
+											</c:otherwise>
+											</c:choose>
+											</tr>
+										</table>
+										
 										</dl>
 										<sec:authorize access="isAuthenticated()">
 											<c:if test="${mvo.memId==svo.memId}">

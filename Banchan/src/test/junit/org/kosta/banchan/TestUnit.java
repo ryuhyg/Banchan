@@ -126,11 +126,12 @@ public class TestUnit {
 		//System.out.println("uuuu1 회원에 대한 Top3 음식 :"+list);
 		
 		
-		HashMap<String,String> paramMap=new HashMap<String,String>();
+		System.out.println(foodDAO.getFoodListByMemId("aaaa"));
+		/*HashMap<String,String> paramMap=new HashMap<String,String>();
 		paramMap.put("startRowNumber","1");
 		paramMap.put("endRowNumber","3");
 		paramMap.put("foodSellNo", "101056");
 		System.out.println(reviewdao.getReviewListByFoodSellNo(paramMap));
-	
+		 */
 	}
 }

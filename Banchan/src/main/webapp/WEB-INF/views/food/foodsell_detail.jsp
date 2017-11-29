@@ -267,23 +267,6 @@
 	</div>
 	
 
-<hr>
-<div class="container">
-		<div class="row">
-		<h4>QnA</h4>		
-
-<!-- 댓글달기 -->
-
-
-		<form>
-			 <textarea id="questContent" name="questContent" class="form-control col-lg-12" rows="4" style="resize: none; width:80%;height:35px;"></textarea>&nbsp;
-			 <input type="hidden" id="memId" name="memId" value="">
-			 <input type="button" id="commentSubmit" name="commentSubmit" class="btn btn-default" value="댓글달기">
-		</form>
-
-		
-		</div>
-</div>
 
 </section>	<!-- recent-list -->			
 

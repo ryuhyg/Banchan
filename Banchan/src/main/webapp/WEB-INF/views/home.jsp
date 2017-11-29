@@ -60,7 +60,7 @@
 
 
 <!--  링크 테스트 섹션 -->
-	<%-- <section id="recent-list">
+	<section id="recent-list">
 			<div class="section-detail" style="border: 1px solid red">
 		
 			
@@ -84,7 +84,7 @@
 			</sec:authorize>
 			
 		</div>
-	</section> --%>
+	</section>
 <!--  링크 섹션끝 -->
 
 
