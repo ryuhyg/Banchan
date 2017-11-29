@@ -16,6 +16,24 @@
 <!-- location 끝 -->
 	<!-- 광태 추가 --><!-- confirm -->
 
+ <!-- 별점 style부분 ************************* -->
+ <style type="text/css"> /* 별점 css */
+.star_rating {font-size:0; letter-spacing:-4px;}
+.star_rating a {
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+}
+.star_rating a:first-child {margin-left:0;}
+.star_rating a.on {color:#ffcc00;}
+.home-top{
+   margin-top: 100px;
+}
+</style> 
+
   
 <script>
 
@@ -122,15 +140,28 @@ $(document).ready(function() {
 	    			 var strTemp="";
 	    			 //alert(data.pb.previousPageGroup);
 	    			 for (var i = 0; i < data.list.length; i++) {
-	    				 strTemp +="<tr><td rowspan='3'>"+
+	    				 strTemp +="<tr><td rowspan='2'>"+
 	    	 				"<a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId="+data.list[i].memId+"'>"+
-	    	 				"<img src='/banchan/resources/images/"+data.list[i].sellerImg+"' style='width: 100px;height:100px;'>"+
+	    	 				"<img src='/banchan/resources/images/"+data.list[i].sellerImg+"' style='width: 100px;height:100px; margin: 0px;'>"+
 	    	 				"</a>"+
 	    	 				"</td>"+
 	    	 				"<td> <a href='#'>"+data.list[i].memId+"</a> </td>"+
 	    	 				"</tr>"+			
-	    	 				"<tr><td>"+"별점 :"+data.list[i].sellerScore+"</td></tr>"+
-	    	  				"<tr><td>"+"판매자 소개:"+ data.list[i].sellerInfo+'</td></tr>';
+	    	 				"<tr><td>"+"별점 :"
+	                        +'<span class="star_rating">'; 
+	                      	 for (var j = 1; j <=data.list[i].sellerScore; j++) {
+	                    	   strTemp +='<a class="on">★</a>';
+							}
+		                      if( (5-data.list[i].sellerScore)<1 && (5-data.list[i].sellerScore)!=0 ){
+		                    	  for (var k = 1; k < (5-data.list[i].sellerScore)+1 ; k++) {
+		                    		  strTemp +='<a>★</a>';
+								}	 
+		                      }else{
+		                    	  for (var q = 1; q < (5-data.list[i].sellerScore); q++) {
+		                    		  strTemp +='<a>★</a>';
+								}
+		                      }
+		                      strTemp+='</span>'+data.list[i].sellerScore+"</td></tr>";
 						
 					}
 	    			 var strTempPaging="";
@@ -185,6 +216,7 @@ $(document).ready(function() {
 								<tr>
 									<td>지도에서 마커를 클릭하세요! </td>
 								</tr>				
+							
 							</tbody>					
 							</table>
 							<div class="pagingInfo" id="pagingDivId" style="text-align: center;">
@@ -202,6 +234,9 @@ $(document).ready(function() {
 							<input type="hidden" id="longitudeId" name="longitude" value="">
 						</form>
 						<input type="hidden" id="addressNoId" value="">
+						
+		                     
+		                       
 					</div>
 				</div>
 	</div>
@@ -232,9 +267,9 @@ $(document).ready(function() {
 	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 	////////////////////////////
 	
-	var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+	var imageSrc = 'http://icon-park.com/imagefiles/location_map_pin_orange7.png', // 마커이미지의 주소입니다    
     imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
-    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+    imageOption = {offset: new daum.maps.Point(17, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
       
 	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 	var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
@@ -249,7 +284,13 @@ $(document).ready(function() {
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
 		
-	
+	var imageSrc2 = 'https://www.google.co.kr/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwiLu5Wih-PXAhWCFpQKHcwQC6QQjBwIBA&url=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2016%2F03%2F08%2F13%2F58%2Flocation-1244030_960_720.png&psig=AOvVaw1GUvAcaHRW25zOproAQnyV&ust=1512019902417179',  // 마커이미지의 주소입니다    
+    imageSize2 = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
+    imageOption2 = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+      
+	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+	var markerImage2 = new daum.maps.MarkerImage(imageSrc2, imageSize2, imageOption2);
+	 
 	
 	// 마커를 표시할 위치와 title 객체 배열입니다 
 	var positions = [	
@@ -265,7 +306,8 @@ $(document).ready(function() {
 	    // 마커를 생성합니다
 	    var marker = new daum.maps.Marker({
 	        map: map, // 마커를 표시할 지도
-	        position: positions[i].latlng // 마커의 위치
+	        position: positions[i].latlng // 마커의 위치 
+	     
 	    });
 	    var iwContent = '<div style="padding:5px;">주부님 보기</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
@@ -311,15 +353,27 @@ $(document).ready(function() {
 	    			 var strTemp="";
 	    			 //alert(data.pb.previousPageGroup);
 	    			 for (var i = 0; i < data.list.length; i++) {
-	    				 strTemp +="<tr><td rowspan='3'>"+
+	    				 strTemp +="<tr><td rowspan='2'>"+
 	    	 				"<a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId="+data.list[i].memId+"'>"+
-	    	 				"<img src='/banchan/resources/images/"+data.list[i].sellerImg+"' style='width: 100px;height:100px;'>"+
+	    	 				"<img src='/banchan/resources/images/"+data.list[i].sellerImg+"' style='width: 100px; height:100px; margin: 0px;'>"+
 	    	 				"</a>"+
 	    	 				"</td>"+
 	    	 				"<td> <a href='#'>"+data.list[i].memId+"</a> </td>"+
 	    	 				"</tr>"+			
-	    	 				"<tr><td>"+"별점 : "+data.list[i].sellerScore+"</td></tr>"+
-	    	  				"<tr><td>"+"판매자 소개:"+ data.list[i].sellerInfo+'</td></tr>';
+	    	 				"<tr><td>"+"별점 : "+'<span class="star_rating">'; 
+                      	 for (var j = 1; j <=data.list[i].sellerScore; j++) {
+	                    	   strTemp +='<a class="on">★</a>';
+							}
+		                      if( (5-data.list[i].sellerScore)<1 && (5-data.list[i].sellerScore)!=0 ){
+		                    	  for (var k = 1; k <= (5-data.list[i].sellerScore) ; k++) {
+		                    		  strTemp +='<a>★</a>';
+								}	 
+		                      }else{
+		                    	  for (var q = 1; q < (5-data.list[i].sellerScore); q++) {
+		                    		  strTemp +='<a>★</a>';
+								}
+		                      }
+		                      strTemp+='</span>'+data.list[i].sellerScore+"</td></tr>";
 						
 					}
 	    			 var strTempPaging="";
