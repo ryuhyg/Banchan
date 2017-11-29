@@ -11,6 +11,7 @@ import org.kosta.banchan.model.dao.ReviewDAO;
 import org.kosta.banchan.model.vo.AnswerVO;
 import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.PagingBean;
+import org.kosta.banchan.model.vo.QuestionVO;
 import org.kosta.banchan.model.vo.ReviewVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,9 +31,11 @@ public class FeedbackServiceImpl implements FeedbackService {
 	//////////////// start윤주/////////////////////////
 	@Transactional
 	@Override
-	public void reviewRegister(ReviewVO rvo, String memId) {
+	public void reviewRegister(ReviewVO rvo, String memId,String foodNo) {
+		System.out.println(foodNo);
 		reviewDAO.reviewRegister(rvo);
 		reviewDAO.updateSellerScore(memId);
+		reviewDAO.updateFoodScore(foodNo);
 	}
 	@Override
 	public ListVO<ReviewVO> getReviewListByFoodSellNo(String foodSellNo, String pageNo) {
@@ -66,8 +69,60 @@ public class FeedbackServiceImpl implements FeedbackService {
 		return answerDAO.findAnswerByAnsNo(ansNo);
 	}
 	////////////////// end윤주///////////////////////////
+
+	////////////////// start 지원///////////////////////////
+	/**[지원] 등록음식에 해당하는 후기 리스트
+	 * 등록음식 상세페이지에서 해당 등록음식 번호에 해당하는 후기 리스트 조회
+	 * 
+	 * @param foodNo
+	 * @param pageNo
+	 * @return
+	 */
+	@Override
+	public ListVO<ReviewVO> getReviewListByFoodNo(String foodNo, String pageNo){
+		int totalPostCount= reviewDAO.getAllReviewCountByFoodNo(foodNo); 
+		PagingBean pagingBean = null;
+		if (pageNo == null) 
+			pagingBean= new PagingBean(totalPostCount);
+		else {
+			int nowPage=Integer.parseInt(pageNo);
+			pagingBean=new PagingBean(totalPostCount, nowPage);
+		}
+		
+		HashMap<String, String> paramMap=new HashMap<String, String>();
+		
+		paramMap.put("foodNo", foodNo);
+		paramMap.put("startRowNumber", String.valueOf(pagingBean.getStartRowNumber()));
+		paramMap.put("endRowNumber", String.valueOf(pagingBean.getEndRowNumber()));
+		
+		ListVO<ReviewVO> lvo=new ListVO<ReviewVO>(reviewDAO.getReviewListByFoodNo(paramMap),pagingBean);
+		return lvo;
+	}
+	
+	////////////////// end 지원///////////////////////////
+
 	
 	//////////////////start정훈///////////////////////////
-	
+	//댓글 목록
+	@Override
+	public List<QuestionVO> commentList(){
+		return questionDAO.commentList();
+	}
+	//댓글 작성
+	@Override
+	public int commentInsert(QuestionVO qvo) {
+		return questionDAO.commentInsert(qvo);
+	}
+	//댓글 수정
+	@Override
+	public int commentUpdate(QuestionVO qvo) {
+		return questionDAO.commentUpdate(qvo);
+	}
+	//댓글 삭제
+	@Override
+	public int commentDelete(QuestionVO qvo) {
+		return questionDAO.commentDelete(qvo);
+	}
 	//////////////////end정훈///////////////////////////
 }
+

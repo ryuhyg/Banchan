@@ -11,6 +11,8 @@
 		});
 	});
 </script>		
+
+
 <header class="menu-base" id="header-container-box"
 	style="top: 0px !important;">
 	<div class="info" style="height: 50px;">
@@ -22,15 +24,9 @@
 					<img src="${pageContext.request.contextPath}/resources/images/logo/header_logo3.png"
 						style="margin-top: -5px; z-index: 1000;"></a>
 				</div>
-				<div class="col-md-4">
-					<form action="searchByKeyword.do">
-						<div class="newsletter-box" style="margin-top: 10px;">
-							<input type="text" style="border-radius: 1px" placeholder="검색" name="kw">
-							<button class="btn btn-default send" type="submit">
-								<i class="fa fa-envelope-o"></i>
-							</button>
-						</div><!-- /input-group -->
-					</form>
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-1">
 				</div>
 				<div id="login-pan" class="col-md-4">
 					<sec:authorize access="!isAuthenticated()">
@@ -92,7 +88,10 @@
 	<!-- /.info -->
 	<div class="menu-navbar" style="z-index: -1;">
 		<div class="container" id="menu-nav">
-			<nav id="navigation" style="margin-left: 30px">
+			<div class="col-sm-2">
+			</div> 
+			<div class="col-sm-7">
+			<nav id="navigation" style="margin-left: 140px">    
 				<ul>
 					<li class="has_submenu"><a href="">Home</a>
 						<ul>
@@ -112,10 +111,38 @@
 							<li><a href="">공지사항</a></li>
 							<li><a href="">QnA</a></li>
 						</ul></li>
-				</ul>
+				</ul> 
 			</nav>
+			</div>  
+			<div class="col-sm-3">			
+				<form action="searchByKeyword.do">
+						<div class="" style="margin-top: 10px; padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;">
+							<input type="text" style="    border: 0; width:85%; box-shadow: none; " placeholder="검색" name="kw"> 
+							<span><button style="  margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;" class="" type="submit">
+								<i class="fa fa-envelope-o"></i>
+							</button></span>
+						</div>
+					</form>
+			</div>
+				<%-- 	 <span id="spinner-show2"  style="color: black; font-weight: bold; margin-top: 20px">
+						  <em class="current2" style="color: black; font-weight: bold; margin-top: 20px"></em>
+						  <span class="next2"  style="margin-left: -25px"><span></span></span>
+					  </span>
+						<ul id="spinner2">
+						<c:forEach items="${rlist}" var="kw">
+							 <li>${pw.keyword}</li>
+						</c:forEach> 
+						</ul>		 --%>
 		</div>
-
 	</div>
 	<!-- /.menu -->
 

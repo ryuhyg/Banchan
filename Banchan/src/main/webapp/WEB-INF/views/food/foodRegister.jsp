@@ -10,7 +10,7 @@ function getimagereview(html, $target) {
         var reader = new FileReader();
         reader.onload = function (e) {
        		//$target.css('display', '');
-	        $target.html('<img src="' + e.target.result + '" alt="" style="width:350px; height:200px;"/>');
+	        $target.html('<img src="' + e.target.result + '" alt="" style="width:350px; height:250px;"/>');
         }
         reader.readAsDataURL(html.files[0]);
     }

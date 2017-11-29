@@ -51,9 +51,12 @@ public interface FoodService {
 	List<FoodVO> getFoodListByMemId(String memId);
 
 	void deleteFoodSell(String foodSellNo);
+	
+	int totalFoodSellCountByMemId(String memId);
 	////////우정 end /////////
 
 	void editFoodSell(FoodSellVO foodSellVO);
+
 
 
 }

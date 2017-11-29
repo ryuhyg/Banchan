@@ -64,23 +64,21 @@
 
 <section id="recent-list" style="margin-top: 150px">
 <div class="container">
-	<div class="row">
-		<div class="col-sm-1"><!-- left --></div>
-		
-		<div class="col-sm-10" >
-			<div class="blog-list blog-detail">
-		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매등록</h3>
+	<div class="col-sm-1"><!-- left --></div>
+	
+	<div class="col-sm-10" >
+	<div class="blog-list blog-detail">
+	<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매등록</h3>
 
- 
 		<form  class="form-large grey-color" action="${pageContext.request.contextPath}/registerFoodSell.do?foodNo=${fvo.foodNo}" method="post"  id="regForm" >
 		<sec:csrfInput/><%-- csrf 토큰 --%>
-		<div>
-		<h4 class="title-form" style="padding-left: 15px; font-weight: bold; padding-top: 8px">${fvo.foodName }</h4>
-		</div>
 		<div class="col-xs-6" style="float: left" class="row">
-			<img style="padding-top: 15px" width="350px" height="250px" src="${pageContext.request.contextPath}/resources/images/${fvo.foodMainImg}" > 
+			<img style="padding-top: 10px" width="350px" height="250px" src="${pageContext.request.contextPath}/resources/images/${fvo.foodMainImg}" > 
 		</div>
 		<div  class="col-xs-6" style="float:right" class="row">
+			<div class="row"> 
+				<h3 class="title-form" style="margin-bottom: 15px">${fvo.foodName }</h3>  
+			</div>
 			<div class="row" >
 				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
 				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" > 
@@ -109,25 +107,24 @@
 				</div>
 		</div>
 		<div class= "row">
-	 		<div  class="container-fluid">										
+	 		<div  class="container-fluid"> 										
 				<label for="sellDetail"><i class="fa fa-ellipsis-h" style="margin-right: 5px;padding-top: 40px"></i>음식 상세정보</label><br>
-				<textarea rows="4" class="" cols="52"  style="width: 100%" readonly="readonly">${fvo.foodDe}</textarea>
+				<textarea rows="4" class="" cols="52"  style="width: 100%; resize: none;" readonly="readonly">${fvo.foodDe}</textarea>
 			</div>
 		</div>				
 		<div class="row">
 	 		<div  class="container-fluid">										
 				<label for="sellDetail"><i class="fa fa-ellipsis-h" style="margin-right: 5px;padding-top: 30px"></i>판매 추가 상세정보</label><br>
-				<textarea rows="10" class="" cols="52" name="sellDetail" style="width: 100%"  required="required"></textarea>
+				<textarea rows="10" class="" cols="52" name="sellDetail" style="width: 100%; resize: none;"  required="required"></textarea>
 			</div>
 		</div>
-		<div  class="col-xs-11" ></div>
-		<div  class="col-xs-1" style="float: left ;margin-bottom: 100px;" ><input type="submit" class="btn btn-default"  style="float: left ;margin-bottom: 100px;" value="등록" ></div>
+		<div class="row" align="center">
+			<input type="submit" class="btn btn-primary btn-lg btn-block" style="width: 100" value="등록하기" >
+		</div>
 		</form>
-		</div> 
-		</div>
-		</div>	
 	
-		<div class="col-sm-1"><!-- right --></div>
-		</div>
-	
-</section>    
+	</div> <!-- blog-list blog-detail -->
+	</div> <!-- col-sm-10  -->
+	<div class="col-sm-1"><!-- right --></div>
+</div><!-- container -->	
+</section>  <!-- recent-list -->   

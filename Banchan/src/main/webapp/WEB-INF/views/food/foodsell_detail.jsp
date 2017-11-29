@@ -3,8 +3,9 @@
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<sec:authorize access="isAuthenticated()">
 <sec:authentication var="mvo" property="principal" />
-
+</sec:authorize>
 <!-- 별점 style부분 ************************* -->
  <style type="text/css"> /* 별점 css */
 .star_rating {font-size:0; letter-spacing:-4px;}
@@ -36,7 +37,8 @@
 			var orderPrice=$(this).val()*$("#price").text();
 			$("#orderPrice").text(orderPrice);
 		}); //change
-
+		
+		
 	/*판매 음식 삭제하기*/
 	$("#deleteFood").click(function() {
 		if(deleteFlag=confirm("삭제하시겠습니까?")){
@@ -51,8 +53,7 @@
 	        			alert("상품이 삭제되었습니다.");
 	        			location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+$("#foodSellNo").val()+"&sellerId="+$("#sellerId").val();
 	        		}
-	        	} 
-	    		
+	        	}  
 			}); //ajax	
 		}
 	}); //delFood click
@@ -74,6 +75,7 @@
 				}); //ajax	
 			}
 		}); //click
+<<<<<<< HEAD
 	
 		 //////////////////////ANSWER_윤주////////////////
 		$("#answerBnt").click(function(){
@@ -106,6 +108,107 @@
 			});//ajax	
 		});//answerSubmit click
 			
+=======
+		
+<<<<<<< HEAD
+		
+//댓글달기!		
+	var foodSellNo = "${foodSell.foodSellNo}"; //게시글 번호
+	 
+	$("[name=commentInsertBtn]").click(function(){ //댓글 등록 버튼 클릭시
+		var insertData = $("[name=commentInsertForm]").serialize(); //commentInsertForm의 내용을 가져옴
+		commentInsert(insertData); //Insert 함수호출(아래)
+	});
+	 
+    //댓글 목록 
+	function commentList(){
+	    $.ajax({
+	        url : "${pageContext.request.contextPath}/commentList.do",
+	        type : "get",
+	        data : {"foodSellNo":foodSellNo},
+	        success : function(data){
+	            var a =""; 
+	            $.each(data, function(key, value){ 
+	                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+	                a += '<div class="commentInfo'+value.questNo+'">'+'댓글번호 : '+value.questNo+' / 작성자 : '+value.memId;
+	                a += '<a onclick="commentUpdate('+value.questNo+'\''+value.questContent+'\');"> 수정 </a>';
+	                a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a> ';
+	                a += '<div class="commentContent'+value.questNo+'"> <p> 내용 : '+value.questContent +'</p>'+'</div>';
+	                a += '</div></div>';
+
+	            });
+
+	          
+	            $(".commentList").html(a);
+	        }
+	    });
+	}
+	//댓글 등록
+	
+	function commentInsert(insertData){
+		 $.ajax({
+	        type : "get",
+	        url : "${pageContext.request.contextPath}/commentInsert.do",
+	        data : insertData,
+	        success : function(data){
+	        	  if(data== 1) {
+	                commentList(); //댓글 작성 후 댓글 목록 reload
+	                $("[name=content]").val("");
+	             }//if
+	        }//success
+	    }); //ajax
+	}//function
+
+	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
+	function commentUpdate(questNo, questContent){
+	    var a ="";
+	    
+	    a += '<div class="input-group">';
+	    a += '<input type="text" class="form-control" name="content_'+questNo+'" value="'+questContent+'"/>';
+	    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+questNo+');">수정</button> </span>';
+	    a += '</div>';
+	    
+	    $('.commentContent'+questNo).html(a);
+	    
+	}
+	 
+	//댓글 수정
+	function commentUpdateProc(questNo){
+	    var updateContent = $("[name=content_"+questNo+"]").val();
+	    
+	    
+	    $.ajax({
+	        url : "${pageContext.request.contextPath}/commentUpdate.do",
+	        type : "get",
+	        data : {"content" : updateContent, "questNo" : questNo},
+	        success : function(data){
+	            if(data == 1) commentList(questNo); //댓글 수정후 목록 출력 
+	        }
+	    });
+	}
+	 
+	//댓글 삭제 
+	function commentDelete(questNo){
+		alert("1");
+	    $.ajax({
+	        url : "${pageContext.request.contextPath}/commentUpdate.do?questNo="+questNo,
+	        type : "get",
+	        success : function(data){
+	            if(data == 1) commentList(foodSellNo); //댓글 삭제후 목록 출력 
+	        }
+	    });
+	}
+		$(document).ready(function(){
+	    commentList(); //페이지 로딩시 댓글 목록 출력 
+		});
+=======
+		$("#loginAndOrder").click(function() {
+			if(confirm("로그인 페이지로 이동합니다."))
+				location.href="${pageContext.request.contextPath}/loginView.do";
+		}); //loginAndOrder click
+	
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 	}); //ready
 
 	function orderFoodConfirm(){
@@ -119,8 +222,9 @@
 		}
 		else
 			return confirm("구매하시겠습니까?");
-		return false;
+		return false; 
 	}
+	
 </script>
 
 <section id="recent-list" class="agency" style="margin-top: 150px">
@@ -183,8 +287,11 @@
 				</div> <!-- row  -->
 				<div class="row col-md-11">
 				<hr>
+				
 					<form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()" >
 					<div class="row"> 
+					<c:choose>
+					<c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
 					 <div class="col-sm-2" style="text-align: right">구매수량:</div>
 					  <div class="col-sm-2">
 				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
@@ -200,22 +307,20 @@
 				      	<label class="control-label" for="거래가격">거래가격:
 						<span id="orderPrice"></span>
 						</label>
-				  
+					</c:when>
+					</c:choose>
 					</div> <!-- row -->
  						
  						<div class="row" align="center">
- 						<sec:authorize access="isAuthenticated()">
 	 						<c:choose>
-	 						<c:when test="${foodSell.memId!=mvo.memId }">
-								<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
-	 						</c:when>
-							<c:otherwise>
-								<input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
-								<input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
-								
-							</c:otherwise> 						
+		 						<c:when test="${foodSell.memId!=mvo.memId}">
+									<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+		 						</c:when>
+								<c:otherwise>
+									<input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
+									<input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
+								</c:otherwise> 						
 	 						</c:choose>
- 						</sec:authorize>
 						</div>
 					</form>
 				</div>
@@ -256,7 +361,7 @@
 						${r.score }
 						</td>
 						<td>${r.revContent }</td>
-						<td>작성자 넣어야댐</td>
+						<td>${r.memId }</td>
 						<td>${r.revPostdate }</td>
 					</tr>
 				</c:forEach>
@@ -290,16 +395,34 @@
 	</div>
 	</div>
 	
+	
+
+<hr>
+<!--  댓글  -->
+    <div class="container">
+        <label for="content">Q&A</label>
+        <form name="commentInsertForm">
+            <div class="input-group">
+               <input type="hidden" name="foodSellNo" value="${foodSell.foodSellNo}"/>
+               <input type="hidden" name="memId" value="${mvo.memId}"/>
+               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+               <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+               </span>
+              </div>
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="commentList"></div>
+    </div>
+
+
 	<!-- QNA "ANSWER"-윤주 -->
 	<hr>
 	<sec:authorize access="isAuthenticated()">
 	<div class="container">
 		<div class="row">
-		   <table id="commentTable" class="table table-condensed mytable">
-
-
-		   </table><!-- 기존 qna 가져오기 -->
-		   
 		   <table class="table table-condensed">
 		    <tr>
 		        <td>
@@ -320,5 +443,4 @@
 	</div> <!-- container -->
 	</sec:authorize>
 </section>	<!-- recent-list -->			
-
 

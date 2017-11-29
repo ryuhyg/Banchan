@@ -72,6 +72,9 @@ function reviewCheck(){
 				<input type="hidden" name="foodSellNo" value="${foodSellNo }">
            	  	<input type="hidden" name="memId" value="${memId }">
            	  	<input type="hidden" name="foodNo" value="${foodNo }">
+           	  	  <sec:authorize access="isAuthenticated()">
+			            <input type="hidden" name="writerId" value="${mvo.memId }">
+			      </sec:authorize>
               <br>
            	  <span style="float:right;">
            	  <input type="submit" class="btn btn-danger" value="후기작성">
