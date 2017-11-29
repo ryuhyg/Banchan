@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.plaf.synth.SynthStyle;
 
 import org.kosta.banchan.model.service.FeedbackService;
 import org.kosta.banchan.model.service.FoodService;
@@ -132,9 +131,9 @@ public class FoodController {
 			if(cookie.length>4) { // 최근클릭 4개 상품만 유지
 				Cookie kc =  new Cookie(cookie[0].getName(),null);
 				kc.setMaxAge(0);
-				System.out.println("******222***ddd****");
+				//System.out.println("******222***ddd****");
 			    resp.addCookie(kc);
-			    System.out.println("*********ddd****");
+			   // System.out.println("*********ddd****");
 			}
 			FoodSellVO fvo =foodService.getFoodSellDetailByNo(foodSellNo);
 			Cookie c =  new Cookie(foodSellNo,fvo.getFoodMainImg());
@@ -145,6 +144,7 @@ public class FoodController {
 		for (int i = 0; i < cookie.length; i++) {
 			System.out.println("--- "+cookie[i].getName()+" : "+cookie[i].getValue());
 		}
+	
 		///// End최근 클릭 리스트 코드 추가 광태
 		return "food/foodsell_detail.tiles";
 	}
@@ -201,6 +201,7 @@ public class FoodController {
 		if (file != null && file.isEmpty() == false) {
 			// System.out.println("파일명:"+file.getOriginalFilename());
 			File uploadFile = new File(uploadPath + file.getOriginalFilename());
+			
 			try {
 				file.transferTo(uploadFile);// 실제 디렉토리로 파일을 저장한다
 				System.out.println("-------------------------------------------");

@@ -3,8 +3,9 @@
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<sec:authorize access="isAuthenticated()">
 <sec:authentication var="mvo" property="principal" />
-
+</sec:authorize>
 <!-- 별점 style부분 ************************* -->
  <style type="text/css"> /* 별점 css */
 .star_rating {font-size:0; letter-spacing:-4px;}
@@ -36,7 +37,6 @@
 			var orderPrice=$(this).val()*$("#price").text();
 			$("#orderPrice").text(orderPrice);
 		}); //change 
-		
 
 	/*판매 음식 삭제하기*/
 	$("#deleteFood").click(function() {
@@ -52,8 +52,7 @@
 	        			alert("상품이 삭제되었습니다.");
 	        			location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+$("#foodSellNo").val()+"&sellerId="+$("#sellerId").val();
 	        		}
-	        	} 
-	    		
+	        	}  
 			}); //ajax	
 		}
 	}); //delFood click
@@ -75,6 +74,11 @@
 				}); //ajax	
 			}
 		}); //click
+		
+		$("#loginAndOrder").click(function() {
+			if(confirm("로그인 페이지로 이동합니다."))
+				location.href="${pageContext.request.contextPath}/loginView.do";
+		}); //loginAndOrder click
 	
 	}); //ready
 
@@ -89,7 +93,7 @@
 		}
 		else
 			return confirm("구매하시겠습니까?");
-		return false;
+		return false; 
 	}
 </script>
 
@@ -154,8 +158,11 @@
 				</div> <!-- row  -->
 				<div class="row col-md-11">
 				<hr>
+				
 					<form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()" >
 					<div class="row"> 
+					<c:choose>
+					<c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
 					 <div class="col-sm-2" style="text-align: right">구매수량:</div>
 					  <div class="col-sm-2">
 				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
@@ -171,22 +178,20 @@
 				      	<label class="control-label" for="거래가격">거래가격:
 						<span id="orderPrice"></span>
 						</label>
-				  
+					</c:when>
+					</c:choose>
 					</div> <!-- row -->
  						
  						<div class="row" align="center">
- 						<sec:authorize access="isAuthenticated()">
 	 						<c:choose>
-	 						<c:when test="${foodSell.memId!=mvo.memId }">
-								<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
-	 						</c:when>
-							<c:otherwise>
-								<input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
-								<input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
-								
-							</c:otherwise> 						
+		 						<c:when test="${foodSell.memId!=mvo.memId}">
+									<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+		 						</c:when>
+								<c:otherwise>
+									<input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
+									<input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
+								</c:otherwise> 						
 	 						</c:choose>
- 						</sec:authorize>
 						</div>
 					</form>
 				</div>
@@ -268,6 +273,13 @@
 		<h4>QnA</h4>		
 
 <!-- 댓글달기 -->
+
+
+		<form>
+			 <textarea id="questContent" name="questContent" class="form-control col-lg-12" rows="4" style="resize: none; width:80%;height:35px;"></textarea>&nbsp;
+			 <input type="hidden" id="memId" name="memId" value="">
+			 <input type="button" id="commentSubmit" name="commentSubmit" class="btn btn-default" value="댓글달기">
+		</form>
 
 		
 		</div>

@@ -359,9 +359,11 @@ public class MemberController {
 		List<FoodVO> flist = foodService.getFoodListByMemId(memId);
 		System.out.println("리스트 정보 :"+flist);
 		ListVO<FoodSellVO> fslist = foodService.getFoodSellInfoByMemId(memId, pageNo);
+		int totalFoodSellCount=foodService.totalFoodSellCountByMemId(memId);
 		model.addAttribute("svo", svo);
 		model.addAttribute("flist", flist);
 		model.addAttribute("lvo", fslist);
+		model.addAttribute("foodSellCount",totalFoodSellCount);
 		return "member/seller_myPage.tiles";
 	}
 

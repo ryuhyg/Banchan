@@ -268,7 +268,50 @@
 		}
 	});
 
+	/* HEADER LANK SLIDE
+	============================================== */
+	$(function() {
+		function spinner($element) {
 
+			var words = [];
+			var list = $('li', $element);
+
+			list.each(function() {
+				words.push($(this).text());    
+			});
+
+			list.remove();
+			var $ss = $('#spinner-show2');
+			var i = 0, i_next = 1;
+
+			$('.next2 span', $ss).text(words[i_next]);
+			$ss.width($('.current2').width());
+
+			setInterval(function() {
+
+				$ss.addClass('swap2');
+				i = i_next;
+				i_next++;
+
+				if(i_next >= words.length) {
+					i_next = 0;
+				};
+
+				$ss.width($('.next2 span').width());
+
+				setTimeout(function() {
+					$('.next2 span', $ss).text(words[i_next]);
+					$('.current2', $ss).text(words[i]);
+					$ss.removeClass('swap2');
+				}, 1000);
+
+			}, 7000);
+		}
+
+		if($('#spinner2').length) {
+			spinner($('#spinner2'));
+		}
+	});
 
 
 
