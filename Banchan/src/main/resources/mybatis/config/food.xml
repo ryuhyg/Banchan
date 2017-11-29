@@ -19,8 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="getFoodListByMemId" parameterType="string"
 		resultType="foodVO">
-		<include refid="selectFood"></include>
-		where mem_id=#{value} order by food_postdate desc
+		select f.food_no,food_name,mem_id,food_de,food_score,category_no,
+		food_main_img,food_postdate,s.sell_check
+		from food f, (select distinct food_no, 1 as sell_check
+		from FOOD_SELL
+		where close_date>sysdate) s
+		where mem_id=#{value} and f.food_no=s.food_no(+) order by food_postdate desc 
 	</select>
 	<select id="getTotalFoodCountByMemId" parameterType="string"
 		resultType="int">

@@ -176,7 +176,7 @@ $(document).ready(function() {
 				
 				</div> 
 					<div class="col-sm-8">
-						<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px; width: inherit;"></i> 위치기반 검색 서비스 </h3>
+						<h3 class="title-form"><i class="icon fa fa-map-marker" style="margin-right: 5px; width: inherit;"></i> 위치기반 검색 서비스 </h3>
 					<hr>
 						<div class="col-sm-6 blog-list blog-detail" style="padding-top: 9px;">		
 							<input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">

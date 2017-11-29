@@ -21,12 +21,14 @@
 			<div class="row">
 				<div class="col-md-4">
 					<a href="${pageContext.request.contextPath}/home.do">
-					<img src="${pageContext.request.contextPath}/resources/images/logo/header_logo3.png"
-						style="margin-top: -5px; z-index: 1000;"></a>
+					<img src="${pageContext.request.contextPath}/resources/images/logo/header_logo4.png"
+						style="margin-top: -2px; z-index: 1000; width: 200px"></a>  
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3"> 
 				</div>
 				<div class="col-md-1">
+					  
+
 				</div>
 				<div id="login-pan" class="col-md-4">
 					<sec:authorize access="!isAuthenticated()">
