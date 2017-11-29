@@ -27,19 +27,7 @@
 				<div class="col-md-3"> 
 				</div>
 				<div class="col-md-1">
-					  <span id="spinner-show2"  style="color: black; font-weight: bold; margin-top: 20px">
-						  <em class="current2" style="color: black; font-weight: bold; margin-top: 20px">1.검색어</em>
-						  <span class="next2"  style="margin-left: -25px"><span></span></span>
-					  </span>
-						<ul id="spinner2">
-						<%-- <c:forEach items="${rlist}" var="kw">
-							 <li>${pw.keyword}</li>
-						</c:forEach> --%>
-							<li>2. 검색어</li>
-							<li>3. 검색어</li>
-							<li>4. 검색어</li>
-							<li>5. 검색어</li>
-						</ul>
+					  
 
 				</div>
 				<div id="login-pan" class="col-md-4">
