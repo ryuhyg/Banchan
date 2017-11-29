@@ -6,17 +6,10 @@ public class AnswerVO {
 	private String ansContent;
 	private String ansPostdate;
 	private String memId;
-
+	private String questNo;
 	public AnswerVO() {
 		super();
 	}
-
-	@Override
-	public String toString() {
-		return "AnswerVO [ansNo=" + ansNo + ", ansContent=" + ansContent + ", ansPostdate=" + ansPostdate + ", memId="
-				+ memId + "]";
-	}
-
 	public String getAnsNo() {
 		return ansNo;
 	}
@@ -48,5 +41,16 @@ public class AnswerVO {
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-
+	public String getQuestNo() {
+		return questNo;
+	}
+	public void setQuestNo(String questNo) {
+		this.questNo = questNo;
+	}
+	@Override
+	public String toString() {
+		return "AnswerVO [ansNo=" + ansNo + ", ansContent=" + ansContent + ", ansPostdate=" + ansPostdate + ", memId="
+				+ memId + ", questNo=" + questNo + "]";
+	}
+	
 }

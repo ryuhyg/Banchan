@@ -73,7 +73,7 @@ function reviewCheck(){
            	  	<input type="hidden" name="memId" value="${memId }">
            	  	<input type="hidden" name="foodNo" value="${foodNo }">
               <br>
-           	  <span style='float:right'>
+           	  <span style="float:right;">
            	  <input type="submit" class="btn btn-danger" value="후기작성">
            	  </span>
            </span>           	 
