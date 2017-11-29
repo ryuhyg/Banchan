@@ -10,19 +10,15 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 						//음식 삭제, 수정
-						$("button[name='update']")
-								.click(
+						$("button[name='update']").click(
 										function() {
 											location.href = "${pageContext.request.contextPath}/updateRegViewFood.do?foodNo="
-													+ $(this).val();
+													+ $(this).val()+ "&memId="+ $("#sellerId").val();
 										});
-						$("button[name='delete']")
-								.click(
+						$("button[name='delete']").click(
 										function() {
 											location.href = "${pageContext.request.contextPath}/deleteRegFood.do?foodNo="
-													+ $(this).val()
-													+ "&memId="
-													+ $("#sellerId").val();
+													+ $(this).val()+ "&memId="+ $("#sellerId").val();
 										});
 						$("button[name='seller']")
 								.click(

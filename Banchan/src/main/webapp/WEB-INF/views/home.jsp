@@ -182,9 +182,8 @@
 					</div><!-- ./col-md-4 -->
 					</c:forEach>
 				</div>
-</c:if>	 
+		</c:if>	 
 		</section>
-		
 		<section id="submit-property" data-parallax-speed="0">
 			 
 			<span class="overlay"></span>

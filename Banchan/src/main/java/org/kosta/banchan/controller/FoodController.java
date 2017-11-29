@@ -271,6 +271,7 @@ public class FoodController {
 	@RequestMapping("updateRegViewFood.do")
 	public String updateRegViewFood(String foodNo, Model model, String memId) {
 		System.out.println("수정하기 전 foodNo:" + foodNo);
+		System.out.println("받아오는 ID 값이 뭐니? :"+memId);
 		String message = "";
 		List<FoodVO> foodlist = foodService.selectRegFoodByNo(foodNo);
 		if (foodlist.size() == 0) {
