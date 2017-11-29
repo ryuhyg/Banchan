@@ -41,7 +41,7 @@
 
 					<sec:authorize access="hasRole('ROLE_BUYER') and !hasRole('ROLE_SELLER')">
 						<!-- 오직 구매자 권한 설정 -->
-						<a href="#" id="logoutAction"><i class="icon fa fa-user user"></i>로그아웃</a>
+						<a href="#" id="logoutAction" style="padding-left: 12px"><i class="fa fa-sign-out"></i>로그아웃</a>
 						<form id="logoutForm"
 							action="${pageContext.request.contextPath}/logout.do"
 							method="post" style="display: none">
@@ -56,21 +56,21 @@
 								class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />">회원정보수정</a></li>
+							<li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />"><i class="fa fa-wrench" aria-hidden="true" style="margin-right: 5px;"></i>회원정보수정</a></li>
 							<li><a href="#">내거래내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do">회원탈퇴</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do"><i class="fa fa-user-times" aria-hidden="true" style="margin-right: 5px"></i>회원탈퇴</a></li>
 						</ul>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_SELLER')">
 						<!-- 판매자 권한 설정 -->
-						<a href="#" id="logoutAction"><i class="icon fa fa-user user"></i>로그아웃</a>
+						<a href="#" id="logoutAction" style="padding-left: 12px"><i class="fa fa-sign-out" aria-hidden="true"></i>로그아웃</a>
 						<form id="logoutForm"
 							action="${pageContext.request.contextPath}/logout.do"
 							method="post" style="display: none">
 							<sec:csrfInput />
 						</form>
 						<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}"><i
-							class="icon fa fa-user user"></i> 판매자 마이페이지</a>
+							class="icon fa fa-user user"></i> 판매자 페이지</a>
 						<button class="btn btn-primary dropdown-toggle" type="button"
 							data-toggle="dropdown"
 							style="color: #1a1a1a; background-color: #fff; font-size: 12px; border: 0px; margin-top: 5px; float: right">
@@ -78,9 +78,9 @@
 								class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />">회원정보수정</a></li>
+							<li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />"><i class="fa fa-wrench" aria-hidden="true" style="margin-right: 5px;"></i>회원정보수정</a></li>
 							<li><a href="#">내거래내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do">회원탈퇴</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do"><i class="fa fa-user-times" aria-hidden="true" style="margin-right: 5px"></i>회원탈퇴</a></li>
 						</ul>
 					</sec:authorize>
 				</div>
@@ -130,20 +130,11 @@
     color: #666666;
     padding: 0 8px 0 10px;
     border-left: solid 1px #ccc;" class="" type="submit">
-								<i class="fa fa-envelope-o"></i>
-							</button></span>
+							<i class="fa fa-search" aria-hidden="true"></i></button></span>
 						</div>
 					</form>
 			</div>
-				<%-- 	 <span id="spinner-show2"  style="color: black; font-weight: bold; margin-top: 20px">
-						  <em class="current2" style="color: black; font-weight: bold; margin-top: 20px"></em>
-						  <span class="next2"  style="margin-left: -25px"><span></span></span>
-					  </span>
-						<ul id="spinner2">
-						<c:forEach items="${rlist}" var="kw">
-							 <li>${pw.keyword}</li>
-						</c:forEach> 
-						</ul>		 --%>
+				
 		</div>
 	</div>
 	<!-- /.menu -->

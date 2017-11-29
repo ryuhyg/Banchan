@@ -265,8 +265,8 @@ ul.tab {
 	float: left;
 	list-style: none;
 	height: 32px;
-	border-bottom: 1px solid #999;
-	border-left: 1px solid #999;
+	border-bottom: 1px solid #e5e5e5;
+	border-left: 0px solid #999;
 	width: 100%;
 }
 
@@ -276,35 +276,35 @@ ul.tab li {
 	padding: 0;
 	height: 31px;
 	line-height: 31px;
-	border: 1px solid #999;
+	border: 0px solid #999;
 	border-left: none;
 	margin-bottom: -1px;
 	overflow: hidden;
 	position: relative;
-	background: #000;
+	background: #fff;
 }
 
 ul.tab li a {
 	/* text-decoration: none; */
-	color: #e0e0e0;
+	color: #5e5e5e;
 	display: block;
 	font-size: 1.0em;
 	padding: 0 20px;
-	border: 1px solid #fff;
+	border: 0px solid #fff;
 	outline: none;
 }
 
 ul.tab li a:hover {
-	background: #ccc;
+	color: #f47821;
 }
 
 html ul.tab li.active, html ul.tab li.active a:hover {
-	background: #000;
-	border-bottom: 1px solid #000;
+	background: #fff;
+	border-bottom: 0px solid #e5e5e5;
 }
 
 #tabcontainer {
-	border: 1px solid #999;
+	border: 0px solid #999;
 	border-top: none;
 	overflow: hidden;
 	clear: both;
@@ -357,7 +357,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 
 
 
-<section id="agent-page"  style="margin-top: 150px;">
+<section id="agent-page"  style="margin-top: 100px;">
 	<br>
 
 	<div class="container">
@@ -370,7 +370,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			                     <div class="image-content">
 			                         <div class="image image-fill">
 			                             <!-- <img alt="Image Sample" src="resources/images/${svo.sellerImg }"> -->
-			                             <img alt="Image Sample" style="width:270px;height:250px" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
+			                             <img alt="Image Sample" style="width:270px;height:250px;" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
 			                         </div>						
 			                     </div>
 			                    <!--  <div class="info-agent" > -->
@@ -420,9 +420,9 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			        			        <br><br> 주부님 소개
 			                 </span> 
 			                 <div class="bs-callout callout-success" style="width: 100%">
-			                   <h4 class="title">믿고먹는 주부님</h4>
-			                   <span class="address"><i class="fa fa-map-marker"></i>&nbsp;${svo.addressVO.addressAPI}</span>
-			                   <p class="text">${svo.sellerInfo }</p>
+			                   <h4 class="title"><i class="fa fa-quote-left" aria-hidden="true" style="font-size: 30px; color: #5e5e5e; margin-right: 10px"></i>믿고먹는 주부님</h4>
+			                   <span class="address" style="color: #5e5e5e"><i class="fa fa-map-marker" style="padding-left: 43px"></i>&nbsp;${svo.addressVO.addressAPI}</span>
+			                   <p class="text" style="padding-left: 42px">${svo.sellerInfo }<i class="fa fa-quote-right" aria-hidden="true" style="font-size: 30px; color: #5e5e5e; margin-left: 10px"></i></p>
 			                 </div>
 			             </div><!-- /.col-md-8 -->
 			          
