@@ -133,9 +133,18 @@
       							<c:forEach begin="1" end="${list.getSellerScore()}">
     							<a class="on">★</a>
 								</c:forEach>
-								<c:forEach begin="1" end="${5-list.getSellerScore()}">
+								<c:choose>
+								<c:when test="${5-list.getSellerScore()<1} && ${5-list.getSellerScore()!=0}">
+								<c:forEach begin="1" end="${5-list.getSellerScore()+1}">
     							<a>★</a>
    								</c:forEach>
+   								</c:when>
+   								<c:otherwise>
+   								<c:forEach begin="1" end="${5-list.getSellerScore()}">
+    							<a>★</a>
+   								</c:forEach>
+   								</c:otherwise>
+    							</c:choose>
        							</span>
        							 &nbsp;${list.getSellerScore()}
        						</div>
@@ -181,9 +190,8 @@
 					</div><!-- ./col-md-4 -->
 					</c:forEach>
 				</div>
-</c:if>	 
+		</c:if>	 
 		</section>
-		
 		<section id="submit-property" data-parallax-speed="0" align="center">
 			 
 			<span class="overlay"></span>

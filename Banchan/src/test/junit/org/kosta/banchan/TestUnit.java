@@ -122,6 +122,17 @@ public class TestUnit {
 		System.out.println(foodDAO.getFoodSellInfoByMemId(paramMap));
 		*/
 		//String id="uuuu1";
+/*<<<<<<< HEAD
+		List<FoodVO> list=foodDAO.selectFoodTop3();
+		System.out.println("uuuu1 회원에 대한 Top3 음식 :"+list);
+		String str ="101033:알감자조림.jpg/101034:김석환.jpg/101030:도미노피자.jpg/101029:IU.jpg/101027:broken-line.png/101028:downloadfile-8.jpg/";
+		System.out.println(str.indexOf("/"));
+		String [] arr =str.split("/");
+		for (int i = 0; i < arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		System.out.println(str.contains("101030"));
+=======
 		//List<FoodVO> list=foodDAO.selectFoodTop3();
 		//System.out.println("uuuu1 회원에 대한 Top3 음식 :"+list);
 		
@@ -132,5 +143,6 @@ public class TestUnit {
 		paramMap.put("foodSellNo", "101056");
 		System.out.println(reviewdao.getReviewListByFoodSellNo(paramMap));
 	
-	}
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
+*/	}
 }

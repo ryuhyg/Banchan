@@ -52,13 +52,12 @@ select * from ban_mem;
 		where bm.mem_id=s.mem_id and s.mem_id=f.mem_id and rank<=3
 
 
-
+select mem_id from ban_mem where mem_name='손나은'
 
 
 	
 
-	
-select * from seller
+	update  seller set seller_score=5 where mem_id='aaaa1'
 	
 
 
@@ -105,20 +104,33 @@ WHERE mem_id='java' ORDER BY quest_postdate ASC
 
 
 
+select  * from question
 
 
 where rownum <= 5
 					
+
+select * from seller
+update seller set seller_score='5' where mem_id='freejh2003';
 					
+					
+
+-- 인기 Top3 주부님 --
 select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score , rnum
 from (select mem_id, seller_score, seller_info, seller_img, row_number() over(order by seller_score desc) as rnum from seller)
 s, ban_mem m, address a 
-where m.mem_id=s.mem_id and m.address_no=a.address_no and rnum<=3	
+where m.mem_id=s.mem_id and m.address_no=a.address_no and rnum<=3
 
+-- 인기 Top3 인기음식 --
 SELECT bm.mem_name, bm.mem_id, f.food_no, f.food_name, f.food_de, f.food_score, f.food_main_img, f.rnum 
 from (select food_no, food_name, mem_id, food_de, food_score, food_main_img, row_number() over (order by food_score desc) as rnum FROM food) 
 f, ban_mem bm, seller s
 WHERE bm.mem_id=s.mem_id and s.mem_id=f.mem_id and f.rnum<=3
+
+
+
+
+
 					
 					
 

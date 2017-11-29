@@ -12,17 +12,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- End 우정 -->
 
 	<!-- Start 정훈 -->
-			<!-- 댓글저장 -->
-	<insert id="commentBoardUpdate" parameterType="questionVO">
+			<!-- 댓글 작성 -->
+	<insert id="commentInsert" parameterType="questionVO">
 		insert into question(quest_no, quest_content, food_sell_no, quest_postdate, mem_id) 
 		values(question_seq.nextval, #{questContent}, #{foodSellNo}, sysdate, #{memId}) 
 	</insert>
-			<!-- 댓글가져오기 -->
-	<select id="getCommentBoardList" parameterType="string" resultType="questionVO">
+			<!-- 댓글 목록 -->
+	<select id="commentList" resultType="questionVO">
 		select quest_no, quest_content, food_sell_no, to_char(to_date(quest_postdate), 'yyyy-mm-dd')as quest_postdate, mem_id
 		FROM question
-		WHERE mem_id=#{value} ORDER BY quest_postdate ASC
 	</select>
+			<!-- 댓글 수정 -->
+	<update id="commentUpdate" parameterType="questionVO">
+		 update question set quest_content = #{questContent} where mem_id = #{memId}
+	</update>
+			<!-- 댓글 삭제 -->
+	<delete id="commentDelete" parameterType="questionVO">
+		delete from question where mem_id=#{memId}
+	</delete>
 	<!-- End 정훈 -->
 
 	<!-- Start 향걸 -->

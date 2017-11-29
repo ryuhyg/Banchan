@@ -1,6 +1,9 @@
 package org.kosta.banchan.model.service;
 
+import java.util.List;
+
 import org.kosta.banchan.model.vo.ListVO;
+import org.kosta.banchan.model.vo.QuestionVO;
 import org.kosta.banchan.model.vo.ReviewVO;
 
 public interface FeedbackService {
@@ -13,7 +16,14 @@ public interface FeedbackService {
 	ListVO<ReviewVO> getReviewListByFoodNo(String foodNo, String pageNo);
 
 	///////////// start정훈////////////////
-	
+	//댓글 목록
+	List<QuestionVO> commentList();
+	//댓글 작성
+	int commentInsert(QuestionVO qvo);
+	//댓글 수정
+	int commentUpdate(QuestionVO qvo);
+	//댓글 삭제
+	int commentDelete(QuestionVO qvo);
 	///////////// end정훈////////////////
 
 }
