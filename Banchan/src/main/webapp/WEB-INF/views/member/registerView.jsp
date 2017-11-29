@@ -348,14 +348,15 @@
 								</div>
 								<div  class="col-xs-8">															
 										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px; padding-top: 10px;"></i>주소</label>
-										<div id="map" style="width:auto;height:200px;"></div><input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
-										<input type="text" name="addressVO.addressAPI"  id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly" style="margin: 0px;">		
-										<input type="text" name="addressDe"  id="detailAddress" class="margin-bottom form-control" placeholder="상세주소 입력" required="required" autocomplete="off" style="margin: 0px;">							
+										<div id="map" style="width:auto;height:200px;"></div>
+										<input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기" style="margin-top: 5px;">
+										<input type="text" name="addressVO.addressAPI"  id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly" style=" margin: 1px;">	 	 
+										<input type="text" name="addressDe"  id="detailAddress" class="margin-bottom form-control" placeholder="상세주소 입력" required="required" autocomplete="off" style="margin: 1px;">							
 								</div>
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
 							</div>
-							<div class="row">
+							<div class="row"> 
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
 								<div  class="col-xs-8" style="margin-top: 10px">										

@@ -24,7 +24,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu.css">                                     <!-- Include Menu stylesheet -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/custom.css">                                   <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/media-query.css">                              <!-- Media Query -->
-    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/banchan.css"> 
     
 
 	<!-- Use Iconifyer to generate all the favicons and touch icons you need: http://iconifier.net -->

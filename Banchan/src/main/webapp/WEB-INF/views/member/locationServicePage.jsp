@@ -16,23 +16,6 @@
 <!-- location 끝 -->
 	<!-- 광태 추가 --><!-- confirm -->
 
- <!-- 별점 style부분 ************************* -->
- <style type="text/css"> /* 별점 css */
-.star_rating {font-size:0; letter-spacing:-4px;}
-.star_rating a {
-    font-size:22px;
-    letter-spacing:0;
-    display:inline-block;
-    margin-left:5px;
-    color:#ccc;
-    text-decoration:none;
-}
-.star_rating a:first-child {margin-left:0;}
-.star_rating a.on {color:#ffcc00;}
-.home-top{
-   margin-top: 100px;
-}
-</style> 
 
   
 <script>
