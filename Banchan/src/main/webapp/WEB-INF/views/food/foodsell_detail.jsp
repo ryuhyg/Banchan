@@ -75,7 +75,7 @@
 				}); //ajax	
 			}
 		}); //click
-	
+
 		 //////////////////////ANSWER_윤주////////////////
 		$("#answerBnt").click(function(){
 			var answer = $("#ansContent");
@@ -105,9 +105,12 @@
 				
 			});//ajax	
 		});//answerSubmit click
+<<<<<<< HEAD
 		
 		
 	/////////////////////////////end윤주////////////////////////////
+=======
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 
 		
 //댓글달기!		
@@ -196,7 +199,21 @@
 	        }
 	    });
 	}
+<<<<<<< HEAD
 		
+=======
+		$(document).ready(function(){
+	    commentList(); //페이지 로딩시 댓글 목록 출력 
+		});
+
+		$("#loginAndOrder").click(function() {
+			if(confirm("로그인 페이지로 이동합니다."))
+				location.href="${pageContext.request.contextPath}/loginView.do";
+		}); //loginAndOrder click
+	
+
+	}); //ready
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 
 	function orderFoodConfirm(){ //윤주
 		var isLogin = $("#checkId").val();
@@ -394,6 +411,7 @@
 	
 	
 
+
 <hr>
 <!--  댓글  -->
     <div class="container">
@@ -439,5 +457,6 @@
 		</div><!-- row -->
 	</div> <!-- container -->
 	</sec:authorize>
+
 </section>	<!-- recent-list -->			
 

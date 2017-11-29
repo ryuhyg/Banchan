@@ -83,7 +83,8 @@ filter: alpha(opacity=0);
 						</form>
 				</div>
 			</div>
-		</div>
+		</div> <!-- row -->
+		</div> <!-- container  -->
 		</c:when>
 <c:otherwise>
 	<div class="container">

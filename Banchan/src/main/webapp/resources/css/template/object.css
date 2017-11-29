@@ -817,7 +817,7 @@
 /* 1.10.22 BOX TITLE STYLE (HOME+)
 ================================== */
 .list-box-title {
-  border-bottom: 3px solid #1a1a1a;
+  border-bottom: 1px solid #e5e5e5;
   height: 36px;
   position: relative;
   margin-bottom: 20px;
@@ -831,8 +831,11 @@
   left: 0;
   z-index: 1;
   padding: 6px 10px 0;
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: #fff;
+  color: #f47821;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: -10px;
 }
 .list-box-title span .icon {
   margin-right: 10px;

@@ -15,6 +15,7 @@ public class MemberVO implements Serializable {
 	private String enableNo;
 	private String pwQnaNo;
 
+
 	private AddressVO addressVO;
 
 	public MemberVO() {
@@ -65,6 +66,9 @@ public class MemberVO implements Serializable {
 		this.memName = memName;
 		this.tel = tel;
 	}
+
+	
+	
 
 	@Override
 	public String toString() {
@@ -152,5 +156,6 @@ public class MemberVO implements Serializable {
 	public void setAddressVO(AddressVO addressVO) {
 		this.addressVO = addressVO;
 	}
+
 
 }

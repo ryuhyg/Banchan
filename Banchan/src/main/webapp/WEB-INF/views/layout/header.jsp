@@ -21,12 +21,26 @@
 			<div class="row">
 				<div class="col-md-4">
 					<a href="${pageContext.request.contextPath}/home.do">
-					<img src="${pageContext.request.contextPath}/resources/images/logo/header_logo3.png"
-						style="margin-top: -5px; z-index: 1000;"></a>
+					<img src="${pageContext.request.contextPath}/resources/images/logo/header_logo4.png"
+						style="margin-top: -2px; z-index: 1000; width: 200px"></a>  
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3"> 
 				</div>
 				<div class="col-md-1">
+					  <span id="spinner-show2"  style="color: black; font-weight: bold; margin-top: 20px">
+						  <em class="current2" style="color: black; font-weight: bold; margin-top: 20px">1.검색어</em>
+						  <span class="next2"  style="margin-left: -25px"><span></span></span>
+					  </span>
+						<ul id="spinner2">
+						<%-- <c:forEach items="${rlist}" var="kw">
+							 <li>${pw.keyword}</li>
+						</c:forEach> --%>
+							<li>2. 검색어</li>
+							<li>3. 검색어</li>
+							<li>4. 검색어</li>
+							<li>5. 검색어</li>
+						</ul>
+
 				</div>
 				<div id="login-pan" class="col-md-4">
 					<sec:authorize access="!isAuthenticated()">

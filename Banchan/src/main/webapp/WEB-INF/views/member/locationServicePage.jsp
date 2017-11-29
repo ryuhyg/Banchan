@@ -149,18 +149,13 @@ $(document).ready(function() {
 	    	 				"</tr>"+			
 	    	 				"<tr><td>"+"별점 :"
 	                        +'<span class="star_rating">'; 
-	                      	 for (var j = 1; j <=data.list[i].sellerScore; j++) {
+	                        var score= data.list[i].sellerScore/1;
+                     		 for (var j = 0; j <score; j++) {
 	                    	   strTemp +='<a class="on">★</a>';
 							}
-		                      if( (5-data.list[i].sellerScore)<1 && (5-data.list[i].sellerScore)!=0 ){
-		                    	  for (var k = 1; k < (5-data.list[i].sellerScore)+1 ; k++) {
-		                    		  strTemp +='<a>★</a>';
-								}	 
-		                      }else{
-		                    	  for (var q = 1; q < (5-data.list[i].sellerScore); q++) {
-		                    		  strTemp +='<a>★</a>';
-								}
-		                      }
+		                   	for (var k = 0; k < 5-score ; k++) {
+		                       strTemp +='<a>★</a>';
+		                   	}
 		                      strTemp+='</span>'+data.list[i].sellerScore+"</td></tr>";
 						
 					}
@@ -198,7 +193,7 @@ $(document).ready(function() {
 				
 				</div> 
 					<div class="col-sm-8">
-						<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px; width: inherit;"></i> 위치기반 검색 서비스 </h3>
+						<h3 class="title-form"><i class="icon fa fa-map-marker" style="margin-right: 5px; width: inherit;"></i> 위치기반 검색 서비스 </h3>
 					<hr>
 						<div class="col-sm-6 blog-list blog-detail" style="padding-top: 9px;">		
 							<input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
@@ -360,19 +355,14 @@ $(document).ready(function() {
 	    	 				"</td>"+
 	    	 				"<td> <a href='#'>"+data.list[i].memId+"</a> </td>"+
 	    	 				"</tr>"+			
-	    	 				"<tr><td>"+"별점 : "+'<span class="star_rating">'; 
-                      	 for (var j = 1; j <=data.list[i].sellerScore; j++) {
+	    	 				"<tr><td>"+"별점 : "+'<span class="star_rating">';
+	    	 				var score= data.list[i].sellerScore/1;
+                      		 for (var j = 0; j <score; j++) {
 	                    	   strTemp +='<a class="on">★</a>';
 							}
-		                      if( (5-data.list[i].sellerScore)<1 && (5-data.list[i].sellerScore)!=0 ){
-		                    	  for (var k = 1; k <= (5-data.list[i].sellerScore) ; k++) {
-		                    		  strTemp +='<a>★</a>';
-								}	 
-		                      }else{
-		                    	  for (var q = 1; q < (5-data.list[i].sellerScore); q++) {
-		                    		  strTemp +='<a>★</a>';
-								}
-		                      }
+		                   	for (var k = 0; k < 5-score ; k++) {
+		                    		strTemp +='<a>★</a>';
+		                   	}
 		                      strTemp+='</span>'+data.list[i].sellerScore+"</td></tr>";
 						
 					}
