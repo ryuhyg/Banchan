@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.banchan.model.service.FeedbackService;
+import org.kosta.banchan.model.vo.AnswerVO;
 import org.kosta.banchan.model.vo.QuestionVO;
 import org.kosta.banchan.model.vo.ReviewVO;
 import org.springframework.stereotype.Controller;
@@ -49,6 +50,20 @@ public class FeedbackController {
 		model.addAttribute("foodSellNo",foodSellNo);
 		return "food/reviewRegister_ok.tiles";
 	}
+	//댓글에 답변달기
+	@ResponseBody
+	@RequestMapping("answerRegister.do")
+	public AnswerVO answerRegisterAjax(String questNo,String memId2,String ansContent){
+		AnswerVO avo = new AnswerVO();
+		avo.setAnsContent(ansContent);
+		avo.setMemId(memId2);
+		avo.setQuestNo(questNo);
+		feedbackService.answerRegister(avo);
+		AnswerVO currAvo = feedbackService.findAnswerByAnsNo(avo.getAnsNo());
+		currAvo.setAnsNo(avo.getAnsNo());
+		return currAvo;
+	}
+	
 	///////////////end윤주//////////////////////
 	
 	///////////////start정훈//////////////////////

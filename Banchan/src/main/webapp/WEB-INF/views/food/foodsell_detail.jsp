@@ -29,23 +29,16 @@
 	$(document).ready(function () {
 		$("#trQuantity").change(function () {
 			//구매수량이 준비수량보다 적은지 확인
-			var preQuantity=$("#preQuantity").text();
-			if(parseInt($(this).val()) > parseInt(preQuantity)){
+			var leftQuantity=$("#leftQuantity").text();
+			if(parseInt($(this).val()) > parseInt(leftQuantity)){
 				alert("준비수량이 부족합니다!");
 				$("#trQuantity").val(1); 
 			}
 			var orderPrice=$(this).val()*$("#price").text();
 			$("#orderPrice").text(orderPrice);
-
 		}); //change
-<<<<<<< HEAD
 		
 		
-			
-=======
-	
-
->>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 	/*판매 음식 삭제하기*/
 	$("#deleteFood").click(function() {
 		if(deleteFlag=confirm("삭제하시겠습니까?")){
@@ -82,8 +75,38 @@
 				}); //ajax	
 			}
 		}); //click
-		
-<<<<<<< HEAD
+
+		 //////////////////////ANSWER_윤주////////////////
+		$("#answerBnt").click(function(){
+			var answer = $("#ansContent");
+			var memId=$("#memId2");
+			//alert(answer.val()+" "+memId.val());
+			 $.ajax({
+				type:"get",
+				url:"${pageContext.request.contextPath}/answerRegister.do",
+				data:"questNo=1&memId2="+memId.val()+"&ansContent="+answer.val(),
+				dataType:"json",
+				success:function(data){
+					 var info="<tr>";
+					info+="<td>"+data.ansNo+"</td>";
+					info+="<td>"+data.ansContent+"</td>";
+					info+="<td>"+data.memId+"</td>";
+					info+="<td>"+data.ansPostdate+"</td>";
+					info+="<td><button name=deletecomment class=btn btn-default>x</button></td>";	
+					info+="</tr>";
+					
+					//테이블의 tr자식이 있으면 tr 뒤에 붙인다. 없으면 테이블 안에 tr을 붙인다.
+					if($('#commentTable tr').contents().size()==0){
+				            $('#commentTable').append(info);
+				        }else{
+				            $('#commentTable tr:last').after(info);
+				        }
+				  			 $("#ansContent").val("");
+						} 
+				
+			});//ajax	
+		});//answerSubmit click
+
 		
 //댓글달기!		
 	var foodSellNo = "${foodSell.foodSellNo}"; //게시글 번호
@@ -174,13 +197,13 @@
 		$(document).ready(function(){
 	    commentList(); //페이지 로딩시 댓글 목록 출력 
 		});
-=======
+
 		$("#loginAndOrder").click(function() {
 			if(confirm("로그인 페이지로 이동합니다."))
 				location.href="${pageContext.request.contextPath}/loginView.do";
 		}); //loginAndOrder click
 	
->>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
+
 	}); //ready
 
 	function orderFoodConfirm(){
@@ -198,10 +221,6 @@
 	}
 	
 </script>
-
-
-
-
 
 <section id="recent-list" class="agency" style="margin-top: 150px">
 <div id="page-container">
@@ -314,7 +333,7 @@
 				<h4>작성된 후기가 없습니다</h4>
 				</c:when>
 				<c:otherwise>
-			<table class="table table-hover"  style="text-align: center;font-size: 12px;">
+			<table class="table table-hover" style="text-align: center;font-size: 12px;">
 					<thead>
 					<tr class="tr_visible">
 						<td>NO</td>
@@ -371,9 +390,10 @@
 	</div>
 	</div>
 	
+	
+
 
 <hr>
-<<<<<<< HEAD
 <!--  댓글  -->
     <div class="container">
         <label for="content">Q&A</label>
@@ -392,31 +412,32 @@
     <div class="container">
         <div class="commentList"></div>
     </div>
-=======
-<div class="container">
-<<<<<<< HEAD
-	
-=======
+
+
+	<!-- QNA "ANSWER"-윤주 -->
+	<hr>
+	<sec:authorize access="isAuthenticated()">
+	<div class="container">
 		<div class="row">
-		<h4>QnA</h4>		
->>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
-
-<<<<<<< HEAD
-=======
-<!-- 댓글달기 -->
-
-
-		<form>
-			 <textarea id="questContent" name="questContent" class="form-control col-lg-12" rows="4" style="resize: none; width:80%;height:35px;"></textarea>&nbsp;
-			 <input type="hidden" id="memId" name="memId" value="">
-			 <input type="button" id="commentSubmit" name="commentSubmit" class="btn btn-default" value="댓글달기">
-		</form>
-
-		
-		</div>
->>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
-</div>
->>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
+		   <table class="table table-condensed">
+		    <tr>
+		        <td>
+		        <%-- <form action="${pageContext.request.contextPath}/answerRegister.do"> --%>
+			           <span class="form-inline" role="form">               
+			              <textarea id="ansContent" name="ansContent" class="form-control col-lg-12" rows="4" style="resize: none; width:95%;height:35px" required="required"></textarea><br>
+			           	  <input type="hidden" name="memId2" id="memId2" value="${mvo.memId }">
+			           	 <%--<input type="hidden" name="questNo" value="1"> --%>
+			           	  <span style="float:right;margin-top: 10px;margin-right: 58px;" >
+			           	  	<input type="button" id="answerBnt" class="btn btn-danger" value="답변작성">
+			           	  </span>
+			           </span>
+			<!-- 	</form>      -->     	 
+ 	        </td>
+		    </tr>
+		  </table><!-- 답변달기 -->
+		</div><!-- row -->
+	</div> <!-- container -->
+	</sec:authorize>
 
 </section>	<!-- recent-list -->			
 

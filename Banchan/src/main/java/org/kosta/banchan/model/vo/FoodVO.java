@@ -18,23 +18,27 @@ public class FoodVO {
 	// private String memId;
 	private MultipartFile uploadImage;
 	private SellerVO sellerVO;
+	private String sellCheck;
 
 	public FoodVO() {
 		super();
 	}
 
+
+	
+
+
 	@Override
 	public String toString() {
-		return "FoodVO [reviewList=" + reviewList + ", foodNo=" + foodNo + ", foodName=" + foodName + ", foodDe="
-				+ foodDe + ", foodScore=" + foodScore + ", foodMainImg=" + foodMainImg + ", foodPostdate="
-				+ foodPostdate + ", categoryNo=" + categoryNo + ", memId=" + ", uploadImage=" + uploadImage
-				+ ", sellerVO=" + sellerVO + ", getUploadImage()=" + getUploadImage() + ", getReviewList()="
-				+ getReviewList() + ", getFoodNo()=" + getFoodNo() + ", getFoodName()=" + getFoodName()
-				+ ", getFoodDe()=" + getFoodDe() + ", getFoodScore()=" + getFoodScore() + ", getFoodMainImg()="
-				+ getFoodMainImg() + ", getFoodPostdate()=" + getFoodPostdate() + ", getCategoryNo()=" + getCategoryNo()
-				+ ", getMemId()=" + getMemId() + ", getSellerVO()=" + getSellerVO() + ", toString()=" + super.toString()
-				+ "]";
+		return "FoodVO [reviewList=" + reviewList + ", memId=" + memId + ", foodNo=" + foodNo + ", foodName=" + foodName
+				+ ", foodDe=" + foodDe + ", foodScore=" + foodScore + ", foodMainImg=" + foodMainImg + ", foodPostdate="
+				+ foodPostdate + ", categoryNo=" + categoryNo + ", uploadImage=" + uploadImage + ", sellerVO="
+				+ sellerVO + ", sellCheck=" + sellCheck + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+
+
+
 
 	public String getMemId() {
 		return memId;
@@ -123,4 +127,16 @@ public class FoodVO {
 	public void setSellerVO(SellerVO sellerVO) {
 		this.sellerVO = sellerVO;
 	}
+
+
+	public String getSellCheck() {
+		return sellCheck;
+	}
+
+
+	public void setSellCheck(String sellCheck) {
+		this.sellCheck = sellCheck;
+	}
+	
+	
 }

@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.kosta.banchan.model.dao.AnswerDAO;
 import org.kosta.banchan.model.dao.QuestionDAO;
 import org.kosta.banchan.model.dao.ReviewDAO;
+import org.kosta.banchan.model.vo.AnswerVO;
 import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.PagingBean;
 import org.kosta.banchan.model.vo.QuestionVO;
@@ -53,6 +54,19 @@ public class FeedbackServiceImpl implements FeedbackService {
 		// start,end,foodSell no를 저장한 map를 param으로
 		ListVO<ReviewVO> lvo = new ListVO<ReviewVO>(reviewDAO.getReviewListByFoodSellNo(paramMap), pagingBean);
 		return lvo;
+	}
+	//질문에 답변달기
+	@Override
+	public void answerRegister(AnswerVO avo) {
+		answerDAO.answerRegister(avo);
+	}
+	@Override
+	public List<AnswerVO> getAllAnswerListByQuestNo(String questNo) {
+		return answerDAO.getAllAnswerListByQuestNo(questNo);
+	}
+	@Override
+	public AnswerVO findAnswerByAnsNo(String ansNo) {
+		return answerDAO.findAnswerByAnsNo(ansNo);
 	}
 	////////////////// end윤주///////////////////////////
 
