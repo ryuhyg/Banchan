@@ -104,11 +104,12 @@ WHERE mem_id='java' ORDER BY quest_postdate ASC
 
 
 
-
-
+select  * from question
 
 where rownum <= 5
 					
+select * from seller
+update seller set seller_score='5' where mem_id='freejh2003';
 					
 					
 					

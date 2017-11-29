@@ -203,6 +203,10 @@ public class MemberServiceImpl implements MemberService {
 				String str = list.get(i).getSellerInfo().substring(0, 18);
 				list.get(i).setSellerInfo(str + "...");
 			}
+			if(!(list.get(i).getAddressVO().getAddressAPI().length() < 18)) {
+				String str = list.get(i).getAddressVO().getAddressAPI().substring(0, 18);
+				list.get(i).getAddressVO().setAddressAPI(str + "...");
+			}
 		}
 		return list;
 	}

@@ -3,6 +3,8 @@
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+    
+	
 <sec:authentication var="mvo" property="principal" />
 
 <!-- 별점 style부분 ************************* -->
@@ -37,42 +39,8 @@
 			$("#orderPrice").text(orderPrice);
 		}); //change
 		
-		 //댓글달기
-		/*  $("#commentSubmit").click(function() {	
-			
-		   	 /*  if($("#questContent").val().trim()==""){ 
-		    		alert("내용을 입력하세요");
-		     		 $("#questContent").focus();
-			            //return;
-		   	  }else
-		   		  alert("1");
-		    /* 	}else{
-		    		$.ajax({
-					type:"get",
-					url:"${pageContext.request.contextPath}/commentBoardUpdate.do",
-					data: "questContent="+$("#questContent").val()+"&memId=${mvo.memId}"+"&foodSellNo=${foodSell.foodSellNo}",
-					dataType:"json",
-					success:function(data){
-						var info="<tr>";
-						info+="<td>"+${list.memId}+"</td>";
-						info+="<td>"+${list.questContent}+"</td>";
-						info+="<td>"+${list.questPostdate}+"</td>";
-						info+="</tr>";
-					
-					//테이블의 tr자식이 있으면 tr 뒤에 붙인다. 없으면 테이블 안에 tr을 붙인다.
-						if($("#commentTable tr").contents().size()==0){
-					            $("#commentTable").append(info);
-					        }else{
-					            $("#commentTable tr:last").after(info);
-					        }
-					   $("#commentParentText").val("");
-					} */
-				});//ajax	
-				}//else */ */
-		     });//댓글달기click  */
 		
-		     
-
+			
 	/*판매 음식 삭제하기*/
 	$("#deleteFood").click(function() {
 		if(deleteFlag=confirm("삭제하시겠습니까?")){
@@ -110,7 +78,97 @@
 				}); //ajax	
 			}
 		}); //click
+		
+		
+//댓글달기!		
+	var foodSellNo = "${foodSell.foodSellNo}"; //게시글 번호
+	 
+	$("[name=commentInsertBtn]").click(function(){ //댓글 등록 버튼 클릭시
+		var insertData = $("[name=commentInsertForm]").serialize(); //commentInsertForm의 내용을 가져옴
+		commentInsert(insertData); //Insert 함수호출(아래)
+	});
+	 
+    //댓글 목록 
+	function commentList(){
+	    $.ajax({
+	        url : "${pageContext.request.contextPath}/commentList.do",
+	        type : "get",
+	        data : {"foodSellNo":foodSellNo},
+	        success : function(data){
+	            var a =""; 
+	            $.each(data, function(key, value){ 
+	                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+	                a += '<div class="commentInfo'+value.questNo+'">'+'댓글번호 : '+value.questNo+' / 작성자 : '+value.memId;
+	                a += '<a onclick="commentUpdate('+value.questNo+'\''+value.questContent+'\');"> 수정 </a>';
+	                a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a> ';
+	                a += '<div class="commentContent'+value.questNo+'"> <p> 내용 : '+value.questContent +'</p>'+'</div>';
+	                a += '</div></div>';
+
+	            });
+
+	          
+	            $(".commentList").html(a);
+	        }
+	    });
+	}
+	//댓글 등록
 	
+	function commentInsert(insertData){
+		 $.ajax({
+	        type : "get",
+	        url : "${pageContext.request.contextPath}/commentInsert.do",
+	        data : insertData,
+	        success : function(data){
+	        	  if(data== 1) {
+	                commentList(); //댓글 작성 후 댓글 목록 reload
+	                $("[name=content]").val("");
+	             }//if
+	        }//success
+	    }); //ajax
+	}//function
+
+	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
+	function commentUpdate(questNo, questContent){
+	    var a ="";
+	    
+	    a += '<div class="input-group">';
+	    a += '<input type="text" class="form-control" name="content_'+questNo+'" value="'+questContent+'"/>';
+	    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+questNo+');">수정</button> </span>';
+	    a += '</div>';
+	    
+	    $('.commentContent'+questNo).html(a);
+	    
+	}
+	 
+	//댓글 수정
+	function commentUpdateProc(questNo){
+	    var updateContent = $("[name=content_"+questNo+"]").val();
+	    
+	    
+	    $.ajax({
+	        url : "${pageContext.request.contextPath}/commentUpdate.do",
+	        type : "get",
+	        data : {"content" : updateContent, "questNo" : questNo},
+	        success : function(data){
+	            if(data == 1) commentList(questNo); //댓글 수정후 목록 출력 
+	        }
+	    });
+	}
+	 
+	//댓글 삭제 
+	function commentDelete(questNo){
+		alert("1");
+	    $.ajax({
+	        url : "${pageContext.request.contextPath}/commentUpdate.do?questNo="+questNo,
+	        type : "get",
+	        success : function(data){
+	            if(data == 1) commentList(foodSellNo); //댓글 삭제후 목록 출력 
+	        }
+	    });
+	}
+		$(document).ready(function(){
+	    commentList(); //페이지 로딩시 댓글 목록 출력 
+		});
 	}); //ready
 
 	function orderFoodConfirm(){
@@ -126,7 +184,11 @@
 			return confirm("구매하시겠습니까?");
 		return false;
 	}
+	
 </script>
+
+
+
 
 
 <section id="recent-list" class="agency" style="margin-top: 150px">
@@ -298,20 +360,25 @@
 	
 
 <hr>
-<div class="container">
-		<div class="row">
-		<h4>QnA</h4>		
+<!--  댓글  -->
+    <div class="container">
+        <label for="content">Q&A</label>
+        <form name="commentInsertForm">
+            <div class="input-group">
+               <input type="hidden" name="foodSellNo" value="${foodSell.foodSellNo}"/>
+               <input type="hidden" name="memId" value="${mvo.memId}"/>
+               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+               <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+               </span>
+              </div>
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="commentList"></div>
+    </div>
 
-<!-- 댓글달기 -->
-
-		<form>
-			 <textarea id="questContent" name="questContent" class="form-control col-lg-12" rows="4" style="resize: none; width:80%;height:35px;"></textarea>&nbsp;
-			 <input type="hidden" id="memId" name="memId" value=<sec:authentication property="principal.memId"/>>
-			 <input type="button" id="commentSubmit" name="commentSubmit" class="btn btn-default" value="댓글달기">
-		</form>
-		</div>
-</div>
 
 </section>	<!-- recent-list -->			
-
 

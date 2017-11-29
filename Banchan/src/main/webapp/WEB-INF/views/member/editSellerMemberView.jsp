@@ -312,10 +312,10 @@
  <section id="recent-list" style="margin-top: 150px;">
  	<div class="container">
  		<div class="row">
- 			<div class="col-sm-2"><!-- left -->
+ 			<div class="col-sm-3"><!-- left -->
  			
  			</div>
- 			<div class="col-sm-8" >
+ 			<div class="col-sm-6" >
 						<div class="blog-list blog-detail">
 		<h3 class="title-form" style="text-align: center;"><i class="icon fa fa-comment" style="margin-right: 5px;"></i>회원정보수정</h3>
  
@@ -323,63 +323,61 @@
  						<%-- csrf 토큰 --%>
  						<sec:csrfInput />
  						<div class="row">
- 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
- 							<div class="col-xs-6">
+ 							<div class="col-xs-8">
  								<label for="id"> 
  								<p><i class="fa fa-user user" style="margin-right: 5px"></i>회원이미지</label></p>
- 								<img id="blah" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg}" alt="" width="335" height="200"  style="border: 3px solid #424242;
-								border-radius: 70px;-moz-border-radius: 70px;-khtml-border-radius: 70px;-webkit-border-radius: 70px;
-"/>
+ 								<img id="blah" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg}" alt="" width="325" height="200"/>
  								<input type="file" name="uploadImage" id="updateImage" class="margin-bottom form-control" onchange="javascript:file_change(this.value);">
  								<input id="fileName" class="margin-bottom form-control" readonly value="${svo.sellerImg}" placeholder="${svo.sellerImg}" size="300"/>
  							</div>
  						</div>
  						
  						<div class="row">
- 							<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 							<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
- 							<div class="col-xs-6">
+ 							<div class="col-xs-8">
  								<label for="id"> 
  								<i class="fa fa-user user" style="margin-right: 5px"></i>아이디</label> 
  								<input type="text" name="memId" id="id" class="margin-bottom form-control" placeholder="아이디" 	
  								value="<sec:authentication property="principal.memId"/>"
  								readonly="readonly">
+ 								<span id="idCheckView" style="margin: 0px;"></span>
  							</div>
- 							<div class="col-xs-3" style="margin-top: 32px;">
- 								<span id="idCheckView"></span>
+ 							<div class="col-xs-2" style="margin-top: 32px;">
  							</div>
  						</div>
  						<div class="row">
- 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
- 							<div class="col-xs-6">
+ 							<div class="col-xs-8">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>비밀번호</label> <input type="password" required="required"
  									name="pw" id="password" class="margin-bottom form-control"
  									placeholder="비밀번호">
+ 								<span id="passwordCheckView" style="margin: 0px;"></span>
  							</div>
- 							<div class="col-xs-3" style="margin-top: 32px;">
- 								<span id="passwordCheckView"></span>
+ 							<div class="col-xs-2" style="margin-top: 32px;">
  							</div>
  						</div>
  						<div class="row">
- 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
- 							<div class="col-xs-6">
+ 							<div class="col-xs-8">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>비밀번호 확인</label> <input type="password" required="required"
  									id="passwordRe" class="margin-bottom form-control"
  									placeholder="비밀번호확인">
+ 								<span id="passwordReCheckView" style="margin: 0px;"></span>
  							</div>
- 							<div class="col-xs-3" style="margin-top: 32px;">
- 								<span id="passwordReCheckView"></span>
+ 							<div class="col-xs-2" style="margin-top: 32px;">
  							</div>
  						</div>
  						<div class="row">
- 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
- 							<div class="col-xs-6">
+ 							<div class="col-xs-8">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>이름</label> <input type="text" required="required"
  									name="memName" id="name" class="margin-bottom form-control"
@@ -388,21 +386,21 @@
  							</div>
  						</div>
  						<div class="row">
- 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
- 							<div class="col-xs-6">
+ 							<div class="col-xs-8">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>생년월일</label> <input type="date" required="required"
  									name="birth" class="margin-bottom form-control" min="1900-01-01" max="2007-12-31"
  									value="<sec:authentication property="principal.birth"/>">
  							</div>
- 							<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 							<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  						</div>
  						<div class="row">
- 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
- 							<div class="col-xs-6">
+ 							<div class="col-xs-8">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>전화번호 ( - 포함하여 입력해주세요! )</label>
  								<!-- <input type="text" name="tel"  class="margin-bottom form-control" placeholder="전화번호"> -->
@@ -410,24 +408,24 @@
  									id="telno" title=" -  포함하여 입력해주세요!" placeholder="00*-000*-0000" required="required"
  									pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" maxlength="13"
  									value="<sec:authentication property="principal.tel"/>">
+ 								<span id="telCheckView" style="margin: 0px;"></span>
  							</div>
- 							<div class="col-xs-3" style="margin-top: 5px;">
- 								<span id="telCheckView"></span>
+ 							<div class="col-xs-2" style="margin-top: 5px;">
  							</div>
  						</div>
  							<div class="row">
- 						<div  class="col-xs-3" style="margin-top: 32px;"> 
+ 						<div  class="col-xs-2" style="margin-top: 32px;"> 
 						</div>
- 							<div class="col-xs-6">
+ 							<div class="col-xs-8">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>판매자 소개</label>
- 						<textarea rows="8"cols="40"name="sellerInfo"required="required"style="height:200px;width:335px">${svo.sellerInfo}</textarea>
+ 						<textarea rows="6"cols="43"name="sellerInfo"required="required"style="resize: none">${svo.sellerInfo}</textarea>
 				 			</div>
 				 		</div>
  						<div class="row">
- 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
- 							<div class="col-xs-6">
+ 							<div class="col-xs-8">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>주소</label>
  								<div id="map" style="width:auto; height: 200px;"></div>
@@ -442,9 +440,9 @@
  							</div> 
  						</div>
  						<div class="row">
- 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
- 							<div class="col-xs-6" style="margin-bottom: 10px">
+ 							<div class="col-xs-8" style="margin-bottom: 10px">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>비밀번호 찾기 질문</label> <select
  									id="pwQnaSelect">
@@ -457,16 +455,16 @@
  							</div>
  						</div>
  						<div class="row">
- 						<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
- 							<div class="col-xs-6">
+ 							<div class="col-xs-8">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px"></i>비밀번호 찾기 답변</label> <input type="text"
  									name="pwAnswer" id="pwAnswer" required="required"
  									class="margin-bottom form-control"
  									value="<sec:authentication property="principal.pwAnswer"/>">
  							</div>
- 								<div  class="col-xs-3" style="margin-top: 32px;"> 				
+ 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  						</div>
  						<br>
@@ -487,7 +485,7 @@
  			</div>
  
  
- 			<div class="col-sm-2">
+ 			<div class="col-sm-3">
  				<!-- right -->
  
  			</div>
