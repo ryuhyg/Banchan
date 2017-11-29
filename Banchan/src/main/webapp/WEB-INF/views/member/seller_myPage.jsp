@@ -13,19 +13,15 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 						//음식 삭제, 수정
-						$("button[name='update']")
-								.click(
+						$("button[name='update']").click(
 										function() {
 											location.href = "${pageContext.request.contextPath}/updateRegViewFood.do?foodNo="
-													+ $(this).val();
+													+ $(this).val()+ "&memId="+ $("#sellerId").val();
 										});
-						$("button[name='delete']")
-								.click(
+						$("button[name='delete']").click(
 										function() {
 											location.href = "${pageContext.request.contextPath}/deleteRegFood.do?foodNo="
-													+ $(this).val()
-													+ "&memId="
-													+ $("#sellerId").val();
+													+ $(this).val()+ "&memId="+ $("#sellerId").val();
 										});
 						$("button[name='seller']")
 								.click(
@@ -450,7 +446,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 
 		<div id="tabcontainer">
 			<ul class="tab">
-				<li class="active"><a href="#tab1">등록 음식</a></li>
+				<li class="active"><a href="#tab1">등록 음식 <b>(</b>${flist.size()}<b>)</b></a></li>
 				<li><a href="#tab2" id="sellFood">판매중 음식 <b>(</b>${foodSellCount}<b>)</b></a></li>
 			</ul>
 			<div class="tab_container">

@@ -29,15 +29,16 @@
 	$(document).ready(function () {
 		$("#trQuantity").change(function () {
 			//구매수량이 준비수량보다 적은지 확인
-			var preQuantity=$("#preQuantity").text();
-			if(parseInt($(this).val()) > parseInt(preQuantity)){
+			var leftQuantity=$("#leftQuantity").text();
+			if(parseInt($(this).val()) > parseInt(leftQuantity)){
 				alert("준비수량이 부족합니다!");
 				$("#trQuantity").val(1); 
 			}
 			var orderPrice=$(this).val()*$("#price").text();
 			$("#orderPrice").text(orderPrice);
-		}); //change 
-
+		}); //change
+		
+		
 	/*판매 음식 삭제하기*/
 	$("#deleteFood").click(function() {
 		if(deleteFlag=confirm("삭제하시겠습니까?")){
@@ -74,12 +75,135 @@
 				}); //ajax	
 			}
 		}); //click
+
+		 //////////////////////ANSWER_윤주////////////////
+		$("#answerBnt").click(function(){
+			var answer = $("#ansContent");
+			var memId=$("#memId2");
+			//alert(answer.val()+" "+memId.val());
+			 $.ajax({
+				type:"get",
+				url:"${pageContext.request.contextPath}/answerRegister.do",
+				data:"questNo=1&memId2="+memId.val()+"&ansContent="+answer.val(),
+				dataType:"json",
+				success:function(data){
+					 var info="<tr>";
+					info+="<td>"+data.ansNo+"</td>";
+					info+="<td>"+data.ansContent+"</td>";
+					info+="<td>"+data.memId+"</td>";
+					info+="<td>"+data.ansPostdate+"</td>";
+					info+="<td><button name=deletecomment class=btn btn-default>x</button></td>";	
+					info+="</tr>";
+					
+					//테이블의 tr자식이 있으면 tr 뒤에 붙인다. 없으면 테이블 안에 tr을 붙인다.
+					if($('#commentTable tr').contents().size()==0){
+				            $('#commentTable').append(info);
+				        }else{
+				            $('#commentTable tr:last').after(info);
+				        }
+				  			 $("#ansContent").val("");
+						} 
+				
+			});//ajax	
+		});//answerSubmit click
+
 		
+//댓글달기!		
+	var foodSellNo = "${foodSell.foodSellNo}"; //게시글 번호
+	 
+	$("[name=commentInsertBtn]").click(function(){ //댓글 등록 버튼 클릭시
+		var insertData = $("[name=commentInsertForm]").serialize(); //commentInsertForm의 내용을 가져옴
+		commentInsert(insertData); //Insert 함수호출(아래)
+	});
+	 
+    //댓글 목록 
+	function commentList(){
+	    $.ajax({
+	        url : "${pageContext.request.contextPath}/commentList.do",
+	        type : "get",
+	        data : {"foodSellNo":foodSellNo},
+	        success : function(data){
+	            var a =""; 
+	            $.each(data, function(key, value){ 
+	                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+	                a += '<div class="commentInfo'+value.questNo+'">'+'댓글번호 : '+value.questNo+' / 작성자 : '+value.memId;
+	                a += '<a onclick="commentUpdate('+value.questNo+'\''+value.questContent+'\');"> 수정 </a>';
+	                a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a> ';
+	                a += '<div class="commentContent'+value.questNo+'"> <p> 내용 : '+value.questContent +'</p>'+'</div>';
+	                a += '</div></div>';
+
+	            });
+
+	          
+	            $(".commentList").html(a);
+	        }
+	    });
+	}
+	//댓글 등록
+	
+	function commentInsert(insertData){
+		 $.ajax({
+	        type : "get",
+	        url : "${pageContext.request.contextPath}/commentInsert.do",
+	        data : insertData,
+	        success : function(data){
+	        	  if(data== 1) {
+	                commentList(); //댓글 작성 후 댓글 목록 reload
+	                $("[name=content]").val("");
+	             }//if
+	        }//success
+	    }); //ajax
+	}//function
+
+	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
+	function commentUpdate(questNo, questContent){
+	    var a ="";
+	    
+	    a += '<div class="input-group">';
+	    a += '<input type="text" class="form-control" name="content_'+questNo+'" value="'+questContent+'"/>';
+	    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+questNo+');">수정</button> </span>';
+	    a += '</div>';
+	    
+	    $('.commentContent'+questNo).html(a);
+	    
+	}
+	 
+	//댓글 수정
+	function commentUpdateProc(questNo){
+	    var updateContent = $("[name=content_"+questNo+"]").val();
+	    
+	    
+	    $.ajax({
+	        url : "${pageContext.request.contextPath}/commentUpdate.do",
+	        type : "get",
+	        data : {"content" : updateContent, "questNo" : questNo},
+	        success : function(data){
+	            if(data == 1) commentList(questNo); //댓글 수정후 목록 출력 
+	        }
+	    });
+	}
+	 
+	//댓글 삭제 
+	function commentDelete(questNo){
+		alert("1");
+	    $.ajax({
+	        url : "${pageContext.request.contextPath}/commentUpdate.do?questNo="+questNo,
+	        type : "get",
+	        success : function(data){
+	            if(data == 1) commentList(foodSellNo); //댓글 삭제후 목록 출력 
+	        }
+	    });
+	}
+		$(document).ready(function(){
+	    commentList(); //페이지 로딩시 댓글 목록 출력 
+		});
+
 		$("#loginAndOrder").click(function() {
 			if(confirm("로그인 페이지로 이동합니다."))
 				location.href="${pageContext.request.contextPath}/loginView.do";
 		}); //loginAndOrder click
 	
+
 	}); //ready
 
 	function orderFoodConfirm(){
@@ -95,8 +219,8 @@
 			return confirm("구매하시겠습니까?");
 		return false; 
 	}
+	
 </script>
-
 
 <section id="recent-list" class="agency" style="margin-top: 150px">
 <div id="page-container">
@@ -209,7 +333,7 @@
 				<h4>작성된 후기가 없습니다</h4>
 				</c:when>
 				<c:otherwise>
-			<table class="table table-hover"  style="text-align: center;font-size: 12px;">
+			<table class="table table-hover" style="text-align: center;font-size: 12px;">
 					<thead>
 					<tr class="tr_visible">
 						<td>NO</td>
@@ -266,8 +390,54 @@
 	</div>
 	</div>
 	
+	
 
+
+<hr>
+<!--  댓글  -->
+    <div class="container">
+        <label for="content">Q&A</label>
+        <form name="commentInsertForm">
+            <div class="input-group">
+               <input type="hidden" name="foodSellNo" value="${foodSell.foodSellNo}"/>
+               <input type="hidden" name="memId" value="${mvo.memId}"/>
+               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+               <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+               </span>
+              </div>
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="commentList"></div>
+    </div>
+
+
+	<!-- QNA "ANSWER"-윤주 -->
+	<hr>
+	<sec:authorize access="isAuthenticated()">
+	<div class="container">
+		<div class="row">
+		   <table class="table table-condensed">
+		    <tr>
+		        <td>
+		        <%-- <form action="${pageContext.request.contextPath}/answerRegister.do"> --%>
+			           <span class="form-inline" role="form">               
+			              <textarea id="ansContent" name="ansContent" class="form-control col-lg-12" rows="4" style="resize: none; width:95%;height:35px" required="required"></textarea><br>
+			           	  <input type="hidden" name="memId2" id="memId2" value="${mvo.memId }">
+			           	 <%--<input type="hidden" name="questNo" value="1"> --%>
+			           	  <span style="float:right;margin-top: 10px;margin-right: 58px;" >
+			           	  	<input type="button" id="answerBnt" class="btn btn-danger" value="답변작성">
+			           	  </span>
+			           </span>
+			<!-- 	</form>      -->     	 
+ 	        </td>
+		    </tr>
+		  </table><!-- 답변달기 -->
+		</div><!-- row -->
+	</div> <!-- container -->
+	</sec:authorize>
 
 </section>	<!-- recent-list -->			
-
 

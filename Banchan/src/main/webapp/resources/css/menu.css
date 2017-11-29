@@ -146,4 +146,5 @@ nav > ul li.has_submenu > ul li.has_submenu:hover > a:after {
   nav {
     display: none;
   }
+ 
 }

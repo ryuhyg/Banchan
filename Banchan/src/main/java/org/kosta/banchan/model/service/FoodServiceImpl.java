@@ -157,7 +157,14 @@ public class FoodServiceImpl implements FoodService {
 		foodDAO.noimgUpdateRegFood(fvo);
 	}
 	public List<FoodVO> selectFoodTop3(){
-		return foodDAO.selectFoodTop3();
+		List<FoodVO> list=foodDAO.selectFoodTop3();
+		for(int i=0; i< list.size(); i++) {
+			if(!(list.get(i).getFoodDe().length() < 25)) {
+				String foodStr=list.get(i).getFoodDe().substring(0, 25);  
+				list.get(i).setFoodDe(foodStr + "...");
+			}
+		}
+		return list;
 	}
 	/** [지원] 판매음식 수정
 	 * 
