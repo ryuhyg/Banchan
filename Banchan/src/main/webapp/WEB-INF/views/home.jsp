@@ -126,7 +126,6 @@
 							</a><!-- /.hover-effect -->
 							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.getAddressVO().getAddressAPI()}</span>
 							<span class="description">${list.getSellerInfo()}</span>
-							
 							<dl class="detail">
 							<div>
 								<dt class="">판매자평점</dt><br><br>
@@ -143,8 +142,7 @@
        						</dl><!-- /.detail -->
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
-				</c:forEach>
-					
+				</c:forEach>		
 				</div>
 	</c:if>
 	<c:if test="${fn:length(flist)!=0}">
