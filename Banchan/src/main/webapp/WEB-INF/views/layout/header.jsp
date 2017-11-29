@@ -113,7 +113,7 @@
 						</ul></li>
 				</ul> 
 			</nav>
-			</div> 
+			</div>  
 			<div class="col-sm-3">			
 				<form action="searchByKeyword.do">
 						<div class="" style="margin-top: 10px; padding: 3px;
