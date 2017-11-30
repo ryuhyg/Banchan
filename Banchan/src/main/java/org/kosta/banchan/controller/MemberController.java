@@ -264,13 +264,13 @@ public class MemberController {
 	@Secured("ROLE_BUYER")
 	@RequestMapping(value = "editBuyerMember.do", method = RequestMethod.POST)
 	public String editBuyerMember(MemberVO mvo) {
+		System.out.println("mvo:"+mvo);
 		// security 세션정보를 셋팅해줘야 됨.
 		MemberVO mvoBuyerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // security
 																													// 세션
 																													// 정보(수정전)
-
 		memberService.editBuyerMemberService(mvo); // update
-		mvoBuyerMember.setMemName(mvo.getPw()); // mvoBuyerMember에 업데이트 된 값 셋팅 (웹페이지에 갱신된 정보를 표현하기 위함)
+		mvoBuyerMember.setPw(mvo.getPw()); // mvoBuyerMember에 업데이트 된 값 셋팅 (웹페이지에 갱신된 정보를 표현하기 위함)
 		mvoBuyerMember.setMemName(mvo.getMemName()); // 안그러면 로그아웃했다가 다시 로그인해야 수정된 정보가 출력됨
 		mvoBuyerMember.setBirth(mvo.getBirth());
 		mvoBuyerMember.setTel(mvo.getTel());
@@ -306,7 +306,7 @@ public class MemberController {
 		if (imageName.equals("null") || imageName.equals("")) {
 
 			memberService.editSellerMemberNoImageService(svo); // 업데이트
-			mvoSellerMember.setMemName(svo.getPw());
+			mvoSellerMember.setPw(svo.getPw());
 			mvoSellerMember.setMemName(svo.getMemName());
 			mvoSellerMember.setBirth(svo.getBirth());
 			mvoSellerMember.setTel(svo.getTel());
@@ -317,7 +317,7 @@ public class MemberController {
 
 			svo.setSellerImg(file.getOriginalFilename()); // 이미지 업데이트
 			memberService.editSellerMemberService(svo); // 업데이트
-			mvoSellerMember.setMemName(svo.getPw());
+			mvoSellerMember.setPw(svo.getPw());
 			mvoSellerMember.setMemName(svo.getMemName());
 			mvoSellerMember.setBirth(svo.getBirth());
 			mvoSellerMember.setTel(svo.getTel());
