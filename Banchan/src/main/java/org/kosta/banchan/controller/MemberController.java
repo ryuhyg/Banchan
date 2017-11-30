@@ -40,6 +40,9 @@ public class MemberController {
 	private FoodService foodService;
 	@Resource
 	private BCryptPasswordEncoder passwordEncoder;
+	
+	/*@Resource
+	private ReportService reportService;*/
 
 	///////////////////////////////////// 향걸 start////////////////////////////////////
 	
@@ -235,6 +238,11 @@ public class MemberController {
 		List<FoodVO> flist=foodService.selectFoodTop3();
 		model.addAttribute("list", list);
 		model.addAttribute("flist", flist);
+		//////////////검색어 순위/////////////////
+		/*List<ReportVO> rlist = reportService.getReport();
+		System.out.println(rlist);
+		model.addAttribute("rlist",rlist);		*/
+		/////////////////////////////////////////
 		return "home.tiles";
 	}
 

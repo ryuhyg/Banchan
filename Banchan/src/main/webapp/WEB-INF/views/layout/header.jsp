@@ -9,9 +9,14 @@
 		$("#logoutAction").click(function() {
 			$("#logoutForm").submit();
 		});
+		
+		$("#searchBtn").hover(function(){
+			$("#searchkw").css("blink")
+		});
+		
+		
 	});
 </script>		
-
 
 <header class="menu-base" id="header-container-box"
 	style="top: 0px !important;">
@@ -117,18 +122,19 @@
 			</div>  
 			<div class="col-sm-3">			
 				<form action="searchByKeyword.do">
-						<div class="" style="margin-top: 10px; padding: 3px;
-    border: solid 1px #E4E4E4;
-    border-radius: 6px;
-    background-color: #fff;">
-							<input type="text" style="    border: 0; width:85%; box-shadow: none; " placeholder="검색" name="kw"> 
-							<span><button style="  margin: 2px 0 0 0;
-    background: none;
-    box-shadow: none;
-    border: 0;
-    color: #666666;
-    padding: 0 8px 0 10px;
-    border-left: solid 1px #ccc;" class="" type="submit">
+						<div class="searchForm">
+							<input type="text" style="border: 0; width:71%; box-shadow: none; " placeholder="검색" name="kw">
+							<button class="btn btn-primary dropdown-toggle dropdown-hover searchBtn" type="button"
+							data-toggle="dropdown" data-hover="dropdown"
+							style="border: none; background-color: #fff">
+							<i class="fa fa-arrow-down" ></i> 
+							</button>
+						<ul class="dropdown-menu" style=" width:71%;" >
+						<c:forEach items="${rlist}"  var="kw" >
+							<li><a href="#" >${kw.keyword}</a></li>
+						</c:forEach>
+						</ul>
+							<span><button class="searchBtn" type="submit">
 							<i class="fa fa-search" aria-hidden="true"></i></button></span>
 						</div>
 					</form>

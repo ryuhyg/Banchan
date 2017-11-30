@@ -52,7 +52,7 @@
 }
 
 .dropdown.open{
-	z-index: 11;
+	z-index: 1000;
 	border-color: rgb(79, 202, 188);
 
 	box-shadow: 0 0 0 4px rgba(79, 236, 188, 0.1);

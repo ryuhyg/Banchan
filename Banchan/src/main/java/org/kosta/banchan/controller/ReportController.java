@@ -15,10 +15,11 @@ public class ReportController {
 	@Resource
 	private ReportService reportService;
 	@RequestMapping("reportmain.do")
-	public String getReport(Model model){
+	public List<ReportVO> getReport(Model model){
 		List<ReportVO> rlist = reportService.getReport();
+		System.out.println(rlist);
 		model.addAttribute("rlist",rlist);
-		return "/report/report";
+		return rlist;
 	}
 	
 }
