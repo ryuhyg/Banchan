@@ -27,6 +27,9 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
+		var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
+		alert(foodSellNo);
+		
 		$("#trQuantity").change(function () {
 			//구매수량이 준비수량보다 적은지 확인
 			var leftQuantity=$("#leftQuantity").text();
@@ -59,17 +62,19 @@
 	}); //delFood click
 	
 	$("#editFoodSell").click(function() {
+			alert(foodSellNo);
 			if(deleteFlag=confirm("수정하시겠습니까?")){
 				$.ajax({
 		    		type:"get",
 		        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
-		        	data:"foodSellNo="+$("#foodSellNo").val(),
+		        	data:"foodSellNo="+foodSellNo,
 		        	success:function(data){
 		        		if(data>1){
 		        			alert("판매중인 상품이 있어 수정할 수 없습니다.");
 		        		}
 		        		else{
-							location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val();
+							/* location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val(); */
+							location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+foodSellNo;
 		        		}
 		        	} 
 				}); //ajax	
@@ -108,9 +113,23 @@
 		});//answerSubmit click
 
 		
-//댓글달기!		
-	var foodSellNo = "${foodSell.foodSellNo}"; //게시글 번호
-	 
+
+		$(document).ready(function(){ 
+	    commentList(); //페이지 로딩시 댓글 목록 출력 
+		}); 
+
+		$("#loginAndOrder").click(function() {
+			if(confirm("로그인 페이지로 이동합니다."))
+				location.href="${pageContext.request.contextPath}/loginView.do";
+		}); //loginAndOrder click
+	
+
+	}); //ready
+	
+	//댓글달기!		
+	/* var foodSellNo = "${foodSell.foodSellNo}"; //게시글 번호
+	alert(foodSellNo); */
+	
 	$("[name=commentInsertBtn]").click(function(){ //댓글 등록 버튼 클릭시
 		var insertData = $("[name=commentInsertForm]").serialize(); //commentInsertForm의 내용을 가져옴
 		commentInsert(insertData); //Insert 함수호출(아래)
@@ -142,6 +161,7 @@
 	//댓글 등록
 	
 	function commentInsert(insertData){
+		alert(1);
 		 $.ajax({
 	        type : "get",
 	        url : "${pageContext.request.contextPath}/commentInsert.do",
@@ -194,17 +214,6 @@
 	        }
 	    });
 	}
-		$(document).ready(function(){
-	    commentList(); //페이지 로딩시 댓글 목록 출력 
-		});
-
-		$("#loginAndOrder").click(function() {
-			if(confirm("로그인 페이지로 이동합니다."))
-				location.href="${pageContext.request.contextPath}/loginView.do";
-		}); //loginAndOrder click
-	
-
-	}); //ready
 
 	function orderFoodConfirm(){
 		var isLogin = $("#checkId").val();
@@ -219,7 +228,6 @@
 			return confirm("구매하시겠습니까?");
 		return false; 
 	}
-	
 </script>
 
 <section id="recent-list" class="agency" style="margin-top: 150px">
@@ -285,14 +293,14 @@
 				
 					<form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()" >
 					<div class="row"> 
+						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
+						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
 					<c:choose>
 					<c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
 					 <div class="col-sm-2" style="text-align: right">구매수량:</div>
 					  <div class="col-sm-2">
 				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
 				      </div>
-						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
-						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
 					
 						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
  							<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
