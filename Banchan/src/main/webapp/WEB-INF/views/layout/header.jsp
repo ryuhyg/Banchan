@@ -27,8 +27,7 @@
 				<div class="col-md-3"> 
 				</div>
 				<div class="col-md-1">
-					  
-
+					   <!-- 검색어 -->
 				</div>
 				<div id="login-pan" class="col-md-4">
 					<sec:authorize access="!isAuthenticated()">
