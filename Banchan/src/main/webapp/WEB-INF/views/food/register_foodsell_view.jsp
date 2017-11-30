@@ -44,7 +44,8 @@
 	                    $(this).val('');
 	                }
 	            }
-			};
+			}; //datepicker
+			
 			$.datepicker.setDefaults($.datepicker.regional['ko']); 
 			
 			$('#closeDate').datepicker({
@@ -52,13 +53,18 @@
 				onSelect: function(selected) {
 					$("#trDate").datepicker("option","minDate",selected);
 				}
-			}); 
+			}); //closeDate datepicker
+			
 			$('#trDate').datepicker({
 				minDate: 0,
 				onSelect: function(selected) {
 					$("#closeDate").datepicker("option","maxDate",selected);
 				}
-			});
+			}); //trDate datepicker
+			
+			$("#regForm").submit(function() {
+				return confirm("판매등록하시겠습니까?");				
+			});//submit
 	});//ready 
 </script>	
 
@@ -79,6 +85,24 @@
 			<div class="row"> 
 				<h3 class="title-form" style="margin-bottom: 15px">${fvo.foodName }</h3>  
 			</div>
+			<div class="row">
+				<div  class="col-xs-4" > 
+					<label for="price"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>가격(원) </label>
+					<input type="number" name="price"  id="price" min="0" class="margin-bottom form-control"  required="required">
+					</div>
+				<div  class="col-xs-4" >
+					<label for="preQuantity"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>준비수량</label>
+					<input type="number" name="preQuantity"  id="preQuantity" min="1" class="margin-bottom form-control" required="required" >	
+				</div>
+				<div  class="col-xs-4" >
+					<label for="unit"><i class="fa fa-ellipsis-h" style=" margin-right: 5px"></i>수량 당 정보</label>
+					<input type="text" name="unit"  id="unit" class="margin-bottom form-control"  required="required" placeholder="(ex)100g/개" >
+				</div>
+			</div>
+			<div class="row">
+				<label for="loc"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>거래장소 </label>
+				<input type="text"	 name="loc"  id="loc" class="margin-bottom small-text"  required="required">	
+			</div>
 			<div class="row" >
 				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
 				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" > 
@@ -87,24 +111,6 @@
 				<label for="date"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>마감일자</label>
 				<input type="text" name="closeDate" id="closeDate" class="margin-bottom small-text " required="required">	
 			</div>
-			<div class="row">
-				<label for="loc"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>거래장소 </label>
-				<input type="text"	 name="loc"  id="loc" class="margin-bottom small-text"  required="required">	
-			</div>
-				<div class="row">
-					<div  class="col-xs-4" >
-						<label for="price"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>가격 </label>
-						<input type="number" name="price"  id="price" min="0" class="margin-bottom form-control"  required="required">
-						</div>
-					<div  class="col-xs-4" >
-						<label for="preQuantity"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>준비수량</label>
-						<input type="number" name="preQuantity"  id="preQuantity" min="1" class="margin-bottom form-control" required="required" >	
-					</div>
-					<div  class="col-xs-4" >
-						<label for="unit"><i class="fa fa-ellipsis-h" style=" margin-right: 5px"></i>수량 당 정보</label>
-						<input type="text" name="unit"  id="unit" class="margin-bottom form-control"  required="required" placeholder="(ex)100g/개" >
-					</div>
-				</div>
 		</div>
 		<div class= "row">
 	 		<div  class="container-fluid"> 										
@@ -119,7 +125,7 @@
 			</div>
 		</div>
 		<div class="row" align="center">
-			<input type="submit" class="btn btn-primary btn-lg btn-block" style="width: 100" value="등록하기" >
+			<input type="submit" class="btn btn-primary" style="width: 100" value="판매등록하기" >
 		</div>
 		</form>
 	

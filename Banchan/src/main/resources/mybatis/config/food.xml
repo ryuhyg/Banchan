@@ -35,15 +35,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType= "foodSellVO">
 		select
 		fs.rnum,fs.food_sell_no,fs.tr_date,fs.close_date,fs.price,fs.pre_quantity,
-		fs.sell_postdate,fs.food_no,fs.food_name,fs.food_main_img,fs.category_no,fs.unit
+		fs.sell_postdate,fs.food_no,fs.food_name,fs.food_main_img,fs.category_no,fs.unit,fs.food_score
 		from(select row_number() over(order by s.tr_date desc) as
 		rnum,s.food_sell_no,s.tr_date,s.close_date,
 		s.price,s.pre_quantity,s.sell_postdate,s.unit,
-		f.food_no,f.food_name,f.food_main_img,f.category_no
+		f.food_no,f.food_name,f.food_main_img,f.category_no,f.food_score
 		from (select
 		food_no,food_sell_no,tr_date,close_date,price,pre_quantity,sell_postdate,unit
 		from FOOD_SELL ) s,
-		(select food_no,food_name,food_main_img,category_no
+		(select food_no,food_name,food_main_img,category_no,food_score
 		from FOOD where mem_id=#{memId}) f
 		where s.close_date>sysdate and
 		f.food_no=s.food_no

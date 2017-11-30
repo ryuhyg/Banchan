@@ -26,110 +26,111 @@
     
 <script type="text/javascript">
 
-	$(document).ready(function () {
-		var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
-		alert(foodSellNo);
-		
-		$("#trQuantity").change(function () {
-			//구매수량이 준비수량보다 적은지 확인
-			var leftQuantity=$("#leftQuantity").text();
-			if(parseInt($(this).val()) > parseInt(leftQuantity)){
-				alert("준비수량이 부족합니다!");
-				$("#trQuantity").val(1); 
-			}
-			var orderPrice=$(this).val()*$("#price").text();
-			$("#orderPrice").text(orderPrice);
-		}); //change
-		
-		
+$(document).ready(function () {
+	var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
+	
+	$("#trQuantity").change(function () {
+		//구매수량이 준비수량보다 적은지 확인
+		var leftQuantity=$("#leftQuantity").text();
+		if(parseInt($(this).val()) > parseInt(leftQuantity)){
+			alert("준비수량이 부족합니다!");
+			$("#trQuantity").val(1); 
+		}
+		var orderPrice=$(this).val()*$("#price").text();
+		$("#orderPrice").text(orderPrice);
+	}); //trQuantity change
+	
+	$("#commentDelete").on("click",".commentInfo a",function(){
+		alert(1);
+	});//commentDelete
+	
 	/*판매 음식 삭제하기*/
 	$("#deleteFood").click(function() {
 		if(deleteFlag=confirm("삭제하시겠습니까?")){
 			$.ajax({
 	    		type:"get",
 	        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
-	        	data:"foodSellNo="+$("#foodSellNo").val(),
+	        	data:"foodSellNo="+foodSellNo,
 	        	success:function(data){
 	        		if(data>1)
 	        			alert("판매중인 상품이 있어 삭제할 수 없습니다.");
 	        		else{
 	        			alert("상품이 삭제되었습니다.");
-	        			location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+$("#foodSellNo").val()+"&sellerId="+$("#sellerId").val();
+	        			location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+foodSellNo+"&sellerId="+$("#sellerId").val();
 	        		}
 	        	}  
 			}); //ajax	
 		}
 	}); //delFood click
-	
+
+	/* 판매음식 수정하기  */
 	$("#editFoodSell").click(function() {
-			alert(foodSellNo);
-			if(deleteFlag=confirm("수정하시겠습니까?")){
-				$.ajax({
-		    		type:"get",
-		        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
-		        	data:"foodSellNo="+foodSellNo,
-		        	success:function(data){
-		        		if(data>1){
-		        			alert("판매중인 상품이 있어 수정할 수 없습니다.");
-		        		}
-		        		else{
-							/* location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val(); */
-							location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+foodSellNo;
-		        		}
-		        	} 
-				}); //ajax	
-			}
-		}); //click
+		if(deleteFlag=confirm("수정하시겠습니까?")){
+			$.ajax({
+	    		type:"get",
+	        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+	        	data:"foodSellNo="+foodSellNo,
+	        	success:function(data){
+	        		if(data>1){
+	        			alert("판매중인 상품이 있어 수정할 수 없습니다.");
+	        		}
+	        		else{
+						/* location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val(); */
+						location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+foodSellNo;
+	        		}
+	        	} 
+			}); //ajax	
+		}
+	}); //click
 
-		 //////////////////////ANSWER_윤주////////////////
-		$("#answerBnt").click(function(){
-			var answer = $("#ansContent");
-			var memId=$("#memId2");
-			//alert(answer.val()+" "+memId.val());
-			 $.ajax({
-				type:"get",
-				url:"${pageContext.request.contextPath}/answerRegister.do",
-				data:"questNo=1&memId2="+memId.val()+"&ansContent="+answer.val(),
-				dataType:"json",
-				success:function(data){
-					 var info="<tr>";
-					info+="<td>"+data.ansNo+"</td>";
-					info+="<td>"+data.ansContent+"</td>";
-					info+="<td>"+data.memId+"</td>";
-					info+="<td>"+data.ansPostdate+"</td>";
-					info+="<td><button name=deletecomment class=btn btn-default>x</button></td>";	
-					info+="</tr>";
-					
-					//테이블의 tr자식이 있으면 tr 뒤에 붙인다. 없으면 테이블 안에 tr을 붙인다.
-					if($('#commentTable tr').contents().size()==0){
-				            $('#commentTable').append(info);
-				        }else{
-				            $('#commentTable tr:last').after(info);
-				        }
-				  			 $("#ansContent").val("");
-						} 
-				
-			});//ajax	
-		});//answerSubmit click
 
-		
+	//////////////////////ANSWER_윤주////////////////
+	$("#answerBnt").click(function(){
+		var answer = $("#ansContent");
+		var memId=$("#memId2");
+		 $.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/answerRegister.do",
+			data:"questNo=1&memId2="+memId.val()+"&ansContent="+answer.val(),
+			dataType:"json",
+			success:function(data){
+			 	var info="<tr>";
+				info+="<td>"+data.ansNo+"</td>";
+				info+="<td>"+data.ansContent+"</td>";
+				info+="<td>"+data.memId+"</td>";
+				info+="<td>"+data.ansPostdate+"</td>";
+				info+="<td><button name=deletecomment class=btn btn-default>x</button></td>";	
+				info+="</tr>";
+			
+				//테이블의 tr자식이 있으면 tr 뒤에 붙인다. 없으면 테이블 안에 tr을 붙인다.
+				if($('#commentTable tr').contents().size()==0){
+			            $('#commentTable').append(info);
+			     }else{
+			            $('#commentTable tr:last').after(info);
+			     }
+			  			 $("#ansContent").val("");
+			} 
+		});//ajax	
+	});//answerSubmit click
 
-		$(document).ready(function(){ 
-	    commentList(); //페이지 로딩시 댓글 목록 출력 
-		}); 
-
-		$("#loginAndOrder").click(function() {
-			if(confirm("로그인 페이지로 이동합니다."))
-				location.href="${pageContext.request.contextPath}/loginView.do";
-		}); //loginAndOrder click
 	
 
-	}); //ready
+
+	$("#loginAndOrder").click(function() {
+		if(confirm("로그인 페이지로 이동합니다."))
+			location.href="${pageContext.request.contextPath}/loginView.do";
+	}); //loginAndOrder click
+
+	commentList(); 
+}); //ready
 	
 	//댓글달기!		
 	/* var foodSellNo = "${foodSell.foodSellNo}"; //게시글 번호
 	alert(foodSellNo); */
-	
+		
+	/////////////////////////////end윤주////////////////////////////
+		
+	//댓글달기!		
 	$("[name=commentInsertBtn]").click(function(){ //댓글 등록 버튼 클릭시
 		var insertData = $("[name=commentInsertForm]").serialize(); //commentInsertForm의 내용을 가져옴
 		commentInsert(insertData); //Insert 함수호출(아래)
@@ -146,12 +147,12 @@
 	            $.each(data, function(key, value){ 
 	                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
 	                a += '<div class="commentInfo'+value.questNo+'">'+'댓글번호 : '+value.questNo+' / 작성자 : '+value.memId;
-	                a += '<a onclick="commentUpdate('+value.questNo+'\''+value.questContent+'\');"> 수정 </a>';
-	                a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a> ';
+	                a += '<a onclick="commentUpdate('+value.questNo+'\''+value.questContent+'\')"> 수정 </a>';
+	               /*  a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a> '; */
+	              	 a += '<a id="commentDelete"> 삭제 </a> ';
 	                a += '<div class="commentContent'+value.questNo+'"> <p> 내용 : '+value.questContent +'</p>'+'</div>';
 	                a += '</div></div>';
-
-	            });
+			    });
 
 	          
 	            $(".commentList").html(a);
@@ -215,7 +216,7 @@
 	    });
 	}
 
-	function orderFoodConfirm(){
+	function orderFoodConfirm(){ //윤주
 		var isLogin = $("#checkId").val();
 		if(isLogin==null || isLogin==""){
 			var flag = confirm("로그인하셔야 구매 가능합니다. 로그인하시겠습니까?");

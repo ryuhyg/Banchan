@@ -152,8 +152,8 @@
 .form-large.grey-color {
   background-color: #FCFCFC;
   border: 1px solid #E5E5E5;
-  padding: 16px 26px 22px;
-  border-top: 6px solid #1a1a1a;
+  padding: 16px 26px 22px; 
+  border-top: 1px solid #e5e5e5;
 }
 .form-large .margin-bottom {
   margin-bottom: 14px;
@@ -735,7 +735,7 @@
 }
 .bs-callout.callout-success {
   color: #a6d272;
-  border-left-color: #94c853;
+  border-left-color: #94c853; 
 }
 .bs-callout.callout-info {
   color: #91c8cb;
@@ -817,7 +817,7 @@
 /* 1.10.22 BOX TITLE STYLE (HOME+)
 ================================== */
 .list-box-title {
-  border-bottom: 3px solid #1a1a1a;
+  border-bottom: 1px solid #e5e5e5;
   height: 36px;
   position: relative;
   margin-bottom: 20px;
@@ -831,8 +831,11 @@
   left: 0;
   z-index: 1;
   padding: 6px 10px 0;
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: #fff;
+  color: #f47821;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: -10px;
 }
 .list-box-title span .icon {
   margin-right: 10px;
