@@ -130,9 +130,9 @@
 							<i class="fa fa-arrow-down" ></i> 
 							</button>
 						<ul class="dropdown-menu" style=" width:71%;" >
-						<c:forEach items="${rlist}"  var="kw" >
+						<%-- <c:forEach items="${rlist}"  var="kw" >
 							<li><a href="#" >${kw.keyword}</a></li>
-						</c:forEach>
+						</c:forEach> --%>
 						</ul>
 							<span><button class="searchBtn" type="submit">
 							<i class="fa fa-search" aria-hidden="true"></i></button></span>

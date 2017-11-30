@@ -9,12 +9,10 @@ $(document).ready(function(){
 	$("#resetPassForm :input[id=password]").keyup(function() {
 		var id=$(this).val().trim();
 		if(id.length<4 || id.length>10){
-			$("#passwordCheckView").html("비밀번호는 4자이상 10자 이하여야 합니다!").css(
-					"color","pink");
+			$("#passwordCheckView").html(" 4 ~ 10 자리로 입력해주세요.").css("color","#990000");
 			checkPassword="";
 		}else{
-			$("#passwordCheckView").html("비밀번호 사용가능!").css(
-					"background","white");
+			$("#passwordCheckView").html(" Ok").css("color","#008000");
 			checkPassword="passwordOK";
 		}
 		$("#resetPassForm :input[id=passwordRe]").trigger("keyup");
@@ -32,11 +30,11 @@ $(document).ready(function(){
 		else{
 			if($("#resetPassForm :input[id=password]").val().trim()!=$("#resetPassForm :input[id=passwordRe]").val().trim()){
 				checkPasswordRe="";
-				$("#passwordReCheckView").text("불일치!!").css("background","red");
+				$("#passwordReCheckView").text("비밀번호가 일치하지 않습니다.").css("color","#990000");
 			}
 			else if($("#resetPassForm :input[id=password]").val().trim()==$("#resetPassForm :input[id=passwordRe]").val().trim()){
 				checkPasswordRe="passwordOK";
-				$("#passwordReCheckView").text("비밀번호 일치").css("background","white");
+				$("#passwordReCheckView").text("Ok").css("color","#008000");
 			}
 		}
 	});//keyup
@@ -67,17 +65,17 @@ $(document).ready(function(){
 				</div>
 					<div class="col-sm-4">
 						<div class="blog-list blog-detail">
-		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px; font-weight: bold;"></i>비밀번호 재설정</h3>
+		<h3 class="title-form"><i class="fa fa-key" style="margin-right: 5px; font-weight: bold;"></i>비밀번호 재설정</h3>
 							<form class="form-large grey-color" id="resetPassForm" name="resetPassForm">
 										<sec:csrfInput/><%-- csrf 토큰 --%>
 										<%-- <input type="hidden" name="id" id="id" value="${qnamvo.memId}"> --%>
 										<input type="hidden" name="id" id="id" value="${memId}">
-										<label for="password" style="font-weight: bold;"> <i class="fa fa-user user" style="margin-right: 5px"></i>비밀번호</label>
-										<input type="password" placeholder="비밀번호" name="password" id="password" class="margin-bottom form-control">
-											<span id="passwordCheckView"></span>	<br>		
-										<label for="passwordRe" style="font-weight: bold;"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호 확인</label>
-										<input type="password" placeholder="비밀번호 확인" name="passwordRe" id="passwordRe" class="margin-bottom form-control">
-											<span id="passwordReCheckView"></span>		<br>			
+										<label for="password" style="font-weight: bold;"> <i class="fa fa-key" style="margin-right: 5px"></i>비밀번호</label>
+										<input type="password" placeholder="비밀번호" name="password" id="password" class="margin-bottom form-control" style="margin: 0px;">
+											<span id="passwordCheckView" style="margin: 0px;"></span>	<br>		
+										<label for="passwordRe" style="font-weight: bold;"><i class="fa fa-key" style="margin-right: 5px"></i>비밀번호 확인</label>
+										<input type="password" placeholder="비밀번호 확인" name="passwordRe" id="passwordRe" class="margin-bottom form-control" style="margin: 0px;">
+											<span id="passwordReCheckView" style="margin: 0px;"></span>		<br>			
 								<br>
 								<div align="center"> 
 								<button type="button" class="btn btn-reverse button-form"  id="resetPassBtn" >재설정</button>

@@ -39,6 +39,8 @@
 .star_rating a:first-child {margin-left:0;}
 .star_rating a.on {color:#ffcc00;}
 .home-top{
+   margin-top: 100px;
+}
 <<<<<<< HEAD
    margin-top: 100px;
 }
@@ -58,7 +60,3 @@
     border-radius: 6px;
     background-color: #fff;
  }
-=======
-   margin-top: 100px;
-}
->>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
