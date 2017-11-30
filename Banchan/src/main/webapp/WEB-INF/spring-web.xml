@@ -17,6 +17,8 @@
 		 컨트롤러 영역 객체를 생성하는 spring-web.xml에서  정의한다 
 		 @Secured("ROLE_MEMBER")
 	 -->
+
+	 
 <security:global-method-security	secured-annotations="enabled" />
 <mvc:annotation-driven />
 <bean id="viewResolver" 

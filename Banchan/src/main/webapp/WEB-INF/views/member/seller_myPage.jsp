@@ -11,10 +11,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-	
-
-		
-		function sellFoodPage(pageNoParam){
+			function sellFoodPage(pageNoParam){
 			var pageNo=pageNoParam;
 			//판매중 음식, 판매중 음식 paging 눌렀을 때 실행
 			$.ajax({
@@ -148,6 +145,7 @@
 							$(activeTab).fadeIn();
 							return false;
 						});
+
 						
 						//판매음식 클릭시
 						$(".sellFood").click(function() {
@@ -155,6 +153,7 @@
 							var offset = $("");
 						});
 						
+
 						//동적으로 생성되는 페이징 번호에 대한 event
 						$("#paginationAjax").on("click",".pagination a",function(){
 							//현재 페이지를 클릭하지 않을 경우에만 실행

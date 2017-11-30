@@ -52,7 +52,7 @@ $(document).ready(function () {
               url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
               data:"foodSellNo="+foodSellNo,
               success:function(data){
-                 if(data>=1)
+                 if(data>1)
                     alert("판매중인 상품이 있어 삭제할 수 없습니다.");
                  else{
                     alert("상품이 삭제되었습니다.");
@@ -71,7 +71,7 @@ $(document).ready(function () {
               url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
               data:"foodSellNo="+foodSellNo,
               success:function(data){
-                 if(data>=1){
+                 if(data>1){
                     alert("판매중인 상품이 있어 수정할 수 없습니다.");
                  }
                  else{
@@ -296,6 +296,8 @@ $(document).ready(function () {
 						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
 						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
 					<div class="row"> 
+						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
+						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
 					<c:choose>
 					<c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
 					 <div class="col-sm-2" style="text-align: right">구매수량:</div>

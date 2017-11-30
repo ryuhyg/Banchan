@@ -57,7 +57,7 @@
 		$("#regForm :input[name=memId]").keyup(function(){
 			var id=$(this).val().trim();
 			if(id.length<4 || id.length>10){
-				$("#idCheckView").html("- 4 ~ 10 자리로 입력해주세요.");
+				$("#idCheckView").html(" 4 ~ 10 자리로 입력해주세요.");  
 				checkResultId="";
 				return;
 			}
@@ -69,13 +69,13 @@
 				beforeSend : function(xhr){   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
                     xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
                 },
-				success:function(data){						
+				success:function(data){				 		
 					if(data=="fail"){
-						$("#idCheckView").html("- 중복된 아이디 입니다.");
+						$("#idCheckView").html(" 중복된 아이디 입니다.");
 							checkResultId="";
 						}else{						
-							$("#idCheckView").html("- Welcome!");		
-							checkResultId=id;
+							$("#idCheckView").html(" Welcome!");		
+							checkResultId=id; 
 						}				
 				}//callback			
 			});//ajax
@@ -85,10 +85,10 @@
 		$("#regForm :input[id=password]").keyup(function() {
 			var id=$(this).val().trim();
 			if(id.length<4 || id.length>10){
-				$("#passwordCheckView").html("- 4 ~ 10 자로 입력해주세요.");
+				$("#passwordCheckView").html(" 4 ~ 10 자리로 입력해주세요.");
 				checkPassword="";
 			}else{
-				$("#passwordCheckView").html("- Ok");
+				$("#passwordCheckView").html(" Ok");
 				checkPassword="passwordOK";
 			}
 			$("#regForm :input[id=passwordRe]").trigger("keyup");
@@ -106,11 +106,11 @@
 			else{
 				if($("#regForm :input[id=password]").val().trim()!=$("#regForm :input[id=passwordRe]").val().trim()){
 					checkPasswordRe="";
-					$("#passwordReCheckView").text("- 비밀번호가 일치하지 않습니다.");
+					$("#passwordReCheckView").text("비밀번호가 일치하지 않습니다.");
 				}
 				else if($("#regForm :input[id=password]").val().trim()==$("#regForm :input[id=passwordRe]").val().trim()){
 					checkPasswordRe="passwordOK";
-					$("#passwordReCheckView").text("- Ok");
+					$("#passwordReCheckView").text("Ok");
 				}
 			}
 			
@@ -228,10 +228,10 @@
 			}
 			else if( !patt.test( $("#telno").val()) ){
 			  //  alert("전화번호를 정확히 입력하여 주십시오.");
-			    $("#telCheckView").text("- 포함하여 정확히 입력해주세요~");   	
+			    $("#telCheckView").text("포함하여 정확히 입력해주세요~");   	
 			   
 			}else{
-				$("#telCheckView").text("- Ok");   	
+				$("#telCheckView").text("Ok");   	
 			}
 			
 		})//$("#telno").keyup
