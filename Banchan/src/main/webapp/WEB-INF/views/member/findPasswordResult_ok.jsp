@@ -73,10 +73,10 @@ $(document).ready(function(){
 										<%-- <input type="hidden" name="id" id="id" value="${qnamvo.memId}"> --%>
 										<input type="hidden" name="id" id="id" value="${memId}">
 										<label for="password" style="font-weight: bold;"> <i class="fa fa-user user" style="margin-right: 5px"></i>비밀번호</label>
-										<input type="text" placeholder="비밀번호" name="password" id="password" class="margin-bottom form-control">
+										<input type="password" placeholder="비밀번호" name="password" id="password" class="margin-bottom form-control">
 											<span id="passwordCheckView"></span>	<br>		
 										<label for="passwordRe" style="font-weight: bold;"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호 확인</label>
-										<input type="text" placeholder="비밀번호 확인" name="passwordRe" id="passwordRe" class="margin-bottom form-control">
+										<input type="password" placeholder="비밀번호 확인" name="passwordRe" id="passwordRe" class="margin-bottom form-control">
 											<span id="passwordReCheckView"></span>		<br>			
 								<br>
 								<div align="center"> 
