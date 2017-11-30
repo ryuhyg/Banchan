@@ -22,26 +22,27 @@ function getimagereview(html, $target) {
 		</div>
 		 
 		<div class=" col-sm-10">
-			<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px; font-weight: bold;"></i>판매자 등록</h3>
+			<h3 class="title-form"><i class="icon fa fa-pencil-square-o" style="margin-right: 5px; font-weight: bold;"></i>판매자 등록</h3>
 			<div class="blog-list blog-detail ">
 					<form class="form-large grey-color"  style="height: 310px" action="sellerRegister.do?id=${mvo.memId}" method="post" enctype="multipart/form-data">
 				<div class="col-sm-6">
 					<sec:csrfInput/>
 					<div style="margin-top: 10px;">
-					프로필사진 업로드
+					<label for="id" style="font-weight: bold;">프로필사진 업로드</label>
 					<div id="cma_image"></div>
 					<input type="file" name="uploadImage" id="cma_file" accept="image/*" onchange="getimagereview(this,$('#cma_image'))" >
 					</div>
 				</div>
 				<div class=" col-sm-6">
 					<div style="margin-top: 10px;">
-					판매자 소개 :
+					<label for="id" style="font-weight: bold;">판매자 소개 :</label>
 					<br>
 					<textarea rows="8" cols="100"  name="sellerInfo" style="width: 400px; height: 200px;">
 					</textarea>
 					</div>
-					<div align="right" style="margin-right: 41px;">
-					<input type="submit"  class="" value="등록">
+					<div align="right">
+					<input type="submit" class="btn btn-reverse button-form" value="등록">
+					<a href="${pageContext.request.contextPath}" class="btn btn-default button-form">돌아가기</a>
 					</div>
 				</div>
 					</form>

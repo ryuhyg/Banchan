@@ -54,28 +54,28 @@ public class SellDAOImpl implements SellDAO {
 	///////////////// start윤주//////////////////////////
 	@Override
 	public int getLeftQuantityByFoodSellNo(String foodSellNo) {
-		int sumQuantity = 0;
-		int preQuantity = 0;
-		try {
-			sumQuantity = template.selectOne("food.getsumQuantityByFoodSellNo", foodSellNo);
-			preQuantity = template.selectOne("food.getPreQuantityByFoodSellNo", foodSellNo);
-			int leftQuantity = preQuantity - sumQuantity;
-			if(leftQuantity<0) {
-				leftQuantity=0;
-				return leftQuantity;
-			}else
-				return leftQuantity;
-		} catch (NullPointerException e) {
-			sumQuantity = 0;
-			preQuantity = template.selectOne("food.getPreQuantityByFoodSellNo", foodSellNo);
-			int leftQuantity = preQuantity - sumQuantity;
+		  int sumQuantity = 0;
+	      int preQuantity = 0;
+	      try {
+	         sumQuantity = template.selectOne("food.getsumQuantityByFoodSellNo", foodSellNo);
+	         preQuantity = template.selectOne("food.getPreQuantityByFoodSellNo", foodSellNo);
+	         int leftQuantity = preQuantity - sumQuantity;
+	         if(leftQuantity<0) {
+	            leftQuantity=0;
+	            return leftQuantity;
+	         }else
+	            return leftQuantity;
+	      } catch (NullPointerException e) {
+	         sumQuantity = 0;
+	         preQuantity = template.selectOne("food.getPreQuantityByFoodSellNo", foodSellNo);
+	         int leftQuantity = preQuantity - sumQuantity;
 
-			if(String.valueOf(preQuantity) == null) {
-				System.out.println("preq:"+preQuantity);
-				
-			}
-			return leftQuantity;
-		}
+	         if(String.valueOf(preQuantity) == null) {
+	            System.out.println("preq:"+preQuantity);
+	            
+	         }
+	         return leftQuantity;
+	      }
 	}
 
 	@Override

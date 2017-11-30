@@ -11,6 +11,109 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <script type="text/javascript">
+			function sellFoodPage(pageNoParam){
+			var pageNo=pageNoParam;
+			//판매중 음식, 판매중 음식 paging 눌렀을 때 실행
+			$.ajax({
+						type : "get",
+						url : "${pageContext.request.contextPath}/sellerPagePagingAjax.do",
+						data : "memId="
+								+ $("#sellerId").val()
+								+ "&pageNo="+pageNo,
+						dataType : "json",
+						success : function(data) {
+							var sellInfo = "";
+							for (var i = 0; i < data.list.length; i++) {
+								sellInfo += "<div class='row' style='vertical-align: middle'>";
+								sellInfo += "<div class='col-sm-8 col-md-8 col-sm-push-4'>";
+								sellInfo += "<div class='bs-callout callout-success' style='width: 800px'>";
+								sellInfo += "<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
+										+ data.list[i].foodSellNo
+										+ "'>";
+								sellInfo += "<h4 class='title'>"
+										+ data.list[i].foodName
+										+ "</h4></a>";
+								sellInfo += "<span class='description' style='color:black;font-size:12px;'>";
+								sellInfo += "<table height='80px'><tr><td><i class='fa fa-krw' style='font-weight: bold'> 가격&nbsp;</i></td><td>"
+										+ data.list[i].price+" &nbsp; &nbsp;(단위:"+data.list[i].unit+")"
+										+ "</td></tr>";
+								sellInfo += "<tr><td><i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜</i></td><td>"
+										+ data.list[i].trDate
+										+ "</td></tr>";
+								sellInfo += "<tr><td> <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 판매 종료 날짜</i></td><td>"
+										+ data.list[i].closeDate;
+								sellInfo += "</td></tr></table>";
+								
+								sellInfo +='<sec:authorize access="!isAuthenticated()">';
+								sellInfo +="<a style='float: right;position:relative;bottom:27px;'";
+								sellInfo += "class='btn btn-default' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
+									+ data.list[i].foodSellNo
+									+ "&pageNo=1'>더 볼래요</a>";
+								sellInfo +='</sec:authorize>'; 
+								
+								sellInfo +='<sec:authorize access="isAuthenticated()">';
+									 if ($("#sellerId").val() == $("#loginId").val()) {
+										sellInfo +="<a style='float: right;position:relative;bottom:27px'";
+										sellInfo += "class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="
+											+ data.list[i].foodSellNo
+											+ "&pageNo=1'>거래 내역 보기</a>";
+									 
+									}else{
+										sellInfo +="<a style='float: right;position:relative;bottom:27px;'";
+										sellInfo += "class='btn btn-default' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
+											+ data.list[i].foodSellNo
+											+ "&pageNo=1'>더 볼래요</a>";
+									} 
+								sellInfo +='</sec:authorize>'; 
+								
+								sellInfo += "</span>";
+								sellInfo += "</div>";
+								sellInfo += "</div>";
+								sellInfo += "<div class='col-sm-4 col-md-4 col-sm-pull-8' style='padding-top: 15px;' >";
+								sellInfo += "<div class='tab2img' >";
+								sellInfo += "<a style='width:100%;height:100%;' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
+										+ data.list[i].foodSellNo
+										+ "'><img alt='Sample images'  width='250px' height='150px' src='${pageContext.request.contextPath}/resources/images/"+data.list[i].foodMainImg+"'></a>";
+								sellInfo += "</div>";
+								sellInfo += "</div>";
+								sellInfo += "</div>";
+							}
+
+							$(
+									"#foodSellInfo")
+									.html(
+											sellInfo);
+							var startPageOfPageGroupMinus = data.pb.startPageOfPageGroup - 1;
+							var endPageOfPageGroupPlus = data.pb.endPageOfPageGroup + 1;
+							var startPageOfPageGroup = data.pb.startPageOfPageGroup;
+							var endPageOfPageGroup = data.pb.endPageOfPageGroup;
+							var nowPage = data.pb.nowPage;
+							var info = " <div class='pagination' style='text-align:center'>";
+							if (data.pb.previousPageGroup) {
+								info += "<a  id="+startPageOfPageGroupMinus+">&laquo;</a>";
+							}
+							for (var i = startPageOfPageGroup; i < endPageOfPageGroup + 1; i++) {
+								if (nowPage != i) {
+									info += "<a id="+i+">"
+											+ i
+											+ "</a>";
+								} else {
+									info += "<a id='-1' class='active'>"
+											+ i
+											+ "</a> &nbsp;";
+								}
+							}
+							if (data.pb.nextPageGroup) {
+								info += "<a  id="+endPageOfPageGroupPlus+">&raquo;</a>";
+							}
+							info += "</div>";
+							$("#paginationAjax").html(info);
+						}//success
+
+					});//ajax
+			
+	}//sellFoodPage
+	
 	$(document).ready(function() {
 						//음식 삭제, 수정
 						$("button[name='update']").click(
@@ -29,7 +132,8 @@
 											location.href = "${pageContext.request.contextPath}/registerFoodView.do?foodNo="
 													+ $(this).val();
 										});
-
+						
+						//tab 클릭시 액션
 						$(".tab_content").hide();
 						$("ul.tab li:first").addClass("active").show();
 						$(".tab_content:first").show();
@@ -41,218 +145,29 @@
 							$(activeTab).fadeIn();
 							return false;
 						});
-						$("#sellFood")
-								.click(
-										function() {
-											//처음 판매중 음식 탭을 눌렀을 떄의 ajax
-											$
-													.ajax({
-														type : "get",
-														url : "${pageContext.request.contextPath}/sellerPagePagingAjax.do",
-														data : "memId="
-																+ $("#sellerId")
-																		.val(),
-														dataType : "json",
-														success : function(data) {
-															var sellInfo = "";
-															for (var i = 0; i < data.list.length; i++) {
-																var foodSellNo = data.list[i].foodSellNo;
-																sellInfo += "<div class='row' style='vertical-align: middle'>";
-																sellInfo += "<div class='col-sm-8 col-md-8 col-sm-push-4'>";
-																sellInfo += "<div class='bs-callout callout-success' style='width: 800px'>";
-																sellInfo += "<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=";
-																sellInfo += data.list[i].foodSellNo
-																		+ "'>";
-																sellInfo += "<h4 class='title'>"
-																		+ data.list[i].foodName
-																		+ "</h4></a>";
-																sellInfo += "<span class='description' style='color:black;font-size:12px;'>";
-																sellInfo += "<i class='fa fa-krw' style='font-weight: bold'> 가격:&nbsp;</i>"
-																		+ data.list[i].price+" &nbsp; &nbsp;(단위:"+data.list[i].unit+")"
-																		+ "<br>";
-																sellInfo += "<i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜:</i>"
-																		+ data.list[i].trDate
-																		+ "<br>";
-																sellInfo += " <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 판매 종료 날짜:</i>"
-																		+ data.list[i].closeDate;
-																sellInfo += "<sec:authorize access='isAuthenticated()'>";
-																if ($(
-																		"#sellerId")
-																		.val() == $(
-																		"#loginId")
-																		.val()) {
-																	sellInfo += " <a  style='display:inline-block;float: right;'";
-																	sellInfo += "class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="
-																			+ data.list[i].foodSellNo
-																			+ "&pageNo=1'>거래 내역 보기</a>";
-																}
-																sellInfo += "</sec:authorize>";
-																sellInfo += "</span>";
-																sellInfo += "</div>";
-																sellInfo += "</div>";
-																sellInfo += "<div class='col-sm-4 col-md-4 col-sm-pull-8' style='padding-top: 15px;' >";
-																sellInfo += "<div class='tab2img' >";
-																sellInfo += "<a style='width:100%;height:100%;' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
-																		+ data.list[i].foodSellNo
-																		+ "'><img alt='Sample images' width='250px' height='150px' src='${pageContext.request.contextPath}/resources/images/"+data.list[i].foodMainImg+"'></a>";
-																sellInfo += "</div>";
-																sellInfo += "</div>";
-																sellInfo += "</div>";
-															}
 
-															$("#foodSellInfo")
-																	.html(
-																			sellInfo);
-
-															//alert(data.pb.previousPageGroup);
-															var startPageOfPageGroupMinus = data.pb.startPageOfPageGroup - 1;
-															var endPageOfPageGroupPlus = data.pb.endPageOfPageGroup + 1;
-															var startPageOfPageGroup = data.pb.startPageOfPageGroup;
-															var endPageOfPageGroup = data.pb.endPageOfPageGroup;
-															var nowPage = data.pb.nowPage;
-															var info = " <div class='pagination'>";
-															if (data.pb.previousPageGroup) {
-																info += "<a id="+startPageOfPageGroupMinus+">&laquo;</a>";
-															}
-															for (var i = startPageOfPageGroup; i < endPageOfPageGroup + 1; i++) {
-																if (nowPage != i) {
-																	info += "<a id="+i+">"
-																			+ i
-																			+ "</a>";
-
-																} else {
-																	info += "<a id='-1' class='active'>"
-																			+ i
-																			+ "</a> &nbsp;";
-																}
-															}
-															if (data.pb.nextPageGroup) {
-																info += "<a id="+endPageOfPageGroupPlus+">&raquo;</a>";
-															}
-															info += "</div>";
-															$("#paginationAjax")
-																	.html(info);
-														}
-
-													});//ajax
-											var offset = $("")
-
-										});//sellfood click
+						
+						//판매음식 클릭시
+						$(".sellFood").click(function() {
+							sellFoodPage(1);
+							var offset = $("");
+						});
+						
 
 						//동적으로 생성되는 페이징 번호에 대한 event
-						//페이징 숫자를 눌렀을 때의 ajax
-						$("#paginationAjax")
-								.on(
-										"click",
-										".pagination a",
-										function() {
-											if ($(this).attr('id') != "-1") {
-												$
-														.ajax({
-															type : "get",
-															url : "${pageContext.request.contextPath}/sellerPagePagingAjax.do",
-															data : "memId="
-																	+ $(
-																			"#sellerId")
-																			.val()
-																	+ "&pageNo="
-																	+ $(this)
-																			.attr(
-																					'id'),
-															dataType : "json",
-															success : function(
-																	data) {
-																var sellInfo = "";
-																for (var i = 0; i < data.list.length; i++) {
-																	sellInfo += "<div class='row' style='vertical-align: middle'>";
-																	sellInfo += "<div class='col-sm-8 col-md-8 col-sm-push-4'>";
-																	sellInfo += "<div class='bs-callout callout-success' style='width: 800px'>";
-																	sellInfo += "<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
-																			+ data.list[i].foodSellNo
-																			+ "'>";
-																	sellInfo += "<h4 class='title'>"
-																			+ data.list[i].foodName
-																			+ "</h4></a>";
-																	sellInfo += "<span class='description' style='color:black;font-size:12px;'>";
-																	sellInfo += "<i class='fa fa-krw' style='font-weight: bold'> 가격: </i>"
-																			+ data.list[i].price+"  (단위:"+data.list[i].unit+")"
-																			+ "<br>";
-																	sellInfo += "<i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜:</i>"
-																			+ data.list[i].trDate
-																			+ "<br>";
-																	sellInfo += " <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 판매 종료 날짜:</i>"
-																			+ data.list[i].closeDate;
-																	sellInfo += "<sec:authorize access='isAuthenticated()'>";
-																	if ($(
-																			"#sellerId")
-																			.val() == $(
-																			"#loginId")
-																			.val()) {
-																		sellInfo += " <a  style='display:inline-block;float: right;'";
-																		sellInfo += "class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="
-																				+ data.list[i].foodSellNo
-																				+ "&pageNo=1'>거래 내역 보기</a>";
-																	}
-																	sellInfo += "</sec:authorize>";
-																	sellInfo += "</span>";
-																	sellInfo += "</div>";
-																	sellInfo += "</div>";
-																	sellInfo += "<div class='col-sm-4 col-md-4 col-sm-pull-8' style='padding-top: 15px;' >";
-																	sellInfo += "<div class='tab2img' >";
-																	sellInfo += "<a style='width:100%;height:100%;' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
-																			+ data.list[i].foodSellNo
-																			+ "'><img alt='Sample images'  width='250px' height='150px' src='${pageContext.request.contextPath}/resources/images/"+data.list[i].foodMainImg+"'></a>";
-																	sellInfo += "</div>";
-																	sellInfo += "</div>";
-																	sellInfo += "</div>";
-																}
-
-																$(
-																		"#foodSellInfo")
-																		.html(
-																				sellInfo);
-																var startPageOfPageGroupMinus = data.pb.startPageOfPageGroup - 1;
-																var endPageOfPageGroupPlus = data.pb.endPageOfPageGroup + 1;
-																var startPageOfPageGroup = data.pb.startPageOfPageGroup;
-																var endPageOfPageGroup = data.pb.endPageOfPageGroup;
-																var nowPage = data.pb.nowPage;
-																var info = " <div class='pagination' style='text-align:center'>";
-																if (data.pb.previousPageGroup) {
-																	info += "<a  id="+startPageOfPageGroupMinus+">&laquo;</a>";
-																}
-																for (var i = startPageOfPageGroup; i < endPageOfPageGroup + 1; i++) {
-																	if (nowPage != i) {
-																		info += "<a id="+i+">"
-																				+ i
-																				+ "</a>";
-																	} else {
-																		info += "<a id='-1' class='active'>"
-																				+ i
-																				+ "</a> &nbsp;";
-																	}
-																}
-																if (data.pb.nextPageGroup) {
-																	info += "<a  id="+endPageOfPageGroupPlus+">&raquo;</a>";
-																}
-																info += "</div>";
-
-																$(
-																		"#paginationAjax")
-																		.html(
-																				info);
-															}
-
-														});//ajax 
-
-												//ajax실행시 스크롤 위치 올리기
-												var offset = $("#pagingScroll")
-														.offset();
-												$('html, body').animate({
-													scrollTop : offset.top
-												}, 1000);
-
-											}
-										});//click function
+						$("#paginationAjax").on("click",".pagination a",function(){
+							//현재 페이지를 클릭하지 않을 경우에만 실행
+							if($(this).attr('id')!=-1){
+							sellFoodPage($(this).attr('id'));
+							var offset = $("#pagingScroll")
+							.offset();
+							$('html, body').animate({
+							scrollTop : offset.top
+							}, 1000);
+							}
+						});				
+								
+					
 
 					});
 </script>
@@ -260,13 +175,13 @@
 
 /*tab*/
 ul.tab {
-	margin: 0;
+	
 	padding: 0;
 	float: left;
 	list-style: none;
 	height: 32px;
-	border-bottom: 1px solid #999;
-	border-left: 1px solid #999;
+	border-bottom: 1px solid #e5e5e5;
+	border-left: 0px solid #999;
 	width: 100%;
 }
 
@@ -276,35 +191,35 @@ ul.tab li {
 	padding: 0;
 	height: 31px;
 	line-height: 31px;
-	border: 1px solid #999;
+	border: 0px solid #999;
 	border-left: none;
 	margin-bottom: -1px;
 	overflow: hidden;
 	position: relative;
-	background: #000;
+	background: #fff;
 }
 
 ul.tab li a {
 	/* text-decoration: none; */
-	color: #e0e0e0;
+	color: #5e5e5e;
 	display: block;
 	font-size: 1.0em;
 	padding: 0 20px;
-	border: 1px solid #fff;
+	border: 0px solid #fff;
 	outline: none;
 }
 
 ul.tab li a:hover {
-	background: #ccc;
+	color: #f47821;
 }
 
 html ul.tab li.active, html ul.tab li.active a:hover {
-	background: #000;
-	border-bottom: 1px solid #000;
+	background: #fff;
+	border-bottom: 0px solid #e5e5e5;
 }
 
 #tabcontainer {
-	border: 1px solid #999;
+	border: 0px solid #999;
 	border-top: none;
 	overflow: hidden;
 	clear: both;
@@ -357,7 +272,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 
 
 
-<section id="agent-page"  style="margin-top: 150px;">
+<section id="agent-page"  style="margin-top: 100px;">
 	<br>
 
 	<div class="container">
@@ -370,7 +285,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			                     <div class="image-content">
 			                         <div class="image image-fill">
 			                             <!-- <img alt="Image Sample" src="resources/images/${svo.sellerImg }"> -->
-			                             <img alt="Image Sample" style="width:270px;height:250px" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
+			                             <img alt="Image Sample" style="width:270px;height:250px;" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
 			                         </div>						
 			                     </div>
 			                    <!--  <div class="info-agent" > -->
@@ -405,37 +320,43 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			         <div class="row">
 			             <div class="" style="margin-left: 20px">
 			                     <input type="hidden" id="sellerId" value="${svo.memId }">			                 
-			                             <input type="hidden" id="loginId" value="${mvo.memId }">		                        
-			                     <b style="font-size: 30px;font-weight: bold" class="name">${svo.memName } </b> 
-			                      <span class="star_rating">  <!-- 별점 표현 -->
-			                               <c:forEach begin="1" end="${svo.sellerScore}">
-			                                     <a class="on">★</a>
-			                               </c:forEach>
-			                               <c:forEach begin="1" end="${6-svo.sellerScore}">
-    												<a>★</a>
-   											</c:forEach>
-			                       </span>
+			                             <input type="hidden" id="loginId" value="${mvo.memId }">	
+			                            	                        
+			                     <b style="font-size: 30px;font-weight: bold;margin-top: 10px;" class="name">${svo.memName } </b> 
+						                     <!-- 별점 표현 -->
+						                    <span class="star_rating"> 
+						                    <c:forEach begin="1" end="${svo.sellerScore-(svo.sellerScore%1)}">
+			    							<a class="on">★</a>
+											</c:forEach>
+											 <c:forEach begin="1" end="${5-(svo.sellerScore-(svo.sellerScore%1))}">
+			    							<a>★</a>
+			    							</c:forEach> 
+			      							</span>
    											&nbsp;&nbsp;&nbsp;&nbsp; 판매자 별점:<b>   ${svo.sellerScore}</b><br>
+			                 <span class="address" style="font-weight:bold;color: #5e5e5e"><i class="fa fa-map-marker" style="padding-top: 5px"></i>&nbsp;${svo.addressVO.addressAPI}<br></span>
 			                 <span id="pagingScroll"class="text">
-			        			        <br><br> 주부님 소개
+			        			        <br> 주부님 소개
 			                 </span> 
-			                 <div class="bs-callout callout-success" style="width: 100%">
-			                   <h4 class="title">믿고먹는 주부님</h4>
-			                   <span class="address"><i class="fa fa-map-marker"></i>&nbsp;${svo.addressVO.addressAPI}</span>
-			                   <p class="text">${svo.sellerInfo }</p>
+			                 <div class="bs-callout callout-success" style="width: 100%;position:relative;bottom:10px;height: 100px;">
+							   <i class="fa fa-quote-left" aria-hidden="true" style=" font-size: 20px; color: #5e5e5e; margin-right: 10px;"></i>			                 
+			                   <b style="color: #5e5e5e;">${svo.sellerInfo }</b>
+			                   <i class="fa fa-quote-right" aria-hidden="true" style="font-size: 20px; color: #5e5e5e; margin-left: 10px;"></i>
 			                 </div>
 			             </div><!-- /.col-md-8 -->
 			          
 			         </div><!-- /.row -->
 			     </div><!-- col-md-9 -->
-			     <div class="col-md-3">  
+			  <div class="col-md-3">  
 			  <sec:authorize access="isAuthenticated()">
-			 <c:if test="${mvo.memId==svo.memId}">
-			         <div style="margin-bottom: 2px"> 
-			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="width: 50%;" >판매내역보기</a>
-						</div>
+					<c:if test="${mvo.memId==svo.memId}">
+					  <div > 
+			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="float:right;margin-left: 10px;" >판매내역보기</a>
+					 </div>
+					 <div > 
 						<a href="${pageContext.request.contextPath}/foodRegisterForm.do"
-							class="btn btn-default" style="width: 50%">음식 등록</a>
+							class="btn btn-default" style="float:right;">음식 등록</a>
+					</div>
+					
 					</c:if>
 				</sec:authorize>
 			</div>
@@ -447,7 +368,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 		<div id="tabcontainer">
 			<ul class="tab">
 				<li class="active"><a href="#tab1">등록 음식 <b>(</b>${flist.size()}<b>)</b></a></li>
-				<li><a href="#tab2" id="sellFood">판매중 음식 <b>(</b>${foodSellCount}<b>)</b></a></li>
+				<li><a href="#tab2" class="sellFood" id="1">판매중 음식 <b>(</b>${foodSellCount}<b>)</b></a></li>
 			</ul>
 			<div class="tab_container">
 
@@ -471,12 +392,29 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 										<span class="description">${food.foodDe}</span>
 										 <dl style="display:inline-block;height:70px"  class="detail" > 
 										<!-- <dl class="detail"> -->
-										<table style="font-size=12px;">
+										<table style="font-size:12px;">
 											<tr>
 											<td >
 											<!-- <small><i class="fa fa-star fa-fw" ></i></small> -->
-											         <a class="star_rating.on" style="color: #ffcc00">★</a>
-			                                    <b style="font-size: 12px">별점 :&nbsp;&nbsp;${food.foodScore}</b> </td>
+											        <!--  <a class="star_rating.on" style="color: #ffcc00">★</a> -->
+													<span class="star_rating"> 
+					      							<c:forEach begin="1" end="${food.foodScore}">
+					    							<a class="on">★</a>
+													</c:forEach>
+													<c:choose>
+													<c:when test="${5-food.foodScore<1} && ${5-food.foodScore!=0}">
+													<c:forEach begin="1" end="${5-food.foodScore+1}">
+					    							<a>★</a>
+					   								</c:forEach>
+					   								</c:when>
+					   								<c:otherwise>
+					   								<c:forEach begin="1" end="${5-food.foodScore}">
+					    							<a>★</a>
+					   								</c:forEach>
+					   								</c:otherwise>
+					    							</c:choose>
+					       							</span>    
+			                                    <b style="font-size: 12px">&nbsp;&nbsp;별점 :&nbsp;&nbsp;${food.foodScore}</b> </td>
 											</tr>
 											<tr>
 											<c:choose>

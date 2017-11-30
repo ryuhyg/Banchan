@@ -24,6 +24,7 @@
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
 </style>
 
 <section id="recent-list" style="margin-top: 100px">
@@ -46,12 +47,30 @@
 						</div>
 						<div class="col-xs-6" style="float: right" class="row">
 							<div class="row">
-								<h3 class="title-form"><i class="" style="margin-right: 5px"></i>${food.foodName}</h3>
+								<h3 class="title-form" style="margin-left: 20px; margin-top: 23px;"><i class=""></i>${food.foodName}</h3>
 							</div>
-							<label for="id"> <i class="fa fa-user user" style="margin-right: 5px"></i>주부님</label> 
-							<input type="text" name="name" class="margin-bottom form-control" value="${food.sellerVO.memName}" readonly="readonly">
-							<label for="date"><i class="fa fa-ellipsis-h"style="margin-right: 5px"></i>별점</label> 
-							<input type="text" name="star" class="margin-bottom form-control" value="${food.foodScore}" readonly="readonly"> 
+						<table class="table" style="margin-top: 22px;">
+						<tbody>
+							<tr>  
+								<td><label for="id"> <i class="fa fa-user user" style="margin-right: 5px"></i>주부님 &nbsp; : &nbsp; ${food.sellerVO.memName} </label></td>
+							<td>
+							</td>
+							</tr>
+							<tr>
+							<td>
+							  <span class="star_rating"> 
+                                      <c:forEach begin="1" end="${food.foodScore-(food.foodScore%1)}">
+                                  <a class="on">★</a>
+                                 </c:forEach>
+                                  <c:forEach begin="1" end="${5-(food.foodScore-(food.foodScore%1))}">
+                                  <a>★</a>
+                                  </c:forEach> 
+                                    </span>
+							</td>
+								<td><label for="date" style="margin-top: 5px;"><i class="fa fa-ellipsis-h"style="margin-right: 5px"></i>별점 &nbsp; : &nbsp; ${food.foodScore}</label></td>
+							</tr>
+							</tbody>
+							</table>
 							<div class="row">
 						</div>
 						</div>
@@ -59,7 +78,7 @@
 						<div class="row">
 							<div class="container-fluid" style="margin-top: 10px;">
 								<label for="sellDetail"><i class="fa fa-ellipsis-h" style="margin-right: 8px;"></i>음식 상세정보</label><br>
-								<textarea rows="4" cols="52" name="sellDetail" style="width: 100%" readonly="readonly">${food.foodDe}</textarea>
+								<textarea rows="4" cols="52" class="panel panel-default" name="sellDetail" style="width: 100%; resize: none;" readonly="readonly">${food.foodDe}</textarea>
 							</div>
 						</div>
 					</form>

@@ -11,9 +11,9 @@ table, th, td{
 <sec:authentication var="mvo" property="principal" />
 <section id="recent-list" style="margin-top: 150px;">
 <div id="page-container">
-	<div class="container">
+	<div class="container" style="width: 100%">
 		<div class="row">
-			<h3>[나의 거래 내역]</h3>
+			<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>나의 거래내역</h3>
 			<c:choose>
 			<c:when test="${fn:length(tlist.list)==0}">
 				<h4>거래내역이 없습니다.</h4>
@@ -25,7 +25,7 @@ table, th, td{
 						<th>거래번호</th>
 						<th>음식명</th>
 						<th>거래신청날짜</th>
-						<th>거래완료날짜</th>
+						<!-- <th>거래완료날짜</th> -->
 						<th>거래일</th>
 						<th>주문마감일</th>
 						<th>거래장소</th>
@@ -44,7 +44,7 @@ table, th, td{
 						<td>${t.trNo}</td>
 						<td>${t.foodSellVO.foodName}</td>
 						<td>${t.trReqDate}</td>
-						<td>${t.trFinDate}</td>
+						<%-- <td>${t.trFinDate}</td> --%>
 						<td>${t.foodSellVO.trDate}</td>
 						<td>${t.foodSellVO.closeDate}</td>
 						<td>${t.foodSellVO.loc}</td>

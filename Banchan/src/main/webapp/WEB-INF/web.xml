@@ -53,8 +53,19 @@
     <filter-name>springSecurityFilterChain</filter-name>
     <url-pattern>*.do</url-pattern>
   </filter-mapping>
-  <error-page>
+  
+
+<!--   <error-page>
     <error-code>403</error-code>
-    <location>/WEB-INF/views/auth_error.jsp</location>
+    <location>/WEB-INF/views/total_error.jsp</location>
+  </error-page> -->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/views/404_error.jsp</location>
   </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/WEB-INF/views/500_error.jsp</location>
+  </error-page>
+  
 </web-app>

@@ -23,222 +23,226 @@
 	margin-top: 100px;
 }
 </style>     
-    
+
 <script type="text/javascript">
 
-	$(document).ready(function () {
-		$("#trQuantity").change(function () {
-			//구매수량이 준비수량보다 적은지 확인
-			var leftQuantity=$("#leftQuantity").text();
-			if(parseInt($(this).val()) > parseInt(leftQuantity)){
-				alert("준비수량이 부족합니다!");
-				$("#trQuantity").val(1); 
-			}
-			var orderPrice=$(this).val()*$("#price").text();
-			$("#orderPrice").text(orderPrice);
-		}); //change
-		
-		
-	/*판매 음식 삭제하기*/
-	$("#deleteFood").click(function() {
-		if(deleteFlag=confirm("삭제하시겠습니까?")){
-			$.ajax({
-	    		type:"get",
-	        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
-	        	data:"foodSellNo="+$("#foodSellNo").val(),
-	        	success:function(data){
-	        		if(data>1)
-	        			alert("판매중인 상품이 있어 삭제할 수 없습니다.");
-	        		else{
-	        			alert("상품이 삭제되었습니다.");
-	        			location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+$("#foodSellNo").val()+"&sellerId="+$("#sellerId").val();
-	        		}
-	        	}  
-			}); //ajax	
-		}
-	}); //delFood click
+$(document).ready(function () {
+	   var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
+	   
+	   $("#trQuantity").change(function () {
+	      //구매수량이 준비수량보다 적은지 확인
+	      var leftQuantity=$("#leftQuantity").text();
+	      if(parseInt($(this).val()) > parseInt(leftQuantity)){
+	         alert("준비수량이 부족합니다!");
+	         $("#trQuantity").val(1); 
+	      }
+	      var orderPrice=$(this).val()*$("#price").text();
+	      $("#orderPrice").text(orderPrice);
+	   }); //trQuantity change
+	   
+	   $("#commentDelete").on("click",".commentInfo a",function(){
+	      alert(1);
+	   });//commentDelete
+	   
+	   /*판매 음식 삭제하기*/
+	   $("#deleteFood").click(function() {
+	      if(deleteFlag=confirm("삭제하시겠습니까?")){
+	         $.ajax({
+	             type:"get",
+	              url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+	              data:"foodSellNo="+foodSellNo,
+	              success:function(data){
+	                 if(data>1)
+	                    alert("판매중인 상품이 있어 삭제할 수 없습니다.");
+	                 else{
+	                    alert("상품이 삭제되었습니다.");
+	                    location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+foodSellNo+"&sellerId="+$("#sellerId").val();
+	                 }
+	              }  
+	         }); //ajax   
+	      }
+	   }); //delFood click
+
+	   /* 판매음식 수정하기  */
+	   $("#editFoodSell").click(function() {
+	      if(deleteFlag=confirm("수정하시겠습니까?")){
+	         $.ajax({
+	             type:"get",
+	              url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+	              data:"foodSellNo="+foodSellNo,
+	              success:function(data){
+	                 if(data>1){
+	                    alert("판매중인 상품이 있어 수정할 수 없습니다.");
+	                 }
+	                 else{
+	                  /* location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val(); */
+	                  location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+foodSellNo;
+	                 }
+	              } 
+	         }); //ajax   
+	      }
+	   }); //click
+
+
+	   $("#loginAndOrder").click(function() {
+	      if(confirm("로그인 페이지로 이동합니다."))
+	         location.href="${pageContext.request.contextPath}/loginView.do";
+	   }); //loginAndOrder click
+
+	   commentList(); 
+	});//ready
 	
-	$("#editFoodSell").click(function() {
-			if(deleteFlag=confirm("수정하시겠습니까?")){
-				$.ajax({
-		    		type:"get",
-		        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
-		        	data:"foodSellNo="+$("#foodSellNo").val(),
-		        	success:function(data){
-		        		if(data>1){
-		        			alert("판매중인 상품이 있어 수정할 수 없습니다.");
-		        		}
-		        		else{
-							location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val();
-		        		}
-		        	} 
-				}); //ajax	
-			}
-		}); //click
-
-		 //////////////////////ANSWER_윤주////////////////
-		$("#answerBnt").click(function(){
-			var answer = $("#ansContent");
-			var memId=$("#memId2");
-			 $.ajax({
-				type:"get",
-				url:"${pageContext.request.contextPath}/answerRegister.do",
-				data:"questNo=1&memId2="+memId.val()+"&ansContent="+answer.val(),
-				dataType:"json",
-				success:function(data){
-					 var info="<tr>";
-					info+="<td>"+data.ansNo+"</td>";
-					info+="<td>"+data.ansContent+"</td>";
-					info+="<td>"+data.memId+"</td>";
-					info+="<td>"+data.ansPostdate+"</td>";
-					info+="<td><button name=deletecomment class=btn btn-default>x</button></td>";	
-					info+="</tr>";
-					
-					//테이블의 tr자식이 있으면 tr 뒤에 붙인다. 없으면 테이블 안에 tr을 붙인다.
-					if($('#commentTable tr').contents().size()==0){
-				            $('#commentTable').append(info);
-				        }else{
-				            $('#commentTable tr:last').after(info);
-				        }
-				  			 $("#ansContent").val("");
-						} 
-				
-			});//ajax	
-		});//answerSubmit click
-<<<<<<< HEAD
-		
-		
-	/////////////////////////////end윤주////////////////////////////
-=======
->>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
-
-		
-//댓글달기!		
+	//댓글달기!		
 	var foodSellNo = "${foodSell.foodSellNo}"; //게시글 번호
 	 
 	$("[name=commentInsertBtn]").click(function(){ //댓글 등록 버튼 클릭시
 		var insertData = $("[name=commentInsertForm]").serialize(); //commentInsertForm의 내용을 가져옴
 		commentInsert(insertData); //Insert 함수호출(아래)
 	});
-	 
-    //댓글 목록 
-	function commentList(){
-	    $.ajax({
-	        url : "${pageContext.request.contextPath}/commentList.do",
-	        type : "get",
-	        data : {"foodSellNo":foodSellNo},
-	        success : function(data){
-	            var a =""; 
-	            $.each(data, function(key, value){ 
-	                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-	                a += '<div class="commentInfo'+value.questNo+'">'+'댓글번호 : '+value.questNo+' / 작성자 : '+value.memId;
-	                a += '<a onclick="commentUpdate('+value.questNo+'\''+value.questContent+'\');"> 수정 </a>';
-	                a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a> ';
-	                a += '<div class="commentContent'+value.questNo+'"> <p> 내용 : '+value.questContent +'</p>'+'</div>';
-	                a += '</div></div>';
-
-	            });
-
-	          
-	            $(".commentList").html(a);
-	        }
-	    });
-	}
-	//댓글 등록
-	
-	function commentInsert(insertData){
-		 $.ajax({
-	        type : "get",
-	        url : "${pageContext.request.contextPath}/commentInsert.do",
-	        data : insertData,
-	        success : function(data){
-	        	  if(data== 1) {
-	                commentList(); //댓글 작성 후 댓글 목록 reload
-	                $("[name=content]").val("");
-	             }//if
-	        }//success
-	    }); //ajax
-	}//function
-
-	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
-	function commentUpdate(questNo, questContent){
-	    var a ="";
-	    
-	    a += '<div class="input-group">';
-	    a += '<input type="text" class="form-control" name="content_'+questNo+'" value="'+questContent+'"/>';
-	    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+questNo+');">수정</button> </span>';
-	    a += '</div>';
-	    
-	    $('.commentContent'+questNo).html(a);
-	    
-	}
-	 
-	//댓글 수정
-	function commentUpdateProc(questNo){
-	    var updateContent = $("[name=content_"+questNo+"]").val();
-	    
-	    
-	    $.ajax({
-	        url : "${pageContext.request.contextPath}/commentUpdate.do",
-	        type : "get",
-	        data : {"content" : updateContent, "questNo" : questNo},
-	        success : function(data){
-	            if(data == 1) commentList(questNo); //댓글 수정후 목록 출력 
-	        }
-	    });
-	}
-	 
-	//댓글 삭제 
-	function commentDelete(questNo){
-		alert("1");
-	    $.ajax({
-	        url : "${pageContext.request.contextPath}/commentUpdate.do?questNo="+questNo,
-	        type : "get",
-	        success : function(data){
-	            if(data == 1) commentList(foodSellNo); //댓글 삭제후 목록 출력 
-	        }
-	    });
-	}
-<<<<<<< HEAD
-		
-=======
-		$(document).ready(function(){
-	    commentList(); //페이지 로딩시 댓글 목록 출력 
-		});
-
 		$("#loginAndOrder").click(function() {
 			if(confirm("로그인 페이지로 이동합니다."))
 				location.href="${pageContext.request.contextPath}/loginView.do";
 		}); //loginAndOrder click
-	
 
-	}); //ready
->>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
-
-	function orderFoodConfirm(){ //윤주
-		var isLogin = $("#checkId").val();
-		if(isLogin==null || isLogin==""){
-			var flag = confirm("로그인하셔야 구매 가능합니다. 로그인하시겠습니까?");
-			if(flag)
-				location.href="loginView.do";
-			else
-				history.go(0);
+		//댓글 목록 
+		function commentList(){
+		    $.ajax({
+		        url : "${pageContext.request.contextPath}/commentList.do",
+		        type : "get",
+		        data : {"foodSellNo":foodSellNo},
+		        success : function(data){
+		            var a =""; 
+		            $.each(data, function(key, value){ 
+		            	   	a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+		                	a += '<div class="commentInfo'+value.questNo+'">'+'댓글번호 : '+value.questNo+' / 작성자 : '+value.memId;
+		                	a += '<a onclick="commentUpdate('+value.questNo+',\''+value.questContent+'\');"> 수정 </a>';
+		                    a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a>'+'작성시간 :'+value.questPostdate;
+		                    a += '<div class="commentContent'+value.questNo+'"> <p> 질문내용 : '+value.questContent +'</p></div>';
+		                    a += '<a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a>';
+		                    a += '<div class="commentAnswerRe'+value.questNo+'">'+'</div>';
+		                   	for(var i=0; i<value.answerList.length; i++)
+		                    	a += '<div class="commentAnswer'+value.questNo+'"> <p> 답변 : '+value.answerList[i].ansContent +'</p>'+'</div>';
+		                	a += '</div></div>';
+		                    	
+		            });
+		            $(".commentList").html(a);
+		        }
+		    });
 		}
-		else
-			return confirm("구매하시겠습니까?");
-		return false; 
-	}
-	}); //ready
+		//댓글 등록
+		
+		function commentInsert(insertData){
+			 $.ajax({
+		        type : "get",
+		        url : "${pageContext.request.contextPath}/commentInsert.do",
+		        data : insertData,
+		        success : function(data){
+		        	  if(data== 1) {
+		                commentList(); //댓글 작성 후 댓글 목록 reload
+		                $("[name=content]").val("");
+		             }//if
+		        }//success
+		    }); //ajax
+		}//function
+		
+		//질문 답변 달기 - 답변 달기 내용 출력을 input 폼으로 변경 
+		function commentAnswerReply(questNo, memId){
+		    var a ="";
+		    
+		    a += '<div class="input-group">';
+		    a += '<input type="text" class="form-control" id="answerContent" name="ansContent"/>';
+		    a += '<input type="hidden" id="memId2" name="memId2" value='+memId+'>';
+		    a += '<input type="hidden" id="questNo" name="questNo" value='+questNo+'>';
+		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentAnswerReplyProc();">답변달기</button> </span>';
+		    a += '</div>';
+		    
+		    $('.commentAnswerRe'+questNo).html(a);
+		    
+		}
+		
+		//질문 답변 달기
+		function commentAnswerReplyProc(questNo){
+			var answer=$("#answerContent").val();
+			var memId=$("#memId2").val();
+			var questNo=$("#questNo").val();
+			$.ajax({
+	            type:"get",
+	            url:"${pageContext.request.contextPath}/answerRegister.do",
+	            data:"questNo="+questNo+"&memId2="+memId+"&ansContent="+answer,
+	            dataType:"json",
+	            success:function(data){
+	                var info="<tr>";
+	               info+="<td>"+data.ansNo+"</td>";
+	               info+="<td>"+data.ansContent+"</td>";
+	               info+="<td>"+data.memId+"</td>";
+	               info+="<td>"+data.ansPostdate+"</td>";
+	               info+="<td><button name=deletecomment class=btn btn-default>x</button></td>";   
+	               info+="</tr>";
+	               
+	             	$("#ansContent").val("");
+	                  } 
+	            
+	         });//ajax   
+		}
+	 
 
-	$(document).ready(function(){
-	    commentList(); //페이지 로딩시 댓글 목록 출력 
-		});
-		$("#loginAndOrder").click(function() {
-			if(confirm("로그인 페이지로 이동합니다."))
-				location.href="${pageContext.request.contextPath}/loginView.do";
-		}); //loginAndOrder click
+
+		//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
+		function commentUpdate(questNo, questContent){
+		    var a ="";
+		    
+		    a += '<div class="input-group">';
+		    a += '<input type="text" class="form-control" name="content_'+questNo+'" value="'+questContent+'"/>';
+		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+questNo+');">수정</button> </span>';
+		    a += '</div>';
+		    
+		    $('.commentContent'+questNo).html(a);
+		    
+		}
+		 
+		//댓글 수정
+		function commentUpdateProc(questNo){
+			var updateContent = $("[name=content_"+questNo+"]").val();
+		    $.ajax({
+		        url : "${pageContext.request.contextPath}/commentUpdate.do",
+		        type : "get",
+		        data : {"content" : updateContent, "questNo" : questNo},
+		        success : function(data){
+		            if(data == 1) 
+		            	commentList(questNo); //댓글 수정후 목록 출력 
+		        }
+		    });
+		}
+	//댓글 삭제 
+		function commentDelete(questNo){
+			$.ajax({
+		        url : "${pageContext.request.contextPath}/commentDelete.do?questNo="+questNo,
+		        type : "get",
+		        success : function(data){
+		            if(data == 1) 
+		            commentList(foodSellNo); //댓글 삭제후 목록 출력 
+		        }
+		    });
+		}
 	
-	}); //ready
+		function orderFoodConfirm(){ //윤주
+		      var isLogin = $("#checkId").val();
+		      var leftQuantity=$("#leftQuantity").text();
+		      
+		      if(parseInt(leftQuantity)==0){
+		         alert("준비 수량이 모두 소진되었습니다");
+		      }
+		      else if(isLogin==null || isLogin==""){
+		         var flag = confirm("로그인하셔야 구매 가능합니다. 로그인하시겠습니까?");
+		         if(flag)
+		            location.href="loginView.do";
+		         else
+		            history.go(0);
+		      }
+		      else
+		         return confirm("구매하시겠습니까?");
+		      return false; 
+		   }
 </script>
 
 <section id="recent-list" class="agency" style="margin-top: 150px">
@@ -303,15 +307,17 @@
 				<hr>
 				
 					<form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()" >
+						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
+						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
 					<div class="row"> 
+						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
+						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
 					<c:choose>
 					<c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
 					 <div class="col-sm-2" style="text-align: right">구매수량:</div>
 					  <div class="col-sm-2">
 				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
 				      </div>
-						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
-						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
 					
 						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
  							<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
@@ -431,32 +437,6 @@
     <div class="container">
         <div class="commentList"></div>
     </div>
-
-
-	<!-- QNA "ANSWER"-윤주 -->
-	<hr>
-	<sec:authorize access="isAuthenticated()">
-	<div class="container">
-		<div class="row">
-		   <table class="table table-condensed">
-		    <tr>
-		        <td>
-		        <%-- <form action="${pageContext.request.contextPath}/answerRegister.do"> --%>
-			           <span class="form-inline" role="form">               
-			              <textarea id="ansContent" name="ansContent" class="form-control col-lg-12" rows="4" style="resize: none; width:95%;height:35px" required="required"></textarea><br>
-			           	  <input type="hidden" name="memId2" id="memId2" value="${mvo.memId }">
-			           	 <%--<input type="hidden" name="questNo" value="1"> --%>
-			           	  <span style="float:right;margin-top: 10px;margin-right: 58px;" >
-			           	  	<input type="button" id="answerBnt" class="btn btn-danger" value="답변작성">
-			           	  </span>
-			           </span>
-			<!-- 	</form>      -->     	 
- 	        </td>
-		    </tr>
-		  </table><!-- 답변달기 -->
-		</div><!-- row -->
-	</div> <!-- container -->
-	</sec:authorize>
 
 </section>	<!-- recent-list -->			
 

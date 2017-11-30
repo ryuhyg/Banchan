@@ -21,8 +21,6 @@
 .star_rating a.on {color:#ffcc00;}
 .home-top{
 	margin-top: 108px; 
-	margin-left: -30px;
-	width: 1355px;
 }
 .nexthome{
 	margin-top: -50px;
@@ -33,7 +31,7 @@
  <!-- 슬라이드 부분 *************************** -->
  	
 	<section id="home-slide" class="home-top" >
-			<div class="home-slider"  style="margin-left: -90px; width: 100%" data-navigation=".home-slider-nav" >
+			<div class="home-slider"  style="width: 100%" data-navigation=".home-slider-nav" >
 				<div class="crsl-wrap">
 						<div class="crsl-item" style="background-image: url('resources/images/img/main_img_00.jpg');">
 						<div class="container slider-box">
@@ -110,7 +108,7 @@
 			
 <c:if test="${fn:length(list)!=0}">
 <!-- 인기 주부님 목록 -->
-			<div class="container" style="margin-left: -20px">
+			<div class="container" style="">
 				<div class="list-box-title">
 					<span><i class=""></i>인기 주부님</span>
 				</div>
@@ -128,26 +126,17 @@
 							<span class="description">${list.getSellerInfo()}</span>
 							<dl class="detail">
 							<div>
-								<dt class="">판매자평점</dt><br><br>
-								<span class="star_rating">  <!-- 별점 표현 -->
-      							<c:forEach begin="1" end="${list.getSellerScore()}">
-    							<a class="on">★</a>
-								</c:forEach>
-								<c:choose>
-								<c:when test="${5-list.getSellerScore()<1} && ${5-list.getSellerScore()!=0}">
-								<c:forEach begin="1" end="${5-list.getSellerScore()+1}">
-    							<a>★</a>
-   								</c:forEach>
-   								</c:when>
-   								<c:otherwise>
-   								<c:forEach begin="1" end="${5-list.getSellerScore()}">
-    							<a>★</a>
-   								</c:forEach>
-   								</c:otherwise>
-    							</c:choose>
-       							</span>
-       							 &nbsp;${list.getSellerScore()}
-       						</div>
+                        <dt class="">판매자평점</dt><br><br>
+                        <span class="star_rating">  <!-- 별점 표현 -->
+                           <c:forEach begin="1" end="${list.sellerScore-(list.sellerScore%1)}">
+			    			<a class="on">★</a>
+							</c:forEach>
+							<c:forEach begin="1" end="${5-(list.sellerScore-(list.sellerScore%1))}">
+			    			<a>★</a>
+			    			</c:forEach> 
+                        </span>
+                             &nbsp;${list.getSellerScore()}
+                         </div>
        						</dl><!-- /.detail -->
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
@@ -174,14 +163,14 @@
 							<span class="description">${flist.foodDe}</span>
 								<dl class="detail">
 							<div>
-								<dt class="">별점</dt><br><br>
+								<i class="fa fa-star" aria-hidden="true" style="margin-left: 4px; margin-right: 5px"></i>별점<br><br>
 								<span class="star_rating">  <!-- 별점 표현 -->
-      							<c:forEach begin="1" end="${flist.foodScore}">
-    							<a class="on">★</a>
+      							<c:forEach begin="1" end="${flist.foodScore-(flist.foodScore%1)}">
+				    			<a class="on">★</a>
 								</c:forEach>
-								<c:forEach begin="1" end="${5-flist.foodScore}">
-    							<a>★</a>
-   								</c:forEach>
+								<c:forEach begin="1" end="${5-(flist.foodScore-(flist.foodScore%1))}">
+				    			<a>★</a>
+				    			</c:forEach> 
        							</span>
        							 &nbsp;${flist.foodScore}
        						</div>

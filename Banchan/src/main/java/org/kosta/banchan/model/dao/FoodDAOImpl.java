@@ -106,7 +106,6 @@ public class FoodDAOImpl implements FoodDAO {
 	public List<FoodVO> selectFoodTop3() {
 		return template.selectList("food.selectFoodTop3");
 	}
-
 	
 
 }

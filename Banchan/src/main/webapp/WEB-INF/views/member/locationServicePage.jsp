@@ -125,7 +125,7 @@ $(document).ready(function() {
 	    			 for (var i = 0; i < data.list.length; i++) {
 	    				 strTemp +="<tr><td rowspan='2'>"+
 	    	 				"<a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId="+data.list[i].memId+"'>"+
-	    	 				"<img src='/banchan/resources/images/"+data.list[i].sellerImg+"' style='width: 100px;height:100px; margin: 0px;'>"+
+	    	 				"<img src='${pageContext.request.contextPath}/resources/images/"+data.list[i].sellerImg+"' style='width: 100px;height:100px; margin: 0px;'>"+
 	    	 				"</a>"+
 	    	 				"</td>"+
 	    	 				"<td> <a href='#'>"+data.list[i].memId+"</a> </td>"+
@@ -333,7 +333,7 @@ $(document).ready(function() {
 	    			 for (var i = 0; i < data.list.length; i++) {
 	    				 strTemp +="<tr><td rowspan='2'>"+
 	    	 				"<a href='${pageContext.request.contextPath}/sellerPageInfo.do?memId="+data.list[i].memId+"'>"+
-	    	 				"<img src='/banchan/resources/images/"+data.list[i].sellerImg+"' style='width: 100px; height:100px; margin: 0px;'>"+
+	    	 				"<img src='${pageContext.request.contextPath}/resources/images/"+data.list[i].sellerImg+"' style='width: 100px; height:100px; margin: 0px;'>"+
 	    	 				"</a>"+
 	    	 				"</td>"+
 	    	 				"<td> <a href='#'>"+data.list[i].memId+"</a> </td>"+
