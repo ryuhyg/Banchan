@@ -82,7 +82,6 @@
 		$("#answerBnt").click(function(){
 			var answer = $("#ansContent");
 			var memId=$("#memId2");
-			//alert(answer.val()+" "+memId.val());
 			 $.ajax({
 				type:"get",
 				url:"${pageContext.request.contextPath}/answerRegister.do",
@@ -108,6 +107,10 @@
 				
 			});//ajax	
 		});//answerSubmit click
+
+		
+		
+	/////////////////////////////end윤주////////////////////////////
 
 		
 //댓글달기!		
@@ -196,7 +199,11 @@
 	        }
 	    });
 	}
-		
+
+		$(document).ready(function(){
+	    commentList(); //페이지 로딩시 댓글 목록 출력 
+		});
+
 
 		$("#loginAndOrder").click(function() {
 			if(confirm("로그인 페이지로 이동합니다."))
@@ -205,8 +212,9 @@
 	
 
 	}); //ready
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 
-	function orderFoodConfirm(){
+	function orderFoodConfirm(){ //윤주
 		var isLogin = $("#checkId").val();
 		if(isLogin==null || isLogin==""){
 			var flag = confirm("로그인하셔야 구매 가능합니다. 로그인하시겠습니까?");
@@ -219,7 +227,17 @@
 			return confirm("구매하시겠습니까?");
 		return false; 
 	}
+	}); //ready
+
+	$(document).ready(function(){
+	    commentList(); //페이지 로딩시 댓글 목록 출력 
+		});
+		$("#loginAndOrder").click(function() {
+			if(confirm("로그인 페이지로 이동합니다."))
+				location.href="${pageContext.request.contextPath}/loginView.do";
+		}); //loginAndOrder click
 	
+	}); //ready
 </script>
 
 <section id="recent-list" class="agency" style="margin-top: 150px">

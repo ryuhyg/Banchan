@@ -61,27 +61,27 @@
 																sellInfo += "<div class='col-sm-8 col-md-8 col-sm-push-4'>";
 																sellInfo += "<div class='bs-callout callout-success' style='width: 800px'>";
 																sellInfo += "<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=";
-																sellInfo += data.list[i].foodSellNo
+																sellInfo += data.list[i].foodSellNo+data.list[i].foodScore
 																		+ "'>";
-																sellInfo += "<h4 class='title'>"
+																sellInfo += "<b style='font-size: 20px;font-weight: bold;margin-top: 7px;' class='name'>"
 																		+ data.list[i].foodName
-																		+ "</h4></a>";
+																		+ "</b></a>";
 																sellInfo += "<span class='description' style='color:black;font-size:12px;'>";
-																sellInfo += "<i class='fa fa-krw' style='font-weight: bold'> 가격:&nbsp;</i>"
+																sellInfo += "<table height='80px'><tr><td><i class='fa fa-krw' style='font-weight: bold'> 가격&nbsp;</i></td><td>"
 																		+ data.list[i].price+" &nbsp; &nbsp;(단위:"+data.list[i].unit+")"
-																		+ "<br>";
-																sellInfo += "<i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜:</i>"
+																		+ "</td></tr>";
+																sellInfo += "<tr><td><i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜</i></td><td>"
 																		+ data.list[i].trDate
-																		+ "<br>";
-																sellInfo += " <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 판매 종료 날짜:</i>"
+																		+ "</td></tr>";
+																sellInfo += "<tr><td> <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 판매 종료 날짜</i></td><td>"
 																		+ data.list[i].closeDate;
-																sellInfo += "<sec:authorize access='isAuthenticated()'>";
+																sellInfo += "</td></tr></table><sec:authorize access='isAuthenticated()'>";
 																if ($(
 																		"#sellerId")
 																		.val() == $(
 																		"#loginId")
 																		.val()) {
-																	sellInfo += " <a  style='display:inline-block;float: right;'";
+																	sellInfo += " <a  style='float: right;position:relative;bottom:27px'";
 																	sellInfo += "class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="
 																			+ data.list[i].foodSellNo
 																			+ "&pageNo=1'>거래 내역 보기</a>";
@@ -174,21 +174,21 @@
 																			+ data.list[i].foodName
 																			+ "</h4></a>";
 																	sellInfo += "<span class='description' style='color:black;font-size:12px;'>";
-																	sellInfo += "<i class='fa fa-krw' style='font-weight: bold'> 가격: </i>"
-																			+ data.list[i].price+"  (단위:"+data.list[i].unit+")"
-																			+ "<br>";
-																	sellInfo += "<i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜:</i>"
+																	sellInfo += "<table height='80px'><tr><td><i class='fa fa-krw' style='font-weight: bold'> 가격&nbsp;</i></td><td>"
+																			+ data.list[i].price+" &nbsp; &nbsp;(단위:"+data.list[i].unit+")"
+																			+ "</td></tr>";
+																	sellInfo += "<tr><td><i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜</i></td><td>"
 																			+ data.list[i].trDate
-																			+ "<br>";
-																	sellInfo += " <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 판매 종료 날짜:</i>"
+																			+ "</td></tr>";
+																	sellInfo += "<tr><td> <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 판매 종료 날짜</i></td><td>"
 																			+ data.list[i].closeDate;
-																	sellInfo += "<sec:authorize access='isAuthenticated()'>";
+																	sellInfo += "</td></tr></table><sec:authorize access='isAuthenticated()'>";
 																	if ($(
 																			"#sellerId")
 																			.val() == $(
 																			"#loginId")
 																			.val()) {
-																		sellInfo += " <a  style='display:inline-block;float: right;'";
+																		sellInfo +="<a style='float: right;position:relative;bottom:27px'";
 																		sellInfo += "class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="
 																				+ data.list[i].foodSellNo
 																				+ "&pageNo=1'>거래 내역 보기</a>";
@@ -260,13 +260,13 @@
 
 /*tab*/
 ul.tab {
-	margin: 0;
+	
 	padding: 0;
 	float: left;
 	list-style: none;
 	height: 32px;
-	border-bottom: 1px solid #999;
-	border-left: 1px solid #999;
+	border-bottom: 1px solid #e5e5e5;
+	border-left: 0px solid #999;
 	width: 100%;
 }
 
@@ -276,35 +276,35 @@ ul.tab li {
 	padding: 0;
 	height: 31px;
 	line-height: 31px;
-	border: 1px solid #999;
+	border: 0px solid #999;
 	border-left: none;
 	margin-bottom: -1px;
 	overflow: hidden;
 	position: relative;
-	background: #000;
+	background: #fff;
 }
 
 ul.tab li a {
 	/* text-decoration: none; */
-	color: #e0e0e0;
+	color: #5e5e5e;
 	display: block;
 	font-size: 1.0em;
 	padding: 0 20px;
-	border: 1px solid #fff;
+	border: 0px solid #fff;
 	outline: none;
 }
 
 ul.tab li a:hover {
-	background: #ccc;
+	color: #f47821;
 }
 
 html ul.tab li.active, html ul.tab li.active a:hover {
-	background: #000;
-	border-bottom: 1px solid #000;
+	background: #fff;
+	border-bottom: 0px solid #e5e5e5;
 }
 
 #tabcontainer {
-	border: 1px solid #999;
+	border: 0px solid #999;
 	border-top: none;
 	overflow: hidden;
 	clear: both;
@@ -357,7 +357,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 
 
 
-<section id="agent-page"  style="margin-top: 150px;">
+<section id="agent-page"  style="margin-top: 100px;">
 	<br>
 
 	<div class="container">
@@ -370,7 +370,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			                     <div class="image-content">
 			                         <div class="image image-fill">
 			                             <!-- <img alt="Image Sample" src="resources/images/${svo.sellerImg }"> -->
-			                             <img alt="Image Sample" style="width:270px;height:250px" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
+			                             <img alt="Image Sample" style="width:270px;height:250px;" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg }">
 			                         </div>						
 			                     </div>
 			                    <!--  <div class="info-agent" > -->
@@ -405,37 +405,51 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			         <div class="row">
 			             <div class="" style="margin-left: 20px">
 			                     <input type="hidden" id="sellerId" value="${svo.memId }">			                 
-			                             <input type="hidden" id="loginId" value="${mvo.memId }">		                        
-			                     <b style="font-size: 30px;font-weight: bold" class="name">${svo.memName } </b> 
-			                      <span class="star_rating">  <!-- 별점 표현 -->
-			                               <c:forEach begin="1" end="${svo.sellerScore}">
-			                                     <a class="on">★</a>
-			                               </c:forEach>
-			                               <c:forEach begin="1" end="${6-svo.sellerScore}">
-    												<a>★</a>
-   											</c:forEach>
-			                       </span>
+			                             <input type="hidden" id="loginId" value="${mvo.memId }">	
+			                            	                        
+			                     <b style="font-size: 30px;font-weight: bold;margin-top: 10px;" class="name">${svo.memName } </b> 
+						                     <!-- 별점 표현 -->
+						                    <span class="star_rating"> 
+			      							<c:forEach begin="1" end="${svo.sellerScore}">
+			    							<a class="on">★</a>
+											</c:forEach>
+											<c:choose>
+											<c:when test="${5-svo.sellerScore<1} && ${5-svo.sellerScore!=0}">
+											<c:forEach begin="1" end="${5-svo.sellerScore+1}">
+			    							<a>★</a>
+			   								</c:forEach>
+			   								</c:when>
+			   								<c:otherwise>
+			   								<c:forEach begin="1" end="${5-svo.sellerScore}">
+			    							<a>★</a>
+			   								</c:forEach>
+			   								</c:otherwise>
+			    							</c:choose>
+			       							</span>
    											&nbsp;&nbsp;&nbsp;&nbsp; 판매자 별점:<b>   ${svo.sellerScore}</b><br>
 			                 <span id="pagingScroll"class="text">
-			        			        <br><br> 주부님 소개
+			        			        <br> 주부님 소개
 			                 </span> 
 			                 <div class="bs-callout callout-success" style="width: 100%">
-			                   <h4 class="title">믿고먹는 주부님</h4>
-			                   <span class="address"><i class="fa fa-map-marker"></i>&nbsp;${svo.addressVO.addressAPI}</span>
-			                   <p class="text">${svo.sellerInfo }</p>
+			                   <h4 class="title"><i class="fa fa-quote-left" aria-hidden="true" style="font-size: 30px; color: #5e5e5e; margin-right: 10px"></i>믿고먹는 주부님</h4>
+			                   <span class="address" style="color: #5e5e5e"><i class="fa fa-map-marker" style="padding-left: 43px; padding-top: 10px"></i>&nbsp;${svo.addressVO.addressAPI}</span>
+			                   <p class="text" style="padding-left: 42px">${svo.sellerInfo }<i class="fa fa-quote-right" aria-hidden="true" style="font-size: 30px; color: #5e5e5e; margin-left: 10px"></i></p>
 			                 </div>
 			             </div><!-- /.col-md-8 -->
 			          
 			         </div><!-- /.row -->
 			     </div><!-- col-md-9 -->
-			     <div class="col-md-3">  
+			  <div class="col-md-3">  
 			  <sec:authorize access="isAuthenticated()">
-			 <c:if test="${mvo.memId==svo.memId}">
-			         <div style="margin-bottom: 2px"> 
-			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="width: 50%;" >판매내역보기</a>
-						</div>
+					<c:if test="${mvo.memId==svo.memId}">
+					  <div > 
+			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="float:right;margin-left: 10px;" >판매내역보기</a>
+					 </div>
+					 <div > 
 						<a href="${pageContext.request.contextPath}/foodRegisterForm.do"
-							class="btn btn-default" style="width: 50%">음식 등록</a>
+							class="btn btn-default" style="float:right;">음식 등록</a>
+					</div>
+					
 					</c:if>
 				</sec:authorize>
 			</div>
@@ -471,12 +485,29 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 										<span class="description">${food.foodDe}</span>
 										 <dl style="display:inline-block;height:70px"  class="detail" > 
 										<!-- <dl class="detail"> -->
-										<table style="font-size=12px;">
+										<table style="font-size:12px;">
 											<tr>
 											<td >
 											<!-- <small><i class="fa fa-star fa-fw" ></i></small> -->
-											         <a class="star_rating.on" style="color: #ffcc00">★</a>
-			                                    <b style="font-size: 12px">별점 :&nbsp;&nbsp;${food.foodScore}</b> </td>
+											        <!--  <a class="star_rating.on" style="color: #ffcc00">★</a> -->
+													<span class="star_rating"> 
+					      							<c:forEach begin="1" end="${food.foodScore}">
+					    							<a class="on">★</a>
+													</c:forEach>
+													<c:choose>
+													<c:when test="${5-food.foodScore<1} && ${5-food.foodScore!=0}">
+													<c:forEach begin="1" end="${5-food.foodScore+1}">
+					    							<a>★</a>
+					   								</c:forEach>
+					   								</c:when>
+					   								<c:otherwise>
+					   								<c:forEach begin="1" end="${5-food.foodScore}">
+					    							<a>★</a>
+					   								</c:forEach>
+					   								</c:otherwise>
+					    							</c:choose>
+					       							</span>    
+			                                    <b style="font-size: 12px">&nbsp;&nbsp;별점 :&nbsp;&nbsp;${food.foodScore}</b> </td>
 											</tr>
 											<tr>
 											<c:choose>

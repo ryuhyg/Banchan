@@ -47,7 +47,7 @@ tr{
 	}); //ready
 </script>
     
-<section id="recent-list" class="agency" style="margin-top: 80px">
+<section id="recent-list" class="agency" style="margin-top: 100px">
 <sec:authorize access="hasRole('ROLE_SELLER')"><!-- 오직 판매자 권한 설정 -->
 <sec:authentication var="mvo" property="principal" />
 <div id="page-container">

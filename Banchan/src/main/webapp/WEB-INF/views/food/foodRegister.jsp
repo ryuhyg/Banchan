@@ -15,6 +15,19 @@ function getimagereview(html, $target) {
         reader.readAsDataURL(html.files[0]);
     }
 }
+function checkForm(){
+	var text;
+	var result = confirm("음식을 등록 하시겠습니까?");
+	if (result == true) {
+	    text = "음식이 등록되었습니다.";
+	    alert(text);
+	    return true;
+	}else{
+		text="음식 등록이 취소되었습니다";
+		alert(text);
+		return false;
+	}
+}
 </script>
 <style>
 .btn btn-default
@@ -54,7 +67,7 @@ filter: alpha(opacity=0);
 			<div class="col-sm-10">
 			<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>음식등록페이지</h3>
 				<div class="blog-list blog-detail">
-					<form class="form-large grey-color" action="foodRegister.do" method="post" enctype="multipart/form-data">
+					<form class="form-large grey-color" action="foodRegister.do" method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
 					<h2 class="title-form">
 						<!-- <i class="icon fa fa-cutlery" style="margin-right: 5px"></i> --><input type="text" name="foodname" placeholder="음식명"  required="required"></h2>
 					
@@ -83,7 +96,8 @@ filter: alpha(opacity=0);
 						</form>
 				</div>
 			</div>
-		</div>
+		</div> <!-- row -->
+		</div> <!-- container  -->
 		</c:when>
 <c:otherwise>
 	<div class="container">
@@ -97,7 +111,7 @@ filter: alpha(opacity=0);
 				<div class="blog-list blog-detail">
 					<form class="form-large grey-color" action="updateRegFood.do" method="post" enctype="multipart/form-data">
 					<h2 class="title-form"><input type="text" name="foodname" value="${beFood.foodName}"></h2>
-						<input type="hidden" name="memId" value="${memId}">
+						<input type="hidden" name="memId" id="memId" value="${memId}">
 						<input type="hidden" name="foodNo" value="${foodNo}">
 						<sec:csrfInput/>
 						<%-- csrf 토큰 --%>
@@ -131,7 +145,7 @@ filter: alpha(opacity=0);
 						</div>
 						</form>
 				</div>
-			</div>
+			</div> 
 		</div>
 		<div class="col-sm-1">
 			<!-- right -->

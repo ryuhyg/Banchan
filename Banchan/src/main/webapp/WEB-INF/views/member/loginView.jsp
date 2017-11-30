@@ -12,7 +12,7 @@
 				</div>
 					<div class="col-sm-4">
 						<div class="blog-list blog-detail">
-		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px; font-weight: bold;"></i>로그인</h3>
+		<h3 class="title-form"><i class="icon fa fa-user user" style="margin-right: 5px; font-weight: bold;"></i>로그인</h3>
 							<form class="form-large grey-color" action="${pageContext.request.contextPath }/login.do" method="post">
 							
 										<sec:csrfInput/><%-- csrf 토큰 --%>
