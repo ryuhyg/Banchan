@@ -89,7 +89,7 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 		<div class="row">
 			<div class="tab2Container">
 				<div class="col-md-9">
-				<h4>[음식 검색 결과]</h4>
+				<h4><i class="fa fa-search" aria-hidden="true"></i>음식 검색 결과 전체보기</h4>
 		<c:choose>
 			<c:when test="${fn:length(fslist)==0 }">
 				검색결과없음
@@ -105,13 +105,13 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 								</a>				
 							</h3>		
 							<span class="description" style="color:black;font-size:13px;">
-								<i class="fa fa-ticket" style="font-weight: bold">음식 소개:</i>${foodSell.foodDe}	<br>					    
-							    <i style="font-weight: bold">음식 평점:</i>${foodSell.foodScore}<br>
-								<i style="font-weight: bold">판매자 아이디:</i>	
+								<i class="fa fa-ticket" style="font-weight: bold">음식 소개:&nbsp;</i>${foodSell.foodDe}	<br>					    
+							    <i style="font-weight: bold">음식 평점:&nbsp;</i>${foodSell.foodScore}<br>
+								<i style="font-weight: bold">판매자 아이디:&nbsp;</i>	
 								<a href="sellerPageInfo.do?memId=${foodSell.memId }">${foodSell.memId }</a><br>
-								<i style="font-weight: bold">예약 마감일:</i>${foodSell.closeDate}<br>
-								<i style="font-weight: bold">거래 일:</i>${foodSell.trDate}<br>
-								<i style="font-weight: bold">판매 추가 정보:</i>${foodSell.sellDetail}<br>
+								<i style="font-weight: bold">예약 마감일:&nbsp;</i>${foodSell.closeDate}<br>
+								<i style="font-weight: bold">거래 일:&nbsp;</i>${foodSell.trDate}<br>
+								<i style="font-weight: bold">판매 추가 정보:&nbsp;</i>${foodSell.sellDetail}<br>
 							</span>
 						</div><!-- bs-callout callout-success -->
 					</div><!-- /.col-md-8 -->

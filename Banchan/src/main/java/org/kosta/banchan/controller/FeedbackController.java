@@ -40,7 +40,6 @@ public class FeedbackController {
 		rvo.setRevContent(rContent);
 		rvo.setFoodNo(foodNo);
 		rvo.setMemId(writerId);
-		System.out.println(foodNo);
 		feedbackService.reviewRegister(rvo, memId,foodNo);
 		return "redirect:reviewRegister_ok.do?foodSellNo="+foodSellNo;
 		

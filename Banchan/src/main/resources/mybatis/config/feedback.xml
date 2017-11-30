@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into question(quest_no, quest_content, food_sell_no, quest_postdate, mem_id) 
 		values(question_seq.nextval, #{questContent}, #{foodSellNo}, sysdate, #{memId}) 
 	</insert>
+	
 			<!-- 댓글 목록 -->
 	<select id="commentList" resultType="questionVO">
 		select quest_no, quest_content, food_sell_no, to_char(to_date(quest_postdate), 'yyyy-mm-dd')as quest_postdate, mem_id
@@ -62,6 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- End 영민 -->
 
 	<!-- Start 윤주 -->
+	<!-- 후기작성 -->
 	<insert id="reviewRegister" parameterType="reviewVO">
 		insert into review(rev_no,score,rev_postdate,rev_content,food_no,mem_id)
 		values(review_seq.nextval,#{score},sysdate,#{revContent},#{foodNo},#{memId})
@@ -98,7 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from review r, food_sell fs
 		where fs.food_sell_no=#{value} and r.food_no=fs.food_no
 	</select>
-	
+	<!-- 답변작성 -->
 	<insert id="answerRegister" parameterType="answerVO"  >
 		<selectKey keyProperty="ansNo" order="BEFORE" resultType="string">
 			select answer_seq.nextval from dual

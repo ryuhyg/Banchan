@@ -59,15 +59,22 @@ public class SellDAOImpl implements SellDAO {
 		try {
 			sumQuantity = template.selectOne("food.getsumQuantityByFoodSellNo", foodSellNo);
 			preQuantity = template.selectOne("food.getPreQuantityByFoodSellNo", foodSellNo);
-			return preQuantity - sumQuantity;
+			int leftQuantity = preQuantity - sumQuantity;
+			if(leftQuantity<0) {
+				leftQuantity=0;
+				return leftQuantity;
+			}else
+				return leftQuantity;
 		} catch (NullPointerException e) {
 			sumQuantity = 0;
 			preQuantity = template.selectOne("food.getPreQuantityByFoodSellNo", foodSellNo);
+			int leftQuantity = preQuantity - sumQuantity;
+
 			if(String.valueOf(preQuantity) == null) {
 				System.out.println("preq:"+preQuantity);
 				
 			}
-			return preQuantity - sumQuantity;
+			return leftQuantity;
 		}
 	}
 

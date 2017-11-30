@@ -18,7 +18,7 @@
 						username-parameter="id"
 						password-parameter="password"
 						authentication-failure-url="/login_fail.do"
-						default-target-url="/home.do"						
+						default-target-url="/home.do"												
 						/>						
 		<sec:logout logout-url="/logout.do" logout-success-url="/home.do" />
 	</sec:http>
