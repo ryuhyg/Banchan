@@ -63,7 +63,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		 */
 		System.out.println("member 정보=" + member);
 		if (!passwordEncoder.matches(password, member.getPw()))
-			throw new BadCredentialsException("비밀번호 불일치~~~");
+			throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
 		// 4.사용자 권한 조회
 		List<Authority> list = memberService.selectAuthorityByMemId(id);
 		if (list.size() == 0) {
@@ -79,7 +79,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		 * 여기까지 왔으면 인증 완료 - Authentication객체 생성해서 리턴
 		 ***************************************/
 		Authentication auth = new UsernamePasswordAuthenticationToken(member, password, authorities);
-		System.out.println("로그인 OK~" + auth);
+		System.out.println("로그인 하였습니다." + auth);
 		return auth;
 	}
 

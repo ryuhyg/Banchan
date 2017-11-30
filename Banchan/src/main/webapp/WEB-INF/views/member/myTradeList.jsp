@@ -13,7 +13,7 @@ table, th, td{
 <div id="page-container">
 	<div class="container" style="width: 100%">
 		<div class="row">
-			<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>나의 거래내역</h3>
+			<h3 class="title-form"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>나의 거래내역</h3>
 			<c:choose>
 			<c:when test="${fn:length(tlist.list)==0}">
 				<h4>거래내역이 없습니다.</h4>

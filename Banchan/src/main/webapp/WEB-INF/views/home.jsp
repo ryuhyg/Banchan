@@ -108,7 +108,7 @@
 			
 <c:if test="${fn:length(list)!=0}">
 <!-- 인기 주부님 목록 -->
-			<div class="container" style="">
+			<div class="container">
 				<div class="list-box-title">
 					<span><i class=""></i>인기 주부님</span>
 				</div>
@@ -126,25 +126,27 @@
 							<span class="description">${list.getSellerInfo()}</span>
 							<dl class="detail">
 							<div>
-                        <dt class="">판매자평점</dt><br><br>
-                        <span class="star_rating">  <!-- 별점 표현 -->
-                           <c:forEach begin="1" end="${list.sellerScore-(list.sellerScore%1)}">
-			    			<a class="on">★</a>
-							</c:forEach>
-							<c:forEach begin="1" end="${5-(list.sellerScore-(list.sellerScore%1))}">
-			    			<a>★</a>
-			    			</c:forEach> 
-                        </span>
+                      			 <dt class="">판매자평점</dt><br><br>
+                       			 <span class="star_rating">  <!-- 별점 표현 -->
+                         	  <c:forEach begin="1" end="${list.sellerScore-(list.sellerScore%1)}">
+					    		<a class="on">★</a>
+							  </c:forEach>
+							  <c:forEach begin="1" end="${5-(list.sellerScore-(list.sellerScore%1))}">
+					    		<a>★</a>
+			    			  </c:forEach> 
+                        		</span>
                              &nbsp;${list.getSellerScore()}
-                         </div>
+                         	</div>
        						</dl><!-- /.detail -->
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
 				</c:forEach>		
-				</div>
+			</div>
+		</div>
 	</c:if>
 	<c:if test="${fn:length(flist)!=0}">
 	<!-- 인기 음식 -->
+		<div class="container">
 				<div class="list-box-title">
 					<span><i class=""></i>인기 음식</span>
 				</div>
@@ -179,6 +181,7 @@
 					</div><!-- ./col-md-4 -->
 					</c:forEach>
 				</div>
+			</div>
 		</c:if>	 
 		</section>
 		<section id="submit-property" data-parallax-speed="0" align="center">
