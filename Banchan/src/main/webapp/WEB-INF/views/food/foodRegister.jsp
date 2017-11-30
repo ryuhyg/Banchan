@@ -68,34 +68,41 @@ filter: alpha(opacity=0);
 			<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>음식등록페이지</h3>
 				<div class="blog-list blog-detail">
 					<form class="form-large grey-color" action="foodRegister.do" method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
-					<h2 class="title-form">
-						<!-- <i class="icon fa fa-cutlery" style="margin-right: 5px"></i> --><input type="text" name="foodname" placeholder="음식명"  required="required"></h2>
-					
+					<label>음식명 : &nbsp;
+						<input type="text" name="foodname" required="required"> 
+						</label>
 						<input type="hidden" name="id" value="${mvo.memId}">
 						<sec:csrfInput/>
 						<%-- csrf 토큰 --%>
 						<div class="row">
-							
+							  
+						<!-- <i class="icon fa fa-pencil-square-o" style="margin-left: 12px;"><label style="margin-left: 5px; margin-bottom: 5px;">상세내용</label></i> -->
 						<div class="col-xs-5" style="float: left" class="row">
 						<select name="category">
 								<c:forEach items="${category}" var="categorylist">
 								<option value="${categorylist.CATEGORY_NO }">${categorylist.CATEGORY_NAME}</option>
 								</c:forEach>
 						</select>
+						
 						<input type="button" value="파일 선택" class="btn btn-default" style="margin-top: 8px" />
 						<div style="margin-top: 10px;" class="file_input_div">
-							<input type ="file"  class="file_input_hidden" value="파일 업로드" name="uploadImage"  id="cma_file" accept="image/*" onchange="getimagereview(this,$('#cma_image'))"/>
+							<input type ="file"  class="file_input_hidden" value="파일 업로드" name="uploadImage"  id="cma_file" required="required" accept="image/*" onchange="getimagereview(this,$('#cma_image'))"/>
 							<div id="cma_image" style="margin-top: 10px;"></div>
 							 </div>
 						</div>
-						<div class="col-xs-7" style="float: right" class="row">
-							<textarea rows="10" cols="52" name="foodInfo" style="width: 100%; height: 100%;"  placeholder="내용을 입력하세요"></textarea>
-							<input type="submit" class="btn btn-default" value="등록" >	
+						<div class="col-xs-7" style="float: right; margin-bottom: 50px;position: relative;bottom: 30px;" class="row">  
+							<i class="icon fa fa-pencil-square-o" style="margin-left: 12px;"><label style="margin-left: 5px; margin-bottom: 5px;">상세내용</label></i>
+							<textarea rows="10" cols="52" name="foodInfo" style="width: 100%; height: 100%;  resize: none;"  placeholder="내용을 입력하세요"></textarea>
+							<input style="float: right;" type="submit" class="btn btn-default" value="등록" >
 						</div>
 						</div>
 						</form>
 				</div>
 			</div>
+			<div class="col-sm-1">
+				<!-- right -->
+			</div>
+			
 		</div> <!-- row -->
 		</div> <!-- container  -->
 		</c:when>

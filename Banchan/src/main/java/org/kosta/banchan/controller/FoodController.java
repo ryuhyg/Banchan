@@ -221,20 +221,22 @@ public class FoodController {
 				e.printStackTrace();
 			}
 		}
-		// String memId=""; // 로그인기능 구현되면 세션정보 가져올 예정
-
-		fvo.setMemId(id);
-		// fvo.setFoodScore(score);
-		fvo.setFoodName(request.getParameter("foodname"));
-		fvo.setFoodMainImg(file.getOriginalFilename());
-		fvo.setFoodDe(request.getParameter("foodInfo"));
-		fvo.setCategoryNo(request.getParameter("category"));
-		System.out.println("카테고리 no:" + request.getParameter("category"));
-		System.out.println("fvo2:" + fvo);
-		foodService.foodRegister(fvo);
-
-		return "redirect:foodRegister_ok.do?memId=" + id;
-	}
+			// String memId=""; // 로그인기능 구현되면 세션정보 가져올 예정
+			
+			fvo.setMemId(id);
+			// fvo.setFoodScore(score);
+			fvo.setFoodName(request.getParameter("foodname"));
+			fvo.setFoodMainImg(file.getOriginalFilename());
+			fvo.setFoodDe(request.getParameter("foodInfo"));
+			fvo.setCategoryNo(request.getParameter("category"));
+			System.out.println("이미지 정상적일 경우 받아오는 값:" + fvo);
+			System.out.println("카테고리 no:" + request.getParameter("category"));
+			System.out.println("fvo2:" + fvo);
+			foodService.foodRegister(fvo);
+			
+			return "redirect:foodRegister_ok.do?memId=" + id;
+		}
+//	}
 
 	@RequestMapping("foodRegister_ok.do")
 	public String foodRegister_ok(String memId, Model model) {
@@ -308,10 +310,6 @@ public class FoodController {
 
 	@RequestMapping(value = "updateRegFood.do", method = RequestMethod.POST)
 	public String updateRegFood(String memId, FoodVO fvo, HttpServletRequest request, Model model) {
-		System.out.println("수정하려는 fvo 값:" + fvo);
-		System.out.println("받은 아이디 값 : " + memId);
-
-		System.out.println("이미지정보 확인하자" + request.getParameter("beforeFoodImg"));
 		/* 테스트 경로 */
 		uploadPath = "C://Users/kosta/git/Banchan/Banchan/src/main/webapp/resources/images/";
 		/* 서버 경로 */
@@ -323,7 +321,6 @@ public class FoodController {
 		System.out.println(file + "<==");
 		// System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인
 		if (file != null && file.isEmpty() == false) {
-			System.out.println("파일명:" + file.getOriginalFilename());
 			File uploadFile = new File(uploadPath + file.getOriginalFilename());
 			try {
 				file.transferTo(uploadFile);// 실제 디렉토리로 파일을 저장한다
@@ -337,7 +334,6 @@ public class FoodController {
 		String foodImage = (String) file.getOriginalFilename();
 		System.out.println("updateImage:" + foodImage);
 		if (foodImage.equals("null") || foodImage.equals("")) {
-			System.out.println("이미지를 안줬을 경우 처리하는 부분");
 			fvo.setMemId(memId);
 			// fvo.setFoodScore(score);
 			fvo.setFoodNo(request.getParameter("foodNo"));
@@ -346,7 +342,6 @@ public class FoodController {
 			fvo.setCategoryNo(request.getParameter("category"));
 			System.out.println("fvo2:" + fvo);
 			foodService.noimgUpdateRegFood(fvo);
-			System.out.println("아이디 멀로 들어오니?"+memId);
 			
 			return "redirect:updateRegFoodOk.do?memId="+ memId;
 		} else {
@@ -360,14 +355,12 @@ public class FoodController {
 			System.out.println("fvo2:" + fvo);
 			foodService.imgUpdateRegFood(fvo);
 			
-			System.out.println("아이디 멀로 들어오니?"+memId);
 			return "redirect:updateRegFoodOk.do?memId="+memId;
 		}
 	}
 
 	@RequestMapping("updateRegFoodOk.do")
 	public String updateRegFoodOk(String memId, Model model) {
-		System.out.println("여긴 아이디가 뭐니? :"+memId);
 		model.addAttribute("memId", memId);
 		
 		return "food/updateRegFood_ok.tiles";

@@ -122,11 +122,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select category_no, category_name from category
 	</select>
 	<insert id="foodRegister" parameterType="foodVO">
-		insert into food(food_no, food_name, food_de, food_score, food_main_img,
-		food_postdate, category_no, mem_id)
-		values(food_seq.nextval, #{foodName}, #{foodDe}, 0, #{foodMainImg}, sysdate, #{categoryNo},
-		#{memId})
+		insert into food(food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id)
+		values(food_seq.nextval, #{foodName}, #{foodDe}, 0, #{foodMainImg}, sysdate, #{categoryNo}, #{memId})
 	</insert>
+	
+<!-- <insert id="foodRegister" parameterType="foodVO">
+    insert into food (food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id) 
+    values (food_seq.nextval, #{foodName}, #{foodDe}, 0, 
+    #{foodMainImg, jdbcType=VARCHAR}, sysdate, #{categoryNo}, #{memId})
+</insert> -->
+
+	
+	<!-- <insert id="noimgFoodRegister" parameterType="foodVO">
+		insert into food(food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id)
+		values(food_seq.nextval, #{foodName}, #{foodDe}, 0, #{foodMainImg}, sysdate, #{categoryNo}, #{memId})
+	</insert> -->
 
 	<resultMap type="foodVO" id="memberRM">
 		<result property="sellerVO.memName" column="mem_name" />

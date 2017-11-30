@@ -199,9 +199,6 @@
 	        }
 	    });
 	}
-<<<<<<< HEAD
-		
-=======
 		$(document).ready(function(){
 	    commentList(); //페이지 로딩시 댓글 목록 출력 
 		});
@@ -213,7 +210,6 @@
 	
 
 	}); //ready
->>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 
 	function orderFoodConfirm(){ //윤주
 		var isLogin = $("#checkId").val();

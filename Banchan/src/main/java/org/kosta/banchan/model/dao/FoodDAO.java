@@ -43,7 +43,6 @@ public interface FoodDAO {
 	void deleteFoodSell(String foodSellNo);
 
 	int totalFoodSellCountByMemId(String memId);
-
 	
 
 }
