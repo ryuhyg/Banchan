@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+ 
 <!-- location  시작 --> 
 	<!-- services와 clusterer, drawing 라이브러리 불러오기 : MAP sdk -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54&libraries=services,clusterer,drawing">
@@ -16,23 +16,6 @@
 <!-- location 끝 -->
 	<!-- 광태 추가 --><!-- confirm -->
 
- <!-- 별점 style부분 ************************* -->
- <style type="text/css"> /* 별점 css */
-.star_rating {font-size:0; letter-spacing:-4px;}
-.star_rating a {
-    font-size:22px;
-    letter-spacing:0;
-    display:inline-block;
-    margin-left:5px;
-    color:#ccc;
-    text-decoration:none;
-}
-.star_rating a:first-child {margin-left:0;}
-.star_rating a.on {color:#ffcc00;}
-.home-top{
-   margin-top: 100px;
-}
-</style> 
 
   
 <script>

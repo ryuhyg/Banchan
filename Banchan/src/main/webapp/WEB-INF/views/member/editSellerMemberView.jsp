@@ -317,7 +317,7 @@
  			</div>
  			<div class="col-sm-6" >
 						<div class="blog-list blog-detail">
-		<h3 class="title-form" style="text-align: center;"><i class="icon fa fa-comment" style="margin-right: 5px;"></i>회원정보수정</h3>
+		<h3 class="title-form"><i class="fa fa-wrench" aria-hidden="true" style="margin-right: 5px;"></i>회원정보수정</h3>
  
  					<form class="form-large grey-color"	action="${pageContext.request.contextPath}/editSellerMember.do" method="post" id="regForm" enctype="multipart/form-data">
  						<%-- csrf 토큰 --%>
@@ -327,7 +327,7 @@
 								</div>
  							<div class="col-xs-8">
  								<label for="id"> 
- 								<p><i class="fa fa-user user" style="margin-right: 5px"></i>회원이미지</label></p>
+ 								<p><i class="fa fa-picture-o" aria-hidden="true" style="margin-right: 5px"></i>회원이미지</label></p>
  								<img id="blah" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg}" alt="" width="325" height="200"/>
  								<input type="file" name="uploadImage" id="updateImage" class="margin-bottom form-control" onchange="javascript:file_change(this.value);">
  								<input id="fileName" class="margin-bottom form-control" readonly value="${svo.sellerImg}" placeholder="${svo.sellerImg}" size="300"/>
@@ -352,7 +352,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
+ 								<label for="password"><i class="fa fa-key" aria-hidden="true"
  									style="margin-right: 5px"></i>비밀번호</label> <input type="password" required="required"
  									name="pw" id="password" class="margin-bottom form-control"
  									placeholder="비밀번호">
@@ -365,7 +365,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
+ 								<label for="password"><i class="fa fa-key" aria-hidden="true"
  									style="margin-right: 5px"></i>비밀번호 확인</label> <input type="password" required="required"
  									id="passwordRe" class="margin-bottom form-control"
  									placeholder="비밀번호확인">
@@ -389,7 +389,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
+ 								<label for="password"><i class="fa fa-calendar" aria-hidden="true"
  									style="margin-right: 5px"></i>생년월일</label> <input type="date" required="required"
  									name="birth" class="margin-bottom form-control" min="1900-01-01" max="2007-12-31"
  									value="<sec:authentication property="principal.birth"/>">
@@ -401,7 +401,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
+ 								<label for="password"><i class="fa fa-phone" aria-hidden="true"
  									style="margin-right: 5px"></i>전화번호 ( - 포함하여 입력해주세요! )</label>
  								<!-- <input type="text" name="tel"  class="margin-bottom form-control" placeholder="전화번호"> -->
  								<input class="margin-bottom form-control" type="tel" name="tel"
@@ -426,7 +426,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
+ 								<label for="password"><i class="fa fa-home" aria-hidden="true"	
  									style="margin-right: 5px"></i>주소</label>
  								<div id="map" style="width:auto; height: 200px;"></div>
  								<input class="btn btn-default" type="button" id="searchaddress"
@@ -443,7 +443,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8" style="margin-bottom: 10px">
- 								<label for="password"><i class="fa fa-ellipsis-h"
+ 								<label for="password"><i class="fa fa-question" aria-hidden="true"
  									style="margin-right: 5px"></i>비밀번호 찾기 질문</label> <select
  									id="pwQnaSelect">
  									<option value="${pvo.pwQnaNo}"
