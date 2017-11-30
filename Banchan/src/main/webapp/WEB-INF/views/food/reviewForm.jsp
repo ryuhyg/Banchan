@@ -76,7 +76,7 @@ function reviewCheck(){
 			            <input type="hidden" name="writerId" value="${mvo.memId }">
 			      </sec:authorize>
               <br>
-           	  <span style='float:right'>
+           	  <span style="float:right;">
            	  <input type="submit" class="btn btn-danger" value="후기작성">
            	  </span>
            </span>           	 

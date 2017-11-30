@@ -26,57 +26,70 @@
 
 <script type="text/javascript">
 
-	$(document).ready(function () {
-		$("#trQuantity").change(function () {
-			//구매수량이 준비수량보다 적은지 확인
-			var preQuantity=$("#preQuantity").text();
-			if(parseInt($(this).val()) > parseInt(preQuantity)){
-				alert("준비수량이 부족합니다!");
-				$("#trQuantity").val(1); 
-			}
-			var orderPrice=$(this).val()*$("#price").text();
-			$("#orderPrice").text(orderPrice);
+$(document).ready(function () {
+	   var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
+	   
+	   $("#trQuantity").change(function () {
+	      //구매수량이 준비수량보다 적은지 확인
+	      var leftQuantity=$("#leftQuantity").text();
+	      if(parseInt($(this).val()) > parseInt(leftQuantity)){
+	         alert("준비수량이 부족합니다!");
+	         $("#trQuantity").val(1); 
+	      }
+	      var orderPrice=$(this).val()*$("#price").text();
+	      $("#orderPrice").text(orderPrice);
+	   }); //trQuantity change
+	   
+	   $("#commentDelete").on("click",".commentInfo a",function(){
+	      alert(1);
+	   });//commentDelete
+	   
+	   /*판매 음식 삭제하기*/
+	   $("#deleteFood").click(function() {
+	      if(deleteFlag=confirm("삭제하시겠습니까?")){
+	         $.ajax({
+	             type:"get",
+	              url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+	              data:"foodSellNo="+foodSellNo,
+	              success:function(data){
+	                 if(data>1)
+	                    alert("판매중인 상품이 있어 삭제할 수 없습니다.");
+	                 else{
+	                    alert("상품이 삭제되었습니다.");
+	                    location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+foodSellNo+"&sellerId="+$("#sellerId").val();
+	                 }
+	              }  
+	         }); //ajax   
+	      }
+	   }); //delFood click
 
-		}); //change
+	   /* 판매음식 수정하기  */
+	   $("#editFoodSell").click(function() {
+	      if(deleteFlag=confirm("수정하시겠습니까?")){
+	         $.ajax({
+	             type:"get",
+	              url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
+	              data:"foodSellNo="+foodSellNo,
+	              success:function(data){
+	                 if(data>1){
+	                    alert("판매중인 상품이 있어 수정할 수 없습니다.");
+	                 }
+	                 else{
+	                  /* location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val(); */
+	                  location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+foodSellNo;
+	                 }
+	              } 
+	         }); //ajax   
+	      }
+	   }); //click
 
 
-	/*판매 음식 삭제하기*/
-	$("#deleteFood").click(function() {
-		if(deleteFlag=confirm("삭제하시겠습니까?")){
-			$.ajax({
-	    		type:"get",
-	        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
-	        	data:"foodSellNo="+$("#foodSellNo").val(),
-	        	success:function(data){
-	        		if(data>1)
-	        			alert("판매중인 상품이 있어 삭제할 수 없습니다.");
-	        		else{
-	        			alert("상품이 삭제되었습니다.");
-	        			location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+$("#foodSellNo").val()+"&sellerId="+$("#sellerId").val();
-	        		}
-	        	}  
-			}); //ajax	
-		}
-	}); //delFood click
-	
-	$("#editFoodSell").click(function() {
-			if(deleteFlag=confirm("수정하시겠습니까?")){
-				$.ajax({
-		    		type:"get",
-		        	url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
-		        	data:"foodSellNo="+$("#foodSellNo").val(),
-		        	success:function(data){
-		        		if(data>1){
-		        			alert("판매중인 상품이 있어 수정할 수 없습니다.");
-		        		}
-		        		else{
-							location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val();
-		        		}
-		        	} 
-				}); //ajax	
-			}
-		}); //click
-	    commentList(); //페이지 로딩시 댓글 목록 출력 
+	   $("#loginAndOrder").click(function() {
+	      if(confirm("로그인 페이지로 이동합니다."))
+	         location.href="${pageContext.request.contextPath}/loginView.do";
+	   }); //loginAndOrder click
+
+	   commentList(); 
 	});//ready
 	
 	//댓글달기!		
@@ -211,26 +224,26 @@
 		        }
 		    });
 		}
-	function orderFoodConfirm(){
-		var isLogin = $("#checkId").val();
-		if(isLogin==null || isLogin==""){
-			var flag = confirm("로그인하셔야 구매 가능합니다. 로그인하시겠습니까?");
-			if(flag)
-				location.href="loginView.do";
-			else
-				history.go(0);
-		}
-		else
-			return confirm("구매하시겠습니까?");
-		return false; 
-	}
-
 	
+		function orderFoodConfirm(){ //윤주
+		      var isLogin = $("#checkId").val();
+		      var leftQuantity=$("#leftQuantity").text();
+		      
+		      if(parseInt(leftQuantity)==0){
+		         alert("준비 수량이 모두 소진되었습니다");
+		      }
+		      else if(isLogin==null || isLogin==""){
+		         var flag = confirm("로그인하셔야 구매 가능합니다. 로그인하시겠습니까?");
+		         if(flag)
+		            location.href="loginView.do";
+		         else
+		            history.go(0);
+		      }
+		      else
+		         return confirm("구매하시겠습니까?");
+		      return false; 
+		   }
 </script>
-
-
-
-
 
 <section id="recent-list" class="agency" style="margin-top: 150px">
 <div id="page-container">
@@ -294,15 +307,17 @@
 				<hr>
 				
 					<form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()" >
+						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
+						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
 					<div class="row"> 
+						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
+						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
 					<c:choose>
 					<c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
 					 <div class="col-sm-2" style="text-align: right">구매수량:</div>
 					  <div class="col-sm-2">
 				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
 				      </div>
-						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
-						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
 					
 						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
  							<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
@@ -343,7 +358,7 @@
 				<h4>작성된 후기가 없습니다</h4>
 				</c:when>
 				<c:otherwise>
-			<table class="table table-hover"  style="text-align: center;font-size: 12px;">
+			<table class="table table-hover" style="text-align: center;font-size: 12px;">
 					<thead>
 					<tr class="tr_visible">
 						<td>NO</td>
@@ -400,6 +415,8 @@
 	</div>
 	</div>
 	
+	
+
 
 <hr>
 <!--  댓글  -->
@@ -420,7 +437,6 @@
     <div class="container">
         <div class="commentList"></div>
     </div>
-
 
 </section>	<!-- recent-list -->			
 

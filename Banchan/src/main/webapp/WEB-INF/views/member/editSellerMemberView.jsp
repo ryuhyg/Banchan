@@ -317,7 +317,7 @@
  			</div>
  			<div class="col-sm-6" >
 						<div class="blog-list blog-detail">
-		<h3 class="title-form" style="text-align: center;"><i class="icon fa fa-comment" style="margin-right: 5px;"></i>회원정보수정</h3>
+		<h3 class="title-form"><i class="fa fa-wrench" aria-hidden="true" style="margin-right: 5px;"></i>회원정보수정</h3>
  
  					<form class="form-large grey-color"	action="${pageContext.request.contextPath}/editSellerMember.do" method="post" id="regForm" enctype="multipart/form-data">
  						<%-- csrf 토큰 --%>

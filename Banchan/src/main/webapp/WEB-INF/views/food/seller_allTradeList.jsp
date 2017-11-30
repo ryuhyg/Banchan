@@ -3,6 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <style>
 table, th, td{
 	text-align: center;
@@ -46,23 +47,25 @@ tr{
 	}); //ready
 </script>
     
-<section id="recent-list" class="agency" style="margin-top: 150px">
+<section id="recent-list" class="agency" style="margin-top: 100px">
 <sec:authorize access="hasRole('ROLE_SELLER')"><!-- 오직 판매자 권한 설정 -->
 <sec:authentication var="mvo" property="principal" />
 <div id="page-container">
-<div class="container">
+<div class="container" style="width: 100%;">
 	<div class="row">
-	<h3>전체거래내역</h3>
+	<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>전체거래내역</h3>
+		<div style="font-size: 15px; text-align: right;margin-bottom: 10px;color: #80808075; font-style: italic">*클릭하여 구매자 정보를 확인하세요</div> 
 	<c:choose>
 	<c:when test="${!empty lvo.list}">
-	<table class="table table-hover" id="tradeList" style="text-align: center;font-size: 12px;" >
+	<table class="table table-hover" id="tradeList" style="text-align: center;font-size: 12px; " > 
+	
 		<thead>
 			<tr class="tr_visible"> 
 				<th>거래번호</th>
 				<th>음식명</th>
 				<th>구매자아이디</th>
 				<th>거래신청날짜</th>
-				<th>거래완료날짜</th>
+				<!-- <th>거래완료날짜</th> -->
 				<th>거래일</th>
 				<th>거래장소</th>
 				<th>구매수량</th>
@@ -77,7 +80,7 @@ tr{
 				<td>${trade.foodSellVO.foodName}</td>
 				<td>${trade.memId }</td>
 				<td>${trade.trReqDate }</td>
-				<td>${trade.trFinDate }</td>
+				<%-- <td>${trade.trFinDate }</td> --%>
 				<td>${trade.foodSellVO.trDate }</td>
 				<td>${trade.foodSellVO.loc }</td>
 				<td id="quantity">${trade.trQuantity }
@@ -112,8 +115,8 @@ tr{
 	
 	<c:set value="${lvo.pb }" var="pb"/>
 	<input type="hidden" value="${pb.nowPage}" id="pageNo">
-	<div class="row center-block pagination"  align="center">
-	  <ul class="pagination">
+	<div class="pageginationContainer" style="text-align: center;">
+	<div class="pagination" >
 		<c:if test="${pb.previousPageGroup}">
 		    <a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
 		</c:if>
@@ -121,7 +124,7 @@ tr{
 	  	<c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
 	  		<c:choose>
 	  			<c:when test="${pageNum==pb.nowPage}">
-			    	<a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pageNum}">${pageNum}</a>
+			    	<a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pageNum}" class="active">${pageNum}</a>
 	  			</c:when>
 	  			<c:otherwise>
 			    	<a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pageNum}">${pageNum}</a>
@@ -132,8 +135,8 @@ tr{
 		<c:if test="${pb.nextPageGroup}">
 		    <a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a>
 		</c:if>
-	  </ul>
-	</div>
+	</div> <!-- pagination -->
+	</div> <!-- pageginationContainer -->
 	
 	
 	
