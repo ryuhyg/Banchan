@@ -51,7 +51,7 @@ tr{
 <sec:authorize access="hasRole('ROLE_SELLER')"><!-- 오직 판매자 권한 설정 -->
 <sec:authentication var="mvo" property="principal" />
 <div id="page-container">
-<div class="container " style="width: 100%;">
+<div class="container" style="width: 100%;">
 	<div class="row">
 	<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>전체거래내역</h3>
 		<div style="font-size: 15px; text-align: right;margin-bottom: 10px;color: #80808075; font-style: italic">*클릭하여 구매자 정보를 확인하세요</div> 
@@ -65,7 +65,7 @@ tr{
 				<th>음식명</th>
 				<th>구매자아이디</th>
 				<th>거래신청날짜</th>
-				<th>거래완료날짜</th>
+				<!-- <th>거래완료날짜</th> -->
 				<th>거래일</th>
 				<th>거래장소</th>
 				<th>구매수량</th>
@@ -80,7 +80,7 @@ tr{
 				<td>${trade.foodSellVO.foodName}</td>
 				<td>${trade.memId }</td>
 				<td>${trade.trReqDate }</td>
-				<td>${trade.trFinDate }</td>
+				<%-- <td>${trade.trFinDate }</td> --%>
 				<td>${trade.foodSellVO.trDate }</td>
 				<td>${trade.foodSellVO.loc }</td>
 				<td id="quantity">${trade.trQuantity }

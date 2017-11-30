@@ -126,26 +126,17 @@
 							<span class="description">${list.getSellerInfo()}</span>
 							<dl class="detail">
 							<div>
-								<i class="fa fa-star" aria-hidden="true" style="margin-left: 4px; margin-right: 5px"></i>판매자평점<br><br>
-								<span class="star_rating">  <!-- 별점 표현 -->
-      							<c:forEach begin="1" end="${list.getSellerScore()}">
-    							<a class="on">★</a>
-								</c:forEach>
-								<c:choose>
-								<c:when test="${5-list.getSellerScore()<1} && ${5-list.getSellerScore()!=0}">
-								<c:forEach begin="1" end="${5-list.getSellerScore()+1}">
-    							<a>★</a>
-   								</c:forEach>
-   								</c:when>
-   								<c:otherwise>
-   								<c:forEach begin="1" end="${5-list.getSellerScore()}">
-    							<a>★</a>
-   								</c:forEach>
-   								</c:otherwise>
-    							</c:choose>
-       							</span>
-       							 &nbsp;${list.getSellerScore()}
-       						</div>
+                        <dt class="">판매자평점</dt><br><br>
+                        <span class="star_rating">  <!-- 별점 표현 -->
+                           <c:forEach begin="1" end="${list.sellerScore-(list.sellerScore%1)}">
+			    			<a class="on">★</a>
+							</c:forEach>
+							<c:forEach begin="1" end="${5-(list.sellerScore-(list.sellerScore%1))}">
+			    			<a>★</a>
+			    			</c:forEach> 
+                        </span>
+                             &nbsp;${list.getSellerScore()}
+                         </div>
        						</dl><!-- /.detail -->
 						</div><!-- /.box-home .box-ads -->
 					</div><!-- ./col-md-4 -->
@@ -174,12 +165,12 @@
 							<div>
 								<i class="fa fa-star" aria-hidden="true" style="margin-left: 4px; margin-right: 5px"></i>별점<br><br>
 								<span class="star_rating">  <!-- 별점 표현 -->
-      							<c:forEach begin="1" end="${flist.foodScore}">
-    							<a class="on">★</a>
+      							<c:forEach begin="1" end="${flist.foodScore-(flist.foodScore%1)}">
+				    			<a class="on">★</a>
 								</c:forEach>
-								<c:forEach begin="1" end="${5-flist.foodScore}">
-    							<a>★</a>
-   								</c:forEach>
+								<c:forEach begin="1" end="${5-(flist.foodScore-(flist.foodScore%1))}">
+				    			<a>★</a>
+				    			</c:forEach> 
        							</span>
        							 &nbsp;${flist.foodScore}
        						</div>
