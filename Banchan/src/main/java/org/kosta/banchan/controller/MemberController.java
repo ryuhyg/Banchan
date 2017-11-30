@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.vo.AddressVO;
@@ -43,6 +44,9 @@ public class MemberController {
 	
 	/*@Resource
 	private ReportService reportService;*/
+
+	Logger logger = Logger.getLogger(this.getClass());
+
 
 	///////////////////////////////////// 향걸 start////////////////////////////////////
 	
@@ -155,7 +159,7 @@ public class MemberController {
 
 		// request에 set해서 비밀번호 찾기 질문 리스트를 보냄.
 		model.addAttribute("pwQnaList", pwQnaList);
-
+		//logger.debug("인터셉터 테스트 ");
 		return "member/registerView.tiles";
 	}
 
@@ -176,7 +180,7 @@ public class MemberController {
 
 		// 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다
 		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-			System.out.println("비로그인 상태  위치기반 접속!");
+			//System.out.println("비로그인 상태  위치기반 접속!");
 			AddressVO avo = new AddressVO();
 			avo.setAddressAPI("경기도 성남시 분당구 삼평동 대왕판교로 660");
 			avo.setLatitude(37.4008198);
@@ -184,7 +188,7 @@ public class MemberController {
 			model.addAttribute("addressVO", avo);
 			list = memberService.getNearSellerAddressByAddressAPI(avo.getAddressAPI());
 		} else {
-			System.out.println("로그인 상태!");
+			//System.out.println("로그인 상태!");
 			MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			mvo.setAddressVO(memberService.getAddressAPIById(mvo));
 			list = memberService.getNearSellerAddressByAddressAPI(mvo.getAddressVO().getAddressAPI());
@@ -197,12 +201,12 @@ public class MemberController {
 
 	@RequestMapping("searchLocationByService.do")
 	public String searchLocationByService(Model model, AddressVO addressVO) {
-		System.out.println("searchLocationByService_unsigned!!!");
-		System.out.println("addressVO :" + addressVO);
+		//System.out.println("searchLocationByService_unsigned!!!");
+		//System.out.println("addressVO :" + addressVO);
 		List<AddressVO> list = null;
 		list = memberService.getNearSellerAddressByAddressAPI(addressVO.getAddressAPI());
-		System.out.println("************************");
-		System.out.println(list);
+		//System.out.println("************************");
+		//System.out.println(list);
 		model.addAttribute("addressVO", addressVO);
 		model.addAttribute("list", list);
 		return "member/locationServicePage.tiles";
@@ -211,15 +215,15 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("getMarkerSellerListOnAjax.do")
 	public ListVO<SellerVO> getMarkerSellerListOnAjax(String addressNo,String pageNo) {
-		System.out.println("*ajax**********getMarkerSellerListOnAjax********************");
-		System.out.println(addressNo); // 들어옴
-		System.out.println(pageNo); // 들어옴
+		//System.out.println("*ajax**********getMarkerSellerListOnAjax********************");
+		//System.out.println(addressNo); // 들어옴
+		//System.out.println(pageNo); // 들어옴
 		if(addressNo!=null && pageNo==null) {
-			System.out.println("addressNo!=null && pageNo==null");
+			//System.out.println("addressNo!=null && pageNo==null");
 			return memberService.getMarkerSellerListByAddressNo(addressNo, "1");
 		}else {
-			System.out.println("addressNo!=null && pageNo!=null");
-			System.out.println(memberService.getMarkerSellerListByAddressNo(addressNo, pageNo));
+			//System.out.println("addressNo!=null && pageNo!=null");
+			//System.out.println(memberService.getMarkerSellerListByAddressNo(addressNo, pageNo));
 			return memberService.getMarkerSellerListByAddressNo(addressNo, pageNo);
 		}
 
@@ -272,13 +276,13 @@ public class MemberController {
 	@Secured("ROLE_BUYER")
 	@RequestMapping(value = "editBuyerMember.do", method = RequestMethod.POST)
 	public String editBuyerMember(MemberVO mvo) {
+		System.out.println("mvo:"+mvo);
 		// security 세션정보를 셋팅해줘야 됨.
 		MemberVO mvoBuyerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // security
 																													// 세션
 																													// 정보(수정전)
-
 		memberService.editBuyerMemberService(mvo); // update
-		mvoBuyerMember.setMemName(mvo.getPw()); // mvoBuyerMember에 업데이트 된 값 셋팅 (웹페이지에 갱신된 정보를 표현하기 위함)
+		mvoBuyerMember.setPw(mvo.getPw()); // mvoBuyerMember에 업데이트 된 값 셋팅 (웹페이지에 갱신된 정보를 표현하기 위함)
 		mvoBuyerMember.setMemName(mvo.getMemName()); // 안그러면 로그아웃했다가 다시 로그인해야 수정된 정보가 출력됨
 		mvoBuyerMember.setBirth(mvo.getBirth());
 		mvoBuyerMember.setTel(mvo.getTel());
@@ -299,22 +303,22 @@ public class MemberController {
 			uploadDir.mkdirs();
 		MultipartFile file = svo.getUploadImage();// 파일
 		if (file != null && file.isEmpty() == false) {
-			System.out.println("파일명:" + file.getOriginalFilename());
+		//	System.out.println("파일명:" + file.getOriginalFilename());
 			File uploadFile = new File(uploadPath + file.getOriginalFilename());
 			try {
 				file.transferTo(uploadFile);// 실제 디렉토리로 파일을 저장한다
-				System.out.println(uploadPath + file.getOriginalFilename() + " 파일업로드");
+				//System.out.println(uploadPath + file.getOriginalFilename() + " 파일업로드");
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
 		}
 		MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String imageName = (String) file.getOriginalFilename();
-		System.out.println("updateImage:" + imageName);
+		//System.out.println("updateImage:" + imageName);
 		if (imageName.equals("null") || imageName.equals("")) {
 
 			memberService.editSellerMemberNoImageService(svo); // 업데이트
-			mvoSellerMember.setMemName(svo.getPw());
+			mvoSellerMember.setPw(svo.getPw());
 			mvoSellerMember.setMemName(svo.getMemName());
 			mvoSellerMember.setBirth(svo.getBirth());
 			mvoSellerMember.setTel(svo.getTel());
@@ -325,7 +329,7 @@ public class MemberController {
 
 			svo.setSellerImg(file.getOriginalFilename()); // 이미지 업데이트
 			memberService.editSellerMemberService(svo); // 업데이트
-			mvoSellerMember.setMemName(svo.getPw());
+			mvoSellerMember.setPw(svo.getPw());
 			mvoSellerMember.setMemName(svo.getMemName());
 			mvoSellerMember.setBirth(svo.getBirth());
 			mvoSellerMember.setTel(svo.getTel());

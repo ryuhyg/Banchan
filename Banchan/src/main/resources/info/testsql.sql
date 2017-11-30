@@ -127,10 +127,12 @@ from (select food_no, food_name, mem_id, food_de, food_score, food_main_img, row
 f, ban_mem bm, seller s
 WHERE bm.mem_id=s.mem_id and s.mem_id=f.mem_id and f.rnum<=3
 
+select seller_img, seller_info from seller where
+		mem_id='ddddd'
 
-
-
-
-					
-					
+select * from mem_auth
+select * from question
+insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '안녕하세요 답글잘되요', sysdate, 'java', 4);
+insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '배고파', sysdate, 'java', 4);
+insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '윤주예뻐', sysdate, 'java', 4);
 

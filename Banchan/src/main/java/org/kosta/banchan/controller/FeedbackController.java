@@ -40,7 +40,6 @@ public class FeedbackController {
 		rvo.setRevContent(rContent);
 		rvo.setFoodNo(foodNo);
 		rvo.setMemId(writerId);
-		System.out.println(foodNo);
 		feedbackService.reviewRegister(rvo, memId,foodNo);
 		return "redirect:reviewRegister_ok.do?foodSellNo="+foodSellNo;
 		
@@ -94,15 +93,15 @@ public class FeedbackController {
 	     QuestionVO qvo = new QuestionVO();
 	     qvo.setQuestNo(questNo);
 	     qvo.setQuestContent(content);
-	     	return feedbackService.commentUpdate(qvo);
+	       	return feedbackService.commentUpdate(qvo);
 	    }
 	
 	//댓글 삭제
 	@RequestMapping("commentDelete.do")   
 	@ResponseBody
-	private int mCommentServiceDelete(@RequestParam String feedSellNo) throws Exception{
+	private int commentDelete(@RequestParam String questNo) throws Exception{
 		QuestionVO qvo= new QuestionVO();
-		qvo.setFoodSellNo(feedSellNo);
+		qvo.setQuestNo(questNo);
 			return feedbackService.commentDelete(qvo);
 	    }
 ////////////////end정훈//////////////////////

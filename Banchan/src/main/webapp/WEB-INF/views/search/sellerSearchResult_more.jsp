@@ -89,37 +89,12 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 		<div class="row">
 			<div class="tab2Container">
 				<div class="col-md-9">
-				<h4>[주부 검색 결과]</h4>
+				<h4><i class="fa fa-search" aria-hidden="true"></i>주부 검색 결과 전체보기</h4>
 	<c:choose>
 		<c:when test="${fn:length(slist)==0 }">
 			검색결과없음
 		</c:when>
 	<c:otherwise>
-		<c:choose>
-			<c:when test="${fn:length(slist)<=2 }">
-				<c:forEach items="${slist }" var="seller">
-					<div class="row" style="vertical-align: middle">
-						<div class="col-sm-8 col-md-8 col-sm-push-4">
-							<div class="bs-callout callout-success" style="width: 800px">
-							<h2 class="title">
-							<a href="sellerPageInfo.do?memId=${seller.memId }">${seller.memName}</a>
-							</h2>						
-							  <span class="description" style="color:black;font-size:13px;margin-top: 15px;">							  <i class="fa fa-ticket" style="font-weight: bold">판매자 소개:</i>${seller.sellerInfo}<br>
-								<i style="font-weight: bold">평점:</i>${seller.sellerScore}<br>
-								<i style="font-weight: bold">판매자 연락처:</i>${seller.tel }	
-							  </span>
-							</div><!-- bs-callout callout-success -->
-						</div><!-- /.col-md-8 -->
-						<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
-						<!-- . Agent Box -->
-						<div class="tab2img" >
-							<img alt="Sample images" width="200" height="150" src="${pageContext.request.contextPath }/resources/images/${seller.sellerImg}"> 
-						</div>
-						</div><!-- /.col-md-4 -->		
-					</div><!-- /.row -->
-			</c:forEach>
-		</c:when>
-			<c:otherwise>
 				<c:forEach items="${slist }" begin="1" end="3" var="seller">
 					<div class="row" style="vertical-align: middle">
 						<div class="col-sm-8 col-md-8 col-sm-push-4">
@@ -127,9 +102,10 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 							<h2 class="title">
 							<a href="sellerPageInfo.do?memId=${seller.memId }">${seller.memName}</a>
 							</h2>						
-							  <span class="description" style="color:black;font-size:13px;margin-top: 15px;">							  <i class="fa fa-ticket" style="font-weight: bold">판매자 소개:</i>${seller.sellerInfo}<br>
-								<i style="font-weight: bold">평점:</i>${seller.sellerScore}<br>
-								<i style="font-weight: bold">판매자 연락처:</i>${seller.tel }	
+							  <span class="description" style="color:black;font-size:13px;margin-top: 15px;">							  
+							  	<i class="fa fa-ticket" style="font-weight: bold">판매자 소개:&nbsp;</i>${seller.sellerInfo}<br>
+								<i style="font-weight: bold">평점:&nbsp;</i>${seller.sellerScore}<br>
+								<i style="font-weight: bold">판매자 연락처:&nbsp;</i>${seller.tel }	
 							  </span>
 							</div><!-- bs-callout callout-success -->
 						</div><!-- /.col-md-8 -->
@@ -141,11 +117,8 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 						</div><!-- /.col-md-4 -->		
 					</div><!-- /.row -->
 			</c:forEach>
-			<a href="sellerSearchMore.do?kw=${keyword }">검색 결과 더보기..</a>
-			</c:otherwise>
-			</c:choose>
-</c:otherwise>
-</c:choose>
+		</c:otherwise>
+	</c:choose>
 </div>
 </div>
 </div>

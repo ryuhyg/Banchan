@@ -87,49 +87,52 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 <section id="recent-list" style="margin-top: 150px;">
 	<div class="container">
 		<div class="row">
-			<div class="tab2Container">
 				<div class="col-md-9">
-				<h4>[주부 검색 결과]</h4>
+				<h4><i class="fa fa-search" aria-hidden="true"></i><b>주부 검색 결과</b></h4>
 	<c:choose>
 		<c:when test="${fn:length(slist)==0 }">
-			검색결과없음
+			&nbsp;&nbsp;&nbsp;<font color="grey">┗ 검색결과없음</font>
+			<div style="margin-top: 20px;"></div>
+			
 		</c:when>
-	<c:otherwise>
-		<c:choose>
-			<c:when test="${fn:length(slist)<=2 }">
-				<c:forEach items="${slist }" var="seller">
-					<div class="row" style="vertical-align: middle">
-						<div class="col-sm-8 col-md-8 col-sm-push-4">
-							<div class="bs-callout callout-success" style="width: 800px">
-							<h2 class="title">
-							<a href="sellerPageInfo.do?memId=${seller.memId }">${seller.memName}</a>
-							</h2>						
-							  <span class="description" style="color:black;font-size:13px;margin-top: 15px;">							  <i class="fa fa-ticket" style="font-weight: bold">판매자 소개:</i>${seller.sellerInfo}<br>
-								<i style="font-weight: bold">평점:</i>${seller.sellerScore}<br>
-								<i style="font-weight: bold">판매자 연락처:</i>${seller.tel }	
-							  </span>
-							</div><!-- bs-callout callout-success -->
-						</div><!-- /.col-md-8 -->
-						<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
-						<!-- . Agent Box -->
-						<div class="tab2img" >
-							<img alt="Sample images" width="200" height="150" src="${pageContext.request.contextPath }/resources/images/${seller.sellerImg}"> 
-						</div>
-						</div><!-- /.col-md-4 -->		
-					</div><!-- /.row -->
-			</c:forEach>
-		</c:when>
+		<c:otherwise>
+			<c:choose>
+				<c:when test="${fn:length(slist)<=2 }">
+					<c:forEach items="${slist }" var="seller">
+						<div class="row" style="vertical-align: middle">
+							<div class="col-sm-8 col-md-8 col-sm-push-4">
+								<div class="bs-callout callout-success" style="width: 800px">
+								<h2 class="title">
+								<a href="sellerPageInfo.do?memId=${seller.memId }">${seller.memName}</a>
+								</h2>						
+								  <span class="description" style="color:black;font-size:14px;margin-top: 15px;">							  
+								  	<i class="fa fa-ticket" style="font-weight: bold">판매자 소개:&nbsp;</i>${seller.sellerInfo}<br>
+									<i style="font-weight: bold">평점:&nbsp;</i>${seller.sellerScore}<br>
+									<i style="font-weight: bold">판매자 연락처:&nbsp;</i>${seller.tel }	
+								  </span>
+								</div><!-- bs-callout callout-success -->
+							</div><!-- /.col-md-8 -->
+							<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
+							<!-- . Agent Box -->
+							<div class="tab2img" >
+								<img alt="Sample images" width="200" height="150" src="${pageContext.request.contextPath }/resources/images/${seller.sellerImg}"> 
+							</div>
+							</div><!-- /.col-md-4 -->		
+						</div><!-- /.row -->
+					</c:forEach>
+				</c:when>
 			<c:otherwise>
 				<c:forEach items="${slist }" begin="1" end="3" var="seller">
 					<div class="row" style="vertical-align: middle">
 						<div class="col-sm-8 col-md-8 col-sm-push-4">
 							<div class="bs-callout callout-success" style="width: 800px">
 							<h2 class="title">
-							<a href="sellerPageInfo.do?memId=${seller.memId }">${seller.memName}</a>
+								<a href="sellerPageInfo.do?memId=${seller.memId }">${seller.memName}</a>
 							</h2>						
-							  <span class="description" style="color:black;font-size:13px;margin-top: 15px;">							  <i class="fa fa-ticket" style="font-weight: bold">판매자 소개:</i>${seller.sellerInfo}<br>
-								<i style="font-weight: bold">평점:</i>${seller.sellerScore}<br>
-								<i style="font-weight: bold">판매자 연락처:</i>${seller.tel }	
+							  <span class="description" style="color:black;font-size:13px;margin-top: 15px;">
+							  	<i class="fa fa-ticket" style="font-weight: bold">판매자 소개:&nbsp;</i>${seller.sellerInfo}<br>
+								<i style="font-weight: bold">평점:&nbsp;</i>${seller.sellerScore}<br>
+								<i style="font-weight: bold">판매자 연락처:&nbsp;</i>${seller.tel }	
 							  </span>
 							</div><!-- bs-callout callout-success -->
 						</div><!-- /.col-md-8 -->
@@ -140,86 +143,87 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 						</div>
 						</div><!-- /.col-md-4 -->		
 					</div><!-- /.row -->
-			</c:forEach>
-			<a href="sellerSearchMore.do?kw=${keyword }">검색 결과 더보기..</a>
-			</c:otherwise>
+				</c:forEach>
+					<a href="sellerSearchMore.do?kw=${keyword }">검색 결과 더보기..</a>
+				</c:otherwise>
 			</c:choose>
-</c:otherwise>
+		</c:otherwise>
 </c:choose>
-<hr>
-				<h4>[음식 검색 결과]</h4>
+</div>
+<hr width="95%" align="left">
+<div class="col-md-9">
+		<h4><b><i class="fa fa-search" aria-hidden="true"></i>음식 검색 결과</b></h4>
 		<c:choose>
 			<c:when test="${fn:length(fslist)==0 }">
-				검색결과없음
+				&nbsp;&nbsp;&nbsp;<font color="grey">┗ 검색결과없음</font>
 			</c:when>
 			<c:otherwise>
-			<c:choose>
-			<c:when test="${fn:length(fslist)<=2 }">
-			<c:forEach items="${fslist }" var="foodSell">
-				<div class="row" style="vertical-align: middle">
-					<div class="col-sm-8 col-md-8 col-sm-push-4">
-						<div class="bs-callout callout-success" style="width: 800px;">
-							<h3 class="title">
-								<a href="getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }">
-								${foodSell.foodName}
-								</a>				
-							</h3>		
+				<c:choose>
+					<c:when test="${fn:length(fslist)<=2 }">
+					<c:forEach items="${fslist }" var="foodSell">
+						<div class="row" style="vertical-align: middle">
+							<div class="col-sm-8 col-md-8 col-sm-push-4">
+								<div class="bs-callout callout-success" style="width: 800px;">
+									<h3 class="title">
+										<a href="getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }">
+										${foodSell.foodName}
+										</a>				
+									</h3>		
 							<span class="description" style="color:black;font-size:13px;">
-								<i class="fa fa-ticket" style="font-weight: bold">음식 소개:</i>${foodSell.foodDe}	<br>					    
-							    <i style="font-weight: bold">음식 평점:</i>${foodSell.foodScore}<br>
-								<i style="font-weight: bold">판매자 아이디:</i>	
+								<i class="fa fa-ticket" style="font-weight: bold">음식 소개:&nbsp;</i>${foodSell.foodDe}	<br>					    
+							    <i style="font-weight: bold">음식 평점:&nbsp;</i>${foodSell.foodScore}<br>
+								<i style="font-weight: bold">판매자 아이디:&nbsp;</i>	
 								<a href="sellerPageInfo.do?memId=${foodSell.memId }">${foodSell.memId }</a><br>
-								<i style="font-weight: bold">예약 마감일:</i>${foodSell.closeDate}<br>
-								<i style="font-weight: bold">거래 일:</i>${foodSell.trDate}<br>
-								<i style="font-weight: bold">판매 추가 정보:</i>${foodSell.sellDetail}<br>
+								<i style="font-weight: bold">예약 마감일:&nbsp;</i>${foodSell.closeDate}<br>
+								<i style="font-weight: bold">거래 일:&nbsp;</i>${foodSell.trDate}<br>
+								<i style="font-weight: bold">판매 추가 정보:&nbsp;</i>${foodSell.sellDetail}<br>
 							</span>
-						</div><!-- bs-callout callout-success -->
-					</div><!-- /.col-md-8 -->
-					<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
-						<!-- . Agent Box -->
-						<div class="tab2img" >
-							<img alt="Sample images" width="200" height="200" src="${pageContext.request.contextPath }/resources/images/${foodSell.foodMainImg}"> 
-						</div>
-					</div><!-- /.col-md-4 -->
-				</div><!-- /.row -->
-		</c:forEach>
-		</c:when>
-		<c:otherwise>
-			<c:forEach items="${fslist }" begin="1" end="3" var="foodSell">
-				<div class="row" style="vertical-align: middle">
-					<div class="col-sm-8 col-md-8 col-sm-push-4">
-						<div class="bs-callout callout-success" style="width: 800px;">
-							<h3 class="title">
-								<a href="getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }">
-								${foodSell.foodName}
-								</a>				
-							</h3>		
+								</div><!-- bs-callout callout-success -->
+							</div><!-- /.col-md-8 -->
+							<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
+								<!-- . Agent Box -->
+								<div class="tab2img" >
+									<img alt="Sample images" width="200" height="200" src="${pageContext.request.contextPath }/resources/images/${foodSell.foodMainImg}"> 
+								</div>
+							</div><!-- /.col-md-4 -->
+						</div><!-- /.row -->
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+				<c:forEach items="${fslist }" begin="1" end="3" var="foodSell">
+					<div class="row" style="vertical-align: middle">
+						<div class="col-sm-8 col-md-8 col-sm-push-4">
+							<div class="bs-callout callout-success" style="width: 800px;">
+								<h3 class="title">
+									<a href="getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }">
+									${foodSell.foodName}
+									</a>				
+								</h3>		
 							<span class="description" style="color:black;font-size:13px;">
-								<i class="fa fa-ticket" style="font-weight: bold">음식 소개:</i>${foodSell.foodDe}	<br>					    
-							    <i style="font-weight: bold">음식 평점:</i>${foodSell.foodScore}<br>
-								<i style="font-weight: bold">판매자 아이디:</i>	
+								<i class="fa fa-ticket" style="font-weight: bold">음식 소개:&nbsp;</i>${foodSell.foodDe}<br>					    
+							    <i style="font-weight: bold">음식 평점:&nbsp;</i>${foodSell.foodScore}<br>
+								<i style="font-weight: bold">판매자 아이디:&nbsp;</i>	
 								<a href="sellerPageInfo.do?memId=${foodSell.memId }">${foodSell.memId }</a><br>
-								<i style="font-weight: bold">예약 마감일:</i>${foodSell.closeDate}<br>
-								<i style="font-weight: bold">거래 일:</i>${foodSell.trDate}<br>
-								<i style="font-weight: bold">판매 추가 정보:</i>${foodSell.sellDetail}<br>
+								<i style="font-weight: bold">예약 마감일:&nbsp;</i>${foodSell.closeDate}<br>
+								<i style="font-weight: bold">거래 일:&nbsp;</i>${foodSell.trDate}<br>
+								<i style="font-weight: bold">판매 추가 정보:&nbsp;</i>${foodSell.sellDetail}<br>
 							</span>
-						</div><!-- bs-callout callout-success -->
-					</div><!-- /.col-md-8 -->
-					<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
-						<!-- . Agent Box -->
-						<div class="tab2img" >
-							<img alt="Sample images" width="200" height="200" src="${pageContext.request.contextPath }/resources/images/${foodSell.foodMainImg}"> 
-						</div>
-					</div><!-- /.col-md-4 -->
-				</div><!-- /.row -->
-		</c:forEach>
+							</div><!-- bs-callout callout-success -->
+						</div><!-- /.col-md-8 -->
+						<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
+							<!-- . Agent Box -->
+							<div class="tab2img" >
+								<img alt="Sample images" width="200" height="200" src="${pageContext.request.contextPath }/resources/images/${foodSell.foodMainImg}"> 
+							</div>
+						</div><!-- /.col-md-4 -->
+					</div><!-- /.row -->
+				</c:forEach>
 					<a href="foodSearchMore.do?kw=${keyword }">검색 결과 더보기..</a>
+				</c:otherwise>
+			</c:choose>
 		</c:otherwise>
-		</c:choose>
-	</c:otherwise>
-</c:choose>
-</div>
-</div>
-</div>
-</div>
+	</c:choose>
+			</div><!-- col-md-9 -->
+		</div><!-- row -->
+	</div><!-- container -->
 </section>
