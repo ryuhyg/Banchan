@@ -27,6 +27,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
+		commentList(); 
 		$("#trQuantity").change(function () {
 			//구매수량이 준비수량보다 적은지 확인
 			var leftQuantity=$("#leftQuantity").text();
@@ -37,8 +38,9 @@
 			var orderPrice=$(this).val()*$("#price").text();
 			$("#orderPrice").text(orderPrice);
 		}); //change
-		
-		
+		$("#commentDelete").on("click",".commentInfo a",function(){
+			alert(1);
+		});//commentDelete
 	/*판매 음식 삭제하기*/
 	$("#deleteFood").click(function() {
 		if(deleteFlag=confirm("삭제하시겠습니까?")){
@@ -127,12 +129,12 @@
 	            $.each(data, function(key, value){ 
 	                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
 	                a += '<div class="commentInfo'+value.questNo+'">'+'댓글번호 : '+value.questNo+' / 작성자 : '+value.memId;
-	                a += '<a onclick="commentUpdate('+value.questNo+'\''+value.questContent+'\');"> 수정 </a>';
-	                a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a> ';
+	                a += '<a onclick="commentUpdate('+value.questNo+'\''+value.questContent+'\')"> 수정 </a>';
+	               /*  a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a> '; */
+	              	 a += '<a id="commentDelete"> 삭제 </a> ';
 	                a += '<div class="commentContent'+value.questNo+'"> <p> 내용 : '+value.questContent +'</p>'+'</div>';
 	                a += '</div></div>';
-
-	            });
+			    });
 
 	          
 	            $(".commentList").html(a);
@@ -194,9 +196,7 @@
 	        }
 	    });
 	}
-		$(document).ready(function(){
-	    commentList(); //페이지 로딩시 댓글 목록 출력 
-		});
+		
 
 		$("#loginAndOrder").click(function() {
 			if(confirm("로그인 페이지로 이동합니다."))
