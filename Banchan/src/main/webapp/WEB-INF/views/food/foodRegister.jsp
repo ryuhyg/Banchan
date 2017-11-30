@@ -145,7 +145,7 @@ filter: alpha(opacity=0);
 						</div>
 						</form>
 				</div>
-			</div>
+			</div> 
 		</div>
 		<div class="col-sm-1">
 			<!-- right -->
