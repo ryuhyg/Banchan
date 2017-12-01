@@ -341,7 +341,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			  <sec:authorize access="isAuthenticated()">
 					<c:if test="${mvo.memId==svo.memId}">
 					  <div > 
-			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="float:right;margin-left: 10px;" >전테 거래내역 보기</a>
+			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="float:right;margin-left: 10px;" >전체 거래내역 보기</a>
 					 </div>
 					 <div > 
 						<a href="${pageContext.request.contextPath}/foodRegisterForm.do"
