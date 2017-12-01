@@ -28,7 +28,7 @@
 
 $(document).ready(function () {
 	   var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
-	   
+	   /*주문 수량 확인하기*/
 	   $("#trQuantity").change(function () {
 	      //구매수량이 준비수량보다 적은지 확인
 	      var leftQuantity=$("#leftQuantity").text();
@@ -39,10 +39,6 @@ $(document).ready(function () {
 	      var orderPrice=$(this).val()*$("#price").text();
 	      $("#orderPrice").text(orderPrice);
 	   }); //trQuantity change
-	   
-	   $("#commentDelete").on("click",".commentInfo a",function(){
-	      alert(1);
-	   });//commentDelete
 	   
 	   /*판매 음식 삭제하기*/
 	   $("#deleteFood").click(function() {
@@ -83,35 +79,41 @@ $(document).ready(function () {
 	      }
 	   }); //click
 
-
-	   $("#loginAndOrder").click(function() {
-	      if(confirm("로그인 페이지로 이동합니다."))
-	         location.href="${pageContext.request.contextPath}/loginView.do";
-	   }); //loginAndOrder click
-
-	   commentList(); 
+	   commentList(); //실행시 댓글 목록 불러옴_정훈
 	});//ready
 	
-	//댓글달기!		
+	/*질문 댓글 작성하기*/		
 	var foodSellNo = "${foodSell.foodSellNo}"; //게시글 번호
-	 
+
 	$("[name=commentInsertBtn]").click(function(){ //댓글 등록 버튼 클릭시
+		alert(1);
+
 		var insertData = $("[name=commentInsertForm]").serialize(); //commentInsertForm의 내용을 가져옴
 		commentInsert(insertData); //Insert 함수호출(아래)
 	});
-		$("#loginAndOrder").click(function() {
-			if(confirm("로그인 페이지로 이동합니다."))
-				location.href="${pageContext.request.contextPath}/loginView.do";
-		}); //loginAndOrder click
-
-		//댓글 목록 
-		function commentList(){
-		    $.ajax({
-		        url : "${pageContext.request.contextPath}/commentList.do",
-		        type : "get",
-		        data : {"foodSellNo":foodSellNo},
-		        success : function(data){
-		            var a =""; 
+	//댓글 등록
+	function commentInsert(insertData){
+		 $.ajax({
+	        type : "get",
+	        url : "${pageContext.request.contextPath}/commentInsert.do",
+	        data : insertData,
+	        success : function(data){
+	        	  if(data== 1) {
+	                commentList(); //댓글 작성 후 댓글 목록 reload
+	                $("[name=content]").val("");
+	             }//if
+	        }//success
+	    }); //ajax
+	}//function
+	
+	//댓글 목록 
+	function commentList(){
+		   $.ajax({
+		       url : "${pageContext.request.contextPath}/commentList.do",
+		       type : "get",
+		       data : {"foodSellNo":foodSellNo},
+		       success : function(data){
+		          var a =""; 
 		            $.each(data, function(key, value){ 
 		            	   	a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
 		                	a += '<div class="commentInfo'+value.questNo+'">'+'댓글번호 : '+value.questNo+' / 작성자 : '+value.memId;
@@ -120,33 +122,16 @@ $(document).ready(function () {
 		                    a += '<div class="commentContent'+value.questNo+'"> <p> 질문내용 : '+value.questContent +'</p></div>';
 		                    a += '<a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a>';
 		                    a += '<div class="commentAnswerRe'+value.questNo+'">'+'</div>';
-		                   	for(var i=0; i<value.answerList.length; i++)
-		                    	a += '<div class="commentAnswer'+value.questNo+'"> <p> 답변 : '+value.answerList[i].ansContent +'</p>'+'</div>';
 		                	a += '</div></div>';
 		                    	
 		            });
-		            $(".commentList").html(a);
-		        }
+		           $(".commentList").html(a);
+		      }
 		    });
-		}
-		//댓글 등록
-		
-		function commentInsert(insertData){
-			 $.ajax({
-		        type : "get",
-		        url : "${pageContext.request.contextPath}/commentInsert.do",
-		        data : insertData,
-		        success : function(data){
-		        	  if(data== 1) {
-		                commentList(); //댓글 작성 후 댓글 목록 reload
-		                $("[name=content]").val("");
-		             }//if
-		        }//success
-		    }); //ajax
-		}//function
+	}
 		
 		//질문 답변 달기 - 답변 달기 내용 출력을 input 폼으로 변경 
-		function commentAnswerReply(questNo, memId){
+		/* function commentAnswerReply(questNo, memId){
 		    var a ="";
 		    
 		    a += '<div class="input-group">';
@@ -158,10 +143,10 @@ $(document).ready(function () {
 		    
 		    $('.commentAnswerRe'+questNo).html(a);
 		    
-		}
+		} */
 		
 		//질문 답변 달기
-		function commentAnswerReplyProc(questNo){
+		/* function commentAnswerReplyProc(questNo){
 			var answer=$("#answerContent").val();
 			var memId=$("#memId2").val();
 			var questNo=$("#questNo").val();
@@ -183,11 +168,9 @@ $(document).ready(function () {
 	                  } 
 	            
 	         });//ajax   
-		}
+		} */
 	 
-
-
-		//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
+		/*댓글 수정 시 댓글 내용을 input폼으로 변경 - 아래 commentUpdateProc()호출*/ 
 		function commentUpdate(questNo, questContent){
 		    var a ="";
 		    
@@ -199,8 +182,7 @@ $(document).ready(function () {
 		    $('.commentContent'+questNo).html(a);
 		    
 		}
-		 
-		//댓글 수정
+		/*댓글 수정*/
 		function commentUpdateProc(questNo){
 			var updateContent = $("[name=content_"+questNo+"]").val();
 		    $.ajax({
@@ -209,22 +191,22 @@ $(document).ready(function () {
 		        data : {"content" : updateContent, "questNo" : questNo},
 		        success : function(data){
 		            if(data == 1) 
-		            	commentList(questNo); //댓글 수정후 목록 출력 
+		            	commentList(questNo); //댓글 수정후 목록 출력 함수 호출
 		        }
 		    });
 		}
-	//댓글 삭제 
+	/*댓글 삭제*/ 
 		function commentDelete(questNo){
 			$.ajax({
 		        url : "${pageContext.request.contextPath}/commentDelete.do?questNo="+questNo,
 		        type : "get",
 		        success : function(data){
 		            if(data == 1) 
-		            commentList(foodSellNo); //댓글 삭제후 목록 출력 
+		            commentList(foodSellNo); //댓글 삭제후 목록 출력 함수 호출
 		        }
 		    });
 		}
-	
+		/*구매 조건 체크 함수*/
 		function orderFoodConfirm(){ //윤주
 		      var isLogin = $("#checkId").val();
 		      var leftQuantity=$("#leftQuantity").text();
