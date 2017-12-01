@@ -25,7 +25,7 @@
 
 #paginationContainer {
 	text-align: center;
-
+}
 /* 별점 css  */
 .star_rating {font-size:0; letter-spacing:-4px;}
 .star_rating a {
@@ -41,9 +41,7 @@
 .home-top{
    margin-top: 100px;
 }
-<<<<<<< HEAD
-   margin-top: 100px;
-}
+s
 /* 검색창  */
 .searchBtn{
     margin: 2px 0 0 0;
