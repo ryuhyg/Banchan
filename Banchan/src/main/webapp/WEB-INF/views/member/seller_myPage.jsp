@@ -345,7 +345,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 					 </div>
 					 <div > 
 						<a href="${pageContext.request.contextPath}/foodRegisterForm.do"
-							class="btn btn-default" style="float:right;">음식 등록</a>
+							class="btn btn-default" style="float:right;">음식 등록</a> 
 					</div>
 					
 					</c:if>
