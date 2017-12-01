@@ -131,6 +131,13 @@ select seller_img, seller_info from seller where
 		mem_id='ddddd'
 
 select * from mem_auth
+
+
+select * from ban_mem where mem_name='ddssss'
+update from BAN_MEM where mem_name='ddssss'
+delete from ban_mem where mem_name='ddssss'
+select * from ENABLE
+
 select * from question
 insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '안녕하세요 답글잘되요', sysdate, 'java', 4);
 insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '배고파', sysdate, 'java', 4);
