@@ -99,6 +99,7 @@ filter: alpha(opacity=0);
 					</div>
 					<div align="right" style="position: relative;bottom: 25px;">
 					<input type="submit" id="registerData" class="btn btn-reverse button-form" value="등록">
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 					<a href="${pageContext.request.contextPath}" class="btn btn-default button-form">돌아가기</a>
 					</div>
 				</div>

@@ -24,7 +24,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<a href="${pageContext.request.contextPath}/home.do">
-					<img src="${pageContext.request.contextPath}/resources/images/logo/header_logo4.png"
+					<img src="${pageContext.request.contextPath}/resources/images/logo/header_logo5.png"
 						style="margin-top: -2px; z-index: 1000; width: 200px"></a>  
 				</div>
 				<div id="login-pan" class="col-md-6">

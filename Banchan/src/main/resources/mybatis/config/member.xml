@@ -331,18 +331,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from ban_mem
 		where mem_id=#{value}
 	</select>
-		<!-- 검색어기능부분start -->
-			<resultMap type="sellerVO" id="searchSellerRM">
-				<result property="addressVO.addressAPI" column="address_api"/>
-			</resultMap>
-			<select id="findSellerList" parameterType="string" resultMap="searchSellerRM">
- 				select s.mem_id,s.seller_img,s.seller_info,s.seller_score,m.mem_name,m.tel, a.address_api
-				from (select mem_id,seller_img,seller_info,seller_score from seller) s,
-						ban_mem m, address a
- 				where m.mem_name like '%'||#{value}||'%' and s.mem_id=m.mem_id
- 				and m.address_no=a.address_no
- 			</select>
-		<!-- 검색어기능부분end -->
+    <resultMap type="sellerVO" id="searchSellerRM">
+       <result property="addressVO.addressAPI" column="address_api"/>
+    </resultMap>
+    <select id="findSellerList" parameterType="string" resultMap="searchSellerRM">
+        select s.mem_id,s.seller_img,s.seller_info,s.seller_score,m.mem_name,m.tel, a.address_api
+       from (select mem_id,seller_img,seller_info,seller_score from seller) s,
+             ban_mem m, address a
+        where m.mem_name like '%'||#{value}||'%' and s.mem_id=m.mem_id
+        and m.address_no=a.address_no
+     </select>
 	<!-- End 윤주 -->
 
 

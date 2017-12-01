@@ -126,7 +126,7 @@
 							<span class="description">${list.getSellerInfo()}</span>
 							<dl class="detail">
 							<div>
-                      			 <dt class="">판매자평점</dt><br><br>
+                      			<i class="fa fa-star" aria-hidden="true" style="margin-left: 4px; margin-right: 5px"></i>판매자평점<br><br>
                        			 <span class="star_rating">  <!-- 별점 표현 -->
                          	  <c:forEach begin="1" end="${list.sellerScore-(list.sellerScore%1)}">
 					    		<a class="on">★</a>
@@ -185,7 +185,6 @@
 		</c:if>	 
 		</section>
 		<section id="submit-property" data-parallax-speed="0" align="center">
-			 
 			<span class="overlay"></span>
 			<div class="container">
 				<div class="section-detail">

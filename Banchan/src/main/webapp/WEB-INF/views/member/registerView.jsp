@@ -5,10 +5,14 @@
 <!-- services와 clusterer, drawing 라이브러리 불러오기 : MAP sdk -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54"></script>  
-<!-- 우편번호 api -->
-<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-
-<script type="text/javascript">
+ <!-- 우편번호 api -->
+ <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+ <!-- datepicker --> 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script type="text/javascript">
 	$(document).ready(function(){
 		
 		var checkResultId="";	
