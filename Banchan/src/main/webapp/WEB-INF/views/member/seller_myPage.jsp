@@ -3,13 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-
 <sec:authorize access="isAuthenticated()">
 		<sec:authentication var="mvo" property="principal" />
  </sec:authorize>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/banchan.css">
 <script type="text/javascript">
 			function sellFoodPage(pageNoParam){
 			var pageNo=pageNoParam;
@@ -238,28 +237,6 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 	border: 5px solid gray;
 	margin: 0;
 }
-/*별점*/
-.star_rating {
-	font-size: 0;
-	letter-spacing: -4px;
-}
-
-.star_rating a {
-	font-size: 22px;
-	letter-spacing: 0;
-	display: inline-block;
-	margin-left: 5px;
-	color: #ccc;
-	text-decoration: none;
-}
-
-.star_rating a:first-child {
-	margin-left: 0;
-}
-
-.star_rating a.on {
-	color: #ffcc00;
-}
 
 .home-top {
 	margin-top: 100px;
@@ -392,28 +369,19 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 										<span class="description">${food.foodDe}</span>
 										 <dl style="display:inline-block;height:70px"  class="detail" > 
 										<!-- <dl class="detail"> -->
-										<table style="font-size:12px;">
+										<table >
 											<tr>
 											<td >
 											<!-- <small><i class="fa fa-star fa-fw" ></i></small> -->
 											        <!--  <a class="star_rating.on" style="color: #ffcc00">★</a> -->
-													<span class="star_rating"> 
-					      							<c:forEach begin="1" end="${food.foodScore}">
-					    							<a class="on">★</a>
-													</c:forEach>
-													<c:choose>
-													<c:when test="${5-food.foodScore<1} && ${5-food.foodScore!=0}">
-													<c:forEach begin="1" end="${5-food.foodScore+1}">
-					    							<a>★</a>
-					   								</c:forEach>
-					   								</c:when>
-					   								<c:otherwise>
-					   								<c:forEach begin="1" end="${5-food.foodScore}">
-					    							<a>★</a>
-					   								</c:forEach>
-					   								</c:otherwise>
-					    							</c:choose>
-					       							</span>    
+											<span class="star_rating" > 
+						                    <c:forEach begin="1" end="${food.foodScore-(food.foodScore%1)}">
+			    							<a class="on" style="font-size: 12px">★</a>
+											</c:forEach>
+											 <c:forEach begin="1" end="${5-(food.foodScore-(food.foodScore%1))}">
+			    							<a style="font-size: 12px">★</a>
+			    							</c:forEach> 
+			      							</span>
 			                                    <b style="font-size: 12px">&nbsp;&nbsp;별점 :&nbsp;&nbsp;${food.foodScore}</b> </td>
 											</tr>
 											<tr>
