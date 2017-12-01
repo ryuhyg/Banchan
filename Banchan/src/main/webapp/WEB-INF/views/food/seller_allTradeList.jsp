@@ -8,7 +8,7 @@
 table, th, td{
 	text-align: center;
 }
-tr{
+.trNone{
 	display: none;
 }
 .tr_visible {
@@ -61,16 +61,16 @@ tr{
 	
 		<thead>
 			<tr class="tr_visible"> 
-				<th>거래번호</th>
-				<th>음식명</th>
-				<th>구매자아이디</th>
-				<th>거래신청날짜</th>
+				<th style="width: 7%;">거래번호</th>
+				<th style="width: 10%;">음식명</th>
+				<th style="width: 10%;">구매자아이디</th>
+				<th style="width: 10%;">거래신청날짜</th>
 				<!-- <th>거래완료날짜</th> -->
-				<th>거래일</th>
-				<th>거래장소</th>
-				<th>구매수량</th>
-				<th>주문가격</th>
-				<th colspan="2">거래상태</th>
+				<th style="width: 10%;">거래일</th>
+				<th style="width: 10%;">거래장소</th>
+				<th style="width: 10%;">구매수량</th>
+				<th style="width: 10%;">주문가격</th>
+				<th colspan="2" style="width: 13%;">거래상태</th>
 			</tr>
 		</thead>
 		<tbody >
@@ -97,7 +97,7 @@ tr{
 					</c:otherwise>
 				</c:choose>
 			</tr>
-			<tr>
+			<tr class="trNone">
 				<td colspan="2">구매자 아이디: <span id="buyerId"></span> </td>
 				<td colspan="2" >구매자 이름: <span id="buyerName"></span></td>
 				<td colspan="3">구매자 연락처: <span id="buyerTel"></span></td>

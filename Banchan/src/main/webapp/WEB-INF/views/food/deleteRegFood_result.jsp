@@ -15,10 +15,10 @@
 			var text;
 			var result = confirm("선택한 음식을 삭제 하시겠습니까?");
 			if (result == true) {
-			    text = "선택한 음식이 삭제되었습니다";
+			    alert("선택한 음식이 삭제되었습니다.");
 			    location.href="${pageContext.request.contextPath}/deleteRegFoodResult.do?foodNo="+foodNumber+"&memId="+memId
 			} else {
-			    text = "삭제가 취소 되었습니다.";
+				alert("삭제가 취소 되었습니다.");
 			    location.href="${pageContext.request.contextPath}/sellerPageInfo.do?memId="+memId;
 			}
 			// alert("선택한 등록음식이 삭제되었습니다.");
