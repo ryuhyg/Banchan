@@ -11,12 +11,11 @@
  	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54"></script>
  <!-- 우편번호 api -->
  <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
- <!-- 스크립트 ajax 부분 -->
- <!-- 입력폼 이쁘게 -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 
+ <!-- datepicker --> 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <script type="text/javascript">
  	$(document)
  			.ready(
@@ -435,6 +434,8 @@
  <section>
  
  
+  
+  </section>
  <script>
  	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
  	mapOption = {
@@ -472,5 +473,3 @@
  	// 마커가 지도 위에 표시되도록 설정합니다
  	marker.setMap(map);
   </script>
-  
-  </section>

@@ -7,17 +7,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-<style>
-.small-text{
-	border: 1px solid #E5E5E5;
-	font-size: 15px;
-	padding: 7px 12px 8px;
-	box-shadow: 0 0 0 4px rgba(236, 236, 236, 0.3);
-	color: #555;
-	background-color: #fff; 
-}
-</style>
 	
 <script type="text/javascript">
 	$(document).ready(function () { 
