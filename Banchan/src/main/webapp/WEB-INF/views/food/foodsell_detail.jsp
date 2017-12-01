@@ -28,7 +28,7 @@
 
 $(document).ready(function () {
 	   var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
-	   
+	   /*주문 수량 확인하기*/
 	   $("#trQuantity").change(function () {
 	      //구매수량이 준비수량보다 적은지 확인
 	      var leftQuantity=$("#leftQuantity").text();
@@ -39,10 +39,6 @@ $(document).ready(function () {
 	      var orderPrice=$(this).val()*$("#price").text();
 	      $("#orderPrice").text(orderPrice);
 	   }); //trQuantity change
-	   
-	   $("#commentDelete").on("click",".commentInfo a",function(){
-	      alert(1);
-	   });//commentDelete
 	   
 	   /*판매 음식 삭제하기*/
 	   $("#deleteFood").click(function() {
@@ -83,35 +79,41 @@ $(document).ready(function () {
 	      }
 	   }); //click
 
-
-	   $("#loginAndOrder").click(function() {
-	      if(confirm("로그인 페이지로 이동합니다."))
-	         location.href="${pageContext.request.contextPath}/loginView.do";
-	   }); //loginAndOrder click
-
-	   commentList(); 
+	   commentList(); //실행시 댓글 목록 불러옴_정훈
 	});//ready
 	
-	//댓글달기!		
+	/*질문 댓글 작성하기*/		
 	var foodSellNo = "${foodSell.foodSellNo}"; //게시글 번호
-	 
+
 	$("[name=commentInsertBtn]").click(function(){ //댓글 등록 버튼 클릭시
+		alert(1);
+
 		var insertData = $("[name=commentInsertForm]").serialize(); //commentInsertForm의 내용을 가져옴
 		commentInsert(insertData); //Insert 함수호출(아래)
 	});
-		$("#loginAndOrder").click(function() {
-			if(confirm("로그인 페이지로 이동합니다."))
-				location.href="${pageContext.request.contextPath}/loginView.do";
-		}); //loginAndOrder click
-
-		//댓글 목록 
-		function commentList(){
-		    $.ajax({
-		        url : "${pageContext.request.contextPath}/commentList.do",
-		        type : "get",
-		        data : {"foodSellNo":foodSellNo},
-		        success : function(data){
-		            var a =""; 
+	//댓글 등록
+	function commentInsert(insertData){
+		 $.ajax({
+	        type : "get",
+	        url : "${pageContext.request.contextPath}/commentInsert.do",
+	        data : insertData,
+	        success : function(data){
+	        	  if(data== 1) {
+	                commentList(); //댓글 작성 후 댓글 목록 reload
+	                $("[name=content]").val("");
+	             }//if
+	        }//success
+	    }); //ajax
+	}//function
+	
+	//댓글 목록 
+	function commentList(){
+		   $.ajax({
+		       url : "${pageContext.request.contextPath}/commentList.do",
+		       type : "get",
+		       data : {"foodSellNo":foodSellNo},
+		       success : function(data){
+		          var a =""; 
 		            $.each(data, function(key, value){ 
 		            	   	a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
 		                	a += '<div class="commentInfo'+value.questNo+'">'+'댓글번호 : '+value.questNo+' / 작성자 : '+value.memId;
@@ -120,33 +122,16 @@ $(document).ready(function () {
 		                    a += '<div class="commentContent'+value.questNo+'"> <p> 질문내용 : '+value.questContent +'</p></div>';
 		                    a += '<a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a>';
 		                    a += '<div class="commentAnswerRe'+value.questNo+'">'+'</div>';
-		                   	for(var i=0; i<value.answerList.length; i++)
-		                    	a += '<div class="commentAnswer'+value.questNo+'"> <p> 답변 : '+value.answerList[i].ansContent +'</p>'+'</div>';
 		                	a += '</div></div>';
 		                    	
 		            });
-		            $(".commentList").html(a);
-		        }
+		           $(".commentList").html(a);
+		      }
 		    });
-		}
-		//댓글 등록
-		
-		function commentInsert(insertData){
-			 $.ajax({
-		        type : "get",
-		        url : "${pageContext.request.contextPath}/commentInsert.do",
-		        data : insertData,
-		        success : function(data){
-		        	  if(data== 1) {
-		                commentList(); //댓글 작성 후 댓글 목록 reload
-		                $("[name=content]").val("");
-		             }//if
-		        }//success
-		    }); //ajax
-		}//function
+	}
 		
 		//질문 답변 달기 - 답변 달기 내용 출력을 input 폼으로 변경 
-		function commentAnswerReply(questNo, memId){
+		/* function commentAnswerReply(questNo, memId){
 		    var a ="";
 		    
 		    a += '<div class="input-group">';
@@ -158,10 +143,10 @@ $(document).ready(function () {
 		    
 		    $('.commentAnswerRe'+questNo).html(a);
 		    
-		}
+		} */
 		
 		//질문 답변 달기
-		function commentAnswerReplyProc(questNo){
+		/* function commentAnswerReplyProc(questNo){
 			var answer=$("#answerContent").val();
 			var memId=$("#memId2").val();
 			var questNo=$("#questNo").val();
@@ -183,11 +168,9 @@ $(document).ready(function () {
 	                  } 
 	            
 	         });//ajax   
-		}
+		} */
 	 
-
-
-		//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
+		/*댓글 수정 시 댓글 내용을 input폼으로 변경 - 아래 commentUpdateProc()호출*/ 
 		function commentUpdate(questNo, questContent){
 		    var a ="";
 		    
@@ -199,8 +182,7 @@ $(document).ready(function () {
 		    $('.commentContent'+questNo).html(a);
 		    
 		}
-		 
-		//댓글 수정
+		/*댓글 수정*/
 		function commentUpdateProc(questNo){
 			var updateContent = $("[name=content_"+questNo+"]").val();
 		    $.ajax({
@@ -209,22 +191,22 @@ $(document).ready(function () {
 		        data : {"content" : updateContent, "questNo" : questNo},
 		        success : function(data){
 		            if(data == 1) 
-		            	commentList(questNo); //댓글 수정후 목록 출력 
+		            	commentList(questNo); //댓글 수정후 목록 출력 함수 호출
 		        }
 		    });
 		}
-	//댓글 삭제 
+	/*댓글 삭제*/ 
 		function commentDelete(questNo){
 			$.ajax({
 		        url : "${pageContext.request.contextPath}/commentDelete.do?questNo="+questNo,
 		        type : "get",
 		        success : function(data){
 		            if(data == 1) 
-		            commentList(foodSellNo); //댓글 삭제후 목록 출력 
+		            commentList(foodSellNo); //댓글 삭제후 목록 출력 함수 호출
 		        }
 		    });
 		}
-	
+		/*구매 조건 체크 함수*/
 		function orderFoodConfirm(){ //윤주
 		      var isLogin = $("#checkId").val();
 		      var leftQuantity=$("#leftQuantity").text();
@@ -245,9 +227,202 @@ $(document).ready(function () {
 		   }
 </script>
 
-
+<!-- 수정 후 코드입니다. -->
 
 <section id="recent-list" class="agency" style="margin-top: 150px">
+<div class="container" style="width: 100%">
+<div class="row">
+   <div class="col-sm-1"></div><!-- col-sm-1 -->
+   <div class="col-sm-10">
+   <div class="blog-list blog-detail">
+      <h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매음식 상세정보</h3>
+      <div class="form-large grey-color">
+      <div class="row">
+      <div class="col-xs-6" style="float: left" class="row">
+         <img style="padding-top: 48px" width="350px" height="250px" src="${pageContext.request.contextPath}/resources/images/${foodSell.foodMainImg}">
+      </div>
+      <div class="col-xs-6" style="float: right" class="row">
+         <div class="row">
+            <h3 class="title-form"><i class="" style="margin-right: 5px"></i>${foodSell.foodName} 평점${foodSell.foodScore}</h3>
+         </div>
+         <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;">
+            <table class="table" style="font-size: 13px">
+               <tr>
+                  <th style="width:25%; padding: 4px; border-top: 0px;">음식평점</th>
+                  <td colspan="3">${foodSell.foodScore}</td>
+               </tr>
+               <tr>
+                  <th>예약마감일</th>
+                  <td>${foodSell.closeDate}</td>
+               </tr>
+               <tr>
+                  <th>거래일</th>
+                  <td>${foodSell.trDate}</td>
+               </tr>
+               <tr>
+                  <th>가격</th>
+                  <td><span id="price">${foodSell.price}</span> 원</td>
+               </tr>
+               <tr>
+                  <th>양(개당)</th>
+                  <td>${foodSell.unit}</td>
+               </tr>
+               <tr>
+                  <th>준비수량</th>
+                  <td><span id="preQuantity">${foodSell.preQuantity}</span>&nbsp;(${foodSell.unit })</td>
+               </tr>
+               <tr>
+                  <th>남은수량</th>
+                  <td><span id="leftQuantity">${leftQuantity}</span>&nbsp;(${foodSell.unit })</td>
+               </tr>
+               <tr>
+                  <th>거래장소</th>
+                  <td colspan="3">${foodSell.loc}</td>
+               </tr>
+               <tr>
+                  <th>음식소개</th>
+                  <td colspan="3">${foodSell.foodDe}</td>
+               </tr>
+               <tr>
+                  <th>판매추가정보</th>
+                  <td colspan="3">${foodSell.sellDetail}</td>
+               </tr>                  
+            </table> 
+         </div>
+      </div><!-- col-xs-6 -->
+      </div><!-- row -->
+      
+      
+      <form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()">
+               <div class="row"> 
+                  <input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
+                  <input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
+               <c:choose>
+               <c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
+                <div class="col-sm-2" style="text-align: right">구매수량:</div>
+                 <div class="col-sm-2">
+                    <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px" required="required"/>
+                  </div>
+               
+                  <sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
+                      <input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
+                   </sec:authorize>
+            
+                   
+                     <label class="control-label" for="거래가격">거래가격:
+                  <span id="orderPrice"></span>
+                  </label>
+               </c:when>
+               </c:choose>
+               </div> <!-- row -->
+                   
+                   <div class="row" align="center">
+                      <c:choose>
+                         <c:when test="${foodSell.memId!=mvo.memId}">
+                           <input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+                         </c:when>
+                        <c:otherwise>
+                           <input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
+                           <input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
+                        </c:otherwise>                   
+                      </c:choose>
+               </div>
+        </form>
+      </div> <!-- form-large grey-color -->
+     
+     <!-- 후기 작성 부분 입니다_윤주 -->
+      <div class="row">
+      <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i>후기</h4>
+      <c:choose>
+		<c:when test="${fn:length(rlist.list)==0}">
+			<h5>작성된 후기가 없습니다</h5>
+		</c:when>
+		<c:otherwise>
+			<table class="table table-hover" style="text-align: center;font-size: 12px;">
+				<thead>
+					<tr class="tr_visible">
+						<td>NO</td>
+						<td>별점</td>
+						<td>내용</td>
+						<td>작성자</td>
+						<td>날짜</td> 
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${rlist.list }" var="r">
+					<tr>
+						<td>${r.revNo }</td>
+						<td align="left">
+							<span class="star_rating">  <!-- 별점 표현 -->
+	      						<c:forEach begin="1" end="${r.score}">
+	    							<a class="on">★</a>
+								</c:forEach>
+       						</span>
+						${r.score }
+						</td>
+						<td>${r.revContent }</td>
+						<td>${r.memId }</td>
+						<td>${r.revPostdate }</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+		</c:otherwise>
+	</c:choose>
+</div><!--row-->
+<!-- 후기 페이징입니다_윤주 -->
+<c:set value="${rlist.pb }" var="pb"/>
+<div class="row center-block pagination"  align="center">
+	 <ul class="pagination">
+	 <c:if test="${pb.previousPageGroup}">
+		<li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${sellfood.foodSellNo }&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+	 </c:if>
+	 <c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
+	  	<c:choose>
+	  		<c:when test="${pageNum==pb.nowPage}">
+			    <li class="active"><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
+	  		</c:when>
+	  		<c:otherwise>
+			   <li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
+	  		</c:otherwise>
+	  	</c:choose>
+	 </c:forEach>
+	<c:if test="${pb.nextPageGroup}">
+		<li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a></li>
+	</c:if>
+	</ul>
+</div><!-- row center-block pagination 후기 페이징 끝_윤주 -->
+      
+      <hr>
+<!--  댓글  -->
+      <div class="row">
+        <label for="content">Q&A</label>
+        <form name="commentInsertForm">
+            <div class="input-group">
+               <input type="hidden" name="foodSellNo" value="${foodSell.foodSellNo}"/>
+               <input type="hidden" name="memId" value="${mvo.memId}"/>
+               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+               <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+               </span>
+              </div>
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="commentList"></div>
+    </div>
+      
+   </div><!-- blog-list blog-detail -->
+   </div> <!-- col-sm-10 -->
+   <div class="col-sm-1"></div><!-- col-sm-1 -->
+</div><!-- row -->   
+</div> <!-- container -->
+</section> <!-- section  -->
+
+
+<!-- 수정 전 코드입니다. -->
+<%-- <section id="recent-list" class="agency" style="margin-top: 150px">
 <div id="page-container">
 	<div class="container">
 		<div class="row">
@@ -356,11 +531,11 @@ $(document).ready(function () {
 	<div class="container">
 		<div class="row">
 				<c:choose>
-				<c:when test="${fn:length(rlist.list)==0}">
-				<h4>작성된 후기가 없습니다</h4>
-				</c:when>
-				<c:otherwise>
-			<table class="table table-hover" style="text-align: center;font-size: 12px;">
+					<c:when test="${fn:length(rlist.list)==0}">
+						<h4>작성된 후기가 없습니다</h4>
+					</c:when>
+					<c:otherwise>
+					<table class="table table-hover" style="text-align: center;font-size: 12px;">
 					<thead>
 					<tr class="tr_visible">
 						<td>NO</td>
@@ -371,7 +546,7 @@ $(document).ready(function () {
 					</tr>
 					</thead>
 					<tbody>
-				<c:forEach items="${rlist.list }" var="r">
+					<c:forEach items="${rlist.list }" var="r">
 					<tr>
 						<td>${r.revNo }</td>
 						<td align="left">
@@ -386,12 +561,12 @@ $(document).ready(function () {
 						<td>${r.memId }</td>
 						<td>${r.revPostdate }</td>
 					</tr>
-				</c:forEach>
+					</c:forEach>
 					</tbody>
-			</table>
-				</c:otherwise>
+					</table>
+					</c:otherwise>
 				</c:choose>
-		</div>
+			</div><!--row-->
 		<c:set value="${rlist.pb }" var="pb"/>
 	<div class="row center-block pagination"  align="center">
 	  <ul class="pagination">
@@ -442,3 +617,4 @@ $(document).ready(function () {
 
 </section>	<!-- recent-list -->			
 
+ --%>
