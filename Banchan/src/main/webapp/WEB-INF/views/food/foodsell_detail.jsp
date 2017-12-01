@@ -22,6 +22,27 @@
 .home-top{
 	margin-top: 100px;
 }
+
+.pagination {
+    display: inline-block;
+    text-align: center;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    font-size: 13px;
+}
+
+.pagination a.active {
+    background-color: #000;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
 </style>     
 
 <script type="text/javascript">
@@ -235,17 +256,21 @@ $(document).ready(function () {
 		         return confirm("구매하시겠습니까?");
 		      return false; 
 		   }
+function returnList(){
+	location.href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${foodSell.memId}";
+	
+}
 </script>
 
 <!-- 수정 후 코드입니다. -->
 
-<section id="recent-list" class="agency" style="margin-top: 150px">
+<section id="recent-list" class="agency" style="margin-top: 100px">
 <div class="container" style="width: 100%">
 <div class="row">
    <div class="col-sm-1"></div><!-- col-sm-1 -->
    <div class="col-sm-10">
    <div class="blog-list blog-detail">
-      <h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매음식 상세정보</h3>
+      <h3 class="title-form"><i class="fa fa-search" aria-hidden="true" style="margin-right: 5px"></i>판매음식 상세정보</h3>
       <div class="form-large grey-color">
       <div class="row">
       <div class="col-xs-6" style="float: left" class="row">
@@ -258,11 +283,7 @@ $(document).ready(function () {
          <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;">
             <table class="table" style="font-size: 13px">
                <tr>
-                  <th style="width:25%; padding: 4px; border-top: 0px;">음식평점</th>
-                  <td colspan="3">${foodSell.foodScore}</td>
-               </tr>
-               <tr>
-                  <th>예약마감일</th>
+                  <th style="width:25%; padding: 4px; border-top: 0px;">예약마감일</th>
                   <td>${foodSell.closeDate}</td>
                </tr>
                <tr>
@@ -304,45 +325,45 @@ $(document).ready(function () {
       
       
       <form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()">
-               <div class="row"> 
-                  <input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
-                  <input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
-               <c:choose>
-               <c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
-                <div class="col-sm-2" style="text-align: right">구매수량:</div>
-                 <div class="col-sm-2">
-                    <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px" required="required"/>
-                  </div>
-               
-                  <sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
-                      <input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
-                   </sec:authorize>
-            
-                   
-                     <label class="control-label" for="거래가격">거래가격:
-                  <span id="orderPrice"></span>
-                  </label>
-               </c:when>
-               </c:choose>
-               </div> <!-- row -->
-                   
-                   <div class="row" align="center">
-                      <c:choose>
-                         <c:when test="${foodSell.memId!=mvo.memId}">
-                           <input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
-                         </c:when>
-                        <c:otherwise>
-                           <input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
-                           <input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
-                        </c:otherwise>                   
-                      </c:choose>
-               </div>
-        </form>
+                <div class="row"> 
+                   <input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
+                   <input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
+                <c:choose>
+                <c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
+                 <div class="col-sm-2" style="text-align: right">구매수량:</div>
+                  <div class="col-sm-2">
+                     <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px" required="required"/>
+                   </div>
+                
+                   <sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
+                       <input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
+                    </sec:authorize>
+             
+                    
+                      <label class="control-label" for="거래가격">거래가격:
+                   <span id="orderPrice"></span>
+                   </label>
+                </c:when>
+                </c:choose>
+                </div> <!-- row -->
+                    
+                    <div class="row" align="center">
+                       <c:choose>
+                          <c:when test="${foodSell.memId!=mvo.memId}">
+                            <input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+                          </c:when>
+                         <c:otherwise>
+                            <input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
+                            <input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
+                         </c:otherwise>                   
+                       </c:choose>
+                </div>
+         </form>
       </div> <!-- form-large grey-color -->
-     
-     <!-- 후기 작성 부분 입니다_윤주 -->
-      <div class="row">
-      <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i>후기</h4>
+     <a href="#" onclick="returnList()" class="btn btn-reverse button-form" style="margin-top: 10px; float: right;">목록으로</a>
+     <!-- 후기 작성 부분 입니다_윤주 --> 
+      <div class="row" style="margin-top: 25px; width: 100%;">
+      <h4><i class="fa fa-pencil-square-o" aria-hidden="true" style="margin-left: 2%"></i>후기</h4>
       <c:choose>
 		<c:when test="${fn:length(rlist.list)==0}">
 			<h5>작성된 후기가 없습니다</h5>
@@ -382,30 +403,32 @@ $(document).ready(function () {
 </div><!--후기 작성 리스트 row-->
 <!-- 후기 페이징입니다_윤주 -->
 <c:set value="${rlist.pb }" var="pb"/>
-<div class="row center-block pagination"  align="center">
-	 <ul class="pagination">
-	 <c:if test="${pb.previousPageGroup}">
-		<li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${sellfood.foodSellNo }&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
-	 </c:if>
-	 <c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
-	  	<c:choose>
-	  		<c:when test="${pageNum==pb.nowPage}">
-			    <li class="active"><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
-	  		</c:when>
-	  		<c:otherwise>
-			   <li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
-	  		</c:otherwise>
-	  	</c:choose>
-	 </c:forEach>
-	<c:if test="${pb.nextPageGroup}">
-		<li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a></li>
-	</c:if>
-	</ul>
+<div class="row" style="text-align: center;">
+	<div class="pageginationContainer">
+		<div class="pagination">
+			 <c:if test="${pb.previousPageGroup}">
+				<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${sellfood.foodSellNo }&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
+			 </c:if>
+			 <c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
+			  	<c:choose>
+			  		<c:when test="${pageNum==pb.nowPage}">
+					  <a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}" class="active">${pageNum}</a>
+			  		</c:when>
+			  		<c:otherwise>
+					  <a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}">${pageNum}</a>
+			  		</c:otherwise>
+			  	</c:choose>
+			 </c:forEach>
+			<c:if test="${pb.nextPageGroup}">
+				<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a>
+			</c:if>
+	</div>
+	</div>
 </div><!-- row center-block pagination 후기 페이징 끝_윤주 -->
       
       <hr>
 <!--  댓글  -->
-      <div class="row">
+     <%--  <div class="row">
         <label for="content">Q&A</label>
         <form name="commentInsertForm">
             <div class="input-group">
@@ -422,210 +445,11 @@ $(document).ready(function () {
     
     <div class="row">
         <div class="commentList"></div>
-    </div>
-      
+    </div> --%>
+<!-- 댓글 끝 -->      
    </div><!-- blog-list blog-detail -->
    </div> <!-- col-sm-10 -->
    <div class="col-sm-1"></div><!-- col-sm-1 -->
 </div><!-- row -->   
 </div> <!-- container -->
 </section> <!-- section  -->
-
-
-<!-- 수정 전 코드입니다. -->
-<%-- <section id="recent-list" class="agency" style="margin-top: 150px">
-<div id="page-container">
-	<div class="container">
-		<div class="row">
-			<h2>판매상세정보</h2>
-		</div>
-		<div class="row">
-			<div class="col-md-3">
-				<div class="agent-box-card grey">
-					<div class="image-content">
-						<div class="image image-fill">
-							<img alt="Image Sample" src="${pageContext.request.contextPath}/resources/images/${foodSell.foodMainImg}">
-						</div>						
-					</div>
-				</div>
-			</div>
-			<div class="col-md-9">
-				<h1 class="name">${foodSell.foodName}</h1>
-				<div class="row">
-				<div class="col-md-11">
-				<table class="table">
-					<tr>
-						<th>음식평점</th>
-						<td colspan="3">${foodSell.foodScore}</td>
-					</tr>
-					<tr>
-						<th>예약마감일</th>
-						<td>${foodSell.closeDate}</td>
-						<th>거래일</th>
-						<td>${foodSell.trDate}</td>
-					</tr>
-					<tr>
-						<th>가격</th>
-						<td><span id="price">${foodSell.price}</span> 원</td>
-						<th>양(개당)</th>
-						<td>${foodSell.unit}</td>
-					</tr>
-					<tr>
-						<th>준비수량</th>
-						<td><span id="preQuantity">${foodSell.preQuantity}</span>&nbsp;(${foodSell.unit })</td>
-						<th>남은수량</th>
-						<td><span id="leftQuantity">${leftQuantity}</span>&nbsp;(${foodSell.unit })</td>
-					</tr>
-					<tr>
-						<th>거래장소</th>
-						<td colspan="3">${foodSell.loc}</td>
-					</tr>
-					<tr>
-						<th>음식소개</th>
-						<td colspan="3">${foodSell.foodDe}</td>
-					</tr>
-					<tr>
-						<th>판매추가정보</th>
-						<td colspan="3">${foodSell.sellDetail}</td>
-					</tr>						
-				</table>
-				</div> <!-- col-md-10 --> 
-				</div> <!-- row  -->
-				<div class="row col-md-11">
-				<hr>
-				
-					<form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()" >
-						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
-						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
-					<div class="row"> 
-						<input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
-						<input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
-					<c:choose>
-					<c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
-					 <div class="col-sm-2" style="text-align: right">구매수량:</div>
-					  <div class="col-sm-2">
-				        <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px"/>
-				      </div>
-					
-						<sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
- 							<input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
- 						</sec:authorize>
-				
- 						
-				      	<label class="control-label" for="거래가격">거래가격:
-						<span id="orderPrice"></span>
-						</label>
-					</c:when>
-					</c:choose>
-					</div> <!-- row -->
- 						
- 						<div class="row" align="center">
-	 						<c:choose>
-		 						<c:when test="${foodSell.memId!=mvo.memId}">
-									<input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
-		 						</c:when>
-								<c:otherwise>
-									<input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
-									<input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
-								</c:otherwise> 						
-	 						</c:choose>
-						</div>
-					</form>
-				</div>
-			</div> <!-- col-md-9 -->	
-		</div> <!-- row -->
-		
-	</div> <!-- container  -->
-</div> <!-- page-container -->
-<br><br>
-<hr>
-	<div class="container">
-		<div class="row">
-				<c:choose>
-					<c:when test="${fn:length(rlist.list)==0}">
-						<h4>작성된 후기가 없습니다</h4>
-					</c:when>
-					<c:otherwise>
-					<table class="table table-hover" style="text-align: center;font-size: 12px;">
-					<thead>
-					<tr class="tr_visible">
-						<td>NO</td>
-						<td>별점</td>
-						<td>내용</td>
-						<td>작성자</td>
-						<td>날짜</td> 
-					</tr>
-					</thead>
-					<tbody>
-					<c:forEach items="${rlist.list }" var="r">
-					<tr>
-						<td>${r.revNo }</td>
-						<td align="left">
-								<span class="star_rating">  <!-- 별점 표현 -->
-      							<c:forEach begin="1" end="${r.score}">
-    							<a class="on">★</a>
-								</c:forEach>
-       							</span>
-						${r.score }
-						</td>
-						<td>${r.revContent }</td>
-						<td>${r.memId }</td>
-						<td>${r.revPostdate }</td>
-					</tr>
-					</c:forEach>
-					</tbody>
-					</table>
-					</c:otherwise>
-				</c:choose>
-			</div><!--row-->
-		<c:set value="${rlist.pb }" var="pb"/>
-	<div class="row center-block pagination"  align="center">
-	  <ul class="pagination">
-		<c:if test="${pb.previousPageGroup}">
-		    <li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${sellfood.foodSellNo }&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
-		</c:if>
-
-	  	<c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
-	  		<c:choose>
-	  			<c:when test="${pageNum==pb.nowPage}">
-			    	<li class="active"><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
-	  			</c:when>
-	  			<c:otherwise>
-			    	<li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pageNum}">${pageNum}</a></li>
-	  			</c:otherwise>
-	  		</c:choose>
-	  	</c:forEach>
-
-		<c:if test="${pb.nextPageGroup}">
-		    <li><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a></li>
-		</c:if>
-	  </ul>
-	</div>
-	</div>
-	
-	
-
-
-<hr>
-<!--  댓글  -->
-    <div class="container">
-        <label for="content">Q&A</label>
-        <form name="commentInsertForm">
-            <div class="input-group">
-               <input type="hidden" name="foodSellNo" value="${foodSell.foodSellNo}"/>
-               <input type="hidden" name="memId" value="${mvo.memId}"/>
-               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
-               <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
-               </span>
-              </div>
-        </form>
-    </div>
-    
-    <div class="container">
-        <div class="commentList"></div>
-    </div>
-
-</section>	<!-- recent-list -->			
-
- --%>

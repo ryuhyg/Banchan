@@ -2,7 +2,6 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
 <style>
 .pagination {
     display: inline-block;
@@ -36,7 +35,7 @@
 
 			<div class="col-sm-10">
 				<div class="blog-list blog-detail">
-					<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>음식상세보기</h3>
+					<h3 class="title-form"><i class="fa fa-search" aria-hidden="true" style="margin-right: 5px"></i>음식상세보기</h3>
 					<%-- <h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>${food.foodName}</h3> --%>
 					<form class="form-large grey-color">
 						<sec:csrfInput />
@@ -67,7 +66,7 @@
                                   </c:forEach> 
                                     </span>
 							</td>
-								<td><label for="date" style="margin-top: 5px;"><i class="fa fa-ellipsis-h"style="margin-right: 5px"></i>별점 &nbsp; : &nbsp; ${food.foodScore}</label></td>
+								<td><label for="date" style="margin-top: 5px;"><i class="fa fa-star"style="margin-right: 5px"></i>별점 &nbsp; : &nbsp; ${food.foodScore}</label></td>
 							</tr>
 							</tbody>
 							</table>
@@ -82,17 +81,19 @@
 							</div>
 						</div>
 					</form>
-				
+					<div align="right">
+					<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${food.memId}" class="btn btn-reverse button-form" style="margin-top: 10px;">목록으로</a>
+					</div>
 					
 					<div class="container" style="width: 100%;">
-					<h3 class="title-form"><i class="icon fa fa-comment" style="margin-top: 30px"></i>후기</h3> 
+					<h3 class="title-form"><i class="fa fa-pencil-square-o" aria-hidden="true" style="margin-right:5px; margin-top: 30px"></i>후기</h3> 
 					<c:choose>
 					<c:when test="${fn:length(rlist.list)==0}">
 					<br><br><h4 style="text-align: center;font-weight: bold">후기가 없습니다.</h4>
 					</c:when>
 					<c:otherwise>
 					<table class="table table-hover"  style="text-align: center;font-size: 12px;margin-top: 10px"> 
-						<thead>
+						<thead> 
 						<tr class="tr_visible">
 							<td>NO</td>
 							<td>별점</td>
@@ -127,11 +128,10 @@
 			<c:set value="${rlist.pb }" var="pb"/>
 			<div class="row" style="text-align: center;">
 			<div class="pageginationContainer">
-			<div class="pagination">
+				<div class="pagination">
 					<c:if test="${pb.previousPageGroup}">
 					    <a href="${pageContext.request.contextPath}/foodDetailView.do?foodNo=${food.foodNo}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
 					</c:if>
-			
 				  	<c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
 				  		<c:choose>
 				  			<c:when test="${pageNum==pb.nowPage}">
@@ -142,7 +142,6 @@
 				  			</c:otherwise>
 				  		</c:choose>
 				  	</c:forEach>
-				  	
 					<c:if test="${pb.nextPageGroup}">
 					    <a href="${pageContext.request.contextPath}/foodDetailView.do?foodNo=${food.foodNo}&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a>
 					</c:if>

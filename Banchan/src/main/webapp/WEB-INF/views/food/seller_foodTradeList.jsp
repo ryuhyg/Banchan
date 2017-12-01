@@ -76,7 +76,7 @@ table, th, td{
 	<div class="col-md-1"></div>
 	<div class="col-md-10" >
 		<div class="blog-list blog-detail">
-		 <h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>거래요청내역</h3>
+		 <h3 class="title-form"><i class="icon fa fa-exchange" style="margin-right: 5px"></i>거래요청내역</h3>
 				 <div class="container" style="width: 100%;">
 				 <div class="form-large grey-color"> 
 				 <div class="row">
@@ -131,12 +131,18 @@ table, th, td{
 					                  <td colspan="3">${foodSell.sellDetail}</td>
 					               </tr>                  
 					            </table> 
+					            
 					         </div> <!-- row  -->
 						 
 				      </div><!-- col-xs-6 -->
 		     	</div> <!--form-large grey-color  --> 
 				</div><!--  <div class="row"> -->
-						<div class="row" style="margin-top: 20px">  
+				<c:if test="${!empty lvo.list}">
+						<div align="right">
+						<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}" class="btn btn-reverse button-form" style="margin-top: 10px;">돌아가기</a>
+						</div>
+				</c:if>
+				<div class="row" style="margin-top: 20px">  
 				<table class="table table-hover" id="tradeList" style="text-align: center;font-size: 12px;">
 					<c:choose>
 					<c:when test="${!empty lvo.list}">
@@ -167,6 +173,9 @@ table, th, td{
 					<br>
 					<br>
 						<div style="font-weight: bold;text-align: center;">판매 상품에 대한 거래 내역이 존재하지 않습니다</div>
+						<div align="center">
+						<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}" class="btn btn-reverse button-form" style="margin-top: 10px;">돌아가기</a>
+						</div>
 					</c:otherwise>
 					</c:choose>
 				</table>

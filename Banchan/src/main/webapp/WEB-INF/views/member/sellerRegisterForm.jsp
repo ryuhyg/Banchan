@@ -19,7 +19,6 @@ function getimagereview(html, $target) {
 $(document).ready(function(){
 	$("#registerData").click(function(){
 		var data=$("#dataCheck").val();
-		alert(data);
 		if(data.length > 90 || data ==""){
 			alert("판매자 소개는 80자 이내로 입력해주세요!");
 			return false;

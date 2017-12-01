@@ -250,7 +250,6 @@ public class FoodController {
 	public String foodDetailView(String foodNo, String pageNo, Model model) {
 		FoodVO food = foodService.getFoodMemInfo(foodNo);
 		model.addAttribute("food", food);
-		
 		// 지원 후기 리스트 추가
 		model.addAttribute("rlist", feedbackService.getReviewListByFoodNo(foodNo, pageNo));
 		

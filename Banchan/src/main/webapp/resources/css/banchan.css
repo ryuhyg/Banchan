@@ -41,6 +41,9 @@
 .home-top{
    margin-top: 100px;
 }
+.nexthome{
+	margin-top: -50px;
+}
 
 /* 검색창  */
 .searchBtn{

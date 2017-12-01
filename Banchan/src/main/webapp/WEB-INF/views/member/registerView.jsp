@@ -284,6 +284,13 @@
 			yearRange: "-100:+0", 
 		});
 	});//ready
+function returnHome(){
+		var flag = confirm("회원가입을 취소하시겠습니까?");
+		if(flag)
+			location.href="${pageContext.request.contextPath}/home.do";
+		else
+			history.go(0);
+}
 </script>
     
     
@@ -413,7 +420,7 @@
 								<div class="row">
 									<div align="center">
 									<input  type="submit" class="btn btn-reverse button-form"  value="가입하기">
-									<button type="button" class="btn btn-default button-form"  id="returnBtn">돌아가기</button>
+									<a href="#" onclick="returnHome()" class="btn btn-default button-form"  id="returnBtn">돌아가기</a>
 									</div>
 								</div>
 								

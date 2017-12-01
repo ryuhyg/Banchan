@@ -24,10 +24,11 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu.css">                                     <!-- Include Menu stylesheet -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/custom.css">                                   <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/media-query.css">                              <!-- Media Query -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/banchan.css"> 								 <!-- 프로젝트 부트스트랩 -->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/banchan.css"> 				 <!-- 프로젝트 부트스트랩 -->
     <link rel=”stylesheet” href=”http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css“>  					 <!-- 아이콘 부트스트랩 -->
 	<!-- Use Iconifyer to generate all the favicons and touch icons you need: http://iconifier.net -->
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon/icon.png" type="image/x-icon" /><!-- 아이콘 --> 
+	<link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
 	
 	<script src="${pageContext.request.contextPath}/resources/script/modernizr.min.js"></script>	
 
@@ -70,20 +71,20 @@
 </div>
 
 
-	<script	src="${pageContext.request.contextPath}/resources/script/jquery.min.js"></script>		<!-- jQuery	(necessary for Bootstrap's JavaScript plugins) -->
-	<script	src="${pageContext.request.contextPath}/resources/script/jquery-ui.min.js"></script>		<!-- jQuery	UI is a	curated	set	of user	interface interactions,	effects, widgets, and themes -->
-	<script	src="${pageContext.request.contextPath}/resources/script/bootstrap.min.js"></script>		<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script	src="${pageContext.request.contextPath}/resources/script/jquery.min.js"></script>									<!-- jQuery	(necessary for Bootstrap's JavaScript plugins) -->
+	<script	src="${pageContext.request.contextPath}/resources/script/jquery-ui.min.js"></script>								<!-- jQuery	UI is a	curated	set	of user	interface interactions,	effects, widgets, and themes -->
+	<script	src="${pageContext.request.contextPath}/resources/script/bootstrap.min.js"></script>								<!-- Include all compiled plugins (below), or include individual files as needed -->
 
 	<script	src="${pageContext.request.contextPath}/resources/script/vendor/mmenu/mmenu.min.all.js"></script>					<!-- Menu Responsive -->
 	<script	src="${pageContext.request.contextPath}/resources/script/vendor/animation-wow/wow.min.js"></script>					<!-- Animate Script	-->
-	<script src="${pageContext.request.contextPath}/resources/script/vendor/labelauty/labelauty.min.js"></script>					<!-- Checkbox Script -->
-	<script	src="${pageContext.request.contextPath}/resources/script/vendor/parallax/parallax.min.js"></script>						<!-- Parallax Script -->
+	<script src="${pageContext.request.contextPath}/resources/script/vendor/labelauty/labelauty.min.js"></script>				<!-- Checkbox Script -->
+	<script	src="${pageContext.request.contextPath}/resources/script/vendor/parallax/parallax.min.js"></script>					<!-- Parallax Script -->
 	<script	src="${pageContext.request.contextPath}/resources/script/vendor/images-fill/imagesloaded.min.js"></script>			<!-- Loaded	image with ImageFill -->
-	<script src="${pageContext.request.contextPath}/resources/script/vendor/images-fill/imagefill.min.js"></script>					<!-- ImageFill Script -->
+	<script src="${pageContext.request.contextPath}/resources/script/vendor/images-fill/imagefill.min.js"></script>				<!-- ImageFill Script -->
 	<script	src="${pageContext.request.contextPath}/resources/script/vendor/easydropdown/jquery.easydropdown.min.js"></script>	<!-- Select	list Script	-->
 	
 	<script	src="${pageContext.request.contextPath}/resources/script/vendor/carousel/responsiveCarousel.min.js"></script>		<!-- Carousel Script -->
-	<script	src="${pageContext.request.contextPath}/resources/script/vendor/noui-slider/nouislider.all.min.js"></script>				<!-- Range Slider -->
+	<script	src="${pageContext.request.contextPath}/resources/script/vendor/noui-slider/nouislider.all.min.js"></script>		<!-- Range Slider -->
 	<script	src="${pageContext.request.contextPath}/resources/script/vendor/skill-bars/custom.js"></script>						<!-- Skill Bars	Script -->
 
 	<script	src="${pageContext.request.contextPath}/resources/script/custom.js"></script>		<!-- Custom	Script -->

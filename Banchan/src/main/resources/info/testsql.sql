@@ -76,8 +76,8 @@ select * from (
 
 where m.mem_id=s.mem_id and rownum <= 3 
 
-select * from ban_mem where mem_id='java2'
-update seller set seller_score='5' where mem_id='java2' 
+select * from ban_mem where mem_id='test'
+update seller set seller_score='5' where mem_id='test' 
 			
 
 

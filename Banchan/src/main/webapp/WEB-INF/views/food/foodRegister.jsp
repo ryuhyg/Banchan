@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<sec:authorize access="isAuthenticated()">
 <sec:authentication var="mvo" property="principal" />
+</sec:authorize>
 <script>
 
 function getimagereview(html, $target) {
@@ -45,7 +47,9 @@ function updateCheckForm(){
 		return false;
 	}
 }
-
+function returnList(){
+	location.href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}";
+}
 </script>
 <style>
 .btn btn-default
@@ -73,7 +77,7 @@ filter: alpha(opacity=0);
 }
 
 </style>
-<section id="recent-list" style="margin-top: 150px;">
+<section id="recent-list" style="margin-top: 100px;">
 <c:choose>
 <c:when test="${message!='ok'}">
 	<div class="container">
@@ -83,7 +87,7 @@ filter: alpha(opacity=0);
 			</div>
 			<!--  음식 등록 페이지 -->
 			<div class="col-sm-10">
-			<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>음식등록페이지</h3>
+			<h3 class="title-form"><i class="fa fa-pencil-square-o" aria-hidden="true" style="margin-right: 5px"></i>음식등록페이지</h3>
 				<div class="blog-list blog-detail">
 					<form class="form-large grey-color" action="foodRegister.do" method="post" enctype="multipart/form-data" onsubmit="return checkForm(this)">
 					<label>음식명 : &nbsp;
@@ -111,10 +115,11 @@ filter: alpha(opacity=0);
 						<div class="col-xs-7" style="float: right; margin-bottom: 50px;position: relative;bottom: 30px;" class="row">  
 							<i class="icon fa fa-pencil-square-o" style="margin-left: 12px;"><label style="margin-left: 5px; margin-bottom: 5px;">상세내용</label></i>
 							<textarea rows="10" cols="52" name="foodInfo" style="width: 100%; height: 100%;  resize: none;"  placeholder="내용을 입력하세요"></textarea>
-							<input style="float: right;" type="submit" class="btn btn-default" value="등록" >
-						</div>
-						</div>
-						</form>
+							<input style="margin-left: 77%" type="submit" class="btn btn-default" value="등록" >
+							<a href="#" onclick="returnList()" class="btn btn-reverse button-form" style="float: right;">취소</a>
+						</div>   
+						</div>    
+						</form> 
 				</div>
 			</div>
 			<div class="col-sm-1">
@@ -132,7 +137,7 @@ filter: alpha(opacity=0);
 			</div>
 			<!--  등록 음식 수정 페이지 -->
 				<div class="col-sm-10">
-				<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>음식수정페이지</h3>
+				<h3 class="title-form"><i class="icon fa fa-wrench" style="margin-right: 5px"></i>음식수정페이지</h3>
 				<div class="blog-list blog-detail">
 					<form class="form-large grey-color" action="updateRegFood.do" method="post" enctype="multipart/form-data" onsubmit="return updateCheckForm()">
 					<h2 class="title-form"><input type="text" name="foodname" value="${beFood.foodName}"></h2>
@@ -165,7 +170,8 @@ filter: alpha(opacity=0);
 						</div>
 							<div class="col-xs-7" style="float: right" class="row">
 							<textarea rows="10" cols="52" name="foodInfo" style="width: 100%; height: 100%;">${beFood.foodDe}</textarea>
-							<input type="submit" class="btn btn-default" value="수정" >	
+							<input style="margin-left: 77%" type="submit" class="btn btn-default" value="수정" >
+							<a href="#" onclick="returnList()" class="btn btn-reverse button-form" style="float: right;">취소</a>	
 						</div>
 						</div>
 						</form>

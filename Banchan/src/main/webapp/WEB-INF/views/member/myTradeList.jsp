@@ -17,6 +17,9 @@ table, th, td{
 			<c:choose>
 			<c:when test="${fn:length(tlist.list)==0}">
 				<br><br><h4 style="text-align: center;font-weight: bold">거래내역이 없습니다.</h4>
+				<div align="center">
+					<a href="${pageContext.request.contextPath}/home.do" class="btn btn-reverse button-form" style="margin-top: 10px;">돌아가기</a>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<table class="table table-hover"  style="text-align: center;font-size: 12px;">
@@ -62,9 +65,11 @@ table, th, td{
 						</c:if>
 						</tr>
 					</c:forEach>
-					</tbody>
+					</tbody>  
 				</table>
-				
+				<div align="right">
+					<a href="${pageContext.request.contextPath}/home.do" class="btn btn-reverse button-form" style="margin-right:14px; margin-top: 10px;">돌아가기</a>
+				</div> 
 				<div class="pageginationContainer" style="text-align: center;">
 			  	  <div class="pagination" >
 			  	  <c:set var="pb" value="${tlist.pb }"/>

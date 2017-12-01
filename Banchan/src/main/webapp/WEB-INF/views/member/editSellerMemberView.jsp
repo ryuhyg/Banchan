@@ -3,20 +3,18 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <%@ taglib prefix="sec"
  	uri="http://www.springframework.org/security/tags"%>
- <!-- services와 clusterer, drawing 라이브러리 불러오기 : MAP sdk -->
- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54&libraries=services,clusterer,drawing"></script>
- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54"></script>
+<!-- services와 clusterer, drawing 라이브러리 불러오기 : MAP sdk -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54"></script>  
  <!-- 우편번호 api -->
  <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-<!-- datepicker --> 
+ <!-- datepicker --> 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <script type="text/javascript">
- 	$(document)
- 			.ready(
- 					function() {
+ 	$(document).ready(function() {
  						var checkResultId = "";
  						var checkPassword = "";
  						var checkPasswordRe = "";
@@ -326,7 +324,13 @@
  			              reader.readAsDataURL(input.files[0]);
  			            }
  			        }
-
+ 			       function returnHome(){
+ 			  		var flag = confirm("회원수정을 취소하시겠습니까?");
+ 			  		if(flag)
+ 			  			location.href="${pageContext.request.contextPath}/home.do";
+ 			  		else
+ 			  			history.go(0);
+ 			  }
 	
  				
  				
@@ -382,7 +386,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
+ 								<label for="password"><i class="fa fa-key"
  									style="margin-right: 5px; padding-top: 10px;"></i>비밀번호</label> <input type="password" required="required"
  									name="pw" id="password" class="margin-bottom form-control" 
  									placeholder="비밀번호" autocomplete="off" style="margin: 0px;">
@@ -395,7 +399,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
+ 								<label for="password"><i class="fa fa-key"
  									style="margin-right: 5px; padding-top: 10px;"></i>비밀번호 확인</label> <input type="password" required="required"
  									id="passwordRe" class="margin-bottom form-control"
  									placeholder="비밀번호확인" autocomplete="off" style="margin: 0px;">
@@ -419,7 +423,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px; padding-top: 10px;"></i>생년월일</label> 
+ 								<label for="password"><i class="fa fa-calendar" style="margin-right: 5px; padding-top: 10px;"></i>생년월일</label> 
  								<input type="text" name="birth" id="birth" value="<sec:authentication property="principal.birth"/>" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" maxlength="10" class="margin-bottom form-control" required="required" style="margin: 0px;">	
  							</div>
  							<div  class="col-xs-2" style="margin-top: 32px;"> 				
@@ -429,7 +433,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
+ 								<label for="password"><i class="fa fa-phone"
  									style="margin-right: 5px; padding-top: 10px;"></i>전화번호 ( - 포함하여 입력해주세요! )</label>
  								<!-- <input type="text" name="tel"  class="margin-bottom form-control" placeholder="전화번호"> -->
  								<input class="margin-bottom form-control" type="tel" name="tel"
@@ -454,7 +458,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
+ 								<label for="password"><i class="fa fa-home"
  									style="margin-right: 5px; padding-top: 10px;"></i>주소</label>
  								<div id="map" style="width:auto; height: 200px;"></div>
  								<input class="btn btn-default" type="button" id="searchaddress"
@@ -471,7 +475,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8" style="margin-bottom: 10px">
- 								<label for="password"><i class="fa fa-ellipsis-h"
+ 								<label for="password"><i class="fa fa-question"
  									style="margin-right: 5px; padding-top: 10px;"></i>비밀번호 찾기 질문</label> <select
  									id="pwQnaSelect">
  									<option value="${pvo.pwQnaNo}"
@@ -498,10 +502,8 @@
  						<br>
  						<div class="row">
  							<div align="center">
- 								<input type="submit" class="btn btn-reverse button-form"
- 									value="수정하기">
- 								<button type="button" class="btn btn-default button-form"
- 									id="returnBtn">돌아가기</button>
+ 								<input type="submit" class="btn btn-reverse button-form" value="수정하기">
+ 								<a href="#" onclick="returnHome()" class="btn btn-default button-form"  id="returnBtn">돌아가기</a>
  							</div>
  						</div>
  

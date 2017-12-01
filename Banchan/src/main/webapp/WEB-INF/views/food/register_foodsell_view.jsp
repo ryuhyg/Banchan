@@ -54,16 +54,25 @@
 			$("#regForm").submit(function() {
 				return confirm("판매등록하시겠습니까?");				
 			});//submit
-	});//ready 
+	});//ready
+function returnList(){
+	var sellerId = $("#sellerId").val();
+	var flag = confirm("돌아가시겠습니까?");
+	if(flag)
+		location.href="${pageContext.request.contextPath}/sellerPageInfo.do?memId="+sellerId;
+	else
+		history(0);  	
+			
+}
 </script>	
 
 <section id="recent-list" style="margin-top: 150px">
 <div class="container">
 	<div class="col-sm-1"><!-- left --></div>
 	
-	<div class="col-sm-10" >
+	<div class="col-sm-10" > 
 	<div class="blog-list blog-detail">
-	<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매등록</h3>
+	<h3 class="title-form"><i class="icon fa fa-pencil-square-o" style="margin-right: 5px"></i>판매등록</h3>
 
 		<form  class="form-large grey-color" action="${pageContext.request.contextPath}/registerFoodSell.do?foodNo=${fvo.foodNo}" method="post"  id="regForm" >
 		<sec:csrfInput/><%-- csrf 토큰 --%>
@@ -114,8 +123,10 @@
 			</div>
 		</div>
 		<div class="row" align="center">
-			<input type="submit" class="btn btn-primary" style="width: 100" value="판매등록하기" >
+			<input type="submit" class="btn btn-default" style="width: 100" value="판매등록하기" >
+			<a href="#" onclick="returnList()" class="btn btn-default">돌아가기</a>
 		</div>
+			<input type="hidden" name="sellerId" value="${fvo.memId}" id="sellerId"/>
 		</form>
 	
 	</div> <!-- blog-list blog-detail -->

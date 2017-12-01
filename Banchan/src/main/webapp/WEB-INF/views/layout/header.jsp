@@ -52,7 +52,7 @@
 							<i class="icon fa fa-pencil-square-o"></i>마이페이지<span
 								class="caret"></span>
 						</button>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu" style="margin-left: 36%;">
 							<li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />"><i class="fa fa-wrench" aria-hidden="true" style="margin-right: 5px;"></i>회원정보수정</a></li>
 							<li><a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>내거래내역</a></li>
 							<li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do"><i class="fa fa-user-times" aria-hidden="true" style="margin-right: 5px"></i>회원탈퇴</a></li>
@@ -75,7 +75,7 @@
 							<i class="icon fa fa-pencil-square-o"></i>마이페이지 <span
 								class="caret"></span>
 						</button>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu" style="margin-left: 36%;">
 							<li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />"><i class="fa fa-wrench" aria-hidden="true" style="margin-right: 5px;"></i>회원정보수정</a></li>
 							<li><a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId }"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>내거래내역</a></li>
 							<li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do"><i class="fa fa-user-times" aria-hidden="true" style="margin-right: 5px"></i>회원탈퇴</a></li>
