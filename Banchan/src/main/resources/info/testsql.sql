@@ -134,5 +134,20 @@ select * from mem_auth
 select * from question
 insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '안녕하세요 답글잘되요', sysdate, 'java', 4);
 insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '배고파', sysdate, 'java', 4);
+
 insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '윤주예뻐', sysdate, 'java', 4);
+
+
+select * from seller 
+select * from BAN_MEM 
+select * from address where address_no=1012
+
+insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '윤주예뻐', sysdate, 'java', 4);
+
+
+update trade set tr_status_no='2';
+
+
+select * from answer;
+select * from FOOD_SELL;
 

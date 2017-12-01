@@ -3,13 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-
 <sec:authorize access="isAuthenticated()">
 		<sec:authentication var="mvo" property="principal" />
  </sec:authorize>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/banchan.css">
 <script type="text/javascript">
 			function sellFoodPage(pageNoParam){
 			var pageNo=pageNoParam;
@@ -24,24 +23,39 @@
 						success : function(data) {
 							var sellInfo = "";
 							for (var i = 0; i < data.list.length; i++) {
+								
 								sellInfo += "<div class='row' style='vertical-align: middle'>";
 								sellInfo += "<div class='col-sm-8 col-md-8 col-sm-push-4'>";
 								sellInfo += "<div class='bs-callout callout-success' style='width: 800px'>";
 								sellInfo += "<a href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
 										+ data.list[i].foodSellNo
 										+ "'>";
-								sellInfo += "<h4 class='title'>"
+								sellInfo += "<b style='font-size: 20px;font-weight: bold;margin-top: 10px;'>"
 										+ data.list[i].foodName
-										+ "</h4></a>";
+										+ "</b></a>&nbsp;&nbsp;";
+								
+								sellInfo += "<span class='star_rating' style=''>";
+								
+								 for (var j = 0; j < (data.list[i].foodScore)-((data.list[i].foodScore)%1); j++) {
+									sellInfo+="<a class='on' style='font-size: 15px;position:relative;bottom:3px;'>★</a>";
+								}  
+								 for (var j = 0; j < 5-((data.list[i].foodScore)-((data.list[i].foodScore)%1)); j++) {
+									sellInfo+="<a style='font-size: 15px;position:relative;bottom:3px;'>★</a>";
+								}
+									
+									
+								sellInfo+="</span>"; 
+										
 								sellInfo += "<span class='description' style='color:black;font-size:12px;'>";
-								sellInfo += "<table height='80px'><tr><td><i class='fa fa-krw' style='font-weight: bold'> 가격&nbsp;</i></td><td>"
+								
+								sellInfo += "<table height='80px'><tr><td><i class='fa fa-krw' style='font-weight: bold'>가격&nbsp;</i></td><td>"
 										+ data.list[i].price+" &nbsp; &nbsp;(단위:"+data.list[i].unit+")"
 										+ "</td></tr>";
 								sellInfo += "<tr><td><i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜</i></td><td>"
 										+ data.list[i].trDate
 										+ "</td></tr>";
 								sellInfo += "<tr><td> <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 판매 종료 날짜</i></td><td>"
-										+ data.list[i].closeDate;
+										+ data.list[i].closeDate
 								sellInfo += "</td></tr></table>";
 								
 								sellInfo +='<sec:authorize access="!isAuthenticated()">';
@@ -79,8 +93,7 @@
 								sellInfo += "</div>";
 							}
 
-							$(
-									"#foodSellInfo")
+							$("#foodSellInfo")
 									.html(
 											sellInfo);
 							var startPageOfPageGroupMinus = data.pb.startPageOfPageGroup - 1;
@@ -238,28 +251,6 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 	border: 5px solid gray;
 	margin: 0;
 }
-/*별점*/
-.star_rating {
-	font-size: 0;
-	letter-spacing: -4px;
-}
-
-.star_rating a {
-	font-size: 22px;
-	letter-spacing: 0;
-	display: inline-block;
-	margin-left: 5px;
-	color: #ccc;
-	text-decoration: none;
-}
-
-.star_rating a:first-child {
-	margin-left: 0;
-}
-
-.star_rating a.on {
-	color: #ffcc00;
-}
 
 .home-top {
 	margin-top: 100px;
@@ -350,7 +341,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			  <sec:authorize access="isAuthenticated()">
 					<c:if test="${mvo.memId==svo.memId}">
 					  <div > 
-			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="float:right;margin-left: 10px;" >판매내역보기</a>
+			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="float:right;margin-left: 10px;" >전테 거래내역 보기</a>
 					 </div>
 					 <div > 
 						<a href="${pageContext.request.contextPath}/foodRegisterForm.do"
@@ -392,29 +383,20 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 										<span class="description">${food.foodDe}</span>
 										 <dl style="display:inline-block;height:70px"  class="detail" > 
 										<!-- <dl class="detail"> -->
-										<table style="font-size:12px;">
+										<table>
 											<tr>
 											<td >
 											<!-- <small><i class="fa fa-star fa-fw" ></i></small> -->
 											        <!--  <a class="star_rating.on" style="color: #ffcc00">★</a> -->
-													<span class="star_rating"> 
-					      							<c:forEach begin="1" end="${food.foodScore}">
-					    							<a class="on">★</a>
-													</c:forEach>
-													<c:choose>
-													<c:when test="${5-food.foodScore<1} && ${5-food.foodScore!=0}">
-													<c:forEach begin="1" end="${5-food.foodScore+1}">
-					    							<a>★</a>
-					   								</c:forEach>
-					   								</c:when>
-					   								<c:otherwise>
-					   								<c:forEach begin="1" end="${5-food.foodScore}">
-					    							<a>★</a>
-					   								</c:forEach>
-					   								</c:otherwise>
-					    							</c:choose>
-					       							</span>    
-			                                    <b style="font-size: 12px">&nbsp;&nbsp;별점 :&nbsp;&nbsp;${food.foodScore}</b> </td>
+											<span class="star_rating" > 
+						                    <c:forEach begin="1" end="${food.foodScore-(food.foodScore%1)}">
+			    							<a class="on" style="font-size: 12px;">★</a>
+											</c:forEach>
+											 <c:forEach begin="1" end="${5-(food.foodScore-(food.foodScore%1))}">
+			    							<a style="font-size: 12px;">★</a>
+			    							</c:forEach> 
+			      							</span>
+			      				                <b style="font-size: 12px">&nbsp;&nbsp;별점 :&nbsp;&nbsp;${food.foodScore}</b> </td>
 											</tr>
 											<tr>
 											<c:choose>

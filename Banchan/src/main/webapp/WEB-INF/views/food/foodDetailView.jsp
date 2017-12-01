@@ -88,7 +88,7 @@
 					<h3 class="title-form"><i class="icon fa fa-comment" style="margin-top: 30px"></i>후기</h3> 
 					<c:choose>
 					<c:when test="${fn:length(rlist.list)==0}">
-					<h4>작성된 후기가 없습니다</h4>
+					<br><br><h4 style="text-align: center;font-weight: bold">후기가 없습니다.</h4>
 					</c:when>
 					<c:otherwise>
 					<table class="table table-hover"  style="text-align: center;font-size: 12px;margin-top: 10px"> 
@@ -114,7 +114,7 @@
 							${r.score }
 							</td>
 							<td>${r.revContent }</td>
-							<td>작성자 넣어야댐</td>
+							<td>${r.memId }</td>
 							<td>${r.revPostdate }</td>
 						</tr>
 					</c:forEach>

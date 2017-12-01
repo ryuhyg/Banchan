@@ -24,9 +24,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu.css">                                     <!-- Include Menu stylesheet -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/custom.css">                                   <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/media-query.css">                              <!-- Media Query -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/banchan.css"> 								 <!-- 프로젝트 부트스트랩 -->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/banchan.css"> 								 <!-- 프로젝트 부트스트랩 -->
     <link rel=”stylesheet” href=”http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css“>  					 <!-- 아이콘 부트스트랩 -->
-
 	<!-- Use Iconifyer to generate all the favicons and touch icons you need: http://iconifier.net -->
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon/icon.png" type="image/x-icon" /><!-- 아이콘 --> 
 	
