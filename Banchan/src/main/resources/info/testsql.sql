@@ -146,4 +146,8 @@ insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(a
 
 delete FROM food
 
-update trade set tr_status_no='2'
+update trade set tr_status_no='2';
+
+
+select * from answer;
+select * from FOOD_SELL;
