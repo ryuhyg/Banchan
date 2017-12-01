@@ -48,7 +48,7 @@ $(document).ready(function () {
 	              url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
 	              data:"foodSellNo="+foodSellNo,
 	              success:function(data){
-	                 if(data>1)
+	                 if(data>=1)
 	                    alert("판매중인 상품이 있어 삭제할 수 없습니다.");
 	                 else{
 	                    alert("상품이 삭제되었습니다.");
@@ -67,7 +67,7 @@ $(document).ready(function () {
 	              url:"${pageContext.request.contextPath}/deleteConfirmAjax.do",
 	              data:"foodSellNo="+foodSellNo,
 	              success:function(data){
-	                 if(data>1){
+	                 if(data>=1){
 	                    alert("판매중인 상품이 있어 수정할 수 없습니다.");
 	                 }
 	                 else{

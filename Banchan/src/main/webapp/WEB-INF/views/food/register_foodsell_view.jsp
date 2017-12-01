@@ -103,13 +103,13 @@
 				<label for="loc"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>거래장소 </label>
 				<input type="text"	 name="loc"  id="loc" class="margin-bottom small-text"  required="required">	
 			</div>
-			<div class="row" >
-				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
-				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" > 
-			</div>
 			<div class="row">	
 				<label for="date"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>마감일자</label>
 				<input type="text" name="closeDate" id="closeDate" class="margin-bottom small-text " required="required">	
+			</div>
+			<div class="row" >
+				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
+				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" > 
 			</div>
 		</div>
 		<div class= "row">
