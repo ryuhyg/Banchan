@@ -32,15 +32,15 @@ function registeSeller(){
 	<section id="home-slide" class="home-top" >
 			<div class="home-slider"  style="width: 100%" data-navigation=".home-slider-nav" >
 				<div class="crsl-wrap">
-						<div class="crsl-item" style="background-image: url('resources/images/img/main_img_00.jpg');">
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_05.png');">
 						<div class="container slider-box">
 						</div>
 					</div>
-					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_01.jpg');">
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_06.png');">
 						<div class="container slider-box">
 						</div>
 					</div>
-					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_02.jpg');">
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_07.png');">
 						<div class="container slider-box">
 						</div>
 					</div>
