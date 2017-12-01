@@ -15,19 +15,37 @@ function getimagereview(html, $target) {
         reader.readAsDataURL(html.files[0]);
     }
 }
-function checkForm(){
-	var text;
+function checkForm(f){
+	f=f.elements;
 	var result = confirm("음식을 등록 하시겠습니까?");
 	if (result == true) {
-	    text = "음식이 등록되었습니다.";
-	    alert(text);
-	    return true;
-	}else{
-		text="음식 등록이 취소되었습니다";
-		alert(text);
+		if(/.*\.(gif)|(jpeg)|(jpg)|(png)$/.test(f['uploadImage'].value.toLowerCase())){
+	    	alert("음식이 등록 되었습니다.");
+			return true;
+		}else{
+			alert("업로드 할 수 없는 파일 입니다");
+			return false;
+				}
+			}else{
+				alert("음식이 취소 되었습니다.");
 		return false;
 	}
 }
+function updateCheckForm(){
+	var text;
+	var result = confirm("선택한 음식을 수정 하시겠습니까?");
+	if (result == true) {
+	    text = "음식이 수정되었습니다.";
+	    alert(text);
+	    return true;
+	}else{
+		text="수정이 취소되었습니다";
+		alert(text);
+		history.go(-1);
+		return false;
+	}
+}
+
 </script>
 <style>
 .btn btn-default
@@ -67,7 +85,7 @@ filter: alpha(opacity=0);
 			<div class="col-sm-10">
 			<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>음식등록페이지</h3>
 				<div class="blog-list blog-detail">
-					<form class="form-large grey-color" action="foodRegister.do" method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
+					<form class="form-large grey-color" action="foodRegister.do" method="post" enctype="multipart/form-data" onsubmit="return checkForm(this)">
 					<label>음식명 : &nbsp;
 						<input type="text" name="foodname" required="required"> 
 						</label>
@@ -86,7 +104,7 @@ filter: alpha(opacity=0);
 						
 						<input type="button" value="파일 선택" class="btn btn-default" style="margin-top: 8px" />
 						<div style="margin-top: 10px;" class="file_input_div">
-							<input type ="file"  class="file_input_hidden" value="파일 업로드" name="uploadImage"  id="cma_file" required="required" accept="image/*" onchange="getimagereview(this,$('#cma_image'))"/>
+							<input type ="file"  class="file_input_hidden" value="파일 업로드" name="uploadImage"  id="cma_file" required="required" accept="image/x-png, image/gif, image/jpeg" onchange="getimagereview(this,$('#cma_image'))"/>
 							<div id="cma_image" style="margin-top: 10px;"></div>
 							 </div>
 						</div>
@@ -116,7 +134,7 @@ filter: alpha(opacity=0);
 				<div class="col-sm-10">
 				<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>음식수정페이지</h3>
 				<div class="blog-list blog-detail">
-					<form class="form-large grey-color" action="updateRegFood.do" method="post" enctype="multipart/form-data">
+					<form class="form-large grey-color" action="updateRegFood.do" method="post" enctype="multipart/form-data" onsubmit="return updateCheckForm()">
 					<h2 class="title-form"><input type="text" name="foodname" value="${beFood.foodName}"></h2>
 						<input type="hidden" name="memId" id="memId" value="${memId}">
 						<input type="hidden" name="foodNo" value="${foodNo}">

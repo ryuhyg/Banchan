@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.AbstractView;
  */
 public class DownloadView extends AbstractView{
  
- @Override
+ @Override 
  public String getContentType() {
   // 8bit 단위의 일련의 데이터
   return "application/octet-stream";

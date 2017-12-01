@@ -238,6 +238,7 @@ $(document).ready(function () {
 </script>
 
 <!-- 수정 후 코드입니다. -->
+
 <section id="recent-list" class="agency" style="margin-top: 150px">
 <div class="container" style="width: 100%">
 <div class="row">
