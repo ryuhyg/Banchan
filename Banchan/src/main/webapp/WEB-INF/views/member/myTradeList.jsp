@@ -9,7 +9,7 @@ table, th, td{
 }
 </style>
 <sec:authentication var="mvo" property="principal" />
-<section id="recent-list" style="margin-top: 150px;">
+<section id="recent-list" style="margin-top: 100px;">
 <div id="page-container">
 	<div class="container" style="width: 100%">
 		<div class="row">
@@ -90,9 +90,9 @@ table, th, td{
 	<!-- pagination -->
 			</c:otherwise>
 		</c:choose>
-		
+
+
 	</div>
-	
-	</div>
+</div>
 </div>
 </section>

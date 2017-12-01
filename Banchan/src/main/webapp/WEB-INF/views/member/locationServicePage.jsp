@@ -142,20 +142,20 @@ $(document).ready(function() {
 						
 					}
 	    			 var strTempPaging="";
-	    			 strTempPaging+='<ul class="pagination">';
+	    			 strTempPaging+='<div class="pageginationContainer" style="text-align: center;"><div class="pagination">';
 	    			 if(data.pb.previousPageGroup){
-	    				 strTempPaging+='<li><a id="'+(data.pb.startPageOfPageGroup-1)+'">이전</a></li>';
+	    				 strTempPaging+='<a id="'+(data.pb.startPageOfPageGroup-1)+'">이전</a>';
 	    			 }
 	    			 
 	    			 for (var i = data.pb.startPageOfPageGroup; i <(data.pb.endPageOfPageGroup+1); i++) {
 	    				if(data.pb.nowPage!=i){
-							strTempPaging+='<li><a id="'+i+'">'+i+'</a></li>';
+							strTempPaging+='<a id="'+i+'">'+i+'</a>';
 						}else{
-							strTempPaging+='<li class="active"><a id="'+i+'">'+i+'</a></li>';  
+							strTempPaging+='<a id="'+i+'" class="active">'+i+'</a>';  
 						}					
 					}  
 	    			 if(data.pb.nextPageGroup){
-	    				 strTempPaging+='<li><a id="'+(data.pb.endPageOfPageGroup+1)+'">다음</a></li></ul>';
+	    				 strTempPaging+='<a id="'+(data.pb.endPageOfPageGroup+1)+'">다음</a></div></div>';
 	    			 }
 	    			 $("#tbodyList").html(strTemp); 
 	    			 $("#pagingDivId").html(strTempPaging);
@@ -349,20 +349,20 @@ $(document).ready(function() {
 						
 					}
 	    			 var strTempPaging="";
-	    			 strTempPaging+='<ul class="pagination">';
+	    			 strTempPaging+='<div class="pageginationContainer" style="text-align: center;"><div class="pagination">';
 	    			 if(data.pb.previousPageGroup){
-	    				 strTempPaging+='<li><a id="'+(data.pb.startPageOfPageGroup-1)+'">이전</a></li>';
+	    				 strTempPaging+='<a id="'+(data.pb.startPageOfPageGroup-1)+'">이전</a>';
 	    			 }
 	    			 
 	    			 for (var i = data.pb.startPageOfPageGroup; i <(data.pb.endPageOfPageGroup+1); i++) {
 						if(data.pb.nowPage!=i){
-							strTempPaging+='<li><a id="'+i+'">'+i+'</a></li>';
+							strTempPaging+='<a id="'+i+'">'+i+'</a>';
 						}else{
-							strTempPaging+='<li class="active"><a id="'+i+'">'+i+'</a></li>';  
+							strTempPaging+='<a id="'+i+'" class="active">'+i+'</a>';  
 						}					
 					}  
 	    			 if(data.pb.nextPageGroup){
-	    				 strTempPaging+='<li><a id="'+(data.pb.endPageOfPageGroup+1)+'">다음</a></li></ul>';
+	    				 strTempPaging+='<a id="'+(data.pb.endPageOfPageGroup+1)+'">다음</a></div></div>';
 	    			 }
 	    			 $("#tbodyList").html(strTemp); 
 	    			 $("#pagingDivId").html(strTempPaging);
