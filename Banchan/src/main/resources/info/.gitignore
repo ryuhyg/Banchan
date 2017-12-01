@@ -22,4 +22,8 @@
 /testsql.sql
 /TestGone.sql
 /testym.sql
+<<<<<<< HEAD
 /testsqlym.sql
+=======
+/gttest.sql
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git

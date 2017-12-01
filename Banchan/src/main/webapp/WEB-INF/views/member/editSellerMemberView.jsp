@@ -4,18 +4,10 @@
  <%@ taglib prefix="sec"
  	uri="http://www.springframework.org/security/tags"%>
  <!-- services와 clusterer, drawing 라이브러리 불러오기 : MAP sdk -->
- <script type="text/javascript"
- 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54&libraries=services,clusterer,drawing">	
- </script>
- <script type="text/javascript"
- 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54"></script>
+ <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54&libraries=services,clusterer,drawing"></script>
+ <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54"></script>
  <!-- 우편번호 api -->
  <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
- <!-- 스크립트 ajax 부분 -->
- <!-- 입력폼 이쁘게 -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  
  <script type="text/javascript">
  	$(document)
@@ -65,8 +57,7 @@
  						$("#regForm :input[id=password]").keyup(function() {
  							var id=$(this).val().trim();
  							if(id.length<4 || id.length>10){
- 								$("#passwordCheckView").html("비밀번호는 4자이상 10자 이하여야 함!").css(
- 										"color","pink");
+ 								$("#passwordCheckView").html(" 4 ~ 10 자리로 입력해주세요.");
  								checkPassword="";
  							}else{
  								$("#passwordCheckView").html("비밀번호 사용가능!").css(
@@ -88,7 +79,7 @@
  							else{
  								if($("#regForm :input[id=password]").val().trim()!=$("#regForm :input[id=passwordRe]").val().trim()){
  									checkPasswordRe="";
- 									$("#passwordReCheckView").text("불일치!!").css("background","red");
+ 									$("#passwordReCheckView").html(" Ok");
  								}
  								else if($("#regForm :input[id=password]").val().trim()==$("#regForm :input[id=passwordRe]").val().trim()){
  									checkPasswordRe="passwordOK";
@@ -267,7 +258,42 @@
  							}
  						});//$("#pwAnswerId").keyup
  						
+ 						//생년월일 지정 할 때 쓰는 datepicker
+ 						$.datepicker.regional['ko'] ={
+ 								showOn: "both",
+ 								/* buttonImage: "${pageContext.request.contextPath}/resources/images/calendar2.png", */ 
+ 								buttonImageOnly: true,
+ 								buttonText: "날짜를 선택하세요.",
+ 								closeText : '닫기',         
+ 					            prevText : '이전달',         
+ 					            nextText : '다음달',         
+ 					            currentText : '오늘', 
+ 					            changeYear: true,
+ 					            changeMonth: true,
+ 					            monthNames : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],         
+ 					            monthNamesShort : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],         
+ 					            dayNames : ['일', '월', '화', '수', '목', '금', '토'],         
+ 					            dayNamesShort : ['일', '월', '화', '수', '목', '금', '토'],         
+ 					            dayNamesMin : ['일', '월', '화', '수', '목', '금', '토'],
+ 					            closeText:'취소',
+ 					            dateFormat: "yy-mm-dd",
+ 					            showButtonPanel: true,
+ 					            showMonthAfterYear: true,
+ 					            onClose: function () {
+ 					                if ($(window.event.srcElement).hasClass('ui-datepicker-close')) {
+ 					                    $(this).val('');
+ 					                }
+ 					            }
+ 							};
+ 							
+ 						//datepicker 기본세팅 설정
+ 						$.datepicker.setDefaults($.datepicker.regional['ko']); 
  						
+ 						//생년월일 datepicekr 적용 
+ 						$('#birth').datepicker({
+ 							maxDate: 0,
+ 							yearRange: "-100:+0", 
+ 						});
  					
  					});//ready
  					
@@ -389,10 +415,8 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px; padding-top: 10px;"></i>생년월일</label> <input type="date" required="required"
- 									name="birth" class="margin-bottom form-control" min="1900-01-01" max="2007-12-31" style="margin: 0px;"
- 									value="<sec:authentication property="principal.birth"/>">
+ 								<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px; padding-top: 10px;"></i>생년월일</label> 
+ 								<input type="text" name="birth" id="birth" value="<sec:authentication property="principal.birth"/>" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" maxlength="10" class="margin-bottom form-control" required="required" style="margin: 0px;">	
  							</div>
  							<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
