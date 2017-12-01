@@ -144,6 +144,10 @@ select * from address where address_no=1012
 
 insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '윤주예뻐', sysdate, 'java', 4);
 
-delete FROM food
 
-update trade set tr_status_no='2'
+update trade set tr_status_no='2';
+
+
+select * from answer;
+select * from FOOD_SELL;
+

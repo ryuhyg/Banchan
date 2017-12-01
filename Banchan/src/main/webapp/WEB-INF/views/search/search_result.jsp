@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+    
 <style type="text/css">
 ul.tab {
     margin: 0;
@@ -84,7 +85,7 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 </style>    
     
     
-<section id="recent-list" style="margin-top: 150px;">
+<section id="recent-list" style="margin-top: 100px;">
 	<div class="container">
 		<div class="row">
 				<div class="col-md-9">
@@ -102,20 +103,28 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 						<div class="row" style="vertical-align: middle">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
 								<div class="bs-callout callout-success" style="width: 800px">
-								<h2 class="title">
-								<a href="sellerPageInfo.do?memId=${seller.memId }">${seller.memName}</a>
-								</h2>						
-								  <span class="description" style="color:black;font-size:14px;margin-top: 15px;">							  
-								  	<i class="fa fa-ticket" style="font-weight: bold">판매자 소개:&nbsp;</i>${seller.sellerInfo}<br>
-									<i style="font-weight: bold">평점:&nbsp;</i>${seller.sellerScore}<br>
-									<i style="font-weight: bold">판매자 연락처:&nbsp;</i>${seller.tel }	
+										<h3 class="title" style="width: auto">
+								<a href="sellerPageInfo.do?memId=${seller.memId }">
+									${seller.memName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${seller.sellerScore}</a></h3> 
+							 <span class='description' style='color:black;font-size:12px;'>		
+								 <table height="81px">  
+								<tr> 
+									<td><i class='fa fa-user' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 주소&nbsp;</i></td><td><a>${seller.addressVO.addressAPI}</a></td>
+								</tr>
+								<tr>
+									<td><i class='fa fa-calendar' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 소개&nbsp;</i></td><td><a>${seller.sellerInfo}</a></td>
+								</tr>		
+								<tr>
+									<td></td><td></td>
+								</tr>			
+								</table>
 								  </span>
 								</div><!-- bs-callout callout-success -->
 							</div><!-- /.col-md-8 -->
 							<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
 							<!-- . Agent Box -->
 							<div class="tab2img" >
-								<img alt="Sample images" width="200" height="150" src="${pageContext.request.contextPath }/resources/images/${seller.sellerImg}"> 
+								<a href="sellerPageInfo.do?memId=${seller.memId }"><img alt="Sample images" width="250px" height="150px" src="${pageContext.request.contextPath }/resources/images/${seller.sellerImg}"></a>
 							</div>
 							</div><!-- /.col-md-4 -->		
 						</div><!-- /.row -->
@@ -126,20 +135,28 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 					<div class="row" style="vertical-align: middle">
 						<div class="col-sm-8 col-md-8 col-sm-push-4">
 							<div class="bs-callout callout-success" style="width: 800px">
-							<h2 class="title">
-								<a href="sellerPageInfo.do?memId=${seller.memId }">${seller.memName}</a>
-							</h2>						
-							  <span class="description" style="color:black;font-size:13px;margin-top: 15px;">
-							  	<i class="fa fa-ticket" style="font-weight: bold">판매자 소개:&nbsp;</i>${seller.sellerInfo}<br>
-								<i style="font-weight: bold">평점:&nbsp;</i>${seller.sellerScore}<br>
-								<i style="font-weight: bold">판매자 연락처:&nbsp;</i>${seller.tel }	
+						<h3 class="title" style="width: auto">
+								<a href="sellerPageInfo.do?memId=${seller.memId }">
+									${seller.memName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${seller.sellerScore}</a></h3> 
+							 <span class='description' style='color:black;font-size:12px;'>		
+								 <table height="81px">  
+								<tr> 
+									<td><i class='fa fa-user' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 주소&nbsp;</i></td><td><a>${seller.addressVO.addressAPI}</a></td>
+								</tr>
+								<tr>
+									<td><i class='fa fa-calendar' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 소개&nbsp;</i></td><td><a>${seller.sellerInfo}</a></td>
+								</tr>		
+								<tr>
+									<td></td><td></td>
+								</tr>			
+								</table>
 							  </span>
 							</div><!-- bs-callout callout-success -->
 						</div><!-- /.col-md-8 -->
 						<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
 						<!-- . Agent Box -->
 						<div class="tab2img" >
-							<img alt="Sample images" width="200" height="150" src="${pageContext.request.contextPath }/resources/images/${seller.sellerImg}"> 
+							<a href="sellerPageInfo.do?memId=${seller.memId }"><img alt="Sample images" width="250px" height="150px" src="${pageContext.request.contextPath }/resources/images/${seller.sellerImg}"></a> 
 						</div>
 						</div><!-- /.col-md-4 -->		
 					</div><!-- /.row -->
@@ -152,7 +169,7 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 </div>
 <hr width="95%" align="left">
 <div class="col-md-9">
-		<h4><b><i class="fa fa-search" aria-hidden="true"></i>음식 검색 결과</b></h4>
+		<h4><b><i class="fa fa-search" aria-hidden="true"></i>판매음식 검색 결과</b></h4>
 		<c:choose>
 			<c:when test="${fn:length(fslist)==0 }">
 				&nbsp;&nbsp;&nbsp;<font color="grey">┗ 검색결과없음</font>
@@ -166,24 +183,26 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 								<div class="bs-callout callout-success" style="width: 800px;">
 									<h3 class="title">
 										<a href="getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }">
-										${foodSell.foodName}
-										</a>				
-									</h3>		
-							<span class="description" style="color:black;font-size:13px;">
-								<i class="fa fa-ticket" style="font-weight: bold">음식 소개:&nbsp;</i>${foodSell.foodDe}	<br>					    
-							    <i style="font-weight: bold">음식 평점:&nbsp;</i>${foodSell.foodScore}<br>
-								<i style="font-weight: bold">판매자 아이디:&nbsp;</i>	
-								<a href="sellerPageInfo.do?memId=${foodSell.memId }">${foodSell.memId }</a><br>
-								<i style="font-weight: bold">예약 마감일:&nbsp;</i>${foodSell.closeDate}<br>
-								<i style="font-weight: bold">거래 일:&nbsp;</i>${foodSell.trDate}<br>
-								<i style="font-weight: bold">판매 추가 정보:&nbsp;</i>${foodSell.sellDetail}<br>
-							</span>
+									${foodSell.foodName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${foodSell.foodScore}</a></h3> 	
+							<span class='description' style='color:black;font-size:12px;'>
+								<table height="81px">  
+										<tr>
+											<td><i class='fa fa-user' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 아이디&nbsp;</i></td><td><a href="sellerPageInfo.do?memId=${foodSell.memId }">${foodSell.memId }</a><br></td>
+										</tr>
+										<tr>
+											<td><i class='fa fa-calendar' style="font-weight: bold; margin-right: 5px">&nbsp;예약 마감일&nbsp;</i></td><td><a>${foodSell.closeDate}</a></td>
+										</tr>
+										<tr> 
+											<td><i class="fa fa-exchange" aria-hidden="true" style="font-weight: bold; margin-right: 5px">&nbsp;거래 일&nbsp;</i></td><td><a>${foodSell.sellDetail}</a></td> 
+										</tr>								
+										</table>
+									</span>
 								</div><!-- bs-callout callout-success -->
 							</div><!-- /.col-md-8 -->
-							<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
+							<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" > 
 								<!-- . Agent Box -->
 								<div class="tab2img" >
-									<img alt="Sample images" width="200" height="200" src="${pageContext.request.contextPath }/resources/images/${foodSell.foodMainImg}"> 
+									<a href="getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }"><img alt="Sample images" width="250px" height="150px" src="${pageContext.request.contextPath }/resources/images/${foodSell.foodMainImg}"></a> 
 								</div>
 							</div><!-- /.col-md-4 -->
 						</div><!-- /.row -->
@@ -194,26 +213,28 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 					<div class="row" style="vertical-align: middle">
 						<div class="col-sm-8 col-md-8 col-sm-push-4">
 							<div class="bs-callout callout-success" style="width: 800px;">
-								<h3 class="title">
+								<h3 class="title" style="width: auto">
 									<a href="getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }">
-									${foodSell.foodName}
-									</a>				
-								</h3>		
-							<span class="description" style="color:black;font-size:13px;">
-								<i class="fa fa-ticket" style="font-weight: bold">음식 소개:&nbsp;</i>${foodSell.foodDe}<br>					    
-							    <i style="font-weight: bold">음식 평점:&nbsp;</i>${foodSell.foodScore}<br>
-								<i style="font-weight: bold">판매자 아이디:&nbsp;</i>	
-								<a href="sellerPageInfo.do?memId=${foodSell.memId }">${foodSell.memId }</a><br>
-								<i style="font-weight: bold">예약 마감일:&nbsp;</i>${foodSell.closeDate}<br>
-								<i style="font-weight: bold">거래 일:&nbsp;</i>${foodSell.trDate}<br>
-								<i style="font-weight: bold">판매 추가 정보:&nbsp;</i>${foodSell.sellDetail}<br>
-							</span>
+									${foodSell.foodName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${foodSell.foodScore}</a></h3> 	
+							<span class='description' style='color:black;font-size:12px;'>
+								<table height="81px">  
+								<tr>
+									<td><i class='fa fa-user' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 아이디&nbsp;</i></td><td><a href="sellerPageInfo.do?memId=${foodSell.memId }">${foodSell.memId }</a><br></td>
+								</tr>
+								<tr>
+									<td><i class='fa fa-calendar' style="font-weight: bold; margin-right: 5px">&nbsp;예약 마감일&nbsp;</i></td><td><a>${foodSell.closeDate}</a></td>
+								</tr>
+								<tr> 
+									<td><i class="fa fa-exchange" aria-hidden="true" style="font-weight: bold; margin-right: 5px">&nbsp;거래 일&nbsp;</i></td><td><a>${foodSell.sellDetail}</a></td> 
+								</tr>								
+								</table>	
+							 </span>				 	
 							</div><!-- bs-callout callout-success -->
 						</div><!-- /.col-md-8 -->
 						<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
 							<!-- . Agent Box -->
 							<div class="tab2img" >
-								<img alt="Sample images" width="200" height="200" src="${pageContext.request.contextPath }/resources/images/${foodSell.foodMainImg}"> 
+								<a href="getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }"><img alt="Sample images" width="250px" height="150px" src="${pageContext.request.contextPath }/resources/images/${foodSell.foodMainImg}"></a> 
 							</div>
 						</div><!-- /.col-md-4 -->
 					</div><!-- /.row -->

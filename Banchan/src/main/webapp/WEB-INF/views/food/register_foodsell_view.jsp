@@ -7,17 +7,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-<style>
-.small-text{
-	border: 1px solid #E5E5E5;
-	font-size: 15px;
-	padding: 7px 12px 8px;
-	box-shadow: 0 0 0 4px rgba(236, 236, 236, 0.3);
-	color: #555;
-	background-color: #fff; 
-}
-</style>
 	
 <script type="text/javascript">
 	$(document).ready(function () { 
@@ -103,13 +92,13 @@
 				<label for="loc"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>거래장소 </label>
 				<input type="text"	 name="loc"  id="loc" class="margin-bottom small-text"  required="required">	
 			</div>
-			<div class="row" >
-				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
-				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" > 
-			</div>
 			<div class="row">	
 				<label for="date"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>마감일자</label>
 				<input type="text" name="closeDate" id="closeDate" class="margin-bottom small-text " required="required">	
+			</div>
+			<div class="row" >
+				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
+				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" > 
 			</div>
 		</div>
 		<div class= "row">

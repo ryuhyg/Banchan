@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-
-<!-- datepicker --> 
+ 
+ <!-- datepicker --> 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
@@ -70,7 +70,7 @@
 		
 		<div class="col-sm-10" >
 			<div class="blog-list blog-detail">
-		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매등록</h3>
+		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매음식 수정</h3>
 
  
 		<form  class="form-large grey-color" action="${pageContext.request.contextPath}/editFoodSell.do?" method="post"  id="regForm" >
@@ -82,13 +82,13 @@
 			<img style="padding-top: 15px" width="350px" height="250px" src="${pageContext.request.contextPath}/resources/images/${foodSell.foodMainImg}" > 
 		</div>
 		<div  class="col-xs-6" style="float:right" class="row">
-			<div class="row" >
-				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
-				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" value="${foodSell.trDate}" > 
-			</div>
 			<div class="row">	
 				<label for="date"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>마감일자</label>
 				<input type="text" name="closeDate" id="closeDate" class="margin-bottom small-text " required="required" value="${foodSell.closeDate}">	
+			</div>
+			<div class="row" >
+				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
+				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" value="${foodSell.trDate}" > 
 			</div>
 			<div class="row">
 				<label for="loc"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>거래장소 </label>

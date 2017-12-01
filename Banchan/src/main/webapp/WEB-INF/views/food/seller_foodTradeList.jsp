@@ -68,57 +68,53 @@ table, th, td{
 </script>
   
     
-<section id="recent-list" class="agency" style="margin-top: 150px">
+<section id="recent-list" class="agency" style="margin-top: 100px"> 
 <sec:authorize access="hasRole('ROLE_SELLER')"><!-- 오직 판매자 권한 설정 -->
 <sec:authentication var="mvo" property="principal" />
-<div class="container" style="width: 100%">
+<div class="container" >
 <div class="row">
-
-	<div class="col-md-1">
-	</div>
-	
-	<div class="col-md-10">
+	<div class="col-md-1"></div>
+	<div class="col-md-10" >
 		<div class="blog-list blog-detail">
-		 <h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>${foodSell.foodName} 거래요청내역</h3>
-		<%-- <div class="row">
-			<h2>${foodSell.foodName} 거래요청내역</h2>
-		</div> --%>
+		 <h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>거래요청내역</h3>
+				 <div class="container" style="width: 100%;">
+				 <div class="form-large grey-color"> 
 				 <div class="row">
 				 <!-- image -->
-				      <div class="col-xs-6" style="float: left" class="row">
-				         <img style="padding-top: 48px" width="350px" height="250px" src="${pageContext.request.contextPath}/resources/images/error.jpg">
+				      <div class="col-xs-6"  class="row">  
+				         <img style="padding-top: 48px" width="350px" height="250px" src="${pageContext.request.contextPath}/resources/images/${foodSell.foodMainImg}">
 				      </div>
 				      <div class="col-xs-6" style="float: right" class="row">
 				         <div class="row">
-				            <h3 class="title-form"><i class="" style="margin-right: 5px"></i>${foodSell.foodName} 평점${foodSell.foodScore}</h3>
+				          <h3 class="title-form"><i class="" style="margin-right: 5px"></i>${foodSell.foodName} 
+							<span class="star_rating" > 
+		                    <c:forEach begin="1" end="${foodSell.foodScore-(foodSell.foodScore%1)}">
+   							<a class="on" style="font-size: 12px;">★</a>
+							</c:forEach>
+							 <c:forEach begin="1" end="${5-(foodSell.foodScore-(foodSell.foodScore%1))}">
+   							<a style="font-size: 12px;">★</a>
+   							</c:forEach> 
+     							</span>
+     				                <b style="font-size: 12px">&nbsp;&nbsp;별점 :&nbsp;&nbsp;${foodSell.foodScore}</b>
+				          </h3>
 				         </div>
-						 <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;">
+						
+						 <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;width: 100%"> 
 					            <table class="table" style="font-size: 13px">
-					               <tr>
-					                  <th style="width:25%; padding: 4px; border-top: 0px;">음식평점</th>
-					                  <td colspan="3">${foodSell.foodScore}</td>
-					               </tr>
-					               <tr>
+					               <tr> 
 					                  <th>예약마감일</th>
 					                  <td>${foodSell.closeDate}</td>
-					               </tr>
-					               <tr>
 					                  <th>거래일</th>
 					                  <td>${foodSell.trDate}</td>
-					               </tr>
+					               </tr> 
 					               <tr>
 					                  <th>가격</th>
-					                  <td><span id="price">${foodSell.price}</span> 원</td>
-					               </tr>
-					               <tr>
+					                  <td><span id="price">${foodSell.price}</span> 원</td> 
 					                  <th>양(개당)</th>
 					                  <td>${foodSell.unit}</td>
-					               </tr>
-					               <tr>
+					                <tr>
 					                  <th>준비수량</th>
 					                  <td><span id="preQuantity">${foodSell.preQuantity}</span>&nbsp;(${foodSell.unit })</td>
-					               </tr>
-					               <tr>
 					                  <th>남은수량</th>
 					                  <td><span id="leftQuantity">${leftQuantity}</span>&nbsp;(${foodSell.unit })</td>
 					               </tr>
@@ -135,29 +131,21 @@ table, th, td{
 					                  <td colspan="3">${foodSell.sellDetail}</td>
 					               </tr>                  
 					            </table> 
-					         </div>
+					         </div> <!-- row  -->
+						 
 				      </div><!-- col-xs-6 -->
-		     
+		     	</div> <!--form-large grey-color  --> 
 				</div><!--  <div class="row"> -->
-			</div>
-		</div>
-			<div class="col-md-1">
-	
-			</div>
-	</div> <!-- container  -->
-	
-	
-	
-	<div class="row">
+						<div class="row" style="margin-top: 20px">  
 				<table class="table table-hover" id="tradeList" style="text-align: center;font-size: 12px;">
 					<c:choose>
 					<c:when test="${!empty lvo.list}">
 					<tr class="tr_visible">
-						<th>거래번호</th>
-						<th>구매자명</th>
-						<th>거래수량</th>
-						<th>거래신청날짜</th>
-						<th>거래상태</th>
+						<th style="width: 20%;">거래번호</th>
+						<th style="width: 20%;">구매자명</th>
+						<th style="width: 20%;">거래수량</th>
+						<th style="width: 20%;">거래신청날짜</th>
+						<th style="width: 20%;">거래상태</th>
 					</tr>
 					<c:forEach items="${lvo.list}" var="trade">
 					<tr class="tr_visible">
@@ -168,9 +156,9 @@ table, th, td{
 						<td>${trade.trStatus}</td>
 					</tr>
 					<tr class="trNone">
-						<td colspan="1">구매자 아이디: <span id="buyerId"></span> </td>
-						<td colspan="1" >구매자 이름: <span id="buyerName"></span></td>
-						<td colspan="1">구매자 연락처: <span id="buyerTel"></span></td>
+						<td colspan="1">구매자 아이디:<span id="buyerId"></span> </td>
+						<td colspan="1">구매자 이름: <span id="buyerName"></span></td>
+						<td colspan="1">구매자 연락처:<span id="buyerTel"></span></td>
 						<td colspan="2">구매자 주소: <span id="buyerAddress"></span></td>
 					</tr>
 					</c:forEach>
@@ -182,6 +170,7 @@ table, th, td{
 					</c:otherwise>
 					</c:choose>
 				</table>
+				 
 				<div class="pageginationContainer" style="text-align: center;">
 				 <div class="pagination" >
 								<c:set var="pb" value="${lvo.pb}"></c:set>
@@ -206,9 +195,19 @@ table, th, td{
 								&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
 								</c:if>
 									 		
-				</div> 
-				</div>
-		</div> 
+				</div> <!-- pagination -->
+				</div> <!-- pageginationContainer  -->
+		</div> <!-- row -->
+		
+				</div> <!-- container -->
+				
+			</div><!-- blog-list blog-detail -->
+		</div> <!-- col-md-10 -->
+			<div class="col-md-1"></div>
+	</div> <!-- container  -->
+	
+	
+
 </div> <!-- page-container -->
 </sec:authorize> <!-- sec -->
 </section>	<!-- recent-list -->			

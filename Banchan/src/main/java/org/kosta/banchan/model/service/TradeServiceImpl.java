@@ -93,10 +93,12 @@ public class TradeServiceImpl implements TradeService {
 		int totalCount = tradeDAO.getAllTradeCountByMemId(memId);
 		PagingBean pagingBean = null;
 		HashMap<String, String> paramMap = new HashMap<String, String>();
-		if (pageNo == null)
+		if (pageNo == null) {
 			pagingBean = new PagingBean(totalCount);
-		else
+		} else {
 			pagingBean = new PagingBean(totalCount, Integer.parseInt(pageNo));
+		}
+		pagingBean.setPostCountPerPage(10);
 
 		paramMap.put("startRowNumber",String.valueOf(pagingBean.getStartRowNumber()));
 		paramMap.put("endRowNumber",String.valueOf(pagingBean.getEndRowNumber()));
