@@ -14,10 +14,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- location 끝 -->
+ 
 	<!-- 광태 추가 --><!-- confirm -->
 
-
-  
 <script>
 
 $(document).ready(function() {
@@ -128,9 +127,9 @@ $(document).ready(function() {
 	    	 				"<img src='${pageContext.request.contextPath}/resources/images/"+data.list[i].sellerImg+"' style='width: 100px;height:100px; margin: 0px;'>"+
 	    	 				"</a>"+
 	    	 				"</td>"+
-	    	 				"<td> <a href='#'>"+data.list[i].memId+"</a> </td>"+
+	    	 				"<td> <a href='#'>"+data.list[i].memName+"</a> </td>"+
 	    	 				"</tr>"+			
-	    	 				"<tr><td>"+"별점 :"
+	    	 				"<tr><td>"+"별점 : "
 	                        +'<span class="star_rating">'; 
 	                        var score= data.list[i].sellerScore/1;
                      		 for (var j = 0; j <score; j++) {
@@ -189,10 +188,10 @@ $(document).ready(function() {
 						</div><!-- end주소 검색 div  -->
 						<div id="sellerTable" class="col-sm-6">
 							<h4>판매자 정보</h4> 
-							<table class="table table-striped" >
+							<table class="table table-striped"  >
 							<tbody id="tbodyList">	
 								<tr>
-									<td>지도에서 마커를 클릭하세요! </td>
+									<td style="color: red;">지도에서 마커를 클릭하세요! </td>
 								</tr>				
 							
 							</tbody>					
@@ -336,7 +335,7 @@ $(document).ready(function() {
 	    	 				"<img src='${pageContext.request.contextPath}/resources/images/"+data.list[i].sellerImg+"' style='width: 100px; height:100px; margin: 0px;'>"+
 	    	 				"</a>"+
 	    	 				"</td>"+
-	    	 				"<td> <a href='#'>"+data.list[i].memId+"</a> </td>"+
+	    	 				"<td> <a href='#'>"+data.list[i].memName+"</a> </td>"+
 	    	 				"</tr>"+			
 	    	 				"<tr><td>"+"별점 : "+'<span class="star_rating">';
 	    	 				var score= data.list[i].sellerScore/1;
@@ -344,7 +343,7 @@ $(document).ready(function() {
 	                    	   strTemp +='<a class="on">★</a>';
 							}
 		                   	for (var k = 0; k < 5-score ; k++) {
-		                    		strTemp +='<a>★</a>';
+		                    		strTemp +='<a >★</a>'; 
 		                   	}
 		                      strTemp+='</span>'+data.list[i].sellerScore+"</td></tr>";
 						

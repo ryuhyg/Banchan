@@ -136,3 +136,4 @@ insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(a
 insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '배고파', sysdate, 'java', 4);
 insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '윤주예뻐', sysdate, 'java', 4);
 
+delete FROM food
