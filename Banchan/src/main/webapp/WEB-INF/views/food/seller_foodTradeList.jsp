@@ -153,11 +153,11 @@ table, th, td{
 					<c:choose>
 					<c:when test="${!empty lvo.list}">
 					<tr class="tr_visible">
-						<th>거래번호</th>
-						<th>구매자명</th>
-						<th>거래수량</th>
-						<th>거래신청날짜</th>
-						<th>거래상태</th>
+						<th style="width: 20%;">거래번호</th>
+						<th style="width: 20%;">구매자명</th>
+						<th style="width: 20%;">거래수량</th>
+						<th style="width: 20%;">거래신청날짜</th>
+						<th style="width: 20%;">거래상태</th>
 					</tr>
 					<c:forEach items="${lvo.list}" var="trade">
 					<tr class="tr_visible">
@@ -168,9 +168,9 @@ table, th, td{
 						<td>${trade.trStatus}</td>
 					</tr>
 					<tr class="trNone">
-						<td colspan="1">구매자 아이디: <span id="buyerId"></span> </td>
-						<td colspan="1" >구매자 이름: <span id="buyerName"></span></td>
-						<td colspan="1">구매자 연락처: <span id="buyerTel"></span></td>
+						<td colspan="1">구매자 아이디:<span id="buyerId"></span> </td>
+						<td colspan="1">구매자 이름: <span id="buyerName"></span></td>
+						<td colspan="1">구매자 연락처:<span id="buyerTel"></span></td>
 						<td colspan="2">구매자 주소: <span id="buyerAddress"></span></td>
 					</tr>
 					</c:forEach>
