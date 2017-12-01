@@ -167,7 +167,7 @@ table, th, td{
 						<td>${trade.trReqDate}</td>
 						<td>${trade.trStatus}</td>
 					</tr>
-					<tr>
+					<tr class="trNone">
 						<td colspan="1">구매자 아이디: <span id="buyerId"></span> </td>
 						<td colspan="1" >구매자 이름: <span id="buyerName"></span></td>
 						<td colspan="1">구매자 연락처: <span id="buyerTel"></span></td>
