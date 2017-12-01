@@ -144,9 +144,11 @@ public class FoodController {
 	    	  count++;
 	      
 	    if(count>4) {
-	    	strTemp = strTemp.substring(strTemp.indexOf("/")+1, strTemp.length());
-	    	//System.out.println("count>6 *******");
-	    	//System.out.println(strTemp);
+	    	if(strTemp.contains(fvo.getFoodSellNo())) {
+	    		
+	    	}else {
+	    		strTemp = strTemp.substring(strTemp.indexOf("/")+1, strTemp.length());
+	    	}    	
 	    }
 		
 		if( !(strTemp.contains(fvo.getFoodSellNo())) ) {
@@ -155,7 +157,8 @@ public class FoodController {
 		}
 		clickCoo.setValue(strTemp);
 		resp.addCookie(clickCoo);
-
+		///// end 최근 클릭 리스트 코드 추가 광태
+		
 		return "food/foodsell_detail.tiles";
 	}
 	
