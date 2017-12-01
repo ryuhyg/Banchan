@@ -9,7 +9,7 @@ table, th, td{
 }
 </style>
 <sec:authentication var="mvo" property="principal" />
-<section id="recent-list" style="margin-top: 150px;">
+<section id="recent-list" style="margin-top: 100px;">
 <div id="page-container">
 	<div class="container" style="width: 100%">
 		<div class="row">
@@ -66,56 +66,31 @@ table, th, td{
 				</table>
 			</c:otherwise>
 		</c:choose>
-	</div>
-	<!-- pagination -->
-	<%-- <c:set value="${tlist.pb }" var="pb"/>
-	<div class="row center-block pagination"  align="center">
-	  <ul class="pagination">
-		<c:if test="${pb.previousPageGroup}">
-		    <li><a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+	<c:set value="${tlist.pb }" var="pb"/>
+	<input type="hidden" value="${pb.nowPage}" id="pageNo">
+	<div class="pageginationContainer" style="text-align: center;margin-top: 5px">
+	<div class="pagination" >
+	  	 <c:if test="${pb.previousPageGroup}">
+			   <a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
 		</c:if>
-
-	  	<c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
-	  		<c:choose>
-	  			<c:when test="${pageNum==pb.nowPage}">
-			    	<li class="active"><a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}&pageNo=${pageNum}">${pageNum}</a></li>
-	  			</c:when>
-	  			<c:otherwise>
-			    	<li><a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}&pageNo=${pageNum}">${pageNum}</a></li>
-	  			</c:otherwise>
-	  		</c:choose>
-	  	</c:forEach>
-
-		<c:if test="${pb.nextPageGroup}">
-		    <li><a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a></li>
-		</c:if>
-	  </ul>
-	</div> --%>
+			<c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
+		  		<c:choose>
+		  			<c:when test="${pageNum==pb.nowPage}">
+		  				 <a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}&pageNo=${pageNum}" class='active' >${pageNum}</a>
+	                </c:when>
+		  			<c:otherwise>
+		  				<a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}&pageNo=${pageNum}">${pageNum}</a>
+		  			</c:otherwise>
+		  		</c:choose>
+		  	</c:forEach>
 	
+			<c:if test="${pb.nextPageGroup}">
+			   <a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
+	       </c:if>
+	   </div> <!-- pagination -->
+	</div> <!-- pageginationContainer -->
+	</div>
 	
-	<div class="pageginationContainer" style="text-align: center;">
-  	  <div class="pagination" >
-  	  <c:set var="pb" value="${tlist.pb }"/>
-  	 <c:if test="${pb.previousPageGroup}">
-		   <a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
-	</c:if>
-		<c:forEach var="pageNum"  begin="${pb.startPageOfPageGroup}"  end="${pb.endPageOfPageGroup}">
-	  		<c:choose>
-	  			<c:when test="${pageNum==pb.nowPage}">
-	  				 <a href="#" class='active' >${pageNum}</a>
-                </c:when>
-	  			<c:otherwise>
-	  				<a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}&pageNo=${pageNum}">${pageNum}</a>
-	  			</c:otherwise>
-	  		</c:choose>
-	  	</c:forEach>
-
-		<c:if test="${pb.nextPageGroup}">
-		   <a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a>
-       </c:if>
-	   </div> 
-	</div>
-	<!-- pagination -->
-	</div>
+</div>
 </div>
 </section>

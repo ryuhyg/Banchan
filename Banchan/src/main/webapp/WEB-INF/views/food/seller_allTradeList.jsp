@@ -133,7 +133,7 @@ tr{
 	  	</c:forEach>
 
 		<c:if test="${pb.nextPageGroup}">
-		    <a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a>
+		    <a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
 		</c:if>
 	</div> <!-- pagination -->
 	</div> <!-- pageginationContainer -->
