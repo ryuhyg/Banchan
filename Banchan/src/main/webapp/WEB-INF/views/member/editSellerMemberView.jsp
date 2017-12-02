@@ -62,14 +62,13 @@
  								$("#passwordCheckView").html(" 4 ~ 10 자리로 입력해주세요.");
  								checkPassword="";
  							}else{
- 								$("#passwordCheckView").html("비밀번호 사용가능!").css(
- 										"background","white");
+ 								$("#passwordCheckView").html(" Ok");
  								checkPassword="passwordOK";
  							}
  							$("#regForm :input[id=passwordRe]").trigger("keyup");
  							
  						});//keyup
- 
+ 						
  						//비밀번호 일치 체크
  						$("#regForm :input[id=passwordRe]").keyup(function() {
  							if($("#regForm :input[id=password]").val().trim()==""&& !checkPassword==""){
@@ -81,11 +80,11 @@
  							else{
  								if($("#regForm :input[id=password]").val().trim()!=$("#regForm :input[id=passwordRe]").val().trim()){
  									checkPasswordRe="";
- 									$("#passwordReCheckView").html(" Ok");
+ 									$("#passwordReCheckView").text("비밀번호가 일치하지 않습니다.");
  								}
  								else if($("#regForm :input[id=password]").val().trim()==$("#regForm :input[id=passwordRe]").val().trim()){
  									checkPasswordRe="passwordOK";
- 									$("#passwordReCheckView").text("비밀번호 일치").css("background","white");
+ 									$("#passwordReCheckView").text("Ok");
  								}
  							}
  							
@@ -451,7 +450,7 @@
  							<div class="col-xs-8">
  								<label for="password"><i class="fa fa-ellipsis-h"
  									style="margin-right: 5px; padding-top: 10px;"></i>판매자 소개</label>
- 						<textarea rows="6"cols="43"name="sellerInfo"required="required"style="resize: none">${svo.sellerInfo}</textarea>
+ 						<textarea rows="6"cols="38"name="sellerInfo"required="required"style="resize: none">${svo.sellerInfo}</textarea>
 				 			</div>
 				 		</div>
  						<div class="row">

@@ -42,8 +42,6 @@
 								 for (var j = 0; j < 5-((data.list[i].foodScore)-((data.list[i].foodScore)%1)); j++) {
 									sellInfo+="<a style='font-size: 15px;position:relative;bottom:3px;'>★</a>";
 								}
-									
-									
 								sellInfo+="</span>"; 
 										
 								sellInfo += "<span class='description' style='color:black;font-size:12px;'>";
@@ -334,7 +332,6 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			                   <i class="fa fa-quote-right" aria-hidden="true" style="font-size: 20px; color: #5e5e5e; margin-left: 10px;"></i>
 			                 </div>
 			             </div><!-- /.col-md-8 -->
-			          
 			         </div><!-- /.row -->
 			     </div><!-- col-md-9 -->
 			  <div class="col-md-3">  
@@ -361,7 +358,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 				<li class="active"><a href="#tab1">등록 음식 <b>(</b>${flist.size()}<b>)</b></a></li>
 				<li><a href="#tab2" class="sellFood" id="1">판매중 음식 <b>(</b>${foodSellCount}<b>)</b></a></li>
 			</ul>
-			<div class="tab_container">
+		<div class="tab_container">
 
 				<!-- tab1 -->
 				<div id="tab1" class="tab_content" style="display: block;">
