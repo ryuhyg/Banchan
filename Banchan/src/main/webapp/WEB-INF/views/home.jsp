@@ -4,44 +4,43 @@
     <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<sec:authorize access="isAuthenticated()">
 	<sec:authentication var="mvo" property="principal" />
- 	
- <!-- 별점 style부분 ************************* -->
- <style type="text/css"> /* 별점 css */
-.star_rating {font-size:0; letter-spacing:-4px;}
-.star_rating a {
-    font-size:22px;
-    letter-spacing:0;
-    display:inline-block;
-    margin-left:5px;
-    color:#ccc;
-    text-decoration:none;
+</sec:authorize>
+<script type="text/javascript">
+function loginCheck(){
+  	    var isLogin = $("#checkId").val();
+			if(isLogin==null || isLogin==""){
+		    var flag = confirm("로그인이 필요합니다. 로그인하시겠습니까?");
+		    if(flag)
+		       location.href="loginView.do";
+		    else
+		       history.go(0);
+		 }
 }
-.star_rating a:first-child {margin-left:0;}
-.star_rating a.on {color:#ffcc00;}
-.home-top{
-	margin-top: 108px; 
+function registeSeller(){
+	var flag = confirm("판매자 등록을 하시겠습니까?")
+	if(flag)
+		location.href="${pageContext.request.contextPath}/sellerRegisterForm.do?id=${mvo.memId}";
+	else
+		history.go(0);
 }
-.nexthome{
-	margin-top: -50px;
-}
-</style> 
-  
-    
+</script>
+
  <!-- 슬라이드 부분 *************************** -->
  	
 	<section id="home-slide" class="home-top" >
 			<div class="home-slider"  style="width: 100%" data-navigation=".home-slider-nav" >
 				<div class="crsl-wrap">
-						<div class="crsl-item" style="background-image: url('resources/images/img/main_img_00.jpg');">
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_05.png');">
 						<div class="container slider-box">
 						</div>
 					</div>
-					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_01.jpg');">
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_06.png');">
 						<div class="container slider-box">
 						</div>
 					</div>
-					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_02.jpg');">
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_07.png');">
 						<div class="container slider-box">
 						</div>
 					</div>
@@ -55,36 +54,6 @@
 			</div>
 		</section>
 <!-- 슬라이드 부분끝 *************************** -->
-
-
-<!--  링크 테스트 섹션 -->
-	<section id="recent-list">
-			<div class="section-detail" style="border: 1px solid red">
-		
-			
-			<a href="">테스트2//</a>
-			<a href="">테스트3//</a>
-			<!-- 우정 링크 테스트 -->
-			<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=aaaa"  >판매자 페이지</a>
-			<!-- 윤주 링크 테스트 -->
-			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
-				<h3><a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}"  >
-								판매자 페이지</a></h3>			
-			<a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId }">나의구매내역테스트_윤주//</a>
-
-			</sec:authorize>
-			<!-- 지원 링크 테스트 -->
-			<a href="${pageContext.request.contextPath}/registerFoodView.do">판매음식등록 테스트//</a>
-			<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=101010">판매음식 상세정보//</a>
-			<a href="${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo=101019&pageNo=1">[판매자]판매음식당 거래요청리스트//</a>
-			<sec:authorize access="hasRole('ROLE_SELLER')">
-				<a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}">[판매자]전체 거래요청리스트//</a>
-			</sec:authorize>
-			
-		</div>
-	</section>
-<!--  링크 섹션끝 -->
-
 
 		<section id="recent-list" class="nexthome">
 			<div class="section-detail">
@@ -126,7 +95,7 @@
 							<span class="description">${list.getSellerInfo()}</span>
 							<dl class="detail">
 							<div>
-                      			 <dt class="">판매자평점</dt><br><br>
+                      			<i class="fa fa-star" aria-hidden="true" style="margin-left: 4px; margin-right: 5px"></i>판매자평점<br><br>
                        			 <span class="star_rating">  <!-- 별점 표현 -->
                          	  <c:forEach begin="1" end="${list.sellerScore-(list.sellerScore%1)}">
 					    		<a class="on">★</a>
@@ -155,7 +124,7 @@
 				<c:forEach items="${flist}" var="flist">
 					<div class="col-md-4">
 						<div class="box-ads box-home">
-							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${flist.sellerVO.memId}">
+							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/foodDetailView.do?foodNo=${flist.foodNo}">
 								<span class="cover"></span>
 								<img alt="Sample images" style="width:380px;height:270px" src="${pageContext.request.contextPath}/resources/images/${flist.foodMainImg}">
 								<h3 class="title">${flist.foodName}</h3>
@@ -185,7 +154,6 @@
 		</c:if>	 
 		</section>
 		<section id="submit-property" data-parallax-speed="0" align="center">
-			 
 			<span class="overlay"></span>
 			<div class="container">
 				<div class="section-detail">
@@ -194,10 +162,11 @@
 				</div>
 				<div class="row text-center">
 			<sec:authorize access="!isAuthenticated()"><!-- 비회원 권한 설정 -->
-					<a href="#" class="btn btn-reverse button-large">판매자 등록하기</a>
+					<input type="hidden" value="" name="checkId" id="checkId">
+					<a href="#" id="loginCheck" onclick="loginCheck()" class="btn btn-reverse button-large">판매자 등록하기</a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
-					<a href="${pageContext.request.contextPath}/sellerRegisterForm.do?id=${mvo.memId}" class="btn btn-reverse button-large">판매자 등록하기</a>
+					<a href="#" onclick="registeSeller()" class="btn btn-reverse button-large">판매자 등록하기</a>
 			</sec:authorize>
 				</div>
 			</div>

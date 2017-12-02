@@ -7,17 +7,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-<style>
-.small-text{
-	border: 1px solid #E5E5E5;
-	font-size: 15px;
-	padding: 7px 12px 8px;
-	box-shadow: 0 0 0 4px rgba(236, 236, 236, 0.3);
-	color: #555;
-	background-color: #fff; 
-}
-</style>
 	
 <script type="text/javascript">
 	$(document).ready(function () { 
@@ -65,16 +54,25 @@
 			$("#regForm").submit(function() {
 				return confirm("판매등록하시겠습니까?");				
 			});//submit
-	});//ready 
+	});//ready
+function returnList(){
+	var sellerId = $("#sellerId").val();
+	var flag = confirm("돌아가시겠습니까?");
+	if(flag)
+		location.href="${pageContext.request.contextPath}/sellerPageInfo.do?memId="+sellerId;
+	else
+		history(0);  	
+			
+}
 </script>	
 
 <section id="recent-list" style="margin-top: 150px">
 <div class="container">
 	<div class="col-sm-1"><!-- left --></div>
 	
-	<div class="col-sm-10" >
+	<div class="col-sm-10" > 
 	<div class="blog-list blog-detail">
-	<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매등록</h3>
+	<h3 class="title-form"><i class="icon fa fa-pencil-square-o" style="margin-right: 5px"></i>판매등록</h3>
 
 		<form  class="form-large grey-color" action="${pageContext.request.contextPath}/registerFoodSell.do?foodNo=${fvo.foodNo}" method="post"  id="regForm" >
 		<sec:csrfInput/><%-- csrf 토큰 --%>
@@ -103,13 +101,13 @@
 				<label for="loc"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>거래장소 </label>
 				<input type="text"	 name="loc"  id="loc" class="margin-bottom small-text"  required="required">	
 			</div>
-			<div class="row" >
-				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
-				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" > 
-			</div>
 			<div class="row">	
 				<label for="date"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>마감일자</label>
 				<input type="text" name="closeDate" id="closeDate" class="margin-bottom small-text " required="required">	
+			</div>
+			<div class="row" >
+				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
+				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" > 
 			</div>
 		</div>
 		<div class= "row">
@@ -125,8 +123,10 @@
 			</div>
 		</div>
 		<div class="row" align="center">
-			<input type="submit" class="btn btn-primary" style="width: 100" value="판매등록하기" >
+			<input type="submit" class="btn btn-default" style="width: 100" value="판매등록하기" >
+			<a href="#" onclick="returnList()" class="btn btn-default">돌아가기</a>
 		</div>
+			<input type="hidden" name="sellerId" value="${fvo.memId}" id="sellerId"/>
 		</form>
 	
 	</div> <!-- blog-list blog-detail -->

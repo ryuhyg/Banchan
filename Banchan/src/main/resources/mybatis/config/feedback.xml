@@ -37,12 +37,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<!-- 댓글 목록 -->
 	<select id="commentList" resultMap="qnaRM">
 		select quest_no, quest_content, food_sell_no, quest_postdate, mem_id
-		FROM question
+		FROM question order by quest_no desc
 	</select>
 	
 			<!-- 댓글 수정 -->
 	<update id="commentUpdate" parameterType="questionVO">
-		 update question set quest_content = #{questContent} where quest_no = #{questNo}
+		 update question set quest_content = #{questContent}, quest_postdate=sysdate where quest_no = #{questNo}
 	</update>
 			<!-- 댓글 삭제 -->
 	<delete id="commentDelete" parameterType="questionVO">
@@ -58,15 +58,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- Start 지원 -->
 	<!-- 등록음식 번호에 해당하는 후기 리스트 -->
 	<select id="getReviewListByFoodNo" parameterType="map" resultType="reviewVO" >
-		select r.rev_no,r.score,r.rev_postdate,r.rev_content,r.mem_id
-		from(
-			select row_number() over(order by rev_no desc) as
-			rnum,rev_no,score,rev_postdate,rev_content,food_no,mem_id
-			from review
-			)r,food f
-		where f.food_no=#{foodNo} and f.food_no=r.food_no and
-				r.rnum between #{startRowNumber} and #{endRowNumber}
-		order by r.rev_postdate desc
+		select fr.rev_no,fr.score,fr.rev_postdate,fr.rev_content,fr.food_no,fr.mem_id
+		from
+		(select row_number() over(order by r.rev_postdate desc) as rnum,
+		r.rev_no,r.score,r.rev_postdate,r.rev_content,r.food_no,r.mem_id
+		from review r, food f
+		where f.food_no=#{foodNo} and f.food_no=r.food_no) fr 
+		where fr.rnum between #{startRowNumber} and #{endRowNumber}
 	</select>
 	<!-- 등록음식 번호에 해당하는 후기 개수 -->
 	<select id="getAllReviewCountByFoodNo" parameterType="string" resultType="int">
@@ -104,15 +102,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<select id="getReviewListByFoodSellNo" parameterType="map"
 		resultType="reviewVO" >
-		select r.rev_no,r.score,r.rev_postdate,r.rev_content,r.mem_id
-		from(
-			select row_number() over(order by rev_no desc) as
-			rnum,rev_no,score,rev_postdate,rev_content,food_no,mem_id
-			from review
-			)r,food_sell fs
-		where fs.food_sell_no=#{foodSellNo} and fs.food_no=r.food_no and
-				r.rnum between #{startRowNumber} and #{endRowNumber}
-		order by r.rev_postdate desc
+		select fr.rev_no,fr.score,fr.rev_postdate,fr.rev_content,fr.food_no,fr.mem_id
+		from
+		(select row_number() over(order by r.rev_postdate desc) as rnum,
+		r.rev_no,r.score,r.rev_postdate,r.rev_content,r.food_no,r.mem_id
+		from review r, food_sell fs
+		where fs.food_sell_no=#{foodSellNo} and fs.food_no=r.food_no) fr 
+		where fr.rnum between #{startRowNumber} and #{endRowNumber}
+		
 	</select>
 	<select id="getAllReviewCountByFoodSellNo" parameterType="string" resultType="int">
 		select count(*)

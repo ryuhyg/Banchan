@@ -45,6 +45,7 @@ table, th, td{
 			}
 		}); //click
 	}); //ready
+
 </script>
     
 <section id="recent-list" class="agency" style="margin-top: 100px">
@@ -53,7 +54,7 @@ table, th, td{
 <div id="page-container">
 <div class="container" style="width: 100%;">
 	<div class="row">
-	<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>전체거래내역</h3>
+	<h3 class="title-form"><i class="icon fa fa-exchange" style="margin-right: 5px"></i>전체거래내역</h3>
 		<div style="font-size: 15px; text-align: right;margin-bottom: 10px;color: #80808075; font-style: italic">*클릭하여 구매자 정보를 확인하세요</div> 
 	<c:choose>
 	<c:when test="${!empty lvo.list}">
@@ -106,9 +107,15 @@ table, th, td{
 			</c:forEach>
 		</tbody>
 	</table>
+		<div align="right">
+		<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}" class="btn btn-reverse button-form" style="margin-top: 10px;">돌아가기</a>
+		</div>
 	</c:when>
 	<c:otherwise>
 		<div style="font-weight: bold;text-align: center;">거래 내역이 존재하지 않습니다</div>
+		<div align="center">
+		<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}" class="btn btn-reverse button-form" style="margin-top: 10px;">돌아가기</a>
+		</div>
 	</c:otherwise>
 	</c:choose>
 	</div> <!-- row -->
@@ -133,7 +140,7 @@ table, th, td{
 	  	</c:forEach>
 
 		<c:if test="${pb.nextPageGroup}">
-		    <a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a>
+		    <a href="${pageContext.request.contextPath}/getAllSellerTradeList.do?sellerId=${mvo.memId}&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
 		</c:if>
 	</div> <!-- pagination -->
 	</div> <!-- pageginationContainer -->

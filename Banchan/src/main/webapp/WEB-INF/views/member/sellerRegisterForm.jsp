@@ -19,13 +19,13 @@ function getimagereview(html, $target) {
 $(document).ready(function(){
 	$("#registerData").click(function(){
 		var data=$("#dataCheck").val();
-		if(data.length > 90){
+		if(data.length > 90 || data ==""){
 			alert("판매자 소개는 80자 이내로 입력해주세요!");
 			return false;
-		}
+			}
 		return true;
-	});
-});
+	}); //click
+}); //ready
 
 function checkForm(f){
 	f=f.elements;

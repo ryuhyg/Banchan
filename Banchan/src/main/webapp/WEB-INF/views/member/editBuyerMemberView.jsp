@@ -5,10 +5,14 @@
  	uri="http://www.springframework.org/security/tags"%>
 <!-- services와 clusterer, drawing 라이브러리 불러오기 : MAP sdk -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54&libraries=services,clusterer,drawing"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54"></script>
-<!-- 우편번호 api -->
-<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
- 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54"></script>  
+ <!-- 우편번호 api -->
+ <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+ <!-- datepicker --> 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <script type="text/javascript">
     $(document)
           .ready(
@@ -54,40 +58,40 @@
                             }
                          });
  
-                   //비밀번호 체크
-                   $("#regForm :input[id=password]").keyup(function() {
-                      var id=$(this).val().trim();
-                      if(id.length<4 || id.length>10){
-                         $("#passwordCheckView").html("4 ~ 10 자로 입력해주세요")
-                         checkPassword="";
-                      }else{
-                         $("#passwordCheckView").html("Ok")
-                         checkPassword="passwordOK";
-                      }
-                      $("#regForm :input[id=passwordRe]").trigger("keyup");
-                      
-                   });//keyup
- 
-                   //비밀번호 일치 체크
-                   $("#regForm :input[id=passwordRe]").keyup(function() {
-                      if($("#regForm :input[id=password]").val().trim()==""&& !checkPassword==""){
-                         
-                         $("#regForm :input[id=passwordRe]").val("");
-                         $("#regForm :input[id=password]").focus();
-                         alert("적정 비밀번호를 먼저 입력하세요");
-                      }
-                      else{
-                         if($("#regForm :input[id=password]").val().trim()!=$("#regForm :input[id=passwordRe]").val().trim()){
-                            checkPasswordRe="";
-                            $("#passwordReCheckView").text("비밀번호가 일치하지 않습니다")
-                         }
-                         else if($("#regForm :input[id=password]").val().trim()==$("#regForm :input[id=passwordRe]").val().trim()){
-                            checkPasswordRe="passwordOK";
-                            $("#passwordReCheckView").text("Ok")
-                         }
-                      }
-                      
-                   });//keyup
+                 //비밀번호 체크
+           		$("#regForm :input[id=password]").keyup(function() {
+           			var id=$(this).val().trim();
+           			if(id.length<4 || id.length>10){
+           				$("#passwordCheckView").html(" 4 ~ 10 자리로 입력해주세요.");
+           				checkPassword="";
+           			}else{
+           				$("#passwordCheckView").html(" Ok");
+           				checkPassword="passwordOK";
+           			}
+           			$("#regForm :input[id=passwordRe]").trigger("keyup");
+           			
+           		});//keyup
+           		
+           		//비밀번호 일치 체크
+           		$("#regForm :input[id=passwordRe]").keyup(function() {
+           			if($("#regForm :input[id=password]").val().trim()==""&& !checkPassword==""){
+           				
+           				$("#regForm :input[id=passwordRe]").val("");
+           				$("#regForm :input[id=password]").focus();
+           				alert("적정 비밀번호를 먼저 입력하세요!");
+           			}
+           			else{
+           				if($("#regForm :input[id=password]").val().trim()!=$("#regForm :input[id=passwordRe]").val().trim()){
+           					checkPasswordRe="";
+           					$("#passwordReCheckView").text("비밀번호가 일치하지 않습니다.");
+           				}
+           				else if($("#regForm :input[id=password]").val().trim()==$("#regForm :input[id=passwordRe]").val().trim()){
+           					checkPasswordRe="passwordOK";
+           					$("#passwordReCheckView").text("Ok");
+           				}
+           			}
+           			
+           		});//keyup
  
                                $("#searchaddress")
                                 .click(
@@ -294,6 +298,14 @@
            		});
        
                 });//ready
+                
+                function returnHome(){
+            		var flag = confirm("회원수정을 취소하시겠습니까?");
+            		if(flag)
+            			location.href="${pageContext.request.contextPath}/home.do";
+            		else
+            			history.go(0);
+            }
  </script>
  
 <section id="recent-list" style="margin-top: 150px;">
@@ -329,7 +341,7 @@
                    <div  class="col-xs-2" style="margin-top: 32px;">             
                         </div>
                       <div class="col-xs-8">
-                         <label for="password"><i class="fa fa-ellipsis-h"
+                         <label for="password"><i class="fa fa-key"
                             style="margin-right: 5px; padding-top: 10px;"></i>비밀번호</label> <input type="password" required="required"
                             name="pw" id="password" class="margin-bottom form-control"
                             placeholder="비밀번호" autocomplete="off" style="margin: 0px;">
@@ -342,7 +354,7 @@
                    <div  class="col-xs-2" style="margin-top: 32px;">             
                         </div>
                       <div class="col-xs-8">
-                         <label for="password"><i class="fa fa-ellipsis-h"
+                         <label for="password"><i class="fa fa-key"
                             style="margin-right: 5px; padding-top: 10px;"></i>비밀번호 확인</label> <input type="password" required="required"
                             id="passwordRe" class="margin-bottom form-control"
                             placeholder="비밀번호확인" autocomplete="off" style="margin: 0px;">
@@ -366,7 +378,7 @@
                    <div  class="col-xs-2" style="margin-top: 32px;">             
                         </div>
                       <div class="col-xs-8">
-                         <label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px; padding-top: 10px;"></i>생년월일</label> 
+                         <label for="password"><i class="fa fa-calendar" style="margin-right: 5px; padding-top: 10px;"></i>생년월일</label> 
        					 <input type="text" name="birth" id="birth" value="<sec:authentication property="principal.birth"/>" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" maxlength="10" class="margin-bottom form-control" required="required" style="margin: 0px;">	
                       
                       </div>
@@ -377,7 +389,7 @@
                    <div  class="col-xs-2" style="margin-top: 32px;">             
                         </div>
                       <div class="col-xs-8">
-                         <label for="password"><i class="fa fa-ellipsis-h"
+                         <label for="password"><i class="fa fa-phone"
                             style="margin-right: 5px; padding-top: 10px;"></i>전화번호 ( - 포함하여 입력해주세요! )</label>
                          <!-- <input type="text" name="tel"  class="margin-bottom form-control" placeholder="전화번호"> -->
                          <input class="margin-bottom form-control" type="tel" name="tel"
@@ -393,7 +405,7 @@
                    <div  class="col-xs-2" style="margin-top: 32px;">             
                         </div>
                       <div class="col-xs-8">
-                         <label for="password"><i class="fa fa-ellipsis-h"
+                         <label for="password"><i class="fa fa-home"
                             style="margin-right: 5px; padding-top: 10px;"></i>주소</label>
                          <div id="map" style="width:auto; height: 200px;"></div>
                          <input class="btn btn-default" type="button" id="searchaddress"
@@ -410,7 +422,7 @@
                    <div  class="col-xs-2" style="margin-top: 32px;">             
                         </div>
                       <div class="col-xs-8" style="margin-bottom: 10px">
-                         <label for="password"><i class="fa fa-ellipsis-h"
+                         <label for="password"><i class="fa fa-question"
                             style="margin-right: 5px; padding-top: 10px;"></i>비밀번호 찾기 질문</label> <select
                             id="pwQnaSelect">
                             <option value="${pvo.pwQnaNo}"
@@ -439,8 +451,7 @@
                       <div align="center">
                          <input type="submit" class="btn btn-reverse button-form"
                             value="수정하기">
-                         <button type="button" class="btn btn-default button-form"
-                            id="returnBtn">돌아가기</button>
+                         <a href="#" onclick="returnHome()" class="btn btn-default button-form"  id="returnBtn">돌아가기</a>
                       </div>
                    </div>
  
@@ -488,16 +499,16 @@
     var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
      imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
      imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
-        markerPosition = new daum.maps.LatLng(${avo.latitude}, ${avo.longitude}); // 마커가 표시될 위치입니다
-    
-    // 마커를 생성합니다
-    var marker = new daum.maps.Marker({
-        position: markerPosition, 
-        image: markerImage // 마커이미지 설정 
-    });
-    
-    // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
+ 	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+ 	var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
+ 	    markerPosition = new daum.maps.LatLng(${avo.latitude}, ${avo.longitude}); // 마커가 표시될 위치입니다
+ 	
+ 	// 마커를 생성합니다
+ 	var marker = new daum.maps.Marker({
+ 	    position: markerPosition, 
+ 	    image: markerImage // 마커이미지 설정 
+ 	});
+ 	
+ 	// 마커가 지도 위에 표시되도록 설정합니다
+ 	marker.setMap(map);
   </script>

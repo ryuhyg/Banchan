@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-
-<!-- datepicker --> 
+ 
+ <!-- datepicker --> 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
@@ -58,7 +58,15 @@
 			
 			
 			
-	});//ready 
+	});//ready
+function returnList(){
+			var foodSellNo = $("#foodSellNo").val();
+			var flag = confirm("취소하시겠습니까?");
+			if(flag)
+				location.href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="+foodSellNo;
+			else
+				history(0);  
+	}
 </script>	 
     
 <section id="recent-list" class="agency" style="margin-top: 150px">
@@ -70,7 +78,7 @@
 		
 		<div class="col-sm-10" >
 			<div class="blog-list blog-detail">
-		<h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매등록</h3>
+		<h3 class="title-form"><i class="fa fa-wrench" aria-hidden="true" style="margin-right: 5px"></i>판매음식 수정</h3>
 
  
 		<form  class="form-large grey-color" action="${pageContext.request.contextPath}/editFoodSell.do?" method="post"  id="regForm" >
@@ -82,13 +90,13 @@
 			<img style="padding-top: 15px" width="350px" height="250px" src="${pageContext.request.contextPath}/resources/images/${foodSell.foodMainImg}" > 
 		</div>
 		<div  class="col-xs-6" style="float:right" class="row">
-			<div class="row" >
-				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
-				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" value="${foodSell.trDate}" > 
-			</div>
 			<div class="row">	
 				<label for="date"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>마감일자</label>
 				<input type="text" name="closeDate" id="closeDate" class="margin-bottom small-text " required="required" value="${foodSell.closeDate}">	
+			</div>
+			<div class="row" >
+				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
+				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" value="${foodSell.trDate}" > 
 			</div>
 			<div class="row">
 				<label for="loc"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>거래장소 </label>
@@ -121,12 +129,15 @@
 				<textarea rows="10" class="" cols="52" name="sellDetail" style="width: 100%"  required="required">${foodSell.sellDetail}</textarea>
 			</div>
 		</div>
-		<div  class="col-xs-11" ></div>
-		<div  class="col-xs-1" style="float: left ;margin-bottom: 100px;" ><input type="submit" id="editButton" class="btn btn-default"  style="float: left ;margin-bottom: 100px;" value="수정하기" ></div>
+		
+		<div class="row" align="right">
+			<input type="submit" id="editButton" class="btn btn-default" style="margin-right: 14px" value="수정하기" >
+			<a href="#" onclick="returnList()" style="margin-right: 14px" class="btn btn-default">취소</a>		
+		</div> 
 			<input type="hidden" name="foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
 			<input type="hidden" name="memId" value="${foodSell.memId}" id="sellerId"/>
-		</form>
-		</div> 
+		</form> 
+		</div>  
 		</div>
 		</div>	
 	

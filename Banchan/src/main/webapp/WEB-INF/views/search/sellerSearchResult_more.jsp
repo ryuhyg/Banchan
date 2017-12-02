@@ -99,20 +99,28 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 					<div class="row" style="vertical-align: middle">
 						<div class="col-sm-8 col-md-8 col-sm-push-4">
 							<div class="bs-callout callout-success" style="width: 800px">
-							<h2 class="title">
-							<a href="sellerPageInfo.do?memId=${seller.memId }">${seller.memName}</a>
-							</h2>						
-							  <span class="description" style="color:black;font-size:13px;margin-top: 15px;">							  
-							  	<i class="fa fa-ticket" style="font-weight: bold">판매자 소개:&nbsp;</i>${seller.sellerInfo}<br>
-								<i style="font-weight: bold">평점:&nbsp;</i>${seller.sellerScore}<br>
-								<i style="font-weight: bold">판매자 연락처:&nbsp;</i>${seller.tel }	
+								<h3 class="title" style="width: auto">
+								<a href="sellerPageInfo.do?memId=${seller.memId }">
+									${seller.memName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${seller.sellerScore}</a></h3> 
+								 <span class='description' style='color:black;font-size:12px;'>		
+								 <table height="81px">  
+								<tr> 
+									<td><i class='fa fa-user' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 주소&nbsp;</i></td><td><a>${seller.addressVO.addressAPI}</a></td>
+								</tr>
+								<tr>
+									<td><i class='fa fa-calendar' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 소개&nbsp;</i></td><td><a>${seller.sellerInfo}</a></td>
+								</tr>		
+								<tr>
+									<td></td><td></td>
+								</tr>			
+								</table>
 							  </span>
 							</div><!-- bs-callout callout-success -->
 						</div><!-- /.col-md-8 -->
 						<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
 						<!-- . Agent Box -->
 						<div class="tab2img" >
-							<img alt="Sample images" width="200" height="150" src="${pageContext.request.contextPath }/resources/images/${seller.sellerImg}"> 
+								<a href="sellerPageInfo.do?memId=${seller.memId }"><img alt="Sample images" width="250px" height="150px" src="${pageContext.request.contextPath }/resources/images/${seller.sellerImg}"></a>
 						</div>
 						</div><!-- /.col-md-4 -->		
 					</div><!-- /.row -->

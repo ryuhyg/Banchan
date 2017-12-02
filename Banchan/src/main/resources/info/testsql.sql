@@ -76,8 +76,8 @@ select * from (
 
 where m.mem_id=s.mem_id and rownum <= 3 
 
-select * from ban_mem where mem_id='java2'
-update seller set seller_score='5' where mem_id='java2' 
+select * from ban_mem where mem_id='test'
+update seller set seller_score='5' where mem_id='test' 
 			
 
 
@@ -131,6 +131,13 @@ select seller_img, seller_info from seller where
 		mem_id='ddddd'
 
 select * from mem_auth
+
+
+select * from ban_mem where mem_name='ddssss'
+update from BAN_MEM where mem_name='ddssss'
+delete from ban_mem where mem_name='ddssss'
+select * from ENABLE
+
 select * from question
 insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '안녕하세요 답글잘되요', sysdate, 'java', 4);
 insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '배고파', sysdate, 'java', 4);
@@ -144,6 +151,40 @@ select * from address where address_no=1012
 
 insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(answer_seq.nextval, '윤주예뻐', sysdate, 'java', 4);
 
-delete FROM food
 
-update trade set tr_status_no='2'
+update trade set tr_status_no='2';
+
+
+select * from answer; 
+select * from FOOD_SELL;
+
+<<<<<<< HEAD
+update seller set seller_score=1.0 where mem_id='jjjjj'
+update food set food_score=1.0 where food_no='1017'
+
+
+select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,
+		t.mem_id,
+		ts.tr_status,
+		fs.tr_date, fs.loc, fs.price,
+		f.food_name, f.food_main_img
+		from (select row_number() over(order by tr_no desc) as
+		rnum, tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id,
+		tr_status_no, food_sell_no from trade) t, tr_status ts, food_sell fs,
+		food f, seller s, ban_mem bm
+		where s.mem_id='kymkyj' and
+		bm.mem_id=s.mem_id and s.mem_id=f.mem_id
+		and t.tr_status_no=ts.tr_status_no
+		and t.food_sell_no=fs.food_sell_no
+		and fs.food_no=f.food_no
+		and t.rnum between 1 and 8
+		order by t.tr_no desc
+
+
+
+select * from BAN_MEM
+
+
+
+
+

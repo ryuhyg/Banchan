@@ -10,9 +10,6 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98caf95ee9ce0f476e2beb58b89d2a54"></script>  
 	 <!-- 우편번호 api -->
 	 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- location 끝 -->
  
 	<!-- 광태 추가 --><!-- confirm -->
@@ -227,7 +224,7 @@ $(document).ready(function() {
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
 			center: new daum.maps.LatLng(${addressVO.latitude}, ${addressVO.longitude}), // 지도의 중심좌표 
-	        level: 3 // 지도의 확대 레벨
+	        level: 4 // 지도의 확대 레벨
 	    };
 	
 	var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
