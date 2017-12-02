@@ -81,16 +81,16 @@ filter: alpha(opacity=0);
 			<div class="blog-list blog-detail ">
 					<form class="form-large grey-color"  style="height: 310px" action="sellerRegister.do?id=${mvo.memId}" method="post" enctype="multipart/form-data" onsubmit="return checkForm(this)">
 					<label for="id" style="font-weight: bold; margin-left: 15px">프로필사진 업로드</label><br>  
-					<div class="col-sm-6">
+				<div class="col-sm-6" >
 					<sec:csrfInput/>
-					<div style="margin-top: 5px;" class="file_input_div">
+					<div style="margin-top: 5px;" class="file_input_div" >
 					<input type="button" value="파일 선택" class="btn btn-default" style="margin-top: 8px" />
 					<input type="file" class="file_input_hidden" value="파일 업로드" name="uploadImage" id="cma_file" required="required" accept="image/*" onchange="getimagereview(this,$('#cma_image'))" >
 					<div id="cma_image" style="margin-top: 10px;"></div>
 					</div>
 				</div>
 				
-				<div class=" col-sm-6">
+				<div class="col-sm-6">
 					<div style="position: relative;bottom: 25px;">
 					<label for="id" style="font-weight: bold;">판매자 소개 :</label>  
 					<br>
