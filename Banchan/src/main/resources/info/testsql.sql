@@ -158,3 +158,7 @@ update trade set tr_status_no='2';
 select * from answer; 
 select * from FOOD_SELL;
 
+select * from food_sell
+
+update food_sell set close_date= to_date('2017.12.20 13:44:30','yyyy.MM.DD HH24:MI:SS')
+commit
