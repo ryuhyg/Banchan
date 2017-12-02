@@ -158,6 +158,7 @@ update trade set tr_status_no='2';
 select * from answer; 
 select * from FOOD_SELL;
 
+<<<<<<< HEAD
 update seller set seller_score=1.0 where mem_id='jjjjj'
 update food set food_score=1.0 where food_no='1017'
 

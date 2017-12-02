@@ -22,27 +22,6 @@
 .home-top{
 	margin-top: 100px;
 }
-
-.pagination {
-    display: inline-block;
-    text-align: center;
-}
-
-.pagination a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    transition: background-color .3s;
-    font-size: 13px;
-}
-
-.pagination a.active {
-    background-color: #000;
-    color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
 </style>     
 
 <script type="text/javascript">
@@ -186,16 +165,6 @@ $(document).ready(function () {
 	            dataType:"json",
 	            success:function(data){
 	            		commentList(questNo);
-	             	/* var info="<tr>";
-	               info+="<td>"+data.ansNo+"</td>";
-	               info+="<td>"+data.ansContent+"</td>";
-	               info+="<td>"+data.memId+"</td>";
-	               info+="<td>"+data.ansPostdate+"</td>";
-	               info+="<td><button name=deleteAnswer class=btn btn-default>x</button></td>";   
-	               info+="</tr>";  */
-		         
-	             	/* $(".ansContent").html(info);
-	             	$(".ansContent").text("");  */
 	            } 
 	            
 	         });//ajax   
@@ -204,11 +173,10 @@ $(document).ready(function () {
 		/*댓글 수정 시 댓글 내용을 input폼으로 변경 - 아래 commentUpdateProc()호출*/ 
 		function commentUpdate(questNo, questContent){
 			var a ="";
-		    a += '<div class="tog">';
 		    a += '<div class="input-group">';
 		    a += '<input type="text" class="form-control" name="content_'+questNo+'" value="'+questContent+'"/>';
 		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+questNo+');">수정</button> </span>';
-		    a += '</div></div>';
+		    a += '</div>';
 		    $('.commentContent'+questNo).html(a);
 		}
 		/*댓글 수정*/
@@ -256,21 +224,17 @@ $(document).ready(function () {
 		         return confirm("구매하시겠습니까?");
 		      return false; 
 		   }
-function returnList(){
-	location.href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${foodSell.memId}";
-	
-}
 </script>
 
 <!-- 수정 후 코드입니다. -->
 
-<section id="recent-list" class="agency" style="margin-top: 100px">
+<section id="recent-list" class="agency" style="margin-top: 150px">
 <div class="container" style="width: 100%">
 <div class="row">
    <div class="col-sm-1"></div><!-- col-sm-1 -->
    <div class="col-sm-10">
    <div class="blog-list blog-detail">
-      <h3 class="title-form"><i class="fa fa-search" aria-hidden="true" style="margin-right: 5px"></i>판매음식 상세정보</h3>
+      <h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매음식 상세정보</h3>
       <div class="form-large grey-color">
       <div class="row">
       <div class="col-xs-6" style="float: left" class="row">
@@ -283,7 +247,11 @@ function returnList(){
          <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;">
             <table class="table" style="font-size: 13px">
                <tr>
-                  <th style="width:25%; padding: 4px; border-top: 0px;">예약마감일</th>
+                  <th style="width:25%; padding: 4px; border-top: 0px;">음식평점</th>
+                  <td colspan="3">${foodSell.foodScore}</td>
+               </tr>
+               <tr>
+                  <th>예약마감일</th>
                   <td>${foodSell.closeDate}</td>
                </tr>
                <tr>
@@ -325,45 +293,45 @@ function returnList(){
       
       
       <form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()">
-                <div class="row"> 
-                   <input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
-                   <input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
-                <c:choose>
-                <c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
-                 <div class="col-sm-2" style="text-align: right">구매수량:</div>
-                  <div class="col-sm-2">
-                     <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px" required="required"/>
-                   </div>
-                
-                   <sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
-                       <input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
-                    </sec:authorize>
-             
-                    
-                      <label class="control-label" for="거래가격">거래가격:
-                   <span id="orderPrice"></span>
-                   </label>
-                </c:when>
-                </c:choose>
-                </div> <!-- row -->
-                    
-                    <div class="row" align="center">
-                       <c:choose>
-                          <c:when test="${foodSell.memId!=mvo.memId}">
-                            <input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
-                          </c:when>
-                         <c:otherwise>
-                            <input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
-                            <input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
-                         </c:otherwise>                   
-                       </c:choose>
-                </div>
-         </form>
+               <div class="row"> 
+                  <input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
+                  <input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
+               <c:choose>
+               <c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
+                <div class="col-sm-2" style="text-align: right">구매수량:</div>
+                 <div class="col-sm-2">
+                    <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px" required="required"/>
+                  </div>
+               
+                  <sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
+                      <input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
+                   </sec:authorize>
+            
+                   
+                     <label class="control-label" for="거래가격">거래가격:
+                  <span id="orderPrice"></span>
+                  </label>
+               </c:when>
+               </c:choose>
+               </div> <!-- row -->
+                   
+                   <div class="row" align="center">
+                      <c:choose>
+                         <c:when test="${foodSell.memId!=mvo.memId}">
+                           <input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+                         </c:when>
+                        <c:otherwise>
+                           <input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
+                           <input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
+                        </c:otherwise>                   
+                      </c:choose>
+               </div>
+        </form>
       </div> <!-- form-large grey-color -->
-     <a href="#" onclick="returnList()" class="btn btn-reverse button-form" style="margin-top: 10px; float: right;">목록으로</a>
-     <!-- 후기 작성 부분 입니다_윤주 --> 
-      <div class="row" style="margin-top: 25px; width: 100%;">
-      <h4><i class="fa fa-pencil-square-o" aria-hidden="true" style="margin-left: 2%"></i>후기</h4>
+     
+     <!-- 후기 작성 부분 입니다_윤주 -->
+      <div class="row">
+      <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i>후기</h4>
       <c:choose>
 		<c:when test="${fn:length(rlist.list)==0}">
 			<h5>작성된 후기가 없습니다</h5>
@@ -428,7 +396,7 @@ function returnList(){
       
       <hr>
 <!--  댓글  -->
-     <%--  <div class="row">
+      <div class="row">
         <label for="content">Q&A</label>
         <form name="commentInsertForm">
             <div class="input-group">
@@ -445,8 +413,8 @@ function returnList(){
     
     <div class="row">
         <div class="commentList"></div>
-    </div> --%>
-<!-- 댓글 끝 -->      
+    </div>
+      
    </div><!-- blog-list blog-detail -->
    </div> <!-- col-sm-10 -->
    <div class="col-sm-1"></div><!-- col-sm-1 -->
