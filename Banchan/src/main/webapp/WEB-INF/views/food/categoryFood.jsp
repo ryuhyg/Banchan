@@ -11,12 +11,11 @@ jQuery(document).ready(function(){
     
     select.change(function(){
     	var select_name = $(this).children("option:selected").val();
-        
         /* var select_name = $(this).children("option:selected").text(); */
         $(this).siblings("label").text(select_name);
         location.href="${pageContext.request.contextPath}/selectCategoryFood.do?category="+select_name+"&pageNo=1";
     });
-    });
+  });
 </script>
 <style type="text/css">
 #select_box {
@@ -48,24 +47,36 @@ jQuery(document).ready(function(){
 <section id="agent-page"  style="margin-top: 100px;">
 	<div class="container">
 		<div id="select_box">
-		    <label>카테고리</label>
-		    <select id="category" title="select category">
-		        <option selected="selected" value="">전체보기</option>
+		    <select id="category" name="category">
+		   	 <option value="">전체보기</option>
+				<c:forEach items="${category}" var="categorylist">
+				<c:choose>
+				<c:when test="${categorySelected eq categorylist.CATEGORY_NAME} ">
+				<option value="${categorylist.CATEGORY_NAME}" selected="selected">${categorylist.CATEGORY_NAME}</option>
+				</c:when>
+				<c:otherwise>
+				<option value="${categorylist.CATEGORY_NAME}">${categorylist.CATEGORY_NAME}</option>
+				</c:otherwise>
+				</c:choose>
+				</c:forEach>
+			</select>
+		    <!-- <select id="category" title="select category">
+		        <option value="" selected="selected">전체보기</option>
 		        <option value="반찬">반찬</option>
 		        <option value="김치">김치</option>
 		        <option value="고기">고기</option>
 		        <option value="국,찌게">국,찌게</option>
 		        <option value="도시락">도시락</option>
 		        <option value="베이커리">베이커리</option>
-		    </select>
+		    </select>-->
 		</div>
-		
+	<div class="col-md-8">
 		<c:forEach var="food" items="${lvo.list }" >
 		<div class="row" style="vertical-align: middle">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
 								<div class="bs-callout callout-success" style="width: 800px">
 										<h3 class="title" style="width: auto">
-								<a href="#">
+								<a href="${pageContext.request.contextPath}/foodDetailView.do?foodNo=${food.foodNo}">
 									${food.foodName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${food.foodScore}</a></h3> 
 							 <span class='description' style='color:black;font-size:12px;'>		
 								 <table height="81px">  
@@ -79,17 +90,19 @@ jQuery(document).ready(function(){
 									<td></td><td></td>
 								</tr>			
 								</table>
-								  </span>
+							 </span>
 								</div><!-- bs-callout callout-success -->
 							</div><!-- /.col-md-8 -->
 							<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
 							<!-- . Agent Box -->
 							<div class="img" >
-								<a href="#"><img alt="Sample images" width="250px" height="150px" src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}"></a>
+								<a href="${pageContext.request.contextPath}/foodDetailView.do?foodNo=${food.foodNo}"><img alt="Sample images" width="250px" height="150px" src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}"></a>
 							</div>
 							</div><!-- /.col-md-4 -->		
 						</div>
 		</c:forEach>
+	</div>
+	<div class="col-md-2"></div>
 	</div>
 </section>
 		
