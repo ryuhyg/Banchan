@@ -154,11 +154,17 @@ insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(a
 
 update trade set tr_status_no='2';
 
-
+delete from question
+select * from question
+create sequence question_seq nocache;
+drop sequence question_seq
+insert into question values(question_seq.nextval,'101014','java2','양파가 들어가나요~?',sysdate)
 select * from answer; 
 select * from FOOD_SELL;
-
+select * from food
+update food set food_score=4.5 where food_no=1003
 select * from food_sell
-
+select * from review
+delete from review where rev_no='22'
 update food_sell set close_date= to_date('2017.12.20 13:44:30','yyyy.MM.DD HH24:MI:SS')
 commit

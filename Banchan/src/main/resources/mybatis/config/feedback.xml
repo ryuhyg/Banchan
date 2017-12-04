@@ -37,7 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<!-- 댓글 목록 -->
 	<select id="commentList" resultMap="qnaRM">
 		select quest_no, quest_content, food_sell_no, quest_postdate, mem_id
-		FROM question order by quest_no desc
+		FROM question
+		order by quest_no desc
 	</select>
 	
 			<!-- 댓글 수정 -->
