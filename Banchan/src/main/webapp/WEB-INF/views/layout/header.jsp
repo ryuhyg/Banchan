@@ -6,7 +6,7 @@
 <sec:authentication var="mvo" property="principal" />
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#logoutAction").click(function() {
+		$("#logoutAction").click(function() { 
 			$("#logoutForm").submit();
 		});
 		$("#searchBtn").hover(function(){
