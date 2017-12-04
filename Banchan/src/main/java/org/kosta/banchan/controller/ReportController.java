@@ -9,12 +9,15 @@ import org.kosta.banchan.model.vo.ReportVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ReportController {
 	@Resource
 	private ReportService reportService;
+	
 	@RequestMapping("reportmain.do")
+	@ResponseBody
 	public List<ReportVO> getReport(Model model){
 		List<ReportVO> rlist = reportService.getReport();
 		System.out.println(rlist);
