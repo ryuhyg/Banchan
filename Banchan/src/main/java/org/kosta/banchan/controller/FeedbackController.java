@@ -69,8 +69,8 @@ public class FeedbackController {
 	//댓글 목록
 	@RequestMapping("commentList.do")
 	@ResponseBody
-	private List<QuestionVO> commentList(Model model){
-		return feedbackService.commentList();
+	private List<QuestionVO> commentList(Model model,String foodSellNo){
+		return feedbackService.commentList(foodSellNo);
 	}
 	
 	//댓글 작성 

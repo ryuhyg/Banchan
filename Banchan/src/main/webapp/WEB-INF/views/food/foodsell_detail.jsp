@@ -93,8 +93,8 @@ $(document).ready(function () {
 	});//ready
 	
 	/*질문 댓글 작성하기*/		
-     var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
-	
+     //var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
+	var foodSellNo = ${foodSell.foodSellNo};//판매음식번호_수정한거
 	/*댓글 등록*/
 	function commentInsert(insertData){
 		 $.ajax({
@@ -133,6 +133,7 @@ $(document).ready(function () {
 		              	a += '</div></div>';      	
 		            });//each
 		           $(".commentList").html(a);
+		            
 		      	}//success
 		    }); //ajax
 	}//function

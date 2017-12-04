@@ -104,8 +104,8 @@ public class FeedbackServiceImpl implements FeedbackService {
 	//////////////////start정훈///////////////////////////
 	//댓글 목록
 	@Override
-	public List<QuestionVO> commentList(){
-		return questionDAO.commentList();
+	public List<QuestionVO> commentList(String foodSellNo){
+		return questionDAO.commentList(foodSellNo);
 	}
 	//댓글 작성
 	@Override
