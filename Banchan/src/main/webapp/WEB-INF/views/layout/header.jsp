@@ -9,10 +9,23 @@
 		$("#logoutAction").click(function() {
 			$("#logoutForm").submit();
 		});
-		
 		$("#searchBtn").hover(function(){
 			$("#searchkw").css("blink")
 		});	
+		$("#reportListBtn").click(function(){
+			var reportList="";
+			$.ajax({
+				 type:"get",
+	             url:"${pageContext.request.contextPath}/reportmain.do",
+	             success:function(data){
+	            	 for(var i=0;i<data.length;i++){
+	            		 reportList += "<li><a href='${pageContext.request.contextPath}/searchByKeyword.do?kw="+data[i].keyword+"'>"+data[i].rk+". "+data[i].keyword+"</a></li>"
+	            		 $("#reportList").html(reportList);
+	            	 }
+	            	
+	             }
+			});
+		});
 	});
 </script>		
 
@@ -97,7 +110,7 @@
 					<li class="has_submenu"><a href="">Home</a>
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/home.do">홈으로</a></li>
-							<li><a href="">소개</a></li>
+							<li><a href="${pageContext.request.contextPath}/intro/service_intro.do">소개</a></li>
 						</ul></li>
 					<li class="has_submenu"><a href="">음식찾기</a>
 						<ul>
@@ -120,15 +133,15 @@
 						<div class="searchForm">
 							<input type="text" style="border: 0; width:71%; box-shadow: none; " placeholder="검색" name="kw">
 							<button class="btn btn-primary dropdown-toggle dropdown-hover searchBtn" type="button"
-							data-toggle="dropdown" data-hover="dropdown"
+							data-toggle="dropdown" data-hover="dropdown" id="reportListBtn"
 							style="border: none; background-color: #fff">
 							<i class="fa fa-arrow-down" ></i> 
 							</button>
-						<ul class="dropdown-menu" style=" width:71%;" >
-						<%-- <c:forEach items="${rlist}"  var="kw" >
-							<li><a href="#" >${kw.keyword}</a></li>
-						</c:forEach> --%>
+							
+						<ul class="dropdown-menu" id="reportList" style=" width:71%;" >
+							<li></li>
 						</ul>
+						
 							<span><button class="searchBtn" type="submit">
 							<i class="fa fa-search" aria-hidden="true"></i></button></span>
 						</div>

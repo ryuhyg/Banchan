@@ -1,6 +1,7 @@
 package org.kosta.banchan;
 
 import javax.annotation.Resource;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -146,6 +147,17 @@ public class TestUnit {
 		 */
 		// 미역국 초밥 등갈비
 		// System.out.println("인기 TOP 음식 테스트 :"+foodService.selectFoodTop3());
+		/*String str ="101033:알감자조림.jpg/101034:김석환.jpg/101030:도미노피자.jpg/101029:IU.jpg/101027:broken-line.png/101028:downloadfile-8.jpg/";
+		System.out.println(str.indexOf("101030"));
+		int start=str.indexOf("101030");
+		System.out.println(str.indexOf("/", 32));
+		int end =str.indexOf("/", start);
+		System.out.println(str.substring(0,start));
+		String strFront= str.substring(0,start);
+		System.out.println(str.substring(end+1, str.length()));
+		String strBack = str.substring(end+1, str.length());
+		System.out.println(strFront+strBack);*/
+		
 	}
 
 	

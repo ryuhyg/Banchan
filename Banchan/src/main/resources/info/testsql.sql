@@ -154,11 +154,22 @@ insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(a
 
 update trade set tr_status_no='2';
 
-
+delete from question
+select * from question
+create sequence question_seq nocache;
+drop sequence question_seq
+insert into question values(question_seq.nextval,'101014','java2','양파가 들어가나요~?',sysdate)
 select * from answer; 
 select * from FOOD_SELL;
+select * from food
+update food set food_score=4.5 where food_no=1003
+select * from food_sell
+select * from review
+delete from review where rev_no='22'
+update food_sell set close_date= to_date('2017.12.20 13:44:30','yyyy.MM.DD HH24:MI:SS')
+commit
+select * from FOOD_SELL;
 
-<<<<<<< HEAD
 update seller set seller_score=1.0 where mem_id='jjjjj'
 update food set food_score=1.0 where food_no='1017'
 
@@ -181,10 +192,22 @@ select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,
 		order by t.tr_no desc
 
 
-
+select * from seller
 select * from BAN_MEM
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('dddd','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('eeee','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('abcde','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('freejh20','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+update seller set seller_score=4.5 where mem_id='dddd';
+update seller set seller_score=4.5 where mem_id='eeee';
+update seller set seller_score=4.5 where mem_id='abcde';
+update seller set seller_score=4.5 where mem_id='freejh20';
+select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score , rank
+				from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
+						s, ban_mem m, address a 
+						where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3	
 
-
+select * from food_sell
 
 
 

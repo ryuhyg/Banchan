@@ -69,8 +69,8 @@ public class FeedbackController {
 	//댓글 목록
 	@RequestMapping("commentList.do")
 	@ResponseBody
-	private List<QuestionVO> commentList(Model model){
-		return feedbackService.commentList();
+	private List<QuestionVO> commentList(Model model,String foodSellNo){
+		return feedbackService.commentList(foodSellNo);
 	}
 	
 	//댓글 작성 
@@ -79,11 +79,9 @@ public class FeedbackController {
 	private int commentInsert(@RequestParam String foodSellNo, @RequestParam String content, @RequestParam String memId) throws Exception{
 		System.out.println("질문 댓글 반응 테스트"); 
 		QuestionVO qvo = new QuestionVO();
-	     System.out.println("전:"+qvo);
 	     qvo.setFoodSellNo(foodSellNo);
 	     qvo.setQuestContent(content);
 	     qvo.setMemId(memId);
-	     System.out.println("후:"+qvo);
 	     	return feedbackService.commentInsert(qvo);
 	    }
 	

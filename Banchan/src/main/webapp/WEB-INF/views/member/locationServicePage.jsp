@@ -128,13 +128,12 @@ $(document).ready(function() {
 	    	 				"</tr>"+			
 	    	 				"<tr><td>"+"별점 : "
 	                        +'<span class="star_rating">'; 
-	                        var score= data.list[i].sellerScore/1;
-                     		 for (var j = 0; j <score; j++) {
-	                    	   strTemp +='<a class="on">★</a>';
+	                        for (var j = 0; j < (data.list[i].sellerScore)-((data.list[i].sellerScore)%1); j++) {
+	    	 					strTemp +='<a class="on">★</a>';
+							}  
+							 for (var k = 0; k < 5-((data.list[i].sellerScore)-((data.list[i].sellerScore)%1)); k++) {
+								 strTemp +='<a >★</a>'; 
 							}
-		                   	for (var k = 0; k < 5-score ; k++) {
-		                       strTemp +='<a>★</a>';
-		                   	}
 		                      strTemp+='</span>'+data.list[i].sellerScore+"</td></tr>";
 						
 					}
@@ -314,13 +313,14 @@ $(document).ready(function() {
 	}
 	
 	// 마커 클릭시 이벤트 입니다
-	function makeClickListener(title) {
+	function makeClickListener(addressNo) {
 	    return function() {
-	    	$("#addressNoId").val(title);
+	    	$("#addressNoId").val(addressNo);
+	    	//alert(addressNo);
 	    	$.ajax({
 	    		type:"get",
 	    		url:"${pageContext.request.contextPath}/getMarkerSellerListOnAjax.do",
-	    		data:"addressNo="+title,
+	    		data:"addressNo="+addressNo,
 	    		success:function(data){
 	    			//alert(data.list[0].memId);
 	    			 //alert(data.list.length);
@@ -335,13 +335,13 @@ $(document).ready(function() {
 	    	 				"<td> <a href='#'>"+data.list[i].memName+"</a> </td>"+
 	    	 				"</tr>"+			
 	    	 				"<tr><td>"+"별점 : "+'<span class="star_rating">';
-	    	 				var score= data.list[i].sellerScore/1;
-                      		 for (var j = 0; j <score; j++) {
-	                    	   strTemp +='<a class="on">★</a>';
+
+	    	 				for (var j = 0; j < (data.list[i].sellerScore)-((data.list[i].sellerScore)%1); j++) {
+	    	 					strTemp +='<a class="on">★</a>';
+							}  
+							 for (var k = 0; k < 5-((data.list[i].sellerScore)-((data.list[i].sellerScore)%1)); k++) {
+								 strTemp +='<a >★</a>'; 
 							}
-		                   	for (var k = 0; k < 5-score ; k++) {
-		                    		strTemp +='<a >★</a>'; 
-		                   	}
 		                      strTemp+='</span>'+data.list[i].sellerScore+"</td></tr>";
 						
 					}

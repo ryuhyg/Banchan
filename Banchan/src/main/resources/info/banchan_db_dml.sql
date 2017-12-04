@@ -50,8 +50,16 @@ insert into food(food_no, food_name, food_de, food_score, food_main_img, food_po
 values(food_seq.nextval, '파김치', '매콤하고 맛있는 파김치~~', 0, '이미지경로', sysdate, 2, 'java2');
 insert into food(food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id)
 values(food_seq.nextval, '도라지무침', '직접 재배한 도라지로 만들었어요~', 0, '이미지경로', sysdate, 3, 'java2');
-
--- FOOD_SELL
+insert into food(food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id)
+values(food_seq.nextval, '시금치무침', '직접 재배한 시금치로 만들었어요~', 0, '등갈비.jpg', sysdate, '10101', 'java2');
+insert into food(food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id)
+values(food_seq.nextval, '두부조림', '직접 재배한 콩으로 만들었어요~', 0, '미역국.jpg', sysdate, '10101', 'java2');
+insert into food(food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id)
+values(food_seq.nextval, '총각김치', '직접 재배한 콩으로 만들었어요~', 0, '미역국.jpg', sysdate, '10101', 'java2');
+insert into food(food_no, food_name, food_de, food_score, food_main_img, food_postdate, category_no, mem_id)
+values(food_seq.nextval, '치즈등갈비', '직접 재배한 콩으로 만들었어요~', 0, '미역국.jpg', sysdate, '10101', 'java2');
+select * from food
+-- FOOD_SELL 
 insert into food_sell(food_sell_no, tr_date, close_date, loc, price, pre_quantity, sell_postdate, unit, sell_detail, food_no)
 values(food_sell_seq.nextval, to_date('20171117 15:30','YYYYMMDD HH24:MI'), to_date('20171130 15:30','YYYYMMDD HH24:MI'), 
       '놀이터', 5000, 5, sysdate, '600g/개', '놀이터에서 일괄 구매만 가능합니다.', 1);
@@ -62,8 +70,6 @@ insert into food_sell(food_sell_no, tr_date, close_date, loc, price, pre_quantit
 values(food_sell_seq.nextval, to_date('20171129 15:30','YYYYMMDD HH24:MI'), to_date('20171201 15:30','YYYYMMDD HH24:MI'), 
       '놀이터', 2000, 10, sysdate, '300g/개', '이번엔 좀 덜 맵게 만들었습니다. 아이들도 먹을 수 있어요. 택배는 불가합니다.', 2);
 
-
-      
 -- TRADE
 insert into trade(tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id, food_sell_no, tr_status_no)
 values(trade_seq.nextval, 1, sysdate, sysdate, 'java', 1, 2);
