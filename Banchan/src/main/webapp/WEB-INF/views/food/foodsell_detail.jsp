@@ -342,7 +342,7 @@
 		<c:otherwise>
 			<table class="table table-hover" style="text-align: center;font-size: 12px;">
 				<thead>
-					<tr class="tr_visible">
+					<tr class="tr_visible"> 
 						<td>NO</td>
 						<td style="width: 150px;">별점</td> 
 						<td>내용</td>
