@@ -58,9 +58,9 @@ table, th, td{
 						<td>${t.foodSellVO.sellerVO.memName}</td>
 						<td>${t.foodSellVO.sellerVO.tel}</td>
 						<td>${t.trStatus}</td>
-						<c:if test="${t.trStatusNo=='2'}">
-						<td>
-						<a href="${pageContext.request.contextPath}/reviewRegisterForm.do?foodSellNo=${t.foodSellVO.foodSellNo}&foodNo=${t.foodSellVO.foodNo}&memId=${t.foodSellVO.sellerVO.memId}" class="btn btn-default" >후기작성</a>
+						<c:if test="${t.trStatusNo=='2'}">  
+						<td style="border-top-color: #fff">    
+						<a href="${pageContext.request.contextPath}/reviewRegisterForm.do?foodSellNo=${t.foodSellVO.foodSellNo}&foodNo=${t.foodSellVO.foodNo}&memId=${t.foodSellVO.sellerVO.memId}" class="btn btn-default"  style=";margin-top:-7px">후기작성</a>
 						</td>
 						</c:if>
 						</tr>
@@ -68,7 +68,7 @@ table, th, td{
 					</tbody>  
 				</table>
 				<div align="right">
-					<a href="${pageContext.request.contextPath}/home.do" class="btn btn-reverse button-form" style="margin-right:14px; margin-top: 10px;">돌아가기</a>
+					<a href="${pageContext.request.contextPath}/home.do" class="btn btn-reverse button-form" style="margin-right:10px; margin-top: 10px;">돌아가기</a>
 				</div> 
 				<div class="pageginationContainer" style="text-align: center;">
 			  	  <div class="pagination" >

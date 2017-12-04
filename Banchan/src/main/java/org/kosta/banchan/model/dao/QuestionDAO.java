@@ -9,7 +9,7 @@ public interface QuestionDAO {
 	
 //start정훈
 	//댓글 목록
-	List<QuestionVO> commentList();
+	List<QuestionVO> commentList(String foodSellNo);
 	//댓글 작성
 	int commentInsert(QuestionVO qvo);
 	//댓글 삭제

@@ -154,11 +154,22 @@ insert into ANSWER(ans_no, ans_content, ans_postdate, mem_id, quest_no) values(a
 
 update trade set tr_status_no='2';
 
-
+delete from question
+select * from question
+create sequence question_seq nocache;
+drop sequence question_seq
+insert into question values(question_seq.nextval,'101014','java2','양파가 들어가나요~?',sysdate)
 select * from answer; 
 select * from FOOD_SELL;
+select * from food
+update food set food_score=4.5 where food_no=1003
+select * from food_sell
+select * from review
+delete from review where rev_no='22'
+update food_sell set close_date= to_date('2017.12.20 13:44:30','yyyy.MM.DD HH24:MI:SS')
+commit
+select * from FOOD_SELL;
 
-<<<<<<< HEAD
 update seller set seller_score=1.0 where mem_id='jjjjj'
 update food set food_score=1.0 where food_no='1017'
 
@@ -181,41 +192,5 @@ select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,
 		order by t.tr_no desc
 
 
-
-select * from BAN_MEM
-select * from category
-select * from food
-
-select f.food_name
-from food f, CATEGORY c
-where c.category_name='반찬' and c.category_no=f.category_no and f.mem_id='aaaa';
-
-
-select food_name,category_no
-from food
-where mem_id='aaaa' order by category_no desc
-
-
-select * from food
-
-select count(*)
-from food f, CATEGORY c
-where c.category_name='반찬' and c.category_no=f.category_no 
-
-select * 
-from 
-(select row_number() over(order by f.food_postdate desc) as
-rnum,f.food_no,f.food_name,f.mem_id,f.food_score,f.food_main_img,f.food_postdate,f.category_no,m.mem_name
-from food f, ban_mem m
-where m.mem_id=f.mem_id) cf
-where cf.rnum between 1 and 5
-
 select * from seller
-
-select * 
-	from (select row_number() over(order by f.food_postdate desc) as
-	rnum,f.food_no,f.food_name,f.mem_id,f.food_score,f.food_main_img,
-	f.food_postdate,c.category_no,m.mem_name
-	from food f, category c,ban_mem m
-	where c.category_name='반찬' and c.category_no=f.category_no and m.mem_id=f.mem_id) cf
-	where cf.rnum 1 between and #{endRowNumber}
+select * from BAN_MEM

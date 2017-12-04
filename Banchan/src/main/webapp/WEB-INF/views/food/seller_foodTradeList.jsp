@@ -27,6 +27,7 @@
 
 table, th, td{
 	text-align: center;
+	border: hidden;
 }
 .trNone{
 	display: none;
@@ -34,6 +35,7 @@ table, th, td{
 .tr_visible {
 	display: table-row;
 }
+
 </style>  
 
 <script type="text/javascript">
@@ -100,7 +102,7 @@ table, th, td{
 				         </div>
 						
 						 <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;width: 100%"> 
-					            <table class="table" style="font-size: 13px">
+					            <table class="table" style="font-size: 13px;" >
 					               <tr> 
 					                  <th>예약마감일</th>
 					                  <td>${foodSell.closeDate}</td>

@@ -16,8 +16,8 @@ public class QuestionDAOImpl implements QuestionDAO {
 //start정훈
    //댓글 목록
    @Override
-   	public List<QuestionVO> commentList(){
-		return template.selectList("feedback.commentList");
+   	public List<QuestionVO> commentList(String foodSellNo){
+		return template.selectList("feedback.commentList",foodSellNo);
 
    	}
    //댓글 작성

@@ -19,7 +19,7 @@
 											<c:forEach items="${qnalist}" var="q">
 															<option value="${q.pwQnaNo}">${q.pwQuest}</option>
 											</c:forEach>
-										</select>
+										</select> 
 										<br>
 										<label for="answer" style="font-weight: bold;"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호 답변</label>
 										<input type="text" placeholder="비밀번호 찾기 답변" name="answer" id="answer" class="margin-bottom form-control">
