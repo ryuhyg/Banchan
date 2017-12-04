@@ -13,7 +13,7 @@
 							<form class="form-large grey-color" id="findPassForm" name="findPassForm" action="${pageContext.request.contextPath }/findPasswordQna.do" method="get">
 										<input type="hidden" name="id" id="id" value="${mvo.memId}">
 										<input type="hidden" name="name" id="name" value="${mvo.memName}">
-										<label for="question" style="font-weight: bold;"> <i class="fa fa-user user" style="margin-right: 5px"></i>비밀번호 질문</label>
+										<label for="question">비밀번호 질문</label>
 										<select id="question" name="question">
 											<option value="100" selected="selected">질문을 선택하세요</option>
 											<c:forEach items="${qnalist}" var="q">
@@ -21,7 +21,7 @@
 											</c:forEach>
 										</select> 
 										<br>
-										<label for="answer" style="font-weight: bold;"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호 답변</label>
+										<label for="answer" style="padding-top: 5px; ">비밀번호 답변</label>
 										<input type="text" placeholder="비밀번호 찾기 답변" name="answer" id="answer" class="margin-bottom form-control">
 								<br>
 								<div align="center"> 
