@@ -82,6 +82,14 @@ public class FoodController {
 		foodService.deleteFoodSell(foodSellNo);
 		return "redirect:sellerPageInfo.do?memId="+sellerId+"&pageNo=1";
 	}
+	@RequestMapping("selectCategoryFood.do")
+	public String selectCategoryFood(String category,String pageNo,Model model) {
+		System.out.println(category);
+		//System.out.println("Controller:"+foodService.selectCategoryFood(category,pageNo));
+		model.addAttribute("lvo",foodService.selectCategoryFood(category,pageNo));
+		return "food/categoryFood.tiles";
+	}
+	
 	///////////////////////// end 우정///////////////////////////////////
 
 	///////////////////////// start 지원///////////////////////////////////

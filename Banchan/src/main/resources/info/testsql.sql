@@ -183,8 +183,39 @@ select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,
 
 
 select * from BAN_MEM
+select * from category
+select * from food
+
+select f.food_name
+from food f, CATEGORY c
+where c.category_name='반찬' and c.category_no=f.category_no and f.mem_id='aaaa';
 
 
+select food_name,category_no
+from food
+where mem_id='aaaa' order by category_no desc
 
 
+select * from food
 
+select count(*)
+from food f, CATEGORY c
+where c.category_name='반찬' and c.category_no=f.category_no 
+
+select * 
+from 
+(select row_number() over(order by f.food_postdate desc) as
+rnum,f.food_no,f.food_name,f.mem_id,f.food_score,f.food_main_img,f.food_postdate,f.category_no,m.mem_name
+from food f, ban_mem m
+where m.mem_id=f.mem_id) cf
+where cf.rnum between 1 and 5
+
+select * from seller
+
+select * 
+	from (select row_number() over(order by f.food_postdate desc) as
+	rnum,f.food_no,f.food_name,f.mem_id,f.food_score,f.food_main_img,
+	f.food_postdate,c.category_no,m.mem_name
+	from food f, category c,ban_mem m
+	where c.category_name='반찬' and c.category_no=f.category_no and m.mem_id=f.mem_id) cf
+	where cf.rnum 1 between and #{endRowNumber}

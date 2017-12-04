@@ -7,6 +7,7 @@ import java.util.Map;
 import org.kosta.banchan.model.vo.FoodSellVO;
 //github.com/ryuhyg/Banchan.git
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.TradeVO;
 
 public interface FoodDAO {
@@ -43,6 +44,15 @@ public interface FoodDAO {
 	void deleteFoodSell(String foodSellNo);
 
 	int totalFoodSellCountByMemId(String memId);
+
+	int getTotalFoodCount();
+
+	int getTotalFoodCountByCategory(String category);
+
+	List<FoodVO> selectAllCategoryFood(HashMap<String, String> paramMap);
+
+	List<FoodVO> selectCategoryFood(HashMap<String, String> paramMap);
+
 	
 
 }

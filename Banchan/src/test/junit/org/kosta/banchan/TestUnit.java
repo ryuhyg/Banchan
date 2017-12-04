@@ -12,6 +12,7 @@ import org.kosta.banchan.model.dao.MemberDAO;
 import org.kosta.banchan.model.dao.ReviewDAO;
 import org.kosta.banchan.model.dao.SellerDAO;
 import org.kosta.banchan.model.dao.TradeDAO;
+import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.vo.FoodVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
@@ -33,7 +34,8 @@ public class TestUnit {
 	private TradeDAO tradeDAO;
 	@Resource
 	private ReviewDAO reviewdao;
-	
+	@Resource
+	private FoodService foodService;
 	@Test
 	public void unitTest() {
 		//System.out.println(sellerDAO.selectSellerInfo("java2"));
@@ -145,6 +147,11 @@ public class TestUnit {
 		System.out.println(reviewdao.getReviewListByFoodSellNo(paramMap));
 
 		 */
+		//System.out.println(foodDAO.getTotalFoodCount());
+		//System.out.println(foodDAO.getTotalFoodCountByCategory("반찬"));
+		String pageNo=null;
+		String category=null;
+		System.out.println(foodService.selectCategoryFood(category,pageNo));
 	}
 
 	

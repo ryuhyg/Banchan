@@ -123,7 +123,29 @@ public class FoodServiceImpl implements FoodService {
 	public int totalFoodSellCountByMemId(String memId) {
 		return foodDAO.totalFoodSellCountByMemId(memId);
 	}
-
+//
+	@Override
+	public ListVO<FoodVO> selectCategoryFood(String category,String pageNo){
+		int totalCount=0;
+		if(category=="")
+			totalCount= foodDAO.getTotalFoodCount();
+		else
+			totalCount=foodDAO.getTotalFoodCountByCategory(category);
+		PagingBean pagingBean = null;
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		if (pageNo == null)
+			pagingBean = new PagingBean(totalCount);
+		else
+			pagingBean = new PagingBean(totalCount, Integer.parseInt(pageNo));
+		paramMap.put("startRowNumber", Integer.toString(pagingBean.getStartRowNumber()));
+		paramMap.put("endRowNumber", Integer.toString(pagingBean.getEndRowNumber()));
+		if(category!="")
+			paramMap.put("category", category);
+		if(category=="")
+			return new ListVO<FoodVO>(foodDAO.selectAllCategoryFood(paramMap), pagingBean);
+		else
+			return new ListVO<FoodVO>(foodDAO.selectCategoryFood(paramMap), pagingBean);
+	}
 	/*
 	 * [영민] 카테고리 받아와서 음식등록
 	 */

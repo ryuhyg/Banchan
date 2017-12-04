@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -105,6 +106,26 @@ public class FoodDAOImpl implements FoodDAO {
 	}
 	public List<FoodVO> selectFoodTop3() {
 		return template.selectList("food.selectFoodTop3");
+	}
+
+	@Override
+	public int getTotalFoodCount() {
+		return template.selectOne("food.getTotalFoodCount");
+	}
+
+	@Override
+	public int getTotalFoodCountByCategory(String category) {
+		return template.selectOne("food.getTotalFoodCountByCategory",category);
+	}
+
+	@Override
+	public List<FoodVO> selectAllCategoryFood(HashMap<String, String> paramMap) {
+		return template.selectList("food.selectAllCategoryFood",paramMap);
+	}
+
+	@Override
+	public List<FoodVO> selectCategoryFood(HashMap<String, String> paramMap) {
+		return template.selectList("food.selectCategoryFood",paramMap);
 	}
 	
 
