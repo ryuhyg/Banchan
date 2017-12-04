@@ -192,10 +192,5 @@ select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,
 		order by t.tr_no desc
 
 
-
+select * from seller
 select * from BAN_MEM
-
-
-
-
-

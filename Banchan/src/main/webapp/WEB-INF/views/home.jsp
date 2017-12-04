@@ -88,7 +88,7 @@ function registeSeller(){
 						<div class="box-ads box-home" style="height: 425px">
 							<a class="hover-effect image image-fill" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${list.getMemId()}">
 								<span class="cover"></span>
-								<img alt="Sample images" style="width:380px;height:270px" src="${pageContext.request.contextPath}/resources/images/${list.getSellerImg()}">
+								<img alt="Sample images" style="width:380px;height:auto;" src="${pageContext.request.contextPath}/resources/images/${list.getSellerImg()}">
 								<h3 class="title">${list.getMemName()} &nbsp;주부님</h3>
 							</a><!-- /.hover-effect -->
 							<span class="address"><i class="fa fa-map-marker"></i>&nbsp;${list.getAddressVO().getAddressAPI()}</span>
