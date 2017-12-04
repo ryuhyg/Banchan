@@ -342,7 +342,7 @@ $(document).ready(function () {
 				<thead>
 					<tr class="tr_visible">
 						<td>NO</td>
-						<td>별점</td>
+						<td style="width: 150px;">별점</td> 
 						<td>내용</td>
 						<td>작성자</td>
 						<td>날짜</td> 
