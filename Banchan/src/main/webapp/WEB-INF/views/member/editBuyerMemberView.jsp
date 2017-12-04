@@ -58,40 +58,40 @@
                             }
                          });
  
-                   //비밀번호 체크
-                   $("#regForm :input[id=password]").keyup(function() {
-                      var id=$(this).val().trim();
-                      if(id.length<4 || id.length>10){
-                         $("#passwordCheckView").html("4 ~ 10 자로 입력해주세요")
-                         checkPassword="";
-                      }else{
-                         $("#passwordCheckView").html("Ok")
-                         checkPassword="passwordOK";
-                      }
-                      $("#regForm :input[id=passwordRe]").trigger("keyup");
-                      
-                   });//keyup
- 
-                   //비밀번호 일치 체크
-                   $("#regForm :input[id=passwordRe]").keyup(function() {
-                      if($("#regForm :input[id=password]").val().trim()==""&& !checkPassword==""){
-                         
-                         $("#regForm :input[id=passwordRe]").val("");
-                         $("#regForm :input[id=password]").focus();
-                         alert("적정 비밀번호를 먼저 입력하세요");
-                      }
-                      else{
-                         if($("#regForm :input[id=password]").val().trim()!=$("#regForm :input[id=passwordRe]").val().trim()){
-                            checkPasswordRe="";
-                            $("#passwordReCheckView").text("비밀번호가 일치하지 않습니다")
-                         }
-                         else if($("#regForm :input[id=password]").val().trim()==$("#regForm :input[id=passwordRe]").val().trim()){
-                            checkPasswordRe="passwordOK";
-                            $("#passwordReCheckView").text("Ok")
-                         }
-                      }
-                      
-                   });//keyup
+                 //비밀번호 체크
+           		$("#regForm :input[id=password]").keyup(function() {
+           			var id=$(this).val().trim();
+           			if(id.length<4 || id.length>10){
+           				$("#passwordCheckView").html(" 4 ~ 10 자리로 입력해주세요.");
+           				checkPassword="";
+           			}else{
+           				$("#passwordCheckView").html(" Ok");
+           				checkPassword="passwordOK";
+           			}
+           			$("#regForm :input[id=passwordRe]").trigger("keyup");
+           			
+           		});//keyup
+           		
+           		//비밀번호 일치 체크
+           		$("#regForm :input[id=passwordRe]").keyup(function() {
+           			if($("#regForm :input[id=password]").val().trim()==""&& !checkPassword==""){
+           				
+           				$("#regForm :input[id=passwordRe]").val("");
+           				$("#regForm :input[id=password]").focus();
+           				alert("적정 비밀번호를 먼저 입력하세요!");
+           			}
+           			else{
+           				if($("#regForm :input[id=password]").val().trim()!=$("#regForm :input[id=passwordRe]").val().trim()){
+           					checkPasswordRe="";
+           					$("#passwordReCheckView").text("비밀번호가 일치하지 않습니다.");
+           				}
+           				else if($("#regForm :input[id=password]").val().trim()==$("#regForm :input[id=passwordRe]").val().trim()){
+           					checkPasswordRe="passwordOK";
+           					$("#passwordReCheckView").text("Ok");
+           				}
+           			}
+           			
+           		});//keyup
  
                                $("#searchaddress")
                                 .click(

@@ -28,7 +28,12 @@
     <link rel=”stylesheet” href=”http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css“>  					 <!-- 아이콘 부트스트랩 -->
 	<!-- Use Iconifyer to generate all the favicons and touch icons you need: http://iconifier.net -->
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon/icon.png" type="image/x-icon" /><!-- 아이콘 --> 
+	<!-- 글꼴 -->
 	<link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/earlyaccess/hanna.css' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/earlyaccess/notosanskr.css' rel='stylesheet' type='text/css' />
+	
+	
 	
 	<script src="${pageContext.request.contextPath}/resources/script/modernizr.min.js"></script>	
 

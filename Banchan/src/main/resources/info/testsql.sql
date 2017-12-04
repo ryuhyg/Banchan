@@ -168,3 +168,34 @@ select * from review
 delete from review where rev_no='22'
 update food_sell set close_date= to_date('2017.12.20 13:44:30','yyyy.MM.DD HH24:MI:SS')
 commit
+select * from FOOD_SELL;
+
+update seller set seller_score=1.0 where mem_id='jjjjj'
+update food set food_score=1.0 where food_no='1017'
+
+
+select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,
+		t.mem_id,
+		ts.tr_status,
+		fs.tr_date, fs.loc, fs.price,
+		f.food_name, f.food_main_img
+		from (select row_number() over(order by tr_no desc) as
+		rnum, tr_no, tr_quantity, tr_req_date, tr_fin_date, mem_id,
+		tr_status_no, food_sell_no from trade) t, tr_status ts, food_sell fs,
+		food f, seller s, ban_mem bm
+		where s.mem_id='kymkyj' and
+		bm.mem_id=s.mem_id and s.mem_id=f.mem_id
+		and t.tr_status_no=ts.tr_status_no
+		and t.food_sell_no=fs.food_sell_no
+		and fs.food_no=f.food_no
+		and t.rnum between 1 and 8
+		order by t.tr_no desc
+
+
+
+select * from BAN_MEM
+
+
+
+
+
