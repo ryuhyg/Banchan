@@ -78,8 +78,32 @@ public class FoodController {
 	}
 
 	@RequestMapping("deleteFoodSell.do")
-	public String deleteFoodSell(String foodSellNo,String sellerId, Model model) {
+	public String deleteFoodSell(String foodSellNo,String sellerId, Model model, HttpServletRequest req, HttpServletResponse resp) {
 		foodService.deleteFoodSell(foodSellNo);
+		// Start 광태 추가 코드(최근클릭)
+		Cookie[] coo= req.getCookies();
+		Cookie clickCoo = null;
+
+		for (int i = 0; i < coo.length; i++) {
+			if(coo[i].getName().equals("click")) {
+				clickCoo = coo[i];
+				break;
+			}
+		}
+		
+		String strTemp= clickCoo.getValue();
+		//FoodSellVO fvo =foodService.getFoodSellDetailByNo(foodSellNo);
+		int start=strTemp.indexOf(foodSellNo);
+		int end =strTemp.indexOf("/", start);
+		String strFront= strTemp.substring(0,start);
+		String strBack = strTemp.substring(end+1, strTemp.length());
+		strTemp= strFront+strBack;
+		System.out.println(strTemp);
+		
+		clickCoo.setValue(strTemp);
+		resp.addCookie(clickCoo);
+		// End 광태 추가 코드(최근클릭)
+		
 		return "redirect:sellerPageInfo.do?memId="+sellerId+"&pageNo=1";
 	}
 	///////////////////////// end 우정///////////////////////////////////
@@ -115,13 +139,11 @@ public class FoodController {
 		model.addAttribute("foodSell", foodService.getFoodSellDetailByNo(foodSellNo));
 		
 		///// Start 최근 클릭 리스트 코드 추가 광태
-		System.out.println("cookie*********");
+		//System.out.println("cookie*********");
 		
 		Cookie[] coo= req.getCookies();
 		Cookie clickCoo = null;
-/*		for (int i = 0; i < coo.length; i++) {
-			//System.out.println("--- "+coo[i].getName()+" : "+coo[i].getValue());
-		}*/
+
 		for (int i = 0; i < coo.length; i++) {
 			if(coo[i].getName().equals("click")) {
 				clickCoo = coo[i];

@@ -27,10 +27,10 @@
   <value>jdbc:oracle:thin:@127.0.0.1:1521:xe</value>  
  </property>
  <property name="username">
-  <value>banchan</value>
+  <value>aaa</value>
  </property> 
  <property name="password">
-  <value>vitamin</value>
+  <value>aaa</value>
  </property>
  <property name="maxActive">
   <value>30</value>
