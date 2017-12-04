@@ -19,7 +19,7 @@
 	             url:"${pageContext.request.contextPath}/reportmain.do",
 	             success:function(data){
 	            	 for(var i=0;i<data.length;i++){
-	            		 reportList += "<li><a href='/"+data[i].keyowrd+"'>"+data[i].rk+". "+data[i].keyword+"</a></li>"
+	            		 reportList += "<li><a href='${pageContext.request.contextPath}/searchByKeyword.do?kw="+data[i].keyword+"'>"+data[i].rk+". "+data[i].keyword+"</a></li>"
 	            		 $("#reportList").html(reportList);
 	            	 }
 	            	
