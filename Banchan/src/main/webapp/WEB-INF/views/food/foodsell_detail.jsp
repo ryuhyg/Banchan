@@ -22,6 +22,9 @@
 .home-top{
 	margin-top: 100px;
 }
+.tableTr{
+	border: hidden;
+}
 </style>     
 
 <script type="text/javascript">
@@ -48,7 +51,7 @@
 	              data:"foodSellNo="+foodSellNo,
 	              success:function(data){
 	                 if(data>=1)
-	                    alert("판매중인 상품이 있어 삭제할 수 없습니다.");
+	                    alert("구매자가 있어 삭제할 수 없습니다.");
 	                 else{
 	                    alert("상품이 삭제되었습니다.");
 	                    location.href="${pageContext.request.contextPath}/deleteFoodSell.do?foodSellNo="+foodSellNo+"&sellerId="+$("#sellerId").val();
@@ -67,7 +70,7 @@
 	              data:"foodSellNo="+foodSellNo,
 	              success:function(data){
 	                 if(data>=1){
-	                    alert("판매중인 상품이 있어 수정할 수 없습니다.");
+	                    alert("구매자가 있어 수정할 수 없습니다.");
 	                 }
 	                 else{
 	                  /* location.href="${pageContext.request.contextPath}/editFoodSellView.do?foodSellNo="+$("#foodSellNo").val(); */
@@ -245,47 +248,58 @@
       </div>
       <div class="col-xs-6" style="float: right" class="row">
          <div class="row">
-            <h3 class="title-form"><i class="" style="margin-right: 5px"></i>${foodSell.foodName} 평점${foodSell.foodScore}</h3>
+            <h3 class="title-form"><i class="" style="margin-right: 5px"></i>${foodSell.foodName} 
+     	
+                  	 <!-- 별점 표현 -->
+						<span class="star_rating"> 
+						<c:forEach begin="1" end="${foodSell.foodScore-(foodSell.foodScore%1)}">
+			    		<a class="on">★</a>
+						</c:forEach>
+						<c:forEach begin="1" end="${5-(foodSell.foodScore-(foodSell.foodScore%1))}">
+			    		<a>★</a>
+			    		</c:forEach> 
+			      		</span>
+   		   </h3>  
          </div>
          <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;">
-            <table class="table" style="font-size: 13px">
-               <tr>
+            <table class="table" style="font-size: 13px; ">
+               <tr class="tableTr">
                   <th style="width:25%; padding: 4px; border-top: 0px;">음식평점</th>
                   <td colspan="3">${foodSell.foodScore}</td>
                </tr>
-               <tr>
+               <tr class="tableTr">
                   <th>예약마감일</th>
                   <td>${foodSell.closeDate}</td>
                </tr>
-               <tr>
+               <tr class="tableTr">
                   <th>거래일</th>
                   <td>${foodSell.trDate}</td>
                </tr>
-               <tr>
+               <tr class="tableTr">
                   <th>가격</th>
                   <td><span id="price">${foodSell.price}</span> 원</td>
                </tr>
-               <tr>
+               <tr class="tableTr">
                   <th>양(개당)</th>
                   <td>${foodSell.unit}</td>
                </tr>
-               <tr>
+               <tr class="tableTr">
                   <th>준비수량</th>
                   <td><span id="preQuantity">${foodSell.preQuantity}</span>&nbsp;(${foodSell.unit })</td>
                </tr>
-               <tr>
+               <tr class="tableTr">
                   <th>남은수량</th>
                   <td><span id="leftQuantity">${leftQuantity}</span>&nbsp;(${foodSell.unit })</td>
                </tr>
-               <tr>
+               <tr class="tableTr">
                   <th>거래장소</th>
                   <td colspan="3">${foodSell.loc}</td>
                </tr>
-               <tr>
+               <tr class="tableTr">
                   <th>음식소개</th>
                   <td colspan="3">${foodSell.foodDe}</td>
                </tr>
-               <tr>
+               <tr class="tableTr">
                   <th>판매추가정보</th>
                   <td colspan="3">${foodSell.sellDetail}</td>
                </tr>                  

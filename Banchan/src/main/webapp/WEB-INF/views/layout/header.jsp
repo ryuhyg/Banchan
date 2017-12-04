@@ -118,8 +118,7 @@
 							<li><a
 								href="${pageContext.request.contextPath}/locationServicePage.do">위치중심으로
 									찾기</a></li>
-							<li><a href="">카테고리로 찾기</a></li>
-
+							<li><a href="${pageContext.request.contextPath}/selectCategoryFood.do?category=">카테고리로 찾기</a></li>
 						</ul></li>
 					<li class="has_submenu"><a href="#">공지사항</a>
 						<ul>

@@ -105,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTradeListByMemId" parameterType="map" resultMap="tradeRM2">
 		SELECT t.tr_no, t.tr_quantity, t.tr_req_date, t.food_sell_no,
 				trs.tr_status_no, trs.tr_status,
-				fs.tr_date, fs.close_date, fs.loc, fs.price, fs.unit,
+				to_char(fs.tr_date, 'YYYY-MM-DD') as tr_date, to_char(fs.close_date, 'YYYY-MM-DD') as close_date, fs.loc, fs.price, fs.unit,
 				f.food_no, f.food_name,
 				m.mem_id, m.mem_name, m.tel
 		FROM ( select row_number() over(order by tr_no desc) as rnum, 
