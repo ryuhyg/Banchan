@@ -25,9 +25,8 @@
 </style>     
 
 <script type="text/javascript">
-
-$(document).ready(function () {
-	   var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
+	$(document).ready(function () {
+		   var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
 	   /*주문 수량 확인하기*/
 	   $("#trQuantity").change(function () {
 	      //구매수량이 준비수량보다 적은지 확인
@@ -149,7 +148,7 @@ $(document).ready(function () {
 		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentAnswerReplyProc();">답변달기</button> </span>';
 		    a += '</div>';
 		    
-		    $('.commentAnswerRe'+questNo).html(a);
+		    $('.commentAnswerRe'+questNo).html(a).toggle();
 		    
 		}
 		 $("[name=commentInsertForm]").serialize();
@@ -170,15 +169,18 @@ $(document).ready(function () {
 	            
 	         });//ajax   
 		}
-	 
+	
+	
+		
 		/*댓글 수정 시 댓글 내용을 input폼으로 변경 - 아래 commentUpdateProc()호출*/ 
 		function commentUpdate(questNo, questContent){
+			
 			var a ="";
 		    a += '<div class="input-group">';
-		    a += '<input type="text" class="form-control" name="content_'+questNo+'" value="'+questContent+'"/>';
+		    a += '<input type="text" class="form-control" id="toggle_btn_commentUpdateText" name="content_'+questNo+'" value="'+questContent+'"/>';
 		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+questNo+');">수정</button> </span>';
 		    a += '</div>';
-		    $('.commentContent'+questNo).html(a);
+		    $('.commentContent'+questNo).html(a).toggle();
 		}
 		/*댓글 수정*/
 		function commentUpdateProc(questNo){

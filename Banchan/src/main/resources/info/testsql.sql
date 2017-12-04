@@ -192,10 +192,22 @@ select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,
 		order by t.tr_no desc
 
 
-
+select * from seller
 select * from BAN_MEM
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('dddd','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('eeee','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('abcde','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('freejh20','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+update seller set seller_score=4.5 where mem_id='dddd';
+update seller set seller_score=4.5 where mem_id='eeee';
+update seller set seller_score=4.5 where mem_id='abcde';
+update seller set seller_score=4.5 where mem_id='freejh20';
+select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score , rank
+				from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
+						s, ban_mem m, address a 
+						where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3	
 
-
+select * from food_sell
 
 
 
