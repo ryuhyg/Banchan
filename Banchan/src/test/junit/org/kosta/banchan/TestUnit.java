@@ -1,8 +1,5 @@
 package org.kosta.banchan;
 
-import java.util.HashMap;
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -12,7 +9,7 @@ import org.kosta.banchan.model.dao.MemberDAO;
 import org.kosta.banchan.model.dao.ReviewDAO;
 import org.kosta.banchan.model.dao.SellerDAO;
 import org.kosta.banchan.model.dao.TradeDAO;
-import org.kosta.banchan.model.vo.FoodVO;
+import org.kosta.banchan.model.service.FoodService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -33,6 +30,8 @@ public class TestUnit {
 	private TradeDAO tradeDAO;
 	@Resource
 	private ReviewDAO reviewdao;
+	@Resource
+	private FoodService foodService;
 	
 	@Test
 	public void unitTest() {
@@ -145,6 +144,8 @@ public class TestUnit {
 		System.out.println(reviewdao.getReviewListByFoodSellNo(paramMap));
 
 		 */
+		// 미역국 초밥 등갈비
+		// System.out.println("인기 TOP 음식 테스트 :"+foodService.selectFoodTop3());
 	}
 
 	
