@@ -17,10 +17,10 @@
 							
 										<sec:csrfInput/><%-- csrf 토큰 --%>
 									
-										<label for="id" style="font-weight: bold;"> <i class="fa fa-user user" style="margin-right: 5px"></i>아이디</label>
+										<label for="id" >아이디</label>
 										<input type="text" placeholder="아이디" name="id" id="id" class="margin-bottom form-control">
 								
-										<label for="password" style="font-weight: bold;"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>비밀번호</label>
+										<label for="password" style="padding-top: 5px; ">비밀번호</label> 
 										<input type="password" placeholder="비밀번호" name="password" id="password" class="margin-bottom form-control">
 								
 								<br>

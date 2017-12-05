@@ -56,6 +56,8 @@ public interface FoodService {
 	////////우정 end /////////
 
 	void editFoodSell(FoodSellVO foodSellVO);
+
+	ListVO<FoodVO> selectCategoryFood(String category,String pageNo);
 	
 
 

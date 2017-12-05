@@ -70,10 +70,10 @@ $(document).ready(function(){
 										<sec:csrfInput/><%-- csrf 토큰 --%>
 										<%-- <input type="hidden" name="id" id="id" value="${qnamvo.memId}"> --%>
 										<input type="hidden" name="id" id="id" value="${memId}">
-										<label for="password" style="font-weight: bold;"> <i class="fa fa-key" style="margin-right: 5px"></i>비밀번호</label>
+										<label for="password">비밀번호</label>
 										<input type="password" placeholder="비밀번호" name="password" id="password" class="margin-bottom form-control" style="margin: 0px;">
 											<span id="passwordCheckView" style="margin: 0px;"></span>	<br>		
-										<label for="passwordRe" style="font-weight: bold;"><i class="fa fa-key" style="margin-right: 5px"></i>비밀번호 확인</label>
+										<label for="passwordRe" style="padding-top: 10px; ">비밀번호 확인</label>
 										<input type="password" placeholder="비밀번호 확인" name="passwordRe" id="passwordRe" class="margin-bottom form-control" style="margin: 0px;">
 											<span id="passwordReCheckView" style="margin: 0px;"></span>		<br>			
 								<br>

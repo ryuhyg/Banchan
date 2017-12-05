@@ -310,11 +310,11 @@ function returnHome(){
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
 								<div class="col-xs-8" > 
-										<label for="id"> <i class="fa fa-user user" style="margin-right: 5px"></i>아이디</label>
+										<label for="id"></i>아이디</label> 
 										<input type="text" name="memId" id="id"  class="margin-bottom form-control" placeholder="아이디" required="required" autocomplete="off" style="margin: 0px;">
 										<span id="idCheckView" style="margin: 0px; "></span>												
 								</div>
-								<div  class="col-xs-2" style="margin-top: 32px;"> 
+								<div  class="col-xs-2" style="margin-top: 32px;">  
 														
 								</div>
 							</div>		
@@ -322,7 +322,7 @@ function returnHome(){
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
 								<div  class="col-xs-8">
-										<label for="password"><i class="fa fa-key" aria-hidden="true" style="margin-right: 5px; padding-top: 10px; "></i>비밀번호</label>
+										<label for="password" style="padding-top: 10px; "></i>비밀번호</label>
 										<input type="password" name="pw" id="password" class="margin-bottom form-control" placeholder="비밀번호" required="required" autocomplete="off" style="margin: 0px;">
 										<span id="passwordCheckView" style="margin: 0;"></span>
 								</div>
@@ -334,7 +334,7 @@ function returnHome(){
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
 								<div  class="col-xs-8">										
-										<label for="password"><i class="fa fa-key" aria-hidden="true" style="margin-right: 5px; padding-top: 10px;"></i>비밀번호 확인</label>
+										<label for="password" style="padding-top: 10px; ">비밀번호 확인</label>
 										<input type="password"  id="passwordRe" class="margin-bottom form-control" placeholder="비밀번호확인" required="required" autocomplete="off" style="margin: 0px;">
 										<span id="passwordReCheckView" style="margin: 0;"></span>
 								</div>
@@ -346,7 +346,7 @@ function returnHome(){
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
 								<div  class="col-xs-8">										
-										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px;padding-top: 10px;"></i>이름</label>
+										<label for="password" style="padding-top: 10px; ">이름</label>
 										<input type="text"  name="memName" id="name" class="margin-bottom form-control" placeholder="이름" required="required" autocomplete="off" style="margin: 0px;">
 								</div>
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
@@ -357,7 +357,7 @@ function returnHome(){
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
 								<div  class="col-xs-8">		 								
-									<label for="birthDate"><i class="fa fa-calendar" aria-hidden="true" style="margin-right: 5px;padding-top: 10px;"></i>생년월일</label>
+									<label for="birthDate" style="padding-top: 10px; ">생년월일</label>
 									<input type="text" name="birth" id="birth" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" maxlength="10" class="margin-bottom form-control" required="required" style="margin: 0px;">	
 								</div>
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
@@ -367,7 +367,7 @@ function returnHome(){
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
 								<div  class="col-xs-8">										
-										<label for="password"><i class="fa fa-phone" aria-hidden="true" style="margin-right: 5px; padding-top: 10px;"></i>전화번호  (   -   포함하여 입력해주세요! )</label>
+										<label for="password" style="padding-top: 10px; ">전화번호  (   -   포함하여 입력해주세요! )</label>
 										<!-- <input type="text" name="tel"  class="margin-bottom form-control" placeholder="전화번호"> -->
 										<input  class="margin-bottom form-control"  type="tel" name="tel" id="telno" title=" -  포함하여 입력해주세요!" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" maxlength="13" required="required" autocomplete="off" style="margin: 0px;">
 										<span id="telCheckView" style="margin: 0;"></span>	
@@ -380,7 +380,7 @@ function returnHome(){
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
 								<div  class="col-xs-8">															
-										<label for="password"><i class="fa fa-home" aria-hidden="true" style="margin-right: 5px; padding-top: 10px;"></i>주소</label>
+										<label for="password" style="padding-top: 10px; ">주소</label>
 										<div id="map" style="width:auto;height:200px;"></div>
 										<input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기" style="margin-top: 5px;">
 										<input type="text" name="addressVO.addressAPI"  id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly" style=" margin: 2px;">	 	 
@@ -393,7 +393,7 @@ function returnHome(){
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
 								<div  class="col-xs-8" style="margin-top: 10px">										
-										<label for="password"><i class="fa fa-question" aria-hidden="true" style="margin-right: 5px; padding-top: 10px;"></i>비밀번호 찾기 질문</label>
+										<label for="password" style="padding-top: 10px; ">비밀번호 찾기 질문</label>
 										<select id="pwQnaSelect">
 											<option value="100" selected="selected">질문을 선택하세요</option>
 											<c:forEach items="${pwQnaList}" var="p">
@@ -409,7 +409,7 @@ function returnHome(){
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
 							 	<div  class="col-xs-8">										
-										<label for="password"><i class="fa fa-ellipsis-h" style="margin-right: 5px; padding-top: 10px;"></i>비밀번호 찾기 답변</label>
+										<label for="password" style="padding-top: 10px; ">비밀번호 찾기 답변</label>
 										<input type="text"	 name="pwAnswer"  id="pwAnswer" class="margin-bottom form-control" required="required" autocomplete="off" style="margin: 0px;" >
 								</div>
 								<div  class="col-xs-2" style="margin-top: 32px;"> 				

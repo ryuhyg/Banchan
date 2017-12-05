@@ -98,7 +98,7 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 		</c:when>
 		<c:otherwise>
 			<c:choose>
-				<c:when test="${fn:length(slist)<=2 && length(slist)>0 }">
+				<c:when test="${fn:length(slist)<=2 && fn:length(slist)>0 }">
 					<c:forEach items="${slist }" var="seller">
 						<div class="row" style="vertical-align: middle">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
@@ -176,7 +176,7 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 			</c:when>
 			<c:otherwise>
 				<c:choose>
-					<c:when test="${fn:length(fslist)<=2 && length(slist)>0}">
+					<c:when test="${fn:length(fslist)<=2 && fn:length(fslist)>0}">
 					<c:forEach items="${fslist }" var="foodSell">
 						<div class="row" style="vertical-align: middle">
 							<div class="col-sm-8 col-md-8 col-sm-push-4">
