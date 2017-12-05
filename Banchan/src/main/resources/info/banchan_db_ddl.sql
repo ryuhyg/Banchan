@@ -1,3 +1,5 @@
+-- 전체 테이블 조회
+SELECT * FROM tab
 -- DROP TABLE
 drop table ANSWER;
 drop table QUESTION;

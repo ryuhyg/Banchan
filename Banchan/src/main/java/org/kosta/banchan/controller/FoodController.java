@@ -189,8 +189,10 @@ public class FoodController {
 			//System.out.println("str에 추가!");
 			strTemp+= fvo.getFoodSellNo()+":"+fvo.getFoodMainImg()+"/";
 		}
+		System.out.println(strTemp);
 		clickCoo.setValue(strTemp);
 		resp.addCookie(clickCoo);
+		//System.out.println("22222");
 		///// end 최근 클릭 리스트 코드 추가 광태
 		
 		return "food/foodsell_detail.tiles";
