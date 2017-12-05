@@ -85,46 +85,46 @@ function returnList(){
 			</div>
 			<div class="row">
 				<div  class="col-xs-4" > 
-					<label for="price"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>가격(원) </label>
+					<label for="price">가격(원) </label>
 					<input type="number" name="price"  id="price" min="0" class="margin-bottom form-control"  required="required">
 					</div>
 				<div  class="col-xs-4" >
-					<label for="preQuantity"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>준비수량</label>
+					<label for="preQuantity">준비수량</label>
 					<input type="number" name="preQuantity"  id="preQuantity" min="1" class="margin-bottom form-control" required="required" >	
 				</div>
 				<div  class="col-xs-4" >
-					<label for="unit"><i class="fa fa-ellipsis-h" style=" margin-right: 5px"></i>수량 당 정보</label>
+					<label for="unit">수량 당 정보</label>
 					<input type="text" name="unit"  id="unit" class="margin-bottom form-control"  required="required" placeholder="(ex)100g/개" >
 				</div>
 			</div>
 			<div class="row">
-				<label for="loc"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>거래장소 </label>
+				<label for="loc">거래장소 </label>
 				<input type="text"	 name="loc"  id="loc" class="margin-bottom small-text"  required="required">	
 			</div>
 			<div class="row">	
-				<label for="date"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>마감일자</label>
+				<label for="date">마감일자</label>
 				<input type="text" name="closeDate" id="closeDate" class="margin-bottom small-text " required="required">	
 			</div>
 			<div class="row" >
-				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
+				<label for="id">거래일자</label>
 				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" > 
 			</div>
 		</div>
 		<div class= "row">
 	 		<div  class="container-fluid"> 										
-				<label for="sellDetail"><i class="fa fa-ellipsis-h" style="margin-right: 5px;padding-top: 40px"></i>음식 상세정보</label><br>
+				<label for="sellDetail" style="padding-top: 40px">음식 상세정보</label><br>
 				<textarea rows="4" class="" cols="52"  style="width: 100%; resize: none;" readonly="readonly">${fvo.foodDe}</textarea>
 			</div>
 		</div>				
 		<div class="row">
 	 		<div  class="container-fluid">										
-				<label for="sellDetail"><i class="fa fa-ellipsis-h" style="margin-right: 5px;padding-top: 30px"></i>판매 추가 상세정보</label><br>
+				<label for="sellDetail" style="padding-top: 30px">판매 추가 상세정보</label><br>
 				<textarea rows="10" class="" cols="52" name="sellDetail" style="width: 100%; resize: none;"  required="required"></textarea>
 			</div>
 		</div>
 		<div class="row" align="center">
-			<input type="submit" class="btn btn-default" style="width: 100" value="판매등록하기" >
-			<a href="#" onclick="returnList()" class="btn btn-default">돌아가기</a>
+			<input type="submit" class="btn btn-reverse" style="width: 100" value="판매등록하기" >
+			<a href="#" onclick="returnList()" class="btn btn-reverse">돌아가기</a> 
 		</div>
 			<input type="hidden" name="sellerId" value="${fvo.memId}" id="sellerId"/>
 		</form>

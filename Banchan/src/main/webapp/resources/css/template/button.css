@@ -54,18 +54,18 @@
   background-color: #1a1a1a;
 }
 .btn-reverse {
-  border: 1px solid #1a1a1a;
-  background-color: #1a1a1a;
-  color: #fff;
+  border: 1px solid #f47821;
+  background-color: #fff;
+  color: #f47821;
 }
 .btn-reverse.active,
 .btn-reverse.focus,
 .btn-reverse:active,
 .btn-reverse:focus,
 .btn-reverse:hover {
-  border: 1px solid #1a1a1a;
-  background-color: #fff;
-  color: #1a1a1a;
+  border: 1px solid #fff;
+  background-color: #f47821;
+  color: #fff;
 }
 .btn-group-lg > .btn,
 .btn-group-lg .btn-lg {
