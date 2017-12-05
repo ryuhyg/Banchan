@@ -174,7 +174,7 @@
 		
 		/*댓글 수정 시 댓글 내용을 input폼으로 변경 - 아래 commentUpdateProc()호출*/ 
 		function commentUpdate(questNo, questContent){
-			
+				
 			var a ="";
 		    a += '<div class="input-group">';
 		    a += '<input type="text" class="form-control" id="toggle_btn_commentUpdateText" name="content_'+questNo+'" value="'+questContent+'"/>';

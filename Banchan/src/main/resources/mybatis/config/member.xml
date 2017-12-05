@@ -183,10 +183,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="sellerScore" column="seller_score" />
 	</resultMap>
 	<select id="selectSellerTop3" resultMap="sellerRM">
-	 	<![CDATA[select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score , rnum
-				from (select mem_id, seller_score, seller_info, seller_img, row_number() over(order by seller_score desc) as rnum from seller)
-						s, ban_mem m, address a 
-						where m.mem_id=s.mem_id and m.address_no=a.address_no and rnum<=3	]]>
+	 	<![CDATA[select b.mem_id, b.foodSellCount, b.seller_img, b.seller_info, b.seller_score, b.rank, b. mem_name, b.address_api
+from 
+(select s.mem_id, a.foodSellCount, s.seller_img, s.seller_info, s.seller_score, 
+         rank() over(order by s.seller_score desc) as rank,  m.mem_name, ad.address_api
+   from(
+      select s.mem_id, count(*) as foodSellCount
+      from food f, food_sell fs, seller s
+      where s.mem_id=f.mem_id
+         and f.food_no=fs.food_no
+      group by s.mem_id order by foodSellCount desc ) a 
+         right outer join seller s on a.mem_id=s.mem_id
+         inner join ban_mem m on s.mem_id=m.mem_id 
+            inner join address ad on m.address_no=ad.address_no) b
+where NOT b.foodSellCount is NULL AND b.rank<=3 order by b.foodSellCount desc]]>
+
 	</select>
 	<select id="findPwQnaNo" parameterType="pwQnaVO" resultType="PwQnaVO">
 		select pw_qna_no, pw_Quest from pw_qna where pw_qna_no=#{value}

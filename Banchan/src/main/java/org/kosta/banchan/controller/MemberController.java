@@ -240,8 +240,8 @@ public class MemberController {
 		List<SellerVO> list = memberService.selectSellerTop3();
 		/* [영민] 인기 Top3 음식  메서드*/
 		List<FoodVO> flist=foodService.selectFoodTop3();
-		model.addAttribute("list", list);
-		model.addAttribute("flist", flist);
+			model.addAttribute("list", list);
+			model.addAttribute("flist", flist);
 		//////////////검색어 순위/////////////////
 		/*List<ReportVO> rlist = reportService.getReport();
 		System.out.println(rlist);
