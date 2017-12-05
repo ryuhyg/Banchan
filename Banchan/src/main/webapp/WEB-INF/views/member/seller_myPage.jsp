@@ -372,9 +372,11 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 											href="${pageContext.request.contextPath}/foodDetailView.do?foodNo=${food.foodNo}">
 											<%-- 	<input type="hidden" id="foodNo" value="${food.foodNo }"> --%>
 
-											<span class="cover" style="height: 10px"></span> <img alt="Sample images"
-											style="width:100%;height:100%;"
+											<span class="cover" style="height: 10px"></span> 
+											<div style="width:100%;height:100%;">
+											<img alt="Sample images"
 											src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}">
+											</div>
 											<h3 class="title">${food.foodName}</h3>
 										</a> 
 										<span class="description">${food.foodDe}</span>

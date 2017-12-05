@@ -108,9 +108,11 @@ filter: alpha(opacity=0);
 						<input type="button" value="파일 선택" class="btn btn-reverse" style="margin-top: 8px" />
 						<div style="margin-top: 10px;" class="file_input_div">
 							<input type ="file"  class="file_input_hidden" value="파일 업로드" name="uploadImage"  id="cma_file" required="required" accept="image/x-png, image/gif, image/jpeg" onchange="getimagereview(this,$('#cma_image'))"/>
-							<div id="cma_image" style="margin-top: 10px;"></div>
-							 </div> 
-						</div> 
+							<div id="cma_image" style="margin-top: 10px; width:350px; height:200px; border: solid 1px; #e1e1d0">
+							</div>
+							 </div>
+						</div>
+
 						<div class="col-xs-7" style="float: right; margin-bottom: 50px;position: relative;bottom: 30px;" class="row">  
 							<label style="margin-left: 5px; margin-bottom: 5px;"><i class="icon fa fa-pencil-square-o" ></i>상세내용</label>
 							<textarea rows="10" cols="52" name="foodInfo" style="width: 100%; height: 100%;  resize: none;"  placeholder="내용을 입력하세요"></textarea>

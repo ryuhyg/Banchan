@@ -12,10 +12,10 @@ $(document).ready(function () {
 	//alert(arr); 
 	var strHtml=''; 
 	for (var i = 0; i < arr.length-1; i++) { //-1은 ""빈공간 때문.
-	//	alert(arr[i]);
+		//alert(arr[i]);
 		var index = arr[i].indexOf(':');
 		var foodSellNo = arr[i].substr(0, index);
-		var foodMainImg = arr[i].substr(7,arr[i].length);	
+		var foodMainImg = arr[i].substr(index+1,arr[i].length);
 		strHtml+= 
 			'<a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo='+foodSellNo+'" style=" z-index: 2;">'+
 		'<img alt="" src="${pageContext.request.contextPath}/resources/images/'+foodMainImg+'" style="width:50px; height:50px; padding:1px;">'+

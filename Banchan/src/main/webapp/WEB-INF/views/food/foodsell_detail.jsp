@@ -82,7 +82,6 @@
 	   }); //click
 
 	   commentList(); //실행시 댓글 목록 불러옴_정훈
-	   
 	   $("[name=commentInsertBtn]").click(function(){ //댓글 등록 버튼 클릭시
 		   	if($("#checkId").val()==null || $("#checkId").val()==""){
 		   		alert("로그인 후 작성가능 합니다");
@@ -120,22 +119,25 @@
 		     data : {"foodSellNo":foodSellNo},
 		     success : function(data){
 		        var a =""; 
+		        
 		          $.each(data, function(key, value){ 
-		        	 
+		        	  
 		         	   	a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-		              	a += '<div class="commentInfo'+value.questNo+'">'+'댓글번호 : '+value.questNo+' / 작성자 : '+value.memId;
+		              	a += '<div class="commentInfo'+value.questNo+'">'+'NO : '+value.questNo+' / 작성자 : '+value.memId;
+		                a += '/작성시간 :'+value.questPostdate;
 		               	a += '<a onclick="commentUpdate('+value.questNo+',\''+value.questContent+'\');"> 수정 </a>';
-		                a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a>'+'작성시간 :'+value.questPostdate;
+		                a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a>';
 		                a += '<div class="commentContent'+value.questNo+'"> <p> 질문내용 : '+value.questContent +'</p></div>';
 		                for(var i=0; i<value.answerList.length; i++){
-		                a += '<div class="ansContent'+value.questNo+'"> <p> 답변 : '+value.answerList[i].ansContent+'</p></div>';
+		                a += '<div class="ansContent'+value.questNo+'">답변 : '+value.answerList[i].ansContent;
+		                a += '('+value.answerList[i].memId+')</div>'
 		                }
 		                a += '<a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a>';
 		                a += '<div class="commentAnswerRe'+value.questNo+'">'+'</div>';
-		              	a += '</div></div>';      	
+		              	a += '</div></div>';   
+		              
 		            });//each
-		           $(".commentList").html(a);
-		            
+		          $(".commentList").html(a);
 		      	}//success
 		    }); //ajax
 	}//function
@@ -143,16 +145,14 @@
 		//질문 답변 달기 - 답변 달기 내용 출력을 input 폼으로 변경 
 		 function commentAnswerReply(questNo, memId){
 		    var a ="";
-		    
-		    a += '<div class="input-group">';
+		     a += '<div class="input-group">';
 		    a += '<input type="text" class="form-control" id="answerContent" name="ansContent"/>';
 		    a += '<input type="hidden" id="memId2" name="memId2" value='+memId+'>';
 		    a += '<input type="hidden" id="questNo" name="questNo" value='+questNo+'>';
 		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentAnswerReplyProc();">답변달기</button> </span>';
 		    a += '</div>';
-		    
-		    $('.commentAnswerRe'+questNo).html(a).toggle();
-		    
+		    $('.commentAnswerRe'+questNo).html(a).toggle(); 
+		   
 		}
 		 $("[name=commentInsertForm]").serialize();
 		
@@ -177,7 +177,7 @@
 		
 		/*댓글 수정 시 댓글 내용을 input폼으로 변경 - 아래 commentUpdateProc()호출*/ 
 		function commentUpdate(questNo, questContent){
-			
+				
 			var a ="";
 		    a += '<div class="input-group">';
 		    a += '<input type="text" class="form-control" id="toggle_btn_commentUpdateText" name="content_'+questNo+'" value="'+questContent+'"/>';
@@ -362,6 +362,7 @@
 						<td>내용</td>
 						<td>작성자</td>
 						<td>날짜</td> 
+						<td></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -429,8 +430,21 @@
     </div><!-- row -->
     
     <div class="row">
-        <div class="commentList"></div>
-    </div>
+        <div class="commentList">
+        	<!-- <table class="table" style="text-align: center;font-size: 12px;">
+				<thead>
+					<tr class="tr_visible">
+						<td>NO</td>
+						<td>내용</td>
+						<td>작성자</td>
+						<td>날짜</td> 
+					</tr>
+				</thead>
+				<tbody id="inner">
+				</tbody>
+			</table> -->
+        </div> <!-- commentList -->
+    </div> <!-- row -->
       
    </div><!-- blog-list blog-detail -->
    </div> <!-- col-sm-10 -->

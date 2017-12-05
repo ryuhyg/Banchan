@@ -194,3 +194,68 @@ select t.tr_no, t.tr_quantity, t.tr_req_date, t.tr_fin_date,
 
 select * from seller
 select * from BAN_MEM
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('dddd','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('eeee','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('abcde','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+insert into seller(mem_id, seller_img, seller_info, seller_score) values('freejh20','이미지경로','혜자스러운 반찬을 전해드립니다!',4.5 );
+update seller set seller_score=4.5 where mem_id='dddd';
+update seller set seller_score=4.5 where mem_id='eeee';
+update seller set seller_score=4.5 where mem_id='abcde';
+update seller set seller_score=4.5 where mem_id='freejh20';
+
+select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score , rank
+				from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller)
+						s, ban_mem m, address a 
+						where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3
+
+select f.mem_id, count(*), fs.close_date from food_sell fs,food f where f.food_no=fs.food_no 
+group by f.mem_id
+order by count(*) desc;
+
+select f.mem_id, fs.close_date as 판매중음식 from food f,food_sell fs where close_date>sysdate and f.food_no=fs.food_no
+
+
+SELECT seq,ca_uid,ca_number,ca_sido,ca_name,ca_sex,ca_work,total_p,total_pc,total_f,total_fc,last_scoer,ca_passyn,tovar_day,prevar_day,ca_birth,rank
+FROM (
+ 
+  SELECT m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.seller_score , rank(
+    from (select mem_id, seller_score, seller_info, seller_img, rank() over(order by seller_score desc) as rank from seller
+    )
+FROM volunt_last AS t
+WHERE trial_seq =  '4'
+ORDER BY  ca_passyn ASC,last_scoer DESC,total_p DESC,tovar_day DESC,prevar_day DESC,ca_birth ASC
+) AS CNT
+
+
+select s.mem_id, a.foodSellCount, s.mem_id, s.seller_img, s.seller_info, s.seller_score, 
+         rank() over(order by s.seller_score desc) as rank,  m.mem_name, ad.address_api
+   from(
+      select s.mem_id, count(*) as foodSellCount
+      from food f, food_sell fs, seller s
+      where s.mem_id=f.mem_id
+         and f.food_no=fs.food_no
+      group by s.mem_id order by foodSellCount desc ) a 
+         right outer join seller s on a.mem_id=s.mem_id
+         inner join ban_mem m on s.mem_id=m.mem_id 
+            inner join address ad on m.address_no=ad.address_no
+            
+select * from food_sell
+
+--top3 rank구하는 쿼리 대단...
+select b.mem_id, b.foodSellCount, b.seller_img, b.seller_info, b.seller_score, b.rank, b. mem_name, b.address_api
+from 
+(   select s.mem_id, a.foodSellCount, s.seller_img, s.seller_info, s.seller_score, 
+         rank() over(order by s.seller_score desc) as rank,  m.mem_name, ad.address_api
+   from(
+      select s.mem_id, count(*) as foodSellCount
+      from food f, food_sell fs, seller s
+      where s.mem_id=f.mem_id
+         and f.food_no=fs.food_no
+      group by s.mem_id order by foodSellCount desc ) a 
+         right outer join seller s on a.mem_id=s.mem_id
+         inner join ban_mem m on s.mem_id=m.mem_id 
+            inner join address ad on m.address_no=ad.address_no) b
+where NOT b.foodSellCount is NULL AND b.rank<=3 order by b.foodSellCount desc;
+
+insert into answer values(answer_seq.nextval,'java2','간답변',sysdate,2)
+
