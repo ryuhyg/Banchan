@@ -6,7 +6,7 @@
 <sec:authentication var="mvo" property="principal" />
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#logoutAction").click(function() {
+		$("#logoutAction").click(function() { 
 			$("#logoutForm").submit();
 		});
 		$("#searchBtn").hover(function(){
@@ -14,12 +14,13 @@
 		});	
 		$("#reportListBtn").click(function(){
 			var reportList="";
-			$.ajax({
+			$.ajax({ 
 				 type:"get",
 	             url:"${pageContext.request.contextPath}/reportmain.do",
 	             success:function(data){
+	            	 reportList += "<li>&nbsp;&nbsp;검색어 순위</li>"
 	            	 for(var i=0;i<data.length;i++){
-	            		 reportList += "<li><a href='/"+data[i].keyowrd+"'>"+data[i].rk+". "+data[i].keyword+"</a></li>"
+	            		 reportList += "<li><a href='${pageContext.request.contextPath}/searchByKeyword.do?kw="+data[i].keyword+"'>"+data[i].rk+". "+data[i].keyword+"</a></li>"
 	            		 $("#reportList").html(reportList);
 	            	 }
 	            	
@@ -117,8 +118,7 @@
 							<li><a
 								href="${pageContext.request.contextPath}/locationServicePage.do">위치중심으로
 									찾기</a></li>
-							<li><a href="">카테고리로 찾기</a></li>
-
+							<li><a href="${pageContext.request.contextPath}/selectCategoryFood.do?category=">카테고리로 찾기</a></li>
 						</ul></li>
 					<li class="has_submenu"><a href="#">공지사항</a>
 						<ul>
@@ -131,7 +131,7 @@
 			<div class="col-sm-3">			
 				<form action="searchByKeyword.do">
 						<div class="searchForm">
-							<input type="text" style="border: 0; width:71%; box-shadow: none; " placeholder="검색" name="kw">
+							<input type="text" style="border: 0; width:71%; box-shadow: none; " placeholder="&nbsp;&nbsp;검색" name="kw">
 							<button class="btn btn-primary dropdown-toggle dropdown-hover searchBtn" type="button"
 							data-toggle="dropdown" data-hover="dropdown" id="reportListBtn"
 							style="border: none; background-color: #fff">

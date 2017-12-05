@@ -359,8 +359,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="id"> 
- 								<p><i class="fa fa-user user" style="margin-right: 5px"></i>회원이미지</label></p>
+ 								<label for="id">회원이미지</label>
  								<img id="blah" src="${pageContext.request.contextPath}/resources/images/${svo.sellerImg}" alt="" width="325" height="200" style="margin: 0px;"/>
  								<input type="file" name="uploadImage" id="updateImage" class="margin-bottom form-control" onchange="javascript:file_change(this.value);" style="margin: 0px;">
  								<input id="fileName" class="margin-bottom form-control" readonly value="${svo.sellerImg}" placeholder="${svo.sellerImg}" size="300" style="margin: 0px;"/>
@@ -371,8 +370,7 @@
  							<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="id"> 
- 								<i class="fa fa-user user" style="margin-right: 5px; padding-top: 10px;"></i>아이디</label> 
+ 								<label for="id" style="padding-top: 10px; ">아이디</label> 
  								<input type="text" autocomplete="off" style="margin: 0px;" name="memId" id="id" class="margin-bottom form-control" placeholder="아이디" 	
  								value="<sec:authentication property="principal.memId"/>"
  								readonly="readonly">
@@ -385,8 +383,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-key"
- 									style="margin-right: 5px; padding-top: 10px;"></i>비밀번호</label> <input type="password" required="required"
+ 								<label for="password" style="padding-top: 10px; ">비밀번호</label> <input type="password" required="required"
  									name="pw" id="password" class="margin-bottom form-control" 
  									placeholder="비밀번호" autocomplete="off" style="margin: 0px;">
  								<span id="passwordCheckView" style="margin: 0px;"></span>
@@ -398,8 +395,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-key"
- 									style="margin-right: 5px; padding-top: 10px;"></i>비밀번호 확인</label> <input type="password" required="required"
+ 								<label for="password" style="padding-top: 10px; ">비밀번호 확인</label> <input type="password" required="required"
  									id="passwordRe" class="margin-bottom form-control"
  									placeholder="비밀번호확인" autocomplete="off" style="margin: 0px;">
  								<span id="passwordReCheckView" style="margin: 0px;"></span>
@@ -411,8 +407,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px; padding-top: 10px;"></i>이름</label> <input type="text" required="required"
+ 								<label for="password" style="padding-top: 10px; ">이름</label> <input type="text" required="required"
  									name="memName" id="name" class="margin-bottom form-control"
  									placeholder="이름" autocomplete="off" style="margin: 0px;"
  									value="<sec:authentication property="principal.memName"/>">
@@ -422,7 +417,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-calendar" style="margin-right: 5px; padding-top: 10px;"></i>생년월일</label> 
+ 								<label for="password" style="padding-top: 10px; ">생년월일</label> 
  								<input type="text" name="birth" id="birth" value="<sec:authentication property="principal.birth"/>" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" maxlength="10" class="margin-bottom form-control" required="required" style="margin: 0px;">	
  							</div>
  							<div  class="col-xs-2" style="margin-top: 32px;"> 				
@@ -432,8 +427,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-phone"
- 									style="margin-right: 5px; padding-top: 10px;"></i>전화번호 ( - 포함하여 입력해주세요! )</label>
+ 								<label for="password" style="padding-top: 10px; ">전화번호 ( - 포함하여 입력해주세요! )</label>
  								<!-- <input type="text" name="tel"  class="margin-bottom form-control" placeholder="전화번호"> -->
  								<input class="margin-bottom form-control" type="tel" name="tel"
  									id="telno" title=" -  포함하여 입력해주세요!" placeholder="00*-000*-0000" required="required"
@@ -448,8 +442,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 
 						</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px; padding-top: 10px;"></i>판매자 소개</label>
+ 								<label for="password" style="padding-top: 10px; ">판매자 소개</label>
  						<textarea rows="6"cols="38"name="sellerInfo"required="required"style="resize: none">${svo.sellerInfo}</textarea>
 				 			</div>
 				 		</div>
@@ -457,8 +450,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-home"
- 									style="margin-right: 5px; padding-top: 10px;"></i>주소</label>
+ 								<label for="password" style="padding-top: 10px; ">주소</label>
  								<div id="map" style="width:auto; height: 200px;"></div>
  								<input class="btn btn-default" type="button" id="searchaddress"
  									value="주소 찾기"> <input type="text"
@@ -474,8 +466,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8" style="margin-bottom: 10px">
- 								<label for="password"><i class="fa fa-question"
- 									style="margin-right: 5px; padding-top: 10px;"></i>비밀번호 찾기 질문</label> <select
+ 								<label for="password" style="padding-top: 10px; ">비밀번호 찾기 질문</label> <select
  									id="pwQnaSelect">
  									<option value="${pvo.pwQnaNo}"
  										selected="<sec:authentication property="principal.pwQnaNo"/>">${pvo.pwQuest}</option>
@@ -489,8 +480,7 @@
  						<div  class="col-xs-2" style="margin-top: 32px;"> 				
 								</div>
  							<div class="col-xs-8">
- 								<label for="password"><i class="fa fa-ellipsis-h"
- 									style="margin-right: 5px; padding-top: 10px;"></i>비밀번호 찾기 답변</label> <input type="text"
+ 								<label for="password" style="padding-top: 10px; ">비밀번호 찾기 답변</label> <input type="text"
  									name="pwAnswer" id="pwAnswer" required="required" autocomplete="off" style="margin: 0px;"
  									class="margin-bottom form-control"
  									value="<sec:authentication property="principal.pwAnswer"/>">

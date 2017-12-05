@@ -32,8 +32,7 @@
 	<link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/earlyaccess/hanna.css' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/earlyaccess/notosanskr.css' rel='stylesheet' type='text/css' />
-	
-	
+	<link href='http://fonts.googleapis.com/earlyaccess/jejugothic.css' rel='stylesheet' type='text/css' />
 	
 	<script src="${pageContext.request.contextPath}/resources/script/modernizr.min.js"></script>	
 

@@ -240,6 +240,7 @@ select s.mem_id, a.foodSellCount, s.mem_id, s.seller_img, s.seller_info, s.selle
             inner join address ad on m.address_no=ad.address_no
             
 select * from food_sell
+
 --top3 rank구하는 쿼리 대단...
 select b.mem_id, b.foodSellCount, b.seller_img, b.seller_info, b.seller_score, b.rank, b. mem_name, b.address_api
 from 
@@ -256,5 +257,5 @@ from
             inner join address ad on m.address_no=ad.address_no) b
 where NOT b.foodSellCount is NULL AND b.rank<=3 order by b.foodSellCount desc;
 
-
+insert into answer values(answer_seq.nextval,'java2','간답변',sysdate,2)
 

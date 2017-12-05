@@ -106,6 +106,18 @@ public class FoodController {
 		
 		return "redirect:sellerPageInfo.do?memId="+sellerId+"&pageNo=1";
 	}
+	@RequestMapping("selectCategoryFood.do")
+	public String selectCategoryFood(String category,String pageNo,Model model) {
+		//System.out.println(category);
+		//System.out.println("Controller:"+foodService.selectCategoryFood(category,pageNo));
+		model.addAttribute("lvo",foodService.selectCategoryFood(category,pageNo));
+		model.addAttribute("category",foodService.allCategorySelect());
+		model.addAttribute("categorySelected",category);
+		System.out.println("categories:"+foodService.allCategorySelect());
+		System.out.println("selected:"+category);
+		return "food/categoryFood.tiles";
+	}
+	
 	///////////////////////// end 우정///////////////////////////////////
 
 	///////////////////////// start 지원///////////////////////////////////

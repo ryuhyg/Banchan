@@ -82,7 +82,7 @@
 						</div>
 					</form>
 					<div align="right">
-					<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${food.memId}" class="btn btn-reverse button-form" style="margin-top: 10px;">목록으로</a>
+					<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${food.memId}" class="btn btn-reverse button-form" style="margin-top: 10px;">판매자 페이지로</a>
 					</div>
 					
 					<div class="container" style="width: 100%;">
