@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where cf.rnum between #{startRowNumber} and #{endRowNumber}
 	</select>
 	<!-- 판매자의 판매목록 -->
-	<select id="getFoodSellInfoByMemId" parameterType="map" 
+	<select id="getFoodSellInfoByMemId" parameterType="map"  
 		resultType= "foodSellVO">
 		select
 		fs.rnum,fs.food_sell_no,to_char(fs.tr_date,'YYYY-MM-DD'),to_char(fs.close_date,'YYYY-MM-DD'),fs.price,fs.pre_quantity,
