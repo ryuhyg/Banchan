@@ -402,7 +402,7 @@
                       <div class="col-xs-8">
                          <label for="password" style="padding-top: 10px; ">주소</label>
                          <div id="map" style="width:auto; height: 200px;"></div>
-                         <input class="btn btn-default" type="button" id="searchaddress"
+                         <input class="btn btn-reverse" type="button" id="searchaddress"
                             value="주소 찾기"> <input type="text"
                             name="addressVO.addressAPI" id="jibunAddress"
                             class="margin-bottom form-control" placeholder="검색 주소"
@@ -443,7 +443,7 @@
                       <div align="center">
                          <input type="submit" class="btn btn-reverse button-form"
                             value="수정하기">
-                         <a href="#" onclick="returnHome()" class="btn btn-default button-form"  id="returnBtn">돌아가기</a>
+                         <a href="#" onclick="returnHome()" class="btn btn-reverse button-form"  id="returnBtn">돌아가기</a>
                       </div>
                    </div>
  

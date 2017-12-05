@@ -13,15 +13,16 @@ table, th, td{
 <div id="page-container">
 	<div class="container" style="width: 100%">
 		<div class="row">
-			<h3 class="title-form"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>나의 거래내역</h3>
-			<c:choose>
-			<c:when test="${fn:length(tlist.list)==0}">
+			<h3 class="title-form"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>나의 거래내역</h3>				
+			<a href="${pageContext.request.contextPath}/home.do" class="btn btn-default" style="float:right; margin-right:7%;"><i class="fa fa-home" style="font-size: 15px"></i></a>      
+			<c:choose>           
+			<c:when test="${fn:length(tlist.list)==0}">      
 				<br><br><h4 style="text-align: center;font-weight: bold">거래내역이 없습니다.</h4>
 				<div align="center">
 					<a href="${pageContext.request.contextPath}/home.do" class="btn btn-reverse button-form" style="margin-top: 10px;">돌아가기</a>
 				</div>
 			</c:when>
-			<c:otherwise>
+			<c:otherwise> 
 				<table class="table table-hover"  style="text-align: center;font-size: 12px;">
 					<thead>
 						<tr class="tr_visible"> 
@@ -60,16 +61,13 @@ table, th, td{
 						<td>${t.trStatus}</td>
 						<c:if test="${t.trStatusNo=='2'}">  
 						<td style="border-top-color: #fff">    
-						<a href="${pageContext.request.contextPath}/reviewRegisterForm.do?foodSellNo=${t.foodSellVO.foodSellNo}&foodNo=${t.foodSellVO.foodNo}&memId=${t.foodSellVO.sellerVO.memId}" class="btn btn-default"  style=";margin-top:-7px">후기작성</a>
+						<a href="${pageContext.request.contextPath}/reviewRegisterForm.do?foodSellNo=${t.foodSellVO.foodSellNo}&foodNo=${t.foodSellVO.foodNo}&memId=${t.foodSellVO.sellerVO.memId}"  style="color: red;margin-top:-7px">후기작성</a>
 						</td>
-						</c:if>
+						</c:if> 
 						</tr>
 					</c:forEach>
 					</tbody>  
 				</table>
-				<div align="right">
-					<a href="${pageContext.request.contextPath}/home.do" class="btn btn-reverse button-form" style="margin-right:10px; margin-top: 10px;">돌아가기</a>
-				</div> 
 				<div class="pageginationContainer" style="text-align: center;">
 			  	  <div class="pagination" >
 			  	  <c:set var="pb" value="${tlist.pb }"/>

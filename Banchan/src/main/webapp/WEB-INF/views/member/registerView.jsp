@@ -381,8 +381,8 @@ function returnHome(){
 								</div>
 								<div  class="col-xs-8">															
 										<label for="password" style="padding-top: 10px; ">주소</label>
-										<div id="map" style="width:auto;height:200px;"></div>
-										<input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기" style="margin-top: 5px;">
+										<div id="map" style="width:auto;height:200px;"></div> 
+										<input class="btn btn-reverse" type="button" id="searchaddress" value="주소 찾기" style="margin-top: 5px;">
 										<input type="text" name="addressVO.addressAPI"  id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly" style=" margin: 2px;">	 	 
 										<input type="text" name="addressDe"  id="detailAddress" class="margin-bottom form-control" placeholder="상세주소 입력" required="required" autocomplete="off" style="margin: 2px;">							
 								</div>
@@ -420,7 +420,7 @@ function returnHome(){
 								<div class="row">
 									<div align="center">
 									<input  type="submit" class="btn btn-reverse button-form"  value="가입하기">
-									<a href="#" onclick="returnHome()" class="btn btn-default button-form"  id="returnBtn">돌아가기</a>
+									<a href="#" onclick="returnHome()" class="btn btn-reverse button-form"  id="returnBtn">돌아가기</a>
 									</div>
 								</div>
 								

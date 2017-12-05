@@ -54,10 +54,13 @@ table, th, td{
 <div id="page-container">
 <div class="container" style="width: 100%;">
 	<div class="row">
-	<h3 class="title-form"><i class="icon fa fa-exchange" style="margin-right: 5px"></i>전체거래내역</h3>
-		<div style="font-size: 15px; text-align: right;margin-bottom: 10px;color: #80808075; font-style: italic">*클릭하여 구매자 정보를 확인하세요</div> 
+	<h3 class="title-form"><i class="icon fa fa-exchange"></i>전체거래내역</h3>   
+	<div class="row"  style="margin-right:0px;">   
+	<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}" class="btn btn-default" style="float:right; margin-right:0%;"><i class="fa fa-home" style="font-size: 15px"></i></a>
+	</div>
+		<div  class="row" style="font-size: 15px; text-align: right;margin-bottom: 10px; margin-right:0px; color: #80808075; font-style: italic">*클릭하여 구매자 정보를 확인하세요</div> 
 	<c:choose>
-	<c:when test="${!empty lvo.list}">
+	<c:when test="${!empty lvo.list}">      
 	<table class="table table-hover" id="tradeList" style="text-align: center;font-size: 12px; " > 
 	
 		<thead>
@@ -107,9 +110,6 @@ table, th, td{
 			</c:forEach>
 		</tbody>
 	</table>
-		<div align="right">
-		<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}" class="btn btn-reverse button-form" style="margin-top: 10px;">돌아가기</a>
-		</div>
 	</c:when>
 	<c:otherwise>
 		<div style="font-weight: bold;text-align: center;">거래 내역이 존재하지 않습니다</div>
