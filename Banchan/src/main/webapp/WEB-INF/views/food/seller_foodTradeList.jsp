@@ -27,8 +27,12 @@
 
 table, th, td{
 	text-align: center;
+}
+.table-border-hidden th, .table-border-hidden td{
+	text-align: center;
 	border: hidden;
 }
+
 .trNone{
 	display: none;
 }
@@ -100,9 +104,8 @@ table, th, td{
      				                <b style="font-size: 12px">&nbsp;&nbsp;별점 :&nbsp;&nbsp;${foodSell.foodScore}</b>
 				          </h3>
 				         </div>
-						
 						 <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;width: 100%"> 
-					            <table class="table" style="font-size: 13px;" >
+					            <table class="table table-border-hidden" style="font-size: 13px;" >
 					               <tr> 
 					                  <th>예약마감일</th>
 					                  <td>${foodSell.closeDate}</td>
@@ -145,6 +148,7 @@ table, th, td{
 						</div>
 				</c:if>
 				<div class="row" style="margin-top: 20px">  
+				<div style="font-size: 15px; text-align: right;margin-bottom: 10px;color: #80808075; font-style: italic">*클릭하여 구매자 정보를 확인하세요</div> 
 				<table class="table table-hover" id="tradeList" style="text-align: center;font-size: 12px;">
 					<c:choose>
 					<c:when test="${!empty lvo.list}">
