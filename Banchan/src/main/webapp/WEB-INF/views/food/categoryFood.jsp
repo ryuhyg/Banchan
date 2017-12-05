@@ -85,15 +85,15 @@ jQuery(document).ready(function(){
 							 <span class='description' style='color:black;font-size:12px;'>		
 								<table height="81px">   
 								<tr> 
-									<td><a style="color:black" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${food.memId}"><i class='fa fa-user' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 아이디&nbsp;</i></a></td><td><a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${food.memId}">${food.memId}</a></td>
+									<td  style="width: 100px;"><a style="color:black" href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${food.memId}"><i class='fa fa-user' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 아이디&nbsp;</i></a></td><td><a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${food.memId}">${food.memId}</a></td>
 								</tr>
 								<tr>
-									<td><i class='fa fa-calendar' style="font-weight: bold; margin-right: 5px">&nbsp;음식 상세&nbsp;</i></td><td><a>${food.foodDe}</a></td>
+									<td style="width: 100px;"><i class='fa fa-calendar' style="font-weight: bold; margin-right: 5px">&nbsp;음식 상세&nbsp;</i></td><td><a>${food.foodDe}</a></td>
 								</tr>		
 								<tr>
-									<td></td><td></td>
+									<td ></td><td></td>
 								</tr>			
-								</table>
+								</table > 
 							 </span>
 						</div><!-- bs-callout callout-success -->
 							<!-- </div> --><!-- /.col-md-8 -->

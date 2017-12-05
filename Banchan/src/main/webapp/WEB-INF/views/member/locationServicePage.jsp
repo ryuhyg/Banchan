@@ -174,7 +174,7 @@ $(document).ready(function() {
 						<h3 class="title-form"><i class="icon fa fa-map-marker" style="margin-right: 5px; width: inherit;"></i> 위치기반 검색 서비스 </h3>
 					<hr>
 						<div class="col-sm-6 blog-list blog-detail" style="padding-top: 9px;">		
-							<input class="btn btn-default" type="button" id="searchaddress" value="주소 찾기">
+							<input class="btn btn-reverse" type="button" id="searchaddress" value="주소 찾기">
 							<br>
 							<input type="text" id="roadAddress" class="margin-bottom form-control" placeholder="검색 주소"  readonly="readonly" value="${addressVO.addressAPI}">
 							<br>	

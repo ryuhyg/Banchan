@@ -240,7 +240,7 @@
    <div class="col-sm-1"></div><!-- col-sm-1 -->
    <div class="col-sm-10">
    <div class="blog-list blog-detail">
-      <h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매음식 상세정보</h3>
+      <h3 class="title-form"><i class="icon fa fa-wrench" style="margin-right: 5px"></i>판매음식 상세정보</h3>
       <div class="form-large grey-color">
       <div class="row">
       <div class="col-xs-6" style="float: left" class="row">
@@ -345,13 +345,13 @@
       </div> <!-- form-large grey-color -->
      
      <!-- 후기 작성 부분 입니다_윤주 -->
-      <div class="row" style="margin-top: 20px">  
+      <div class="row" style="margin-top: 40px">
       <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i>후기</h4>
       <c:choose>
 		<c:when test="${fn:length(rlist.list)==0}">
 			<h5>작성된 후기가 없습니다</h5>
 		</c:when>
-		<c:otherwise>
+		<c:otherwise> 
 			<table class="table table-hover" style="text-align: center;font-size: 12px;">
 				<thead>
 					<tr class="tr_visible"> 
@@ -418,12 +418,12 @@
             <div class="input-group">
                <input type="hidden" name="foodSellNo" value="${foodSell.foodSellNo}"/>
                <input type="hidden" name="memId" value="${mvo.memId}"/>
-               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요." style="width: 99%">
                <span class="input-group-btn">
-                    <Button class="btn btn-default" type="button" id="commentInsertBtn" name="commentInsertBtn">등록</Button>
+                    <Button class="btn btn-reverse" type="button" id="commentInsertBtn" name="commentInsertBtn">등록</Button>
                </span>
               </div>
-        </form>
+        </form> 
         
     </div><!-- row -->
     

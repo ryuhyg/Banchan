@@ -14,7 +14,7 @@
 			<div class="col-sm-4">
 				<div class="blog-list blog-detail">
 					<h3 class="title-form">
-						<i class="fa fa-user user"
+						<i class="fa fa-user-times"
 							style="margin-right: 5px; font-weight: bold;"></i>회원 탈퇴
 					</h3>
 					<form class="form-large grey-color"
@@ -29,7 +29,7 @@
 						<div align="center">
 							<button type="submit" class="btn btn-reverse button-form"
 								id="deleteBtn">예</button>
-							<a href=""><button type="button"
+							<a href="${pageContext.request.contextPath }/home.do"><button type="button"
 									class="btn btn-reverse button-form" style="margin-left: 10px"
 									id="returnBtn">아니오</button></a>
 						</div>
