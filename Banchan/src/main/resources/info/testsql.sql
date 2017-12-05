@@ -208,6 +208,6 @@ select m.mem_id, m.mem_name, a.address_api, s.seller_img, s.seller_info, s.selle
 						where m.mem_id=s.mem_id and m.address_no=a.address_no and rank<=3	
 
 select * from food_sell
-
+insert into answer values(answer_seq.nextval,'java2','간답변',sysdate,2)
 
 
