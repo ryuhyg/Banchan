@@ -310,44 +310,42 @@
       
       
       <form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()">
-               <div class="row"> 
-                  <input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
-                  <input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
-               <c:choose>
-               <c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
-                <div class="col-sm-2" style="text-align: right">구매수량:</div>
-                 <div class="col-sm-2">
-                    <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px" required="required"/>
-                  </div>
-               
-                  <sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
-                      <input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
-                   </sec:authorize>
-            
-                   
-                     <label class="control-label" for="거래가격">거래가격:
-                  <span id="orderPrice"></span>
-                  </label>
-               </c:when>
-               </c:choose>
-               </div> <!-- row -->
-                   
-                   <div class="row" align="center">
-                      <c:choose>
-                         <c:when test="${foodSell.memId!=mvo.memId}">
-                           <input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
-                         </c:when>
-                        <c:otherwise>
-                           <input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
-                           <input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
-                        </c:otherwise>                   
-                      </c:choose>
-               </div>
+             <sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
+                 <input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
+              </sec:authorize>
+            <div class="row" style="margin-top: 10px"> 
+               <input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
+               <input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
+            <c:choose>
+            <c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
+             <div class="col-sm-2" style="text-align: right">구매수량:</div>
+             <div class="col-sm-2">
+                 <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px" required="required"/>
+             </div>
+             <div class="col-sm-2">
+	              <label class="control-label" for="거래가격">거래가격: </label> 
+	            <span id="orderPrice"></span>원
+             </div>
+            </c:when>
+            </c:choose>
+            </div> <!-- row -->
+                
+            <div class="row" align="center">
+              <c:choose>
+                 <c:when test="${foodSell.memId!=mvo.memId}">
+                   <input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+                 </c:when>
+                <c:otherwise>
+                   <input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
+                   <input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
+                </c:otherwise>                   
+              </c:choose>
+            </div>
         </form>
       </div> <!-- form-large grey-color -->
      
      <!-- 후기 작성 부분 입니다_윤주 -->
-      <div class="row">
+      <div class="row" style="margin-top: 20px">  
       <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i>후기</h4>
       <c:choose>
 		<c:when test="${fn:length(rlist.list)==0}">
