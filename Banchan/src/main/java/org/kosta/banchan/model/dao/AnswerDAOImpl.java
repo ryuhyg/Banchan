@@ -26,5 +26,9 @@ public List<AnswerVO> getAllAnswerListByQuestNo(String questNo) {
 public AnswerVO findAnswerByAnsNo(String ansNo) {
 	return template.selectOne("feedback.findAnswerByAnsNo",ansNo);
 }
+@Override
+public void answerDelete(String answerNo) {
+	template.delete("feedback.answerDelete",answerNo);
+}
 ////////////////////end윤주 //////////////////////
 }

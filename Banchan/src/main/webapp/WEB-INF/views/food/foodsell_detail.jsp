@@ -130,8 +130,13 @@
 		                a += '<div class="commentContent'+value.questNo+'"> <p> 질문내용 : '+value.questContent +'</p></div>';
 		                for(var i=0; i<value.answerList.length; i++){
 		                a += '<div class="ansContent'+value.questNo+'">답변 : '+value.answerList[i].ansContent;
-		                a += '('+value.answerList[i].memId+')</div>'
-		                }
+		                a += '('+value.answerList[i].memId+')';
+		               	 if(value.answerList[i].memId == '${mvo.memId}'){
+		                	a += '&nbsp;<a onclick="answerDelete('+value.answerList[i].ansNo+',\''+foodSellNo+'\');">삭제</a>';
+		                	
+		                	}//if
+		                a += '</div>';
+		                }//for
 		                a += '<a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a>';
 		                a += '<div class="commentAnswerRe'+value.questNo+'">'+'</div>';
 		              	a += '</div></div>';   
@@ -141,7 +146,21 @@
 		      	}//success
 		    }); //ajax
 	}//function
-		
+	
+	function answerDelete(answerNo,foodSellNo){
+    	$.ajax({
+		     url : "${pageContext.request.contextPath}/answerDelete.do",
+		     type : "get",
+		     data : "answerNo="+answerNo+"&foodSellNo="+foodSellNo,
+		     success : function(data){
+		    		 commentList(foodSellNo);
+		      	},//success
+		      error: function(data){
+		    	  alert("answer delete error");
+		      }
+		    }); //ajax
+    }//answerDelete function
+    
 		//질문 답변 달기 - 답변 달기 내용 출력을 input 폼으로 변경 
 		 function commentAnswerReply(questNo, memId){
 		    var a ="";

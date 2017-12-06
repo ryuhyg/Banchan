@@ -9,5 +9,6 @@ public interface AnswerDAO {
 	void answerRegister(AnswerVO avo);
 	AnswerVO findAnswerByAnsNo(String ansNo);
 	List<AnswerVO> getAllAnswerListByQuestNo(String questNo);
+	void answerDelete(String answerNo);
 	/////////////end윤주////////////////
 }
