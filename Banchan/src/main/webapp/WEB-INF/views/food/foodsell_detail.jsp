@@ -132,11 +132,14 @@
 		                }
 		               	/* a += '<a onclick="commentUpdate('+value.questNo+',\''+value.questContent+'\');"> 수정 </a>'; */
 		                a += '<div class="commentContent'+value.questNo+'"> <p> 질문내용 : '+value.questContent +'</p>';
-		                for(var i=0; i<value.answerList.length; i++){
-		                a += '<div class="ansContent'+value.questNo+'">┗Re ('+value.answerList[i].memId+') : '+value.answerList[i].ansContent+'<span style="float: right;"> 작성시간 :'+value.answerList[i].ansPostdate+' </span></div>';
-		                       }
-		                a +='<div>'+value.memId+'</div>'
-		              	
+		                	for(var i=0; i<value.answerList.length; i++){
+		                	a += '<div class="ansContent'+value.questNo+'">┗Re ('+value.answerList[i].memId+') : '+value.answerList[i].ansContent+'<span style="float: right;"> 작성시간 :'+value.answerList[i].ansPostdate+' </span>';
+		                	if(value.answerList[i].memId == '${mvo.memId}'){
+			                	a += '&nbsp;<a onclick="answerDelete('+value.answerList[i].ansNo+',\''+foodSellNo+'\');">삭제</a>';
+			                	
+			                	}//if
+		                	a +='</div>';
+		                      }//for		              	
 		                a +='<a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a></div>';
 		               
 		                /* a += '<span style="float: right;"><a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a></span>'; */
