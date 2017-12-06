@@ -48,12 +48,13 @@
 							<div class="row">
 								<h3 class="title-form" style="margin-left: 20px; margin-top: 23px;"><i class=""></i>${food.foodName}</h3>
 							</div>
-						<table class="table" style="margin-top: 22px;">
+						<table class="table" style="margin-top: 22px;"> 
 						<tbody>
 							<tr>  
-								<td><label for="id"> <i class="fa fa-user user" style="margin-right: 5px"></i>주부님 &nbsp; : &nbsp; ${food.sellerVO.memName} </label></td>
+								<td><label for="id"> <i class="fa fa-user user" style="margin-right: 5px"></i>주부님 &nbsp; : &nbsp; ${food.sellerVO.memName} </label>
+								<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${food.memId}" class="btn btn-reverse button-form" style="margin-left: 10px;">판매자 페이지로</a></td>
 							<td>
-							</td>
+							</td> 
 							</tr>
 							<tr>
 							<td>
@@ -81,10 +82,6 @@
 							</div>
 						</div>
 					</form>
-					<div align="right">
-					<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${food.memId}" class="btn btn-reverse button-form" style="margin-top: 10px;">판매자 페이지로</a>
-					</div>
-					
 					<div class="container" style="width: 100%;">
 					<h3 class="title-form"><i class="fa fa-pencil-square-o" aria-hidden="true" style="margin-right:5px; margin-top: 30px"></i>후기</h3> 
 					<c:choose>

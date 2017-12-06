@@ -4,14 +4,16 @@
 			<div class="container" style="text-align: center">
 				<div class="row" style="text-align: center">
 				<div>
-					Test
+					김우정  | 김영민 | 류향걸 | 박광태 | 이윤주 | 이정훈 | 정지원 
 				</div>
 				</div>
 			</div>
 			<div class="credits">
 				<div class="container">
 					<div class="row" style="text-align: center">
-						<div class="hidden-xs credits-text" style="text-align: center" >Copyright 2017 | <b>BANCHAN</b> | All Rights Reserved | Designed By VitaminD</div>
+						<div class="hidden-xs credits-text" style="text-align: center" >
+						경기도 성남시 분당구 삼평동 대왕판교로 670길(구 682번지) 유스페이스2 B동 8층 <br>
+						Copyright@ 2017 | <b>BANCHAN</b> | All Rights Reserved | Designed By VitaminD</div>
 					</div>
 				</div>
 			</div>

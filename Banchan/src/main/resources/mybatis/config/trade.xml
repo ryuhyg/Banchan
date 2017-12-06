@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<select id="getAllSellerTradeList" parameterType="map" resultMap="sellerTradeRM">
 		SELECT tr_no, tr_quantity, tr_req_date, tr_fin_date, tr_status_no, food_sell_no, mem_id,
-	  		 tr_status, tr_date, loc, price, food_name
+	  		 tr_status, to_char(tr_date,'YYYY-MM-DD') as tr_date, loc, price, food_name
 		FROM (select row_number() over (order by t.tr_no desc) as rnum, t.tr_no, t.tr_quantity, 
 				t.tr_req_date, t.tr_fin_date, t.tr_status_no, t.food_sell_no, t.mem_id, 
 				ts.tr_status, fs.tr_date, fs.loc, fs.price, f.food_name, bm.mem_name 

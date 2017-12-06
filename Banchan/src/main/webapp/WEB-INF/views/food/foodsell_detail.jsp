@@ -140,6 +140,7 @@
 		                a +='<a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a></div>';
 		               
 		                /* a += '<span style="float: right;"><a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a></span>'; */
+
 		                a += '<div class="commentAnswerRe'+value.questNo+'">'+'</div>';
 		              	a += '</div></div>'; 
 		             
@@ -148,7 +149,21 @@
 		      	}//success
 		    }); //ajax
 	}//function
-		
+	
+	function answerDelete(answerNo,foodSellNo){
+    	$.ajax({
+		     url : "${pageContext.request.contextPath}/answerDelete.do",
+		     type : "get",
+		     data : "answerNo="+answerNo+"&foodSellNo="+foodSellNo,
+		     success : function(data){
+		    		 commentList(foodSellNo);
+		      	},//success
+		      error: function(data){
+		    	  alert("answer delete error");
+		      }
+		    }); //ajax
+    }//answerDelete function
+    
 		//질문 답변 달기 - 답변 달기 내용 출력을 input 폼으로 변경 
 		 function commentAnswerReply(questNo, memId){
 			  if($("#memId").val()==null || $("#memId").val()==""){
@@ -258,7 +273,7 @@
    <div class="col-sm-1"></div><!-- col-sm-1 -->
    <div class="col-sm-10">
    <div class="blog-list blog-detail">
-      <h3 class="title-form"><i class="icon fa fa-comment" style="margin-right: 5px"></i>판매음식 상세정보</h3>
+      <h3 class="title-form"><i class="icon fa fa-wrench" style="margin-right: 5px"></i>판매음식 상세정보</h3>
       <div class="form-large grey-color">
       <div class="row">
       <div class="col-xs-6" style="float: left" class="row">
@@ -328,51 +343,48 @@
       
       
       <form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()">
-               <div class="row"> 
-                  <input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
-                  <input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
-               <c:choose>
-               <c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
-                <div class="col-sm-2" style="text-align: right">구매수량:</div>
-                 <div class="col-sm-2">
-                    <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px" required="required"/>
-                  </div>
-               
-            		 <sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
-            		 <input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
-                   </sec:authorize>
-                  
-            
-                   
-                     <label class="control-label" for="거래가격">거래가격:
-                  <span id="orderPrice"></span>
-                  </label>
-               </c:when>
-               </c:choose>
-               </div> <!-- row -->
-                   
-                   <div class="row" align="center">
-                      <c:choose>
-                         <c:when test="${foodSell.memId!=mvo.memId}">
-                           <input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
-                         </c:when>
-                        <c:otherwise>
-                           <input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
-                           <input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
-                        </c:otherwise>                   
-                      </c:choose>
-               </div>
+             <sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
+                 <input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
+              </sec:authorize>
+            <div class="row" style="margin-top: 10px"> 
+               <input type="hidden" name="foodSellVO.foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/> 
+               <input type="hidden" name="sellerId" value="${foodSell.memId}" id="sellerId"/>
+            <c:choose>
+            <c:when test="${foodSell.memId!=mvo.memId || mvo.memId=='' || mvo.memId==null}">
+             <div class="col-sm-2" style="text-align: right">구매수량:</div>
+             <div class="col-sm-2">
+                 <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px" required="required"/>
+             </div>
+             <div class="col-sm-2">
+	              <label class="control-label" for="거래가격">거래가격: </label> 
+	            <span id="orderPrice"></span>원
+             </div>
+            </c:when>
+            </c:choose>
+            </div> <!-- row -->
+                
+            <div class="row" align="center">
+              <c:choose>
+                 <c:when test="${foodSell.memId!=mvo.memId}">
+                   <input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+                 </c:when>
+                <c:otherwise>
+                   <input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
+                   <input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
+                </c:otherwise>                   
+              </c:choose>
+            </div>
         </form>
       </div> <!-- form-large grey-color -->
      
      <!-- 후기 작성 부분 입니다_윤주 -->
-      <div class="row">
+      <div class="row" style="margin-top: 40px">
       <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i>후기</h4>
       <c:choose>
 		<c:when test="${fn:length(rlist.list)==0}">
 			<h5>작성된 후기가 없습니다</h5>
 		</c:when>
-		<c:otherwise>
+		<c:otherwise> 
 			<table class="table table-hover" style="text-align: center;font-size: 12px;">
 				<thead>
 					<tr class="tr_visible"> 
@@ -441,10 +453,10 @@
                <input type="hidden" id="memId" name="memId" value="${mvo.memId}"/>
                <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
                <span class="input-group-btn">
-                    <Button class="btn btn-default" type="button" id="commentInsertBtn" name="commentInsertBtn">등록</Button>
+                    <Button class="btn btn-reverse" type="button" id="commentInsertBtn" name="commentInsertBtn">등록</Button>
                </span>
               </div>
-        </form>
+        </form> 
         
     </div><!-- row -->
     

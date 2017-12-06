@@ -163,10 +163,10 @@ function registeSeller(){
 				<div class="row text-center">
 			<sec:authorize access="!isAuthenticated()"><!-- 비회원 권한 설정 -->
 					<input type="hidden" value="" name="checkId" id="checkId">
-					<a href="#" id="loginCheck" onclick="loginCheck()" class="btn btn-reverse button-large">판매자 등록하기</a>
+					<a href="#" id="loginCheck" onclick="loginCheck()" class="btn btn-default button-large">판매자 등록하기</a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_BUYER')"><!-- 구매자 권한 설정 -->
-					<a href="#" onclick="registeSeller()" class="btn btn-reverse button-large">판매자 등록하기</a>
+					<a href="#" onclick="registeSeller()" class="btn btn-default button-large">판매자 등록하기</a>
 			</sec:authorize>
 				</div>
 			</div>

@@ -113,18 +113,20 @@
 							<li><a href="${pageContext.request.contextPath}/home.do">홈으로</a></li>
 							<li><a href="${pageContext.request.contextPath}/intro/service_intro.do">소개</a></li>
 						</ul></li>
-					<li class="has_submenu"><a href="">음식찾기</a>
-						<ul>
+					<li class="has_submenu"><a href="${pageContext.request.contextPath}/locationServicePage.do">위치별</a>
+						<!-- <ul>
 							<li><a
 								href="${pageContext.request.contextPath}/locationServicePage.do">위치중심으로
 									찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/selectCategoryFood.do?category=">카테고리로 찾기</a></li>
-						</ul></li>
-					<li class="has_submenu"><a href="#">공지사항</a>
+						</ul> -->
+						</li>
+					<li class="has_submenu"><a href="${pageContext.request.contextPath}/selectCategoryFood.do?category=">카테고리별</a>
 						<ul>
-							<li><a href="">공지사항</a></li>
-							<li><a href="">QnA</a></li>
-						</ul></li>
+							<li><a href="">반찬</a></li>
+							<li><a href="">김치</a></li>
+						</ul> 
+						</li>
 				</ul> 
 			</nav>
 			</div>  

@@ -46,13 +46,13 @@
 										
 								sellInfo += "<span class='description' style='color:black;font-size:12px;'>";
 								
-								sellInfo += "<table height='80px'><tr><td><i class='fa fa-krw' style='font-weight: bold'>가격&nbsp;</i></td><td>"
+								sellInfo += "<table height='80px'><tr><td style='width: 100px;'><i class='fa fa-krw' style='font-weight: bold'>가격&nbsp;</i></td><td>"
 										+ data.list[i].price+" &nbsp; &nbsp;(단위:"+data.list[i].unit+")"
 										+ "</td></tr>";
-								sellInfo += "<tr><td><i class='fa fa-calendar' style='font-weight: bold'> 거래 날짜</i></td><td>"
+								sellInfo += "<tr><td style='width: 100px;'><i class='fa fa-calendar' style='font-weight: bold'> 거래일</i></td><td>"
 										+ data.list[i].trDate
 										+ "</td></tr>";
-								sellInfo += "<tr><td> <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 판매 종료 날짜</i></td><td>"
+								sellInfo += "<tr><td style='width: 100px;'> <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 예약마감일</i></td><td>"
 										+ data.list[i].closeDate
 								sellInfo += "</td></tr></table>";
 								
@@ -66,13 +66,13 @@
 								sellInfo +='<sec:authorize access="isAuthenticated()">';
 									 if ($("#sellerId").val() == $("#loginId").val()) {
 										sellInfo +="<a style='float: right;position:relative;bottom:27px'";
-										sellInfo += "class='btn btn-default' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="
+										sellInfo += "class='btn btn-reverse' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="
 											+ data.list[i].foodSellNo
 											+ "&pageNo=1'>거래 내역 보기</a>";
 									 
 									}else{
 										sellInfo +="<a style='float: right;position:relative;bottom:27px;'";
-										sellInfo += "class='btn btn-default' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
+										sellInfo += "class='btn btn-reverse' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
 											+ data.list[i].foodSellNo
 											+ "&pageNo=1'>더 볼래요</a>";
 									} 
@@ -338,11 +338,11 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			  <sec:authorize access="isAuthenticated()">
 					<c:if test="${mvo.memId==svo.memId}">
 					  <div > 
-			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-default" style="float:right;margin-left: 10px;" >전체 거래내역 보기</a>
+			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-reverse" style="float:right;margin-left: 10px;" >전체 거래내역 보기</a>
 					 </div>
 					 <div > 
 						<a href="${pageContext.request.contextPath}/foodRegisterForm.do"
-							class="btn btn-default" style="float:right;">음식 등록</a> 
+							class="btn btn-reverse" style="float:right;">음식 등록</a> 
 					</div>
 					
 					</c:if>
@@ -372,9 +372,11 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 											href="${pageContext.request.contextPath}/foodDetailView.do?foodNo=${food.foodNo}">
 											<%-- 	<input type="hidden" id="foodNo" value="${food.foodNo }"> --%>
 
-											<span class="cover" style="height: 10px"></span> <img alt="Sample images"
-											style="width:100%;height:100%;"
+											<span class="cover" style="height: 10px"></span> 
+											<div style="width:100%;height:100%;">
+											<img alt="Sample images"
 											src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}">
+											</div>
 											<h3 class="title">${food.foodName}</h3>
 										</a> 
 										<span class="description">${food.foodDe}</span>
@@ -417,12 +419,12 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 													<%-- <a  style="display:inline-block" class="btn btn-default" hre	f="${pageContext.request.contextPath}/registerFoodView.do?foodNo=${food.foodNo}">판매등록</a> --%>
 													<button type="button" name="update" value="${food.foodNo }"
 														style="margin-top: 60px; margin-left: 5px"
-														class="btn btn-default btn-xs">수정</button>
+														class="btn btn-reverse btn-xs">수정</button>
 													<button type="button" name="delete" value="${food.foodNo }"
-														style="margin-top: 60px" class="btn btn-default btn-xs">삭제</button>
+														style="margin-top: 60px" class="btn btn-reverse btn-xs">삭제</button>
 													<button type="button" name="seller" value="${food.foodNo }"
 														style="margin-top: 60px; margin-left: 50px"
-														class="btn btn-default btn-xs">판매등록</button>
+														class="btn btn-reverse btn-xs">판매등록</button>
 												</div>
 											</c:if>
 										</sec:authorize>
