@@ -46,13 +46,13 @@
 										
 								sellInfo += "<span class='description' style='color:black;font-size:12px;'>";
 								
-								sellInfo += "<table height='80px'><tr><td><i class='fa fa-krw' style='font-weight: bold'>가격&nbsp;</i></td><td>"
+								sellInfo += "<table height='80px'><tr><td style='width: 100px;'><i class='fa fa-krw' style='font-weight: bold'>가격&nbsp;</i></td><td>"
 										+ data.list[i].price+" &nbsp; &nbsp;(단위:"+data.list[i].unit+")"
 										+ "</td></tr>";
-								sellInfo += "<tr><td><i class='fa fa-calendar' style='font-weight: bold'> 거래일</i></td><td>"
+								sellInfo += "<tr><td style='width: 100px;'><i class='fa fa-calendar' style='font-weight: bold'> 거래일</i></td><td>"
 										+ data.list[i].trDate
 										+ "</td></tr>";
-								sellInfo += "<tr><td> <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 예약마감일</i></td><td>"
+								sellInfo += "<tr><td style='width: 100px;'> <i class='fa fa-close' aria-hidden='true' style='font-weight: bold'> 예약마감일</i></td><td>"
 										+ data.list[i].closeDate
 								sellInfo += "</td></tr></table>";
 								
