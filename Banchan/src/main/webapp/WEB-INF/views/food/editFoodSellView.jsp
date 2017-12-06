@@ -131,8 +131,8 @@ function returnList(){
 		</div>
 		
 		<div class="row" align="right">
-			<input type="submit" id="editButton" class="btn btn-default" style="margin-right: 14px" value="수정하기" >
-			<a href="#" onclick="returnList()" style="margin-right: 14px" class="btn btn-default">취소</a>		
+			<input type="submit" id="editButton" class="btn btn-reverse" style="margin-right: 14px" value="수정하기" >
+			<a href="#" onclick="returnList()" style="margin-right: 14px" class="btn btn-reverse">취소</a>		
 		</div> 
 			<input type="hidden" name="foodSellNo" value="${foodSell.foodSellNo}" id="foodSellNo"/>
 			<input type="hidden" name="memId" value="${foodSell.memId}" id="sellerId"/>

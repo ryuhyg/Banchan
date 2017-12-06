@@ -8,9 +8,9 @@
 <script type="text/javascript">
 jQuery(document).ready(function(){
     
-    var select = $("#category");
-    
-    select.change(function(){
+  
+   
+	$("#category").change(function(){
     	var select_name = $(this).children("option:selected").val();
         location.href="${pageContext.request.contextPath}/selectCategoryFood.do?category="+select_name+"&pageNo=1";
     });

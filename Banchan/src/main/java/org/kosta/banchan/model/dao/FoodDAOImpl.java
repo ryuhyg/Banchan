@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 
 import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
-import org.kosta.banchan.model.vo.ListVO;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -81,7 +80,7 @@ public class FoodDAOImpl implements FoodDAO {
 	}
 
 	@Override
-	public List<Map<String, String>> allCategorySelect() {
+	public List<Map<String, Object>> allCategorySelect() {
 		return template.selectList("food.allCategorySelect");
 	}
 

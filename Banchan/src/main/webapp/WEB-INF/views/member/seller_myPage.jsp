@@ -58,7 +58,7 @@
 								
 								sellInfo +='<sec:authorize access="!isAuthenticated()">';
 								sellInfo +="<a style='float: right;position:relative;bottom:27px;'";
-								sellInfo += "class='btn btn-default' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
+								sellInfo += "class='btn btn-reverse' href='${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo="
 									+ data.list[i].foodSellNo
 									+ "&pageNo=1'>더 볼래요</a>";
 								sellInfo +='</sec:authorize>'; 

@@ -157,7 +157,7 @@ public class FoodServiceImpl implements FoodService {
 	
 
 	@Override
-	public List<Map<String, String>> allCategorySelect() {
+	public List<Map<String, Object>> allCategorySelect() {
 		return foodDAO.allCategorySelect();
 	}
 

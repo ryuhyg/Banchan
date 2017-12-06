@@ -149,7 +149,7 @@
 		    a += '<input type="text" class="form-control" id="answerContent" name="ansContent"/>';
 		    a += '<input type="hidden" id="memId2" name="memId2" value='+memId+'>';
 		    a += '<input type="hidden" id="questNo" name="questNo" value='+questNo+'>';
-		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentAnswerReplyProc();">답변달기</button> </span>';
+		    a += '<span class="input-group-btn"><button class="btn btn-reverse" type="button" onclick="commentAnswerReplyProc();">답변달기</button> </span>';
 		    a += '</div>';
 		    $('.commentAnswerRe'+questNo).html(a).toggle(); 
 		   
@@ -181,7 +181,7 @@
 			var a ="";
 		    a += '<div class="input-group">';
 		    a += '<input type="text" class="form-control" id="toggle_btn_commentUpdateText" name="content_'+questNo+'" value="'+questContent+'"/>';
-		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+questNo+');">수정</button> </span>';
+		    a += '<span class="input-group-btn"><button class="btn btn-reverse" type="button" onclick="commentUpdateProc('+questNo+');">수정</button> </span>';
 		    a += '</div>';
 		    $('.commentContent'+questNo).html(a).toggle();
 		}
@@ -240,7 +240,10 @@
    <div class="col-sm-1"></div><!-- col-sm-1 -->
    <div class="col-sm-10">
    <div class="blog-list blog-detail">
-      <h3 class="title-form"><i class="icon fa fa-wrench" style="margin-right: 5px"></i>판매음식 상세정보</h3>
+       <div class="row" style="padding-top: 10px; padding-right: 14px" align="right">           
+      <h3 class="title-form" style="float: left;"><i class="icon fa fa-wrench" style="margin-right: 5px;"></i>판매음식 상세정보</h3>
+     <a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${foodSell.memId}" class="btn btn-reverse button-form" style="margin-left: 10px;">판매자 페이지로</a>
+      </div>
       <div class="form-large grey-color">
       <div class="row">
       <div class="col-xs-6" style="float: left" class="row">
@@ -309,7 +312,7 @@
       </div><!-- row -->
       
       
-      <form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()">
+         <form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()">
              <sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
                  <input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
               </sec:authorize>
@@ -323,8 +326,8 @@
                  <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px" required="required"/>
              </div>
              <div class="col-sm-2">
-	              <label class="control-label" for="거래가격">거래가격: </label> 
-	            <span id="orderPrice"></span>원
+                 <label class="control-label" for="거래가격">거래가격: </label> 
+               <span id="orderPrice"></span>원
              </div>
             </c:when>
             </c:choose>
@@ -333,18 +336,17 @@
             <div class="row" align="center">
               <c:choose>
                  <c:when test="${foodSell.memId!=mvo.memId}">
-                   <input type="submit"  class="btn btn-default" style="margin-top: 20px;"  value="구매하기">
+                   <input type="submit"  class="btn btn-reverse" style="margin-top: 20px;"  value="구매하기">
                  </c:when>
                 <c:otherwise>
-                   <input type="button"  class="btn btn-default" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
-                   <input type="button"  class="btn btn-default" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
+                   <input type="button"  class="btn btn-reverse" id="editFoodSell" style="margin-top: 20px;"  value="수정하기">
+                   <input type="button"  class="btn btn-reverse" id="deleteFood" style="margin-top: 20px;" value="삭제하기">
                 </c:otherwise>                   
-              </c:choose>
+              </c:choose>    
             </div>
         </form>
       </div> <!-- form-large grey-color -->
-     
-     <!-- 후기 작성 부분 입니다_윤주 -->
+     <!-- 후기 작성 부분 입니다_윤주 -->  
       <div class="row" style="margin-top: 40px">
       <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i>후기</h4>
       <c:choose>
