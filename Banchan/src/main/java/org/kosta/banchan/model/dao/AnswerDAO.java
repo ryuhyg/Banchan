@@ -11,4 +11,5 @@ public interface AnswerDAO {
 	List<AnswerVO> getAllAnswerListByQuestNo(String questNo);
 	void answerDelete(String answerNo);
 	/////////////end윤주////////////////
+
 }

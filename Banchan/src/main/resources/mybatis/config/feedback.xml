@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="commentDelete" parameterType="questionVO">
 		delete from question where quest_no=#{questNo}
 	</delete>
-		
+	
    
 	<!-- End 정훈 -->
 
