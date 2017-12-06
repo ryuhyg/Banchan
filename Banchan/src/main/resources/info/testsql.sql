@@ -259,3 +259,4 @@ where NOT b.foodSellCount is NULL AND b.rank<=3 order by b.foodSellCount desc;
 
 insert into answer values(answer_seq.nextval,'java2','간답변',sysdate,2)
 
+select * from answer

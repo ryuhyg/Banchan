@@ -83,12 +83,13 @@
 
 	   commentList(); //실행시 댓글 목록 불러옴_정훈
 	   $("[name=commentInsertBtn]").click(function(){ //댓글 등록 버튼 클릭시
-		   	if($("#checkId").val()==null || $("#checkId").val()==""){
+		  if($("#memId").val()==null || $("#memId").val()==""){
 		   		alert("로그인 후 작성가능 합니다");
 		   		history.go(0);
-		   	}
+		   	}else{
 			var insertData = $("[name=commentInsertForm]").serialize(); //commentInsertForm의 내용을 가져옴
 			commentInsert(insertData); //Insert 함수호출(아래)
+		   	}
 		}); 
 	   
 	});//ready
@@ -123,36 +124,74 @@
 		          $.each(data, function(key, value){ 
 		        	  
 		         	   	a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-		              	a += '<div class="commentInfo'+value.questNo+'">'+'NO : '+value.questNo+' / 작성자 : '+value.memId;
-		                a += '/작성시간 :'+value.questPostdate;
-		               	a += '<a onclick="commentUpdate('+value.questNo+',\''+value.questContent+'\');"> 수정 </a>';
-		                a += '<a onclick="commentDelete('+value.questNo+');"> 삭제 </a>';
-		                a += '<div class="commentContent'+value.questNo+'"> <p> 질문내용 : '+value.questContent +'</p></div>';
-		                for(var i=0; i<value.answerList.length; i++){
-		                a += '<div class="ansContent'+value.questNo+'">답변 : '+value.answerList[i].ansContent;
-		                a += '('+value.answerList[i].memId+')</div>'
+		              	a += '<div class="commentInfo'+value.questNo+'">'+'NO : '+value.questNo+' /작성자 : '+value.memId;
+						
+		                a += '/작성시간 :'+value.questPostdate+'';
+		                if($("#memId").val()==value.memId){
+		                a += '<span style="float: right;"><a onclick="commentDelete('+value.questNo+',\''+value.memId+'\');"> 삭제 </a></span>';
 		                }
-		                a += '<a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a>';
+		               	/* a += '<a onclick="commentUpdate('+value.questNo+',\''+value.questContent+'\');"> 수정 </a>'; */
+		                a += '<div class="commentContent'+value.questNo+'"> <p> 질문내용 : '+value.questContent +'</p>';
+		                	for(var i=0; i<value.answerList.length; i++){
+		                	a += '<div class="ansContent'+value.questNo+'">┗Re ('+value.answerList[i].memId+') : '+value.answerList[i].ansContent+'<span style="float: right;"> 작성시간 :'+value.answerList[i].ansPostdate+' </span>';
+		                	if(value.answerList[i].memId == '${mvo.memId}'){
+			                	a += '&nbsp;<a onclick="answerDelete('+value.answerList[i].ansNo+',\''+foodSellNo+'\');">삭제</a>';
+			                	
+			                	}//if
+		                	a +='</div>';
+		                      }//for		              	
+		                a +='<a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a></div>';
+		               
+		                /* a += '<span style="float: right;"><a onclick="commentAnswerReply('+value.questNo+',\''+value.memId+'\');"> 답변달기 </a></span>'; */
+
 		                a += '<div class="commentAnswerRe'+value.questNo+'">'+'</div>';
-		              	a += '</div></div>';   
-		              
+		              	a += '</div></div>'; 
+		             
 		            });//each
 		          $(".commentList").html(a);
 		      	}//success
 		    }); //ajax
 	}//function
-		
+	
+	function answerDelete(answerNo,foodSellNo){
+    	$.ajax({
+		     url : "${pageContext.request.contextPath}/answerDelete.do",
+		     type : "get",
+		     data : "answerNo="+answerNo+"&foodSellNo="+foodSellNo,
+		     success : function(data){
+		    		 commentList(foodSellNo);
+		      	},//success
+		      error: function(data){
+		    	  alert("answer delete error");
+		      }
+		    }); //ajax
+    }//answerDelete function
+    
 		//질문 답변 달기 - 답변 달기 내용 출력을 input 폼으로 변경 
 		 function commentAnswerReply(questNo, memId){
+
+			  if($("#memId").val()==null || $("#memId").val()==""){
+				   		alert("로그인 후 작성가능 합니다");
+				   		history.go(0);
+				   	}else{
+
 		    var a ="";
 		     a += '<div class="input-group">';
 		    a += '<input type="text" class="form-control" id="answerContent" name="ansContent"/>';
-		    a += '<input type="hidden" id="memId2" name="memId2" value='+memId+'>';
+		    a += '<input type="hidden" id="memId2" name="memId2" value="'+$("#memId").val()+'">';
 		    a += '<input type="hidden" id="questNo" name="questNo" value='+questNo+'>';
+<<<<<<< HEAD
 		    a += '<span class="input-group-btn"><button class="btn btn-reverse" type="button" onclick="commentAnswerReplyProc();">답변달기</button> </span>';
 		    a += '</div>';
 		    $('.commentAnswerRe'+questNo).html(a).toggle(); 
 		   
+=======
+		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentAnswerReplyProc();">답변달기</button> </span>';
+		    a += '</div>';
+		    
+		     $('.commentAnswerRe'+questNo).html(a).toggle();
+			   	}
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 		}
 		 $("[name=commentInsertForm]").serialize();
 		
@@ -176,7 +215,7 @@
 	
 		
 		/*댓글 수정 시 댓글 내용을 input폼으로 변경 - 아래 commentUpdateProc()호출*/ 
-		function commentUpdate(questNo, questContent){
+		/* function commentUpdate(questNo, questContent){
 				
 			var a ="";
 		    a += '<div class="input-group">';
@@ -184,9 +223,9 @@
 		    a += '<span class="input-group-btn"><button class="btn btn-reverse" type="button" onclick="commentUpdateProc('+questNo+');">수정</button> </span>';
 		    a += '</div>';
 		    $('.commentContent'+questNo).html(a).toggle();
-		}
+		} */
 		/*댓글 수정*/
-		function commentUpdateProc(questNo){
+		/* function commentUpdateProc(questNo){
 			var updateContent = $("[name=content_"+questNo+"]").val();
 		    $.ajax({
 		        url : "${pageContext.request.contextPath}/commentUpdate.do",
@@ -198,10 +237,14 @@
 		        }//success
 		    });//ajax
 		}//commentUpdateProc
-		
+		 */
 		/*댓글 삭제*/ 
-		function commentDelete(questNo){
-			$.ajax({
+		function commentDelete(questNo, memId){
+			 if($("#memId").val()!=memId){
+			   		alert("작성자만 삭제할 수 있습니다");
+			   		history.go(0);
+			   	}else{
+			  $.ajax({
 		        url : "${pageContext.request.contextPath}/commentDelete.do?questNo="+questNo,
 		        type : "get",
 		        success : function(data){
@@ -209,6 +252,7 @@
 		           	 commentList(foodSellNo); //댓글 삭제후 목록 출력 함수 호출
 		        }//success
 		    });//ajax
+			  }//if-else
 		}//commentDelete
 		
 		/*구매 조건 체크 함수*/
@@ -312,7 +356,8 @@
       </div><!-- row -->
       
       
-         <form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()">
+
+      <form action="${pageContext.request.contextPath}/orderFood.do" onsubmit="return orderFoodConfirm()">
              <sec:authorize access="hasRole('ROLE_BUYER')"><!--구매자 권한 설정 -->
                  <input type="hidden" name="memId" id="checkId" value="${mvo.memId }">
               </sec:authorize>
@@ -419,8 +464,8 @@
         <form name="commentInsertForm">
             <div class="input-group">
                <input type="hidden" name="foodSellNo" value="${foodSell.foodSellNo}"/>
-               <input type="hidden" name="memId" value="${mvo.memId}"/>
-               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요." style="width: 99%">
+               <input type="hidden" id="memId" name="memId" value="${mvo.memId}"/>
+               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
                <span class="input-group-btn">
                     <Button class="btn btn-reverse" type="button" id="commentInsertBtn" name="commentInsertBtn">등록</Button>
                </span>
