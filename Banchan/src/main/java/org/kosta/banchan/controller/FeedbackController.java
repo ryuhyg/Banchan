@@ -62,7 +62,7 @@ public class FeedbackController {
 		currAvo.setAnsNo(avo.getAnsNo());
 		return currAvo;
 	}
-	//답변 삭제하기
+	//답변 삭제하기 
 	@RequestMapping("answerDelete.do")
 	@ResponseBody
 	public String answerDeleteAjax(String answerNo,String foodSellNo) {

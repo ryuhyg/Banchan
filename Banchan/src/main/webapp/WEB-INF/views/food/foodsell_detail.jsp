@@ -163,6 +163,7 @@
     
 		//질문 답변 달기 - 답변 달기 내용 출력을 input 폼으로 변경 
 		 function commentAnswerReply(questNo, memId){
+    		
 		    var a ="";
 		     a += '<div class="input-group">';
 		    a += '<input type="text" class="form-control" id="answerContent" name="ansContent"/>';
@@ -170,8 +171,8 @@
 		    a += '<input type="hidden" id="questNo" name="questNo" value='+questNo+'>';
 		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentAnswerReplyProc();">답변달기</button> </span>';
 		    a += '</div>';
-		    $('.commentAnswerRe'+questNo).html(a).toggle(); 
-		   
+		    $('.commentAnswerRe'+questNo).html(a); 
+		    $('.commentAnswerRe'+questNo).html(a).toggle();
 		}
 		 $("[name=commentInsertForm]").serialize();
 		

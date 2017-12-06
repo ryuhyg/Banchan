@@ -29,7 +29,6 @@ public class ReportController {
 	@ResponseBody
 	public List<ReportVO> getReport(Model model){
 		List<ReportVO> rlist = reportService.getReport();
-		System.out.println(rlist);
 		model.addAttribute("rlist",rlist);
 		return rlist;
 	}
@@ -39,18 +38,18 @@ public class ReportController {
 		ModelAndView mv = new ModelAndView();
 		List<SellerVO> slist=null;
 		List<FoodSellVO> fslist = null;
-		System.out.println("kw = "+kw);
+		//System.out.println("kw = "+kw);
 		if(kw=="" || kw=="null") {
 			
 		}else {
 			slist = memberService.findSellerList(kw);
 			fslist = foodService.findFoodSellList(kw);
 		}
-		System.out.println("keyword ="+kw );
+		//System.out.println("keyword ="+kw );
 		mv.addObject("keyword",kw);
-		System.out.println("slist = "+ slist);
+		//System.out.println("slist = "+ slist);
 		mv.addObject("slist",slist);
-		System.out.println("fslist = "+ fslist);
+		//System.out.println("fslist = "+ fslist);
 		mv.addObject("fslist",fslist);
 		mv.setViewName("search/search_result.tiles");
 		return mv;
