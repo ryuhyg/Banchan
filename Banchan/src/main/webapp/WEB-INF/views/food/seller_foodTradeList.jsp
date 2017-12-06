@@ -28,6 +28,9 @@
 table, th, td{
 	text-align: center;
 }
+th{
+	width: inherit;
+}
 .table-border-hidden th, .table-border-hidden td{
 	text-align: center;
 	border: hidden;
@@ -105,7 +108,7 @@ table, th, td{
 				          </h3>
 				         </div>
 						 <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;width: 100%"> 
-					            <table class="table table-border-hidden" style="font-size: 13px; position: fixed;" >
+					            <table class="table table-border-hidden" style="font-size: 13px;" >
 					               <tr> 
 					                  <th>예약마감일</th>
 					                  <td>${foodSell.closeDate}</td>
