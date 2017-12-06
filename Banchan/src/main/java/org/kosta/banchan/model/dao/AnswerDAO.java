@@ -10,4 +10,5 @@ public interface AnswerDAO {
 	AnswerVO findAnswerByAnsNo(String ansNo);
 	List<AnswerVO> getAllAnswerListByQuestNo(String questNo);
 	/////////////end윤주////////////////
+
 }
