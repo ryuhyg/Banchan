@@ -29,6 +29,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
+		
 		   var foodSellNo = $("#foodSellNo").val(); //게시글 번호 
 	   /*주문 수량 확인하기*/
 	   $("#trQuantity").change(function () {
@@ -185,7 +186,7 @@
 		    $('.commentAnswerRe'+questNo).html(a).toggle(); 
 		}
 		 $("[name=commentInsertForm]").serialize();
-		
+    }
 		//질문 답변 달기
 		 function commentAnswerReplyProc(questNo){
 			var answer=$("#answerContent").val();
@@ -361,7 +362,7 @@
              <div class="col-sm-2">
                  <input type="number" min="1" name="trQuantity" id="trQuantity" class="form-control" style="width: 100px" required="required"/>
              </div>
-             <div class="col-sm-2">
+             <div class="col-sm-3">
                  <label class="control-label" for="거래가격">거래가격: </label> 
                <span id="orderPrice"></span>원
              </div>
