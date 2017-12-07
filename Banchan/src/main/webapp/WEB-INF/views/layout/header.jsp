@@ -20,14 +20,28 @@
 	             success:function(data){
 	            	 reportList += "<li>&nbsp;&nbsp;검색어 순위</li>"
 	            	 for(var i=0;i<data.length;i++){
-	            		 reportList += "<li><a href='${pageContext.request.contextPath}/searchByKeyword.do?kw="+data[i].keyword+"'>"+data[i].rk+". "+data[i].keyword+"</a></li>"
+	            		 reportList += "<li><a href='${pageContext.request.contextPath}/searchByKeyword.do?kw="+data[i].keyword+"'>"+data[i].rk+". "+data[i].keyword+"</a></li>";
+	            	 }//for
 	            		 $("#reportList").html(reportList);
-	            	 }
-	            	
-	             }
-			});
-		});
-	});
+	             }//data
+			});//ajax
+		});//click
+		mover();
+	});//ready
+	
+	function mover(){
+		var listcategory = ""; 
+		$.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/category.do",
+			success:function(data){  
+				 for(var i=0;i<data.length;i++){	 
+					 listcategory += "<li><a href='${pageContext.request.contextPath}/selectCategoryFood.do?category="+data[i].CATEGORY_NAME+"&pageNo=1'>"+data[i].CATEGORY_NAME+"</a></li>" ; 	   
+				 } 
+				 $("#navigation #headcategoryList").html(listcategory);
+			}             
+		});//ajax
+	} //function
 </script>		
 
 <header class="menu-base" id="header-container-box"
@@ -65,7 +79,7 @@
 							style="color: #1a1a1a; background-color: #fff; font-size: 12px; border: 0px; margin-top: 5px; float: right">
 							<i class="icon fa fa-pencil-square-o"></i>마이페이지<span
 								class="caret"></span>
-						</button>
+						</button>   
 						<ul class="dropdown-menu" style="margin-left: 36%;">
 							<li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />"><i class="fa fa-wrench" aria-hidden="true" style="margin-right: 5px;"></i>회원정보수정</a></li>
 							<li><a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>내거래내역</a></li>
@@ -112,8 +126,10 @@
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/home.do">홈으로</a></li>
 							<li><a href="${pageContext.request.contextPath}/intro/service_intro.do">소개</a></li>
-						</ul></li>
+						</ul>
+					</li>
 					<li class="has_submenu"><a href="${pageContext.request.contextPath}/locationServicePage.do">위치별</a>
+<<<<<<< HEAD
 						<!-- <ul>
 							<li><a
 								href="${pageContext.request.contextPath}/locationServicePage.do">위치중심으로
@@ -126,6 +142,14 @@
 							<li><a href="">반찬</a></li>
 							<li><a href="">김치</a></li>
 						</ul> 
+=======
+					
+					</li>
+					<li class="has_submenu" id="headcategory"><a href="${pageContext.request.contextPath}/selectCategoryFood.do?category=">카테고리별</a>
+						<ul id="headcategoryList" >
+						
+						</ul>
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 					</li>
 				</ul> 
 			</nav>
@@ -140,7 +164,7 @@
 							<i class="fa fa-arrow-down" ></i> 
 							</button>
 							
-						<ul class="dropdown-menu" id="reportList" style=" width:71%;" >
+						<ul class="dropdown-menu"  id="reportList" style=" width:71%;" >
 							<li></li>
 						</ul>
 						

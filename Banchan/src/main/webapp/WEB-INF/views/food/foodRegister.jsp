@@ -161,7 +161,7 @@ filter: alpha(opacity=0);
 									</c:choose>
 								</c:forEach>
 						</select>
-						<input type="button" value="파일 선택" class="btn btn-default" style="margin-top: 8px" />
+						<input type="button" value="파일 선택" class="btn btn-reverse" style="margin-top: 8px" />
 						<div style="margin-top: 10px;" class="file_input_div">
 							<input type ="file"  class="file_input_hidden" value="파일 업로드" name="uploadImage"  id="cma_file" accept="image/*" onchange="getimagereview(this,$('#cma_image'))"/>
 							<div id="cma_image" style="margin-top: 10px;">
@@ -171,7 +171,7 @@ filter: alpha(opacity=0);
 						</div>
 						<div class="col-xs-7" style="float: right" class="row">
 							<textarea rows="10" cols="52" name="foodInfo" style="width: 100%; height: 100%;">${beFood.foodDe}</textarea>
-							<input style="margin-left: 77%" type="submit" class="btn btn-default" value="수정" >
+							<input style="margin-left: 77%" type="submit" class="btn btn-reverse" value="수정" >
 							<a href="#" onclick="returnList()" class="btn btn-reverse button-form" style="float: right;">취소</a>	
 						</div>
 						</div>

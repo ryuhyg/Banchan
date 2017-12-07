@@ -67,6 +67,11 @@ public class FeedbackServiceImpl implements FeedbackService {
 	public AnswerVO findAnswerByAnsNo(String ansNo) {
 		return answerDAO.findAnswerByAnsNo(ansNo);
 	}
+	@Override
+	public void answerDelete(String answerNo) {
+		answerDAO.answerDelete(answerNo);
+		
+	}
 	////////////////// end윤주///////////////////////////
 
 	////////////////// start 지원///////////////////////////
@@ -123,5 +128,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 		return questionDAO.commentDelete(qvo);
 	}
 	//////////////////end정훈///////////////////////////
+	
 }
 

@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="commentDelete" parameterType="questionVO">
 		delete from question where quest_no=#{questNo}
 	</delete>
-		
+	
    
 	<!-- End 정훈 -->
 
@@ -131,6 +131,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from answer
 		where ans_no=#{value}
 	</select>
+	<delete id="answerDelete" parameterType="string">
+		delete from answer where ans_no=#{value}
+	</delete>
 	<!-- End 윤주 -->
 </mapper>
 

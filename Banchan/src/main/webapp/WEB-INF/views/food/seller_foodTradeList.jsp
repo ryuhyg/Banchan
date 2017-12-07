@@ -28,6 +28,9 @@
 table, th, td{
 	text-align: center;
 }
+th{
+	width: inherit;
+}
 .table-border-hidden th, .table-border-hidden td{
 	text-align: center;
 	border: hidden;

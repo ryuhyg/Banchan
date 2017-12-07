@@ -84,7 +84,7 @@ filter: alpha(opacity=0);
 				<div class="col-sm-6" >
 					<sec:csrfInput/>
 					<div style="margin-top: 5px;" class="file_input_div" >
-					<input type="button" value="파일 선택" class="btn btn-default" style="margin-top: 8px" />
+					<input type="button" value="파일 선택" class="btn btn-reverse" style="margin-top: 8px" />
 					<input type="file" class="file_input_hidden" value="파일 업로드" name="uploadImage" id="cma_file" required="required" accept="image/*" onchange="getimagereview(this,$('#cma_image'))" >
 					<div id="cma_image" style="margin-top: 10px; width: 350px; height: 200px; border: solid 1px; #e1e1d0">
 					</div>
@@ -100,7 +100,7 @@ filter: alpha(opacity=0);
 					</div>
 					<div align="right" style="position: relative;bottom: 25px;">
 					<input type="submit" id="registerData" class="btn btn-reverse button-form" value="등록">
-					<a href="${pageContext.request.contextPath}" class="btn btn-default button-form">돌아가기</a>
+					<a href="${pageContext.request.contextPath}" class="btn btn-reverse button-form">돌아가기</a>
 					</div>
 				</div>
 					</form>
