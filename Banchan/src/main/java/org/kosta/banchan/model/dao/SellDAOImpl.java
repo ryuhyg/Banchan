@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.kosta.banchan.model.vo.FoodSellVO;
+import org.kosta.banchan.model.vo.FoodVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -79,8 +80,8 @@ public class SellDAOImpl implements SellDAO {
 	}
 
 	@Override
-	public List<FoodSellVO> findFoodSellList(String kw) {
-		return template.selectList("food.findFoodSellList", kw);
+	public List<FoodVO> findFoodList(String kw) {
+		return template.selectList("food.findFoodList", kw);
 	}
 	////////////////// end윤주//////////////////////////////
 

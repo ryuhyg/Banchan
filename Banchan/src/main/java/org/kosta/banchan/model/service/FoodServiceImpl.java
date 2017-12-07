@@ -35,9 +35,9 @@ public class FoodServiceImpl implements FoodService {
 	}
 
 	@Override
-	public List<FoodSellVO> findFoodSellList(String kw) {
+	public List<FoodVO> findFoodList(String kw) {
 		
-		return sellDAO.findFoodSellList(kw);
+		return sellDAO.findFoodList(kw);
 	}
 	/////////////////// end윤주////////////////////////
 

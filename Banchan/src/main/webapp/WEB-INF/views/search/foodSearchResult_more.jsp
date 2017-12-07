@@ -91,27 +91,24 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 				<div class="col-md-9">
 				<h4><i class="fa fa-search" aria-hidden="true"></i>판매 음식 검색 결과 전체보기</h4>
 		<c:choose>
-			<c:when test="${fn:length(fslist)==0 }">
+			<c:when test="${fn:length(flist)==0 }">
 				검색결과없음
 			</c:when>
 			<c:otherwise>
-			<c:forEach items="${fslist }" var="foodSell">
+			<c:forEach items="${flist }" var="food">
 				<div class="row" style="vertical-align: middle">
 					<div class="col-sm-8 col-md-8 col-sm-push-4">
 						<div class="bs-callout callout-success" style="width: 800px;">
 								<h3 class="title">
-										<a href="getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }">
-									${foodSell.foodName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${foodSell.foodScore}</a></h3> 	
+										<a href="foodDetailView.do?foodNo=${food.foodNo }">
+									${food.foodName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${food.foodScore}</a></h3> 	
 							<span class='description' style='color:black;font-size:12px;'>
 								<table height="81px">  
 										<tr>
-											<td><i class='fa fa-user' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 아이디&nbsp;</i></td><td><a href="sellerPageInfo.do?memId=${foodSell.memId }">${foodSell.memId }</a><br></td>
+											<td><i class='fa fa-user' style="font-weight: bold; margin-right: 5px">&nbsp;판매자 아이디&nbsp;</i></td><td><a href="sellerPageInfo.do?memId=${food.memId }">${food.memId }</a><br></td>
 										</tr>
 										<tr>
-											<td><i class='fa fa-calendar' style="font-weight: bold; margin-right: 5px">&nbsp;예약 마감일&nbsp;</i></td><td><a>${foodSell.closeDate}</a></td>
-										</tr>
-										<tr> 
-											<td><i class="fa fa-exchange" aria-hidden="true" style="font-weight: bold; margin-right: 5px">&nbsp;거래 일&nbsp;</i></td><td><a>${foodSell.sellDetail}</a></td> 
+											<td><i class='fa fa-calendar' style="font-weight: bold; margin-right: 5px">&nbsp;음식 상세&nbsp;</i></td><td><a>${food.foodDe}</a></td>
 										</tr>								
 										</table>
 							</span>
@@ -120,7 +117,7 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 					<div class="col-sm-4 col-md-4 col-sm-pull-8" style="padding-top: 15px;" >
 						<!-- . Agent Box -->
 						<div class="tab2img" >
-							<a href="getFoodSellDetail.do?foodSellNo=${foodSell.foodSellNo }"><img alt="Sample images" width="250px" height="150px" src="${pageContext.request.contextPath }/resources/images/${foodSell.foodMainImg}"></a> 
+							<a href="foodDetailView.do?foodNo=${food.foodNo }"><img alt="Sample images" width="250px" height="150px" src="${pageContext.request.contextPath }/resources/images/${food.foodMainImg}"></a> 
 						</div>
 					</div><!-- /.col-md-4 -->
 				</div><!-- /.row -->

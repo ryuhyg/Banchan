@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.kosta.banchan.model.service.FoodService;
 import org.kosta.banchan.model.service.MemberService;
 import org.kosta.banchan.model.service.ReportService;
-import org.kosta.banchan.model.vo.FoodSellVO;
+import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.ReportVO;
 import org.kosta.banchan.model.vo.SellerVO;
 import org.springframework.stereotype.Controller;
@@ -37,34 +37,30 @@ public class ReportController {
 	public ModelAndView SearchByKeyword(String kw) {
 		ModelAndView mv = new ModelAndView();
 		List<SellerVO> slist=null;
-		List<FoodSellVO> fslist = null;
-		//System.out.println("kw = "+kw);
+		List<FoodVO> flist = null;
 		if(kw=="" || kw=="null") {
 			
 		}else {
 			slist = memberService.findSellerList(kw);
-			fslist = foodService.findFoodSellList(kw);
+			flist = foodService.findFoodList(kw);
 		}
-		//System.out.println("keyword ="+kw );
 		mv.addObject("keyword",kw);
-		//System.out.println("slist = "+ slist);
 		mv.addObject("slist",slist);
-		//System.out.println("fslist = "+ fslist);
-		mv.addObject("fslist",fslist);
+		mv.addObject("flist",flist);
 		mv.setViewName("search/search_result.tiles");
 		return mv;
 	}
 	@RequestMapping("foodSearchMore.do")
 	public ModelAndView foodSearchMore(String kw) {
 		ModelAndView mv = new ModelAndView();
-		List<FoodSellVO> fslist = null;
+		List<FoodVO> flist = null;
 		if(kw=="" || kw=="null") {
 			
 		}else {
-			fslist = foodService.findFoodSellList(kw);
+			flist = foodService.findFoodList(kw);
 		}
 		mv.addObject("keyword",kw);
-		mv.addObject("fslist",fslist);
+		mv.addObject("fslist",flist);
 		mv.setViewName("search/foodSearchResult_more.tiles");
 		return mv;
 	} 

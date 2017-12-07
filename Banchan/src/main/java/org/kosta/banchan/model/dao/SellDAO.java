@@ -3,6 +3,7 @@ package org.kosta.banchan.model.dao;
 import java.util.List;
 
 import org.kosta.banchan.model.vo.FoodSellVO;
+import org.kosta.banchan.model.vo.FoodVO;
 
 public interface SellDAO {
 
@@ -10,7 +11,7 @@ public interface SellDAO {
 
 	//////////// start윤주////////////
 	int getLeftQuantityByFoodSellNo(String foodSellNo);
-	List<FoodSellVO> findFoodSellList(String kw);
+	List<FoodVO> findFoodList(String kw);
 	//////////// end윤주///////////////
 
 	void registerFoodSell(FoodSellVO foodSellVO);
