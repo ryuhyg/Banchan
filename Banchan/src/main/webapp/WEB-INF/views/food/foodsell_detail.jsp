@@ -411,6 +411,9 @@
 	      						<c:forEach begin="1" end="${r.score}">
 	    							<a class="on">★</a>
 								</c:forEach>
+								<c:forEach begin="${r.score}" end="4">
+                           			<a>★</a>
+                        		</c:forEach>
        						</span>
 						${r.score }
 						</td>
