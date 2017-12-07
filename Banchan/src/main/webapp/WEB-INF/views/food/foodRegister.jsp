@@ -12,7 +12,7 @@ function getimagereview(html, $target) {
         var reader = new FileReader();
         reader.onload = function (e) {
        		//$target.css('display', '');
-        	$target.html('<img src="' + e.target.result + '" alt="" style="width:350px; height:250px;"/>');
+        	$target.html('<img src="' + e.target.result + '" alt="" style="width:350px; height:250px; background-size: cover;"/>');
         }
         reader.readAsDataURL(html.files[0]);
     }
@@ -108,7 +108,7 @@ filter: alpha(opacity=0);
 						<input type="button" value="파일 선택" class="btn btn-reverse" style="margin-top: 8px" />
 						<div style="margin-top: 10px;" class="file_input_div">
 							<input type ="file"  class="file_input_hidden" value="파일 업로드" name="uploadImage"  id="cma_file" required="required" accept="image/x-png, image/gif, image/jpeg" onchange="getimagereview(this,$('#cma_image'))"/>
-							<div id="cma_image" style="margin-top: 10px; width:350px; height:200px; border: solid 1px; #e1e1d0">
+							<div id="cma_image" style="margin-top: 10px; width:350px; height:250px; background-size: cover; border: solid 1px; #e1e1d0">
 							</div>
 							 </div>
 						</div>
