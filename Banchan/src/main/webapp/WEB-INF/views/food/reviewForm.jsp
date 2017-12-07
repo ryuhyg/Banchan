@@ -50,17 +50,17 @@ function reviewCheck(){
 }
 </script>    
 <sec:authentication var="mvo" property="principal" />
-<section id="recent-list" style="margin-top: 150px;">
+<section id="recent-list" style="margin-top: 100px;">
 	<div class="container">
-[후기작성]
-<form action="${pageContext.request.contextPath}/reviewRegister.do" onsubmit="return reviewCheck()">
-   <table class="table table-condensed">
-    <tr>
-        <td>
-           <span class="form-inline" role="form">               
-              <textarea id="rContent" name="rContent" class="form-control col-lg-12" rows="4" style="resize: none; width:100%;height:30px" required="required"></textarea><br>
+	<div class="row" style="margin-left: 20%">         
+	<h3 class="title-form"><i class="icon fa fa-pencil-square-o" style="margin-right: 5px"></i>후기작성</h3>
+	</div>
+	<div class="row" align="center">      
+<form action="${pageContext.request.contextPath}/reviewRegister.do" style="width: 60%" class="form-large grey-color" onsubmit="return reviewCheck()" >	
+          <div class="row">
+           <span class="form-inline" role="form">                    
 		              별점&nbsp;
-				<span class="star_rating">
+				<span class="star_rating">  
 				    <a href="#" class="on">★</a>
 				    <a href="#" class="on">★</a>
 				    <a href="#" class="on">★</a>
@@ -75,14 +75,19 @@ function reviewCheck(){
            	  	  <sec:authorize access="isAuthenticated()">
 			            <input type="hidden" name="writerId" value="${mvo.memId }">
 			      </sec:authorize>
-              <br>
-           	  <span style="float:right;">
+			        </span>      
+			      </div>
+              <br>    
+  				<textarea id="rContent" name="rContent" class="form-control" rows="4" style="resize: none; width:70%;height:300px" required="required"></textarea>
+           	 <div class="row" style="padding-top: 10px">
            	  <input type="submit" class="btn btn-danger" value="후기작성">
-           	  </span>
-           </span>           	 
-        </td>
-    </tr>
-  </table>
+           	 </div>
+           	      
+          
+              	 
+         
+
  </form>
+ </div>
 	</div>
 </section>

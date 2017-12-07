@@ -15,13 +15,13 @@
 		$("#reportListBtn").click(function(){
 			var reportList="";
 			$.ajax({ 
-				 type:"get",
+				 type:"get",   
 	             url:"${pageContext.request.contextPath}/reportmain.do",
 	             success:function(data){
 	            	 reportList += "<li>&nbsp;&nbsp;검색어 순위</li>"
-	            	 for(var i=0;i<data.length;i++){
-	            		 reportList += "<li><a href='${pageContext.request.contextPath}/searchByKeyword.do?kw="+data[i].keyword+"'>"+data[i].rk+". "+data[i].keyword+"</a></li>";
-	            	 }//for
+	            		 for(var i=0;i<data.length;i++){
+	                         reportList += "<li><a href='${pageContext.request.contextPath}/searchByKeyword.do?kw="+data[i].keyword+"'>"+data[i].rk+". "+data[i].keyword+"</a></li>";
+	                      }//for
 	            		 $("#reportList").html(reportList);
 	             }//data
 			});//ajax
@@ -142,7 +142,7 @@
 			<div class="col-sm-3">			
 				<form action="searchByKeyword.do">
 						<div class="searchForm">
-							<input type="text" style="border: 0; width:71%; box-shadow: none; " placeholder="&nbsp;&nbsp;검색" name="kw">
+							<input type="text" style="border: 0; width:71%; box-shadow: none; " autocomplete="off"  placeholder="&nbsp;&nbsp;검색" name="kw">
 							<button class="btn btn-primary dropdown-toggle dropdown-hover searchBtn" type="button"
 							data-toggle="dropdown" data-hover="dropdown" id="reportListBtn"
 							style="border: none; background-color: #fff">

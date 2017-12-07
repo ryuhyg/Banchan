@@ -80,52 +80,51 @@ function returnList(){
 			<div class="blog-list blog-detail">
 		<h3 class="title-form"><i class="fa fa-wrench" aria-hidden="true" style="margin-right: 5px"></i>판매음식 수정</h3>
 
- 
 		<form  class="form-large grey-color" action="${pageContext.request.contextPath}/editFoodSell.do?" method="post"  id="regForm" >
 		<sec:csrfInput/><%-- csrf 토큰 --%>
-		<div>
-		<h4 class="title-form" style="padding-left: 15px; font-weight: bold; padding-top: 8px">${foodSell.foodName }</h4>
-		</div>
 		<div class="col-xs-6" style="float: left" class="row">
 			<img style="padding-top: 15px" width="350px" height="250px" src="${pageContext.request.contextPath}/resources/images/${foodSell.foodMainImg}" > 
 		</div>
 		<div  class="col-xs-6" style="float:right" class="row">
-			<div class="row">	
-				<label for="date"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>마감일자</label>
-				<input type="text" name="closeDate" id="closeDate" class="margin-bottom small-text " required="required" value="${foodSell.closeDate}">	
-			</div>
-			<div class="row" >
-				<label for="id"> <i class="fa fa-user user" style="margin-right: 5px;"></i>거래일자</label>
-				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" value="${foodSell.trDate}" > 
+		<div class="row">   
+				<h3 class="title-form" style="margin-bottom: 15px">${foodSell.foodName }</h3>  
 			</div>
 			<div class="row">
-				<label for="loc"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>거래장소 </label>
-				<input type="text"	 name="loc"  id="loc" class="margin-bottom small-text"  required="required" value="${foodSell.loc}">	
-			</div>
-				<div class="row">
 					<div  class="col-xs-4" >
-						<label for="price"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>가격 </label>
+						<label for="price">가격 </label>
 						<input type="number" name="price"  id="price" min="0" class="margin-bottom form-control"  required="required" value="${foodSell.price}">
 						</div>
 					<div  class="col-xs-4" >
-						<label for="preQuantity"><i class="fa fa-ellipsis-h" style="margin-right: 5px"></i>준비수량</label>
+						<label for="preQuantity">준비수량</label>
 						<input type="number" name="preQuantity"  id="preQuantity" min="1" class="margin-bottom form-control" required="required" value="${foodSell.preQuantity}">	
 					</div>
 					<div  class="col-xs-4" >
-						<label for="unit"><i class="fa fa-ellipsis-h" style=" margin-right: 5px"></i>수량 당 정보</label>
+						<label for="unit">수량 당 정보</label>
 						<input type="text" name="unit"  id="unit" class="margin-bottom form-control"  required="required" value="${foodSell.unit}" >
 					</div>
 				</div>
+			<div class="row">	 
+				<label for="date">마감일자</label>
+				<input type="text" name="closeDate" id="closeDate" class="margin-bottom small-text " required="required" value="${foodSell.closeDate}">	
+			</div>
+			<div class="row" >
+				<label for="id">거래일자</label>
+				<input type="text"  name="trDate" id="trDate" required="required" class="margin-bottom small-text trDate" value="${foodSell.trDate}" > 
+			</div>
+			<div class="row">
+				<label for="loc">거래장소 </label>
+				<input type="text"	 name="loc"  id="loc" class="margin-bottom small-text"  required="required" value="${foodSell.loc}">	
+			</div>
 		</div>
 		<div class= "row">
 	 		<div  class="container-fluid">										
-				<label for="sellDetail"><i class="fa fa-ellipsis-h" style="margin-right: 5px;padding-top: 40px"></i>음식 상세정보</label><br>
+				<label for="sellDetail" style="padding-top: 40px">음식 상세정보</label><br>
 				<textarea rows="4" class="" cols="52"  style="width: 100%" readonly="readonly">${foodSell.foodDe}</textarea>
 			</div>
 		</div>				
 		<div class="row">
 	 		<div  class="container-fluid">										
-				<label for="sellDetail"><i class="fa fa-ellipsis-h" style="margin-right: 5px;padding-top: 30px"></i>판매 추가 상세정보</label><br>
+				<label for="sellDetail" style="padding-top: 30px">판매 추가 상세정보</label><br>
 				<textarea rows="10" class="" cols="52" name="sellDetail" style="width: 100%"  required="required">${foodSell.sellDetail}</textarea>
 			</div>
 		</div>
