@@ -107,22 +107,22 @@ table, th, td{
 						 <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;width: 100%"> 
 					            <table class="table table-border-hidden" style="font-size: 13px; table-layout: fixed; height:auto; overflow: hidden;" >
 					               <tr> 
-					                  <th>예약마감일</th>
-					                  <td>${foodSell.closeDate}</td>
-					                  <th>거래일</th>
-					                  <td>${foodSell.trDate}</td>
+					                  <th style="width: 25%;">예약마감일</th>
+					                  <td style="width: 25%;">${foodSell.closeDate}</td>
+					                  <th style="width: 25%;">거래일</th>
+					                  <td style="width: 25%;">${foodSell.trDate}</td>
 					               </tr> 
 					               <tr>
-					                  <th>가격</th>
-					                  <td><span id="price">${foodSell.price}</span> 원</td> 
-					                  <th>양(개당)</th>
-					                  <td>${foodSell.unit}</td>
-					                <tr>
-					                  <th>준비수량</th>
-					                  <td><span id="preQuantity">${foodSell.preQuantity}</span>&nbsp;(${foodSell.unit })</td>
-					                  <th>남은수량</th>
-					                  <td><span id="leftQuantity">${leftQuantity}</span>&nbsp;(${foodSell.unit })</td>
-					               </tr>
+					                  <th style="width: 25%;">가격</th>
+					                  <td style="width: 25%;"><span id="price">${foodSell.price}</span> 원</td> 
+					                  <th style="width: 25%;">양(개당)</th>
+					                  <td style="width: 25%;">${foodSell.unit}</td>
+					                <tr> 
+					                  <th style="width: 25%;">준비수량</th>
+					                  <td style="width: 25%;"><span id="preQuantity">${foodSell.preQuantity}</span>&nbsp;(${foodSell.unit })</td>
+					                  <th style="width: 25%;">남은수량</th>
+					                  <td style="width: 25%;"><span id="leftQuantity">${leftQuantity}</span>&nbsp;(${foodSell.unit })</td>
+					               </tr> 
 					               <tr>
 					                  <th>거래장소</th>
 					                  <td colspan="3">${foodSell.loc}</td>

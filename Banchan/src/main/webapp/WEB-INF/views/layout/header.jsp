@@ -129,12 +129,27 @@
 						</ul>
 					</li>
 					<li class="has_submenu"><a href="${pageContext.request.contextPath}/locationServicePage.do">위치별</a>
+<<<<<<< HEAD
+						<!-- <ul>
+							<li><a
+								href="${pageContext.request.contextPath}/locationServicePage.do">위치중심으로
+									찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/selectCategoryFood.do?category=">카테고리로 찾기</a></li>
+						</ul> -->
+						</li>
+					<li class="has_submenu"><a href="${pageContext.request.contextPath}/selectCategoryFood.do?category=">카테고리별</a>
+						<ul>
+							<li><a href="">반찬</a></li>
+							<li><a href="">김치</a></li>
+						</ul> 
+=======
 					
 					</li>
 					<li class="has_submenu" id="headcategory"><a href="${pageContext.request.contextPath}/selectCategoryFood.do?category=">카테고리별</a>
 						<ul id="headcategoryList" >
 						
 						</ul>
+>>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 					</li>
 				</ul> 
 			</nav>
