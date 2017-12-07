@@ -122,7 +122,7 @@
 			<div class="col-sm-7">
 			<nav id="navigation" style="margin-left: 140px">    
 				<ul>
-					<li class="has_submenu"><a href="">Home</a>
+					<li class="has_submenu"><a href="">Home</a> 
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/home.do">홈으로</a></li>
 							<li><a href="${pageContext.request.contextPath}/intro/service_intro.do">소개</a></li>
