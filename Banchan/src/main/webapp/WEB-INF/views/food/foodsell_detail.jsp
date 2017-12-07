@@ -288,7 +288,7 @@
       <h3 class="title-form" style="float: left;"><i class="icon fa fa-wrench" style="margin-right: 5px;"></i>판매음식 상세정보</h3>
      <a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${foodSell.memId}" class="btn btn-reverse button-form" style="margin-left: 10px;">판매자 페이지로</a>
       </div>
-      <div class="form-large grey-color">
+      <div class="form-large grey-color"> 
       <div class="row">
       <div class="col-xs-6" style="float: left" class="row">
          <img style="padding-top: 48px" width="350px" height="250px" src="${pageContext.request.contextPath}/resources/images/${foodSell.foodMainImg}">
