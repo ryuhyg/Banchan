@@ -37,6 +37,7 @@ jQuery(document).ready(function(){
     opacity: 0;
     filter: alpha(opacity=0); 
 }
+ 
 </style> 
 
 <section id="agent-page"  style="margin-top: 100px;">
@@ -81,7 +82,20 @@ jQuery(document).ready(function(){
 					<div class="bs-callout callout-success" style=" float: left; width: 70%; margin-top: 5px;">
 										<h3 class="title" style="width: auto">
 								<a href="${pageContext.request.contextPath}/foodDetailView.do?foodNo=${food.foodNo}">
-									${food.foodName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${food.foodScore}</a></h3> 
+									${food.foodName}</a><a style="font-size: 12px">
+									</a>
+									
+									<span class="star_rating"> 
+									<c:forEach begin="1" end="${food.foodScore-(food.foodScore%1)}">
+						    			<a class="on" style="font-size: 16px;">★</a>
+									</c:forEach>
+									<c:forEach begin="1" end="${5-(food.foodScore-(food.foodScore%1))}">
+						    			<a style="font-size: 16px;">★</a>
+						    		</c:forEach> 
+						      		</span> &nbsp;
+						      		<b style="font-size: 14px; color: gray;">${food.foodScore}</b>
+									</h3> 
+
 							 <span class='description' style='color:black;font-size:12px;'>		
 								<table height="81px">   
 								<tr> 

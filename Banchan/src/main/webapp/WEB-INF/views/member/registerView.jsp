@@ -252,7 +252,6 @@
 				showOn: "both",
 				/* buttonImage: "${pageContext.request.contextPath}/resources/images/calendar2.png", */ 
 				buttonImageOnly: true,
-				buttonText: "날짜를 선택하세요.",
 				closeText : '닫기',         
 	            prevText : '이전달',         
 	            nextText : '다음달',         
