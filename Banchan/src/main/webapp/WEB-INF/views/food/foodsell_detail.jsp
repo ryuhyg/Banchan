@@ -454,7 +454,7 @@
 <!--  댓글  -->
       <div class="row">
         <label for="content">Q&A</label>
-        <form name="commentInsertForm">
+        <form name="commentInsertForm"> 
             <!-- <div class="input-group"> -->
             <div class="form-group row">
                <input type="hidden" name="foodSellNo" value="${foodSell.foodSellNo}"/>
