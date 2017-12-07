@@ -105,7 +105,16 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 								<div class="bs-callout callout-success" style="width: 800px">
 										<h3 class="title" style="width: auto">
 								<a href="sellerPageInfo.do?memId=${seller.memId }">
-									${seller.memName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${seller.sellerScore}</a></h3> 
+									${seller.memName}</a>&nbsp;
+									<span class="star_rating"> 
+									<c:forEach begin="1" end="${seller.sellerScore-(seller.sellerScore%1)}">
+						    			<a class="on" style="font-size: 16px;">★</a>
+									</c:forEach>
+									<c:forEach begin="1" end="${5-(seller.sellerScore-(seller.sellerScore%1))}">
+						    			<a style="font-size: 16px;">★</a>
+						    		</c:forEach> 
+						      		</span> &nbsp;
+									<a style="font-size: 12px">${seller.sellerScore}</a></h3> 
 							 <span class='description' style='color:black;font-size:12px;'>		
 								 <table height="81px">  
 								<tr> 
@@ -137,7 +146,17 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 							<div class="bs-callout callout-success" style="width: 800px">
 						<h3 class="title" style="width: auto">
 								<a href="sellerPageInfo.do?memId=${seller.memId }">
-									${seller.memName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${seller.sellerScore}</a></h3> 
+									${seller.memName}</a>&nbsp;
+									<span class="star_rating"> 
+									<c:forEach begin="1" end="${seller.sellerScore-(seller.sellerScore%1)}">
+						    			<a class="on" style="font-size: 16px;">★</a>
+									</c:forEach>
+									<c:forEach begin="1" end="${5-(seller.sellerScore-(seller.sellerScore%1))}">
+						    			<a style="font-size: 16px;">★</a>
+						    		</c:forEach> 
+						      		</span> &nbsp;
+									<a style="font-size: 12px">${seller.sellerScore}</a>
+									</h3> 
 							 <span class='description' style='color:black;font-size:12px;'>		
 								 <table height="81px">  
 								<tr> 
@@ -183,7 +202,16 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 								<div class="bs-callout callout-success" style="width: 800px;">
 									<h3 class="title">
 										<a href="foodDetailView.do?foodNo=${food.foodNo }">
-									${food.foodName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${food.foodScore}</a></h3> 	
+									${food.foodName}</a>
+									<span class="star_rating"> 
+									<c:forEach begin="1" end="${food.foodScore-(food.foodScore%1)}">
+						    			<a class="on" style="font-size: 16px;">★</a>
+									</c:forEach>
+									<c:forEach begin="1" end="${5-(food.foodScore-(food.foodScore%1))}">
+						    			<a style="font-size: 16px;">★</a>
+						    		</c:forEach> 
+						      		</span> &nbsp;
+									<a style="font-size: 12px">${food.foodScore}</a> 	</h3>
 							<span class='description' style='color:black;font-size:12px;'>
 								<table height="81px">  
 										<tr>
@@ -212,7 +240,16 @@ html ul.tab li.active, html ul.tab li.active a:hover  {
 							<div class="bs-callout callout-success" style="width: 800px;">
 								<h3 class="title" style="width: auto">
 									<a href="foodDetailView.do?foodNo=${food.foodNo }">
-									${food.foodName}</a><a style="font-size: 12px"><i class="fa fa-star" style="margin-right: 5px; margin-left: 10px"></i>평점:&nbsp;${food.foodScore}</a></h3> 	
+									${food.foodName}</a> 	
+								<span class="star_rating"> 
+									<c:forEach begin="1" end="${food.foodScore-(food.foodScore%1)}">
+						    			<a class="on" style="font-size: 16px;">★</a>
+									</c:forEach>
+									<c:forEach begin="1" end="${5-(food.foodScore-(food.foodScore%1))}">
+						    			<a style="font-size: 16px;">★</a>
+						    		</c:forEach> 
+						      		</span> &nbsp;
+									<a style="font-size: 12px">${food.foodScore}</a> </h3>
 							<span class='description' style='color:black;font-size:12px;'>
 								<table height="81px">  
 								<tr>
