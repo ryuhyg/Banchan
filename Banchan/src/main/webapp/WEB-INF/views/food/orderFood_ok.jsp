@@ -8,7 +8,7 @@
 		<div class="col-sm-2">
 		</div>
 		<div class="col-sm-8">
-			<h3>주문이 완료되었습니다.</h3>
+			<h3>구매가 완료되었습니다.</h3>
 			<div class="form-large grey-color" style="border-left: 0px;border-right: 0px;" align="center">
 				<div>
 					<a href="home.do">홈으로</a>&nbsp;&nbsp;&nbsp;&nbsp;

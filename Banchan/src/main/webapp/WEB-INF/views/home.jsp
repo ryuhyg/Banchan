@@ -95,7 +95,7 @@ function registeSeller(){
 							<span class="description">${list.getSellerInfo()}</span>
 							<dl class="detail">
 							<div>
-                      			<i class="fa fa-star" aria-hidden="true" style="margin-left: 4px; margin-right: 5px"></i>판매자평점<br><br>
+                      			<i class="fa fa-star" aria-hidden="true" style="margin-left: 4px; margin-right: 5px"></i>판매자 별점<br><br>
                        			 <span class="star_rating">  <!-- 별점 표현 -->
                          	  <c:forEach begin="1" end="${list.sellerScore-(list.sellerScore%1)}">
 					    		<a class="on">★</a>
@@ -134,7 +134,7 @@ function registeSeller(){
 							<span class="description">${flist.foodDe}</span>
 								<dl class="detail">
 							<div>
-								<i class="fa fa-star" aria-hidden="true" style="margin-left: 4px; margin-right: 5px"></i>별점<br><br>
+								<i class="fa fa-star" aria-hidden="true" style="margin-left: 4px; margin-right: 5px"></i>음식 별점<br><br>
 								<span class="star_rating">  <!-- 별점 표현 -->
       							<c:forEach begin="1" end="${flist.foodScore-(flist.foodScore%1)}">
 				    			<a class="on">★</a>

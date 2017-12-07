@@ -13,7 +13,7 @@ table, th, td{
 <div id="page-container">
 	<div class="container" style="width: 100%">
 		<div class="row">
-			<h3 class="title-form"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>나의 거래내역</h3>				
+			<h3 class="title-form"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>나의 구매내역</h3>				
 			<a href="${pageContext.request.contextPath}/home.do" class="btn btn-default" style="float:right; margin-right:7%;"><i class="fa fa-home" style="font-size: 15px"></i></a>      
 			<c:choose>           
 			<c:when test="${fn:length(tlist.list)==0}">      

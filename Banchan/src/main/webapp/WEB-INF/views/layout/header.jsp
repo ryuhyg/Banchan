@@ -82,7 +82,7 @@
 						</button>   
 						<ul class="dropdown-menu" style="margin-left: 36%;">
 							<li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />"><i class="fa fa-wrench" aria-hidden="true" style="margin-right: 5px;"></i>회원정보수정</a></li>
-							<li><a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>내거래내역</a></li>
+							<li><a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId}"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>구매내역</a></li>
 							<li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do"><i class="fa fa-user-times" aria-hidden="true" style="margin-right: 5px"></i>회원탈퇴</a></li>
 						</ul>
 						<a><label for="id" style="font-weight: bold;">${mvo.memName} 님</label></a>
@@ -105,7 +105,7 @@
 						</button>
 						<ul class="dropdown-menu" style="margin-left: 36%;">
 							<li><a href="${pageContext.request.contextPath}/editMemberView.do?memId=${mvo.memId}&pwQnaNo=<sec:authentication property="principal.pwQnaNo" />"><i class="fa fa-wrench" aria-hidden="true" style="margin-right: 5px;"></i>회원정보수정</a></li>
-							<li><a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId }"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>내거래내역</a></li>
+							<li><a href="${pageContext.request.contextPath}/myTradeList.do?memId=${mvo.memId }"><i class="fa fa-exchange" aria-hidden="true" style="margin-right: 5px"></i>구매내역</a></li>
 							<li><a href="${pageContext.request.contextPath}/member/deleteMemberView.do"><i class="fa fa-user-times" aria-hidden="true" style="margin-right: 5px"></i>회원탈퇴</a></li>
 						</ul>
 						<a><label for="id" style="font-weight: bold;">${mvo.memName} 님</label></a>
@@ -128,10 +128,10 @@
 							<li><a href="${pageContext.request.contextPath}/intro/service_intro.do">소개</a></li>
 						</ul>
 					</li>
-					<li class="has_submenu"><a href="${pageContext.request.contextPath}/locationServicePage.do">위치별</a>
+					<li class="has_submenu"><a href="${pageContext.request.contextPath}/locationServicePage.do">위치검색</a>
 					
 					</li>
-					<li class="has_submenu" id="headcategory"><a href="${pageContext.request.contextPath}/selectCategoryFood.do?category=">카테고리별</a>
+					<li class="has_submenu" id="headcategory"><a href="${pageContext.request.contextPath}/selectCategoryFood.do?category=">카테고리검색</a>
 						<ul id="headcategoryList" >
 						
 						</ul>

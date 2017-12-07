@@ -34,7 +34,6 @@
 				<p>1) 반찬창고 사이트에서 판매자가 등록한 판매음식 중 구입하고자 하는 음식의 수량을 선택하여 구매하기 버튼을 누릅니다.</p>
 				<p>2) 거래일자에 지정한 장소에서 판매자는 음식을 전달하고 구매자는 돈을 지불하여 거래합니다.  </p> 
 				<p>3) 판매자는 거래완료 버튼을 누르고 구매자는 구매한 음식에 대한 후기를 남겨줍니다.  </p> 
-              <img class="" src="${pageContext.request.contextPath}/resources/images/img/intro_img2.png" alt="">
         	</div>
         </div>
       </div>

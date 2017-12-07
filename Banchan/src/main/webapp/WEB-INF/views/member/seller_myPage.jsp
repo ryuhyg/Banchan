@@ -68,7 +68,7 @@
 										sellInfo +="<a style='float: right;position:relative;bottom:27px'";
 										sellInfo += "class='btn btn-reverse' href='${pageContext.request.contextPath}/getSellerTradeListByFoodSellNo.do?foodSellNo="
 											+ data.list[i].foodSellNo
-											+ "&pageNo=1'>거래 내역 보기</a>";
+											+ "&pageNo=1'>판매 내역 보기</a>";
 									 
 									}else{
 										sellInfo +="<a style='float: right;position:relative;bottom:27px;'";
@@ -338,7 +338,7 @@ html ul.tab li.active, html ul.tab li.active a:hover {
 			  <sec:authorize access="isAuthenticated()">
 					<c:if test="${mvo.memId==svo.memId}">
 					  <div > 
-			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-reverse" style="float:right;margin-left: 10px;" >전체 거래내역 보기</a>
+			          <a href="getAllSellerTradeList.do?sellerId=${mvo.memId }&pageNo=1" class="btn btn-reverse" style="float:right;margin-left: 10px;" >전체 판매내역 보기</a>
 					 </div>
 					 <div > 
 						<a href="${pageContext.request.contextPath}/foodRegisterForm.do"
