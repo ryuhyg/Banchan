@@ -150,7 +150,7 @@
 		            });//each
 		          $(".commentList").html(a);
 		      	}//success
-		    }); //ajax
+		    }); //ajax 
 	}//function
 	
 	function answerDelete(answerNo,foodSellNo){
