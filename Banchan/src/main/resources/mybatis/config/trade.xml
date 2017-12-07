@@ -48,6 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- [판매자] 전체거래내역 조회 -->
 	<resultMap type="tradeVO" id="sellerTradeRM">
+		<result property="foodSellVO.foodSellNo" column="food_sell_no" />
 		<result property="foodSellVO.trDate" column="tr_date" />
 		<result property="foodSellVO.loc" column="loc" />
 		<result property="foodSellVO.price" column="price" />
