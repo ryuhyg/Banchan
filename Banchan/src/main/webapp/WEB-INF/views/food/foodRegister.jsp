@@ -169,7 +169,7 @@ filter: alpha(opacity=0);
 							</div>
 							 </div>
 						</div>
-							<div class="col-xs-7" style="float: right" class="row">
+						<div class="col-xs-7" style="float: right" class="row">
 							<textarea rows="10" cols="52" name="foodInfo" style="width: 100%; height: 100%;">${beFood.foodDe}</textarea>
 							<input style="margin-left: 77%" type="submit" class="btn btn-default" value="수정" >
 							<a href="#" onclick="returnList()" class="btn btn-reverse button-form" style="float: right;">취소</a>	

@@ -126,7 +126,7 @@
 							<li><a href="">반찬</a></li>
 							<li><a href="">김치</a></li>
 						</ul> 
-						</li>
+					</li>
 				</ul> 
 			</nav>
 			</div>  
