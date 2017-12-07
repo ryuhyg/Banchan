@@ -28,7 +28,7 @@ public interface FoodService {
 	//////// 영민 start /////////
 	void foodRegister(FoodVO fvo);
 
-	List<Map<String, String>> allCategorySelect();
+	List<Map<String, Object>> allCategorySelect();
 	//////// 영민 end /////////
 
 	FoodVO getFoodMemInfo(String foodNo);

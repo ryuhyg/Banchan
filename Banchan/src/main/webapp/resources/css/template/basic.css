@@ -73,8 +73,10 @@ body {
 /* 1.1.2 FORM FIELD STYLE
 ================================== */
 .form-control {
+  font-family: 'Nanum Gothic', serif;
   border: 1px solid #E5E5E5;
-  font-size: 15px;
+  font-size: 13px;
+  font-weight: bold;
   height: 36px;
   padding: 7px 12px 8px;
   -webkit-box-shadow: 0 0 0 4px rgba(236, 236, 236, 0.3);

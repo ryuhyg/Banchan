@@ -29,7 +29,7 @@ function registeSeller(){
 
  <!-- 슬라이드 부분 *************************** -->
  	
-	<section id="home-slide" class="home-top" >
+	<section id="home-slide" class="home-top"  style="margin-left: -11%; width: 122%">
 			<div class="home-slider"  style="width: 100%" data-navigation=".home-slider-nav" >
 				<div class="crsl-wrap">
 					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_05.png');">

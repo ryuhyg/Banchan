@@ -41,7 +41,15 @@ public class FoodController {
 	// 파일 업로드를 FoodController에서 하실지 FileUploadController에서 하실지..
 	private String uploadPath;
 
-
+	@RequestMapping("category.do")
+	@ResponseBody
+	public List<Map<String, Object>> allCategoryList() {
+		List<Map<String,Object>> list = foodService.allCategorySelect();
+		System.out.println("카테고리"+list);
+		System.out.println("0번째"+list.get(0));       
+		return list;
+	}
+	
 	///////////////////////// start 윤주 ////////////////////////////
 
 	@Transactional
@@ -231,7 +239,7 @@ public class FoodController {
 	///////////////////// 영민 start ///////////////////////////////////
 	@RequestMapping("foodRegisterForm.do")
 	public String foodRegisterForm(Model model) {
-		List<Map<String, String>> list = foodService.allCategorySelect();
+		List<Map<String, Object>> list = foodService.allCategorySelect();
 		//System.out.println("list :" + list);
 
 		model.addAttribute("category", list);
@@ -332,7 +340,7 @@ public class FoodController {
 		List<FoodVO> foodlist = foodService.selectRegFoodByNo(foodNo);
 		if (foodlist.size() == 0) {
 
-			List<Map<String, String>> list = foodService.allCategorySelect();
+			List<Map<String, Object>> list = foodService.allCategorySelect();
 			model.addAttribute("category", list);
 			FoodVO beforeFood = foodService.getFoodMemInfo(foodNo);
 		//	System.out.println("수정하기 전 food :" + beforeFood);

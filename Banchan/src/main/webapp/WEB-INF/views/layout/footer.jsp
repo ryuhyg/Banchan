@@ -3,9 +3,10 @@
 <footer id="footer-page" class="section-color">
 			<div class="container" style="text-align: center">
 				<div class="row" style="text-align: center">
-				<div>
-					김우정  | 김영민 | 류향걸 | 박광태 | 이윤주 | 이정훈 | 정지원 
-				</div>
+				<h2>VITAMIN D</h2>
+				<div >					 
+					김우정  | 김영민 | 류향걸 | 박광태 | 이윤주 | 이정훈 | 정지원
+				</div>    
 				</div>
 			</div>
 			<div class="credits">
