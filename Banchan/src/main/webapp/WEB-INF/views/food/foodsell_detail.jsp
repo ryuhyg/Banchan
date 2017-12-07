@@ -309,7 +309,7 @@
    		   </h3>  
          </div>
          <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;">
-            <table class="table" style="font-size: 13px; ">
+            <table class="table" style="font-size: 13px; table-layout: fixed; height:auto; overflow: hidden;">
                <tr class="tableTr">
                   <th style="width:25%; padding: 4px; border-top: 0px;">음식평점</th>
                   <td colspan="3">${foodSell.foodScore}</td>

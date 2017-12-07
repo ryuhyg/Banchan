@@ -23,7 +23,7 @@ table, th, td{
 				</div>
 			</c:when>
 			<c:otherwise> 
-				<table class="table table-hover"  style="text-align: center;font-size: 12px;">
+				<table class="table table-hover"  style="text-align: center;font-size: 12px; ">
 					<thead>
 						<tr class="tr_visible"> 
 						<th>거래번호</th>
