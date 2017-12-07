@@ -95,8 +95,7 @@ filter: alpha(opacity=0);
 					<div style="position: relative;bottom: 25px;">
 					<label for="id" style="font-weight: bold;">판매자 소개 :</label>  
 					<br>
-					<textarea rows="10" cols="100" id="dataCheck" name="sellerInfo" style="width: 400px; height: 200px; resize: none;">
-					</textarea>
+					<textarea rows="10" cols="100" id="dataCheck" name="sellerInfo" style="width: 400px; height: 200px; resize: none;"></textarea>
 					</div>
 					<div align="right" style="position: relative;bottom: 25px;">
 					<input type="submit" id="registerData" class="btn btn-reverse button-form" value="등록">
