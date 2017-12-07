@@ -268,7 +268,7 @@
 		         if(flag)
 		            location.href="loginView.do";
 		         else
-		            history.go(0);
+		            history.go(0); 
 		      }
 		      else
 		         return confirm("구매하시겠습니까?");
