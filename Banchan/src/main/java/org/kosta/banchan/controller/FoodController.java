@@ -2,6 +2,9 @@ package org.kosta.banchan.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -142,9 +145,10 @@ public class FoodController {
 	 * @param foodSellNo
 	 * @param model
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping("getFoodSellDetail.do")
-	public String getFoodSellDetail(String foodSellNo, Model model,String pageNo, HttpServletRequest req, HttpServletResponse resp) {
+	public String getFoodSellDetail(String foodSellNo, Model model,String pageNo, HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
 		// 윤주
 		model.addAttribute("rlist", feedbackService.getReviewListByFoodSellNo(foodSellNo,pageNo));
 		model.addAttribute("leftQuantity", foodService.getLeftQuantityByFoodSellNo(foodSellNo));
@@ -155,7 +159,6 @@ public class FoodController {
 		
 		Cookie[] coo= req.getCookies();
 		Cookie clickCoo = null;
-		
 		for (int i = 0; i < coo.length; i++) {
 			if(coo[i].getName().equals("click")) {
 				clickCoo = coo[i];
@@ -167,7 +170,8 @@ public class FoodController {
 			//System.out.println("clickCoo==null: new Cookie(click,)" );
 			clickCoo = new Cookie("click", "");
 		}
-		String strTemp= clickCoo.getValue();
+		String strTemp= URLDecoder.decode(clickCoo.getValue(), "UTF-8");
+				
 		FoodSellVO fvo =foodService.getFoodSellDetailByNo(foodSellNo);
 		
 		//특정 문자 개수 구하기
@@ -177,7 +181,7 @@ public class FoodController {
 	      for( int i = 0; m.find(i); i = m.end())
 	    	  count++;
 	      
-	    if(count>3) {
+	    if(count>4) {
 	    	if(strTemp.contains(fvo.getFoodSellNo())) {
 	    		
 	    	}else {
@@ -190,7 +194,9 @@ public class FoodController {
 			strTemp+= fvo.getFoodSellNo()+":"+fvo.getFoodMainImg()+"/";
 		}
 		System.out.println(strTemp);
-		clickCoo.setValue(strTemp);
+		String strEncoding=URLEncoder.encode(strTemp, "UTF-8");
+		System.out.println(strEncoding);
+		clickCoo.setValue(strEncoding);
 		resp.addCookie(clickCoo);
 		//System.out.println("22222");
 		///// end 최근 클릭 리스트 코드 추가 광태

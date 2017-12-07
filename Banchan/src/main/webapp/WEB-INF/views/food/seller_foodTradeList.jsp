@@ -107,10 +107,10 @@ table, th, td{
 						 <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;width: 100%"> 
 					            <table class="table table-border-hidden" style="font-size: 13px;" >
 					               <tr> 
-					                  <th>예약마감일</th>
-					                  <td>${foodSell.closeDate}</td>
-					                  <th>거래일</th>
-					                  <td>${foodSell.trDate}</td>
+					                  <th style="width: 20%;">예약마감일</th>
+					                  <td style="width: 30%;">${foodSell.closeDate}</td>
+					                  <th style="width: 20%;">거래일</th>
+					                  <td style="width: 30%;">${foodSell.trDate}</td>
 					               </tr> 
 					               <tr>
 					                  <th>가격</th>
