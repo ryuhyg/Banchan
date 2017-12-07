@@ -180,18 +180,9 @@
 		    a += '<input type="text" class="form-control" id="answerContent" name="ansContent"/>';
 		    a += '<input type="hidden" id="memId2" name="memId2" value="'+$("#memId").val()+'">';
 		    a += '<input type="hidden" id="questNo" name="questNo" value='+questNo+'>';
-<<<<<<< HEAD
 		    a += '<span class="input-group-btn"><button class="btn btn-reverse" type="button" onclick="commentAnswerReplyProc();">답변달기</button> </span>';
 		    a += '</div>';
 		    $('.commentAnswerRe'+questNo).html(a).toggle(); 
-		   
-=======
-		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentAnswerReplyProc();">답변달기</button> </span>';
-		    a += '</div>';
-		    
-		     $('.commentAnswerRe'+questNo).html(a).toggle();
-			   	}
->>>>>>> branch 'master' of https://github.com/ryuhyg/Banchan.git
 		}
 		 $("[name=commentInsertForm]").serialize();
 		
