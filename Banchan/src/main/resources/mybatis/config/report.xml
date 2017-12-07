@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update banchan_report set hit=hit+1 where keyword=#{value}
  	</update>
  	<select id="getReport" resultType="reportVO">
-		<![CDATA[select keyword,hit,rk from(select keyword,hit,rank() over(order by hit desc) as rk from banchan_report)
+		<![CDATA[select keyword,hit,rk from(select keyword,hit,row_number() over(order by hit desc) as rk from banchan_report)
 		where rk<=5]]>
  	</select>
 	<!-- End 윤주 -->
