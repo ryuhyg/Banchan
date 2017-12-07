@@ -81,7 +81,7 @@ table, th, td{
 			<c:forEach items="${lvo.list }" var="trade">
 			<tr class="tr_visible" >
 				<td>${trade.trNo }</td>
-				<td>${trade.foodSellVO.foodName}</td>
+				<td><a href="${pageContext.request.contextPath}/getFoodSellDetail.do?foodSellNo=${trade.foodSellVO.foodSellNo}">${trade.foodSellVO.foodName}</a></td>
 				<td>${trade.memId }</td>
 				<td>${trade.trReqDate }</td>
 				<%-- <td>${trade.trFinDate }</td> --%>
@@ -144,9 +144,6 @@ table, th, td{
 		</c:if>
 	</div> <!-- pagination -->
 	</div> <!-- pageginationContainer -->
-	
-	
-	
 </div><!-- container -->
 </div> <!-- page-container -->
 </sec:authorize> <!-- sec -->

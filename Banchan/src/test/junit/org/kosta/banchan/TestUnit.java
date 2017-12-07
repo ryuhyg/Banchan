@@ -1,5 +1,7 @@
 package org.kosta.banchan;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
@@ -11,9 +13,10 @@ import org.kosta.banchan.model.dao.ReviewDAO;
 import org.kosta.banchan.model.dao.SellerDAO;
 import org.kosta.banchan.model.dao.TradeDAO;
 import org.kosta.banchan.model.service.FoodService;
-
+import org.kosta.banchan.model.service.TradeService;
 import org.kosta.banchan.model.vo.FoodVO;
-
+import org.kosta.banchan.model.vo.ListVO;
+import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -36,6 +39,8 @@ public class TestUnit {
 	private ReviewDAO reviewdao;
 	@Resource
 	private FoodService foodService;
+	@Resource
+	private TradeService tradeService;
 
 	@Test
 	public void unitTest() {
@@ -167,6 +172,11 @@ public class TestUnit {
 		System.out.println(str.substring(end+1, str.length()));
 		String strBack = str.substring(end+1, str.length());
 		System.out.println(strFront+strBack);*/
+		ListVO<TradeVO> list= tradeService.getAllSellerTradeList("asas", "1");
+		for(int i=0;i<list.getList().size();i++) {
+			System.out.println(list.getList().get(i));
+		}
+		
 		
 	}
 

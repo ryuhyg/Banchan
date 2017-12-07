@@ -298,14 +298,12 @@
 			    		<a>★</a>
 			    		</c:forEach> 
 			      		</span>
+			      		<b>${foodSell.foodScore}</b>
    		   </h3>  
          </div>
          <div class="row" style="border-top: 1PX solid #928f8f ;border-bottom: 1PX solid #928f8f;margin-top: 5px;margin-bottom: 5px;">
             <table class="table" style="font-size: 13px; table-layout: fixed; height:auto; overflow: hidden;">
-               <tr class="tableTr">
-                  <th style="width:25%; padding: 4px; border-top: 0px;">음식평점</th>
-                  <td colspan="3">${foodSell.foodScore}</td>
-               </tr>
+         
                <tr class="tableTr">
                   <th>예약마감일</th>
                   <td>${foodSell.closeDate}</td>
@@ -411,6 +409,9 @@
 	      						<c:forEach begin="1" end="${r.score}">
 	    							<a class="on">★</a>
 								</c:forEach>
+								<c:forEach begin="${r.score}" end="4">
+                           			<a>★</a>
+                        		</c:forEach>
        						</span>
 						${r.score }
 						</td>
