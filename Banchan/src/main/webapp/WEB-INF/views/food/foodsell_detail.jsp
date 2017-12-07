@@ -454,10 +454,13 @@
       <div class="row">
         <label for="content">Q&A</label>
         <form name="commentInsertForm">
-            <div class="input-group">
+            <!-- <div class="input-group"> -->
+            <div class="form-group row">
                <input type="hidden" name="foodSellNo" value="${foodSell.foodSellNo}"/>
                <input type="hidden" id="memId" name="memId" value="${mvo.memId}"/>
+               <div class="col-xs-10">    
                <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+               </div>
                <span class="input-group-btn">
                     <Button class="btn btn-reverse" type="button" id="commentInsertBtn" name="commentInsertBtn">등록</Button>
                </span>
