@@ -282,7 +282,7 @@
 <div class="container" style="width: 100%">
 <div class="row">
    <div class="col-sm-1"></div><!-- col-sm-1 -->
-   <div class="col-sm-10">
+   <div class="col-sm-10"> 
    <div class="blog-list blog-detail">  
        <div class="row" style="padding-top: 10px; padding-right: 14px" align="right">           
       <h3 class="title-form" style="float: left;"><i class="icon fa fa-wrench" style="margin-right: 5px;"></i>판매음식 상세정보</h3>
