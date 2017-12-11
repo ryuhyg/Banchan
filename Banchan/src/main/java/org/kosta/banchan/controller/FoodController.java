@@ -22,7 +22,6 @@ import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,7 +51,6 @@ public class FoodController {
 	
 	///////////////////////// start 윤주 ////////////////////////////
 
-	@Transactional
 	@RequestMapping("orderFood.do")
 	public String orderFood(HttpServletRequest request) {
 
