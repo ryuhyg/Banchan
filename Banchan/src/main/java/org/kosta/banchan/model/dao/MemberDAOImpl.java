@@ -98,9 +98,7 @@ public class MemberDAOImpl implements MemberDAO {
 	// 광태 새로운 주소지 등록
 	@Override
 	public void registerNewAddressInfo(AddressVO addressVO) {
-		// System.out.println("전 :" +memberVO);
 		template.insert("member.registerNewAddressInfo", addressVO);
-		// System.out.println("후 :" +memberVO);
 	}
 
 	// 광태 회원 등록

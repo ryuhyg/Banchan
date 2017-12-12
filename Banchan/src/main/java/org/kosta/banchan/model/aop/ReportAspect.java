@@ -35,15 +35,9 @@ public class ReportAspect {
 					reportService.insertKeyword(new ReportVO(keyword,1));
 				else
 					reportService.updateKeyword(keyword);
-				System.out.println("**AOP 실행** 검색어 : "+keyword);
 			}
 		}
 		return retValue; //실제 대상 메서드가 반환하는 리턴값
 	}
 	
-	public Object refreshReport(ProceedingJoinPoint point) throws Throwable{
-		Object retValue = null;
-		
-		return retValue;
-	}
 }

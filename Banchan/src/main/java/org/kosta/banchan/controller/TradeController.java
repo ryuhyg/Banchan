@@ -76,7 +76,6 @@ public class TradeController {
 			return "redirect:loginView.do";
 		} else {
 			MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			System.out.println("mvo Id: " + mvo.getMemId());
 			return "redirect:getAllSellerTradeList.do?sellerId=" + mvo.getMemId()+"&pageNo="+pageNo;
 		}
 	}

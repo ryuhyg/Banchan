@@ -40,9 +40,6 @@ public class MemberController {
 	private FoodService foodService;
 	@Resource
 	private BCryptPasswordEncoder passwordEncoder;
-	
-	/*@Resource
-	private ReportService reportService;*/
 
 	Logger logger = Logger.getLogger(this.getClass());
 
@@ -164,8 +161,7 @@ public class MemberController {
 
 	@RequestMapping(value = "registerMember.do", method = RequestMethod.POST)
 	public String registerMember(MemberVO memberVO) {
-
-		// System.out.println("memberVO :"+memberVO);
+		
 		memberService.registerMember(memberVO);
 
 		return "redirect:member/registerMember_ok.do";
@@ -179,7 +175,6 @@ public class MemberController {
 
 		// 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다
 		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-			//System.out.println("비로그인 상태  위치기반 접속!");
 			AddressVO avo = new AddressVO();
 			avo.setAddressAPI("경기도 성남시 분당구 삼평동 대왕판교로 660");
 			avo.setLatitude(37.4008198);
@@ -187,7 +182,6 @@ public class MemberController {
 			model.addAttribute("addressVO", avo);
 			list = memberService.getNearSellerAddressByAddressAPI(avo.getAddressAPI());
 		} else {
-			//System.out.println("로그인 상태!");
 			MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			mvo.setAddressVO(memberService.getAddressAPIById(mvo));
 			list = memberService.getNearSellerAddressByAddressAPI(mvo.getAddressVO().getAddressAPI());
@@ -200,12 +194,8 @@ public class MemberController {
 
 	@RequestMapping("searchLocationByService.do")
 	public String searchLocationByService(Model model, AddressVO addressVO) {
-		//System.out.println("searchLocationByService_unsigned!!!");
-		//System.out.println("addressVO :" + addressVO);
 		List<AddressVO> list = null;
 		list = memberService.getNearSellerAddressByAddressAPI(addressVO.getAddressAPI());
-		//System.out.println("************************");
-		//System.out.println(list);
 		model.addAttribute("addressVO", addressVO);
 		model.addAttribute("list", list);
 		return "member/locationServicePage.tiles";
@@ -214,15 +204,9 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("getMarkerSellerListOnAjax.do")
 	public ListVO<SellerVO> getMarkerSellerListOnAjax(String addressNo,String pageNo) {
-		//System.out.println("*ajax**********getMarkerSellerListOnAjax********************");
-		//System.out.println(addressNo); // 들어옴
-		//System.out.println(pageNo); // 들어옴
 		if(addressNo!=null && pageNo==null) {
-			//System.out.println("addressNo!=null && pageNo==null");
 			return memberService.getMarkerSellerListByAddressNo(addressNo, "1");
 		}else {
-			//System.out.println("addressNo!=null && pageNo!=null");
-			//System.out.println(memberService.getMarkerSellerListByAddressNo(addressNo, pageNo));
 			return memberService.getMarkerSellerListByAddressNo(addressNo, pageNo);
 		}
 
@@ -241,11 +225,6 @@ public class MemberController {
 		List<FoodVO> flist=foodService.selectFoodTop3();
 			model.addAttribute("list", list);
 			model.addAttribute("flist", flist);
-		//////////////검색어 순위/////////////////
-		/*List<ReportVO> rlist = reportService.getReport();
-		System.out.println(rlist);
-		model.addAttribute("rlist",rlist);		*/
-		/////////////////////////////////////////
 		return "home.tiles";
 	}
 
@@ -275,7 +254,7 @@ public class MemberController {
 	@Secured("ROLE_BUYER")
 	@RequestMapping(value = "editBuyerMember.do", method = RequestMethod.POST)
 	public String editBuyerMember(MemberVO mvo) {
-		System.out.println("mvo:"+mvo);
+		//System.out.println("mvo:"+mvo);
 		// security 세션정보를 셋팅해줘야 됨.
 		MemberVO mvoBuyerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // security
 																													// 세션
@@ -302,18 +281,15 @@ public class MemberController {
 			uploadDir.mkdirs();
 		MultipartFile file = svo.getUploadImage();// 파일
 		if (file != null && file.isEmpty() == false) {
-		//	System.out.println("파일명:" + file.getOriginalFilename());
 			File uploadFile = new File(uploadPath + file.getOriginalFilename());
 			try {
 				file.transferTo(uploadFile);// 실제 디렉토리로 파일을 저장한다
-				//System.out.println(uploadPath + file.getOriginalFilename() + " 파일업로드");
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
 		}
 		MemberVO mvoSellerMember = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String imageName = (String) file.getOriginalFilename();
-		//System.out.println("updateImage:" + imageName);
 		if (imageName.equals("null") || imageName.equals("")) {
 
 			memberService.editSellerMemberNoImageService(svo); // 업데이트
@@ -340,25 +316,6 @@ public class MemberController {
 		model.addAttribute("mvoSellerMember", mvoSellerMember);
 		return "redirect:member/editMember_ok.do";
 	}
-
-	// 수정세션..
-	/*
-	 * System.out.println("Spring Security 세션 수정 전 회원정보:" + pvo);
-	 * memberService.updateMember(memberVO);//service에서 변경될 비밀번호를 암호화한다 // 수정한 회원정보로
-	 * Spring Security 세션 회원정보를 업데이트한다 pvo.setPassword(memberVO.getPassword());
-	 * pvo.setName(memberVO.getName()); pvo.setAddress(memberVO.getAddress());
-	 * System.out.println("Spring Security 세션 수정 후 회원정보:" + pvo);
-	 */
-
-	/*
-	 * //비밀번호 질문 받아오기
-	 * 
-	 * @RequestMapping("findPwQnaNo.do") public String findPwQnaNo(String pwQnaNo,
-	 * Model model) { System.out.println("memberController:" + pwQnaNo);
-	 * 
-	 * return "member/editMemberView.tiles";
-	 */
-
 	// 회원수정완료
 	/////////////////////// end 정훈 메서드 ///////////////////////////////
 
