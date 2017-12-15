@@ -82,7 +82,7 @@ table, th, td{
 	<div class="col-md-1"></div>
 	<div class="col-md-10" >
 		<div class="blog-list blog-detail">
-		 <h3 class="title-form"><i class="icon fa fa-exchange" style="margin-right: 5px"></i>거래요청내역</h3>
+		 <h3 class="title-form"><i class="icon fa fa-exchange" style="margin-right: 5px"></i>판매내역</h3>
 				 <div class="container" style="width: 100%;">
 				 <div class="form-large grey-color"> 
 				 <div class="row">

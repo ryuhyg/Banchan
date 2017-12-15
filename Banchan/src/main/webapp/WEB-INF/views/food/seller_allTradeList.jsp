@@ -54,7 +54,7 @@ table, th, td{
 <div id="page-container">
 <div class="container" style="width: 100%;">
 	<div class="row">
-	<h3 class="title-form"><i class="icon fa fa-exchange"></i>전체거래내역</h3>   
+	<h3 class="title-form"><i class="icon fa fa-exchange"></i>전체판매내역</h3>   
 	<div class="row"  style="margin-right:0px;">   
 	<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}" class="btn btn-default" style="float:right; margin-right:0%;"><i class="fa fa-home" style="font-size: 15px"></i></a>
 	</div>
@@ -112,7 +112,7 @@ table, th, td{
 	</table>
 	</c:when>
 	<c:otherwise>
-		<div style="font-weight: bold;text-align: center;">거래 내역이 존재하지 않습니다</div>
+		<div style="font-weight: bold;text-align: center;">판매 내역이 존재하지 않습니다</div>
 		<div align="center">
 		<a href="${pageContext.request.contextPath}/sellerPageInfo.do?memId=${mvo.memId}" class="btn btn-reverse button-form" style="margin-top: 10px;">돌아가기</a>
 		</div>

@@ -203,7 +203,6 @@ public class FoodController {
 		}
 		System.out.println(strTemp);
 		String strEncoding=URLEncoder.encode(strTemp, "UTF-8");
-		System.out.println(strEncoding);
 		clickCoo.setValue(strEncoding);
 		resp.addCookie(clickCoo);
 		//System.out.println("22222");

@@ -32,15 +32,15 @@ function registeSeller(){
 	<section id="home-slide" class="home-top"  style="margin-left: -11%; width: 122%">
 			<div class="home-slider"  style="width: 100%" data-navigation=".home-slider-nav" >
 				<div class="crsl-wrap">
-					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_05.png');">
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_00.png');">
 						<div class="container slider-box">
 						</div>
 					</div>
-					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_06.png');">
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_01.png');">
 						<div class="container slider-box">
 						</div>
 					</div>
-					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_07.png');">
+					<div class="crsl-item" style="background-image: url('resources/images/img/main_img_02.png');">
 						<div class="container slider-box">
 						</div>
 					</div>
@@ -72,8 +72,8 @@ function registeSeller(){
 					 <li>닭 볶음탕</li>
 					 <li>낙지젓갈</li>
 				</ul>
-				<h4  style="color: black;">주부님들의 반찬으로 인스턴스 식품에 찌든 여러분을 정화 시키는 맛</h4>		
-			</div>
+				<h4  style="color: black;">집이 생각나는 따뜻한 밥상</h4>		
+			</div> 
 			
 <c:if test="${fn:length(list)!=0}">
 <!-- 인기 주부님 목록 -->

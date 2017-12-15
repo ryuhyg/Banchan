@@ -22,10 +22,10 @@
 <security:global-method-security	secured-annotations="enabled" />
 <mvc:annotation-driven />
 <bean id="viewResolver" 
-class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-<property name="prefix" value="/WEB-INF/views/"></property>
-<property name="suffix" value=".jsp"></property>
-<property name="order" value="2"></property>
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="prefix" value="/WEB-INF/views/"></property>
+	<property name="suffix" value=".jsp"></property>
+	<property name="order" value="2"></property>
 </bean>
 <!--  Tiles 설정 -->
 <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer" >

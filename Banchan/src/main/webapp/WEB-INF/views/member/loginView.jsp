@@ -18,10 +18,10 @@
 										<sec:csrfInput/><%-- csrf 토큰 --%>
 									
 										<label for="id" >아이디</label>
-										<input type="text" placeholder="아이디" name="id" id="id" class="margin-bottom form-control">
+										<input type="text" placeholder="아이디" name="id" id="id" class="margin-bottom form-control" autocomplete="off">
 								
 										<label for="password" style="padding-top: 5px; ">비밀번호</label> 
-										<input type="password" placeholder="비밀번호" name="password" id="password" class="margin-bottom form-control">
+										<input type="password" placeholder="비밀번호" name="password" id="password" class="margin-bottom form-control" autocomplete="off">
 								
 								<br>
 								<button type="submit" class="btn btn-reverse button-form" style="float: left" id="loginBtn" >로그인</button>
