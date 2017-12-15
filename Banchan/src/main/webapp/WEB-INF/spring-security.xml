@@ -18,13 +18,11 @@
 						username-parameter="id"
 						password-parameter="password"
 						authentication-failure-url="/login_fail.do"
-						  authentication-success-handler-ref="authenticationSuccessHandler"
 						default-target-url="/home.do"						
 						/>						
 		<sec:logout logout-url="/logout.do" logout-success-url="/home.do" />
 	</sec:http>
 	<!-- 비밀번호 암호화를 위한 설정 -->
-	<bean id="authenticationSuccessHandler"  class="org.kosta.banchan.security.CustomAuthenticationSuccessHandler"/>
 	<bean id="passwordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 

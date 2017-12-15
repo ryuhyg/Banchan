@@ -87,7 +87,6 @@ public class FeedbackController {
 	@RequestMapping("commentInsert.do")
 	@ResponseBody
 	private int commentInsert(@RequestParam String foodSellNo, @RequestParam String content, @RequestParam String memId) throws Exception{
-		System.out.println("질문 댓글 반응 테스트"); 
 		QuestionVO qvo = new QuestionVO();
 	     qvo.setFoodSellNo(foodSellNo);
 	     qvo.setQuestContent(content);

@@ -22,7 +22,6 @@ import org.kosta.banchan.model.vo.FoodSellVO;
 import org.kosta.banchan.model.vo.FoodVO;
 import org.kosta.banchan.model.vo.TradeVO;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,15 +43,12 @@ public class FoodController {
 	@RequestMapping("category.do")
 	@ResponseBody
 	public List<Map<String, Object>> allCategoryList() {
-		List<Map<String,Object>> list = foodService.allCategorySelect();
-		System.out.println("카테고리"+list);
-		System.out.println("0번째"+list.get(0));       
+		List<Map<String,Object>> list = foodService.allCategorySelect();      
 		return list;
 	}
 	
 	///////////////////////// start 윤주 ////////////////////////////
 
-	@Transactional
 	@RequestMapping("orderFood.do")
 	public String orderFood(HttpServletRequest request) {
 
@@ -108,9 +104,7 @@ public class FoodController {
 		int end =strTemp.indexOf("/", start);
 		String strFront= strTemp.substring(0,start);
 		String strBack = strTemp.substring(end+1, strTemp.length());
-		strTemp= strFront+strBack;
-		System.out.println(strTemp);
-		
+		strTemp= strFront+strBack;		
 		clickCoo.setValue(strTemp);
 		resp.addCookie(clickCoo);
 		// End 광태 추가 코드(최근클릭)
@@ -119,13 +113,9 @@ public class FoodController {
 	}
 	@RequestMapping("selectCategoryFood.do")
 	public String selectCategoryFood(String category,String pageNo,Model model) {
-		//System.out.println(category);
-		//System.out.println("Controller:"+foodService.selectCategoryFood(category,pageNo));
 		model.addAttribute("lvo",foodService.selectCategoryFood(category,pageNo));
 		model.addAttribute("category",foodService.allCategorySelect());
 		model.addAttribute("categorySelected",category);
-		System.out.println("categories:"+foodService.allCategorySelect());
-		System.out.println("selected:"+category);
 		return "food/categoryFood.tiles";
 	}
 	
@@ -141,9 +131,7 @@ public class FoodController {
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "registerFoodSell.do")
 	public String registerFoodSell(FoodSellVO foodSellVO) {
-		// System.out.println("foodSellVO : "+ foodSellVO);
 		foodService.registerFoodSell(foodSellVO);
-		// System.out.println(" 메서드 후 foodSellVO : "+ foodSellVO); //ok
 		return "redirect:getFoodSellDetail.do?foodSellNo=" + foodSellVO.getFoodSellNo();
 	}
 
@@ -163,7 +151,6 @@ public class FoodController {
 		model.addAttribute("foodSell", foodService.getFoodSellDetailByNo(foodSellNo));
 		
 		///// Start 최근 클릭 리스트 코드 추가 광태
-		//System.out.println("cookie*********");
 		
 		Cookie[] coo= req.getCookies();
 		Cookie clickCoo = null;
@@ -175,7 +162,6 @@ public class FoodController {
 		}
 		// 첫 클릭시 click 쿠키 생성
 		if(clickCoo == null) {
-			//System.out.println("clickCoo==null: new Cookie(click,)" );
 			clickCoo = new Cookie("click", "");
 		}
 		String strTemp= URLDecoder.decode(clickCoo.getValue(), "UTF-8");
@@ -198,10 +184,8 @@ public class FoodController {
 	    }
 		
 		if( !(strTemp.contains(fvo.getFoodSellNo())) ) {
-			//System.out.println("str에 추가!");
 			strTemp+= fvo.getFoodSellNo()+":"+fvo.getFoodMainImg()+"/";
 		}
-		System.out.println(strTemp);
 		String strEncoding=URLEncoder.encode(strTemp, "UTF-8");
 		clickCoo.setValue(strEncoding);
 		resp.addCookie(clickCoo);
@@ -239,7 +223,6 @@ public class FoodController {
 	@RequestMapping("foodRegisterForm.do")
 	public String foodRegisterForm(Model model) {
 		List<Map<String, Object>> list = foodService.allCategorySelect();
-		//System.out.println("list :" + list);
 
 		model.addAttribute("category", list);
 		return "food/foodRegister.tiles";
@@ -247,7 +230,6 @@ public class FoodController {
 
 	@RequestMapping(value = "foodRegister.do", method = RequestMethod.POST)
 	public String foodRegister(String id, FoodVO fvo, HttpServletRequest request) {
-		//System.out.println("foodRegister fvo:" + fvo);
 
 		/* 테스트 경로 */
 		uploadPath = "C://Users/kosta/git/Banchan/Banchan/src/main/webapp/resources/images/";
@@ -258,23 +240,16 @@ public class FoodController {
 		if (uploadDir.exists() == false)
 			uploadDir.mkdirs();
 		MultipartFile file = fvo.getUploadImage();// 파일
-		//System.out.println("File명이 뭐니? :" + file.toString());
-		// System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인
 		if (file != null && file.isEmpty() == false) {
-			// System.out.println("파일명:"+file.getOriginalFilename());
 			File uploadFile = new File(uploadPath + file.getOriginalFilename());
 			
 			try {
 				file.transferTo(uploadFile);// 실제 디렉토리로 파일을 저장한다
-			//	System.out.println("-------------------------------------------");
-			//	System.out.println(uploadPath + file.getOriginalFilename() + " 파일업로드");
-			//	System.out.println("-------------------------------------------");
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		// String memId=""; // 로그인기능 구현되면 세션정보 가져올 예정
+
 
 		fvo.setMemId(id);
 		// fvo.setFoodScore(score);
@@ -282,8 +257,6 @@ public class FoodController {
 		fvo.setFoodMainImg(file.getOriginalFilename());
 		fvo.setFoodDe(request.getParameter("foodInfo"));
 		fvo.setCategoryNo(request.getParameter("category"));
-	//	System.out.println("카테고리 no:" + request.getParameter("category"));
-	//	System.out.println("fvo2:" + fvo);
 		foodService.foodRegister(fvo);
 
 		return "redirect:foodRegister_ok.do?memId=" + id;
@@ -307,10 +280,8 @@ public class FoodController {
 
 	@RequestMapping("deleteRegFood.do")
 	public String deleteRegFood(String foodNo, Model model, String memId) {
-	//	System.out.println("삭제하기 전의 memId 확인 :" + memId);
-		String message = "";
+		//String message = "";
 		List<FoodVO> food = foodService.selectRegFoodByNo(foodNo);
-	//	System.out.println("Select foodIdResult :" + food);
 		if (food.size() == 0) {
 			// foodService.deleteRegFood(foodNo);
 			model.addAttribute("message", "ok");
@@ -327,22 +298,18 @@ public class FoodController {
 	@RequestMapping("deleteRegFoodResult.do")
 	public String deleteRegFoodResult(String foodNo, String memId) {
 		foodService.deleteRegFood(foodNo);
-	//	System.out.println("memId 확인 :" + memId);
 		return "redirect:sellerPageInfo.do?memId=" + memId;
 	}
 
 	@RequestMapping("updateRegViewFood.do")
 	public String updateRegViewFood(String foodNo, Model model, String memId) {
-	//	System.out.println("수정하기 전 foodNo:" + foodNo);
-	//	System.out.println("받아오는 ID 값이 뭐니? :"+memId);
-		String message = "";
+		//String message = "";
 		List<FoodVO> foodlist = foodService.selectRegFoodByNo(foodNo);
 		if (foodlist.size() == 0) {
 
 			List<Map<String, Object>> list = foodService.allCategorySelect();
 			model.addAttribute("category", list);
 			FoodVO beforeFood = foodService.getFoodMemInfo(foodNo);
-		//	System.out.println("수정하기 전 food :" + beforeFood);
 
 			model.addAttribute("foodNo", foodNo);
 			model.addAttribute("memId", memId);
@@ -361,10 +328,6 @@ public class FoodController {
 	@RequestMapping(value = "updateRegFood.do", method = RequestMethod.POST)
 	public String updateRegFood(String memId, FoodVO fvo, HttpServletRequest request, Model model) {
 
-	//	System.out.println("수정하려는 fvo 값:" + fvo);
-	//	System.out.println("받은 아이디 값 : " + memId);
-	//	System.out.println("이미지정보 확인하자" + request.getParameter("beforeFoodImg"));
-
 		/* 테스트 경로 */
 		uploadPath = "C://Users/kosta/git/Banchan/Banchan/src/main/webapp/resources/images/";
 		/* 서버 경로 */
@@ -373,27 +336,17 @@ public class FoodController {
 		if (uploadDir.exists() == false)
 			uploadDir.mkdirs();
 		MultipartFile file = fvo.getUploadImage();// 파일
-	//	System.out.println(file + "<==");
-		// System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인
 		if (file != null && file.isEmpty() == false) {
-
-			//System.out.println("파일명:" + file.getOriginalFilename());
 
 			File uploadFile = new File(uploadPath + file.getOriginalFilename());
 			try {
 				file.transferTo(uploadFile);// 실제 디렉토리로 파일을 저장한다
-			//	System.out.println("-------------------------------------------");
-			//	System.out.println(uploadPath + file.getOriginalFilename() + " 파일업로드");
-			//	System.out.println("-------------------------------------------");
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
 		}
 		String foodImage = (String) file.getOriginalFilename();
-		//System.out.println("updateImage:" + foodImage);
 		if (foodImage.equals("null") || foodImage.equals("")) {
-
-		//	System.out.println("이미지를 안줬을 경우 처리하는 부분");
 
 			fvo.setMemId(memId);
 			// fvo.setFoodScore(score);
@@ -401,12 +354,8 @@ public class FoodController {
 			fvo.setFoodName(request.getParameter("foodname"));
 			fvo.setFoodDe(request.getParameter("foodInfo"));
 			fvo.setCategoryNo(request.getParameter("category"));
-		//	System.out.println("fvo2:" + fvo);
 			foodService.noimgUpdateRegFood(fvo);
-
-		//	System.out.println("아이디 멀로 들어오니?"+memId);
-
-			
+		
 			return "redirect:updateRegFoodOk.do?memId="+ memId;
 		} else {
 			fvo.setMemId(memId);
@@ -416,10 +365,7 @@ public class FoodController {
 			fvo.setFoodMainImg(file.getOriginalFilename());
 			fvo.setFoodDe(request.getParameter("foodInfo"));
 			fvo.setCategoryNo(request.getParameter("category"));
-		//	System.out.println("fvo2:" + fvo);
 			foodService.imgUpdateRegFood(fvo);
-			
-		//	System.out.println("아이디 멀로 들어오니?"+memId);
 
 			return "redirect:updateRegFoodOk.do?memId="+memId;
 		}
@@ -427,8 +373,6 @@ public class FoodController {
 
 	@RequestMapping("updateRegFoodOk.do")
 	public String updateRegFoodOk(String memId, Model model) {
-
-	//	System.out.println("여긴 아이디가 뭐니? :"+memId);
 
 		model.addAttribute("memId", memId);
 		

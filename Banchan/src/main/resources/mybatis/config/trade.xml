@@ -40,10 +40,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{endRowNumber}
 		order by t.tr_no desc
 	</select>
-	<!-- [판매자] 실제 거래완료 후 거래완료확인 하여 거래상태를 바꿔줌 -->
+	<!-- [판매자] 실제 거래완료 후 거래완료확인 하여 거래상태와 거래완료날짜를 바꿔줌 -->
 	<update id="completeTrade" parameterType="string">
-		update trade set
-		tr_status_no=2
+		update trade set 
+		tr_status_no=2 , tr_fin_date=sysdate
 		where tr_no=#{value}
 	</update>
 	<!-- [판매자] 전체거래내역 조회 -->

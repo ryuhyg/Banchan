@@ -73,7 +73,6 @@ public class SellDAOImpl implements SellDAO {
 
 	         if(String.valueOf(preQuantity) == null) {
 	            System.out.println("preq:"+preQuantity);
-	            
 	         }
 	         return leftQuantity;
 	      }
